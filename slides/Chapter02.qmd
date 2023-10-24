@@ -309,9 +309,10 @@ ggplot(data.frame(x), aes(x)) + stat_ecdf()
 
 <https://shiny.massey.ac.nz/kgovinda/demos/get.univariate.plots/>
 
--   Adopt study guide, past assignment R codes
-
--   Lots of examples on the web (particularly with `ggplot2`)
+Lots of examples are available 
+ 
+- In the study guide and workshops for this course
+- On the web
 
 ## Quantile-Quantile (Q-Q) plot
 
@@ -329,7 +330,7 @@ ggplot(dfm, aes(x=f.quants, y= m.quants))+geom_point()+geom_abline(slope=1, inte
 
 ## Some Q-Q Plot patterns
 
--   Case a: Quantiles of Y (mean/median etc) are higher than that of X
+-   Case a: Quantiles of Y (mean/median etc) are higher than those of X
 
 -   Case b: Spread or SD of Y \> spread or SD of X
 

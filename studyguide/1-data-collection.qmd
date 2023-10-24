@@ -1,3 +1,4 @@
+
 # Chapter 1: Data Collection and Quality Issues
 
 > "*Data! data! he cried impatiently, I can't make bricks without clay.*"
@@ -142,7 +143,7 @@ The human interface also arises when someone administers the instrument of the r
 
 3.  It is a salutary point to note that usually the individual who collects the raw data is an underpaid and possibly under-trained junior who is not highly motivated to produce high quality data.
 
-#### Self Administered Tests
+#### Self-Administered Tests
 
 In some situations, the subject records the response as in *self-administered* questionnaires, for example, tick a box or circle a number. There may be advantages in this for the respondent is presumably the best person to know what response should be given. On the other hand, the respondent is usually not trained so that there may be a higher incidence of coding errors and questions which are left unanswered. On the other hand, if the researcher does the coding, unwarranted assumptions may be made.
 
@@ -218,9 +219,9 @@ For example, for the census carried out on the students of a high school, the la
 
 In this example the survey may, in practice, be carried out as a sample rather than a census but conceptually it would be possible, to carry out such a census. Another point which may need discussion and clarification is whether the population represented by $U$ should refer to the target population, the frame or the actual population; usually $U$ would refer to the target population.
 
-### Nonsampling Errors
+### Non-sampling Errors
 
-A number of errors may occur in collecting information even when a census is being taken. The elements of the census must be contacted, a measurement or observation taken and this information recorded. As no sampling procedure is involved, it seems reasonable to label errors as *nonsampling errors*.
+A number of errors may occur in collecting information even when a census is being taken. The elements of the census must be contacted, a measurement or observation taken and this information recorded. As no sampling procedure is involved, it seems reasonable to label errors as *non-sampling errors*.
 
 The goal of the survey will be to produce summary statistics such as the population mean and standard deviation. If errors are committed in the collection process, the summary statistics may be incorrect. It is possible that these errors will cancel out but we cannot rely on this. The errors may lead to a tendency for the calculated mean to be too low and the mean is said to be **biased**. Alternatively, the bias may be on the high side and, at times, it may be difficult even to decide the direction of the bias although we know there is a strong possibility of it occurring.
 
@@ -234,9 +235,9 @@ Once the elements of the frame have been located, there remains the step of extr
 
 ### Inference
 
-It is *not* appropriate to carry out any statistical test or form a confidence interval on census data because they are measurements on the whole population. Statistical inference is used if the data represent a random sample from a population and, in this case, generalisations can be made from the sample to the target population.
+It is *not* appropriate to carry out any statistical test or form a confidence interval on census data because they are measurements on the whole population. Statistical inference is using data from a sample to make statements about the broader population from which the sample was taken. When we do a census, we have the whole population, so we are no longer making inferences.
 
-We next consider sampling from the population instead of taking a census.
+Next, we'll consider sampling from the population instead of taking a census.
 
 ## Sampling
 
@@ -370,23 +371,23 @@ Estimators with a low variance are likely to be more accurate in that they refle
 
 If the population is small but there is no information available on other aspects of the population, a simple random sample may be appropriate. Other sampling schemes may be used, though, for some of the following reasons:
 
-#### Administrative problems
+##### Administrative problems
 
-:   If the population size is large, it will be rather clumsy to try to select a simple random sample. If the population is spread out geographically, then considerable cost may be involved unless the sample is grouped in some way.
+If the population size is large, it will be rather clumsy to try to select a simple random sample. If the population is spread out geographically, then considerable cost may be involved unless the sample is grouped in some way.
 
-#### Improve accuracy
+##### Improve accuracy
 
-:   Under certain conditions, or assumptions, it may be possible to use a scheme which leads to more accurate estimates - accurate in the sense that the variance and/or bias is reduced.
+Under certain conditions, or assumptions, it may be possible to use a scheme which leads to more accurate estimates - accurate in the sense that the variance and/or bias is reduced.
 
-#### Political reasons
+##### Political reasons
 
-:   A simple random sample of (say) supermarkets in New Zealand may, by chance, consist only of stores in Auckland. The results of this survey may be viewed very sceptically by readers and, more importantly, by those who are funding the survey.
+A simple random sample of (say) supermarkets in New Zealand may, by chance, consist only of stores in Auckland. The results of this survey may be viewed very sceptically by readers and, more importantly, by those who are funding the survey.
 
 ### Stratified Sampling
 
-Stratified sampling is a very versatile approach combining operational ease and control by the researcher and can lead to efficient estimation. The population is divided into meaningful groups called strata and samples are selected from each stratum. The advantages of this approach are:
+Stratified sampling is a very versatile approach. It can be easy to implement, and can also lead to more efficient estimation of parameters. With stratified sampling, the population is divided into groups called "strata", and then random samples are taken from each stratum. The advantages of this approach are:
 
-1.  It is a flexible approach as strata can be formed in different ways.
+1.  It is a flexible approach, as strata can be designated in different ways.
 
 2.  Each stratum can be treated as a separate population so that strata could be surveyed at different times and even different ways. For example, a survey in NZ could be divided into north and south island, urban and rural; the rural sample could be contacted by telephone but the urban by face-to-face interviews. One stratum could involve systematic sampling; other involve simple random sampling.
 
@@ -396,7 +397,7 @@ Stratified sampling is a very versatile approach combining operational ease and 
 
 5.  The sample is spread throughout the population.
 
-6.  The variance of an estimate from stratified sampling is usually equal to, or less than, the variance of an estimate from simple random sampling. It would be sensible to *sample more heavily the larger strata.* This is the approach taken in proportional (stratified) sampling in which the sample size in each stratum is proportional to the size of the stratum. Proportional sampling is appropriate when all the strata are equally variable. When this is not the case the *more varied strata are sampled more heavily*.
+6.  The variance of an estimate from stratified sampling is usually equal to, or less than, the variance of an estimate from simple random sampling. It would be sensible to *sample more heavily the larger strata.* This is the approach taken in proportional (stratified) sampling in which the sample size in each stratum is proportional to the size of the stratum. Proportional sampling is appropriate when all the strata are equally variable. When this is not the case the *more variable strata are sampled more heavily*.
 
 ### Cluster Sampling
 
@@ -418,9 +419,9 @@ In this section, we shall only consider a particular type of systematic sampling
 
 In the simplest presentation, the frame is assumed to consist of $N$ elements where $N$ = $kn$ with $n$ being the required sample size. A random digit, $i$, in the range of l through $k$ is chosen as a starting point and then every $k^{th}$ element from then on is placed in the sample. The sample then consists of the elements $i, i + k, i + 2k,$ etc. Clearly this approach is likely to produce a sample which is evenly distributed over the entire sampling frame, and it is therefore likely that the sample will be representative of the population. This is particularly true when the sampling frame is sorted geographically. However, when this is not the case, the variance of the estimators obtained using systematic sampling will generally be greater than those obtained for simple random sampling.
 
-### PPS Sampling
+### Probability-proportional-to-size (PPS) Sampling
 
-Probability proportional to size sampling, PPS sampling, can be thought of as an extension of stratified sampling. Stratified sampling allows the flexibility for the probabilities of selection to vary with the size and characteristics of the strata. PPS sampling takes this a step further so that each element has its own probability of selection.
+Probability-proportional-to-size sampling, or PPS sampling, can be thought of as an extension of stratified sampling. Stratified sampling allows the flexibility for the probabilities of selection to vary with the size and characteristics of the strata. PPS sampling takes this a step further so that each element has its own probability of selection.
 
 The procedure requires that an associated variable be known so that each element in the population has a measure of size associated with it. This variable may be a related variable whose values are known from a previous census. For example, auditors usually check only a sample of all the accounts in existence. The size of each account is crucial. So the large value accounts should be checked more intensely than the smaller accounts. This is achieved by giving each account a probability of selection which is proportional to its value. This is called *Dollar-Unit Sampling*.
 
@@ -628,3 +629,4 @@ In *cluster sampling* the population is divided into clusters; certain clusters 
 Each sampling method has its own estimator which is a weighted sum of all elements in the sample. For simple random, systematic, cluster and proportional stratified sampling, the estimate of the mean is the sample mean.
 
 In this chapter, a number of issues have been raised but many loose ends remain. Simple random sampling is rarely used in practice but it is a standard against which other schemes may be compared. Stratified sampling points to the fact that different strata can be treated differently. One obvious difference, which seems to be contrary to popular wisdom, is that different proportional sample sizes may be chosen, and indeed should be chosen, for the different strata. Cluster sampling emphasises the need to decide on the elements under study, for example the family rather than the individual in TV ratings surveys.
+

@@ -1,0 +1,13 @@
+format:
+
+  html: 
+    theme: cosmo
+    code-fold: true
+    code-tools: true
+    cite-method: citeproc
+       
+  pdf: 
+    documentclass: scrreprt
+    cite-method: biblatex
+
+bibliography: references.bib

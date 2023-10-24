@@ -843,4 +843,3 @@ Various ANOVA models have been considered in this chapter. The goodness of fit i
 
 Indicator variables can be used to perform ANOVA using regression. However, it is more common to use indicator variables when one wants to use both a categorical factor and a continuous measurement variable $X$ to model the $Y$ responses. Such an analysis is called an ANCOVA and the model fitted using regression may consist of a separate model for each treatment.
 
-
