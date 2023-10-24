@@ -1,0 +1,351 @@
+---
+title: "Chapter 1:<br>Data Collection"
+image: img/abacus.jpg
+format: 
+  revealjs:
+    width: 1050
+    height:	700
+    transition: fade
+    theme: [default, myquarto.scss]
+    slide-number: c/t  
+    logo: img/L_Color.png
+    footer: "[161250 Data Analysis](https://anhsmith.quarto.pub/161250-data-analysis/slides.html)"
+    styles:
+      - revealjs.dark:
+        background-color: #222
+        color: #fff
+execute:
+  echo: true
+---
+
+<!-- <link href="http://www.massey.ac.nz/~kgovinda/250/lecnotes/220.css" rel="stylesheet"> -->
+
+```{r setup, echo=FALSE, message=FALSE}
+library(jpeg)
+library(png)
+knitr::opts_chunk$set(
+  warning = FALSE, 
+  echo = FALSE, 
+  include=TRUE, 
+  message=FALSE, 
+  comment = NA, 
+  warn=-1, 
+  warn.conflicts = FALSE, 
+  quietly=TRUE, 
+  fig.align="center", 
+  fig.height=3.5, 
+  fig.width=6
+  )
+```
+
+## The nature of data: random variables
+
+Data come from recording observations of the world. E.g.,
+
+-   recording the number of heart beats per minute
+-   counting birds in your yard
+-   measuring the lengths of fish you catch
+
+Each time you collect one of these observations, it is likely to be different.
+
+-   Pulse may vary between 55 and 70 bpm, depending on when you record it
+-   Number of birds varies at different times, and across different yards.
+
+We call these **random variables** (often denoted with an upper case letter, $X$), because the particular value that a single observation or measurement will take is uncertain. The value varies across observations.
+
+## Types of data
+
+![](img/data_types.png){.preview-image}
+
+## Subtypes of *qual*itative data
+
+::: columns
+::: {.column width="60%"}
+<br>
+
+-   **Nominal variables** have no particular order <br>(e.g., gender, colour, species, country)
+
+<br><br><br><br>
+
+-   **Ordinal variables** can be ordered <br>(e.g., altitude = {low, mid, high}, <br>age group = {child, juvenile, adult} )
+:::
+
+::: {.column width="30%"}
+![](img/birds.jpg) ![](img/good_bad.jpg)
+:::
+:::
+
+## Subtypes of *quant*itative data
+
+::: columns
+::: {.column width="60%"}
+<br>
+
+-   **Continuous variables** have no gaps between possible values, as in measurements (e.g., weight, temperature, length)
+
+<br><br><br>
+
+-   **Discrete variables** have gaps between possible values, as in counts (e.g., number of siblings, number of flowers)
+:::
+
+::: {.column width="30%"}
+![](img/ruler.jpg) ![](img/abacus.jpg)
+:::
+:::
+
+## Subtypes of continuous data
+
+<br>
+
+### Interval scale
+
+-   No absolute zero
+-   Division & subtraction may not be meaningful
+-   Temperature in degrees Celcius is interval because 20°C is not twice as hot as 10°C.
+
+<br>
+
+### Ratio scale
+
+-   Zero = zero
+-   All arithmetic manipulation can be done
+-   Length is ratio because 20 mm is twice as long as 10 mm.
+
+## Data Collection: Census, Survey & Experiments
+
+-   In a **census**, every element of the population is contacted, counted, and other information collected or evaluated.
+
+-   In a **survey**, data is collected from a *sample* of the population. A sample is a subset of the larger population of interest.
+
+-   **Experiments** are a special type of data collection which involves actively applying a *treatment* to a sample; some variable (drug, temperature, exercise regime, or other treatment) has been manipulated to study its effects.
+
+## Measurement issues
+
+-   Measuring Devices or Instruments
+
+    -   a physical device - measuring rule to gauge the heights of plants
+    -   a counting device - a Geiger- counter for measuring radioactive material
+    -   a questionnaire - requires a more subjective response.
+
+-   Measurement Error
+
+    -   measuring instrument may be *faulty* (bias)
+    -   values recorded from the same object may vary from one measurement to another (variance)
+
+-   Indirect measures
+
+    -   For example, is Body Mass Index (BMI) a good measure of fitness?
+    -   temperature - gauged by expansion of mercury!
+
+## Non-response
+
+-   a *non-sampling error*
+
+-   **Selection stage:** an element may be selected but not found
+
+    -   e.g. sheep in a flock may be tagged with individual identification number but one may not be found at the time of the survey.
+
+-   **Collection stage:** it may not be possible to take a measurement
+
+    -   some respondents may forget, or refuse, to answer the questionnaire
+
+-   **Documentation stage**
+
+    -   Incorrect record of measurement
+
+-   **Call-backs** reduce non-response
+
+## Census related concepts
+
+**TARGET POPULATION** the population under study
+
+**FRAME** operationalises data collection from a target population. e.g. listing of elements in population.
+
+**ACTUAL POPULATION** is the resulting set of elements on which usable data have been collected.
+
+![](img/census.jpg)
+
+## Sample *vs* population
+
+::: columns
+::: {.column width="55%"}
+-   A **sample** is a subset of the population.
+
+-   Datasets usually only contain a sample from the population; rarely do we have the entire population of data!
+
+-   Why sample?
+
+    -   Sampling conserves resources (money, time, etc.).
+    -   A well collected sample is more useful than a badly designed census.
+    -   Collecting data may be destructive.
+    -   The disadvantage: the statistics we calculate from sample data is subject to ***sampling variation**, which introduces* uncertainty\* about their true values.
+:::
+
+::: {.column width="45%"}
+![](img/samuel_johnson.jpg)
+
+> "*You don't have to eat the whole ox to know that the meat is tough*"<br> -- Samuel Johnson (1709-1784)
+:::
+:::
+
+## Population, frame, and sample
+
+![](img/sample.jpg)
+
+## Statistical inference
+
+::: columns
+::: {.column width="50%"}
+[***Statistical inference*** is the process of using information from sample data to make conclusions about the population.]{style="color:#E46C0A;"}
+
+<br>
+
+For example, we want to know $\mu$, mean length of fish in a population. So, we collect a sample of fish, measure their lengths, calculate the mean $\bar{x}$, and use $\bar{x}$ as an estimate of $\mu$. This is *statistical inference*.
+:::
+
+::: {.column width="50%"}
+![](img/inference.png)
+:::
+:::
+
+The sample mean $\bar{x}$ depends on *which particular fish we happened to get in our sample*.
+
+Therefore, the sample mean $\bar{x}$ itself is a random variable.
+
+If we were to take 1000 different samples, we'd get 1000 different means.
+
+## Bias *vs* sampling variance
+
+::: columns
+::: {.column width="40%"}
+A method used to estimate $\hat{\theta}$ a population parameter $\theta$ is called an ***estimator***. An estimator includes the study design, methods of data collection, and mathematical operations.
+
+***Sampling variance*** is the sample-to-sample variation in an estimator.
+
+***Bias*** is when our estimator *doesn't get it right on average*. That is, the average of estimates over $\infty$ samples is not centred on the population parameter; $\text{Mean}(\hat{\theta}) \neq \theta$.
+:::
+
+::: {.column width="60%"}
+![](img/bullseye.png)
+:::
+:::
+
+An estimator can have high/low sampling variance and high/low bias.
+
+## Principle of randomisation
+
+-   We want our sample to be representative of (and have similar properties to) the population. The most straightforward way to do this is through *randomisation*.
+
+-   We randomise data collection to avoid **bias**. If we (consciously or subconsciously) tended to chose the largest fish for our sample, we'd get an upwardly biased estimate of the lengths.
+
+-   *EPSEM* (equal probability of selection) is the simplest way of random sampling.
+
+## Simple Random Sampling (SRS)
+
+-   **Random** - refers to the *process* not *outcome*
+
+    -   Each (sampling) unit has same chance of being selected
+    -   Units can be selected with & without replacement
+
+-   SRS is easy to handle; suits even for a poor sampling frame
+
+-   SRS can be costly to implement
+
+-   SRS estimates are more variable than some alternatives
+
+![](img/random_sample.png)
+
+## Stratified Random Sampling (STRS)
+
+-   Suitable for *heterogeneous* populations
+
+-   Population is divided into relatively homogeneous groups called *strata* and a random sample is taken from each *stratum*.
+
+-   Sampling Approaches
+
+    -   Sample the larger strata more heavily (suits when all the strata are equally variable)
+    -   Sample the more varied strata are sampled
+
+-   Advantages of STRS
+
+    -   leads to efficient estimation That is, the variance (of an estimate) is usually less than that of SRS
+    -   sample is spread throughout population
+
+## Stratified Random Sampling (STRS)
+
+-   Suitable for *heterogeneous* populations
+
+-   Population is divided into relatively homogeneous groups called *strata* and a random sample is taken from each *stratum*.
+
+![](img/stratified_sample.png)
+
+## Cluster sampling
+
+-   A convenient method of sampling
+
+-   population is composed of *clusters* (groups)
+
+-   Select certain clusters (randomly) and collect measurements from a random selection of the elements within the chosen clusters
+
+-   Larger variance than SRS!
+
+![](img/cluster_sample.png)
+
+## Systematic Random sampling (SyRS)
+
+-   Select every $k^{th}$ element!
+
+-   Random start within the first block of elements.
+
+    -   Convenient and also the sample will be representative of population
+
+    -   Variance of estimates - generally greater than those of SRS
+
+    -   Inefficient/inappropriate, if cycle or trend is present
+
+![](img/systematic_sample.png)
+
+## Other Sampling methods
+
+-   Probability proportional to size (PPS)
+    -   e.g. sampling high-value companies more likely than low-value companies
+-   Multistage
+    -   e.g. 1st stage - cluster; 2nd stage - SRS
+-   Volunteers
+    -   e.g. Blood donors...
+    -   randomisation?
+-   Haphazard / opportunistic / snowball / purposive
+    -   e.g. Study of HIV/AIDS patients...
+    -   randomisation?
+
+## Some sampling methods
+
+![](img/1_5.png)
+
+## Effective Sample size (thumb rule)
+
+| Sample Design | Design Effect ($d$) | Effective Sample Size ($\frac{n}{d}$) |
+|-------------------|-------------------|-----------------------------------|
+| SRS           | 1.00                | $n$                                   |
+| STRS          | 0.80 to 0.90        | $\frac{n}{0.9}$ to $\frac{n}{0.8}$    |
+| Cluster       | 1.02 to 1.26        | $\frac{n}{1.26}$ to $\frac{n}{1.02}$  |
+| SyRS          | 1.05                | $\frac{n}{1.05}$                      |
+| Quota         | 2                   | $\frac{n}{2}$                         |
+
+## Summary
+
+-   Issues to address
+
+    -   WHAT are collected?
+    -   WHO does the data collection?
+    -   HOW are the data collected?
+
+-   Bias occurs due to
+
+    -   SELECTION
+    -   COLLECTION
+    -   NON-RESPONSE (the single largest cause of bias!)
+
+-   A sample may have the same biases as a census along with *sampling errors*
+
+<!-- ricomisc::rstudio_viewer("Chapter-1.html", file_path = NULL) -->

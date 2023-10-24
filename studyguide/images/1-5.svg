@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+
+<!-- Page 1 -->
+<svg x="0" y="0" width="694" height="392" viewBox="0 0 694 392" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+style="display: block;margin-left: auto;margin-right: auto;">
+<defs>
+
+<style type="text/css"><![CDATA[
+text { white-space: pre; }
+path, image { pointer-events: none; }
+
+.s1_1{
+font-size: 17.84px;
+font-family: TimesNewRoman-Bold_6;
+fill: #000000;
+}
+.s2_1{
+font-size: 17.84px;
+font-family: TimesNewRoman_8;
+fill: #000000;
+}
+.s3_1{
+font-size: 11.96px;
+font-family: TimesNewRoman_8;
+fill: #000000;
+}
+
+.g0_1{
+}
+
+]]></style>
+
+</defs>
+<path d="M0,0
+L0,392
+L694,392
+L694,0 Z " 
+fill="#FFFFFF" stroke="none" />
+<text x="13" y="22" dx="0,0,0,0,0,0,0,0,0,0,0,0,0,-0.1,0,0,0,0,0,0,0" class="s1_1">Geographical Cluster </text>
+<text x="195" y="22" dx="0,-0.1,0,0,0,0,0,0,0,0,0,0,0,-0.2,-0.1" class="s1_1">1------------1 </text>
+<text x="293" y="22" dx="0,0.1,0,0,0,0,0,0,0,0,0,0,0,0.2,0.1" class="s2_1">2------------2 </text>
+<text x="391" y="22" dx="0,0.1,0,0,0,0,0,0,0.1" class="s1_1">1------1 </text>
+<text x="458" y="22" dx="0,-0.1,0,0,0,0,0,0,0,0,0,0,0,0.2" class="s2_1">2------------ </text>
+<text x="547" y="22" dx="0,0,0,0,0,0,-0.1" class="s2_1">------2</text>
+<path d="M5.1,6.5H6.2V5.4H5.1V6.5Z" class="g0_1" />
+<path d="M5.1,6.5H6.2V5.4H5.1V6.5Z" class="g0_1" />
+<path d="M6.2,6.5h181V5.4H6.2V6.5Z" class="g0_1" />
+<path d="M187.2,6.5h1.1V5.4h-1.1V6.5Z" class="g0_1" />
+<path d="M188.3,6.5H692.4V5.4H188.3V6.5Z" class="g0_1" />
+<path d="M692.4,6.5h1V5.4h-1V6.5Z" class="g0_1" />
+<path d="M692.4,6.5h1V5.4h-1V6.5Z" class="g0_1" />
+<path d="M5.1,27.1H6.2V6.5H5.1V27.1Z" class="g0_1" />
+<path d="M187.2,27.1h1.1V6.5h-1.1V27.1Z" class="g0_1" />
+<path d="M692.4,27.1h1V6.5h-1V27.1Z" class="g0_1" />
+<text x="55" y="44" dx="0,0,0,0,0,0,0,0,0,0,-0.4" class="s1_1">Population </text>
+<text x="195" y="44" dx="0,-0.1" class="s1_1">F </text>
+<text x="215" y="44" dx="0,-0.1" class="s1_1">F </text>
+<text x="235" y="44" dx="0,-0.1" class="s1_1">F </text>
+<text x="255" y="44" dx="0,-0.1" class="s1_1">F </text>
+<text x="274" y="44" class="s1_1">F</text>
+<text x="295" y="44" dx="0,-0.3" class="s2_1">F </text>
+<text x="313" y="44" dx="0,-0.3" class="s2_1">F </text>
+<text x="332" y="44" dx="0,-0.3" class="s2_1">F </text>
+<text x="351" y="44" dx="0,-0.3" class="s2_1">F </text>
+<text x="370" y="44" dx="0,-0.3" class="s2_1">F </text>
+<text x="389" y="44" dx="0,0.1,0.1,0.1,0.1" class="s1_1">M M M</text>
+<text x="457" y="44" dx="0,-0.2,0.2,-0.2,0.2,-0.2,0.2,-0.2,0.2,-0.2,0.2,-0.2,0.2,-0.4" class="s2_1">M M M M M M M </text>
+<path d="M5.1,28.2H6.2V27.1H5.1v1.1Z" class="g0_1" />
+<path d="M6.2,28.2h181V27.1H6.2v1.1Z" class="g0_1" />
+<path d="M187.2,28.2h1.1V27.1h-1.1v1.1Z" class="g0_1" />
+<path d="M188.3,28.2H692.4V27.1H188.3v1.1Z" class="g0_1" />
+<path d="M692.4,28.2h1V27.1h-1v1.1Z" class="g0_1" />
+<path d="M5.1,48.7H6.2V28.2H5.1V48.7Z" class="g0_1" />
+<path d="M187.2,48.7h1.1V28.2h-1.1V48.7Z" class="g0_1" />
+<path d="M692.4,48.7h1V28.2h-1V48.7Z" class="g0_1" />
+<text x="25" y="66" dx="0,0,0,0,0,0,0,0,0,0,0,-0.1,0,0,0,0,0,0" class="s1_1">Accidental Sample </text>
+<text x="195" y="66" dx="0,-0.1" class="s1_1">F </text>
+<text x="215" y="66" dx="0,-0.1" class="s1_1">F </text>
+<text x="235" y="66" dx="0,-0.1" class="s1_1">F </text>
+<text x="255" y="66" dx="0,-0.1" class="s1_1">F </text>
+<text x="195" y="86" dx="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.2" class="s2_1">First four people who happen to be women </text>
+<path d="M5.1,49.6H6.2v-.9H5.1v.9Z" class="g0_1" />
+<path d="M6.2,49.6h181v-.9H6.2v.9Z" class="g0_1" />
+<path d="M187.2,49.6h1.1v-.9h-1.1v.9Z" class="g0_1" />
+<path d="M188.3,49.6H692.4v-.9H188.3v.9Z" class="g0_1" />
+<path d="M692.4,49.6h1v-.9h-1v.9Z" class="g0_1" />
+<path d="M5.1,90.9H6.2V49.6H5.1V90.9Z" class="g0_1" />
+<path d="M187.2,90.9h1.1V49.6h-1.1V90.9Z" class="g0_1" />
+<path d="M692.4,90.9h1V49.6h-1V90.9Z" class="g0_1" />
+<text x="30" y="119" dx="0,0,0,0,0,0,0,0,0,-0.1,0,0,0,0,0,0" class="s1_1">Snowball Sample </text>
+<text x="414" y="109" class="s1_1">M</text>
+<text x="471" y="109" dx="0,-0.3" class="s2_1">M </text>
+<text x="526" y="109" class="s2_1">M</text>
+<text x="560" y="109" dx="0,-0.1" class="s2_1">M </text>
+<text x="195" y="129" dx="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.2" class="s2_1">Use contacts to choose the members of the sample </text>
+<path d="M5.1,92H6.2V90.9H5.1V92Z" class="g0_1" />
+<path d="M6.2,92h181V90.9H6.2V92Z" class="g0_1" />
+<path d="M187.2,92h1.1V90.9h-1.1V92Z" class="g0_1" />
+<path d="M188.3,92H692.4V90.9H188.3V92Z" class="g0_1" />
+<path d="M692.4,92h1V90.9h-1V92Z" class="g0_1" />
+<path d="M5.1,134.3H6.2V92H5.1v42.3Z" class="g0_1" />
+<path d="M187.2,134.3h1.1V92h-1.1v42.3Z" class="g0_1" />
+<path d="M692.4,134.3h1V92h-1v42.3Z" class="g0_1" />
+<text x="42" y="162" dx="0,0,0,0,0,0,-0.1,0,0,0,0,0,-0.2" class="s1_1">Quota Sample </text>
+<text x="195" y="151" class="s1_1">F </text>
+<text x="215" y="151" class="s1_1">F</text>
+<text x="396" y="151" dx="0,0,-0.1" class="s1_1">M M</text>
+<text x="195" y="171" dx="0,0,0,0,0,0,0.1,0,0,0,0.1,0,0,0,0,0,0.1,0,0,0,0.1,0,0,0,0,0,0.1,0,0,0,0.1,0,0,0.2" class="s2_1">First two women and first two men </text>
+<path d="M5.1,135.4H6.2v-1.1H5.1v1.1Z" class="g0_1" />
+<path d="M6.2,135.4h181v-1.1H6.2v1.1Z" class="g0_1" />
+<path d="M187.2,135.4h1.1v-1.1h-1.1v1.1Z" class="g0_1" />
+<path d="M188.3,135.4H692.4v-1.1H188.3v1.1Z" class="g0_1" />
+<path d="M692.4,135.4h1v-1.1h-1v1.1Z" class="g0_1" />
+<path d="M5.1,176.5H6.2V135.4H5.1v41.1Z" class="g0_1" />
+<path d="M187.2,176.5h1.1V135.4h-1.1v41.1Z" class="g0_1" />
+<path d="M692.4,176.5h1V135.4h-1v41.1Z" class="g0_1" />
+<text x="33" y="204" dx="0,0,0,0,0,0,0,0.1,0,0,0,0,0,0,0.1" class="s1_1">Random Cluster </text>
+<text x="209" y="194" dx="0,-0.1" class="s1_1">F </text>
+<text x="228" y="194" dx="0,-0.1" class="s1_1">F </text>
+<text x="248" y="194" dx="0,-0.1" class="s1_1">F </text>
+<text x="415" y="194" class="s1_1">M </text>
+<text x="195" y="214" dx="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-0.9" class="s2_1">Random selection of four people from cluster one only </text>
+<path d="M5.1,177.6H6.2v-1.1H5.1v1.1Z" class="g0_1" />
+<path d="M6.2,177.6h181v-1.1H6.2v1.1Z" class="g0_1" />
+<path d="M187.2,177.6h1.1v-1.1h-1.1v1.1Z" class="g0_1" />
+<path d="M188.3,177.6H692.4v-1.1H188.3v1.1Z" class="g0_1" />
+<path d="M692.4,177.6h1v-1.1h-1v1.1Z" class="g0_1" />
+<path d="M5.1,218.7H6.2V177.6H5.1v41.1Z" class="g0_1" />
+<path d="M187.2,218.7h1.1V177.6h-1.1v41.1Z" class="g0_1" />
+<path d="M692.4,218.7h1V177.6h-1v41.1Z" class="g0_1" />
+<text x="35" y="236" dx="0,0,0,0,0,0,0,-0.2,0,0,0,0,0,0" class="s1_1">Simple Random </text>
+<text x="68" y="256" dx="0,0.1,0.1,0.1,0.1,0.1,-0.5" class="s1_1">Sample </text>
+<text x="222" y="235" class="s1_1">F</text>
+<text x="282" y="235" dx="0,-0.3" class="s2_1">F </text>
+<text x="301" y="235" dx="0,-0.3" class="s2_1">F </text>
+<text x="391" y="235" class="s1_1">M</text>
+<text x="195" y="256" dx="0,0,0,0,0,0,0,-0.1,0,0,0,0,0,0,0,0,0,-0.1,0,0,-0.1,0,0,0,0,-0.1,0,0,0,0,0,0" class="s2_1">Random selection of four people </text>
+<path d="M5.1,219.8H6.2v-1.1H5.1v1.1Z" class="g0_1" />
+<path d="M6.2,219.8h181v-1.1H6.2v1.1Z" class="g0_1" />
+<path d="M187.2,219.8h1.1v-1.1h-1.1v1.1Z" class="g0_1" />
+<path d="M188.3,219.8H692.4v-1.1H188.3v1.1Z" class="g0_1" />
+<path d="M692.4,219.8h1v-1.1h-1v1.1Z" class="g0_1" />
+<path d="M5.1,260.8H6.2v-41H5.1v41Z" class="g0_1" />
+<path d="M187.2,260.8h1.1v-41h-1.1v41Z" class="g0_1" />
+<path d="M692.4,260.8h1v-41h-1v41Z" class="g0_1" />
+<text x="20" y="288" dx="0,0,0,0,0,0,0,0,0,0,0,-0.2,0,0,0,0,0,0" class="s1_1">Systematic Random </text>
+<text x="68" y="309" dx="0,0.1,0.1,0.1,0.1,0.1,-0.5" class="s1_1">Sample </text>
+<text x="213" y="277" class="s1_1">F</text>
+<text x="313" y="277" dx="0,-0.1" class="s2_1">F </text>
+<text x="404" y="277" dx="0,-0.1" class="s2_1">M </text>
+<text x="500" y="277" dx="0,-0.3" class="s2_1">M </text>
+<text x="195" y="298" dx="0,0,0,0,0,0,0,-0.1,0,0,0,0,-0.2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" class="s2_1">Random selection from first 10 people = 2</text>
+<text x="498" y="290" dx="0,-0.1" class="s3_1">nd</text>
+<text x="515" y="298" class="s2_1">person. </text>
+<text x="575" y="298" class="s2_1">Thereafter </text>
+<text x="195" y="318" dx="0,0,0,0,0,0,-0.1,0" class="s2_1">every 10</text>
+<text x="257" y="310" dx="0,-0.3" class="s3_1">th</text>
+<text x="271" y="318" dx="0,0,0,0,0,0,0,0.1,0,0,0,0,0.1,0,0,0,0.1,0" class="s2_1">person (ie. the 12</text>
+<text x="395" y="310" dx="0,-0.3" class="s3_1">th</text>
+<text x="404" y="318" dx="0,0,-0.1,0" class="s2_1">, 22</text>
+<text x="431" y="310" dx="0,0.1" class="s3_1">nd</text>
+<text x="443" y="318" dx="0,0,-0.1,0,0,0,-0.1,0" class="s2_1">, and 32</text>
+<text x="500" y="310" dx="0,0.1" class="s3_1">nd</text>
+<text x="516" y="318" dx="0,0,0,0,0,0,0,-0.2" class="s2_1">person) </text>
+<path d="M5.1,261.9H6.2v-1.1H5.1v1.1Z" class="g0_1" />
+<path d="M6.2,261.9h181v-1.1H6.2v1.1Z" class="g0_1" />
+<path d="M187.2,261.9h1.1v-1.1h-1.1v1.1Z" class="g0_1" />
+<path d="M188.3,261.9H692.4v-1.1H188.3v1.1Z" class="g0_1" />
+<path d="M692.4,261.9h1v-1.1h-1v1.1Z" class="g0_1" />
+<path d="M5.1,323.3H6.2V261.9H5.1v61.4Z" class="g0_1" />
+<path d="M187.2,323.3h1.1V261.9h-1.1v61.4Z" class="g0_1" />
+<path d="M692.4,323.3h1V261.9h-1v61.4Z" class="g0_1" />
+<text x="25" y="351" dx="0,0,0,0,0,0,0,0,0,0,0,-0.1,0,0,0,0,0,0" class="s1_1">Stratified Random </text>
+<text x="68" y="371" dx="0,0.1,0.1,0.1,0.1,0.1,-0.5" class="s1_1">Sample </text>
+<text x="209" y="340" class="s1_1">F</text>
+<text x="331" y="340" dx="0,-0.2" class="s2_1">F </text>
+<text x="404" y="340" class="s1_1">M</text>
+<text x="487" y="340" dx="0,-0.1" class="s2_1">M </text>
+<text x="195" y="361" class="s2_1">Random selection of two men and two women, one from each </text>
+<text x="195" y="381" class="s2_1">cluster. </text>
+<path d="M5.1,324.4H6.2v-1.1H5.1v1.1Z" class="g0_1" />
+<path d="M6.2,324.4h181v-1.1H6.2v1.1Z" class="g0_1" />
+<path d="M187.2,324.4h1.1v-1.1h-1.1v1.1Z" class="g0_1" />
+<path d="M188.3,324.4H692.4v-1.1H188.3v1.1Z" class="g0_1" />
+<path d="M692.4,324.4h1v-1.1h-1v1.1Z" class="g0_1" />
+<path d="M5.1,386.2H6.2V324.4H5.1v61.8Z" class="g0_1" />
+<path d="M5.1,387.3H6.2v-1.1H5.1v1.1Z" class="g0_1" />
+<path d="M5.1,387.3H6.2v-1.1H5.1v1.1Z" class="g0_1" />
+<path d="M6.2,387.3h181v-1.1H6.2v1.1Z" class="g0_1" />
+<path d="M187.2,386.2h1.1V324.4h-1.1v61.8Z" class="g0_1" />
+<path d="M187.2,387.3h1.1v-1.1h-1.1v1.1Z" class="g0_1" />
+<path d="M188.3,387.3H692.4v-1.1H188.3v1.1Z" class="g0_1" />
+<path d="M692.4,386.2h1V324.4h-1v61.8Z" class="g0_1" />
+<path d="M692.4,387.3h1v-1.1h-1v1.1Z" class="g0_1" />
+<path d="M692.4,387.3h1v-1.1h-1v1.1Z" class="g0_1" />
+
+
+<!-- Any embedded fonts defined here -->
+<style type="text/css" ><![CDATA[
+
+@font-face {
+	font-family: TimesNewRoman-Bold_6;
+	src: url("fonts/TimesNewRoman-Bold_6.woff") format("woff");
+}
+
+@font-face {
+	font-family: TimesNewRoman_8;
+	src: url("fonts/TimesNewRoman_8.woff") format("woff");
+}
+
+]]></style>
+
+</svg>

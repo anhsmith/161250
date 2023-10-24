@@ -1,0 +1,7 @@
+pathString,prob
+Healthy,0.97
+Healthy/Positive,0.05
+Healthy/Negative,0.95
+Disease,0.03
+Disease/Positive,0.98
+Disease/Negative,0.02

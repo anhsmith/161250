@@ -1,0 +1,10 @@
+﻿Two-sample T for TELETIME
+
+SEX   N  Mean  StDev  SE Mean
+1    23  1668    648      135
+2    23  1790    482      101
+
+Difference = μ (1) - μ (2)
+Estimate for difference:  -122
+95% CI for difference:  (-462, 218)
+T-Test of difference = 0 (vs ≠): T-Value = -0.72  P-Value = 0.473  DF = 40

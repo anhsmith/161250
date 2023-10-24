@@ -1,0 +1,21 @@
+burntime	fabric
+17.8	Fabric 1
+16.2	Fabric 1
+17.5	Fabric 1
+17.4	Fabric 1
+15	Fabric 1
+11.2	Fabric 2
+11.4	Fabric 2
+15.8	Fabric 2
+10	Fabric 2
+10.4	Fabric 2
+11.8	Fabric 3
+11	Fabric 3
+10	Fabric 3
+9.2	Fabric 3
+9.2	Fabric 3
+14.9	Fabric 4
+10.8	Fabric 4
+12.8	Fabric 4
+10.7	Fabric 4
+10.7	Fabric 4

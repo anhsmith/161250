@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+
+<!-- Page 1 -->
+<svg x="0" y="0" width="554" height="180" viewBox="0 0 554 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+style="display: block;margin-left: auto;margin-right: auto;">
+<defs>
+
+<style type="text/css"><![CDATA[
+text { white-space: pre; }
+path, image { pointer-events: none; }
+
+.s1_1{
+font-size: 16.31px;
+font-family: TimesNewRoman-Bold_6;
+fill: #000000;
+}
+.s2_1{
+font-size: 16.31px;
+font-family: TimesNewRoman_8;
+fill: #000000;
+}
+
+.g0_1{
+}
+
+]]></style>
+
+</defs>
+<path d="M0,0
+L0,180
+L554,180
+L554,0 Z " 
+fill="#FFFFFF" stroke="none" />
+<text x="209" y="21" class="s1_1">Aggregate</text>
+<text x="41" y="42" class="s1_1">Cement</text>
+<text x="162" y="42" class="s1_1">1</text>
+<text x="240" y="42" class="s1_1">2</text>
+<text x="319" y="42" class="s1_1">3</text>
+<text x="373" y="42" dx="0,0,0,0,0.1,0,0,0,0" class="s1_1">Row Means</text>
+<text x="466" y="42" dx="0,0,0,0,0.1,0,0,0,0,0,0" class="s1_1">Row Effects</text>
+<text x="64" y="63" class="s2_1">1</text>
+<text x="162" y="63" class="s2_1">4</text>
+<text x="236" y="63" dx="0,-0.1" class="s2_1">10</text>
+<text x="314" y="63" dx="0,0.1" class="s2_1">22</text>
+<text x="396" y="63" class="s2_1">12.00</text>
+<text x="491" y="63" class="s2_1">-2.42</text>
+<text x="64" y="83" class="s2_1">2</text>
+<text x="162" y="83" class="s2_1">5</text>
+<text x="240" y="83" class="s2_1">8</text>
+<text x="314" y="83" dx="0,0.1" class="s2_1">28</text>
+<text x="396" y="83" class="s2_1">13.67</text>
+<text x="491" y="83" class="s2_1">-0.75</text>
+<text x="64" y="104" class="s2_1">3</text>
+<text x="162" y="104" class="s2_1">6</text>
+<text x="240" y="104" class="s2_1">9</text>
+<text x="314" y="104" dx="0,0.1" class="s2_1">34</text>
+<text x="396" y="104" class="s2_1">16.33</text>
+<text x="494" y="104" class="s2_1">1.92</text>
+<text x="64" y="125" class="s2_1">4</text>
+<text x="162" y="125" class="s2_1">7</text>
+<text x="236" y="125" dx="0,-0.1" class="s2_1">10</text>
+<text x="314" y="125" dx="0,0.1" class="s2_1">30</text>
+<text x="396" y="125" class="s2_1">15.67</text>
+<text x="494" y="125" class="s2_1">1.25</text>
+<text x="15" y="145" dx="0,0,0,0,0,0,0,0.1,0,0,0,0" class="s1_1">Column Means</text>
+<text x="152" y="146" class="s2_1">5.50</text>
+<text x="230" y="146" class="s2_1">9.25</text>
+<text x="304" y="146" class="s2_1">28.50</text>
+<text x="396" y="146" class="s2_1">14.42</text>
+<text x="14" y="166" class="s1_1">Column Effects</text>
+<text x="149" y="166" class="s2_1">-8.92</text>
+<text x="227" y="166" class="s2_1">-5.17</text>
+<text x="304" y="166" class="s2_1">14.08</text>
+<path d="M7.3,5.3h.8V4.5H7.3v.8Z" class="g0_1" />
+<path d="M7.3,5.3h.8V4.5H7.3v.8Z" class="g0_1" />
+<path d="M8.1,5.3H550.9V4.5H8.1v.8Z" class="g0_1" />
+<path d="M550.9,5.3h.7V4.5h-.7v.8Z" class="g0_1" />
+<path d="M550.9,5.3h.7V4.5h-.7v.8Z" class="g0_1" />
+<path d="M7.3,172.3h.8V5.3H7.3v167Z" class="g0_1" />
+<path d="M550.9,172.3h.7V5.3h-.7v167Z" class="g0_1" />
+<path d="M7.3,173h.8v-.7H7.3v.7Z" class="g0_1" />
+<path d="M7.3,173h.8v-.7H7.3v.7Z" class="g0_1" />
+<path d="M8.1,173H550.9v-.7H8.1v.7Z" class="g0_1" />
+<path d="M550.9,173h.7v-.7h-.7v.7Z" class="g0_1" />
+<path d="M550.9,173h.7v-.7h-.7v.7Z" class="g0_1" />
+
+
+<!-- Any embedded fonts defined here -->
+<style type="text/css" ><![CDATA[
+
+@font-face {
+	font-family: TimesNewRoman-Bold_6;
+	src: url("fonts/TimesNewRoman-Bold_6.woff") format("woff");
+}
+
+@font-face {
+	font-family: TimesNewRoman_8;
+	src: url("fonts/TimesNewRoman_8.woff") format("woff");
+}
+
+]]></style>
+
+</svg>

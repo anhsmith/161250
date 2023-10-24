@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+
+<!-- Page 1 -->
+<svg x="0" y="0" width="430" height="208" viewBox="0 0 430 208" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+style="display: block;margin-left: auto;margin-right: auto;">
+<defs>
+
+<style type="text/css"><![CDATA[
+text { white-space: pre; }
+path, image { pointer-events: none; }
+
+.s1_1{
+font-size: 15.22px;
+font-family: CourierNew-Bold_6;
+fill: #000000;
+}
+.s2_1{
+font-size: 15.22px;
+font-family: CourierNew_a;
+fill: #000000;
+}
+
+.g0_1{
+}
+
+]]></style>
+
+</defs>
+<path d="M0,0
+L0,208
+L430,208
+L430,0 Z " 
+fill="#FFFFFF" stroke="none" />
+<text x="13" y="17" class="s1_1">Rotational Speed </text>
+<text x="45" y="34" class="s1_1">of Paddle </text>
+<text x="63" y="51" class="s1_1">(rpm) </text>
+<text x="193" y="17" class="s1_1">Paddle </text>
+<text x="184" y="34" class="s1_1">Diameter </text>
+<text x="202" y="51" class="s1_1">(mm) </text>
+<text x="286" y="17" class="s1_1">Optimum Mixing </text>
+<text x="332" y="34" class="s1_1">Time </text>
+<text x="323" y="51" class="s1_1">(secs) </text>
+<path d="M7,5.1h.7V4.3H7v.8Z" class="g0_1" />
+<path d="M7,5.1h.7V4.3H7v.8Z" class="g0_1" />
+<path d="M7.7,5.1H167V4.3H7.7v.8Z" class="g0_1" />
+<path d="M167,5.1h.7V4.3H167v.8Z" class="g0_1" />
+<path d="M167.7,5.1H275.2V4.3H167.7v.8Z" class="g0_1" />
+<path d="M275.2,5.1h.7V4.3h-.7v.8Z" class="g0_1" />
+<path d="M275.9,5.1H426.4V4.3H275.9v.8Z" class="g0_1" />
+<path d="M426.4,5.1h.8V4.3h-.8v.8Z" class="g0_1" />
+<path d="M426.4,5.1h.8V4.3h-.8v.8Z" class="g0_1" />
+<path d="M7,55.7h.7V5.1H7V55.7Z" class="g0_1" />
+<path d="M167,55.7h.7V5.1H167V55.7Z" class="g0_1" />
+<path d="M275.2,55.7h.7V5.1h-.7V55.7Z" class="g0_1" />
+<path d="M426.4,55.7h.8V5.1h-.8V55.7Z" class="g0_1" />
+<text x="77" y="68" class="s2_1">70 </text>
+<text x="77" y="84" class="s2_1">70 </text>
+<text x="77" y="100" class="s2_1">70 </text>
+<text x="72" y="116" class="s2_1">110 </text>
+<text x="72" y="132" class="s2_1">110 </text>
+<text x="72" y="148" class="s2_1">110 </text>
+<text x="72" y="165" class="s2_1">150 </text>
+<text x="72" y="181" class="s2_1">150 </text>
+<text x="72" y="197" class="s2_1">150 </text>
+<text x="211" y="68" class="s2_1">90 </text>
+<text x="206" y="84" class="s2_1">120 </text>
+<text x="206" y="100" class="s2_1">150 </text>
+<text x="211" y="116" class="s2_1">90 </text>
+<text x="206" y="132" class="s2_1">120 </text>
+<text x="206" y="148" class="s2_1">150 </text>
+<text x="211" y="165" class="s2_1">90 </text>
+<text x="206" y="181" class="s2_1">120 </text>
+<text x="206" y="197" class="s2_1">150 </text>
+<text x="294" y="68" class="s2_1">1490 </text>
+<text x="299" y="84" class="s2_1">780 </text>
+<text x="299" y="100" class="s2_1">825 </text>
+<text x="299" y="116" class="s2_1">575 </text>
+<text x="299" y="132" class="s2_1">385 </text>
+<text x="299" y="148" class="s2_1">315 </text>
+<text x="299" y="165" class="s2_1">195 </text>
+<text x="299" y="181" class="s2_1">117 </text>
+<text x="299" y="197" class="s2_1">225 </text>
+<text x="369" y="68" class="s2_1">1100 </text>
+<text x="374" y="84" class="s2_1">620 </text>
+<text x="374" y="100" class="s2_1">690 </text>
+<text x="374" y="116" class="s2_1">480 </text>
+<text x="374" y="132" class="s2_1">385 </text>
+<text x="374" y="148" class="s2_1">400 </text>
+<text x="374" y="165" class="s2_1">230 </text>
+<text x="374" y="181" class="s2_1">190 </text>
+<text x="374" y="197" class="s2_1">145 </text>
+<path d="M7,56.4h.7v-.7H7v.7Z" class="g0_1" />
+<path d="M7.7,56.4H167v-.7H7.7v.7Z" class="g0_1" />
+<path d="M167,56.4h.7v-.7H167v.7Z" class="g0_1" />
+<path d="M167.7,56.4H275.2v-.7H167.7v.7Z" class="g0_1" />
+<path d="M275.2,56.4h.7v-.7h-.7v.7Z" class="g0_1" />
+<path d="M275.9,56.4h74.8v-.7H275.9v.7Z" class="g0_1" />
+<path d="M350.7,56.4h.7v-.7h-.7v.7Z" class="g0_1" />
+<path d="M351.4,56.4h75v-.7h-75v.7Z" class="g0_1" />
+<path d="M426.4,56.4h.8v-.7h-.8v.7Z" class="g0_1" />
+<path d="M7,201.6h.7V56.4H7V201.6Z" class="g0_1" />
+<path d="M7,202.3h.7v-.7H7v.7Z" class="g0_1" />
+<path d="M7,202.3h.7v-.7H7v.7Z" class="g0_1" />
+<path d="M7.7,202.3H167v-.7H7.7v.7Z" class="g0_1" />
+<path d="M167,201.6h.7V56.4H167V201.6Z" class="g0_1" />
+<path d="M167,202.3h.7v-.7H167v.7Z" class="g0_1" />
+<path d="M167.7,202.3H275.2v-.7H167.7v.7Z" class="g0_1" />
+<path d="M275.2,201.6h.7V56.4h-.7V201.6Z" class="g0_1" />
+<path d="M275.2,202.3h.7v-.7h-.7v.7Z" class="g0_1" />
+<path d="M275.9,202.3h74.8v-.7H275.9v.7Z" class="g0_1" />
+<path d="M350.7,201.6h.7V56.4h-.7V201.6Z" class="g0_1" />
+<path d="M350.7,202.3h.7v-.7h-.7v.7Z" class="g0_1" />
+<path d="M351.4,202.3h75v-.7h-75v.7Z" class="g0_1" />
+<path d="M426.4,201.6h.8V56.4h-.8V201.6Z" class="g0_1" />
+<path d="M426.4,202.3h.8v-.7h-.8v.7Z" class="g0_1" />
+<path d="M426.4,202.3h.8v-.7h-.8v.7Z" class="g0_1" />
+
+
+<!-- Any embedded fonts defined here -->
+<style type="text/css" ><![CDATA[
+
+@font-face {
+	font-family: CourierNew_a;
+	src: url("fonts/CourierNew_a.woff") format("woff");
+}
+
+@font-face {
+	font-family: CourierNew-Bold_6;
+	src: url("fonts/CourierNew-Bold_6.woff") format("woff");
+}
+
+]]></style>
+
+</svg>

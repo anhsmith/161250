@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+
+<!-- Page 1 -->
+<svg x="0" y="0" width="570" height="205" viewBox="0 0 570 205" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+style="display: block;margin-left: auto;margin-right: auto;">
+<defs>
+
+<style type="text/css"><![CDATA[
+text { white-space: pre; }
+path, image { pointer-events: none; }
+
+.s1_1{
+font-size: 18.33px;
+font-family: TimesNewRoman_6;
+fill: #000000;
+}
+
+.g0_1{
+}
+
+]]></style>
+
+</defs>
+<path d="M0,0
+L0,205
+L570,205
+L570,0 Z " 
+fill="#FFFFFF" stroke="none" />
+<text x="219" y="22" class="s1_1">Selection of </text>
+<text x="235" y="43" dx="0,0,0,0,0,0,-0.2" class="s1_1">Sample </text>
+<text x="390" y="22" class="s1_1">Data Collection and </text>
+<text x="395" y="43" class="s1_1">forming Estimates </text>
+<path d="M5.1,6.4h.8V5.6H5.1v.8Z" class="g0_1" />
+<path d="M5.1,6.4h.8V5.6H5.1v.8Z" class="g0_1" />
+<path d="M5.9,6.4H162.6V5.6H5.9v.8Z" class="g0_1" />
+<path d="M162.6,6.4h.7V5.6h-.7v.8Z" class="g0_1" />
+<path d="M163.3,6.4H362.6V5.6H163.3v.8Z" class="g0_1" />
+<path d="M362.6,6.4h.8V5.6h-.8v.8Z" class="g0_1" />
+<path d="M363.4,6.4H563.6V5.6H363.4v.8Z" class="g0_1" />
+<path d="M563.6,6.4h.7V5.6h-.7v.8Z" class="g0_1" />
+<path d="M563.6,6.4h.7V5.6h-.7v.8Z" class="g0_1" />
+<path d="M5.1,48.5h.8V6.4H5.1V48.5Z" class="g0_1" />
+<path d="M162.6,48.5h2.2V6.4h-2.2V48.5Z" class="g0_1" />
+<path d="M362.6,48.5h.8V6.4h-.8V48.5Z" class="g0_1" />
+<path d="M563.6,48.5h.7V6.4h-.7V48.5Z" class="g0_1" />
+<text x="49" y="67" dx="0,0,0,0,0,0,0,0,-0.2" class="s1_1">Sampling </text>
+<text x="254" y="67" dx="0,0,0,-0.1" class="s1_1">(i) </text>
+<text x="187" y="88" dx="0,0,0,0,0,0,0.4,0,0,0,0,0,0,0,0,0,0,0,0,0,0" class="s1_1">Frame Inefficiencies </text>
+<text x="452" y="67" dx="0,0,0,0,-0.1" class="s1_1">(ii) </text>
+<text x="400" y="88" class="s1_1">Biased Estimates </text>
+<path d="M5.1,50.9h.8V48.5H5.1v2.4Z" class="g0_1" />
+<path d="M5.9,50.7H162.6V48.5H5.9v2.2Z" class="g0_1" />
+<path d="M162.6,50.9h2.2V48.5h-2.2v2.4Z" class="g0_1" />
+<path d="M164.8,50.7H362.6V48.5H164.8v2.2Z" class="g0_1" />
+<path d="M362.6,50.9h.8v-.4h-.8v.4Z" class="g0_1" />
+<path d="M362.6,50.7h2.2V48.5h-2.2v2.2Z" class="g0_1" />
+<path d="M364.8,50.7H563.6V48.5H364.8v2.2Z" class="g0_1" />
+<path d="M563.6,50.9h.7V48.5h-.7v2.4Z" class="g0_1" />
+<path d="M5.1,93.1h.8V50.9H5.1V93.1Z" class="g0_1" />
+<path d="M162.6,93.1h2.2V50.9h-2.2V93.1Z" class="g0_1" />
+<path d="M362.6,93.1h.8V50.9h-.8V93.1Z" class="g0_1" />
+<path d="M563.6,93.1h.7V50.9h-.7V93.1Z" class="g0_1" />
+<text x="249" y="110" dx="0,0,0,0,0,-0.1" class="s1_1">(iii) </text>
+<text x="200" y="131" dx="0,0,0,0,-0.1,0,0,0,0,0,0,0,0,0,0,0,0" class="s1_1">non-observations </text>
+<text x="450" y="110" class="s1_1">(iv) </text>
+<text x="417" y="131" dx="0,0,0,0,0,0,0,0,0,0,0,-0.2" class="s1_1">nonresponse </text>
+<path d="M5.1,93.8h.8v-.7H5.1v.7Z" class="g0_1" />
+<path d="M5.9,93.8H162.6v-.7H5.9v.7Z" class="g0_1" />
+<path d="M162.6,93.8h2.2v-.7h-2.2v.7Z" class="g0_1" />
+<path d="M164.8,93.8H362.6v-.7H164.8v.7Z" class="g0_1" />
+<path d="M362.6,93.8h.8v-.7h-.8v.7Z" class="g0_1" />
+<path d="M363.4,93.8H563.6v-.7H363.4v.7Z" class="g0_1" />
+<path d="M563.6,93.8h.7v-.7h-.7v.7Z" class="g0_1" />
+<path d="M5.1,136h.8V93.8H5.1V136Z" class="g0_1" />
+<path d="M162.6,136h2.2V93.8h-2.2V136Z" class="g0_1" />
+<path d="M362.6,136h.8V93.8h-.8V136Z" class="g0_1" />
+<path d="M563.6,136h.7V93.8h-.7V136Z" class="g0_1" />
+<text x="29" y="152" dx="0,0,0,0,-0.1,0,0,0,0,0,0,0,0,-0.2" class="s1_1">Non- sampling </text>
+<text x="252" y="152" class="s1_1">(v) </text>
+<text x="191" y="173" class="s1_1">Purposive selection </text>
+<text x="221" y="194" class="s1_1">(e.g. quota) </text>
+<text x="450" y="152" dx="0,0,0,0,-0.2" class="s1_1">(vi) </text>
+<text x="404" y="173" class="s1_1">Interviewer bias </text>
+<text x="414" y="194" dx="0,0,0,0,0,0,0,0.2,0,0,0,0,0,0" class="s1_1">coding errors </text>
+<path d="M5.1,199.2h.8V136H5.1v63.2Z" class="g0_1" />
+<path d="M5.1,200h.8v-.8H5.1v.8Z" class="g0_1" />
+<path d="M5.1,200h.8v-.8H5.1v.8Z" class="g0_1" />
+<path d="M5.9,200H162.6v-.8H5.9v.8Z" class="g0_1" />
+<path d="M162.6,199.2h2.2V136h-2.2v63.2Z" class="g0_1" />
+<path d="M162.6,200h.7v-.8h-.7v.8Z" class="g0_1" />
+<path d="M163.3,200H362.6v-.8H163.3v.8Z" class="g0_1" />
+<path d="M362.6,199.2h.8V136h-.8v63.2Z" class="g0_1" />
+<path d="M362.6,200h.8v-.8h-.8v.8Z" class="g0_1" />
+<path d="M363.4,200H563.6v-.8H363.4v.8Z" class="g0_1" />
+<path d="M563.6,199.2h.7V136h-.7v63.2Z" class="g0_1" />
+<path d="M563.6,200h.7v-.8h-.7v.8Z" class="g0_1" />
+<path d="M563.6,200h.7v-.8h-.7v.8Z" class="g0_1" />
+
+
+<!-- Any embedded fonts defined here -->
+<style type="text/css" ><![CDATA[
+
+@font-face {
+	font-family: TimesNewRoman_6;
+	src: url("fonts/TimesNewRoman_6.woff") format("woff");
+}
+
+]]></style>
+
+</svg>

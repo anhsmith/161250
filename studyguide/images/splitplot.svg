@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+
+<!-- Page 1 -->
+<svg x="0" y="0" width="1089" height="509" viewBox="0 0 1089 509" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+style="display: block;margin-left: auto;margin-right: auto;">
+<defs>
+<clipPath id="c0_1"><path d="M-243.3,663.4V-161.5H1223.3V663.4Z" /></clipPath>
+
+<style type="text/css"><![CDATA[
+text { white-space: pre; }
+path, image { pointer-events: none; }
+
+.s1_1{
+font-size: 27.50px;
+font-family: Calibri_7;
+fill: #000000;
+}
+.s2_1{
+font-size: 27.54px;
+font-family: Calibri_7;
+fill: #000000;
+}
+
+.g0_1{
+fill: #FFFFFF;
+}
+.g1_1{
+fill: none;
+stroke: #41719C;
+stroke-width: 1.4666667;
+stroke-linecap: butt;
+stroke-linejoin: miter;
+}
+.g2_1{
+fill: none;
+stroke: #5B9BD5;
+stroke-width: 0.73333335;
+stroke-linecap: butt;
+stroke-linejoin: miter;
+}
+.g3_1{
+fill: #5B9BD5;
+}
+
+]]></style>
+
+</defs>
+<path d="M0,0
+L0,509
+L1089,509
+L1089,0 Z " 
+fill="#FFFFFF" stroke="none" />
+<g clip-path="url(#c0_1)">
+<path fill-rule="evenodd" d="M-243.3,663.4H1223.3V-161.5H-243.3V663.4Z" class="g0_1" />
+</g>
+<path d="M21.1,324H223.5V59.5H21.1V324ZM280,324H482.4V59.5H280V324Zm280.5,0H762.9V59.5H560.5V324Z" class="g1_1" />
+<path d="M21.1,191.7H223.5m56.5,0H482.4m78.1,-4.2H762.9" class="g2_1" />
+<text x="403" y="496" dx="0,-0.1,0,0,0,0,0.2,0,0,0,-0.1,0,0.2,0,0,-0.5,0,0,0,0,0,0,0" class="s1_1">Whole plots (say field)</text>
+<text x="96" y="144" class="s2_1">F1</text>
+<text x="95" y="261" class="s1_1">F2</text>
+<text x="365" y="135" class="s1_1">F1</text>
+<text x="645" y="144" class="s2_1">F1</text>
+<text x="365" y="262" class="s1_1">F2</text>
+<text x="645" y="261" class="s1_1">F2</text>
+<path d="M662.1,457L844.9,334.6l-.9,-1.3L661.3,455.7ZM845.7,338.6l5.1,-8.9L840.6,331Z" class="g3_1" />
+<path d="M396.3,457.2L237.4,335.9l.9,-1.2L397.2,456ZM236.3,339.9l-4.5,-9.3l10.1,2Z" class="g3_1" />
+<path d="M494.5,465.2L409.1,339.9l1.2,-.8l85.5,125.3ZM406.8,343.4l-1.4,-10.2l9,5Z" class="g3_1" />
+<path d="M855.3,321.8h222.6V57.3H855.3V321.8Z" class="g1_1" />
+<path d="M855.3,185.3h222.6" class="g2_1" />
+<text x="947" y="141" class="s1_1">F1</text>
+<text x="947" y="259" class="s1_1">F2</text>
+<path d="M581.7,456.7l64,-114.3l-1.4,-.7L580.4,456ZM648.2,345.6l.5,-10.2l-8.4,5.8Z" class="g3_1" />
+<text x="109" y="48" class="s2_1">V1</text>
+<text x="367" y="41" class="s1_1">V2</text>
+<text x="951" y="41" class="s1_1">V1</text>
+<text x="625" y="41" class="s1_1">V2</text>
+
+
+<!-- Any embedded fonts defined here -->
+<style type="text/css" ><![CDATA[
+
+@font-face {
+	font-family: Calibri_7;
+	src: url("fonts/Calibri_7.woff") format("woff");
+}
+
+]]></style>
+
+</svg>

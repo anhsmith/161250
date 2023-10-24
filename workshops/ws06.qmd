@@ -1,0 +1,155 @@
+
+```{r, echo=FALSE, message=FALSE}
+knitr::opts_chunk$set(echo = TRUE, 
+                      warning=FALSE, 
+                      message=FALSE, 
+                      comment=NA, 
+                      fig.show="hide")
+```
+
+# Chapter 6 Workshop {-}
+
+Dataset **`Prestige`**
+
+We will continue to use dataset `Prestige` from the `car`	R package. 
+
+
+## Exercise 6.1 {-}
+
+Fit a resistant line of `prestige` against `education`.  Show the fitted line on a scatterplot of `prestige ~ education`.  Obtain the plot of the residuals against fitted values.
+
+```{r, fig.show='hide',results='hide'}
+library(tidyverse)
+library(car)
+
+x <- Prestige$education
+y <- Prestige$prestige
+```
+
+
+Median-median line Tukey line()
+
+```{r, results='hide'}
+line(x,y)
+```
+
+#Plotting Tukey line & residuals
+
+```{r, fig.show='hide',results='hide'}
+Tline <- line(x,y)
+
+PrestigeT <- Prestige |> 
+  mutate(Tline.residuals=residuals(Tline),
+         Tline.fits=fitted(Tline)
+         ) 
+
+p1 <- PrestigeT |> 
+  ggplot() +
+  aes(x=education, y=prestige) + 
+  geom_point() +
+  geom_path(aes(x=education, y=Tline.fits))
+
+p2 <- PrestigeT |> 
+  ggplot() +
+  aes(y=Tline.residuals, x=Tline.fits) + 
+  geom_point() + 
+  geom_hline(yintercept = 0)
+
+library(patchwork)
+
+p1+p2
+```
+
+
+```{r, fig.show='hide',results='hide'}
+# Old style plotting
+x <- Prestige$education
+y <- Prestige$prestige
+
+plot(y ~ x) 
+title(main = "Scatterplot prestige ~ education")
+z = line(x,y)  # slightly different Rline
+abline(coef(z), lty=2, col= "blue")
+legend("topleft", legend ="Resistant (Tukey) line", 
+       lty=2, col = "blue")
+plot(residuals(z) ~ fitted(z))
+```
+
+
+The robust regression (which is similar to the robust line) function in the `MASS` package along with the `visreg` package is done with the following codes:
+
+```{r, fig.show='hide',results='hide'}
+library(visreg)
+library(car)
+library(MASS)
+
+fit1 <- rlm(prestige ~ education, data = Prestige)
+visreg(fit1)
+```
+
+
+
+## Exercise 6.2 {-}
+
+Fit a simple regression line of `prestige` against `education`.  Show the fitted regression line on a scatterplot of `prestige ~ education`.  Obtain the plot of the residuals against fitted values.
+
+```{r, results="hide"}
+x <- Prestige$education
+y <- Prestige$prestige
+
+simplereg <- lm(y~x) # Fits the simple regression
+
+summary(simplereg)
+
+anova(simplereg)
+```
+
+
+```{r, fig.show='hide'}
+PrestigeReg <- Prestige |> 
+  mutate(Residuals=residuals(simplereg), 
+         Fits=fitted(simplereg))
+
+PrestigeReg |> 
+  ggplot() + 
+  aes(x=education, y=prestige) + 
+  geom_point() + 
+  geom_line(aes(x=education, y=Fits))
+
+PrestigeReg |> 
+  ggplot() + 
+  aes(y=Residuals, x=Fits) + 
+  geom_point() + 
+  geom_hline(yintercept = 0)
+
+```
+
+
+
+```{r, fig.show='hide',results='hide'}
+# Old style plotting
+plot(y ~ x) 
+abline(simplereg, lty=1, col = "blue")
+abline(h=mean(y), lty=2)
+abline(v=mean(x), lty=2)
+legend("topleft", legend =c("Regression line"), 
+       lty=1, col = "blue")
+
+Fitted = fitted.values(simplereg)
+Residuals = residuals(simplereg)
+plot(Fitted, Residuals, xlab = "Fitted Values")
+abline(h = 0)
+title("Residuals Vs Fitted Values")
+```
+
+Using the `visreg` package.
+
+```{r, fig.show='hide',results='hide'}
+fit1<- lm(prestige ~ education, data = Prestige)
+visreg(fit1)
+```
+
+
+**Note:**
+
++ More R code examples are [here](https://www.massey.ac.nz/~anhsmith/250/exercises/chap06more.R) 

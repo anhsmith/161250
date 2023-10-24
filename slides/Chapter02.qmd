@@ -1,0 +1,783 @@
+---
+title: "Chapter 2:<br>Exploratory Data Analysis (EDA)"
+image: img/pairs.png
+format: 
+  revealjs:
+    width: 1050
+    height:	700
+    transition: fade
+    theme: [default, myquarto.scss]
+    slide-number: c/t  
+    logo: img/L_Color.png
+    footer: "[161250 Data Analysis](https://anhsmith.quarto.pub/161250-data-analysis/slides.html)"
+    styles:
+      - revealjs.dark:
+        background-color: #222
+        color: #fff
+execute:
+  echo: true
+---
+
+```{r setup, echo=FALSE, message=FALSE}
+knitr::opts_chunk$set(warning = FALSE, 
+                      echo = FALSE, 
+                      include=TRUE, 
+                      message=FALSE, 
+                      comment = NA, 
+                      warn=-1, 
+                      warn.conflicts = FALSE, 
+                      quietly=TRUE, 
+                      fig.align="center")
+library(tidyverse)
+```
+
+## Categorical data
+
+*Bar graphs or charts*
+
+-   For categorical variables
+-   The height of each bar is proportional to the quantity displayed
+-   Can be "stacked" or "clustered"
+
+## tea data
+
+```{r}
+library(FactoMineR)
+theme_set(theme_minimal())
+
+data(tea)
+library(ggplot2)
+p1 <- ggplot(tea, aes(x=price))+geom_bar(aes(fill=where))
+p1 <- p1 + ggtitle("Stacked bar chart")
+p2 <- ggplot(tea, aes(x=price))+geom_bar(aes(fill=where), position = "dodge")
+p2 <- p2 + ggtitle("Clustered bar chart")
+library(patchwork)
+p1/p2
+```
+
+## Pie charts (yeah nah)
+
+::: columns
+::: column
+-   Popular but not usually the best way to show proportional data
+-   Requires comparison of angles or areas of different shapes
+-   Stacked barcharts are almost always better
+:::
+
+::: column
+```{r}
+ggplot(tea, aes(x="", fill = price)) +
+  geom_bar() +
+  # facet_grid(~where) +
+  coord_polar("y") + xlab("") + ylab("")
+```
+:::
+:::
+
+<https://shiny.massey.ac.nz/kgovinda/demos/explore.counts.of.factors/>
+
+## One-dimensional graphs
+
+Dotplots and strip charts display one-dimensional data (grouped/ungrouped) and are useful to discover gaps and outliers.
+
+Often used to display experimental design data; not great for very small datasets (\<20)
+
+```{r,  warning=FALSE, message=FALSE}
+library(MASS)
+require(ggplot2)
+p1 <- ggplot(Animals, aes(x = brain)) + 
+  geom_dotplot() + 
+  scale_y_continuous(NULL, breaks = NULL)+ ggtitle("Dotplot")
+p2 <- ggplot(Animals, aes(y=row.names(Animals), x=brain)) + 
+  geom_point() + ylab("Animal") + ggtitle("Strip chart")
+library(patchwork)
+p1+p2
+
+```
+
+## Stem-and-leaf display
+
+-   Preserves the raw data (approximately) as well as shows the distribution
+-   Data summaries are basically displayed
+-   I haven't seen these used anywhere since highschool!
+
+```{r,  warning=FALSE, message=FALSE, comment=NA }
+library(aplpack)
+set.seed(1234)
+stem.leaf(rnorm(50, mean=100))
+```
+
+## Histograms
+
+Divide the data range into "bins", count the occurrences in each bin, and make a bar chart.
+
+Can be displayed as raw counts, relative frequencies, or densities
+
+```{r,  warning=FALSE, message=FALSE}
+#| fig-height: 4 
+#| fig-width: 10
+set.seed(1234)
+dfm <- data.frame(X=rnorm(50, 100))
+library(ggplot2)
+p1 <- ggplot(dfm, aes(X))+ 
+  geom_histogram(bins = 20) +
+  ggtitle("Heights sum to n")
+p2 <- ggplot(dfm, aes(X))+ 
+  geom_histogram(bins = 20, aes(y = (..count..)/sum(..count..))) + 
+  ylab("relative frequency") +
+  ggtitle("Heights sum to 1")
+p3 <- ggplot(dfm, aes(X))+ 
+  geom_histogram(bins = 20, aes(y=..density..)) +
+  ggtitle("Heights x widths sum to 1")
+library(patchwork)
+p1+p2+p3
+```
+
+## Frequency polygon & smoothed density plots
+
+-   smoothed density plots are approximations of the underlying distribution
+-   histograms are crude approximations of the true density
+
+```{r,  warning=FALSE, message=FALSE}
+library(ggplot2)
+
+vital <- read.table(
+  "https://www.massey.ac.nz/~anhsmith/data/vital.txt",
+  header=TRUE,
+  sep=",")
+
+p1 <- ggplot(vital, aes(Life_female))+
+  geom_histogram(bins=12)+
+  geom_freqpoly(bins=12) +
+  ggtitle("Frequency Polygon")
+
+p2 <- ggplot(vital, aes(Life_female))+
+  geom_density() +
+  ggtitle("Smoothed Density Curve")
+
+library(patchwork)
+p1+p2
+
+
+```
+
+## Summary statistics for EDA
+
+<!-- ```{r} -->
+
+<!-- #| fig-width: 8 -->
+
+<!-- #| fig-height: 0.2 -->
+
+<!-- library(tidyverse)  -->
+
+<!-- bind_cols( -->
+
+<!--   Rank = 1:nrow(vital), -->
+
+<!--   "Sorted Life Expectancy" = vital$Life_female |> sort() -->
+
+<!-- ) |>  -->
+
+<!--   ggplot() +  -->
+
+<!--   geom_text(aes( -->
+
+<!--     x = Rank,  -->
+
+<!--     y = 1, -->
+
+<!--     label = `Sorted Life Expectancy` -->
+
+<!--     ), -->
+
+<!--     size = 1.75) + -->
+
+<!--   geom_text(aes( -->
+
+<!--     x = Rank,  -->
+
+<!--     y = 2, -->
+
+<!--     label = Rank -->
+
+<!--     ), -->
+
+<!--     size = 1.75) + -->
+
+<!--   theme_void() -->
+
+<!-- ``` -->
+
+![](img/summarystats.png)
+
+## Five-number summary
+
+`Minimum`, `lower hinge`, `median`, `upper hinge` and `maximum`
+
+```{r, echo=TRUE, size="tiny"}
+set.seed(1234)
+my.data <- rnorm(50, 100)
+fivenum(my.data)
+summary(my.data)
+```
+
+## Boxplots {.scrollable}
+
+-   Graphical display of 5-number summary
+-   Can show several groups of data on the same graph
+
+```{r}
+# # Figure 2.27 two boxplots
+vital1 <- read.table(
+  "https://www.massey.ac.nz/~anhsmith/data/vital1.txt", 
+  header=TRUE, 
+  sep=","
+  ) |> 
+  mutate(gender = str_trim(gender))
+
+library(tidyverse)
+
+five_male <- vital1 |> 
+  filter(gender=="male") |> 
+  pull(life.expectancy) |> 
+  fivenum()
+
+vital1 |> 
+  ggplot() + 
+  aes(x = gender, y = life.expectancy) +
+  geom_boxplot() + 
+  coord_flip() +
+  annotate("text", 
+           x = c(2,2.5,2.5,2.5,2),
+           y = five_male, 
+           label = c("Min or\n1.5*IQR", 
+                     "'Lower hinge'\nQ1", 
+                     "Median\nQ2", 
+                     "'Lower hinge'\nQ3",
+                     "Max or\n1.5*IQR")) +
+  theme_minimal()
+```
+
+## Letter Value Display
+
+-   EDA summary in the form of a Table
+-   This display represents the tail of the distribution very well
+
+```{r}
+set.seed(123)
+x <- rnorm(50, 100)
+# source("https://www.massey.ac.nz/~kgovinda/eda/lva.R")
+# lva(x)
+
+structure(list(X = c("M", "F", "E", "D", "C", "B", "A"), Depth = c(25.5, 
+13, 7, 4, 2.5, 1.5, 1), Lower = c(99.92736, 99.43952, 98.93218, 
+98.73494, 98.52396, 98.17334, 98.03338), Upper = c(99.92736, 
+100.70136, 101.20796, 101.55871, 101.75099, 101.97793, 102.16896
+), Mid = c(99.92736, 100.07044, 100.07007, 100.14682, 100.13747, 
+100.07564, 100.10117), Spread = c(0, 1.261832, 2.275786, 2.82377, 
+3.227034, 3.80459, 4.135573)), class = "data.frame", row.names = c(NA, 
+-7L)) |> column_to_rownames("X")
+
+```
+
+## Letter Value Plot
+
+Suitable for large datasets
+
+```{r}
+set.seed(123)
+x <- rlnorm(5000, 100)
+library(lvplot)
+LVboxplot(x, xlab = "Random log-normal data of size 5000")
+```
+
+## Cumulative frequency graphs
+
+-   Show the left tail area
+-   Useful to obtain the quantiles (deciles, percentiles, quartiles etc)
+
+```{r, warning=FALSE, message=FALSE}
+set.seed(1234)
+library(ggplot2)
+ggplot(data.frame(x), aes(x)) + stat_ecdf()
+```
+
+## Shiny apps
+
+<https://shiny.massey.ac.nz/kgovinda/demos/explore.univariate.graphs/>
+
+<https://shiny.massey.ac.nz/kgovinda/demos/get.univariate.plots/>
+
+-   Adopt study guide, past assignment R codes
+
+-   Lots of examples on the web (particularly with `ggplot2`)
+
+## Quantile-Quantile (Q-Q) plot
+
+Q-Q plots compare the distributions of two datasets by plotting their quantiles against each other.
+
+```{r}
+vital <- read.table("https://www.massey.ac.nz/~anhsmith/data/vital.txt", header=TRUE, sep=",")
+library(tidyverse)
+vital %>% summarise(f.quants=quantile(Life_female, seq(0, 1, 0.05))) -> f.quants
+vital %>% summarise(m.quants=quantile(Life_male, seq(0, 1, 0.05))) -> m.quants
+dfm <- cbind.data.frame(f.quants, m.quants )
+ggplot(dfm, aes(x=f.quants, y= m.quants))+geom_point()+geom_abline(slope=1, intercept=0) +
+  coord_fixed()
+```
+
+## Some Q-Q Plot patterns
+
+-   Case a: Quantiles of Y (mean/median etc) are higher than that of X
+
+-   Case b: Spread or SD of Y \> spread or SD of X
+
+-   Case c: X and Y follow different distributions ![](./img/2_31.png)
+
+    -   R function: `qqplot()`.
+
+## Bivariate relationships
+
+A scatter plot shows the relationship between two quantitative variables. It can highlight linear or non-linear relationships, gaps/subgroups, outliers, etc. A `lowess` smoother can help show the relationship.
+
+```{r}
+#| fig-width: 8
+#| fig-height: 3
+
+library(tidyverse) 
+# url1 <- "https://www.massey.ac.nz/~anhsmith/data/horsehearts.RData"
+# download.file(url = url1, destfile = "horsehearts.RData")
+
+load("../data/horsehearts.RData")
+
+p1 <- ggplot(horsehearts, aes(x=EXTSYS, y=WEIGHT))+geom_point() + ggtitle("Scatterplot")
+p2 <- p1+ geom_smooth(span = 0.8, se=FALSE)+ ggtitle("Scatterplot with lowess smoother")
+
+p1+p2
+```
+
+## Marginal Plot
+
+Shows both bivariate relationships and univariate (marginal) distributions
+
+```{r}
+#| fig-width: 6
+#| fig-height: 6
+
+library(tidyverse) 
+# url1 <- "https://www.massey.ac.nz/~anhsmith/data/rangitikei.RData"
+# download.file(url = url1, destfile = "rangitikei.RData")
+load("../data/rangitikei.RData")
+p1 <- ggplot(rangitikei, aes(x=people, y=vehicle))+geom_point() + theme_bw()
+
+library(ggExtra)
+ggMarginal(p1, type="boxplot")
+```
+
+## Shiny apps
+
+Explore-
+
+<https://shiny.massey.ac.nz/kgovinda/demos/explore.bivariate.plots/>
+
+<https://shiny.massey.ac.nz/kgovinda/demos/get.bivariate.plots/>
+
+<https://shiny.massey.ac.nz/kgovinda/demos/explore.facet.wrapped.plots/>
+
+<https://shiny.massey.ac.nz/kgovinda/demos/get.facet.wrapped.plots/>
+
+<https://shiny.massey.ac.nz/kgovinda/demos/explore.facet.grid.plots/>
+
+## Pairs plot / scatterplot matrix (all pairwise scatterplots)
+
+```{r}
+#| fig-width: 6
+#| fig-height: 6
+library(tidyverse) 
+# url1 <- "https://www.massey.ac.nz/~anhsmith/data/pinetree.RData"
+# download.file(url = url1, destfile = "pinetree.RData")
+load("../data/pinetree.RData")
+library(GGally)
+ggpairs(pinetree[,-1])
+```
+
+## Pairs plot with a grouping variable
+
+```{r}
+#| fig-width: 6
+#| fig-height: 6
+
+ggpairs(pinetree[,-1], aes(colour=pinetree$Area))
+```
+
+## Correlation coefficients
+
+-   Pearson correlation coefficient is a measure of **linear** relationship
+
+    -   Case a: Positive linear relationship
+    -   Case b: Negative linear relationship ![](./img/2_41.png)
+
+## Correlation Matrix {.scrollable}
+
+-   To show all pairwise correlation coefficients
+-   Useful to explore the inter-relationship between variables \scriptsize
+
+```{r, warning=FALSE, message=FALSE, comment=NA}
+library(psych)
+# url1 <- "https://www.massey.ac.nz/~anhsmith/data/pinetree.RData"
+# download.file(url = url1, destfile = "pinetree.RData")
+load("../data/pinetree.RData")
+corr.test(pinetree[,-1])
+```
+
+## Correlation Plots
+
+```{r}
+library(corrplot)
+corrplot(cor(pinetree[,-1]),  type = "upper", method="number")
+```
+
+```{r}
+# library(tidyverse)
+# library(corrr)
+# pinetree[,-1] %>% correlate() %>% network_plot(min_cor=0.2)
+```
+
+## 3-D Plots
+
+-   A bubble plot, shows the third (fourth) variable as point size (colour).
+
+```{r}
+# url1 <- "https://www.massey.ac.nz/~anhsmith/data/pinetree.RData"
+# download.file(url = url1, destfile = "pinetree.RData")
+load("../data/pinetree.RData")
+library(tidyverse)
+p1 <- ggplot(pinetree, aes(x=First, y=Second))+ 
+  geom_point(aes(size=Third))
+p2 <- ggplot(pinetree, aes(x=First, y=Second, colour=Area))+ 
+  geom_point(aes(size=Third))
+library(patchwork)
+p1+p2+plot_annotation(title = 'Bubble plots')
+```
+
+## 3-D plots are far more useful if you can rotate them
+
+Package `plot3D`
+
+```{r}
+library("plot3D")
+# url1 <- "https://www.massey.ac.nz/~anhsmith/data/pinetree.RData"
+# download.file(url = url1, destfile = "pinetree.RData")
+# load("pinetree.RData")
+attach(pinetree)
+scatter3D(x=First, y=Second, z=Top, phi = 0, bty = "g", ticktype ="detailed")
+```
+
+## 3-D plots are far more useful if you can rotate them
+
+Package `plotly`
+
+```{r,  warning=FALSE, message=FALSE}
+# url1 <- "https://www.massey.ac.nz/~anhsmith/data/pinetree.RData"
+# download.file(url = url1, destfile = "pinetree.RData")
+# load("pinetree.RData")
+# library(car)
+# scatter3d(Top~First+Second, data=pinetree, surface=FALSE, residuals=TRUE, bg="white", axis.scales=TRUE, grid=TRUE, ellipsoid=FALSE)
+#rgl.snapshot
+# require(RcmdrPlugin.HH)
+# scatter3dHH(pinetree$First, pinetree$Top, pinetree$Second, fit="linear", bg="white", grid=TRUE, squares=FALSE, xlab="First", ylab="Top", zlab="Second")
+# rgl.snapshot
+library(plotly)
+plot_ly(pinetree, x = ~First, y = ~Second, z = ~Top) |> add_markers()
+
+```
+
+## Contour plots
+
+-   3D plots are difficult to interpret than 2D plots in general
+
+-   Contour plots are another way of looking three variables in two dimensions
+
+```{r,  warning=FALSE, message=FALSE}
+# url1 <- "https://www.massey.ac.nz/~anhsmith/data/pinetree.RData"
+# download.file(url = url1, destfile = "pinetree.RData")
+# load("pinetree.RData")
+attach(pinetree)
+
+my_mod <- lm(Top ~ First * Second)
+w.marginal <- seq(min(First), max(First), length.out = 50)
+t.marginal <- seq(min(Second), max(Second), length.out = 50)
+wtr.marginal <- list(First = w.marginal, Second = t.marginal)
+grid <- expand.grid(wtr.marginal)
+grid[, "fit"] <- c(predict(my_mod, grid))
+lattice::contourplot(fit ~ First * Second , data = grid,
+            cuts = 10, region = TRUE,
+            xlab = "First ",
+            ylab = "Second", main="Top contour levels are shown")
+# library(ggplot2)
+# ggplot(grid, aes(First, Second, z = fit)) + geom_contour(aes(colour = ..level..))
+# ggplot(grid, aes(First, Second, z = fit)) + geom_contour() + metR::geom_label_contour()
+```
+
+## Conditioning plots
+
+-   Conditioning Plots (Coplots) show two variables at different ranges of third variable
+
+```{r}
+# url1 <- "https://www.massey.ac.nz/~anhsmith/data/pinetree.RData"
+# download.file(url = url1, destfile = "pinetree.RData")
+# load("pinetree.RData")
+coplot(Top~ First | Second*Area, data = pinetree)
+# install.packages("remotes")
+# remotes::install_github("mpru/ggcleveland")
+library(ggcleveland)
+gg_coplot(pinetree, x = First, y = Top, faceting = Second, number_bins = 6, overlap = 3/4)
+```
+
+## More `R` graphs
+
+Build plots in a single layout. R packages `patchwork` or `gridExtra` can be used.
+
+```{r, }
+# url1 <- "https://www.massey.ac.nz/~anhsmith/data/testmarks.RData"
+# download.file(url = url1, destfile = "testmarks.RData")
+load("../data/testmarks.RData")
+
+p1 <- ggplot(testmarks, aes(y=English, x=Maths))+ 
+  geom_point()
+p2 <- ggplot(testmarks, aes(y=English, x=Maths))+ 
+  stat_density_2d(geom = "raster",  aes(fill = after_stat(density)),
+  contour = FALSE) + scale_fill_viridis_c()+ guides(fill=FALSE)
+library(patchwork)
+p1/p2
+```
+
+<!-- ## More `R` graphs -->
+
+<!-- - Plots produced using the ggplot system and the old style graphs can also be put together but not straight forward.  In the following example, a *lattice* package plot is combined with a ggplot-type error bar plot. -->
+
+<!-- ```{r} -->
+
+<!-- library("grid") -->
+
+<!-- library("ggplotify") -->
+
+<!-- library("lattice") -->
+
+<!-- library(patchwork) -->
+
+<!-- # url1 <- "https://www.massey.ac.nz/~anhsmith/data/pinetree.RData" -->
+
+<!-- # download.file(url = url1, destfile = "pinetree.RData") -->
+
+<!-- # load("pinetree.RData") -->
+
+<!-- p1 <- as.grob(bwplot(Top ~ Area, data = pinetree)) -->
+
+<!-- p1 <- as.ggplot(p1) -->
+
+<!-- library(ggpubr) -->
+
+<!-- p2 <- ggerrorplot(pinetree, x = "Area", y = "Top") -->
+
+<!-- p1/p2 +plot_annotation(title = 'Combining lattice and ggplot type plots') -->
+
+<!-- ``` -->
+
+<!-- - The focus of this course is to perform EDA and not spend lots of time coding.  Adopt the codes of others.  -->
+
+<!-- - There are hundreds of R packages and examples for graphing. So, develop basic skills of recycling the R codes for a new dataset. -->
+
+<!--  - More graphing is covered in the exercises (such as `plotly` type) -->
+
+## Time series data
+
+-   A Time Series is an ordered sequence of observations of a variable(s) (often) made at equally spaced time points.
+
+-   Time series Components of variation
+
+    -   *Trend* - representing long term positive (upward) or negative (downward) movement
+    -   *Seasonal* - a periodic behaviour happening within a block (say Christmas time) of a given time period (say in a calendar year) but this periodic behaviour will repeat fairly regularly over time (say year after year)
+    -   *Error* (Residual)
+
+## Time series example
+
+<!-- http://www.rbnz.govt.nz/-/media/ReserveBank/Files/Statistics/tables/f3/hf3.xls -->
+
+```{r}
+notes = read.table("../data/20dollar.txt", header=TRUE, sep="")
+library(tidyverse)
+library(forecast)
+NZnotes20 <- notes$value / 1000  #setting in millions
+NZnotes20 <- ts(NZnotes20,start=1968, frequency=1)
+forecast::autoplot(NZnotes20, xlab="Year", ylab="Value of $20 notes (millions)")
+```
+
+<!-- ```{r} -->
+
+<!-- # Dynamic graphing -->
+
+<!-- # https://rstudio.github.io/dygraphs/index.html -->
+
+<!-- library(dygraphs) -->
+
+<!-- dygraph(NZnotes20) %>% -->
+
+<!--   dyOptions(drawPoints = TRUE) -->
+
+<!-- dygraph(NZnotes20) %>% -->
+
+<!--   dyOptions(fillGraph=TRUE) -->
+
+<!-- ``` -->
+
+## Autocorrelation function (ACF)
+
+-   The $k ^ \text{th}$ order ACF or the autocorrelation between $x_t$ and $x_{t-k}$ is
+
+$$\frac{\text{Covariance}(x_t, x_{t-k})}{\text{SD}(x_t)\text{SD}(x_{t-k})} = \frac{\text{Covariance}(x_t, x_{t-k})}{\text{Variance}(x_t)}$$
+
+## Autocorrelation function (ACF) Plot
+
+The significance of autocorrelations may be judged from the 95% confidence interval band
+
+```{r, echo = FALSE, comment=NA, warning=NA}
+ggAcf(NZnotes20)
+```
+
+Autocorrelations decay to zero (\$20 notes positively depend on the values of \$20 notes held in the immediate past rather than too distant past)
+
+## PACF (Partial Autocorrelation Function)
+
+-   A type of correlation after removing the effect of earlier lags
+
+```{r}
+ggPacf(NZnotes20)
+# ggtsdisplay(value, plot.type="partial")
+```
+
+## Time series trend types
+
+Requires a (parametric) model to fit the trend (covered later)
+
+::: centered
+![](img/trendtypes.png)
+:::
+
+Non-parametric fits can also be made
+
+## Seasonality
+
+Simple scatter plot of the response variable against time may reveal seasonality directly
+
+```{r}
+# from https://www.stats.govt.nz/indicators/uv-intensity/
+uv = read.table("../data/uv.txt",
+                header=TRUE, sep="")
+uv <- ts(uv$erythemal.uv, start=c(1990,1), frequency=12)
+forecast::autoplot(uv, xlab="time", ylab="Erythemal UV")
+```
+
+## Sub-series plots
+
+Seasonality is easily seen graphically when grouping variables are used
+
+```{r, fig.width=12}
+p1 <- ggseasonplot(uv)
+p2 <- ggsubseriesplot(uv)
+library(patchwork)
+p1+p2
+```
+
+## ACF plot showing seasonality
+
+```{r, comment=NA, warning=NA}
+# milkdata <- read.table("../data/milk.txt", header=TRUE, sep="")
+# attach(milkdata)
+# milkdata=ts(milk)
+# acf(milkdata)
+```
+
+![](img/acf_milk.png)
+
+## White noise errors
+
+Example using random normal data
+
+```{r}
+set.seed(123)
+whtnoise <- ts(rnorm(120), start=1, frequency = 12)
+forecast::autoplot(whtnoise, xlab="time", ylab="N(0,1) random data")
+```
+
+## Time series decomposition
+
+::: left-code
+::: {style="font-size: 90%;"}
+-   Additive model\
+    $X_t$ = Trend + Seasonal + Error\
+    (where $X_t$ is an observation at time $t$)
+
+-   Multiplicative model\
+    $X_t$ = Trend $\times$ Seasonal + Error\
+    (trend and seasonal components are not independent)
+
+-   *Detrending* means removing the trend from the series, making it easier to see the seasonality.
+
+-   *Deseasoning* means removing the seasonality from the series, making it easier to see the trend.
+:::
+:::
+
+::: right-plot
+```{r}
+#| fig-width: 6
+#| fig-height: 6
+uv %>% decompose(type="additive") %>%
+forecast::autoplot() + ggtitle("")
+```
+:::
+
+## Learning EDA
+
+-   The best way to learn EDA is to try many approaches and find which are informative and which are not.\
+
+-   Chatfield (1995) on tackling statistical problems:
+
+    -   Do not attempt to analyse the data until you understand what is being measured and why. Find out whether there is prior information such as are there any likely effects.
+    -   Find out how the data were collected.
+    -   Look at the structure of the data.
+    -   The data then need to be carefully examined in an exploratory way before attempting a more sophisticated analysis.
+    -   Use common sense, and be honest!
+
+## Summary
+
+-   **Size**
+
+    -   For small datasets, we cannot be assertive.
+    -   Some displays are affected by sample size (eg. stem plot); some may not (eg. smoothed density)
+
+-   **Shape**
+
+    -   We are concerned with overall shape of distribution.\
+    -   Are there gaps and/or many peaks (modes)?
+    -   Is the distribution `symmetrical`? Is the distribution `normal`?
+
+-   **Outliers**
+
+    -   More important than points in the middle
+    -   boxplots & scatter plots show them
+
+-   Graphs should be simple and informative; certainly not misleading!
+
+<!-- ## Exercises -->
+
+<!-- download.file("<https://www.massey.ac.nz/~kgovinda/220exer/Chap2moreexamples.R>", destfile="Chap2moreexamples.R") -->
+
+<!-- download.file("<https://www.massey.ac.nz/~kgovinda/220exer/chapter-2-exercises.html>", destfile="chapter-2-exercises.html") -->
+
+<!-- install.packages("remotes") -->
+
+<!-- remotes::install_github("ricompute/ricomisc") -->
+
+<!-- ricomisc::rstudio_viewer("chapter-2-exercises.html", file_path = NULL) -->

@@ -1,0 +1,2 @@
+Variable   N    Mean  StDev  SE Mean       95% CI 
+TELETIME  46  1729.3  567.9     83.7  (1560.6, 1897.9)

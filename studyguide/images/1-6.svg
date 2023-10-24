@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+
+<!-- Page 1 -->
+<svg x="0" y="0" width="577" height="286" viewBox="0 0 577 286" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+style="display: block;margin-left: auto;margin-right: auto;">
+<defs>
+
+<style type="text/css"><![CDATA[
+text { white-space: pre; }
+path, image { pointer-events: none; }
+
+.s1_1{
+font-size: 18.33px;
+font-family: TimesNewRoman-Bold_6;
+fill: #000000;
+}
+.s2_1{
+font-size: 18.33px;
+font-family: TimesNewRoman_8;
+fill: #000000;
+}
+.s3_1{
+font-size: 18.33px;
+font-family: TimesNewRoman-Italic_a;
+fill: #000000;
+}
+.s4_1{
+font-size: 18.31px;
+font-family: TimesNewRoman_8;
+fill: #000000;
+}
+.s5_1{
+font-size: 18.31px;
+font-family: TimesNewRoman-Italic_a;
+fill: #000000;
+}
+
+.g0_1{
+}
+.g1_1{
+fill: none;
+stroke: #000000;
+stroke-width: 0.9166667;
+stroke-linecap: round;
+stroke-linejoin: round;
+}
+
+]]></style>
+
+</defs>
+<path d="M0,0
+L0,286
+L577,286
+L577,0 Z " 
+fill="#FFFFFF" stroke="none" />
+<text x="13" y="26" class="s1_1">Sample Design </text>
+<text x="227" y="26" class="s1_1">Design Effect </text>
+<text x="268" y="47" class="s2_1">(</text>
+<text x="274" y="47" class="s3_1">d</text>
+<text x="283" y="47" class="s2_1">)</text>
+<text x="377" y="26" class="s1_1">Effective Sample Size </text>
+<text x="444" y="47" class="s2_1">(</text>
+<text x="450" y="47" class="s3_1">n</text>
+<text x="459" y="47" class="s2_1">/</text>
+<text x="464" y="47" class="s3_1">d</text>
+<text x="473" y="47" class="s2_1">)</text>
+<path d="M4.6,9.7h.7V8.9H4.6v.8Z" class="g0_1" />
+<path d="M4.6,9.7h.7V8.9H4.6v.8Z" class="g0_1" />
+<path d="M5.3,9.7H207.4V8.9H5.3v.8Z" class="g0_1" />
+<path d="M207.4,9.7h.7V8.9h-.7v.8Z" class="g0_1" />
+<path d="M208.1,9.7H350.7V8.9H208.1v.8Z" class="g0_1" />
+<path d="M350.7,9.7h.8V8.9h-.8v.8Z" class="g0_1" />
+<path d="M351.4,9.7H572V8.9H351.4v.8Z" class="g0_1" />
+<path d="M572,9.7h.7V8.9H572v.8Z" class="g0_1" />
+<path d="M572,9.7h.7V8.9H572v.8Z" class="g0_1" />
+<path d="M4.6,51.8h.7V9.7H4.6V51.8Z" class="g0_1" />
+<path d="M207.4,51.8h.7V9.7h-.7V51.8Z" class="g0_1" />
+<path d="M350.7,51.8h.8V9.7h-.8V51.8Z" class="g0_1" />
+<path d="M572,51.8h.7V9.7H572V51.8Z" class="g0_1" />
+<text x="16" y="69" dx="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-0.2" class="s2_1">Simple Random Sample </text>
+<text x="263" y="69" class="s1_1">1.00 </text>
+<text x="457" y="69" class="s3_1">n </text>
+<path d="M4.6,52.6h.7v-.8H4.6v.8Z" class="g0_1" />
+<path d="M5.3,52.6H207.4v-.8H5.3v.8Z" class="g0_1" />
+<path d="M207.4,52.6h.7v-.8h-.7v.8Z" class="g0_1" />
+<path d="M208.1,52.6H350.7v-.8H208.1v.8Z" class="g0_1" />
+<path d="M350.7,52.6h.8v-.8h-.8v.8Z" class="g0_1" />
+<path d="M351.4,52.6H572v-.8H351.4v.8Z" class="g0_1" />
+<path d="M572,52.6h.7v-.8H572v.8Z" class="g0_1" />
+<path d="M4.6,73.6h.7v-21H4.6v21Z" class="g0_1" />
+<path d="M207.4,73.6h.7v-21h-.7v21Z" class="g0_1" />
+<path d="M350.7,73.6h.8v-21h-.8v21Z" class="g0_1" />
+<path d="M572,73.6h.7v-21H572v21Z" class="g0_1" />
+<text x="38" y="93" class="s2_1">Stratified Random </text>
+<text x="78" y="114" dx="0,0,0,0,0,0,-0.2" class="s2_1">Sample </text>
+<text x="235" y="104" class="s2_1">0.80 to 0.90 </text>
+<path d="M421.9,98.8h24.3" class="g1_1" />
+<text x="422" y="117" dx="0,0.1,0.1" class="s4_1">0.9</text>
+<text x="429" y="91" class="s5_1">n</text>
+<text x="453" y="103" class="s2_1">to </text>
+<path d="M475.9,98.8H500" class="g1_1" />
+<text x="476" y="117" dx="0,0.1,0.1" class="s4_1">0.8</text>
+<text x="483" y="91" class="s5_1">n</text>
+<path d="M4.6,74.4h.7v-.8H4.6v.8Z" class="g0_1" />
+<path d="M5.3,74.4H207.4v-.8H5.3v.8Z" class="g0_1" />
+<path d="M207.4,74.4h.7v-.8h-.7v.8Z" class="g0_1" />
+<path d="M208.1,74.4H350.7v-.8H208.1v.8Z" class="g0_1" />
+<path d="M350.7,74.4h.8v-.8h-.8v.8Z" class="g0_1" />
+<path d="M351.4,74.4H572v-.8H351.4v.8Z" class="g0_1" />
+<path d="M572,74.4h.7v-.8H572v.8Z" class="g0_1" />
+<path d="M4.6,121.9h.7V74.4H4.6v47.5Z" class="g0_1" />
+<path d="M207.4,121.9h.7V74.4h-.7v47.5Z" class="g0_1" />
+<path d="M350.7,121.9h.8V74.4h-.8v47.5Z" class="g0_1" />
+<path d="M572,121.9h.7V74.4H572v47.5Z" class="g0_1" />
+<text x="14" y="139" class="s2_1">Cluster Sample with 3 to </text>
+<text x="27" y="160" class="s2_1">25 randomly selected </text>
+<text x="21" y="181" dx="0,0,0,0,0,0,0,0,0,0,0,0,0.1,0,0,0,0.1,0,0,0,0,0,0,0" class="s2_1">respondents per cluster </text>
+<text x="235" y="160" class="s2_1">1.02 to 1.26 </text>
+<path d="M414.3,154.9h31.8" class="g1_1" />
+<text x="413" y="173" class="s4_1">1.26</text>
+<text x="425" y="147" class="s5_1">n</text>
+<text x="453" y="159" class="s2_1">to </text>
+<path d="M475.9,154.9h31.8" class="g1_1" />
+<text x="475" y="173" class="s4_1">1.02</text>
+<text x="487" y="147" class="s5_1">n</text>
+<path d="M4.6,122.6h.7v-.7H4.6v.7Z" class="g0_1" />
+<path d="M5.3,122.6H207.4v-.7H5.3v.7Z" class="g0_1" />
+<path d="M207.4,122.6h.7v-.7h-.7v.7Z" class="g0_1" />
+<path d="M208.1,122.6H350.7v-.7H208.1v.7Z" class="g0_1" />
+<path d="M350.7,122.6h.8v-.7h-.8v.7Z" class="g0_1" />
+<path d="M351.4,122.6H572v-.7H351.4v.7Z" class="g0_1" />
+<path d="M572,122.6h.7v-.7H572v.7Z" class="g0_1" />
+<path d="M4.6,185.8h.7V122.6H4.6v63.2Z" class="g0_1" />
+<path d="M207.4,185.8h.7V122.6h-.7v63.2Z" class="g0_1" />
+<path d="M350.7,185.8h.8V122.6h-.8v63.2Z" class="g0_1" />
+<path d="M572,185.8h.7V122.6H572v63.2Z" class="g0_1" />
+<text x="32" y="205" class="s2_1">Systematic Random </text>
+<text x="78" y="226" dx="0,0,0,0,0,0,-0.2" class="s2_1">Sample </text>
+<text x="263" y="216" class="s2_1">1.05 </text>
+<path d="M445.1,211h31.4" class="g1_1" />
+<text x="444" y="229" class="s4_1">1.05</text>
+<text x="456" y="203" class="s5_1">n</text>
+<path d="M4.6,186.6h.7v-.8H4.6v.8Z" class="g0_1" />
+<path d="M5.3,186.6H207.4v-.8H5.3v.8Z" class="g0_1" />
+<path d="M207.4,186.6h.7v-.8h-.7v.8Z" class="g0_1" />
+<path d="M208.1,186.6H350.7v-.8H208.1v.8Z" class="g0_1" />
+<path d="M350.7,186.6h.8v-.8h-.8v.8Z" class="g0_1" />
+<path d="M351.4,186.6H572v-.8H351.4v.8Z" class="g0_1" />
+<path d="M572,186.6h.7v-.8H572v.8Z" class="g0_1" />
+<path d="M4.6,233.9h.7V186.6H4.6v47.3Z" class="g0_1" />
+<path d="M207.4,233.9h.7V186.6h-.7v47.3Z" class="g0_1" />
+<path d="M350.7,233.9h.8V186.6h-.8v47.3Z" class="g0_1" />
+<path d="M572,233.9h.7V186.6H572v47.3Z" class="g0_1" />
+<text x="14" y="253" dx="0,0,0,0,0,0,0,0,0,0,0,0,0,-0.1,0,0,0,0,0,0,0,0,0,0,0" class="s2_1">Quota or non-probability </text>
+<text x="79" y="274" dx="0,0,0,0,0,0,-0.2" class="s2_1">sample </text>
+<text x="274" y="264" class="s2_1">2 </text>
+<path d="M455,259h11.2" class="g1_1" />
+<text x="456" y="277" class="s4_1">2</text>
+<text x="456" y="252" class="s5_1">n</text>
+<path d="M4.6,234.6h.7v-.7H4.6v.7Z" class="g0_1" />
+<path d="M5.3,234.6H207.4v-.7H5.3v.7Z" class="g0_1" />
+<path d="M207.4,234.6h.7v-.7h-.7v.7Z" class="g0_1" />
+<path d="M208.1,234.6H350.7v-.7H208.1v.7Z" class="g0_1" />
+<path d="M350.7,234.6h.8v-.7h-.8v.7Z" class="g0_1" />
+<path d="M351.4,234.6H572v-.7H351.4v.7Z" class="g0_1" />
+<path d="M572,234.6h.7v-.7H572v.7Z" class="g0_1" />
+<path d="M4.6,282.1h.7V234.6H4.6v47.5Z" class="g0_1" />
+<path d="M4.6,282.8h.7v-.7H4.6v.7Z" class="g0_1" />
+<path d="M4.6,282.8h.7v-.7H4.6v.7Z" class="g0_1" />
+<path d="M5.3,282.8H207.4v-.7H5.3v.7Z" class="g0_1" />
+<path d="M207.4,282.1h.7V234.6h-.7v47.5Z" class="g0_1" />
+<path d="M207.4,282.8h.7v-.7h-.7v.7Z" class="g0_1" />
+<path d="M208.1,282.8H350.7v-.7H208.1v.7Z" class="g0_1" />
+<path d="M350.7,282.1h.8V234.6h-.8v47.5Z" class="g0_1" />
+<path d="M350.7,282.8h.8v-.7h-.8v.7Z" class="g0_1" />
+<path d="M351.4,282.8H572v-.7H351.4v.7Z" class="g0_1" />
+<path d="M572,282.1h.7V234.6H572v47.5Z" class="g0_1" />
+<path d="M572,282.8h.7v-.7H572v.7Z" class="g0_1" />
+<path d="M572,282.8h.7v-.7H572v.7Z" class="g0_1" />
+
+
+<!-- Any embedded fonts defined here -->
+<style type="text/css" ><![CDATA[
+
+@font-face {
+	font-family: TimesNewRoman-Bold_6;
+	src: url("fonts/TimesNewRoman-Bold_6.woff") format("woff");
+}
+
+@font-face {
+	font-family: TimesNewRoman_8;
+	src: url("fonts/TimesNewRoman_8.woff") format("woff");
+}
+
+@font-face {
+	font-family: TimesNewRoman-Italic_a;
+	src: url("fonts/TimesNewRoman-Italic_a.woff") format("woff");
+}
+
+]]></style>
+
+</svg>

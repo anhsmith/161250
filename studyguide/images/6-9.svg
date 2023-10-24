@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+
+<!-- Page 1 -->
+<svg x="0" y="0" width="615" height="98" viewBox="0 0 615 98" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+style="display: block;margin-left: auto;margin-right: auto;">
+<defs>
+
+<style type="text/css"><![CDATA[
+text { white-space: pre; }
+path, image { pointer-events: none; }
+
+.s1_1{
+font-size: 15.22px;
+font-family: CourierNew_6;
+fill: #000000;
+}
+
+.g0_1{
+}
+
+]]></style>
+
+</defs>
+<path d="M0,0
+L0,98
+L615,98
+L615,0 Z " 
+fill="#FFFFFF" stroke="none" />
+<text x="13" y="20" class="s1_1">ANOVA Source </text>
+<text x="157" y="20" class="s1_1">d.f. </text>
+<text x="264" y="20" class="s1_1">Sum Sq </text>
+<text x="359" y="20" dx="0,0,0,0,0,0,0,0,13.4,0,0,0,0,0,0,0,13.2,0,0,0,0,0,0,0" class="s1_1">Mean Sq F-Ratio P value </text>
+<path d="M6.8,5.4H7.9V4.3H6.8V5.4Z" class="g0_1" />
+<path d="M6.8,5.4H7.9V4.3H6.8V5.4Z" class="g0_1" />
+<path d="M7.9,5.4H150.3V4.3H7.9V5.4Z" class="g0_1" />
+<path d="M150.3,5.4h1.1V4.3h-1.1V5.4Z" class="g0_1" />
+<path d="M151.4,5.4H258.1V4.3H151.4V5.4Z" class="g0_1" />
+<path d="M258.1,5.4h1.1V4.3h-1.1V5.4Z" class="g0_1" />
+<path d="M259.2,5.4h94.1V4.3H259.2V5.4Z" class="g0_1" />
+<path d="M353.3,5.4h1.1V4.3h-1.1V5.4Z" class="g0_1" />
+<path d="M354.4,5.4H440V4.3H354.4V5.4Z" class="g0_1" />
+<path d="M440,5.4h1.1V4.3H440V5.4Z" class="g0_1" />
+<path d="M441.1,5.4h85.4V4.3H441.1V5.4Z" class="g0_1" />
+<path d="M526.5,5.4h1.1V4.3h-1.1V5.4Z" class="g0_1" />
+<path d="M527.6,5.4h85.7V4.3H527.6V5.4Z" class="g0_1" />
+<path d="M613.3,5.4h1.1V4.3h-1.1V5.4Z" class="g0_1" />
+<path d="M613.3,5.4h1.1V4.3h-1.1V5.4Z" class="g0_1" />
+<path d="M6.8,27.8H7.9V5.4H6.8V27.8Z" class="g0_1" />
+<path d="M150.3,27.8h1.1V5.4h-1.1V27.8Z" class="g0_1" />
+<path d="M258.1,27.8h1.1V5.4h-1.1V27.8Z" class="g0_1" />
+<path d="M353.3,27.8h1.1V5.4h-1.1V27.8Z" class="g0_1" />
+<path d="M440,27.8h1.1V5.4H440V27.8Z" class="g0_1" />
+<path d="M526.5,27.8h1.1V5.4h-1.1V27.8Z" class="g0_1" />
+<path d="M613.3,27.8h1.1V5.4h-1.1V27.8Z" class="g0_1" />
+<text x="13" y="40" class="s1_1">Cement (row) </text>
+<text x="13" y="56" class="s1_1">Aggregate(col) </text>
+<text x="13" y="73" class="s1_1">Error </text>
+<text x="13" y="89" class="s1_1">Total </text>
+<text x="157" y="40" class="s1_1">r-1= </text>
+<text x="212" y="40" class="s1_1">3 </text>
+<text x="157" y="56" class="s1_1">c-1= 2 </text>
+<text x="157" y="73" class="s1_1">n-r-c+1=6 </text>
+<text x="157" y="89" class="s1_1">n-1=11 </text>
+<text x="264" y="40" class="s1_1">34.92 </text>
+<text x="264" y="56" class="s1_1">1218.17 </text>
+<text x="264" y="73" class="s1_1">47.83 </text>
+<text x="264" y="89" class="s1_1">1300.92 </text>
+<text x="359" y="40" class="s1_1">11.64 </text>
+<text x="359" y="56" class="s1_1">609.08 </text>
+<text x="359" y="73" class="s1_1">7.97 </text>
+<text x="359" y="89" class="s1_1">118.27 </text>
+<text x="446" y="40" class="s1_1">1.5 </text>
+<text x="446" y="56" class="s1_1">76.4 </text>
+<text x="533" y="40" class="s1_1">0.317 </text>
+<text x="533" y="56" class="s1_1">0.000 </text>
+<path d="M6.8,28.9H7.9V27.8H6.8v1.1Z" class="g0_1" />
+<path d="M7.9,28.9H150.3V27.8H7.9v1.1Z" class="g0_1" />
+<path d="M150.3,28.9h1.1V27.8h-1.1v1.1Z" class="g0_1" />
+<path d="M151.4,28.9H258.1V27.8H151.4v1.1Z" class="g0_1" />
+<path d="M258.1,28.9h1.1V27.8h-1.1v1.1Z" class="g0_1" />
+<path d="M259.2,28.9h94.1V27.8H259.2v1.1Z" class="g0_1" />
+<path d="M353.3,28.9h1.1V27.8h-1.1v1.1Z" class="g0_1" />
+<path d="M354.4,28.9H440V27.8H354.4v1.1Z" class="g0_1" />
+<path d="M440,28.9h1.1V27.8H440v1.1Z" class="g0_1" />
+<path d="M441.1,28.9h85.4V27.8H441.1v1.1Z" class="g0_1" />
+<path d="M526.5,28.9h1.1V27.8h-1.1v1.1Z" class="g0_1" />
+<path d="M527.6,28.9h85.7V27.8H527.6v1.1Z" class="g0_1" />
+<path d="M613.3,28.9h1.1V27.8h-1.1v1.1Z" class="g0_1" />
+<path d="M6.8,93.4H7.9V28.9H6.8V93.4Z" class="g0_1" />
+<path d="M6.8,94.5H7.9V93.4H6.8v1.1Z" class="g0_1" />
+<path d="M6.8,94.5H7.9V93.4H6.8v1.1Z" class="g0_1" />
+<path d="M7.9,94.5H150.3V93.4H7.9v1.1Z" class="g0_1" />
+<path d="M150.3,93.4h1.1V28.9h-1.1V93.4Z" class="g0_1" />
+<path d="M150.3,94.5h1.1V93.4h-1.1v1.1Z" class="g0_1" />
+<path d="M151.4,94.5H258.1V93.4H151.4v1.1Z" class="g0_1" />
+<path d="M258.1,93.4h1.1V28.9h-1.1V93.4Z" class="g0_1" />
+<path d="M258.1,94.5h1.1V93.4h-1.1v1.1Z" class="g0_1" />
+<path d="M259.2,94.5h94.1V93.4H259.2v1.1Z" class="g0_1" />
+<path d="M353.3,93.4h1.1V28.9h-1.1V93.4Z" class="g0_1" />
+<path d="M353.3,94.5h1.1V93.4h-1.1v1.1Z" class="g0_1" />
+<path d="M354.4,94.5H440V93.4H354.4v1.1Z" class="g0_1" />
+<path d="M440,93.4h1.1V28.9H440V93.4Z" class="g0_1" />
+<path d="M440,94.5h1.1V93.4H440v1.1Z" class="g0_1" />
+<path d="M441.1,94.5h85.4V93.4H441.1v1.1Z" class="g0_1" />
+<path d="M526.5,93.4h1.1V28.9h-1.1V93.4Z" class="g0_1" />
+<path d="M526.5,94.5h1.1V93.4h-1.1v1.1Z" class="g0_1" />
+<path d="M527.6,94.5h85.7V93.4H527.6v1.1Z" class="g0_1" />
+<path d="M613.3,93.4h1.1V28.9h-1.1V93.4Z" class="g0_1" />
+<path d="M613.3,94.5h1.1V93.4h-1.1v1.1Z" class="g0_1" />
+<path d="M613.3,94.5h1.1V93.4h-1.1v1.1Z" class="g0_1" />
+
+
+<!-- Any embedded fonts defined here -->
+<style type="text/css" ><![CDATA[
+
+@font-face {
+	font-family: CourierNew_6;
+	src: url("fonts/CourierNew_6.woff") format("woff");
+}
+
+]]></style>
+
+</svg>

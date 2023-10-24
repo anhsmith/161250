@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+
+<!-- Page 1 -->
+<svg x="0" y="0" width="872" height="509" viewBox="0 0 872 509" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+style="display: block;margin-left: auto;margin-right: auto;">
+<defs>
+
+<style type="text/css"><![CDATA[
+text { white-space: pre; }
+path, image { pointer-events: none; }
+
+.s1_1{
+font-size: 22.92px;
+font-family: Tahoma_l;
+fill: #000000;
+}
+.s2_1{
+font-size: 19.80px;
+font-family: Tahoma_l;
+fill: #000000;
+}
+.s3_1{
+font-size: 26.03px;
+font-family: Tahoma_l;
+fill: #000000;
+}
+.s4_1{
+font-size: 18.33px;
+font-family: Tahoma_l;
+fill: #000000;
+}
+.s5_1{
+font-size: 15.22px;
+font-family: Tahoma_l;
+fill: #000000;
+}
+.s6_1{
+font-size: 27.50px;
+font-family: Tahoma_l;
+fill: #000000;
+}
+
+.g0_1{
+fill: #FFFFFF;
+}
+.g1_1{
+}
+.g2_1{
+fill: none;
+stroke: #000000;
+stroke-width: 0.9166667;
+stroke-linecap: butt;
+stroke-linejoin: round;
+stroke-miterlimit: 8;
+}
+.g3_1{
+fill: none;
+stroke: #000000;
+stroke-width: 0.9166667;
+stroke-linecap: round;
+stroke-linejoin: round;
+}
+
+]]></style>
+
+</defs>
+<path d="M0,0
+L0,509
+L872,509
+L872,0 Z " 
+fill="#FFFFFF" stroke="none" />
+<path d="M-113.6,701.9H986.3V-123H-113.6V701.9Z" class="g0_1" />
+<path fill-rule="evenodd" d="M515.5,91.7L843.1,394H515.5V91.7Z" class="g1_1" />
+<image preserveAspectRatio="none" x="515" y="91" width="329" height="101" xlink:href="1/img/1.png" />
+<image preserveAspectRatio="none" x="515" y="192" width="329" height="101" xlink:href="1/img/2.png" />
+<image preserveAspectRatio="none" x="515" y="293" width="329" height="102" xlink:href="1/img/3.png" />
+<path fill-rule="evenodd" d="M515.5,91.7H843.1V394L515.5,91.7Z" class="g1_1" />
+<image preserveAspectRatio="none" x="515" y="91" width="329" height="101" xlink:href="1/img/4.png" />
+<image preserveAspectRatio="none" x="515" y="192" width="329" height="101" xlink:href="1/img/5.png" />
+<image preserveAspectRatio="none" x="515" y="293" width="329" height="102" xlink:href="1/img/6.png" />
+<path d="M515.5,91.7V394H843.1V91.7ZM30.3,89V393.3H357V89Z" class="g2_1" />
+<path fill-rule="evenodd" d="M191.4,229.4c-2.8,0,-5,2.2,-5,4.8c0,2.5,2.2,4.7,5,4.7c2.8,0,5,-2.2,5,-4.7c0,-2.6,-2.2,-4.8,-5,-4.8Z" class="g1_1" />
+<path d="M191.4,229.4c-2.8,0,-5,2.2,-5,4.8c0,2.5,2.2,4.7,5,4.7c2.8,0,5,-2.2,5,-4.7c0,-2.6,-2.2,-4.8,-5,-4.8m2.2,5.1H357" class="g3_1" />
+<text x="255" y="225" dx="0,0.2,-0.2,-0.4,-0.2" class="s1_1">error</text>
+<text x="169" y="249" class="s2_1">y</text>
+<path d="M167.9,233.8h7.2" class="g3_1" />
+<text x="10" y="32" dx="0,-0.6,-0.5,-0.1,0,-0.8,0.1,0,7.8,-0.7,0,-0.3,-0.5,-0.4,-0.3,0.1,-0.5,-0.4,-0.3,0.1,0,-0.6,0,-0.8,-0.5,-0.5,-0.6,0.3,-0.5,-0.3,0.1" class="s3_1">Case 1. No Explanatory Variable</text>
+<path fill-rule="evenodd" d="M678.5,225.7c-2.7,0,-4.8,2.2,-4.8,5c0,2.6,2.1,4.8,4.8,4.8c2.6,0,4.8,-2.2,4.8,-4.8c0,-2.8,-2.2,-5,-4.8,-5Z" class="g1_1" />
+<path d="M678.5,225.7c-2.7,0,-4.8,2.2,-4.8,5c0,2.6,2.1,4.8,4.8,4.8c2.6,0,4.8,-2.2,4.8,-4.8c0,-2.8,-2.2,-5,-4.8,-5" class="g3_1" />
+<text x="169" y="249" class="s2_1">y</text>
+<path d="M167.9,233.8h7.2" class="g3_1" />
+<text x="462" y="34" dx="0,-0.8,-0.5,-0.2,0,-0.6,-0.1,0,7.8,-0.6,0.5,-0.1,0,7.4,-0.5,-0.6,-0.3,0.3,-0.5,-0.4,-0.5,0.3,-0.2,-0.4,0,-0.9,-0.5,-0.3,-0.8,0.3,-0.3,-0.3,0.1" class="s3_1">Case 2. With Explanatory Variable</text>
+<path fill-rule="evenodd" d="M599.5,159.2L761,307.3H599.5V159.2Z" class="g0_1" />
+<path d="M599.5,159.2L761,307.3H599.5V159.2Z" class="g3_1" />
+<path fill-rule="evenodd" d="M599.5,159.2H761V307.3L599.5,159.2Z" class="g0_1" />
+<path d="M599.5,159.2H761V307.3L599.5,159.2Z" class="g3_1" />
+<path d="M599.5,307.3H761V159.2H599.5V307.3Z" class="g0_1" />
+<path d="M599.5,159.2V307.3H761V159.2Z" class="g2_1" />
+<path fill-rule="evenodd" d="M677.6,230.1c-2.7,0,-4.8,2.2,-4.8,5c0,2.6,2.1,4.8,4.8,4.8c2.7,0,4.9,-2.2,4.9,-4.8c0,-2.8,-2.2,-5,-4.9,-5Z" class="g1_1" />
+<path d="M677.6,230.1c-2.7,0,-4.8,2.2,-4.8,5c0,2.6,2.1,4.8,4.8,4.8c2.7,0,4.9,-2.2,4.9,-4.8c0,-2.8,-2.2,-5,-4.9,-5" class="g3_1" />
+<path fill-rule="evenodd" d="M595.1,332.6l180,42.2h-180V332.6Z" class="g0_1" />
+<path d="M595.1,332.6l180,42.2h-180V332.6Z" class="g3_1" />
+<path fill-rule="evenodd" d="M595.1,332.6h180v42.2l-180,-42.2Z" class="g0_1" />
+<path d="M595.1,332.6h180v42.2l-180,-42.2Z" class="g3_1" />
+<path d="M595.1,374.8h180V332.6h-180v42.2Z" class="g0_1" />
+<path d="M595.1,332.6v42.2h180V332.6Z" class="g2_1" />
+<text x="606" y="357" dx="0,0.3,-0.3,0.5,0.4,-0.1,0.2,0.4,0.1,0,1,0.4,-0.1,0.5,0.4,-0.1,0.1,0.2,-0.1" class="s4_1">Explained Variation</text>
+<path d="M679.8,235.5H761" class="g3_1" />
+<text x="683" y="225" dx="0,0.4,-0.4,-0.4,0" class="s1_1">error</text>
+<text x="603" y="184" dx="0,0.7,0.3,0.1,0.2,0.6,0,0.1,-0.2,0.3,0.1,0,0.9,0.6,-0.1,-0.2,0,0.1,0.2,0,0.5" class="s5_1">Unexplained Variation</text>
+<text x="157" y="118" dx="0,-0.1,-0.1,-0.1,0.1,0,0.5,0.6,0.1,0.5,0,0.3,-0.1,0.4,-0.4" class="s4_1">Total Variation</text>
+<text x="144" y="477" dx="0,0,8.8,0,0.5" class="s6_1">R = 0</text>
+<text x="164" y="460" class="s4_1">2</text>
+<path fill-rule="evenodd" d="M693,465l45.1,27.1H693V465Z" class="g1_1" />
+<image preserveAspectRatio="none" x="692" y="464" width="47" height="28" xlink:href="1/img/7.png" />
+<path fill-rule="evenodd" d="M693,465h45.1v27.1L693,465Z" class="g1_1" />
+<image preserveAspectRatio="none" x="692" y="464" width="47" height="28" xlink:href="1/img/8.png" />
+<path d="M693,465v27.1h45.1V465Z" class="g2_1" />
+<text x="630" y="486" dx="0,0,7.4" class="s3_1">R =</text>
+<text x="646" y="467" class="s4_1">2</text>
+
+
+<!-- Any embedded fonts defined here -->
+<style type="text/css" ><![CDATA[
+
+@font-face {
+	font-family: Tahoma_l;
+	src: url("fonts/Tahoma_l.woff") format("woff");
+}
+
+]]></style>
+
+</svg>

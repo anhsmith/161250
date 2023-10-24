@@ -1,0 +1,57 @@
+project:
+  type: website
+
+website:
+  title: "161250 Data Analysis"
+  page-navigation: true
+
+  navbar:
+    pinned: true
+    left:
+      - about.qmd
+
+      - text: "Slides"
+        href: slides.qmd
+
+      - text: "Study Guide"
+        href: studyguide/index.qmd
+        
+      - text: "Workshops"
+        href: workshops/ws01.qmd
+      
+  sidebar:
+  
+    - id: studyguide
+      collapse-level: 2
+      contents: 
+        - section: "Study Guide"
+          href: studyguide/index.qmd
+          contents:
+            - studyguide/1-data-collection.qmd
+            - studyguide/2-eda.qmd
+            - studyguide/3-probability.qmd
+            - studyguide/4-inference.qmd
+            - studyguide/5-tabulated.qmd
+            - studyguide/6-single.qmd
+            - studyguide/7-multiple.qmd
+            - studyguide/8-anova.qmd
+        
+    - id: workshops
+      collapse-level: 2
+      contents: 
+        - workshops/ws01.qmd
+        - workshops/ws02.qmd
+        - workshops/ws03.qmd
+        - workshops/ws04.qmd
+        - workshops/ws05.qmd
+        - workshops/ws06.qmd
+        - workshops/ws07.qmd
+        - workshops/ws08.qmd
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+
+
+

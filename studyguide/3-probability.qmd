@@ -1,0 +1,1092 @@
+
+# Chapter 3: Probability Concepts and Distributions
+
+> *Watson: "You may be right."*<br>
+> *Holmes: "The probability lies in that direction."*
+>
+> — Arthur Conan Doyle, *The Hound of the Baskervilles*
+
+> "_Statisticians, like artists, have the bad habit of falling in love with their models._" 
+>
+> – George Box
+
+
+
+## Introduction
+
+Probability concepts form the foundation of statistical inference.   In other words, our inference based on the sample relies on the probability notions and any generalisation of the results based on the sample involves uncertainty which can be expressed in probabilistic terms. We also informally used the probability concepts in data collection, particularly with the *EPSEM* sampling methods.
+
+The concepts we cover in this Chapter must be largely familiar to you from a first year course.  Note that we are covering probability concepts and distributions at a very basic level without much maths. You will not be examined on the theory, if nay, covered in this Chapter.
+
+
+## Probability as a relative frequency
+
+The naive or classical definition of probability is just a  relative frequency.  If $n$ is the total number of equally likely possible outcomes and if $m$ of those $n$ outcomes result in the occurrence of some given event, then the probability of that event is $m/n$. 
+
+Example: If a fair die is rolled, there are $n = 6$ possible outcomes. Let the event of interest be *getting a number 4 or more*. So, the probability of this event is 3 out of 6 or $p=1/2$.
+
+The *sample space* or the set of all possible outcomes need not be finite. For example, tossing a coin until the first head appears will result in an infinite sample space.So, the probability can be viewed as a limiting or long run fraction of $m/n$ (i.e. when $n  \to \infty$).
+
+When the sample space is finite and outcomes are equally likely, we can assume that classical probability will be the same as empirical probability. Note that to find the probability of a fair coin landing heads it is not necessary to toss the coin repeatedly and observe the proportion of heads.  So when the number of trails is reasonably large, empirical probability may be treated as the true value.
+
+Subjective probability (such as expert opinion) is useful in areas such as decision theory, and its definition does not fit as a relative frequency.
+
+Probabilities can only be between $0$ and $1$ (impossible to certain).
+
+## Mutually exclusive events
+
+Assume that a researcher studies the effects of various drugs on the web-building abilities of orb-web spiders.  He classifies the webs into three types:
+
+- `complete`, `partial`, or `crazy`.
+
+He also finds the relative frequencies for the three types as follows:
+
+- $P(W=\text{complete}) = 0.2$
+
+- $P(W=\text{partial}) = 0.3$
+
+- $P(W=\text{crazy}) = 0.5$
+
+The random variable $W$ has three possible states but any given observation can only belong to one state. You cannot observe a web that is both “partial” and “complete”, or “complete” and “crazy”. These values or states are said to be mutually exclusive.
+
+For mutually exclusive events, 
+
+1. The probability of any two events co-occurring is zero.
+
+2. The probability of one event or another event occurring is the sum of the two respective probabilities. 
+
+For example, either a complete web or a partial web being observed is equal to the sum of $P(W = \text{complete})$ and $P(W = \text {partial})$.  That is, 
+
+
+3. The probability of any one event not occurring is the sum of those remaining is 
+$$P(\text{not complete})	= P(W = \text{partial or}~W \text{ = crazy})= 0.3 + 0.5 = 0.8 = 1 – P(W = \text{complete}) $$
+
+	
+## Statistical independence
+
+If events $A$ and $B$ are statistically independent, then 
+$$P(A \textbf{ and } B) = P(A) \times P(B)$$
+
+If the $n$ events $A_1, A_2, \dots, A_n$  are mutually independent, then:
+   $$P(A_1 \textbf{ and } A_2 \textbf{ and } \dots \textbf{ and } A_n) = P(A_1) \times  P(A_2) \times \dots \times P(A_n)$$
+
+The probability of *event A occurring given that event B has already occurred* is written in shorthand as $P(A|B)$.
+
+For example, the probability of a card you’ve drawn being a 5, given that it is a spade.  This is known as a **conditional probability**.
+
+Note that the sample space is reduced to that where B has occurred. 
+
+We say that two events (A and B) are **independent** if
+
+$$P(A | B) = P(A) \textbf{ and } P(B | A) = P(B)$$
+
+This means that observing event A doesn’t make event B any more or less likely, and vice versa. 
+
+For any two events $A$ and $B$,
+	
+$$P(A \textbf{ and } B ) = P(A|B) \times P(B)$$
+		and also
+
+$$P(A \textbf{ and } B ) = P(B|A) \times P(A)$$
+
+### Examples
+
+#### Blood group example
+
+
+There are a large number of genetic-based blood-type systems that have been used for categorising blood. Two of these are the Rh system (Rh+ and Rh–) and the Kell system (K+ and K–). It is found that for any person, their blood type in any one system is independent of their blood type in any other. 
+
+For Europeans in New Zealand, about 81% are Rh+ and about 8% are K+. So, we can form a Table of counts as shown in @fig-Rh:
+
+
+![Categorising blood types](images/RhK.png){#fig-Rh}
+
+
+If a European New Zealander is chosen at random, what is the probability that they are (Rh+ and K+) or (Rh– and K–)?
+
+The answer is 0.0648 + 0.1748 = 0.2396 (verify).
+
+Suppose that a murder victim has a bloodstain on him with type (Rh– and K+), presumably from the assailant. What is the probability that a randomly selected person matches this type?
+
+The answer is 0.0152 (verify).
+
+#### Beached whales example
+
+Assume that 0.63 is the probability of a randomly selected beached whale is a male. So the probability of a beached whale being female is $1-0.63=0.37$. Suppose that we also observe whether beached whales are juvenile or adult, and the probability of a whale being juvenile, given that it is female, is 0.8, and the probability it is juvenile, given that it is male, is 0.4.
+
+Let us denote the random variables and their outcomes as follows:
+
+*Sex* (S) = either female ($f$) or male ($m$)
+   
+*Age* (A) = either juvenile ($j$) or adult ($a$)
+
+We are given
+
+   $P(S=m) = 0.63$   
+   $P(A=j | S=f) = 0.8$   
+   $P(A=j | S=m) = 0.4$
+
+### Probability tree diagram
+
+Easy to visualise the probabilities with this representation as shown in @fig-PTD.
+
+![Probability tree diagram](images/tree.png){#fig-PTD}
+
+#### Rules of the Probability Tree
+
+1. Within each level, all branches are mutually exclusive events. 
+
+2. The tree covers all possibilities (i.e., the entire sample space).
+
+3. We multiply as we move along branches.
+
+4. We add when we move across branches.
+
+What is the overall probability that a whale is juvenile? That is, what is $P(A = j)$ (or $P(j)$ for short)?
+
+$$P(j) = P(m \textbf{ and } j) + P(f \textbf{ and } j)= 0.63\times 0.4+0.37 \times 0.8 = 0.548 $$
+
+### Bayes rule
+
+What is the probability of the whale being female given that it is juvenile? i.e., what is $P(f | j)$ ?
+
+
+$P(f | j)$ doesn’t appear in the tree anywhere, so we will have to go back to first principles.
+
+we know that
+	
+$$P(f \textbf{ and }  j)  = P(f | j) × P(j)$$ and 	
+$$P(f \textbf{ and }  j)  = P(j | f) × P(f)$$
+
+Thus,  $$P(f | j) × P(j) = P(j | f) × P(f)$$
+
+$$P(f | j) = \frac {P(j | f) × P(f)} {P(j)}$$
+This is known as the *Bayes rule* or theorem.
+
+For our question
+$$P(f | j) = \frac {P(j | f) × P(f)} {P(j)}= \frac{0.8 \times 0.37}{0.548}= 0.54$$
+
+## Discrete probability distributions
+
+Consider the number of eggs $(X)$ in an Adelie penguin’s nest. The values range from $1$ to $5$, each with a certain probability (or relative frequency) of occurrence.
+
+
+```{r}
+#| echo: true
+dfm <- data.frame(
+  X=1:5, 
+  Probability=c(0.1, 0.2, 0.3,0.25,0.15)
+  )
+
+library(kableExtra)
+
+kable(dfm, booktabs=TRUE) |> 
+  kable_styling(bootstrap_options = "striped", full_width = F)
+```
+
+The barplot of these probabilities is shown as @fig-discr.
+
+
+```{r}
+#| message: false 
+library(tidyverse)
+library(ggpmisc)
+theme_set(theme_minimal())
+```
+
+```{r}
+#| echo: true
+#| label: fig-discr
+#| fig-cap: 'Barplot of probabilities'
+#| fig-height: 3
+#| fig-width: 5
+
+dfm |> 
+  ggplot() +
+  aes(x=X, y=`Probability`) +
+  geom_col()+
+  theme_minimal() + 
+  scale_x_continuous(breaks = c(0:9))+
+  annotate(geom = "table", label = list(dfm), x=8, y=.15)
+```
+
+Note the probabilities add to $1$ because ${1,2,3,4,5}$ is a complete sample space
+
+The population mean $\mu_X$ is simply the sum of each outcome multiplied by its probability. 
+
+$$\mu_X = E(X)= \sum xP(X=x)=\sum xP(x)$$ 
+
+In R,
+
+```{r, echo=TRUE}
+X <- 1:5
+P <- c(0.1, 0.2, 0.3,0.25,0.15)
+(Mean <- sum(X*P))
+```
+
+The population variance is given by
+
+$$Var(X)= \sigma_X^2=\sum (x-\mu_X)^2 P(x)$$
+
+The population SD is simply the square-root of the variance.
+
+In R,
+
+
+```{r, echo=TRUE}
+X <- 1:5
+P <- c(0.1, 0.2, 0.3,0.25,0.15)
+Mean <- sum(X * P)
+(Variance <- sum((X-Mean)^2*P))
+(SD <- sqrt(Variance))
+```
+
+
+## Binomial distribution
+
+Let $X$ be the number of heads when two coins are tossed. The possible outcomes are shown in @fig-twocoins.
+
+![Possible outcomes for two coin tosses](images/binom.png){#fig-twocoins}
+
+In general, when there only two possible outcomes say  *success* or *failure* ($1$ or $0$; Yes or No; On or Off; Heads or Tails; etc.), we deal with a  *binary* or **Bernoulli** random variable.
+
+The count of the number of *successes* $X$ out of a fixed total of $n$ *independent* trials (in the above coin tossing example, there were $n = 2$ trials) follows the binomial distribution.
+
+In other words, $X \sim Bin(n, p)$, where $p$ the probability of a success. The binomial probability function $P(X=x)$ or $P(x)$ is given by
+
+$$P(x)={n \choose x}p^{x}(1-p)^{n-x}$$
+
+It is easy to plot these probabilities in R. For $n=10$, $p=0.3$, the binomial probabilities $P(x)~~~ x=0,1,2, \dots, 10$ are plotted in @fig-dbin.
+
+```{r}
+#| echo: false
+#| label: fig-dbin
+#| fig-cap: 'Binomial probabilities'
+#| fig-width: 5
+#| fig-height: 4
+#| message: false
+
+library(tidyverse)
+library(ggpmisc)
+data.frame(x = 0:10, 
+           probability = dbinom(x = 0:10, size = 10, prob = 0.3)) %>%
+  mutate(x=as.factor(x)) ->dfm
+ggplot(dfm, aes(x = x, y = probability)) + geom_col()+
+  annotate(geom = "table", label = list(dfm), x=11, y=.05)
+```
+
+
+Example: A microbiologist conducts an experiment to create a recombinant strain of bacteria that is resistant to penicillin. She plates out the bacteria on a plate, and picks out 10 colonies. She knows that the probability of successfully creating a recombinant is 0.15.
+
+What is the probability that if she mixes all 10 colonies in a growth medium with penicillin, something  (anything) will grow?
+
+Given:
+
+$X \sim Bin(n = 10, p = 0.15)$. What is $P(x > 0)$? 
+
+Note  $P(x > 0)=1-P(x = 0)$.  So in R, compute this as follows:
+
+```{r, echo=TRUE}
+1 - dbinom(x=0, size=10, prob=.15)
+```
+
+
+or
+
+```{r, echo=TRUE}
+1-pbinom(q=0, size=10, prob=.15)
+```
+
+Note that function `pbinom(k,size=n,prob=p)` gives the cumulative probabilities up to and including the quantile $k$ (which is equal to zero in our example). 
+
+$$P(X\leq k)=\sum _{i=0}^{k}{n \choose x}p^{x}(1-p)^{n-x}$$
+
+The mean and variance of the binomial random variable is given by
+
+$$\mu_X=np~~~~ \sigma^2_X=np(1-p)$$
+
+So the expected number of recombinant strain of bacteria would be
+
+$$\mu_X=np=10*0.15=1.5$$
+
+with SD
+
+$$\sigma_X=\sqrt {np(1-p)}=1.129159$$
+
+## Poisson distribution
+
+The Poisson distribution is used to obtain the probabilities of counts of relatively rare events or outcomes that occur independently in space or time. 
+
+Some Examples:
+
+1. The number of snails in a quadrat ($1~m^2$)
+2. Fish counts in a visual transect (25 x 5 m)
+3. Bacterial colonies in 2 litres of milk
+
+The random variable $X$,  the number of occurrences (count), often follows the Poisson distribution whose probability function is given by
+
+$$\Pr(x)= \frac{\lambda^x e^{-\lambda}}{x!}~~~ x=0,1,2,\dots, \infty$$
+
+The parameter $\lambda$ is the mean  which is also equal to the variance.
+
+$$\mu_X=\lambda~~~~ \sigma^2_X=\lambda$$
+
+Main assumptions:
+
+1. The events occur at a constant average rate of $\lambda$ per unit time or space.
+
+2. Occurrences are independent of one another as well as they do not happen at exactly the same unit time or space.
+
+
+Example: Consider the number of changes that accumulate along a stretch of a neutrally evolving gene over a given period of time.
+
+This is a Poisson random variable with a population mean of $\lambda=kt$, where $k$ is the number of mutations per generation, and $t$ is the time in generations that has elapsed.
+
+Assume that $k = 1\times10^{-4}$ and $t = 500$.
+
+For  $\lambda=kt=0.05$, the Poisson probabilities are shown in @fig-dpoi.
+
+```{r}
+#| echo: false
+#| label: fig-dpoi
+#| fig-cap: 'Poisson probabilities'
+#| fig-height: 4
+#| fig-width: 5
+library(tidyverse)
+library(ggpmisc)
+data.frame(x = 0:5, 
+           probability = dpois(x = 0:5, lambda=0.05)) %>%
+  mutate(x=as.factor(x), probability = round(probability,4)) ->dfm
+ggplot(dfm, aes(x = x, y = probability)) + geom_col()+
+  annotate(geom = "table", label = list(dfm), x=5, y=.25)
+```
+
+
+What is the probability that at least one mutation has occurred over this period?
+
+$P(x > 0)=1-P(x = 0)$ is found in R as follows:
+
+```{r}
+1 - dpois(x=0, lambda=0.05)
+```
+
+Another example: The number of parasites in a host is a Poisson random variable with mean 1.5. What is the probability that there will be exactly one parasite in the host?  Examine @fig-parasite for the answer.
+
+```{r}
+#| echo: false
+#| label: fig-parasite
+#| fig-cap: 'Parasites distribution'
+#| fig-height: 4
+#| fig-width: 5
+
+library(tidyverse)
+library(ggpmisc)
+data.frame(x = 0:10, 
+           probability = dpois(x = 0:10, lambda=1.5)) %>%
+  mutate(x=as.factor(x), 
+         probability = round(probability,4),
+         parasites = ifelse(x == 1, "1", "Not 1")) ->dfm
+ggplot(dfm, aes(x = x, y = probability, fill = parasites)) + 
+  geom_col()+
+  annotate(geom = "table", label = list(dfm[,1:2]), x=10, y=.3)
+```
+
+## Continuous probability distributions
+
+A discrete random variable takes values which are simply points on a real line.  In other words, there is an inherent discontinuity in the values a discrete random variable can take.
+
+If a random variable, $X$, can take any value (i.e., not just integers) in some interval of the real line, it is called a *continuous* random variable.  Examples include variables such as height, weight, length, percentage protein etc.
+
+For a discrete random variable $X$, the associated probabilities $P(X=x)$ are also just points or masses, and hence the probability function $P(x)$ is also called as the probability mass function (*pmf*).
+
+For continuous random variables, probabilities can be computed when the variable falls in an interval such as $5$ to $15$, but not when it takes a fixed value such as $10$ (which is equal to zero).
+
+The probability density function (pdf) gives the probabilities as an area under the curve.
+
+For example, consider a random proportion $(X)$ between $0$ and $1$.  Here $X$ follows a (standard) continuous uniform distribution whose (probability) density function $f(x)$ is defined as follows:
+
+$$f(x)=\begin{cases}{1}~~~\mathrm {for} \ 0\leq x\leq 1,\\[9pt]0~~~\mathrm {for} \ x<0\ \mathrm {or} \ x>1\end{cases}$$
+
+This constant density function is very simple; see @fig-constdens. 
+
+```{r}
+#| label: fig-constdens
+#| fig-cap: "Constant density between 0 and 1"
+#| echo: true
+
+data.frame(x = c(-.5, 1.5)) |> 
+  ggplot() + 
+  aes(x) +
+  stat_function(
+    fun = dunif, 
+    n = 10001, 
+    args = list(min = 0, max = 1)
+    ) +
+  ylab("f(x)") +
+  theme_minimal()
+```
+
+
+The cumulative distribution function, CDF,  $F(x)$ gives the left tail area or probability up to $x$.  This is probability is found as
+
+$$F_{X}(x)=\int _{-\infty }^{x}f_{X}(t)\,dt$$
+The relationship between the density function $f(x)$ and the distribution function $F(x)$ is given by the *Fundamental Theorem of Calculus*.
+
+$$f(x)={dF(x) \over dx}$$
+
+The total area under the pdf curve is $1$. The probability of obtaining a value between two points ($a$ and $b$) is the area under the pdf curve between those two points.  This probability is given by $F(b)-F(a)$.
+
+
+
+For the uniform distribution $U(0,1)$, $f(x)=1$. So,
+
+$$F_{X}(x)=\int _{-\infty }^{x}\,dt=x$$
+
+For example, the probability of a randomly drawn fraction from the interval $[0,1]$ to fall below $x=0.5$ is 50%.
+
+The probability of a random fraction falling between $a=0.2$ and $b=0.8$ is
+
+$$F(b)-F(a)=0.8-0.2=0.6$$
+
+
+
+## Normal distribution
+
+The Gaussian or normal distribution is parameterised in terms of the mean $\mu$ and the variance $\sigma ^{2}$ and its density function is given by
+
+$$f(x)={\frac {1}{\sigma {\sqrt {2\pi }}}}e^{-{\frac {1}{2}}\left({\frac {x-\mu }{\sigma }}\right)^{2}}$$
+If $X \sim N(\mu, \sigma)$, its Z-score is calculated from $X$ by subtracting $\mu$ and dividing by the standard deviation $\sigma$.
+
+$$Z={\frac {X-\mu }{\sigma }}$$ 
+The random variable $Z \sim N(0,1)$.  Its pdf is given by
+
+$$f(z)={\frac {1}{ {\sqrt {2\pi }}}}e^{-{\frac {1}{2}}z^{2}}$$
+
+We often deal with the Standard normal because the *symmetric* bell shape of the normal distribution remains the same for all $\mu$ and $\sigma$; see @fig-nrm.
+
+```{r}
+#| echo: false
+#| label: fig-nrm
+#| fig-cap: 'Standard Normal Density'
+#| fig-height: 5
+#| fig-width: 5
+
+library(tidyverse)
+p <- ggplot(data.frame(x = c(-4, 4)), aes(x = x)) + 
+  xlab("standard normal deviate, z")
+
+p1 <- p + 
+  stat_function(fun = dnorm, 
+                args=list(mean=0, sd=1), 
+                geom = "area") + 
+  geom_vline(xintercept = 0) + 
+  labs(title = "Standard Normal Density") + ylab("f(x)")
+
+p2 <- p + 
+  stat_function(fun = pnorm, args=list(mean=0, sd=1), geom = "line", lwd=1.02) + 
+  geom_vline(xintercept = 0, alpha=.5) + 
+  labs(title = "Cumulative Standard Normal Density") +
+  geom_hline(yintercept = 0.5, alpha=.5) + ylab("F(x)")
+
+library(patchwork)
+p1/p2  & theme_minimal()
+```
+
+
+Example: The weight of an individual of *Amphibola crenata* (snail) is normally distributed with a mean of $40g$ and variance of $20g^2$ as shown in @fig-nrmeg.  
+
+```{r}
+#| echo: true
+#| label: fig-nrmeg
+#| fig-cap: 'Distribution of snail weight'
+#| fig-height: 3
+#| fig-width: 4
+
+dfs <- tibble(
+  x=seq(20, 60, length=1000), 
+  `f(x)` = dnorm(x, mean=40, sd=sqrt(20))
+  )
+
+ps <- ggplot(dfs) + aes(x = x, y = `f(x)`) + 
+  geom_area(fill="gray") +
+  geom_vline(xintercept=40) 
+
+ps
+```
+
+
+
+What is the probability of getting a snail that weighs between $35g$ and $50g$? In R, the function `pnorm()` gives the CDF.
+
+```{r, echo=TRUE}
+pnorm(50, mean=40, sd=sqrt(20)) - 
+  pnorm(35, mean=40, sd=sqrt(20)) 
+```
+
+@fig-snail illustrates the computation.
+
+```{r}
+#| label: fig-snail
+#| echo: true
+#| fig-cap: 'Probability of snail weight being between 35 g and 50 g'
+#| fig-height: 3
+#| fig-width: 4
+
+ps + 
+  geom_area(data = dfs |> filter(x < 50 & x > 35),
+            fill="coral1", alpha=.5)
+```
+
+What is the probability of getting a snail that weighs below $35g$ or over $50g$?
+
+```{r, echo=TRUE}
+pnorm(35, mean=40, sd=sqrt(20)) + 
+  pnorm(50, mean=40, sd=sqrt(20), lower.tail=FALSE) 
+```
+
+Under standard normal, the areas under the pdf curve are shown in @fig-ncurves for various situations.
+
+```{r}
+#| label: fig-ncurves
+#| echo: false
+#| fig-cap: 'Standard normal coverage'
+#| fig-height: 5
+#| fig-width: 5
+
+plot_area <- function(lower, upper) {
+  x <- seq(-3,3,length.out = 1000)
+  y <- dnorm(x, 0, 1)
+  df <- data.frame(x=x, y=y)
+  area <- round(100 * (pnorm(upper) - pnorm(lower)), 1)
+  ggplot(df, aes(x=x, y=y)) + 
+    geom_line() +
+    stat_function(fun = dnorm,
+                  xlim = c(lower, upper),
+                  geom = "area",
+                  fill='coral1',
+                  alpha=.5) +
+    scale_x_continuous(breaks=c(lower, upper)) +
+    annotate("text", label = paste(area, "%", sep=""), size=3, x = 2, y = 0.3) +
+    xlab("") + ylab("") +
+    theme(axis.text.y = element_blank(),
+          axis.ticks.y = element_blank())
+}
+
+p1 <- plot_area(-1, 1)
+p2 <- plot_area(-2, 2)
+p3 <- plot_area(-3, 3)
+p4 <- plot_area(-1.946, 1.946)
+library(patchwork)
+p1+p2+p3+p4
+```
+
+## Skewed distributions
+
+There are many probability distributions which are asymmetrical. A few of them are briefed here.
+
+ **Log-normal**
+
+A random variable $X$ is log-normally distributed, when $log_e(X)$ follows normal. Alternatively, if $X$ follows normal, then $e^X$ follows log-normal.
+
+The log-normal density function is shown below:
+
+$$f(x)={\frac {1}{x\sigma {\sqrt {2\pi }}}}\ \exp \left(-{\frac {\left(\ln x-\mu \right)^{2}}{2\sigma ^{2}}}\right),~~ x>0$$
+While the R function `dnorm()` gives the normal density, the function `dlnorm()` gives the log-normal density.
+
+The standard log-normal pdf and CDF are plotted in @fig-lnrm
+
+
+```{r}
+#| label: fig-lnrm
+#| echo: false
+#| fig-cap: 'Log-normal pdf and CDF'
+#| fig-height: 5
+#| fig-width: 5
+
+dfln <- tibble(x=seq(0, 4, length=1000), 
+              `f(x)` = dlnorm(x), 
+              `F(x)` = plnorm(x))
+
+p1 <- ggplot(dfln) + 
+  aes(x=x, y=`f(x)`) + 
+  geom_area(alpha=.8) + 
+  labs(title = "Standard log-normal density", 
+       x = "standard log-normal deviate, z")
+
+p2 <- ggplot(dfln) + 
+  aes(x=x,y=`F(x)`) + 
+  geom_line() + 
+  labs(title = "Cumulative standard log-normal density", 
+       x = "standard log-normal deviate, z")
+
+p1/p2
+
+
+```
+
+The mean & variance of the lognormal random variables are:
+
+$$\mu_X=e^{\left(\mu +{\frac {\sigma ^{2}}{2}}\right)}~~~~\sigma_X^2=(e^{\sigma ^{2}}-1) e^{(2\mu +\sigma ^{2})}$$
+
+ **Weibull**
+
+The probability function of the Weibull distribution is given below:
+
+$$f(t;\eta,\beta) =
+\begin{cases}
+\frac{\beta}{\eta}\left(\frac{x}{\eta}\right)^{\beta-1}e^{-(x/\eta)^{\beta}}  ~~x\geq0 ,\\
+0~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  x<0,
+\end{cases}$$
+
+
+$\beta~(> 0)$  is the called the **shape** parameter and $\eta~(> 0)$ is the called **scale** parameter, and different values of $\beta$ will result in different distributional shapes; see @fig-weib.
+
+
+```{r}
+#| label: fig-weib
+#| echo: false
+#| fig-cap: 'Weibull distributional shapes'
+#| fig-height: 4
+#| fig-width: 7
+
+p1 <- data.frame(x=c(0,5)) |> 
+  ggplot() + aes(x=x) +
+  stat_function(fun = dweibull, args = list(shape = 0.5, scale = 1),
+                geom='area') +
+  labs(title = "shape = 0.5, scale = 1")
+
+p2 <- ggplot(data.frame(x=c(0,5)), aes(x=x)) +
+  stat_function(fun = dweibull, args = list(shape = 1, scale = 1),
+                geom='area') +
+  labs(title = "shape = 1, scale = 1")
+
+p3 <- ggplot(data.frame(x=c(0,5)), aes(x=x)) +
+  stat_function(fun = dweibull, args = list(shape = 3, scale = 1),
+                geom='area') +
+  labs(title = "shape = 3, scale = 1")
+
+p4 <- ggplot(data.frame(x=c(0,7)), aes(x=x)) +
+  stat_function(fun = dweibull, args = list(shape = 6, scale = 4),
+                geom='area') +
+  labs(title = "shape = 6, scale = 4")
+
+library(patchwork)
+p1+p2+p3+p4
+```
+
+
+The Weibull distribution becomes the exponential distribution for $\beta=1$.
+
+The scale parameter $\eta$ is called the *characteristic life* because $\eta$ becomes the quantile with slightly less than two-thirds of the population (63.21%) below it irrespective of the shape $\beta$ when this distribution is used to model lifetimes. 
+
+ **Gamma**
+
+The probability function of the gamma distribution with shape parameter $\alpha$ and scale parameter $\beta$ is given below:
+
+$$\displaystyle {\begin{aligned}f(x)={\frac {\beta ^{\alpha }x^{\alpha -1}e^{-\beta x}}{\Gamma (\alpha )}}\quad {\text{ for }}x>0\quad \alpha ,\beta >0,\\[6pt]\end{aligned}}$$
+where $\displaystyle \Gamma (\alpha)=\int _{0}^{\infty }x^{\alpha-1}e^{-x}\,dx.$ 
+
+@fig-gam shows the plot of gamma density for various shape and scale parameters.
+
+```{r}
+#| label: fig-gam
+#| echo: false
+#| fig-cap: 'Gamma distributional shapes'
+#| fig-height: 4
+#| fig-width: 7
+
+p1 <- ggplot(data.frame(x=c(0,5)), aes(x=x)) +
+  stat_function(fun = dgamma, args = list(shape = 0.5, scale = 1),
+                geom='area') +
+  labs(title = "shape = 0.5, scale = 1")
+
+p2 <- ggplot(data.frame(x=c(0,5)), aes(x=x)) +
+  stat_function(fun = dgamma, args = list(shape = 1, scale = 1),
+                geom='area') +
+  labs(title = "shape = 1, scale = 1")
+
+p3 <- ggplot(data.frame(x=c(0,5)), aes(x=x)) +
+  stat_function(fun = dgamma, args = list(shape = 3, scale = 1),
+                geom='area') +
+  labs(title = "shape = 3, scale = 1")
+
+p4 <- ggplot(data.frame(x=c(0,7)), aes(x=x)) +
+  stat_function(fun = dgamma, args = list(shape = 6, scale = 4),
+                geom='area') +
+  labs(title = "shape = 6, scale = 4")
+
+p1+p2+p3+p4
+```
+
+Lognormal, Weibull  and  gamma distributions are useful to model right skewed data, particularly lifetimes data, but we need large amount of data, say over 300, to discriminate the three fitted distributions.
+
+ **Beta distribution**
+
+The beta distribution is bounded on the interval $[0, 1]$ and  parameterised by two positive shape parameters, say $\alpha$ and $\beta$.
+
+The probability function of the Weibull distribution is given below:
+
+$$\begin{aligned}f(x;\alpha ,\beta ) ={\frac {x^{\alpha -1}(1-x)^{\beta -1}}{\displaystyle \int _{0}^{1}u^{\alpha -1}(1-u)^{\beta -1}\,du}}={\frac {1}{\mathrm {B} (\alpha ,\beta )}}x^{\alpha -1}(1-x)^{\beta -1}\end{aligned} $$
+where $\mathrm {B} (\alpha ,\beta )=\frac {\Gamma (\alpha )\Gamma (\beta )}{\Gamma (\alpha +\beta )}$.  @fig-betas shows the plot of beta density for various shape parameter combinations.
+
+
+```{r}
+#| label: fig-betas
+#| echo: false
+#| fig-cap: 'Beta distributional shapes'
+#| fig-height: 4
+#| fig-width: 7
+
+p1 <- ggplot(data.frame(x=c(0,1)), aes(x=x)) +
+  stat_function(fun = dbeta, args = list(shape1 = 0.5, shape2 = 0.5),
+                geom='area') +
+  labs(title = "shape1 = 0.5, shape2 = 0.5")
+
+p2 <- ggplot(data.frame(x=c(0,1)), aes(x=x)) +
+  stat_function(fun = dbeta, args = list(shape1 = 2, shape2 = 2),
+                geom='area') +
+  labs(title = "shape1 = 2, shape2 = 2")
+
+p3 <- ggplot(data.frame(x=c(0,1)), aes(x=x)) +
+  stat_function(fun = dbeta, args = list(shape1 = 2, shape2 = 5),
+                geom='area') +
+  labs(title = "shape1 = 2, shape2 = 5")
+
+p4 <- ggplot(data.frame(x=c(0,1)), aes(x=x)) +
+  stat_function(fun = dbeta, args = list(shape1 = 5, shape2 = 2),
+                geom='area') +
+  labs(title = "shape1 = 6, shape2 = 4")
+
+p1+p2+p3+p4
+```
+
+When $\alpha=\beta=1$, the beta distribution becomes the continuous uniform distribution.  This distribution is useful to model component fractions such as percentage of protein in milk powder, and is also widely used in Bayesian analysis.
+
+## Empirical distributions
+
+Data from a normal (or any other distribution) may not look very much like the expected theoretical shape ('bell-curve\` for normal)  unless there is very large amount of it.  @fig-rn200 is for a random sample of 200 from the standard normal distribution.  Compare the departures from the expected theoretical shape.  Recall that we covered the ECDF curves in the last Chapter.  The CDF curve is just theoretical one but fitted with data.  More on this later.
+
+```{r}
+#| label: fig-rn200
+#| echo: false
+#| warning: false
+#| message: false
+#| fig-cap: 'Normal(0,1) data (n=200)'
+#| fig-height: 5
+#| fig-width: 4
+
+
+set.seed(1234)
+
+dfm <- data.frame(x=rnorm(200, mean=80, sd=12))
+
+p1 <- ggplot(dfm) + 
+  aes(x) + 
+  geom_histogram(aes(y=after_stat(density)), colour=1) +
+  stat_function(fun = dnorm, 
+                args = list(mean=mean(dfm$x), sd=sd(dfm$x)), 
+                geom = "line")
+
+p2 <- ggplot(dfm) + aes(x) + geom_boxplot()
+
+library(patchwork)
+
+p1/p2+ plot_layout(heights = c(5,1))
+```
+
+ **Small sample effect**   For small samples, we do not expect many outliers but the 'ideal' shape may not be seen; see @fig-rn50.
+
+```{r}
+#| label: fig-rn50
+#| echo: false
+#| warning: false
+#| message: false
+#| fig-cap: 'Normal(0,1) data (n=50)'
+#| fig-height: 3
+#| fig-width: 4
+
+set.seed(123)
+dfm <- data.frame(x = rnorm(50, mean=80, sd =12))
+p1 <- ggplot(dfm, aes(x))+stat_ecdf()+stat_function(fun = pnorm, args=list(mean=80, sd=12), colour="red")
+p1 <- p1+labs(title="ECDF & CDF curves" )
+p2 <- ggplot(dfm, aes(sample = x))+stat_qq(distribution = stats::qnorm)+stat_qq_line()
+p2 <- p2+labs(title = "Normal quantile plot")
+library(patchwork)
+p1 
+```
+
+
+## Importance of the normal distribution
+
+***Question***: Why do we use the Normal distribution so much? Answer: Because:
+
+1.  Many physical, biological, engineering and economic quantities do seem to follow a Normal distribution (sometimes after a transformation of the data to an appropriate scale). An example is that the logarithm of the 'waiting time' between earthquakes in Wellington is normally distributed. (The use of the logarithm may worry you, but it is natural for the subject area. Note that the magnitude of earthquakes is also measured on a logarithmic scale, namely the familiar Richter scale.)
+
+2.  Data that are *approximately* Normal seem to turn up very frequently in practice. In particular this may occur because
+
+3.  The Normal distribution is often what you get *(for mathematical reasons)* when you add together (or average) lots of different things. This result is known as the central limit theorem (CLT). For example, test scores are calculated by adding together marks from different questions, or share market movements are the result of many individuals and firms making private decisions. There is another theory which establishes that the sampling distributions of quantiles of continuous distributions of are approximately normal for *large* sample sizes.
+
+4.  We shall see in this course that residuals play a large part. These are, for example, the 'errors' left over after fitting a regression line to data. Quite often, we expect residuals to follow a Normal distribution.
+
+## Normal data in practice
+
+In practice, data from a 'Normal distribution' *may* not look very much like the 'bell-curve' unless there is very large amount of it. This statement has practical implications but first let us check whether the statement is true. We can do this by simulating batches of data from a Normal distribution (using software) and noting the variations across the data sets. Moreover, because the Normal distribution and its bell shaped curve are so important and ubiquitous, it is instructive to apply EDA methods to Normal data, for we would certainly like EDA methods to work well for that type of curve.
+
+For the first batch, we simulated 1000 numbers from a Normal distribution with mean 80 and standard deviation of 12. The numbers could represent, for example, the diastolic blood pressure of 1000 adult New Zealanders. @fig-simnor shows the histogram and the boxplot of the random normal data. Even though the typical bell-shaped pattern (theoretical normal curve shown in dotted lines) is evident, the histogram is not perfectly symmetric as the numbers were chosen at random so that by chance more fall into some classifications than would be expected. Also there are a few unusual values at the both extremes (see the boxplot). In practice if we didn't know that the data came from a Normal distribution we might investigate the three highest points to see if they were valid points or outliers. The extreme edges of a data often comprise very atypical values we would not tend to place too much weight on the conflicting evidence they give about symmetry. The mean and median of this simulated batch are somewhat closer but the median is slightly off-centred from the quartiles.*Well, so far so good. Now what if we have smaller batches?*
+
+```{r}
+#| label: fig-simnor
+#| echo: false
+#| message: false
+#| warning: false
+#| fig-cap: 'Simulated normal data, n=100 and n=1000'
+#| fig-height: 6
+#| fig-width: 6
+
+Mean  <-  80
+Sd  <-  12
+n <- 100
+set.seed(123)
+dfm<- data.frame(RNDnorm = rnorm(n, Mean, Sd))
+p1 <- ggplot(dfm, aes(x = RNDnorm)) + 
+    geom_histogram(aes(y =after_stat(density)),
+                   breaks = seq(Mean-4*Sd, Mean+4*Sd, length.out =20), 
+                   colour = "black", 
+                   fill = "white") +
+stat_function(fun = dnorm, args = list(mean = mean(dfm$RNDnorm), sd = sd(dfm$RNDnorm)))
+p1 <- p1+xlab("N(80,12) random data n=100")
+
+p11 <- ggplot(dfm, aes(y = RNDnorm, x=factor(""))) 
+p11 <- p11 + geom_boxplot()+xlab("")
+p11 <- p11 + coord_flip()+ylab("N(80,12) random data n=100")
+
+n <- 1000
+set.seed(123)
+dfm<- data.frame(RNDnorm = rnorm(n, Mean, Sd))
+p2 <- ggplot(dfm, aes(x = RNDnorm)) + 
+    geom_histogram(aes(y =..density..),
+                   breaks = seq(Mean-4*Sd, Mean+4*Sd, length.out =20), 
+                   colour = "black", 
+                   fill = "white") +
+stat_function(fun = dnorm, args = list(mean = mean(dfm$RNDnorm), sd = sd(dfm$RNDnorm)))
+
+p2 <- p2+xlab("N(80,12) random data n=1000")
+p22 <- ggplot(dfm, aes(y = RNDnorm, x=factor(""))) 
+p22 <- p22 + geom_boxplot()+xlab("")
+p22 <- p22 + coord_flip()+ylab("N(80,12) random data n=1000")
+
+gridExtra::grid.arrange(p2,p1,p22,p11, ncol=2)
+
+```
+
+For a normal distribution,
+
+68% of the values fall within 1 standard deviation of the mean\
+95% of the values fall within 2 standard deviation of the mean\
+99% of the values fall within 3 standard deviation of the mean.\
+
+As a special case, 50% of the values will fall within 0.6745 standard deviations of the mean. For symmetric distributions, mean equals the median. Hence the fourths (quartiles) of random data obtained drawn from theoretical normal population will be
+
+**Lower hinge** = median - $0.6745\times S~(\simeq$lower quartile),
+
+and
+
+**Upper hinge** = median + $0.6745 \times S~(\simeq$ upper quartile),
+
+where $S$ is the standard deviation. Thus F-spread (or $\simeq$ the IQR) $\simeq$ 1.35$\times S$. Hence
+
+**inner fences**= median $\pm$ 2 F-spread = median $\pm$ 2.7$\times S$
+
+The probability that an observation falls between these fences is 0.993, or the probability of falling outside these fences is 0.007. Thus in our simulated batch of size 1000, we expect about 7 possible outliers but none for the simulated batch size 100. **Outer fences** are defined as being 2 steps (3$\times$F-spread) away from the fourths so that
+
+**outer fences**= median $\pm$ 3.5$\times$F-spread = median $\pm$ 4.72$\times S$
+
+The probability of a point falling outside of this range is the extremely small amount of 0.000002. It is not surprising, then, that none of the values in our simulated batches fell outside of the outer fences. If they did, we would class them as probable outliers. Of course, with distributions other than the Gaussian one, and particularly for asymmetric distributions, the probability of a value falling outside these fences is higher.
+
+## Assessment of Normality
+
+The shapes of the ECDF curves shown in @fig-simnorecdf are typical of the empirical cumulative distributions for data from Normal populations. This curve was drawn using 1000 and 100 simulated random normal data. It could perhaps be described as an S-shape on its side (or lazy or stretched out S). The curve is flatter at either end which reflects the small amounts of relative frequency in the tails of the Normal distribution. The theoretical Cumulative Distribution Function (CDF) curve for the normal distribution is also shown in @fig-simnorecdf as a smooth curve. For smaller samples from a Normal population, the ECDF curve will vary about the theoretical curve, and, of course, the variation is likely to be larger the smaller the sample; see @fig-simnorecdf(B).
+
+```{r}
+#| label: fig-simnorecdf
+#| echo: false
+#| warning: false
+#| fig-cap: 'Simulated normal data, n=100 and n=1000'
+
+Mean  <-  80
+Sd  <-  12
+n <- 100
+set.seed(123)
+dfm<- data.frame(RNDnorm = rnorm(n, Mean, Sd))
+p1 <- ggplot(dfm, aes(x = RNDnorm)) + stat_ecdf(aes(color="red")) 
+p1 <- p1+stat_function(fun = pnorm, args = list(mean = mean(dfm$RNDnorm), sd = sd(dfm$RNDnorm)))
+p1 <- p1+guides(colour=FALSE)+ggtitle("(A)")
+p1 <- p1+xlab("N(80,12) random data n=100")+ylab("Cumulative proportion/probability")
+
+n <- 1000
+dfm<- data.frame(RNDnorm = rnorm(n, Mean, Sd))
+p2 <- ggplot(dfm, aes(x = RNDnorm)) + stat_ecdf(aes(color="red")) 
+p2 <- p2+stat_function(fun = pnorm, args = list(mean = mean(dfm$RNDnorm), sd = sd(dfm$RNDnorm)))
+p2 <- p2+guides(colour=FALSE)+ggtitle("(B)")
+p2 <- p2+xlab("N(80,12) random data n=1000")+ylab("Cumulative proportion/probability")
+gridExtra::grid.arrange(p2,p1, ncol=2)
+```
+
+### Normal quantile-quantile plots
+
+To visually check whether a given set of data are normally distributed, one can create a normal quantile-quantile (Q-Q) plot. In this plot the quantiles of the sample are plotted against the theoretical quantiles of a standard normal distribution N(0,1). If the data, $Y_{i}$, are normally distributed N($\mu, \sigma$) then $Z_{i} = \left(Y_{i} -\mu \right)/\sigma$ has a standard normal distribution. If we plot the quantiles of the data against corresponding quantiles of the standard normal distribution, the points should roughly lie on the straight line: $$Y_{i} =\mu +\sigma Z_{i}$$ that is, a line with intercept $\mu$, and slope $\sigma$.
+
+We should note that the mean and standard deviation do not appear in the formula $Y_{i} =\mu +\sigma Z_{i}$ by coincidence. Rather, the mean and standard deviation are intimately connected to the normal distribution: if the data had not been normal then the line with these parameters would not pass through the data.
+
+```{r}
+#| label: fig-normqq
+#| echo: false
+#| fig-cap: 'Normal Quantile-Quantile Plot for Checking Normality'
+
+set.seed(123)
+x  <-  rnorm(n = 50, mean = 80, sd = 12) #qqnorm(x); qqline(x) # base function
+ggplot(data.frame(x), aes(sample = x)) +  stat_qq() + stat_qq_line() +
+      theme_minimal()
+```
+
+@fig-normqq shows the normal Q-Q plot for 50 random values from N(80,12). Note that the points in the middle largely plot on a line. It is natural that the tail part of the distribution shows more variation, and hence we will ignore such departures.
+
+The normal Q-Q plot is presented as a **normal probability plot** in some software where the theoretical quantiles are replaced by the associated normal probabilities. Such normal probability plots show the sample data in the $X$-axis and the normal probabilities in the $Y$-axis. In both plots, we mainly look whether or not the points plot roughly on a straight line.
+
+```{r}
+#| label: fig-normqqP
+#| echo: true
+#| fig-cap: 'Normal Quantile-Quantile Plot for Checking Normality'
+
+download.file(
+  url = "http://www.massey.ac.nz/~anhsmith/data/rangitikei.RData",
+  destfile = "rangitikei.RData")
+
+load("rangitikei.RData")
+
+p1 <- ggplot(rangitikei) +
+  aes(sample = people) + 
+  stat_qq() + stat_qq_line()
+
+p2 <- ggplot(rangitikei) + aes(y=people, x="") +
+  geom_boxplot() +
+  xlab("") + 
+  coord_flip()
+
+gridExtra::grid.arrange(p1, p2, ncol=1) 
+```
+
+@fig-normqqP shows the normal Q-Q plot for the number of people who made use of a recreational facility (**rangitikei**). This plot clearly reveals that the data are not normal. The plotted points show a curved but asymmetric pattern. This pattern matches with the right skewness seen in the data (see the boxplot given in @fig-normqqP.
+
+Note that **normality and symmetry are not the same**. If the true distribution of the data is symmetric such as uniform, rectangular or triangular distributions, then the normal Q-Q plot will show a symmetric pattern for the plotted points but they will not plot on a straight line. As an example, the normal Q-Q plots for batches of random data from Student's $t$ (to be covered later in the next Chapter) and few other symmetric distributions is shown in @fig-normqqsym. Clearly normality is rejected for other symmetric non-normal distributions.
+
+```{r}
+#| label: fig-normqqsym
+#| echo: false
+#| fig-cap: 'Normal Quantile-Quantile Plot for Checking Normality'
+#| fig-height: 6
+#| fig-width: 6
+
+set.seed(123)
+
+x  <-  rt(500, 2) 
+p1 <- ggplot(data.frame(x), aes(sample = x)) +  stat_qq() + stat_qq_line() +
+      theme_minimal()+ggtitle("Student t data with 2 df - n=500")
+x  <-  runif(500) 
+p2 <- ggplot(data.frame(x), aes(sample = x)) +  stat_qq() + stat_qq_line() +
+      theme_minimal()+ggtitle("Uniform data - n=500")
+
+x  <-  rbeta(500, 2,2) 
+p3 <- ggplot(data.frame(x), aes(sample = x)) + 
+  stat_qq() + stat_qq_line() +
+  theme_minimal()+ggtitle("Beta(2,2) data - n=500")
+
+x  <-  extraDistr::rlaplace(500) 
+
+p4 <- ggplot(data.frame(x), aes(sample = x)) +  stat_qq() + 
+  stat_qq_line() +
+  theme_minimal()+ggtitle("Laplace data - n=500")
+
+gridExtra::grid.arrange(p1,p2, p3, p4, ncol=2) 
+```
+
+## Fitting non-normal distributions to data
+
+For a normal distribution, which is specified by its mean $\mu$ and variance $\sigma^2$, parameter estimation is fairly straight forward.  The sample mean and variance become the estimates.   The Poisson parameter  $\lambda$ is also the mean of the distribution and hence the sample mean becomes the estimate.  On the other hand, distributions such as beta, and gamma involve shape and/or scale parameters and hence their estimation becomes complicated.  The population mean and SD of these distributions are functions of the distributional parameters.  Data from skewed distributions are not well represented by the sample mean and SD.
+
+In order to estimate the distributional parameters, we follow a method called the **Maximum Likelihood** (ML) method. The *likelihood* function (or simply the likelihood) is based on the joint probability of the observed data as a function of the distributional parameters.  The ML method maximises the likelihood function to estimate the distributional (model) parameters.  There are also other methods of estimation such as the method of moments and we will not delve into the theory behind these methods in this course. We will simply use R packages such as `VGAM` or `fitdistrplus` to estimate the parameters.
+
+Example: Your are familiar with the **rangitikei** dataset which gives the number of people who made use of a recreational facility.  This variable is right skewed, and let us fit a lognormal distribution to this variable using the `fitdistrplus` package.
+
+
+```{r}
+#| echo: true
+#| message: false
+library(fitdistrplus, exclude = c("select", "area"))
+
+fitdist(rangitikei$people, "lnorm")
+```
+
+The adequacy of the lognormal distribution fitted, can be examined using graphical displays as in @fig-lnormfit.
+
+```{r} 
+#| label: fig-lnormfit
+#| echo: true
+#| fig-cap: 'Log-normal fit for people'
+#| fig-height: 7
+#| fig-width: 7
+
+lnormfit <- fitdist(rangitikei$people, "lnorm")
+plot(lnormfit)
+```
+
+The lognormal fit does not appear too bad to people data. How about fitting gamma distribution instead of lognormal?  This fit can again be accomplished using the `fitdistrplus` package.
+
+```{r, echo=TRUE}
+fitdist(rangitikei$people, "gamma")
+```
+
+The EDA plots to assess the gamma distribution fit are shown in @fig-gammafit.
+
+```{r}
+#| label: fig-gammafit
+#| echo: true
+#| fig-cap: 'Gamma fit for people'
+#| fig-height: 7
+#| fig-width: 7
+
+gammafit <- fitdist(rangitikei$people, "gamma")
+plot(gammafit)
+```
+
+
+Note that this package gives the estimated gamma parameters in a reparametrised form. For small and medium size datasets $(n<300)$, we may not be able discriminate between gamma & Weibull type of right skewed distributions.
+
+We can of course fit a gallery of probability distributions but we have to select the *best* fitting distribution, if it exists.
+
+The function `descdist()` in  the `fitdistrplus` package will obtain a plot of kurtosis, a measure of excessive peakedness, against the square of a measure of skew for a number of probability distributions.  This plot is known as the *Cullen and Frey plot*.  We can visibly judge the best fitting distribution using this plot.  For the number of people data, this plot is shown in @fig-cfplot.
+
+```{r}
+#| label: fig-cfplot
+#| echo: true
+#| fig-cap: 'Cullen and Frey plot for people'
+#| fig-height: 6
+#| fig-width: 7
+
+descdist(rangitikei$people)
+```
+
+The presence of a large outlier in peoples data particularly affect the measures of skewness and kurtosis.  So Cullen and Frey plot does not particularly strongly support the lognormal fit but suggests the lack of fit for symmetrical distributions such as normal (read corresponding to zero skew).
+
+When the observed data is a mixture from two or more distributions or contain a large number of unusual observations, no single distributional fit will be satisfactory.  For example, count data may not fit the Poisson distribution due to excessive zeros.
+
+We will cover the power transformation of data in the next Chapter, which is a remedy for dampening the effect of outliers and mixture of subgroups (distributions).
+
+## Summary
+
+This Chapter provided a revision of probability concepts usually covered the first year level covered at the seventh form level or in a first year Statistics course.  A few popular probability distributions are also introduced.
+
+Identification of a probability distribution is not an easy task for a set of observed data. This issue is not settled purely on statistical grounds.  EDA helps to short-list distributions fitting reasonably well to the data.  For regression type of models fitted to continuous responses, the normal distribution works generally well.
+
+The material covered in this Chapter forms the foundation for many of the inferential methods.
+

@@ -1,0 +1,415 @@
+---
+title: "Chapter 8:<br>Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)"
+image: img/ano.png
+format: 
+  revealjs:
+    width: 1050
+    height:	700
+    scrollable: true
+    transition: fade
+    theme: [default, myquarto.scss]
+    slide-number: c/t  
+    logo: img/L_Color.png
+    footer: "[161250 Data Analysis](https://anhsmith.quarto.pub/161250-data-analysis/slides.html)"
+    styles:
+      - revealjs.dark:
+        background-color: #222
+        color: #fff
+    
+execute:
+  echo: true
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+```{r setup, echo=FALSE, message=FALSE}
+knitr::opts_chunk$set(warning = FALSE, 
+                      echo = FALSE, 
+                      include=TRUE, 
+                      message=FALSE,
+                      comment = NA,
+                      warn=-1,
+                      warn.conflicts = FALSE, 
+                      quietly=TRUE,
+                      fig.align="center")
+library(tidyverse)
+theme_set(theme_minimal())
+```
+
+## One-way ANOVA
+
+-   fabric burn-time data
+
+| fabric 1 | fabric 2 | fabric 3 | fabric 4 |
+|----------|----------|----------|----------|
+| 17.8     | 11.2     | 11.8     | 14.9     |
+| 16.2     | 11.4     | 11       | 10.8     |
+| 17.5     | 15.8     | 10       | 12.8     |
+| 17.4     | 10       | 9.2      | 10.7     |
+| 15       | 10.4     | 9.2      | 10.7     |
+
+-   Can we regard the mean burn times of the four fabrics as equal?\
+    -   fabric 1 seems to take longer time to burn
+
+## One-way (single factor) ANOVA model
+
+-   $H_0$: The mean burn times are equal for the four fabrics
+-   $H_a$: The mean burn time of at least one fabric is different.
+
+![](img/oneway.png)
+
+## ANOVA table
+
+> observation = mean + effect + error
+
+> SS Total = SS Factor + SS Error
+
+```{r}
+fabric=read.table("../data/fabric.txt", header=TRUE, sep="\t")
+summary(aov(burntime ~ fabric, data = fabric))
+```
+
+-   fabric effect on burntime is highly significant.
+    -   In other words, the null hypothesis of equal mean burntime is
+        rejected.
+        -   Or alternatively the mean burntime is different for **at
+            least** one fabric
+
+## Graphical comparison of means
+
+-   The graph below shows individual 95% confidence intervals for the
+    fabric means
+    -   Pooled SD ($\sqrt{MSE}$) is NOT used
+
+```{r}
+ggplot(fabric) +
+  aes(x = fabric, y = burntime) + 
+  geom_jitter(mapping=aes(col=fabric), height = 0, width=.2, alpha=.4) +
+  stat_summary(fun = "mean", geom = "point") + 
+  stat_summary(fun.data = "mean_cl_normal", 
+               geom = "errorbar", width = 0.1, 
+               fun.args = list(conf.int = 0.95)) + 
+  theme(legend.position = "none") + coord_flip() 
+```
+
+## Tukey HSD (Interval Plot)
+
+-   The ANOVA model assumes equal SD for the treatments.
+-   Tukey HSD (Honest Significant Differences) plot allows pairwise
+    comparison of treatment means
+
+```{r}
+par(las=1, mar=c(5, 8, 4, 2))
+plot(TukeyHSD(aov(burntime~fabric, data=fabric)))
+```
+
+## One-way ANOVA model Assumptions
+
+-   Residuals are randomly and normally distributed
+-   Residuals must be independent of means.
+    -   If SD increases with mean, try square root or logarithmic
+        transformation.
+-   If experimental errors are more in some subgroups, divide the
+    problem into separate ones.
+-   Positive correlation among residuals leads to under estimation of
+    error variance; negative correlation leads to overestimation.\
+
+*These assumptions are harder to validate to small experimental design
+data*
+
+## Two way (two factor) ANOVA
+
+-   Two factors are present.
+-   Example: Twelve tanks, six each with water from one of the two lakes
+    were set up. Three nutrient supplements were added to each tank. The
+    count of zooplankton in a unit volume of water was then noted.
+
+```{r}
+zooplankton=read.table("../data/zooplankton.txt", header=TRUE, sep="\t")
+print(zooplankton, row.names=FALSE)
+```
+
+## Main effect plots
+
+-   Simply plot of response means for factor levels
+
+```{r}
+library(ggplot2)
+library(gridExtra)
+
+plot1 <- zooplankton |> ggplot() +
+  aes(x = factor(Supplement), y = Zooplankton) +
+  stat_summary(fun = mean, geom = "point", aes(group = 1)) +
+  stat_summary(fun = mean, geom = "line", aes(group = 1))+
+  geom_abline(intercept = mean(zooplankton$Zooplankton), slope=0)+ 
+  ggtitle("Main effect of Supplement")
+
+plot2 = zooplankton |> ggplot() +
+  aes(x = Lake, y = Zooplankton) +
+  stat_summary(fun = mean, geom = "point", aes(group = 1)) +
+  stat_summary(fun = mean, geom = "line", aes(group = 1))+
+  geom_abline(intercept = mean(zooplankton$Zooplankton), slope=0)+ 
+  theme_bw()+ggtitle("Main effect of Lake")
+
+library(patchwork)
+plot1+plot2
+```
+
+## Two-way model fit
+
+> Model:\
+> Observation = Overall Mean + Row Effect + Column Effect + Error
+
+-   $H_0$: Row means are equal; Column means are equal
+
+\scriptsize
+
+```{r}
+summary(aov(Zooplankton~factor(Supplement)+Lake, data=zooplankton))
+```
+
+Supplement effect is significant at 5% level but not the Lake effect
+
+## Interaction effect
+
+-   Whether Factor A (row) effects are constant over Factor B (column)
+    effects or Factor B effects are constant over Factor A effects?
+    -   If the answer is no, then there is an interaction between A & B.
+-   Example:
+    -   Temperature and pressure are factors affecting the yield in
+        chemical experiments.
+    -   They do `interact` in a mechanistic sense.
+
+`Interaction` may or may not have physical meaning.
+
+## Interaction Plots
+
+-   In the absence of interaction, the plotted means of factor crossings
+    will be roughly parallel
+    -   see Plot 1. A & B do not interact.
+-   If the the plotted means of factor crossings are far from parallel,
+    then there is interaction
+    -   Plot 2 shows extreme (antagonistic) interaction between A & B.
+
+![](img/interaction.png)
+
+## Interaction Plot for Zooplankton data
+
+```{r, echo=TRUE, warning=FALSE, comment=FALSE}
+attach(zooplankton)
+library(ggplot2)
+p1= ggplot(data = zooplankton, aes(x = factor(Supplement), y = Zooplankton, group=Lake, colour=Lake)) +
+  stat_summary(fun=mean, geom="point")+
+  stat_summary(fun=mean, geom="line")+
+  geom_abline(intercept = mean(Zooplankton), slope=0)+ 
+  theme_bw()+ggtitle("Lake*Supplement Interaction effect")
+p2= ggplot(data = zooplankton, aes(x = Lake, y = Zooplankton, group=factor(Supplement), colour=factor(Supplement))) +stat_summary(fun=mean, geom="point")+
+  stat_summary(fun=mean, geom="line")+
+  geom_abline(intercept = mean(Zooplankton), slope=0)+ 
+  theme_bw()+ggtitle("Lake*Supplement Interaction effect")
+library(patchwork)
+p1+p2
+```
+
+-   Interaction effect may be present
+
+## Two-way model fit
+
+> observation = mean + row effect + column effect +interaction effect +
+> error
+
+-   The above model is known as `multiplicative` model
+
+-   If interaction effect is ignored, we deal with an `additive` model
+
+Example: zooplankton data
+
+\scriptsize
+
+```{r}
+zooplankton |> 
+  mutate(Supplement = factor(Supplement)) |> 
+  aov(formula = Zooplankton ~ Supplement * Lake) |> 
+  summary()
+```
+
+## Residual diagnostics
+
+```{r}
+modl <- zooplankton |> 
+  mutate(Supplement = factor(Supplement)) |> 
+  aov(formula = Zooplankton ~ Supplement * Lake)
+
+zooplankton <- zooplankton |> 
+  mutate(Fitted = fitted.values(modl), Residuals = residuals(modl))
+
+p1 <- ggplot(zooplankton, aes(sample=Residuals))+stat_qq()+stat_qq_line()+
+  labs(title = "Normal Probability Plot \nof the Residuals")
+
+p2 <- ggplot(zooplankton, aes(y=Residuals, x=Fitted))+geom_point() +
+  geom_hline(yintercept = 0) + 
+  labs(title = "Residuals Vs \n Fitted Values")
+
+p3 <- ggplot(zooplankton) +
+  aes(Residuals) + 
+  geom_histogram(bins=4) +
+  labs(title = "Histogram of the Residuals")
+
+p4 <- ggplot(zooplankton) + 
+  aes(y=Residuals, x=1:length(Residuals)) + 
+  geom_point()+geom_line() +
+  geom_hline(yintercept = 0) +
+  labs(title = "Residuals Vs Obs. Order")
+
+library(patchwork)
+p1+p2+p3+p4 & theme_minimal()
+```
+
+## Indicator variables
+
+-   Indicator variables are used if the predictor is qualitative rather
+    than quantitative.
+    -   Consider gender, a categorical variable.
+        -   Let $I_1$ be an indicator variable that takes a value 1 for
+            males and 0 for females.\
+        -   Let $I_2$ takes 1 for females and 0 for males.
+        -   Note only one of $I_1$ & $I_2$ is sufficient.
+-   The minimum number of indicator variables needed is related to
+    degrees of freedom.
+
+## ANOVA through regression
+
+-   Consider the burn-time data for the four fabrics.
+    -   The four fabric types are categorical.
+    -   Define-
+        -   $I_1$ = 1 for fabric 1 and 0 otherwise
+        -   $I_2$ = 1 for fabric 2 and 0 otherwise
+        -   $I_3$ = 1 for fabric 3 and 0 otherwise
+        -   $I_4$ = 1 for fabric 4 and 0 otherwise
+-   Note that any THREE indicator variables are sufficient for the four
+    fabrics.
+    -   3 df for 4 fabrics
+
+## Regression summary
+
+-   Regress the burn-time response on the indicator variables $I_1$,
+    $I_2$ & $I_3$
+
+\tiny
+
+```{r}
+fabric = read.table("../data/fabric.txt", header=TRUE, sep="\t") |> 
+  mutate(I1= as.numeric(fabric=="Fabric 1"),
+         I2= as.numeric(fabric=="Fabric 2"),
+         I3= as.numeric(fabric=="Fabric 3"),
+         I4= as.numeric(fabric=="Fabric 4")
+  )
+fabric |> lm(formula = burntime~I1+I2+I3) |> summary()
+```
+
+-   Compare with the one-way output
+
+```{r}
+fabric |> aov(formula = burntime~fabric) |> summary()
+```
+
+## Analysis of Covariance (ANCOVA)
+
+-   Indicator variables are used as additional regressors along with a
+    quantitative predictor (covariate).
+
+```{r, comment=""}
+restaurant <- 
+  read.table("../data/restaurant.txt", header=TRUE, sep = "\t") |> 
+  mutate(I1 = as.numeric( Location=="Mall"),
+         I2 = as.numeric( Location=="Street")
+  )
+print(restaurant, row.names=FALSE)
+```
+
+-   Plot of data. Do we need three separate models?
+
+```{r}
+restaurant |> ggplot() + 
+  aes(x=Households, y=Sales, colour=Location) +
+  geom_point() + geom_smooth(method = lm, se = FALSE)
+```
+
+-   ANCOVA fit
+
+```{r}
+
+restaurant |> 
+  lm(formula = Sales~Households*Location) |> 
+  summary() |> coef() |> round(digits=3)
+
+```
+
+## Explanation of fit
+
+-   In order to allow for different slopes for each location, we define
+    the product (or interaction) variables $I_1*X$, and $I_2*X$ ($X$
+    being the covariate, Households)
+
+```{r}
+Y = restaurant$Sales
+X = restaurant$Households
+X2 = restaurant$Location
+I1 = as.numeric(X2=="Mall")
+I2 = as.numeric(X2=="Street")
+I3 = as.numeric(X2=="Highway")
+modl = lm(Y~X*I1+X*I2)
+outs <- summary(modl)$coefficients
+round(outs[, 1:4], digits = 3)
+```
+
+-   For $I_1=0$ & $I_2=0$, the model becomes the fit for `Highway`
+
+    -   So this set-up compares Mall/Street with Highway
+
+-   Significant $I_1$ coefficient means that Mall location has a
+    constant level of higher sales
+
+-   Mall location model has a higher intercept but the slopes are the
+    same for all three locations.
+
+## Graphing the model
+
+```{r}
+p <- restaurant |> ggplot() + 
+  aes(x=Households, y=Sales, colour = Location=="Mall") +
+  geom_point() + geom_smooth(method = lm, se = FALSE) +
+  scale_color_manual("Location", values = 2:3, 
+                     labels=c("Street/Highway", "Mall"))
+p
+```
+
+## Summary
+
+ANOVA models study categorical predictors (factors). - Interaction
+between factors is important. - ANOVA models and regression models are
+related and fall under a general family of linear models.
+
+ANCOVA models employs both numerical variables (covariates) and
+qualitative factors for modelling.
+
+-   Interaction between factors and covariates is important.
+
+## Shiny apps
+
+https://shiny.massey.ac.nz/kgovinda/demos/explore.simple.experimental.ANOVA.models/
+
+https://shiny.massey.ac.nz/kgovinda/demos/fit.multiple.regression/
+
+<!-- ## Exercises -->
+
+<!-- download.file("https://www.massey.ac.nz/~kgovinda/220exer/Chap6moreexamples.R", destfile="Chap6moreexamples.R") -->
+
+<!-- download.file("https://www.massey.ac.nz/~kgovinda/220exer/chapter-6-exercises.html", destfile="chapter-6-exercises.html") -->
+
+<!-- install.packages("remotes") -->
+
+<!-- remotes::install_github("ricompute/ricomisc") -->
+
+<!-- ricomisc::rstudio_viewer("chapter-6-exercises.html", file_path = NULL) -->
