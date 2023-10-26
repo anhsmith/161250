@@ -41,13 +41,51 @@ theme_set(theme_minimal())
 
 # Introduction to Probability {.background-black}
 
+> “Misunderstanding of probability may be the greatest of all impediments to scientific literacy.”
+>
+> — Stephen Jay Gould
+
 ::: footer
 Intro to probability
 :::
 
+
+## Probability and randomness
+
+::::{.columns}
+
+:::{.column width="70%"}
+
+::: incremental
+
+- **Probability and randomness are placeholders for incomplete knowledge.** 
+
+- After I shuffled a deck of cards, you might consider the identity of the top card to be "random".
+
+- But is it really?
+
+- If you knew the starting positions of the cards and a good HD video of my shuffling, you could surely _know_ the positions of the cards, and which is on top.
+
+- Likewise for rolling a die. If we know everything about the starting position, how it was thrown, the texture of the surface, humidity, etc., could we predict what it would roll?
+
+:::
+
+:::
+
+
+:::{.column width="30%"}
+
+![](img/cards.jpg)
+![](img/dice.png)
+
+:::
+
+::::
+
 ## Probability as a relative frequency
 
 ::: incremental
+
 -   The classical definition of probability is just the relative
     frequency of an event.
     -   If a fair die is rolled, there are $n = 6$ possible outcomes.
@@ -68,6 +106,7 @@ Intro to probability
 -   Probabilities can only be between $0$ (impossible) and $1$
     (certain).
 -   Probabilities can be subjective (such as expert opinion, or a guess)
+
 :::
 
 ## Mutually Exclusive Events

@@ -414,10 +414,44 @@ ggpairs(pinetree[,-1], aes(colour=pinetree$Area))
 
 ## Correlation coefficients
 
--   Pearson correlation coefficient is a measure of **linear** relationship
+The Pearson correlation coefficient measures the **linear** association between two variables.
 
-    -   Case a: Positive linear relationship
-    -   Case b: Negative linear relationship ![](./img/2_41.png)
+```{r}
+
+library(patchwork)
+
+corpl <- function(covar, n = 1e2, ...) {
+  
+  require(Rfast)
+  require(ggeasy)
+  require(dplyr)
+  
+  rmvnorm(
+  n = n,
+  mu = c(0,0),
+  sigma = matrix(c(1,covar,covar,1), 2, 2),
+  ) |> 
+  as.data.frame() |> 
+  dplyr::select(x = 1, y = 2) |> 
+  ggplot() + 
+    geom_vline(xintercept = 0, alpha = .3) + 
+    geom_hline(yintercept = 0, alpha = .3) + 
+    aes(x=x,y=y) +
+    geom_point() + 
+    xlim(-2,2) + ylim(-2,2) + 
+    coord_equal() +
+    ggtitle(paste("Correlation =", covar))  + 
+    theme_bw() +
+    theme(plot.title = element_text(hjust = 0.5)) + 
+    easy_remove_axes("both") 
+}
+
+
+( corpl(0.1) + corpl(0.6) + corpl(0.99) ) / 
+  ( corpl(-0.1) + corpl(-0.6) + corpl(-0.99) )
+  
+
+```
 
 ## Correlation Matrix {.scrollable}
 

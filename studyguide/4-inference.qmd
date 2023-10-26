@@ -423,17 +423,17 @@ Usually, we reject $H_0$ in favour of $H_{1}$ if the $p$-value of the data is $<
 Unfortunately the P-values are often misunderstood in practice. The advice issued by the American Statistical Association (<https://www.amstat.org/asa/files/pdfs/P-ValueStatement.pdf>) is noteworthy:
 
 > The statement's six principles, many of which address misconceptions and misuse of the pvalue, are the following:
-
+>
 > 1.  P-values can indicate how incompatible the data are with a specified statistical model.
-
+>
 > 2.  P-values do not measure the probability that the studied hypothesis is true, or the probability that the data were produced by random chance alone.
-
+>
 > 3.  Scientific conclusions and business or policy decisions should not be based only on whether a p-value passes a specific threshold.
-
+>
 > 4.  Proper inference requires full reporting and transparency.
-
+>
 > 5.  A p-value, or statistical significance, does not measure the size of an effect or the importance of a result.
-
+>
 > 6.  By itself, a p-value does not provide a good measure of evidence regarding a model or hypothesis.
 
 In order to fully appreciate the reasons behind the above advice, we need learn more theory but you should be able to understand the following distinction between `statistical` significance and `practical` significance. A hypothesis test may suggest that the estimated size of the effect is not big enough compared to the effect that can occur due to errors under the assumed model. A small effect, particularly if it is known to be *caused* by a variable, can be of practical importance and can contribute to scientific knowledge. The opposite scenario is also possible. We may find a small difference to be statistically significant because of the large sample size but such a difference may not be of much practical significance.
@@ -830,9 +830,9 @@ For one batch of data, it is relatively easy to choose an appropriate transforma
 
 If groups are skewed in different directions (i.e. some positively and some negatively), it would be difficult to choose a transformation. If the batches are small, the skewness may be due to random variation and could be ignored. If the batches are large, it may not be feasible to perform statistical inference if the degree of skewness is quite variable.
 
-With 2 or more groups, we are often interested in comparing the location (or level) of the responses in these groups, the location being measured by the median, mean or similar statistic. In this situation we like to assume that the groups are similar in other aspects such as in the shape of the distribution and, in particular, the spread of the responses. These assumptions simplify and strengthen the hypothesis test. Quite often, the spread (measured (say) by the range) increases as the locations (measured (say) by the median) increases. It is advisable to use a transformation which removes the systematic relationship between spread and location. Confidence interval, and hypothesis tests, of two means assume that the samples come from populations which have the same variance, or spread. We later consider comparisons of more than two means, and to carry out confirmatory analysis we need the assumption that the spreads (variances) are constant over the groups. So in this section, we look at how to examine whether the spreads are equal and, if not, how to transform the data to try to make the spreads more nearly equal.
+With 2 or more groups, we are often interested in comparing the location (or level) of the responses in these groups, the location being measured by the median, mean or similar statistic. In this situation we like to assume that the groups are similar in other aspects such as in the shape of the distribution and, in particular, the spread of the responses. These assumptions simplify and strengthen the hypothesis test. Quite often, the spread (measured (say) by the range) increases as the locations (measured (say) by the median) increases. It is advisable to use a transformation which removes the systematic relationship between spread and location. Confidence interval, and hypothesis tests, of two means assume that the samples come from populations which have the same variance, or spread. We later consider comparisons of more than two means, and standard methods of formally testing hypotheses regarding differences in means require the assumption that the spreads (variances) are constant over the groups. So in this section, we look at how to examine whether the variances are equal and, if not, how transformations of the data can sometimes serve to equalise the variances.
 
-Consider the response variable people in the dataset **rangitikei** for time of the day (time) temperature groupings (temp). @fig-diabox shows the boxplots of price for the combinations of time and temp factors. Also compare the position of the medians in the boxplots.
+Consider the response variable people in the dataset **rangitikei** for time of the day (`time`) temperature groupings (`temp`). @fig-diabox shows the boxplots of price for the combinations of `time` and `temp` factors. Also compare the position of the medians in the boxplots.
 
 ```{r}
 #| echo: true
@@ -842,7 +842,10 @@ Consider the response variable people in the dataset **rangitikei** for time of 
 rangitikei |> 
   mutate(temp = paste("Temperature", temp)) |>
   ggplot() +
-  aes(y=people, x = time, color=time) +
+  aes(y = people, 
+      x = time,
+      colour = time
+      ) +
   geom_boxplot() +
   facet_wrap(~temp) +
   ggtitle("People by time and temperature")
@@ -858,10 +861,12 @@ The assumption of a Normal distribution with constant variance may become crucia
 
 rangitikei |> 
   group_by(time,temp) |> 
-  summarize(medians = median(people), 
-            ranges=(max(people)-min(people))) |> 
+  summarise(
+    medians = median(people), 
+    ranges = max(people) - min(people)
+    ) |> 
   ggplot() + 
-  aes(y=ranges, x=medians) +
+  aes(y = ranges, x = medians) +
   geom_point()
 ```
 
@@ -877,8 +882,10 @@ In the absence of outliers, we can also plot standard deviations against means a
 
 rangitikei |> 
   group_by(time,temp) |> 
-  summarize(means = mean(people), 
-            sds=sd(people))  |> 
+  summarise(
+    means = mean(people), 
+    sds=sd(people)
+    ) |> 
   ggplot() + 
   aes(y=sds, x=means) +
   geom_point()
@@ -893,10 +900,12 @@ A common transformation can be found if ranges (SDs) and medians (means) are rel
 #| fig-cap: 'Ranges vs. Medians with log transformed data'
 
 rangitikei |> 
-  mutate(trans.ppl=log(people)) |> 
-  group_by(time,temp) |> 
-  summarize(medians = median(trans.ppl),
-            ranges=(max(trans.ppl)-min(trans.ppl))) |> 
+  mutate(trans.ppl = log(people)) |> 
+  group_by(time, temp) |> 
+  summarise(
+    medians = median(trans.ppl),
+    ranges = max(trans.ppl) - min(trans.ppl)
+    ) |> 
   ggplot() +
   aes(y=ranges, x=medians) +
   geom_point()
@@ -925,9 +934,11 @@ A nonparametric approach used very frequently, especially in the social sciences
 #| label: "fig-spear"
 #| fig-cap: "Comparison of Pearson and Spearman rank correlations"
 
-ggpairs(trees, 
-        upper = list(continuous = wrap('cor', method = "spearman")), 
-        lower = list(continuous = 'cor'))
+ggpairs(
+  trees, 
+  upper = list(continuous = wrap('cor', method = "spearman")), 
+  lower = list(continuous = 'cor')
+  )
 ```
 
 It can be noted that the size of the estimates differ depending on the skew and relationship between the variables. For large samples it would be quite a reasonable approach, as the distribution of $W$ values is symmetrical and therefore the usual data analysis methods - relying on $W$ being Normally distributed - will work pretty well. The main difference to standard hypothesis tests would be that they would need to be expressed in terms of medians, say, rather than means.
@@ -941,7 +952,7 @@ In practice there are a couple of complications. One is that for small samples t
 For the nonparametric equivalent of a one-sample $t$-test for $H_0:\mu= \mu_0$, we use the **Wilcoxon signed rank test** for $H_0: \eta=\eta_0$ where $\eta$ (Greek letter 'eta') is the population median. Effectively this test is based on rank $(|Y-\eta_0|)$, where the ranks for data with $Y<\eta_0$ are compared to the ranks for data with $Y>\eta_0$. If the $\eta_0$ is in about the right place, then the distances to points above $\eta_0$ will tend to rank approximately the same as the distances to points below $\eta_0$. But if median is assumed too low, say, then the distances above $\eta_0$ will tend to be bigger (ranked higher) than the distances to points below $\eta_0$. A statistical test (Wilcoxon test) and the associated $p$-value follow. In theory, this test assumes a continuous symmetric distribution, but a correction is available in the case of ties. The following output shows the two-sample $t$ test and Wilcoxon test results for testing the equality of median number of people for the time of day groups (morning & afternoon).
 
 ```{r}
-wilcox.test(rangitikei$people~rangitikei$time, conf.int=T)
+wilcox.test(rangitikei$people ~ rangitikei$time, conf.int=T)
 ```
 
 The `t.test(rangitikei$people~rangitikei$time)` test also gives the same conclusion for the equality of means.
@@ -982,18 +993,8 @@ For two-sample test example based on the *tv* dataset, we obtain the following o
 
 ```{r, echo=TRUE}
 library(coin)
-independence_test(TELETIME~SEX, distribution ='exact', data=tv)
+independence_test(TELETIME ~ SEX, distribution = 'exact', data = tv)
 ```
-
-<!-- Also using `exactRankTests` package. Try- -->
-
-<!-- ```{r, echo=TRUE} -->
-
-<!-- library(exactRankTests) -->
-
-<!-- perm.test(TELETIME~SEX, distribution ='exact', data=tv) -->
-
-<!-- ``` -->
 
 The symmetry in the distribution of the TV times can also be tested using the function `symmetry_test()`. The significance of the Pearson correlation coefficient can be tested using `spearman_test()`. Pairwise permutation test across groups can also be done; see the output shown below:
 

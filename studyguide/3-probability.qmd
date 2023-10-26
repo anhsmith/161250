@@ -1,33 +1,59 @@
 
 # Chapter 3: Probability Concepts and Distributions
 
-> *Watson: "You may be right."*<br>
-> *Holmes: "The probability lies in that direction."*
->
-> — Arthur Conan Doyle, *The Hound of the Baskervilles*
+> “_Misunderstanding of probability may be the greatest of all impediments to scientific literacy_” 
+> 
+> — Stephen Jay Gould
+
 
 > "_Statisticians, like artists, have the bad habit of falling in love with their models._" 
 >
-> – George Box
+> — George Box
 
 
 
 ## Introduction
 
-Probability concepts form the foundation of statistical inference.   In other words, our inference based on the sample relies on the probability notions and any generalisation of the results based on the sample involves uncertainty which can be expressed in probabilistic terms. We also informally used the probability concepts in data collection, particularly with the *EPSEM* sampling methods.
+The concept of probability is the foundation of statistical inference. In other words, making inferences about a populations based on a sample relies on probability notions, and any uncertainty in our conclusions can be expressed in probabilistic terms. We also informally used the probability concepts in data collection, particularly with the *EPSEM* sampling methods.
 
-The concepts we cover in this Chapter must be largely familiar to you from a first year course.  Note that we are covering probability concepts and distributions at a very basic level without much maths. You will not be examined on the theory, if nay, covered in this Chapter.
+The concepts we cover in this Chapter must be largely familiar to you from a first year course. Note that we are covering probability concepts and distributions at a very basic level without much maths. 
+
+## Probability: a placeholder for incomplete knowledge
+
+Probability is a mathematical framework used to quantify and describe expectations of random events. Okay, so what is randomness? Where does it come from? This is a philosophical question, really. 
+
+From a practical viewpoint, I find it useful to think of randomness and probability as _placeholders for incomplete knowledge_. If we have complete knowledge of something, we don't need the concepts of randomness and probability.
+
+To illustrate, when you roll a die, you don't know what number you'll get. On inspection of the die, you can see that it has six sides, numbered 1-6. If we assume that it will land on one side, and that there's equal probability of landing on each of the six sides, then we can form a basic probability model. 
+
+| $x$ | $P(x)$ |
+|---|------|
+| 1 | 1/6  |
+| 2 | 1/6  |
+| 3 | 1/6  |
+| 4 | 1/6  |
+| 5 | 1/6  |
+| 6 | 1/6  |
+
+
+There are six possible outcomes with equal probability, so the probability of each is 1/6. The probabilities sum to 1. 
+
+Where does the randomness come into this scenario? Is there randomness inherent in the process of rolling a die? I would say no. If we had complete knowledge of the system, including the shape of the die, the starting position, the angle and velocity with which it is thrown, and the shape and texture of the surface it lands on, and a good physical model of how these things interact, then we could theoretically be able to predict perfectly the number on which it will land. The trouble is, of course, that all this information is extremely difficult to collect in enough detail to allow us to make such a prediction. 
+
+A simpler case is a shuffled deck of cards. When you shuffle a deck of cards for long enough, we'd consider the question of which card is on the top to be random. However, if we knew the starting conditions and exactly how the cards were shuffled, then there's no randomness, and no need for a  probability model. 
+
+But most of the world isn't as simple as shuffling cards or even rolling a die. Our knowledge is so very limited that concepts of uncertainty, randomness, and probability are indispensable to anyone who wants to make any real sense of it.
 
 
 ## Probability as a relative frequency
 
-The naive or classical definition of probability is just a  relative frequency.  If $n$ is the total number of equally likely possible outcomes and if $m$ of those $n$ outcomes result in the occurrence of some given event, then the probability of that event is $m/n$. 
+The naive or classical definition of probability is just a relative frequency. If $n$ is the total number of equally likely possible outcomes and if $m$ of those $n$ outcomes result in the occurrence of some given event, then the probability of that event is $m/n$. 
 
-Example: If a fair die is rolled, there are $n = 6$ possible outcomes. Let the event of interest be *getting a number 4 or more*. So, the probability of this event is 3 out of 6 or $p=1/2$.
+For example, if a fair die is rolled, there are $n = 6$ possible outcomes. Let the event of interest be *getting a number 4 or more*. So, the probability of this event is 3 out of 6 or $p=1/2$.
 
-The *sample space* or the set of all possible outcomes need not be finite. For example, tossing a coin until the first head appears will result in an infinite sample space.So, the probability can be viewed as a limiting or long run fraction of $m/n$ (i.e. when $n  \to \infty$).
+The *sample space* or the set of all possible outcomes need not be finite. For example, tossing a coin until the first head appears will result in an infinite sample space.So, the probability can be viewed as a limiting or long run fraction of $m/n$ (i.e. when $n \to \infty$).
 
-When the sample space is finite and outcomes are equally likely, we can assume that classical probability will be the same as empirical probability. Note that to find the probability of a fair coin landing heads it is not necessary to toss the coin repeatedly and observe the proportion of heads.  So when the number of trails is reasonably large, empirical probability may be treated as the true value.
+When the sample space is finite and outcomes are equally likely, we can assume that classical probability will be the same as empirical probability. Note that to find the probability of a fair coin landing heads it is not necessary to toss the coin repeatedly and observe the proportion of heads. So when the number of trails is reasonably large, empirical probability may be treated as the true value.
 
 Subjective probability (such as expert opinion) is useful in areas such as decision theory, and its definition does not fit as a relative frequency.
 
@@ -35,19 +61,23 @@ Probabilities can only be between $0$ and $1$ (impossible to certain).
 
 ## Mutually exclusive events
 
-Assume that a researcher studies the effects of various drugs on the web-building abilities of orb-web spiders.  He classifies the webs into three types:
+A German researcher [@witt] studied the effects of various drugs on the web-building abilities of orb-web spiders (@fig-webs). 
 
-- `complete`, `partial`, or `crazy`.
+![Some examples of webs made by spiders dosed with various intoxicants](images/webs.png){#fig-webs}
 
-He also finds the relative frequencies for the three types as follows:
+Say he classified the webs into three types:
+
+- `complete`, `partial`, or `fail`.
+
+He found the relative frequencies for the three types as follows:
 
 - $P(W=\text{complete}) = 0.2$
 
 - $P(W=\text{partial}) = 0.3$
 
-- $P(W=\text{crazy}) = 0.5$
+- $P(W=\text{fail}) = 0.5$
 
-The random variable $W$ has three possible states but any given observation can only belong to one state. You cannot observe a web that is both “partial” and “complete”, or “complete” and “crazy”. These values or states are said to be mutually exclusive.
+The random variable $W$ has three possible states but any given observation can only belong to one state. You cannot observe a web that is both “partial” and “complete”, or “complete” and “fail”. These values or states are said to be mutually exclusive.
 
 For mutually exclusive events, 
 
@@ -59,7 +89,7 @@ For example, either a complete web or a partial web being observed is equal to t
 
 
 3. The probability of any one event not occurring is the sum of those remaining is 
-$$P(\text{not complete})	= P(W = \text{partial or}~W \text{ = crazy})= 0.3 + 0.5 = 0.8 = 1 – P(W = \text{complete}) $$
+$$P(\text{not complete})	= P(W = \text{partial or}~W \text{ = fail})= 0.3 + 0.5 = 0.8 = 1 – P(W = \text{complete}) $$
 
 	
 ## Statistical independence
