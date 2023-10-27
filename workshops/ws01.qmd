@@ -1,3 +1,9 @@
+---
+title: "Getting Started With R"
+---
+
+# Installing `R` and RStudio
+
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 colorize <- function(x, color) {
   if (knitr::is_latex_output()) {
@@ -10,9 +16,6 @@ colorize <- function(x, color) {
 
 
 ```
-
-
-# Installing R and RStudio {.unnumbered}
 
 ::: {.callout-tip}
 
@@ -71,7 +74,7 @@ this course.
 You can either type or copy and paste the R codes appearing in this
 section on to the R Script window and run them.
 
-## Some `R` basics {.unnumbered}
+# Some `R` basics {.unnumbered}
 
 -   `R` is case sensitive, so `data` is not the same as `DATA`
 
@@ -156,6 +159,7 @@ is part of the `tidyverse` suite of packages; see
 Let's load that package now:
 
 ```{r}
+#| message: false
 library(tidyverse)
 ```
 
@@ -176,7 +180,7 @@ using the `ctv` package command `install.views()`.
 
 You might have to install quite a few packages as you work through this course.
 
-## Loading/Importing Data {.unnumbered}
+# Loading/Importing Data {.unnumbered}
 
 Most data sets we shall consider in this course are in a tabular form.
 This means that each variable is a column, each row is an observation,
@@ -205,14 +209,14 @@ further analysis just by double clicking.
 We will be mainly using RStudio menus for loading the data or use R
 commands to load the data for assignments.
 
-## Graphing with `ggplot2` {.unnumbered}
+# Graphing with `ggplot2` {.unnumbered}
 
 The R library `ggplot2` is very powerful for plotting but
 `r colorize("you may find the syntax little strange.", "red")` There are
-plenty of examples at the [ggplot2 online help
+plenty of examples at the [`ggplot2` online help
 website](https://ggplot2.tidyverse.org/reference/). The `ggplot2` package is loaded as part of the `tidyverse` set of packages.
 
-Advantages of ggplot2 are the following:
+Advantages of `ggplot2` are the following:
 
 -   employs the `grammar of graphics` of [@Wilkinson]
 -   plotting involves a high level of abstraction
@@ -227,7 +231,7 @@ Some disadvantages of `ggplot2` are the following:
     other packages)
 -   Interactive graphics (opt for `plotly`, `ggvis` and other packages)
 
-`Grammar of Graphics`
+## Grammar of Graphics
 
 The main idea behind the grammar of graphics of [@Wilkinson] is to mimic
 the manual graphing approach and define building blocks and combine them
@@ -249,13 +253,13 @@ following commands.
 install.packages("ggplot2")
 ```
 
-We can now load the ggplot2 library with the commands:
+We can now load the `ggplot2` library with the commands:
 
 ```{r, warninng=FALSE}
 library(ggplot2)
 ```
 
-In order to work with ggplot2, we must have a `data frame` or a `tibble`
+In order to work with `ggplot2`, we must have a `data frame` or a `tibble`
 containing our data. We need to specify the `aesthetics` or how the
 columns of our data frame can be translated into positions, colours,
 sizes, and shapes of graphical elements.
@@ -263,7 +267,7 @@ sizes, and shapes of graphical elements.
 The geometric objects and aesthetics of the ggplot2 system are explained
 below:
 
-*Aesthetic Mapping* (`aes`)
+## Aesthetic Mapping (`aes`)
 
 In ggplot land *aesthetic* means visualisation features or aesthetics.
 These are
@@ -277,7 +281,7 @@ These are
 
 Aesthetic mappings are set with the `aes()` function.
 
-*Geometric Objects* (`geom`)
+## Geometric Objects (`geom`)
 
 Geometric objects or `geoms` are the actual marking or inking on a plot
 such as:
@@ -410,7 +414,7 @@ of data. `ggplot2` offers two functions for creating small multiples:
 1. `facet_wrap()`: define subsets as the levels of a single grouping variable
 2. `facet_grid()`: define subsets as the crossing of two grouping variables
 
-The following arguments are common to most scales in ggplot2:
+The following arguments are common to most scales in `ggplot2`:
 
 -   **name:** the first argument gives the axis or legend title
 -   **limits:** the minimum and maximum of the scale
@@ -542,7 +546,7 @@ Try-
 
 A cheat sheet for `ggplot2` is available at
 <https://www.rstudio.com/resources/cheatsheets/> (optional to download).
-There are many other packages which incorporate ggplot2 based graphs or
+There are many other packages which incorporate `ggplot2` based graphs or
 dependent on it.
 
 The library *patchwork* allows complex composition arbitrary plots,
@@ -561,41 +565,34 @@ p3 <- ggplot(my.data, aes(x = vehicle, y = people)) + geom_point()
 
 ## `ggplot` builder {.unnumbered}
 
-A nice R package, known as `esquisse` is available to build few simple
-ggplot graphics interactively. This may help in the early stages of
-learning to use ggplot graphing.
+A nice `R` package, known as `esquisse` is available to build few simple `ggplot` graphics interactively. This may help in the early stages of learning to use `ggplot` graphing.
 
-If this package is not installed, installed it first & then try.
+If this package is not installed, install it first & then try.
 
     library(esquisse)
     options("esquisse.display.mode" = "browser")
     esquisse::esquisser(data = iris)
 
-You can also load the desired dataset within `R` studio and select the
-dataset.
+You can also load the desired dataset within `R` studio and select the dataset.
 
-The other option is to load a dataset from the course data web folder
-and then launch `esquisse`. Try-
+The other option is to load a dataset from the course data web folder and then launch `esquisse`. Try-
 
     url1 <- "https://www.massey.ac.nz/~anhsmith/data/rangitikei.RData"
     download.file(url = url1, destfile = "rangitikei.RData")
     load("rangitikei.RData")
     esquisse::esquisser(data = rangitikei, viewer = "browser")
 
-You can also download the associated R codes or save the graph within
-the `esquisse` web app.
+You can also download the associated R codes or save the graph within the `esquisse` web app.
 
-## `tidyverse` and related packages {.unnumbered}
+# `tidyverse` and related packages {.unnumbered}
 
 In the recent years, `tidyverse` suite of packages, which includes
-`ggplot2` has become the popular tool for data handling and plotting. In
-this section, a brief intro to the data management packages such as
-`dplyr` is given.
+`ggplot2` has become the popular tool for data handling and plotting. In this section, a brief intro to the data management packages such as `dplyr` is given.
 
 For detailed coverage of the `tidyverse` system, go to
 <https://www.tidyverse.org/>.
 
-### `dplyr` {.unnumbered}
+## `dplyr` {.unnumbered}
 
 The following six functions of `dplyr` are very useful for data
 wrangling :
@@ -608,22 +605,21 @@ wrangling :
 -   For group-wise computations (e.g. summary measures), use
     `group_by()`
 
-There are many other functions such as `transmute()` which will add
-newly calculated columns to the existing data frame but drop all unused
-columns. The `across()` function  extends `group_by()` and `summarise()` functions for multiple column and function summaries.  For example, you like to report rounded data in a table, which calls for an operation across both rows and columns.
+There are many other functions such as `transmute()` which will add newly calculated columns to the existing data frame but drop all unused columns. The `across()` function  extends `group_by()` and `summarise()` functions for multiple column and function summaries.  For example, you like to report rounded data in a table, which calls for an operation across both rows and columns.
 
-> ##### **Piping operation is a fundamental aspect of computer programming. The semantics of pipes is taking the output from the left-hand side and passing it as input to the right-hand side.**
+## Piping
 
-The `R` package `magrittr` introduced the pipe operator `%>%` and can be
-pronounced as "then". In RStudio windows/Linux versions, press
-`Ctrl+Shift+M` to insert the pipe operator. In Mac, use `Cmd+Shift+M`. 
+::: {.callout-tip}
+
+**The piping operation is a fundamental aspect of computer programming. The semantics of pipes is taking the output from the left-hand side and passing it as input to the right-hand side.**
+
+:::
+
+The `R` package `magrittr` introduced the pipe operator `%>%` and can be pronounced as "then". In RStudio windows/Linux versions, press `Ctrl+Shift+M` to insert the pipe operator. On a Mac, use `Cmd+Shift+M`. 
 
 `R` also has its own pipe, `|>`, which is an alternative to `%>%`. I tend to use `|>`. If you want to change the pipe inserted automatically with `Ctrl+Shift+M`, find on the menu **Tools > Global Options**, then click on **Code** and check the box that says "**Use Native Pipe Operator**". 
 
-We often pipe the `dplyr` functions, and the advantage is that we show
-the flow of data manipulation and subsequent graphing. This approach
-also helps to save memory, and dataframes are not unnecessarily created,
-a necessity for a big data framework.
+We often pipe the `dplyr` functions, and the advantage is that we show the flow of data manipulation and subsequent graphing. This approach also helps to save memory, and dataframes are not unnecessarily created, a necessity for a big data framework.
 
 Try the following examples after loading the `rangitikei` dataset.
 
@@ -750,7 +746,7 @@ my.data |>
 The `count()` is useful to check the balanced nature of the data when
 many subgroups are involved.
 
-### `tidyr` {.unnumbered}
+## `tidyr` {.unnumbered}
 
 By the phrase `tidy data`, it is meant the preferred way of arranging
 data that is easy to analyse. The principles of tidy data are:
@@ -804,7 +800,7 @@ The `dplyr` package also has functions to deal with two-tables which can be join
 
 The `reshape2` and `data.table` packages also have functions to do the same task.
 
-## A typical data analysis session in R/RStudio {.unnumbered}
+# A typical data analysis session in R/RStudio {.unnumbered}
 
 A data analysis session in R/RStudio involves loading the data,
 graphing, and modelling. You finally save your outputs or produce a
@@ -922,7 +918,7 @@ st.line.model <- lm(stack.loss~Air.Flow, data=stackloss)
 abline(st.line.model)
 ```
 
-### Data Quality Checks {.unnumbered}
+## Data Quality Checks {.unnumbered}
 
 It is a good idea to check the quality of secondary data sourced from
 elsewhere. For example, there could be missing values in the dataset.
@@ -1018,7 +1014,7 @@ variable types. You will be largely using data that are already cleaned
 for your assignments but be aware that you have to perform data cleaning
 and perform necessary quality checks before analysis.
 
-## Further Help {.unnumbered}
+# Further Help {.unnumbered}
 
 There are a number of online sources (tutorials, discussion groups etc)
 for getting help with R. These links are available at your class Stream.
@@ -1044,7 +1040,7 @@ You may also use the advanced search facility of Goggle at
         <https://cran.r-project.org/web/views/>
     -   StackOverflow: <https://stackoverflow.com/questions/tagged/r>
 
-## R default (base) Graphing {.unnumbered}
+# R default (base) Graphing {.unnumbered}
 
 For a simple bar chart, try
 
@@ -1173,7 +1169,7 @@ Graphs can be saved in various file formats, such as PDF (.pdf), JPEG (.jpeg or 
 
 The `command dev.off()` closes the file. You may use the copy and paste facility for processing graphs or use the RStudio option to save graphs.
 
-The`lattice` package contains extra graphing facilities but such graphs can be produced using ggplot2 package. Try-
+The`lattice` package contains extra graphing facilities but such graphs can be produced using `ggplot2` package. Try-
 
 ```{r}
 my.data <-read.csv(
@@ -1221,7 +1217,7 @@ It is optional to work through the activities that follow to gain an appreciatio
 :::
 
 
-## R Objects, Model Syntax etc. {.unnumbered}
+# R Objects, Model Syntax etc. {.unnumbered}
 
 In R, we work with objects. There are different classes of objects
 including: `character`, `integer`, `numeric`, `vector`, `matrix`,

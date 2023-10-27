@@ -1,11 +1,13 @@
+---
+title: "Chapter 8 Workshop"
+---
 
 ```{r, echo=FALSE, message=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE, comment=NA, fig.show="hide")
 ```
 
-# Chapter 8 Workshop {-}
 
-Dataset **`alfalfa`**
+# Dataset **`alfalfa`**
 
 This dataset is from the R package `faraway`. The alfalfa dataset frame has 25 rows and 4 columns. Data comes from an experiment to test the effects of seed inoculum, irrigation and shade on alfalfa yield. 
 
@@ -30,7 +32,7 @@ head(alfalfa, 25)
 
 
 
-## Exercise 8.1 {-}
+# Exercise 8.1 {-}
 
 Obtain the main effects and interaction plots.
 
@@ -142,7 +144,7 @@ plot4 / plot5 / plot6
 
 
 
-## Exercise 8.2 {-}
+# Exercise 8.2 {-}
 
 Fit one-way ANOVA models to this dataset.
 
@@ -164,7 +166,7 @@ plot(TukeyHSD(anova3))
 
 
 
-## Exercise 8.3 {-}
+# Exercise 8.3 {-}
 
 Fit a three-factor (additive) ANOVA model without interactions.
 
@@ -186,7 +188,7 @@ plot(anova1)
 ```
 
 
-## Exercise 8.4 {-}
+# Exercise 8.4 {-}
 
 Fit the indicator variable regression model of `yield ~ inoculum`
 
@@ -208,7 +210,7 @@ summary(indicator.reg)
 Note that this regression allows the treatments to be compared with the control.
 
 
-## Exercise 8.5 {-}
+# Exercise 8.5 {-}
 
 `shade` is a categorical variable of factor codes but let us (incorrectly) treat it as numerical (and if the actual distances are given, then the `distance` variable becomes a covariate). Fit ANCOVA of yield on the `inoculum` factor and `shade` covariate.
 
@@ -222,7 +224,7 @@ summary(ancova.model)
 ```
 
 
-## Exercise 8.6 {-}
+# Exercise 8.6 {-}
 
 In a two-factor experiment, one of the factors was assigned to main plot (main-plot factor), the second factor, called the subplot factor, was assigned into subplots.  The dataset `https://www.massey.ac.nz/~kgovinda/data/plots.RData` gives the experimental set up. Perform the ANOVA for this basic split-plot experiment.
 

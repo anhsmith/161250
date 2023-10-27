@@ -1,5 +1,7 @@
+---
+title: "Chapter 7: Models with Multiple Continuous Predictors"
+---
 
-# Chapter 7: Models with Multiple Continuous Predictors
 
 In this chapter, we consider **multiple regression** and other models in which there are more than one predictor (or $X$) variable. Once again our focus is on finding the estimates of coefficients or parameters in multiple linear regression models by the method of **least squares**. For this we assume that
 
@@ -27,7 +29,7 @@ In this chapter, we consider **multiple regression** and other models in which t
 
 We will continue to use the data set **horsehearts** of the weights of horses' hearts and other related measurements.
 
-## Full Regression
+# Full Regression
 
 With one explanatory variable scatterplots and correlation coefficients provided good starting points for exploring relationships between the explanatory and response variables. This is even more relevant with two or more explanatory variables. For the horses' hearts data, there are six potential explanatory variables; namely `EXTDIA`, `EXTSYS`, `INNERDIA`, `INNERSYS`, `OUTERDIA` and `OUTERSYS`. These measurements of heart width are made of the exterior width, inner wall and outer wall at two different phases, the diastole phase and the systole phase. So a matrix of scatter plots (or matrix plot) of these variables will be useful for exploratory analysis.
 
@@ -161,7 +163,7 @@ Both the simple and full regression models give similar predictions when the hor
 
 We are rather hesitant to make unique claims about any particular subset of predictors based on the correlation matrix or based on the significance of the coefficients from the multiple regression output. In forthcoming sections, methods to decide on a subset of these variables will be explained, but first we look at the issues involved when predictor variables are correlated to each other.
 
-## Measuring Variation Explained by Predictors
+# Measuring Variation Explained by Predictors
 
 The variation in a variable can be measured by its sum of squares. In this section, we illustrate this variation by the area of a circle. For brevity, we denote the **T**otal **S**um of **S**quares, the **R**egression **S**um of **S**quares and the **E**rror or residual **S**um of **S**quares by **SST**, **SSR** and **SSE** respectively. In @fig-f5-3, the circle is labelled $y$ and represents the Sum of Squares for all the $y$ observations, that is, SST.
 
@@ -253,7 +255,7 @@ From @fig-f5-3 and @fig-f5-4, it is clear that for correlated variables, the var
 
 Note that we can also define the additional variation in $y$ explained by $x_{1}$ after $x_{2}$. It is important to note that in general the additional SSR depends on the **order** of placing the predictors. **This order does not have any effect on the coefficient estimation, standard errors etc.**
 
-### Significance testing of Type I SS
+## Significance testing of Type I SS
 
 The significance of the additional variation explained by a predictor can be tested using a $t$ or $F$ statistic. Consider the simple regression model of `WEIGHT` on `EXTDIA`. Suppose we decided to add the explanatory variable `OUTERDIA` to the model, i.e. regress `WEIGHT` on two explanatory variables `EXTDIA` and `OUTERDIA`. Is this new model a significant improvement on the existing one? For testing the null hypothesis that the true slope coefficient of `OUTERDIA` in this model is zero, the $t$-statistic is 1.531 (see output below).
 
@@ -304,7 +306,7 @@ Although `OUTERDIA` is correlated with `WEIGHT`, it also has high correlation wi
 
 7.  Notice that the above trends will occur even if the variables added are **garbage**. For example, you could generate a column of random data or a column of birthdays of your friends, and this would improve the $R^2$ **but not the adjusted** $R^2$. The adjusted $R^2$ makes adjustment for the degrees of freedom for the SSR and SSE, and hence reliable when compared to the unadjusted or multiple $R^2$. The residual mean square error also partly adjusts for the drop in the degrees of freedom for the SSE and hence becomes an important measure. The addition of unimportant variables will not improve the adjusted $R^2$ and the mean square error $s_{e}^{2}$.
 
-### Other SS types
+## Other SS types
 
 The `R` anova function anova() calculates sequential or Type-I SS values.
 
@@ -374,7 +376,7 @@ if(knitr::is_html_output()) {
 
 When predictor variables are correlated, it is difficult to assess their absolute importance and the importance of a variable can be assessed only relatively. This is not an issue with the most highly correlated predictor in general.
 
-## Regression Fitting with Fewer Predictors
+# Regression Fitting with Fewer Predictors
 
 The first step before selection of the best subset of predictors is to study the correlation matrix. For horses' heart data, the explanatory variable which is most highly correlated with $y$ (`WEIGHT`) is $x_2$ (`INNERDIA`) having a correlation coefficient of 0.811 (see @fig-multggally). This means that `INNERDIA` should be the single best predictor. We may guess that the next best variable to join `INNERDIA`. This would be $x_3$ (`OUTERSYS`) but the correlations between $x_3$ and the other explanatory variables clouds the issue. In other words, the significance or otherwise of a variable in a multiple regression model depends on the other variables in the model.
 
@@ -627,7 +629,7 @@ leapForwardfit <- train(
 summary(leapForwardfit)
 ```
 
-### Best Subsets Selection
+## Best Subsets Selection
 
 An exhaustive screening of all possible regression models (and hence the name **best subsets** regression) can also be done using software. For example, there are 6 predictor variables in the horses' hearts data. If we fix the number of predictors as 3, then $\small {\left(\begin{array}{c} {6} \\ {3} \end{array}\right)} = 20$ regression models are possible. One may select the 'best' 3-variable model based on criteria such as AIC, $C_{p}$, $R_{adj}^{2}$ etc. Software must be employed to perform the conventional stepwise regression procedures. Software algorithms give one or more best candidate models fixing the number of variables in each step.
 
@@ -662,7 +664,7 @@ Variable selection procedures can be a valuable tool in data analysis, particula
 
 4.  Methods are available that *shrink* coefficients towards zero. The least squares approach minimises the residual sums of squares or RSS without placing any constraint on the coefficients. The shrinkage methods, which place a constraint on the coefficients, work well when there are large numbers of predictors. A *ridge regression* shrinks the coefficients towards zero but in relation each other. On the other hand, (Least Absolute Selection and Shrinkage Operator) *lasso* regression shrinks some of coefficients to zero which means these predictors can be dropped. Note that the ridge regression does not completely remove predictors. By shrinking large coefficients, we obtain a model with higher bias but lower variance. This process is known as *regularisation* in the literature (not covered in this course).
 
-## Polynomial Models
+# Polynomial Models
 
 Consider the **pinetree** data set which contains the circumference measurements of pine trees at four positions. The simple regression of the top circumference on the first (bottom) circumference, the fit is ${\text {Top = -6.33 + 0.763 First}}$. This fit is satisfactory on many counts (highly significant $t$ and $F$ values, high $R^{2}$ etc); see @tbl-poly1tidy and @tbl-poly1glance.
 
@@ -936,7 +938,7 @@ pinetree |>
               formula = y ~ splines::bs(x, 3))
 ```
 
-## Model structure and other issues
+# Model structure and other issues
 
 The difficult task in statistical modelling is the assessment of the underlying model structure or alternatively knowing the true form of the relationship. For example, the true relationship between $Y$ and $X$ variables may be nonlinear. If we incorrectly assume a multiple linear relationship instead, a good model may not result. The interaction between the explanatory variables is also important and this topic is covered in a different section. We may also fit a robust linear model in order to validate the ordinary least squares fit. For the horses heart data, OUTERSYS and EXTDIA were short-listed as the predictors of WEIGHT using the AIC criterion. This least squares regression model can be compared to the robust versions as shown in @fig-mcompare1.
 
@@ -977,11 +979,11 @@ Measures such as AIC or BIC need corrections when the normality assumption does 
 
 If a large dataset is in hand, a part of the data (training data) can be used to fit the model and then we can see how well the fitted model works for the remaining data.
 
-## Smoothing and Regression modeling for Time series
+# Smoothing and Regression modeling for Time series
 
 For time series data, the term **smoothing** means the technique of removing random variation in the data but retaining any trend and cyclic/seasonal type of variations. Two types of smoothing methods are considered in this section. These two methods are basically averaging techniques, which use only the immediate past data (rather than all the observations) with constant and variable weights for each observation.
 
-### Time Series Regression with seasonality components
+## Time Series Regression with seasonality components
 
 Indicator variables are used to capture the seasonality such as months and quarters. Time related trends can be picked up with the usual regression. The function `tslm()` from the `forecast` package is handy to model the response $Y$ using the time variable and the seasonal indicators. Consider the credit card balance series discussed in Chapter 2. The fitted linear model is shown in @tbl-cbfit1 and the forecasts made the model for 48 months ahead are shown in @fig-cbforecast.
 
@@ -1049,7 +1051,7 @@ if(knitr::is_html_output()) {
 
 Note that the time variable $t$ becomes the predictor in the fitted model but the model is not based on the past or lagged $Y$ data. The smoothing methods discussed below employ such past data.
 
-### Moving Average Smoothing
+## Moving Average Smoothing
 
 Here we compute the mean of successive smaller sets of numbers of immediate past data. The period or length (also called span) of the **moving average** is the number of observations (including the present one) used for averaging. The general expression for the moving average $M_t$ at time $t$ is $$M_t = [X_t + X_{t-1} + ... + X_{t-N+1}] / N$$ where $X_t$ is the observation at time $t$ and $N$ the moving average length. @fig-MAcntr shows the moving average smoothing for the '\$20 Notes in public hands' data. It can be noted that the degree of smoothing is directly related to the length of the moving average (i.e., longer the length, greater the smoothing).
 
@@ -1081,7 +1083,7 @@ autoplot(NZnotes20) +
 
 When placing the moving averages against time, placing them in the middle time period is more appropriate. Strictly speaking the moving average must fall at $t = 1.5, 2.5, 3.5$ etc when the period of the moving average is an even number. Hence we need to smooth again the moving average smoothed values to place the moving averages at $t = 2, 3, 4$ etc. @fig-MAcntr also compares the centred moving average smoothing and non-centred moving average smoothing (length 2) for the '\$20 Notes in public hands' data. It is easy to see that centring has stopped the moving averages from drifting below the original series and 'lined' them with the original data.
 
-### Exponential Smoothing
+## Exponential Smoothing
 
 In moving average smoothing all past observations are given equal weight. In exponential average smoothing, past observations (i.e. as the observations become older) are given exponentially decreasing weights. That is, recent observations are given relatively more weight than the older observations. Hence the exponential smoothing method becomes a representative method to produce a smoothed time series. The average computed using exponentially decreasing weights is known as the **Exponentially Weighted Moving average** (EWMA). This fitted average is also called `level` because this method does not allow for trends or seasonality (and everything gets smoothed).
 
@@ -1112,7 +1114,7 @@ The rate at which the effect of older observations on the current EWMA will be d
 
 A naive choice for the initial value for $S_0$ (i.e. at the origin) is $x_1$, the first observation. The other choices include the average of two or more successive observations, estimating using regression methods etc. In this course we will not be concerned with the choice of the initial values very much (and accept the defaults of the `R` packages).
 
-### Double Exponential Smoothing
+## Double Exponential Smoothing
 
 Single exponential smoothing is improved to **double exponential smoothing** to account for the trend type of variations. This is achieved by introducing a second smoothing constant say $\beta$. This weighting constant captures linear trends using the successive differences in the fitted EWMAs. The process of double exponential smoothing is conveniently represented by the following two equations.
 
@@ -1138,7 +1140,7 @@ autoplot(NZnotes20) +
   autolayer(double.exp, series = "DEWMA-optimised")
 ```
 
-### Triple Exponential Smoothing
+## Triple Exponential Smoothing
 
 This approach developed by Holt and Winter (hence the name **Holts-Winter (HW) smoothing**) employs a level equation, a trend equation, and a seasonal equation for smoothing at each time period. Hence three weights, or smoothing parameters are needed.
 
@@ -1166,7 +1168,7 @@ autoplot(credit.balance) +
 
 ```
 
-### Assessment of Fit:
+## Assessment of Fit:
 
 Forecast accuracy measures such as MSE are useful for fixing the smoothing parameters such as the moving average length or the EWMA smoothing constant. We may minimise MSE (say) to fix a value for the EWMA smoothing constant. This can be done by trial and error or by nonlinear optimisation methods (such as Marquardt's procedure).
 
@@ -1218,7 +1220,7 @@ bind_cols(
 
 Evidently the triple exponential smoothing fares well for our credit card balances data.
 
-### Intro to Autoregressive Modelling
+## Intro to Autoregressive Modelling
 
 The concept of **stationarity** plays in important role for building time series models. In crude terms, a time series is said to be **stationary** if the mean and variance do not change over time (alternatively the same probability law applies over time). In fact stationarity is defined in a pure mathematical way but we will not worry about this in this course.
 
@@ -1357,7 +1359,7 @@ fit <- auto.arima(credit.balance)
 forecast::autoplot(forecast(fit,h=24))
 ```
 
-## Summary
+# Summary
 
 Regression methods are the most commonly used of statistics techniques. The main aim is to fit a model by least squares to explain the variation in the response variable $Y$ by using one or more explanatory variables $X_1$, $X_2$, ... , $X_k$. The correlation coefficient $r_{xy}$ measures the strength of the linear relationship between $Y$ and $X$; $R^{2}$ measures the strength of the linear relationship between $Y$ and $X_1$, $X_2$, ... , $X_k$. When $k$=1, then $r_{xy}^{2} =R^{2}$. Scatter plots and correlation coefficients provide important clues to the inter-relationships between the variables.
 

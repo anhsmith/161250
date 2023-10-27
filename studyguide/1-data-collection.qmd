@@ -1,60 +1,58 @@
-
-# Chapter 1: Data Collection and Quality Issues
+---
+title: "Chapter 1: Data Collection and Quality Issues"
+---
 
 > "*Data! data! he cried impatiently, I can't make bricks without clay.*"
 >
-> — Sir Arthur Conan Doyle, The Vopper Beeches
+> --- Sir Arthur Conan Doyle, The Vopper Beeches
 
 <br>
 
-> "_The plural of anecdote is not data._" 
-> 
-> — Roger Brinner
+> "*The plural of anecdote is not data.*"
+>
+> --- Roger Brinner
 
+# Introduction
 
-## Introduction
-
-In every-day life, most of the information we collect is done so almost unwittingly and unconsciously. Nevertheless, we are constantly collecting information, receiving it and passing it to others verbally and in writing, and using it as a basis for decision making. 
+In every-day life, most of the information we collect is done so almost unwittingly and unconsciously. Nevertheless, we are constantly collecting information, receiving it and passing it to others verbally and in writing, and using it as a basis for decision making.
 
 There's a saying that "knowledge is power" (attributed to Sir Francis Bacon, 1597). The most powerful knowledge comes from information that was collected in a systematic way. In this course, we are mainly concerned with information which can be coded in numerical form, as data. We can perform operations on data using algebra and arithmetic. This combination of systematic observation and analysis is the most powerful way to build knowledge of our world.
 
 In what follows, we begin by introducing the concept of random variables. Then, we consider different types of data that are collected, and then discuss some practical difficulties that must be overcome in collecting and interpreting any data. We then focus on probability models for data.
 
-## Random variables
+# Random variables
 
-Data are records of measurements or observations of our world. For example, you can count the number of heart beats you have in a minute, measure the length of a leaf, or record the colour of the next car that you see. Each time you collect an observation like these, it is likely to be different. There is an element of randomness to it. This is why we often refer to these sorts of observations, collected repeatedly in a systematic way, as "*random variables*". Each data point, each observation, is a realisation of a random variable. 
+Data are records of measurements or observations of our world. For example, you can count the number of heart beats you have in a minute, measure the length of a leaf, or record the colour of the next car that you see. Each time you collect an observation like these, it is likely to be different. There is an element of randomness to it. This is why we often refer to these sorts of observations, collected repeatedly in a systematic way, as "*random variables*". Each data point, each observation, is a realisation of a random variable.
 
 We often represent a random variable with an upper case letter, like $X$. A single observation is often represented by a lower case of the same letter, with a subscript. For example, $X$ may be the random variable representing the lengths of a leaf of a particular species of tree; if we measure three leaves, we have the three observations $x_1$, $x_2$, and $x_3$. In this case, these values will be numerical lengths, in millimetres, say. But not all random variables are numbers. Random variables and data can take many different forms.
 
-## Types of data
+# Types of data
 
-This section discusses different types of data, with some examples. 
+This section discusses different types of data, with some examples.
 
-### Categorical or Qualitative Data
+## Categorical or Qualitative Data
 
-#### Nominal Data
+### Nominal Data
 
 At this level, objects are classified by qualities or characteristics, and are placed in categories. Often these categories are really only names, for example Ford Focus, Mondeo, or Mustang; Boeing 737, 747 or 767, etc. Hence we describe the data as 'nominal'. Sometimes confusion arises because the names are replaced (coded) by numbers as in the aeroplane example, or to facilitate data entry into a computer. An example of the latter would be a person's marital status, coded as 1 (never married), 2 (currently married), 3 (widowed) or 4 (separated or divorced). It would make no sense to perform any mathematical manipulation on these numbers for they are only abbreviations for the categories. Notice that categories should cover all possibilities so that a further category may be needed, namely 5 (in a de facto relationship).
 
-#### Ordinal Data
+### Ordinal Data
 
 Ordinal data are categorical but the levels have an intrinsic order to them. Typical examples are a 3-point scale for burns - mild, moderate, severe, or a 5-point agreement scale - strongly disagree; disagree; no opinion; agree; strongly agree.
 
 The distances between any two responses may differ. For example, *disagree* may be perceived by some respondents, although not others, as closer to *strongly disagree* than to *no opinion*. For this reason, there are problems in aggregating such responses. There are 'nonparametric' statistical methods to cope with these problems. It may be feasible, however, to add or average responses if the sample size is reasonably large and the assumption can be made that the differences in usage of the measures will average out over the sample.
 
+## Quantitative (i.e., measured or counted) data
 
-### Quantitative (i.e., measured or counted) data
-
-#### Discrete Data
+### Discrete Data
 
 Discrete data usually arises by counting events or objects. Because of this discrete data are usually integers, but not always. For example, one may count the number of accidents last year at a particular intersection. On the one hand you can't have fractions since you can't have half an accident. On the other hand a further analysis may require you to state the proportion of the accidents that were nose-to-tail. Then if there were *n* accidents, the proportion of nose-to-tail ones could be $\frac{0}{n}, \frac{1}{n}, \frac{2}{n}, ... ,\frac{n}{n}$ - a finite range of values, so the proportion is still discrete.
 
-#### Continuous Data
+### Continuous Data
 
 Without going into the mathematical definition of continuity, we tend to visualise continuous data as having a flowing nature, like water flowing under a bridge, or time passing in a continuous fashion. So one could in theory measure amounts (of water or time) to any level of precision, with many decimal places. Of course in practice, the *measured* responses will rarely be exactly continuous for, even if the underlying variables are assumed continuous, the instrument used to take readings will only be able to do so on a discrete scale. If the variable of interest is time, responses may be integers (say) 1, 2, ... seconds or if the instrument can distinguish to the nearest $\frac{1}{100}$ of a second, the response will still be discrete but is now 1.00, 1.01 or 0.99. What we can say is that if the unit of measurement is sufficiently small then each individual possible reading will have an infinitesimal probability of occurring and we can basically ignore such individual points and only talk about probability in terms of intervals (e.g. one-second intervals rather than individual 10.99 seconds, say). Thus the practical difference between discrete and continuous data is that with real discrete data, outcomes each have their own separate probability of occurring, but with continuous data, probability is only thought of as associated with intervals.
 
-
-#### Interval and ratio scales
+### Interval and ratio scales
 
 Statisticians sometimes further distinguish among quantitative variables as being interval or ratio data. In fact some theoreticians write at length about the 'four levels of measurement': nominal, ordinal, interval or ratio.
 
@@ -64,20 +62,19 @@ Ratio scales are sometimes regarded the highest level of measurement, and are us
 
 From a practical point of view, the type of data (categorical - nominal or ordinal; discrete; or continuous) may be crucial to the statistical analysis. It may be convenient to use a statistical method appropriate to ratio level data in the case mentioned above of the time to complete a given task, but the results may also be analysed by a non-parametric technique which actually only requires ordinal data. Similarly it may be satisfactory as a *first step* to analyse ordinal data by assigning scores {1, 2, 3, 4, and 5} to the categories and running the data through a regression package that assumes Normal data (better approaches are available!). Indeed, it may be difficult in some circumstances to clearly decide on the appropriate level, and the distinction particularly between interval and ratio levels is often unimportant.
 
-
-## Data Quality Issues
+# Data Quality Issues
 
 The quality of data collected can vary for a variety of reasons. Such common issues with data quality are summarised below under various headings, after defining certain terms relevant to data collection.
 
-### Measuring Devices or Instruments
+## Measuring Devices or Instruments
 
 Any device used to collect measurements is called an **instrument**. It may be a physical device such as a measuring rule to gauge the heights of plants or a counting device such as a Geiger-counter for measuring radioactive material. In the social sciences or marketing, the instrument may be such a physical device or it may be a questionnaire which requires a more subjective response.
 
-#### Measurement Error
+### Measurement Error
 
 Measurement error may arise if the instrument tends to give a reading which is too high or too low. Instruments should be checked as often as possible and standardised by checking them against known standards. This is not really possible with questionnaires but one should note the need for pilot testing the questionnaire on a group of subjects who are not in the frame for the survey.
 
-#### Indirect Measures
+### Indirect Measures
 
 It is a common mistake to assume that the values reported for a variable are direct measurements of that variable. It is more usually the case that the recorded value reflects the desired value but is only an indirect measure of it. A doctor may wish to have some measure of the health of a patient, and, for this reason, a blood pressure measurement is taken, but blood pressure is not a direct measure of health for there are many inherited, climatic and individual effects which also play a part in the blood pressure reading. Even then a typical blood pressure reading would be required, but the mere fact that a measurement is being made will have an effect on the patient and possibly affect the reading. The stress of being in a hospital or a doctor's surgery may increase the measurement.
 
@@ -85,11 +82,11 @@ It should be noted that the instrument used will only rarely be able to give a d
 
 Another question which should be asked of data is who did the recording? Often, questionnaires require that people provide the information themselves, that is by self-reporting. Conscious or sub-conscious influences may have some bearing on the numbers provided. If someone is asked his/her income or workload, the answer may depend on what is perceived by the respondent as the aim of the survey, who is asking the question and who will have access to the results. A seemingly direct question may evoke an indirect answer. If the data is collected by a researcher or technician there may be some possible hiccups on the interface between the respondent and the researcher or the instrument and researcher.
 
-### Range of Instruments
+## Range of Instruments
 
 The range of instruments is immense and in the remainder of this section a few examples will be given.
 
-#### Observation
+### Observation
 
 It is common in the study of animals or birds to observe them in their natural settings. This may be done directly such as counting the number of wingbeats per minute or it may be of an indirect approach such as counting the frequency of spore in order to determine the number of animals in a given area. This method of data gathering is often costly and time-consuming. It may help to answer what is occurring rather than why.
 
@@ -97,29 +94,27 @@ As there is a high labour content with this instrument, errors may occur due to 
 
 Observation does have an important part to play in a preliminary study to decide on the areas which require further study. Some researchers tend to bypass or shorten this phase by using a multivariate package on the computer hoping that it will sort out important relationships from a morass of complex data. It is surprising how many novel and correct scientific processes were discovered by such painstaking workers as Darwin and Mendel using only visual observation.
 
-#### Interviews
+### Interviews
 
 This method can suffer from some of the problems of observation in that it can be time consuming, involve coding errors and be influenced by different interviewers making different judgements.
 
 Interviewers need to be carefully trained so that they allow the person being interviewed to express his or her own views rather than interposing their own feelings or prejudices. On the positive side, a trained interviewer can sense nuances behind supplied answers in a way that observations or questionnaires cannot. A much richer range of responses can then be recorded which makes the interview ideal for pilot studies in particular as it can open up new avenues of study.
 
-#### Questionnaires
+### Questionnaires
 
 Questionnaires are a common method used to collect data and they are very versatile as they can be administered by **mail, telephone or face to face**. Mailed questionnaires have the advantage of being efficient time-wise for a researcher and may be less threatening to the respondent as they can be answered when and where the respondent chooses. They are appropriate if the respondent needs to give some thought to the questions or where the answers involve sensitive information. Unfortunately, this flexibility can lead to respondents procrastinating or not replying at all. The problem of non-response will be considered later.
 
-
 *How long* should the questionnaire be? Almost invariably, it is too long as the researcher strives to obtain as much information as possible. A long and tiresome questionnaire may be counter-productive as the quality of the data may suffer. There has been a lot of research on questionnaire design. Some points to note are that straightforward questions should be asked near the beginning so that the respondent feels at ease while questions requiring judgements or moral decisions should come later.
 
-### The Human Interface
+## The Human Interface
 
 Mention has been made of some problems associated with respondents giving replies and researchers seeking to understand those replies and to code them. It is worthwhile taking more time to reconsider these processes for the quality of data will invariably be greatly affected by the human interface with the research instrument.
 
 The yields of different varieties of field grasses would seem to be a clear cut and well defined and measured quantity but the yield would be influenced by many factors such as the height of the cut, perhaps the speed at which the mower is operated and the ability of the assistant to mow within the specified boundaries.
 
-
 With more subjective instruments and human respondents other problems may arise and affect the quality of the data.
 
-#### Human Respondents
+### Human Respondents
 
 A number of possible difficulties may arise:
 
@@ -133,7 +128,7 @@ A number of possible difficulties may arise:
 
 5.  Questionnaires can be self-fulfilling prophecies in that the structure and language of the questions suggest the correct or desired responses. Socialising factors may prejudice the results in that most people are hesitant to be rude or to reveal to strangers their deep desires and true feelings, particularly if these are thought to be socially undesirable.
 
-#### Researchers
+### Researchers
 
 The human interface also arises when someone administers the instrument of the research and some points to note are:
 
@@ -143,7 +138,7 @@ The human interface also arises when someone administers the instrument of the r
 
 3.  It is a salutary point to note that usually the individual who collects the raw data is an underpaid and possibly under-trained junior who is not highly motivated to produce high quality data.
 
-#### Self-Administered Tests
+### Self-Administered Tests
 
 In some situations, the subject records the response as in *self-administered* questionnaires, for example, tick a box or circle a number. There may be advantages in this for the respondent is presumably the best person to know what response should be given. On the other hand, the respondent is usually not trained so that there may be a higher incidence of coding errors and questions which are left unanswered. On the other hand, if the researcher does the coding, unwarranted assumptions may be made.
 
@@ -151,7 +146,7 @@ It is conceivable that many human interventions and possible errors may occur in
 
 At the other extreme, it is possible for information to be relayed directly to the computer without human interference. Microprocessors can be used to collect and transmit a whole variety of information. In experiments on animals, sensors can be placed on different parts of their bodies to relay information to the computer. These facilities open up new vistas and challenges for statisticians to monitor large amounts of data, for it may not be obvious how to cope with them.
 
-### Non-response Bias
+## Non-response Bias
 
 Non response is very common in all types of data collection and is probably the largest source of non-sampling error. It can occur at three stages of the process. An element may be selected but not found. For example, sheep in a flock may be tagged with individual identification number but one may not be found at the time of the survey. It may be hiding or perhaps has died. If the elements are people, some may not be at home at the time, or, if it is a telephone survey, the telephone may be cut off from certain selected individuals.
 
@@ -189,11 +184,11 @@ The estimate of the number in favour is 70/200 or 35%.
 
 -   It may be possible to make other reasonable assumptions if additional information is at hand on the whole batch of 200. We can massage the results in different ways but none of them is very convincing. The moral is: Try to reduce nonresponse by all legitimate means.
 
-## Concepts Relating to a Census
+# Concepts Relating to a Census
 
 Here we consider a variety of ideas and problems relating to taking a census. Most of these concepts carry over directly to sample surveys as well. However sample surveys have additional complicating factors relating to choice of sample, and using statistical methods to quantify the extent of sampling error (including random error) involved.
 
-### Some Terminology
+## Some Terminology
 
 *In a census, every element of the population is contacted, counted and other quantities collected or evaluated.* Conceptually, the procedure is straightforward and perhaps trivial. In practice and particularly if the population is large, difficulties often arise. There are *three critical operations* in census taking, namely identifying an element as belonging to the population under study, making contact with that element and obtaining the appropriate information in a suitable form.
 
@@ -211,7 +206,7 @@ A simple example of a census would be the exercise of collecting information fro
 
 **Frame inefficiencies** may well occur to the extent that the frame does not match the target population. The collection of information on siblings may encounter snags as some students may not respond due to absence, or parents or student may refuse to divulge the required information. The actual population may then fall short of the frame, which contains the maximum possible elements, which in this case, are students.
 
-### Elements, Measures and Associated Variables
+## Elements, Measures and Associated Variables
 
 With a census, there is usually some ambivalence as to whether the objects under study are the elements of the population (such as plants, animals or people) or the measurements on these elements. The measurements may simply be the count, or may be such variables as the length, weight, salary or any other measure. The selection process will focus mainly on the elements, but from then on attention will be focussed on measurement and then analysis. These two ideas can be incorporated into the notation $$U=\left(L,Y,X\right)$$ Here $U$ denotes the population, $L$ is the set of labels $(i = 1,2,...,N)$ attached to the $N$ elements of the population, $Y$ is the measurement, or response, under study from each element in the population, and $X$ is an associated variable measured on each element in the population.
 
@@ -219,13 +214,13 @@ For example, for the census carried out on the students of a high school, the la
 
 In this example the survey may, in practice, be carried out as a sample rather than a census but conceptually it would be possible, to carry out such a census. Another point which may need discussion and clarification is whether the population represented by $U$ should refer to the target population, the frame or the actual population; usually $U$ would refer to the target population.
 
-### Non-sampling Errors
+## Non-sampling Errors
 
 A number of errors may occur in collecting information even when a census is being taken. The elements of the census must be contacted, a measurement or observation taken and this information recorded. As no sampling procedure is involved, it seems reasonable to label errors as *non-sampling errors*.
 
 The goal of the survey will be to produce summary statistics such as the population mean and standard deviation. If errors are committed in the collection process, the summary statistics may be incorrect. It is possible that these errors will cancel out but we cannot rely on this. The errors may lead to a tendency for the calculated mean to be too low and the mean is said to be **biased**. Alternatively, the bias may be on the high side and, at times, it may be difficult even to decide the direction of the bias although we know there is a strong possibility of it occurring.
 
-### Selection Bias
+## Selection Bias
 
 It may seem a contradiction in terms to speak of errors in selecting elements of a census for the aim is to contact every element in the population. From the discussion in the above section, it is clear that some difficulties may arise in the sequence from *target population* to *frame* and these difficulties are often called **frame inefficiencies**.
 
@@ -233,17 +228,18 @@ A survey may be carried out on all exporting firms in New Zealand. The frame may
 
 Once the elements of the frame have been located, there remains the step of extracting information from them. For some reasons particular firms in the frame may not wish to take part in the survey so that errors may occur in this second step also.
 
-### Inference
+## Inference
 
 It is *not* appropriate to carry out any statistical test or form a confidence interval on census data because they are measurements on the whole population. Statistical inference is using data from a sample to make statements about the broader population from which the sample was taken. When we do a census, we have the whole population, so we are no longer making inferences.
 
 Next, we'll consider sampling from the population instead of taking a census.
 
-## Sampling
+# Sampling
 
-### Introduction
+## Introduction
 
 Sampling as a scientific exercise is a peculiarly twentieth century phenomenon despite the fact that sampling has been used in an *ad hoc* manner from earliest times. Sampling, as in sample surveys, was accepted only after many years of argument and counter-argument. The most intensive and extensive discussion took place at the International Statistical Institute (ISI) meeting in Berne in 1895. Kiaer explained the 'representative method' he had used in Norway. Further meetings of the ISI enabled Kiaer to expand and clarify his approach. Four principles have been identified in Kiaer's reasoning:
+
 
 1.  *Representativeness* in terms of adequate representation of identifiable groups in the population.
 
@@ -257,7 +253,7 @@ Sampling as a scientific exercise is a peculiarly twentieth century phenomenon d
 
 It was not until @Neyman1934 that random, rather than purposeful, sampling was given a strong mathematical justification. Neyman showed that it did not matter if equal or unequal probabilities were used provided that probabilities were known in advance. His arguments were not based on specific distributions as in Bayesian approaches so that the touchstone of randomness seemed to have finally won the day. For an interesting discussion on the controversies in the history of survey sampling, see @Brewer.
 
-### Why Sample?
+## Why Sample?
 
 There is a widespread belief that a census, rather than a sample, should be taken if at all possible. Most people feel secure with a census but are somewhat uneasy about only collecting a sample and using mathematical means to estimate properties of the population. Lack of sufficient resources of money, trained manpower and so on is often the motivation to reject a complete enumeration. A compromise, of course, is necessary in that a cheaper, quicker collection method using a sample may result in less accurate estimates. Often, however, the reduction in accuracy is slight compared with the considerable reduction in cost. Time is also a factor in that a census may require officials to collect data over a long period which may raise difficulties in that the responses would be meant to relate to a particular point in time.
 
@@ -269,11 +265,11 @@ Nonsampling errors, nonresponse in particular may introduce biases. Unfortunatel
 
 To reduce unwanted effects such as interviewer biases, statistical tests can be employed. These require certain assumptions about the population and selection method which have been used. We can never be sure that the assumptions associated with these tests are valid. If the sample suggests that they may not be true, some action must be taken such as a data transformation to make the results more 'Normal'.
 
-### The Case for Randomisation
+## The Case for Randomisation
 
-> "_Randomization is too important to be left to chance._" 
+> "*Randomization is too important to be left to chance.*"
 >
-> – J. D. Petruccelli
+> -- J. D. Petruccelli
 
 The sample should be similar to the population. It is easier to state this than it is to define what is meant by the statement and how to achieve this similarity. Randomisation can be used to obtain a sample which, on average, has similar properties to the population. Not only is this so but it is possible to estimate how closely the sample reflects the population and attach a probability to the possible discrepancy. It is not possible to state with certainty that a particular measurement from a sample is peculiar although it would be possible to attach a probability to such an unusual value. Similarly, it would be possible to make a probability statement about the sample itself if the sampling process was replicated.
 
@@ -285,7 +281,7 @@ As a compromise, it is possible to use a *randomisation* scheme *with certain re
 
 It should be noted that restrictions may limit the number of elements selected from particular subgroups so that it may not be reasonable to invoke the Central Limit Theorem and assume that estimators in these subgroups follow a Normal distribution.
 
-### Terminology and Notation for Samples
+## Terminology and Notation for Samples
 
 A sample is a subset of a population. There are innumerable ways of drawing a sample so that there is a richness and variety in sampling methods which do not exist in census methods. The first step in obtaining a sample is the same as for taking a census in that a frame must be set up. The sample is then drawn from the frame so that the sequence is *target population* $\Rightarrow$ *frame* $\Rightarrow$ *sample*.
 
@@ -297,7 +293,7 @@ It was pointed out above that a population, in practice the frame, could be writ
 
 Another way to look at this is to consider the probability that a particular element, or **label**, be included in the sample. Let $\pi_{i}$ be the inclusion probability for the $i^{th}$ label. A special but common occurrence is the equality of the $\pi_{i}$ for $i$ from $1$ through $N$ and, in this case, the $P_r(s)$ will be the same for all $s$ in $S$. In this case, the selection is said to be **EPSEM**, standing for **equal probability of selection**, or it is said that the elements are self weighing as the probabilities do not depend on the particular labels which have already been selected. The most obvious example of a *self weighting* sample is that of a simple random sample but multistage samples can also be arranged with unequal probabilities at each stage but such that the inclusion probabilities are equal.
 
-### Errors in Samples
+## Errors in Samples
 
 Samples will be liable to the same kind of biases as a census as well as others inherent in the sampling process. Major sources of biases in samples are classified in @fig-f1-3x. On the one hand, the biases can be split into those which occur at the time of selecting the sample, while others occur at the stage of collecting and operation on the data. On the other hand, a division can be made into sampling and nonsampling, depending on whether the bias occurs in a random or fixed manner. The nonsampling errors can be further subdivided according to whether an observation is made or not.
 
@@ -335,7 +331,7 @@ Often, the sample and the estimator are chosen in such a way that the estimator 
 
 In sample surveys, an estimator may turn out to be biased because the **probability of selection** of certain elements is *different to* what the researcher thought. If the frame used to select people is a list of homeowners, wealthy owners would have a higher probability of selection for they are more likely than less well off people to own more than one house. Consequently, an owner of multiple houses would have a high probability of selection which would bias the estimate towards such people unless the multiple ownership is taken into account. This source of error is termed *frame inefficiency* and it is likely to arise whenever there are discrepancies with the sampling frame.
 
-## Introduction to Sample Surveys
+# Introduction to Sample Surveys
 
 In sample surveys, the emphasis is on the selection of the sample although this is a means to the end of obtaining estimates; testing hypotheses etc. The selection procedure has been studied in great detail by researchers in this area.
 
@@ -353,7 +349,7 @@ In this lottery example, the population is restricted to the finite, known size 
 
 Sampling without replacement does cause some problems as the probability of choosing an element depends on the set of elements or labels which have already been selected unless the inclusion probabilities are all equal. Calculating the variance of an estimator is often made trickier by sampling without replacement and involves finite correction factors. Estimators of the population variance are also more involved than they would be with replacement. A brief overview of common sampling schemes follows.
 
-### Simple Random Sample
+## Simple Random Sample
 
 In our lottery example, each of the 1,000 tickets has the same probability (1 in 1,000) of winning any one prize and, indeed, of winning any one of the 3 prizes (3 chances in 1,000, that is, 1 chance in 333).
 
@@ -371,19 +367,19 @@ Estimators with a low variance are likely to be more accurate in that they refle
 
 If the population is small but there is no information available on other aspects of the population, a simple random sample may be appropriate. Other sampling schemes may be used, though, for some of the following reasons:
 
-##### Administrative problems
+#### Administrative problems
 
 If the population size is large, it will be rather clumsy to try to select a simple random sample. If the population is spread out geographically, then considerable cost may be involved unless the sample is grouped in some way.
 
-##### Improve accuracy
+#### Improve accuracy
 
 Under certain conditions, or assumptions, it may be possible to use a scheme which leads to more accurate estimates - accurate in the sense that the variance and/or bias is reduced.
 
-##### Political reasons
+#### Political reasons
 
 A simple random sample of (say) supermarkets in New Zealand may, by chance, consist only of stores in Auckland. The results of this survey may be viewed very sceptically by readers and, more importantly, by those who are funding the survey.
 
-### Stratified Sampling
+## Stratified Sampling
 
 Stratified sampling is a very versatile approach. It can be easy to implement, and can also lead to more efficient estimation of parameters. With stratified sampling, the population is divided into groups called "strata", and then random samples are taken from each stratum. The advantages of this approach are:
 
@@ -399,7 +395,7 @@ Stratified sampling is a very versatile approach. It can be easy to implement, a
 
 6.  The variance of an estimate from stratified sampling is usually equal to, or less than, the variance of an estimate from simple random sampling. It would be sensible to *sample more heavily the larger strata.* This is the approach taken in proportional (stratified) sampling in which the sample size in each stratum is proportional to the size of the stratum. Proportional sampling is appropriate when all the strata are equally variable. When this is not the case the *more variable strata are sampled more heavily*.
 
-### Cluster Sampling
+## Cluster Sampling
 
 For some investigations, it is advisable to consider the population as being composed of clusters or groups and to proceed with the sample survey by selecting certain clusters and collecting measurements from (usually) a random selection of the elements within the chosen clusters. Cluster and stratified sampling differ in that all the strata are sampled whereas only some of the clusters are sampled. It is usual to have a large number of small clusters in cluster sampling but a small number of strata in stratified sampling. Consider a sample survey of the pupils in a school. The classes within the school may be considered as possible strata or possible clusters. There are advantages for cluster sampling in this case.
 
@@ -413,19 +409,19 @@ For some investigations, it is advisable to consider the population as being com
 
 In some cases, it makes more sense to collect measurements on whole clusters rather than just a few individuals within each selected cluster. This is probably true in the case of the above example. Surveys on TV watching collect information on a family is another example where this is probably true. If the TV set is on, it may be difficult to pin down which members are watching as some may claim not to be interested (although they may know quite a lot about that program). Alas, there must be some payment for these benefits and this is reflected in the higher variances of cluster sampling estimators over those of simple random sampling.
 
-### Systematic Sampling
+## Systematic Sampling
 
 In this section, we shall only consider a particular type of systematic sampling, namely that which includes a component of randomness, as this allows probability statements to be made.
 
 In the simplest presentation, the frame is assumed to consist of $N$ elements where $N$ = $kn$ with $n$ being the required sample size. A random digit, $i$, in the range of l through $k$ is chosen as a starting point and then every $k^{th}$ element from then on is placed in the sample. The sample then consists of the elements $i, i + k, i + 2k,$ etc. Clearly this approach is likely to produce a sample which is evenly distributed over the entire sampling frame, and it is therefore likely that the sample will be representative of the population. This is particularly true when the sampling frame is sorted geographically. However, when this is not the case, the variance of the estimators obtained using systematic sampling will generally be greater than those obtained for simple random sampling.
 
-### Probability-proportional-to-size (PPS) Sampling
+## Probability-proportional-to-size (PPS) Sampling
 
 Probability-proportional-to-size sampling, or PPS sampling, can be thought of as an extension of stratified sampling. Stratified sampling allows the flexibility for the probabilities of selection to vary with the size and characteristics of the strata. PPS sampling takes this a step further so that each element has its own probability of selection.
 
 The procedure requires that an associated variable be known so that each element in the population has a measure of size associated with it. This variable may be a related variable whose values are known from a previous census. For example, auditors usually check only a sample of all the accounts in existence. The size of each account is crucial. So the large value accounts should be checked more intensely than the smaller accounts. This is achieved by giving each account a probability of selection which is proportional to its value. This is called *Dollar-Unit Sampling*.
 
-### Estimates for Common Sampling Methods
+## Estimates for Common Sampling Methods
 
 Associated with each sampling method is a particular form of estimator for the population parameters of concern. If an element has a high probability of selection, its effect must be reduced when an estimate is formed or, otherwise, the estimate will tend to be too large.
 
@@ -438,7 +434,6 @@ This is easy to show with simple random sampling when $\pi _ i =\frac{n}{N}$ for
 For stratified sampling with $k$ strata, the estimated total and mean are, respectively $$\hat{Y}=N_{1} \bar{y}_{1} +N_{2} \bar{y}_{2} +....+N_{k} \bar{y}_{k}$$ and $$\bar{Y}=\left(N_{1} \bar{y}_{1} +N_{2} \bar{y}_{2} +....+N_{k} \bar{y}_{k} \right)/N$$ Assume that stratum $j$ contains $N_{j}$ elements and that the sample size for this stratum is $n_{j}$, then the probability that an element in the $j^{th}$ stratum is selected is $\frac{n_{j} }{N_{j} }$. As an example, suppose that a stratified sample of adult males, in full time employment in NZ, was taken to determine the number of working days lost in the previous year and also their party political preference. In this hypothetical example, the strata are urban versus rural. The results were shown in @fig-strs).
 
 ![STRS estimation](images/strs.png){#fig-strs}
-
 
 <!-- +-------------+-------------+-------------+-------------+-------------+ -->
 
@@ -495,12 +490,11 @@ Estimate of proportions who prefer Labour = $\hat{Y}/N$ = 230,000/500,000 = 0.46
 
 These same formulae for estimating the population total and the population mean are appropriate for probability proportional to size (PPS) sampling. However, sampling without replacement makes the formulae rather complicated so we will not consider the details here.
 
-### Multistage Designs and EPSEM
+## Multistage Designs and EPSEM
 
 Large, and even moderately sized, sample surveys are often multistage surveys. The probability that an element is selected becomes the product of the probabilities of it being selected at each stage. As a simple example, consider 3 schools having 100, 200 and 300 students, respectively, and suppose that 12 students are to be selected from one of these schools. This could be carried out in a two-stage survey with the first stage being the selection of one school by probability proportional to size (PPS) sampling. In the second stage, 12 students are selected from the chosen school. Let $\pi _{a}$ be the probability of choosing a particular school and $\pi _{b}$ the probability of choosing a particular student (given that his/her school has been chosen). The probability of selecting a particular student is $\pi_{a} \times \pi_{b}$; see @fig-pps.
 
 ![PPS example](images/pps.png){#fig-pps}
-
 
 <!-- +-------------+-------------+-------------+-------------+-------------------------+ -->
 
@@ -530,25 +524,25 @@ In this example, each student has the same probability of being selected which h
 
 These EPSEM, equal probability of selection methods, have the advantage that it seems "fair" to allow each person the same probability of selection but, also, it makes for simpler and neater formulae for estimates and their variances.
 
-### Other Sampling Methods
+## Other Sampling Methods
 
-#### Volunteers
+### Volunteers
 
 Samples are often selected because they are easy to obtain. Many psychology experiments referred to in the literature make use of long suffering students in introductory psychology courses. Quite often, volunteers are sought for experiments. Indeed, even when a probability sampling scheme is used, some subjects will withdraw so that the actual respondents are, in a sense, volunteers. Sometimes, people are accosted in the street or supermarket by market researchers or media reporters. The sample is by and large an **opportunity sample** for it is difficult to obtain a random sample under such conditions. Any generalisations from such a sample should be treated with some suspicion.
 
-#### Snowball samples
+### Snowball samples
 
 A snowball sampling approach is used by medical authorities to track down possible sufferers of sexually transmitted diseases. All former contacts of a known sufferer are contacted, if possible, and former contacts of theirs also contacted. Both volunteer and snowball sampling are purposive methods in that no randomisation is employed.
 
-#### Quota samples
+### Quota samples
 
 Another purposive sampling method is that of quota sampling. The idea is to make the sample representative of the population at least for certain variables. The quotas required in the sample may be decided by partitioning the sample into males and females, and also partitioning it by age groupings. The interviewer would be required to find the stipulated number of respondents in each cell of the sample. Although the sample is representative on the given variables, one is not sure how representative it is in terms of the responses obtained. Furthermore, being a purposive sample, it is difficult to make probability statements about estimators.
 
-#### Estimating wild life populations
+### Estimating wild life populations
 
 It would be difficult to estimate the number of deer in a large untamed area such as some parts of the South Island. The target population of deer is very large but also is very hard to locate. One sampling approach would be to use recent deer droppings as a sampling frame, and for researchers to walk in a straight line noting the number of occurrences of droppings in (say) a 2 meter wide path. If the researchers are spaced at intervals of 20 meters then one could assume actual number of droppings of 10 times that obtained in the sample. Further assumptions would be needed to extrapolate from the number of droppings to the number of deer. A more direct approach would be afforded by a **capture-recapture method** in which a sample of animals is captured, tagged, released and then at a later date a further sample is captured. The proportion of tagged animals in this second sample indicates the size of the population. A number of assumptions must be made such as the uniform spread of the tagged animals throughout the areas of the second sampling. The initial capturing may affect the animals in unusual ways, by making them shy tending to avoid capture in future or making them tamer so that they do not fear capture as much on a subsequent occasion. The method of tagging may also be disadvantageous causing stress. Other assumptions need to be made about the distribution of the untagged and tagged animals. A number of different estimators have been suggested to obtain unbiased and efficient estimators of the number of animals in the population.
 
-### Sample Size & Some Practical issues
+## Sample Size & Some Practical issues
 
 @fig-f1-5 shows a fictitious example of how samples of four people are drawn from a population of 20 people.
 
@@ -556,13 +550,11 @@ It would be difficult to estimate the number of deer in a large untamed area suc
 
 In reality, sampling issues are not as simple as in the above example. Most large studies require quite a complex form of sampling involving layered sampling frames and combinations of design strategies. A typical design for an urban study is described below. The first layer consists of 20 regional areas; the second layer consists of all the municipalities within each regional area; the third layer consists of all the suburbs within each municipality; the fourth layer consists of all the city blocks within each suburb and the fifth layer consists of all the households within each city block. Judgement may be used to select only 5 of the 20 regional areas, one typical of the central regions, one each typical of the northern, southern, eastern and western regions. Next a systematic sample of municipalities is chosen (from a list sorted by postal code) for each of these regional areas, a sample of suburbs is chosen (stratified by socio-economic level) within each municipality, a simple random sample of city blocks is chosen within each suburb and a simple random sample of households is chosen within each city block. Such designs aim to be cost effective in terms of producing a representative sample at reasonable cost. However, complex designs require complex analyses, so try to keep things as simple as possible. The important criteria for the selection of an appropriate sample design are stratification, randomisation and cost. Note that non-response also has cost implications in that a survey with a high non-response rate is more costly than a survey with a good response rate. Of course the sample size also has an influence on cost and this provides opportunities for sample design/sample size trade-off. In the following discussion we assume that there is a 100% response rate. In other words sample size refers to the number of (good) sample elements. When only a 50% response rate is expected for a mail survey it means that the number of questionnaires distributed should be double the required sample size.
 
-#### Sample Size
+### Sample Size
 
 Unfortunately, it is the available funds rather than research requirements that often determine what the sample size will be. We will therefore not ask the question How large a sample do we need? Instead we will ask What can a certain sample size $(n)$ do for us? The answer to this question depends on the sample design that is to be used. A quantity called a **design effect** $(d)$, related to the variance of the estimate, is used to measure the quality of a sample design. The larger the design effect (variance), the worse the design in terms of producing representative samples. The design effect is used to compute an **effective sample size** $(e)$ from the actual sample size ${n}$ using the formula ${e=}\frac{n}{d}$. The effective sample size provides a more meaningful indication of the number of independent (useful) responses than the actual sample size. @fig-f1-6 roughly shows the typical ranges for the design effect $(d)$ associated with the various sample designs.
 
-
 ![Crude comparison of effective sample sizes](images/1-6.png){#fig-f1-6}
-
 
 For a simple random sample the design effect is treated as one. So, for a simple random the effective sample size is the same as the actual sample size. Each observation in the sample is doing a full job. You will see that a quota sample typically has a design effect of 2, producing an effective sample size, which is half the actual sample size. This means that each observation in a quota sample is only doing half a job. However, in the case of a stratified random sample, the design effect is typically less than one indicating a very good design and producing an effective sample size that is greater than the actual sample size $(n)$. In this case each observation is working overtime. Clearly a design effect of more than one means that the sample is not as efficient as a random sample would be, while a design effect of less than one means that the sample if more efficient than a random sample would be.
 
@@ -592,7 +584,7 @@ In @fig-f1-7, the effective sample size required for a margin of error of 10% is
 
 The following rule of thumb can be used when sample results are to be generalised to a population. Firstly, if fairly sophisticated (multivariate analysis) is required then the effective sample size should be at least 200. Secondly, there should be at least four sample elements for every variable included in the study. However, this rule and the above formula are irrelevant when the population is relatively small or when we do not wish to generalise our findings to the population. In studies of this nature smaller sample sizes are sufficient. But the relative percentage to the size of the population should be large. For example if the population is of size only 100, an effective sample of size 80 is needed to achieve a certain degree of margin of error when the true population proportion is about 0.5. However, only an effective sample of size 370 is needed for the same margin of error if the population size is 10,000. The effective sample size needs to be increased only to 385 if the population size is 100,000. The moral is that *percentage sampling is a fallacy*, and that the absolute sample size is more important than sampling a fixed percentage of the population.
 
-## Summary
+# Summary
 
 In this Chapter, we have focussed on the problem of collecting data from the whole population, that is the taking of a census. In any data collection, the following questions should be addressed:
 
@@ -629,4 +621,3 @@ In *cluster sampling* the population is divided into clusters; certain clusters 
 Each sampling method has its own estimator which is a weighted sum of all elements in the sample. For simple random, systematic, cluster and proportional stratified sampling, the estimate of the mean is the sample mean.
 
 In this chapter, a number of issues have been raised but many loose ends remain. Simple random sampling is rarely used in practice but it is a standard against which other schemes may be compared. Stratified sampling points to the fact that different strata can be treated differently. One obvious difference, which seems to be contrary to popular wisdom, is that different proportional sample sizes may be chosen, and indeed should be chosen, for the different strata. Cluster sampling emphasises the need to decide on the elements under study, for example the family rather than the individual in TV ratings surveys.
-

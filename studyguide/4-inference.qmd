@@ -1,5 +1,7 @@
+---
+title: "Chapter 4: Statistical Inference"
+---
 
-# Chapter 4: Statistical Inference
 
 > "_All models are wrong, but some are useful._"
 >
@@ -15,15 +17,15 @@
 
 This chapter provides an introduction to statistical inference. Many of the concepts in this chapter should be familiar to you because they are covered in all first-year statistics courses.
 
-## What is statistical inference?
+# What is statistical inference?
 
-### Populations and parameters, samples and statistics
+## Populations and parameters, samples and statistics
 
 Statistical inference is a fundamental concept in statistics. The vast majority of statistical analyses that you will do as an undergraduate involve statistical inference. Anything involving *p*-values, confidence intervals, or standard errors are a form of statistical inference.
 
 :::{.callout-important}
 
-## Statistical inference is: 
+# Statistical inference is: 
 
 the use of information from a sample to make statements about a population.
 
@@ -45,7 +47,7 @@ To clarify some terminology using the example in @fig-inf:
 
 The fact that we've only measured lengths from a sample rather than the whole population necessitates statistical inference. If we'd measured every fish in the farm, we wouldn't need statistical inference, because we'd know precisely the population parameter (assuming negligible measurement error). 
 
-### Sampling Error
+## Sampling Error
 
 This brings us to the next important concept of statistical inference: sampling error. A consequence of having collected data from a sample rather than the whole population is that there is *uncertainty* in our knowledge of the population parameter. Our sample mean is an *estimate* of the population mean; if we wanted to know population mean with zero uncertainty, we'd have to measure all the fish. This is the trade-off of sampling. It's a lot cheaper to sample, but we sacrifice certainty.
 
@@ -70,7 +72,7 @@ Don't worry if those definitions aren't completely clear to you right now, but I
 Now, we'll introduce some specific inference methods. 
 
 
-## Tests for normality
+# Tests for normality
 
 Let's say we have some data and we wish to test the idea that the data came from a population that is normally distributed. The null hypothesis is that the population conforms a normal distribution. We calculate a test statistic that quantifies the degree of *departure* of the data from what we'd expect if the null hypothesis were true, and the population was indeed normal. 
 
@@ -87,7 +89,7 @@ There are several statistical tests for normality available in the literature. T
 
 The Shapiro-Wilk test of normality for the number of people who made use of a recreational facility (**rangitikei**) gives a $p$-value less than 0.001. The null hypothesis is that the data come from a normal distribution. The low $p$-value indicates a significant departure from normality.
 
-### Example: `rangitikei`
+## Example: `rangitikei`
 
 ```{r}
 #| message: false
@@ -139,7 +141,7 @@ ks.test(rangitikei$people, "pnorm")
 
 It is often informative to analyse data by fitting a **statistical model**. The idea is to look for real patterns, "signals" amongst the "noise" of individual variation, patterns that would reoccur in other, hypothetical samples we might have drawn from the population. We often try to approximate patterns by fitting a "statistical model". A A statistical model usually comprises a mathematical formula describing the relationships among variables, along with a probabilistic description of the variation of the data around the formula. If the statistical model is a good approximation, it serves as a neat way of describing the system that generated the data, and we can use such a model  to predict future values of the variables.
 
-### Example: `testmarks`
+## Example: `testmarks`
 
 The data set **tv** consists of the time that 46 school children spent watching television. Before fitting a model to the data, it is a good idea to see whether the data approximately follows a Normal distribution using a normal Q-Q Plot; see @fig-tvdist. The points plotted fall pretty much along the line, suggesting at least approximate Normality.
 
@@ -195,7 +197,7 @@ Clearly all these estimates are close to the true parameter values, but not the 
 
 Without going into details, it turns out that $\bar{y}$ has the smallest possible standard error for any unbiased estimator of $\mu$ for normal data. (An unbiased estimator is one that is not systematically too big or too small.) While the same is *not* true of $S$ in relation to $\sigma$, the latter does have other useful mathematical properties. So these are some reasons for using these formulae so routinely.
 
-## Sampling distributions
+# Sampling distributions
 
 A *sampling distribution* is a probabilistic model of *sampling variation*–it describes the behaviour of some sample statistic (such as a sample mean) if one were to repeat the sampling and calculation of the statistic many many times. The sampling distribution is not known, because we usually only have a single sample. However, we can make certain theoretical assumptions about how a statistic is distributed if one were to repeat the study over and over again. 
 
@@ -262,7 +264,7 @@ Note that, strictly speaking, the $t$ distribution only holds true if the data $
 
 
 
-## Confidence Intervals for Population Mean & $t$-tests
+# Confidence Intervals for Population Mean & $t$-tests
 
 If the batch of data consists of the whole population, the batch mean will be exactly the population mean $\mu$. If the batch is a sample, the sample mean $\bar{y}$ will be an exact summary of the sample, but may not be the same as $\mu$. In fact, if another sample is drawn, a sample mean different to the first will be obtained. The sample mean will not exactly equal the population mean but will vary about it from sample to sample. This variation of the sample mean about the population mean is discussed in every introductory textbook on Statistics and also in Chapter 1 of these notes.
 
@@ -286,7 +288,7 @@ The term $t$ is the appropriate percentile of the $t$-statistic with $n-1$ degre
 
 Be aware that this derivation of the confidence interval means that it is a statistic (that is, a formula based on sample observations) that works for 95% of samples. What we mean is that if we use this formula repeatedly over our lifetime, then on average 95% of the intervals we obtain will be correct (that is, will contain the true mean $\mu$) and 5% of the intervals we obtain will not be correct (that is, will not contain $\mu$). The only way to cut down our error rate is to increase the confidence level, for example use 99% confidence intervals instead, which means using a different value of $t$. The problem with this strategy is that our intervals will always be that much wider, and we do not always need such a high level of confidence. In conclusion, we usually employ 95% confidence intervals unless the context indicates we should use some other level.
 
-For the TV viewing time data, the sample mean = 1729.28 with (estimated) standard deviation = 567.91. Hence the (estimated) standard error of the mean is $S/ \sqrt n = 83.73$. For the sample of size $n = 46$, we have $n-1 = 46-1= 45$ degrees of freedom for the $t$ statistic. We may use either software or use Student's $t$ tables and obtain $t$ ordinate (i.e. quantile) value as 2.01 corresponding to a right tail probability (area) of 0.025; see @fig-normqqsym. Due to symmetry, the area below the $t$ ordinate of $-2.01$ will also be 0.025.
+For the TV viewing time data, the sample mean = 1729.28 with (estimated) standard deviation = 567.91. Hence the (estimated) standard error of the mean is $S/ \sqrt n = 83.73$. For the sample of size $n = 46$, we have $n-1 = 46-1= 45$ degrees of freedom for the $t$ statistic. We may use either software or use Student's $t$ tables and obtain $t$ ordinate (i.e. quantile) value as 2.01 corresponding to a right tail probability (area) of 0.025; see @fig-tquant. Due to symmetry, the area below the $t$ ordinate of $-2.01$ will also be 0.025.
 
 ```{r}
 #| echo: true
@@ -327,7 +329,7 @@ One sided (lower or upper only) confidence bounds can be obtained and the confid
 
 Also note that there many types of statistical intervals available in the literature, and the confidence interval is one such interval which is expected to capture an unknown `parameter` of the population. In our example, we used the mean of the population (parameter). Naturally, we can construct a CI for the median, 90th percentile etc. A prediction interval (which will discuss later on) deals with covering a desired fraction of the population and is different from a confidence interval.
 
-## Hypothesis Testing
+# Hypothesis Testing
 
 > "_… the null hypothesis is never proved or established, but is possibly disproved, in the course of experimentation. Every experiment may be said to exist only to give the facts a chance of disproving the null hypothesis._"
 > 
@@ -339,7 +341,7 @@ These thoughts lead to the more formal idea of hypothesis testing. In hypothesis
 
 :::{.callout-important}
 
-## Two important points to remember about null hypotheses:
+# Two important points to remember about null hypotheses:
 
 - Null (and alternative) hypotheses are **always** about population parameters, and **never** about sample statistics; inferences are always about the population, never about the sample.
 - With a large $p$-value, we **never** say that we have "accepted" or "confirmed" the null hypothesis; we only ever reject or fail to reject a null hypothesis.
@@ -392,7 +394,7 @@ As pointed out by Fisher, our hypothesis testing procedure does not prove or dis
 
 More ideas on hypothesis testing follow in the next section.
 
-### Hypothesis testing for mean
+## Hypothesis testing for mean
 
 For testing the mean of a population, the fact that we have specified a parameter value in $H_0$ enables us to specify a probability distribution, for example that the data are a random sample from N($\mu_0$, $\sigma$). This immediately implies that
 
@@ -466,7 +468,7 @@ When we test many hypothesis in tandem, we are more concerned on the overall or 
 *P hacking* is a phrase used when a particular test or a meta procedure is deliberately chosen either to ensure a low p-value or just to achieve a value below 0.05. 
 
 
-## Inferences for Two Groups
+# Inferences for Two Groups
 
 In an earlier section, we considered confidence intervals and hypothesis tests for the television viewing times of pupils (**tv**). Now this sample can be divided into two groups, viewing times for boys and viewing times for girls. The boxplots in @fig-tvdistsex indicate that the median viewing time for boys (Sex=1) is less than for girls (Sex=2) although the spread of times is greater for the group of boys. The slopes in the normal quantile plot also confirms the differing spread.
 
@@ -498,7 +500,7 @@ We see that average number of minutes per week of television watched is 1668 for
 
 We are assuming that we have information about the samples and wish to make inferences about the populations. In particular, we wish to make inferences about the difference in population means, ($\mu _{1}-\mu _{2}$), from the difference in sample means, $\bar{y}_{1} -\bar{y}_{2}$, and the variances of the two samples, $S_{1}^{2}$ and $S_{2}^{2}$.
 
-### Hypothesis tests for two groups
+## Hypothesis tests for two groups
 
 The null hypothesis is that population means of the two groups are equal (written as $H_0:\mu_1 = \mu_2$ or $H_0:\mu_1-\mu_2=0$). The alternative hypothesis is that the population means of the two groups are different (i.e., $H_0:\mu_1\neq \mu_2$ or $H_0:\mu_1-\mu_2\neq0$). Note that when the two population means are different either $\mu_1>\mu_2$ or $\mu_1<\mu_2$.
 
@@ -538,7 +540,7 @@ t.test(TELETIME~SEX, data=tv)
 
 Based on the EDA evidence seen in @fig-tvdistsex, we may take a conservative stand and prefer the unpooled two-sample $t$-test (which is also known as Welch Two Sample t-test). The $t$-value of -0.72 is not unusual as the probability of getting such an extreme value under the null hypothesis is $p=0.47$. In other words, we cannot reject the null hypothesis; we accept it until we have more evidence to the contrary. Hence the conclusion of the $t$-test is that the mean TV viewing times can be regarded as the same for the population of boys and girls. Alternatively there is no statistically significant gender effect on TV watching for boys and girls of Standards 2 to 4.
 
-### Confidence Intervals for the Difference in Means
+## Confidence Intervals for the Difference in Means
 
 The 95% Confidence Interval for the difference $\left(\mu _{1} -\mu _{2} \right)$ in population means is given by:
 
@@ -554,7 +556,7 @@ $-122 \pm2.021\times\sqrt{\frac{648^{2}}{23}+\frac{482^{2}}{23}}$ or $(-462.3, 2
 
 The $t$-test output for the null hypothesis $H_{0}:\mu _1=\mu _2$ (or $(\mu _1-\mu _2)= 0)$ gives the confidence interval too. Notice that the CI actually includes zero as a possible value. This means that it is possible $(\mu_1-\mu_2)=0$; so we cannot reject the null hypothesis.
 
-### Paired $t$ test
+## Paired $t$ test
 
 Note that the two-sample data may be simply paired observations. For instance, a measurement may be made on the left and right eyes of the same person. If observations are paired in some way, a one-sample $t$-test on the difference $\left(X_{i} ,Y_{i} \right)$ will suggest whether the true mean of the differences can be regarded as zero or not. Such a test will be more powerful than a two sample $t$-test because of the correlation between the paired observations. If the correlation is weak, it is desirable to ignore the pairing variable and perform a two-sample $t$-test.
 
@@ -582,7 +584,7 @@ The paired $t$-test or the one-sample $t$-test on the difference in scores gives
 t.test(testmarks$Maths, testmarks$English, paired=T)
 ```
 
-## Transformations
+# Transformations
 
 A **transformation** is a function that is applied to each observation in a data set to make the distribution of the data symmetric (or even normal if possible). There are several reasons for this:
 
@@ -594,7 +596,7 @@ A **transformation** is a function that is applied to each observation in a data
 
 Of course for much statistical inference we don't need the data to be normal itself, but can rely on the central limit theorem. But results based on the CLT will be more dependable if the data are at least symmetric, or can be made symmetric, as we shall see in an example. Thus in this chapter we shall be mainly concerned with transforming data to symmetry (with perhaps a secret longing that the data will be almost normally distributed).
 
-### Transformation and shape
+## Transformation and shape
 
 When considering data, we may decide to use the measurements as they are, or we may rescale them. For example, we may change them to percentages of the total. As a simple example, consider a town with four stores in which the weekly turnovers are one, two, four and eight thousand dollars. These could be rescaled to percentages of the total (which is 15).
 
@@ -648,7 +650,7 @@ gridExtra::grid.arrange(p1, p3, p2, p4, ncol=2)
 In this chapter, we focus on transformations involving just one variable (though perhaps more than one batch of data on that variable). **Our goal is to change the shape of a distribution** to make it more symmetric. Consider the two distributions in @fig-transf in which (a) is skewed to the left and (b) to the right. These could be made more symmetric by stretching the large values in (a) but shrinking them in (b).
 
 
-### The Ladder of Powers
+## The Ladder of Powers
 
 From now on we assume that the data are very skewed, and we wish to transform it, (or, in Tukey's terms, re-express it) to be as symmetrical as possible. A simple approach considers the data raised to different powers, that is, if the original data are $x$ and the new data are $y$,
 
@@ -708,7 +710,7 @@ gridExtra::grid.arrange(p1,p3,p2, p4, ncol=2)
 
 As an example, the boxplots in @fig-rangitransf represent the number of vehicles at the two Rangitikei river locations (from **rangitikei**). The first boxplot shows the square of the number of vehicle, which is highly right-skewed. The second boxplot shows the raw data (vehicle) which are still skewed towards the larger values. So to squash these to make the distribution more symmetric, the ladder of powers suggests we could try a square root transformation, or a stronger one such as the logarithm (or reciprocal root). These are shown in the third and fourth boxplots.
 
-### Checking the adequacy of a transformation
+## Checking the adequacy of a transformation
 
 Since the purpose of transforming the data is to make it more symmetric, we need to decide if we have achieved this goal. One approach which has been suggested is to consider the difference mean-median where the vertical lines stand for "the absolute value of" which means we ignore a negative sign if it occurs. If the batch is symmetric then the mean equals the median so that the difference mean - median= 0. We could design a measure, D, of symmetry by standardising it. That is, we divide this difference by a measure of spread - we could choose either the standard deviation or the F spread, whichever is at hand. These choices give the so-called **D-Statistics**:
 
@@ -744,7 +746,7 @@ The D-statistics D1 and D2 presented above suggest that the natural log would be
 
 Having chosen the transformation it is a good idea to check it graphically using a **mids vs. spreads plot**. The plot in @fig-rangilval shows a consistent upward trend in the untransformed (raw) data (right-skewed). Again a general upward trend is seen for squared data indicating that the skewness is not fully corrected. The square root data still shows the positive trend, which means that the transformation has failed to correct the skew in the non-middle 50% of the data. For logged data, the mids vs. spread plot shows a random scatter of points. This confirms the conclusion from the D statistic that the log transformation works well to correct the skew in the non-middle part of the data. Note that we may also compute the D-Statistics using the IQR in place of F-spread and the results will often be similar.
 
-### Some Words of Caution About Transformations
+## Some Words of Caution About Transformations
 
 1.  The D values can be compared for the same data set but we should be wary of comparing the D value from one data set with that of another (possibly transformed) data set.
 
@@ -760,7 +762,7 @@ Having chosen the transformation it is a good idea to check it graphically using
 
 7.  Note that there are several other transformation functions available. For example, transformations such as arcsine are useful for proportion data.
 
-### Box-Cox Normalising transformations
+## Box-Cox Normalising transformations
 
 A systematic approach to power transformations was developed by @boxcox and @boxcox2. Their method produces a log-likelihood curve of possible values for the power $\lambda$. Without going into details, the higher the curve is for a particular value of $\lambda$, the more normal the transformed data will be. The plot of the log-likelihood curve of the Box-Cox method applied to the vehicle data is shown in @fig-rangibox.
 
@@ -779,7 +781,7 @@ The curve peaks near zero indicating that a log transformation would be appropri
 
 The Box-Cox method, and other power transformations, should only be applied if the data are strictly positive. If all the data are negative one can of course take the absolute value of the data and then apply the transformation. If, however, only some of the data are not positive, we may add a constant to all of the data (to make the data positive) but the estimated power will vary depending on the constant.
 
-## Transformations for Inference
+# Transformations for Inference
 
 If we have a sample of data of size 30 or more from a homogeneous population preferably symmetrically distributed, the central limit theorem allows us to calculate a confidence interval for the population mean, $\mu$. If the population is skewed, then we will need a larger sample to find the "correct" confidence interval for $\mu$; the greater the skewness, the larger the sample size needed. However, when the population is skewed, even if we have a large enough sample size to obtain the "correct" confidence interval for $\mu$, we must ask ourselves just how useful the population mean is as a description of the centre (or location) of the population. As an example, consider a skewed theoretical distribution known as the *lognormal* distribution. This distribution is related to the normal distribution. If a variable follows the lognormal distribution, then the log of the variable follows the normal distribution. @fig-lnorml shows the density curve for the log normal distribution with $\mu=0$ and $\sigma=1$.
 
@@ -824,7 +826,7 @@ This procedure works because the median is a *monotonic* function with respect t
 The distribution of vehicles in the **rangitikei** dataset is not symmetrical but very much skewed to the right with a probable outlier. The sample size 33 is only just above 30. It is of interest to compute the confidence interval for the true mean number of vehicles using the raw data (even though the CLT cannot be fully applied here). Using software, we obtain the 95% confidence interval for the mean as 13.1154 $\leq$ $\mu$ $\leq$ 29.3694.
 
 
-## Transformations to Constant Variance
+# Transformations to Constant Variance
 
 For one batch of data, it is relatively easy to choose an appropriate transformation for symmetry. With more than one batch of data, life is more complicated. On the one hand the symmetry of each batch could be examined, and various transformations tried quite separately. However it may then be very difficult to compare and interpret the batches. On the other hand, if each batch is skewed in the same direction, we may be able to apply a common transformation so that each batch becomes symmetric, or close to it.
 
@@ -913,7 +915,7 @@ rangitikei |>
 
 If groups are skewed in different directions, we may not be able to find a common variance stabilizing transformation.
 
-## Nonparametric Methods
+# Nonparametric Methods
 
 In this section we outline an alternative to using power transformations as a method of preparing the data for hypothesis testing. The alternative approach usually relies on replacing the actual observed data values by their **ranks**. That is, the smallest data value is replaced by '1', the second smallest by '2', and so on up to the largest data value replaced by '$n$'. If there are several data with the same value (known as *ties*) then they are all assigned the average rank they would have gotten if they had received a tiny random increment before being placed in order: for example if the $3^{\text{rd}}$, $4^{\text{th}}$,${5^\text{th}}$ and ${6^\text{th}}$ smallest data values are all the same, then the four corresponding points are all assigned rank 4.5, which is the average of 3, 4, 5 and 6. We then analyse the ranks as if they are the original data.
 
@@ -923,7 +925,7 @@ The rank approach in some ways seems like a bad idea, as we are throwing away in
 
 -   On the other hand if the data are not normally distributed, then the nonparametric tests are still powerful but the normal-theory methods can go wrong. So we are safer using a nonparametric method. The second justification, on a bit more of a philosophical level, is that if we honestly do not know what the distribution is, then we are probably wise not to pretend that any transformation is going to make it Normal. After all some data are collected on very odd scales indeed (e.g. optometry refers to '20/20 vision' etc.), so that the data are just ordinal rather than numerical. In such a context rank methods may be appropriate as they pick up on ordinal difference rather than exact numerical difference.
 
-### Ranking and rank Correlation
+## Ranking and rank Correlation
 
 A nonparametric approach used very frequently, especially in the social sciences, is the **Spearman's Rank Correlation**. To calculate it, first rank the $X$ and $Y$ variable, and then obtain usual correlation (the so-called Pearson correlation) coefficient. If there are a great many ties in the ranks then various corrections or modifications to the Spearman method have been suggested, but these are beyond the scope of this course. In principle then, one could simply apply the usual data analysis techniques to the $W= \text {rank}(Y)$ data and quote the $p$-values accordingly. We don't usually do this in simple analyses, for reasons outlined below, but let's explore this idea for a moment. @fig-spear shows the usual Pearson (lower diagonal) and Spearman rank correlations (upper diagonal) for the *trees* default `R` dataset.
 
@@ -947,7 +949,7 @@ For example, a two-group hypothesis test would be based on computing $W$ for all
 
 In practice there are a couple of complications. One is that for small samples the distribution of $W=\text {rank}(Y)$ is not Normal because it is discrete, taking only integers or averages of integers. But fortunately mathematical statisticians have long since worked out the exact distribution of $W$ for many simple situations including two-sample tests, one-way ANOVA, two-way ANOVA with balanced numbers, correlation coefficients (e.g. the correlation between $\text {rank}(Y)$ and $\text {rank}(X)$) and some others. So these exact distributions can be used for hypothesis tests, and are available. The second complication is that these exact distributions for $W= \text {rank}(Y)$ usually depend on the assumption of no ties, i.e. no equal ranks. Since ties do often occur in practice (if only because data are not measured exactly enough) then we need to use methods that are modified or corrected to handle ties. Fortunately the use of a software handles such issues as a matter of course in many cases, so it doesn't take any extra time or effort on our behalf.
 
-### Wilcoxon signed rank test
+## Wilcoxon signed rank test
 
 For the nonparametric equivalent of a one-sample $t$-test for $H_0:\mu= \mu_0$, we use the **Wilcoxon signed rank test** for $H_0: \eta=\eta_0$ where $\eta$ (Greek letter 'eta') is the population median. Effectively this test is based on rank $(|Y-\eta_0|)$, where the ranks for data with $Y<\eta_0$ are compared to the ranks for data with $Y>\eta_0$. If the $\eta_0$ is in about the right place, then the distances to points above $\eta_0$ will tend to rank approximately the same as the distances to points below $\eta_0$. But if median is assumed too low, say, then the distances above $\eta_0$ will tend to be bigger (ranked higher) than the distances to points below $\eta_0$. A statistical test (Wilcoxon test) and the associated $p$-value follow. In theory, this test assumes a continuous symmetric distribution, but a correction is available in the case of ties. The following output shows the two-sample $t$ test and Wilcoxon test results for testing the equality of median number of people for the time of day groups (morning & afternoon).
 
@@ -957,7 +959,7 @@ wilcox.test(rangitikei$people ~ rangitikei$time, conf.int=T)
 
 The `t.test(rangitikei$people~rangitikei$time)` test also gives the same conclusion for the equality of means.
 
-### Sign test
+## Sign test
 
 There is an additional one-sample test available called the one-sample **sign test**, which is based on replacing $Y$ not by $\text {rank}(Y)$ but simply by the *sign* of $Y-\eta_0$, i.e. whether it is positive or negative. This replacement represents an additional loss of detail in the data, but also requires no assumptions. The resulting test is based on a binomial distribution. For example, consider the television viewing time data. Suppose we wish to test the hypothesis that children watch 4 hours of television per day on average (1680 minutes per week). The one-sample sign test output follows:
 
@@ -967,7 +969,7 @@ wilcox.test(tv$TELETIME, mu=1680, conf.int=T)
 
 Notice the Wilcoxon test has about the same $p$-value as the Normal-based $t$-test. However as it assumes symmetry the estimated median is the same as the sample mean. The $p$-value for the sign test is similar, but not the same as the others, and the estimated median is the same. The Wilcoxon and Sign test procedure can also be used to generate approximate 95% confidence intervals for the median. Note that these are based on the sorted sample data, and so are discrete, so it is usually not possible to get exact 95% confidence intervals. Both intervals are wider than the confidence interval based on the mean. The loss of precision (longer interval) is reasonable as we are making much weaker assumptions.
 
-### Wilcoxon Rank-Sum or Mann-Whitney test
+## Wilcoxon Rank-Sum or Mann-Whitney test
 
 As an alternative to the two-sample $t$-test is the **Wilcoxon Rank-Sum test** (also mathematically equivalent to a test known as the **Mann-Whitney test**). The assumptions of the test are that the data are continuous (or at least ordinal) from populations that have the same shape (e.g. same skewness and same variance) but just (possibly) different medians. For this test, the entire set of responses is ranked together and then the ranks for the first group are compared to the ranks for the second group. The null hypothesis is that the two group medians are the same: $H_0: \eta_1=\eta_2$. The following `R` output shows the Wilcoxon Rank-Sum test results.
 
@@ -977,7 +979,7 @@ kruskal.test(tv$TELETIME ~ factor(tv$SCHOOL))
 
 Again since our data are normally distributed we expect to get a similar result for the Mann-Whitney test as for the two-sample $t$-test of equal means $\mu_1=\mu_2$. This is indeed the case.
 
-## Permutation and bootstrap tests
+# Permutation and bootstrap tests
 
 The computationally intensive alternatives to non-parametric methods are also available. Such tests are popular in certain application areas. We will cover them at a basic level only but these are not too hard to perform using `R` packages.
 
@@ -1006,7 +1008,7 @@ wilcox.test(x = testmarks$Maths,
 
 There is a close theoretical connection between randomisation type and nonparametric tests. So the results are often similar when the same size is large.
 
-### Bootstrap methods
+## Bootstrap methods
 
 When a random sample is taken from a population, the expectation is that it is representative. So why not sample from the sample (i.e. resample) so that the quality of how well the sample is representative can be examined. We cannot gain extra information hugely by ordinary resampling and it is more like moving forward pulling the bootstrap! The methodology bootstrapping or resampling was introduced by @efron. This computational intensive procedure can be implemented very mechanically and simpler. By computing the sampling distribution of a statistic of interest, issues such as its bias and the standard error can be addressed.
 
@@ -1074,7 +1076,7 @@ The bootstrap test conclusion again agrees with the Welch two-sample t-test conc
 
 You will not be examined on the use of permutation and bootstrap tests in the final exam. We may occasionally use this approach for assignments.
 
-## Summary
+# Summary
 
 The Normal distribution is important not only in its own right as a model for data, but because it plays a basic part in confirmatory statistics. Indeed the $t$, $F$ and $\chi^2$ statistics we will use in the rest of this course all assume that the populations are Normal. The sample under study will not follow exactly a Normal distribution but we will often require it to be at least approximately symmetric.
 

@@ -10,6 +10,6 @@ format:
     documentclass: scrreprt
     cite-method: biblatex
     toc: true  
-    number-sections: true
+    number-sections: false
 
 bibliography: references.bib

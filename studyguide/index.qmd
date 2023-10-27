@@ -1,4 +1,6 @@
-# Preface {.unnumbered}
+---
+title: "Preface"
+---
 
 > "_Statistics is the grammar of science._"
 >
@@ -6,9 +8,9 @@
 
 In this course, principles and techniques will be considered of collecting, displaying, and analysing data. The Study Guide covers the basic types of sets of numbers, namely single batches, two or more batches, related batches and data in tables. It contains Exploratory Data Analysis (EDA) techniques for displaying data, fitting a model, and considering transformations of variables so that the data better fit the assumptions of the models. The Study Guide also contains some methods for testing hypotheses, namely $t$, $F$ and $\chi^2$ tests; and some thoughts on the collection data.
 
-The essence of Exploratory Data Analysis, or EDA, is to search for clues by whatever graphical or numerical means seem appropriate and even though these methods are often easy to understand, it is useful to have a computer at hand to perform the computations and draw graphs. EDA has come into vogue in recent years, the most well-known proponent of these methods being John @tukey1977 of Princeton University. EDA can be likened to detective work where data are studied carefully to provide clues. Some of the techniques employed are quite old and date back to the nineteenth century and beyond when researchers collected information in an organised way and displayed it in tables and graphs. Other techniques are of more recent origin and have been developed to more easily discern peculiarities and trends in data and to provide robust methods of fitting models to data, and these methods not being overly sensitive to restrictive assumptions.
+The essence of Exploratory Data Analysis, or EDA, is to search for clues by whatever graphical or numerical means seem appropriate and even though these methods are often easy to understand, it is useful to have a computer at hand to perform the computations and draw graphs. Methods for EDA have developed very quickly over the past few decades. John @tukey1977 likened EDA to detective work where data are studied carefully to provide clues. Some of the techniques employed are quite old and date back to the nineteenth century and beyond when researchers collected information in an organised way and displayed it in tables and graphs. Other techniques are of more recent origin and have been developed to more easily discern peculiarities and trends in data and to provide robust methods of fitting models to data, and these methods not being overly sensitive to restrictive assumptions.
 
-Inferential statistics[^1] has seen huge progress in the last 50 or so years since we've had fast computers. Inference uses probability models to test hypotheses and estimate parameters while quantifying uncertainty. These procedures lie at the heart of all quantitative science, and can be likened to the way a detective evaluates evidence for competing theories. Regression and Analysis of Variance models are covered in the later part of the study guide, where we will use both EDA and inferential statistics. Topics such as time series analysis, nonparametric methods, and experimental design are presented only briefly. It is intended that these sections will give you an idea of how advanced modelling or analysis can be done.
+Inferential statistics[^1] has also seen huge progress in the last 50 or so years since we've had fast computers. Inference uses probability models to test hypotheses and estimate parameters while quantifying uncertainty. These procedures lie at the heart of all quantitative science, and can be likened to the way a detective evaluates evidence for competing theories. Regression and Analysis of Variance models are covered in the later part of the study guide, where we will use both EDA and inferential statistics. Topics such as time series analysis, nonparametric methods, and experimental design are presented only briefly. It is intended that these sections will give you an idea of how advanced modelling or analysis can be done.
 
 [^1]: Inferential statistics is sometimes called "Confirmatory Analysis", but I'm not a fan of this term. Real scientists acknowledge that there is always uncertainty, and we can never really "confirm" anything! 
 
@@ -21,7 +23,7 @@ Data analysis is best learned by practice—exploring, summarising, plotting, an
 > — Preface to *Exploratory Data Analysis*, John W. @tukey1977
 
 
-## What is Data Analysis? 
+# What is Data Analysis? 
 
 -   **DATA can be defined as NUMBERS + STORY** - This reminds us that
     numbers have no meaning in themselves but depend on the reasons why
@@ -37,7 +39,7 @@ Data analysis is best learned by practice—exploring, summarising, plotting, an
     make and other such considerations. We will take the view that the
     best approach to a problem is to view it in more than one way.
 
-## Approaches to Analyses
+# Approaches to Analyses
 
 -   **Describe the Data** - Our first approach to data will be to describe
     them pictorially or by summary statistics. At times, this will be
@@ -61,7 +63,7 @@ Data analysis is best learned by practice—exploring, summarising, plotting, an
     the data.
 
 
-## Models and Data 
+# Models and Data 
 
 The following explanation of Prof. George Box succinctly summarises the link between data and models; see <https://williamghunter.net/george-box-articles/statistics_as_a_catalyst_to_learning>
 
@@ -83,7 +85,7 @@ The following explanation of Prof. George Box succinctly summarises the link bet
 >Data: Yes. Here it is!
 
 
-## Some Dichotomies about this course 
+# Some dichotomies of this course 
 
 -   **Theory versus Applications** Data and applications are the
     cornerstones of this course but occasionally we must introduce some

@@ -95,18 +95,6 @@ p1+p2
 
 ```
 
-## Stem-and-leaf display
-
--   Preserves the raw data (approximately) as well as shows the distribution
--   Data summaries are basically displayed
--   I haven't seen these used anywhere since highschool!
-
-```{r,  warning=FALSE, message=FALSE, comment=NA }
-library(aplpack)
-set.seed(1234)
-stem.leaf(rnorm(50, mean=100))
-```
-
 ## Histograms
 
 Divide the data range into "bins", count the occurrences in each bin, and make a bar chart.
@@ -121,14 +109,18 @@ dfm <- data.frame(X=rnorm(50, 100))
 library(ggplot2)
 p1 <- ggplot(dfm, aes(X))+ 
   geom_histogram(bins = 20) +
-  ggtitle("Heights sum to n")
+  ylab("Count") + 
+  ggtitle("Frequency histogram", 
+          "Heights of the bars sum to n")
 p2 <- ggplot(dfm, aes(X))+ 
   geom_histogram(bins = 20, aes(y = (..count..)/sum(..count..))) + 
-  ylab("relative frequency") +
-  ggtitle("Heights sum to 1")
+  ylab("Relative frequency") +
+  ggtitle("Relative frequency histogram",
+          "Heights sum to 1")
 p3 <- ggplot(dfm, aes(X))+ 
   geom_histogram(bins = 20, aes(y=..density..)) +
-  ggtitle("Heights x widths sum to 1")
+  ggtitle("Density histogram",
+          "Heights x widths sum to 1")
 library(patchwork)
 p1+p2+p3
 ```
@@ -160,6 +152,10 @@ p1+p2
 
 
 ```
+## Kernel density estimation (KDE)
+
+![](../img/kde.gif)
+
 
 ## Summary statistics for EDA
 
@@ -254,7 +250,7 @@ vital1 |>
            label = c("Min or\n1.5*IQR", 
                      "'Lower hinge'\nQ1", 
                      "Median\nQ2", 
-                     "'Lower hinge'\nQ3",
+                     "'Upper hinge'\nQ3",
                      "Max or\n1.5*IQR")) +
   theme_minimal()
 ```

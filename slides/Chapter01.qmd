@@ -111,13 +111,31 @@ We call these **random variables** (often denoted with an upper case letter, $X$
 -   All arithmetic manipulation can be done
 -   Length is ratio because 20 mm is twice as long as 10 mm.
 
-## Data Collection: Census, Survey & Experiments
+## Data Collection: Survey, Experiment, Census 
 
--   In a **census**, every element of the population is contacted, counted, and other information collected or evaluated.
+::::{.columns}
 
--   In a **survey**, data is collected from a *sample* of the population. A sample is a subset of the larger population of interest.
+:::{.column width="65%"}
 
--   **Experiments** are a special type of data collection which involves actively applying a *treatment* to a sample; some variable (drug, temperature, exercise regime, or other treatment) has been manipulated to study its effects.
+-   We collect data from the world to get information about patterns and processes. 
+
+-   Most datasets contain a subset, a **sample**, of a much bigger population of interest.
+      
+      +   We may conduct a **survey** to collect a sample of data from different places, times, people, or organisms. We would rarely survey all of them.
+      
+      +   We might conduct an **experiment** where we take a sample of elements (people, organisms, objects) and apply some **treatment** in a lab (e.g., drug, temperature, exercise regime, or other treatment) to study its effects.
+
+-   If we are not dealing with a sample, if *every* element of the population of interest is represented in the dataset, we call this a **census** rather than a **sample**. 
+
+:::
+
+:::{.column width="35%"}
+
+![](img/sampling_variation2.gif)
+
+:::
+
+::::
 
 ## Measurement issues
 
@@ -134,8 +152,7 @@ We call these **random variables** (often denoted with an upper case letter, $X$
 
 -   Indirect measures
 
-    -   For example, is Body Mass Index (BMI) a good measure of fitness?
-    -   temperature - gauged by expansion of mercury!
+    -   For example, we use Body Mass Index (BMI) as a measure of condition, and we measure temperature with the expansion of mercury.
 
 ## Non-response
 
@@ -217,7 +234,7 @@ If we were to take 1000 different samples, we'd get 1000 different means.
 ## Bias *vs* sampling variance
 
 ::: columns
-::: {.column width="40%"}
+::: {.column width="50%"}
 A method used to estimate $\hat{\theta}$ a population parameter $\theta$ is called an ***estimator***. An estimator includes the study design, methods of data collection, and mathematical operations.
 
 ***Sampling variance*** is the sample-to-sample variation in an estimator.
@@ -225,7 +242,7 @@ A method used to estimate $\hat{\theta}$ a population parameter $\theta$ is call
 ***Bias*** is when our estimator *doesn't get it right on average*. That is, the average of estimates over $\infty$ samples is not centred on the population parameter; $\text{Mean}(\hat{\theta}) \neq \theta$.
 :::
 
-::: {.column width="60%"}
+::: {.column width="50%"}
 ![](img/bullseye.png)
 :::
 :::
@@ -234,18 +251,38 @@ An estimator can have high/low sampling variance and high/low bias.
 
 ## Principle of randomisation
 
+::::{.columns}
+
+:::{.column width="65%"}
+
 -   We want our sample to be representative of (and have similar properties to) the population. The most straightforward way to do this is through *randomisation*.
 
--   We randomise data collection to avoid **bias**. If we (consciously or subconsciously) tended to chose the largest fish for our sample, we'd get an upwardly biased estimate of the lengths.
+-   We randomise the selection of objects for our sample to avoid **bias**. If we (consciously or subconsciously) tended to chose the largest fish for our sample, we'd get an upwardly biased estimate of the lengths.
 
--   *EPSEM* (equal probability of selection) is the simplest way of random sampling.
+-   Simple random sampling or *EPSEM* (equal probability of selection) is the gold standard of random sampling.
+:::
+:::{.column width="35%"}
+![](img/rolling-dice.jpg)
+:::
+::::
 
 ## Simple Random Sampling (SRS)
 
--   **Random** - refers to the *process* not *outcome*
 
+::::{.columns}
+:::{.column width="50%"}
+-   **Random selection of elements** 
+
+    -   "Random" refers to the *process* not *outcome*
     -   Each (sampling) unit has same chance of being selected
     -   Units can be selected with & without replacement
+
+
+:::
+:::{.column width="50%"}
+![](img/random_sample.png)
+:::
+::::
 
 -   SRS is easy to handle; suits even for a poor sampling frame
 
@@ -253,14 +290,27 @@ An estimator can have high/low sampling variance and high/low bias.
 
 -   SRS estimates are more variable than some alternatives
 
-![](img/random_sample.png)
+:::{.absolute top=270 right=50 style="font-size: 50%;"}
+[Smith et al. (2017)](https://doi.org/10.1111/ecog.02821)
+:::
+
 
 ## Stratified Random Sampling (STRS)
+
+
+::::{.columns}
+:::{.column width="50%"}
+
 
 -   Suitable for *heterogeneous* populations
 
 -   Population is divided into relatively homogeneous groups called *strata* and a random sample is taken from each *stratum*.
 
+:::
+:::{.column width="50%"}
+![](img/stratified_sample.png)
+:::
+::::
 -   Sampling Approaches
 
     -   Sample the larger strata more heavily (suits when all the strata are equally variable)
@@ -271,16 +321,15 @@ An estimator can have high/low sampling variance and high/low bias.
     -   leads to efficient estimation That is, the variance (of an estimate) is usually less than that of SRS
     -   sample is spread throughout population
 
-## Stratified Random Sampling (STRS)
-
--   Suitable for *heterogeneous* populations
-
--   Population is divided into relatively homogeneous groups called *strata* and a random sample is taken from each *stratum*.
-
-![](img/stratified_sample.png)
+:::{.absolute top=270 right=50 style="font-size: 50%;"}
+[Smith et al. (2017)](https://doi.org/10.1111/ecog.02821)
+:::
 
 ## Cluster sampling
 
+
+::::{.columns}
+:::{.column width="50%"}
 -   A convenient method of sampling
 
 -   population is composed of *clusters* (groups)
@@ -288,10 +337,21 @@ An estimator can have high/low sampling variance and high/low bias.
 -   Select certain clusters (randomly) and collect measurements from a random selection of the elements within the chosen clusters
 
 -   Larger variance than SRS!
-
+:::
+:::{.column width="50%"}
 ![](img/cluster_sample.png)
+:::
+::::
+
+:::{.absolute top=270 right=50 style="font-size: 50%;"}
+[Smith et al. (2017)](https://doi.org/10.1111/ecog.02821)
+:::
 
 ## Systematic Random sampling (SyRS)
+
+
+::::{.columns}
+:::{.column width="50%"}
 
 -   Select every $k^{th}$ element!
 
@@ -302,21 +362,30 @@ An estimator can have high/low sampling variance and high/low bias.
     -   Variance of estimates - generally greater than those of SRS
 
     -   Inefficient/inappropriate, if cycle or trend is present
-
+:::
+:::{.column width="50%"}
 ![](img/systematic_sample.png)
+:::
+::::
+
+:::{.absolute top=270 right=50 style="font-size: 50%;"}
+[Smith et al. (2017)](https://doi.org/10.1111/ecog.02821)
+:::
 
 ## Other Sampling methods
 
 -   Probability proportional to size (PPS)
-    -   e.g. sampling high-value companies more likely than low-value companies
+    -   e.g., sampling high-value companies more likely than low-value companies
 -   Multistage
-    -   e.g. 1st stage - cluster; 2nd stage - SRS
--   Volunteers
-    -   e.g. Blood donors...
-    -   randomisation?
--   Haphazard / opportunistic / snowball / purposive
-    -   e.g. Study of HIV/AIDS patients...
-    -   randomisation?
+    -   e.g., first stage - cluster; second stage - SRS
+
+-   Non-probability sampling methods
+
+    -   Haphazard / opportunistic / volunteer; take what you can get! 
+    -   Snowball; get your participants to find new participants
+    -   Purposive; select items with certain characteristics; e.g., patients with particular symptoms
+
+-   Non-probability samples are often treated as random, requiring the assumption that the sample is representative. The validity of this assumption should be carefully considered.
 
 ## Some sampling methods
 

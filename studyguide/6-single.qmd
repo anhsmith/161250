@@ -1,10 +1,11 @@
-
-# Chapter 6: Models with a Single Continuous Predictor
+---
+title: "Chapter 6: Models with a Single Continuous Predictor"
+---
 
 > "*The sciences do not try to explain, they hardly even try to interpret, they mainly make models. By a model is meant a mathematical construct which, with the addition of verbal interpretations, describes observed phenomena. The justification of such a mathematical construct is solely and precisely that it is expected to work.*"<br>
 > — von Neumann
 
-## Modelling bivariate data
+# Modelling bivariate data
 
 In this section, we consider straight line relationships between two variables. We learn how to fit simple regression and robust lines. The later fit to data is not affected by extreme or unusual data points. As a natural outgrowth of this fitting procedure, a method of testing for linearity emerges.
 
@@ -53,7 +54,7 @@ Finally we note that there are at least three reasons for fitting a model:
 
 3.  The estimates of coefficients, $a$, $b$ etc., may have particular meanings and may **help to direct future policy or theory**.
 
-## Simple Regression
+# Simple Regression
 
 This section gives some theory/maths behind the simple regression, and there is no need to remember any of the formulae presented.
 
@@ -103,7 +104,7 @@ If $n$ is not small and $x_0$ is near the centre of the distribution of $X$, the
 
 We consider the data set **horsehearts** and discuss simple regression analysis.
 
-### Displaying & Interpreting the Fitted Model
+## Displaying & Interpreting the Fitted Model
 
 It is fairly easy to display fitted simple regression line on a scatter plot; see @fig-simpreg1 and the `R` codes shown below:
 
@@ -168,7 +169,7 @@ The $t$-statistic is clearly large enough to be considered significant for $(n-2
 
 We can also carry out a similar $t$-test for the $y$-intercept $\alpha$ based on the $t$-statistic $$t = \frac {a}{s_a}= \frac{-2.00034}{0.55881}=-3.58.$$ but the main interest is in the slope parameter $\beta$. See @tbl-fittedmodel.
 
-### Model Summaries
+## Model Summaries
 
 Many of the model summary measures can be obtained for assessing the quality of the fitted model using the `glance()` function from the `broom` package (@tbl-modelsumry).
 
@@ -308,7 +309,7 @@ library(lessR)
 reg(WEIGHT~EXTDIA, data=horsehearts)
 ```
 
-### Prediction and Estimation
+## Prediction and Estimation
 
 Recall that the fitted value for the weight of a heart with an *extdia* value of 15.0mm was 2.5kg. This value can be interpreted as the predicted weight of a horse heart with *extdia* = 15mm, or as the estimated of all horse hearts with *extdia* = 15mm. The 95% confidence limits for the **mean** response for the mean weight of horses hearts with *extdia* = 15mm is given by $\left(2.26kg,2.72kg\right)$. However the weight of **any** individual heart with *extdia* = 15mm could (with the same confidence) be as low as 0.98kg or as high as 4.00kg (the prediction interval being (0.98kg, 4.00kg). Notice that the approximate PI formula works as well here: $s$ = 0.7403 and so 2.50 $\pm$ (2 $\times$ 0.74) = (1.0kg, 4.0kg). Note that manual computation of the prediction intervals is harder, and we prefer to use `R` for this.
 
@@ -369,7 +370,7 @@ library(visreg)
 visreg(lm(WEIGHT~EXTDIA, data=horsehearts),)
 ```
 
-## Residual Analysis for Regression
+# Residual Analysis for Regression
 
 A careful examination of the residuals indicates how well a model fits the data and also helps to identify shortcomings and possible ways of improving the model fit. In this section, we review some of the points to notice and use them to improve fitted simple as well as multiple regression models covered in the next Chapter.
 
@@ -706,7 +707,7 @@ In summary, residuals give important information about the fit of a model and ho
 
 4.  Plotting the residuals against the order of the data allows us to check whether successive values are independent of one another, and hence may reveal further relationships in the data.
 
-### Improving Simple Regression
+## Improving Simple Regression
 
 If the fitted simple regression is rather poor, what can be done?
 
@@ -759,7 +760,7 @@ These values also support the model based on the negative reciprocal cubic root 
 **(c) Add other explanatory variables to the model**\
 This will cause the $R^{2}$ to increase (although we may decide that the increase is not worth the effect of making the model more complicated). We will study multiple regression models having two or more predictors in the next chapter.
 
-## Robust Model Fitting
+# Robust Model Fitting
 
 The regression fit by the least squares method can be affected by outliers. If data are explored using scatterplots, then we often obtain which of the observations are suspicious or appear to be rogue.
 
@@ -941,7 +942,7 @@ lmrob(English ~ Maths, data = testmarks) |> summary()
 
 The slope estimates are similar for the above robust fits. The standard error of the estimated y-intercept is usually large. The slope of the line being the important parameter, we may conclude that the fitted slope of 0.72 is the robust value.
 
-### Cross Validation (CV)
+## Cross Validation (CV)
 
 This technique is commonly employed for validating models for prediction purposes. The available data is split randomly into $k$ (equal) folds (parts), often by resampling. A model is fitted for the $(k-1)$ folds of the data, and then the prediction errors are calculated for the fold that was omitted for modelling. This process can be repeated omitting one subset (out of the $k$ subsets) so that all the $k$ subsets contribute to the estimation of prediction accuracy. This exercise is computationally intensive, and hence we will leave it to the software package such as *caret*, *rsample* or *modelr* to perform the cross validation. Consider the simple regression of WEIGHT on EXTDIA done with the horsesheart data. The following `R` code perform the 5-fold cross validation of the model for prediction purposes and compare the root mean square errors for both the regression and robust regression models.
 
@@ -1029,7 +1030,7 @@ ggplot(dfm) +
 
 ```
 
-### Models Related to Simple Regression Model
+## Models Related to Simple Regression Model
 
 For some applications, the true $y$-intercept $\alpha$ is *known* to be zero. An example is when a model is fitted with compositional characteristics as predictors such as percentage fat, protein, moisture in milk powder. The sum of these compositional characteristics is always 100% and this constraint removes the intercept due to theoretical reasons. In such cases, we will be fitting only the slope(s). When the model without the $y$-intercept is the true or correct model, both the fitted models (with and without the $y$-intercept) provide unbiased estimates of the true parameters. However the model without the intercept will provide precise estimates. This regression model without the intercept must be used with caution because a very strong assumption is made on the true $y$-intercept. The first differences of certain time series data may be analysed with a model having no intercept term.
 
@@ -1056,7 +1057,7 @@ ggplot(testmarks) +
 
 A number of relationships between variables can be linearised by transformations. For example, the relationship $y=\alpha x^{\beta }$ is linearised by taking $\log$ on both sides as $$\log (y)=\log (\alpha )+\beta \log (x).$$ The methods discussed in this chapter will equally apply for models which can be rewritten as a straight line equation.
 
-## Summary
+# Summary
 
 Once a model is fitted to data, the question must be asked as to whether the fit is a good one. Perhaps it would be more in keeping with the spirit of statistical tests to ask if the fit is bad. The fitted model is of the general form
 

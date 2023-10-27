@@ -1,75 +1,82 @@
+---
+title: "Chapter 2: Exploratory Data Analysis (EDA)"
+---
 
-# Chapter 2: Exploratory Data Analysis (EDA)
-
-> *"Data has no meaning apart from its context."*
-> 
+> *"Data has no meaning apart from its context."*<br>
 > — Walter A Shewhart
 
-> *"How do all these unusuals strike you, Watson?"*<br>
-> *"Their cumulative effect is certainly considerable,and yet each of them is quite possible in itself"*
-> 
-> — Sherlock Holmes & Dr. Watson,<br>
-> _The Adventure of the Abbey Grange_
+> *Sherlock Holmes: "How do all these unusuals strike you, Watson?"*<br>
+> *Dr. Watson: "Their cumulative effect is certainly considerable,and yet each of them is quite possible in itself"*<br>
+> — Sir Arthur Conan Doyle, _The Adventure of the Abbey Grange_
 
-## What is EDA?
+# The two modes of data analysis
 
-Exploratory Data Analysis (EDA) is just not producing various graphical displays. Exploratory analysis is detective in character, and even called as quantitative and graphical detective work by John @tukey1977 in his book. As in a detective story, the circumstances surrounding a crime can be accidental. In other words, confirmatory analysis, which is judicial in character and relies on statistical models, must follow after EDA. EDA is the foundation which uncovers indications or clues for confirmatory analysis.
+Exploratory Data Analysis (EDA) is exactly as it sounds: the process of exploring a data set, usually by visual examination, calculating summary statistics, and making tables and graphical displays. Exploratory analysis was likened to detective work by John @tukey1977 in his seminal book. As in a detective story, the circumstances surrounding a crime can be accidental; it is important to keep in mind that not all patterns that you see in a sample data set will reflect true patterns in the population. 
 
-The best way to learn EDA is trying out many things and finding which works and which doesn't. Experts remark that we often learn less from an expertly done analysis than from one where something is missed out by not trying.
+When analysing data, it is important to keep front of mind the purpose of the analysis. One can distinguish between the following two broad modes of analysis:
 
-@Chatfield listed the following guidelines for tackling statistical problems.
+- **Exploratory** or **hypothesis-generating analyses** are about *discovering new patterns*. Such analyses are typically rather unstructured exploration by summarising data and making tables and graphs, without any preconceived ideas about what might be found. The purpose is often to produce better understanding of a system, and is a good way of generating new hypotheses that can be tested with subsequent data/experiments. 
 
-1.  Do not attempt to analyse the data until you understand what is being measured and why. Find out whether there is prior information such as are there any likely effects. Find out how the data were collected.
+- **Confirmatory** or **inferential** or **hypothesis-testing analyses** are about *testing a priori ideas*. The ideas about what patterns would be present in the data were known to the analyst *prior to seeing the data*, often in accordance with some scientific theory about the mechanistic processes in the system under study. These analyses often take the form of fitting statistical models and performing formal hypothesis tests, and evaluating evidence for particular effects.
 
-2.  Look at the structure of the data.
+Here's the important part: one must no report an exploratory analysis as though it was a confirmatory analysis. In other words, if an exploratory data analysis leads you to a new scientific hypothesis, do not report this as though it were an *a priori* hypothesis that you then tested with those data. This is scientifically dishonest and is a major contributor to the replication crisis in science [@ioannidis_why_2005]. Taking a hypothesis that occurred to you after seeing patterns in the data, and *using that same data to test that hypothesis*, is a form of circular reasoning. The strength of any evidence obtained in this way is much weaker than if one tests a bona fide *a priori* hypothesis.
 
-3.  The data then need to be carefully examined in an exploratory way before attempting a more sophisticated analysis.
+To address the issue of testing hypotheses with the same data that generated them, scientists are increasingly encouraged to publically *preregister* their scientific hypotheses before the data are even collected [@nosek_preregistration_2018]. This guarantees that there was no "data snooping" for patterns prior to hypothesis testing.
 
-4.  Use your common sense at all times.
+So, if you have any *a priori* ideas and hypotheses about what patterns you might see in the data (e.g., the mean of $y$ will be higher for group $A$ than group $B$), before you look at or even collect the data, it is wise to write them down or, better still, formally preregister them. This will help clarify the purpose of the analysis, and reduce the risk of misrepresenting your results.
 
-Evidently the above rules warn that data analysis can never be a cook book recipe, and the role and experience of the analyst is important in making sense of data and providing interpretations. If data analysis can be reduced to a unique set of rules, then it shouldn't be hard to write a computer program which will do all the analysis and interpretations for us. Statistical thinking in the context of the data is important for interpreting the results and making useful tentative conclusions.
+From the [Center for Open Science website](https://www.cos.io/initiatives/prereg):
 
-@Boxonscience remarked that data analysis can be viewed as a sub-iterative step in the process of scientific investigation illustrated below: $$\boxed{{\text {Tentative Model}}} \begin{array}{c} {Inference\to } \\ {\leftarrow Criticism} \end{array}\boxed{{\text {Tentative Analysis}}}$$ In the inferential stage, the analyst acts as a sponsor for the model. Conditional on the assumption of the truth of the model, the best statistical procedure is selected. EDA is essential to justify the assumptions of the model. After completing the analysis, the analyst turns to a critic (from being the sponsor of the model). Contrary to the assumptions made, the model may be faulty in one or more ways. Hence appropriate diagnostic checks are applied involving various kinds of residual analysis. EDA is important for such model criticism. In subsequent chapters, you will find further EDA tools for model criticism.
+> Preregistration separates *hypothesis-generating* (exploratory) from *hypothesis-testing* (confirmatory) research. Both are important. But the same data cannot be used to generate and test a hypothesis, which can happen unintentionally and reduce the credibility of your results. Addressing this problem through planning improves the quality and transparency of your research. This helps you clearly report your study and helps others who may wish to build on it. For instructions on how to submit a preregistration on OSF, please visit our help guides.
 
-After a data set has been collected, the next stage of a statistical analysis involves using descriptive techniques to understand the nature of the data in relation to the problems in hand. Descriptive techniques include: summary statistics, tables, and graphs. Employing these methods is commonly referred to as exploratory data analysis (EDA).
+![](../img/confexpl.png)
 
-EDA can be thought of as being comprised of four stages: the data familiarisation stage, the error checking stage, the data understanding stage, data visualisation and analysis stage. The last stage of analysis requires experience and involves creativity to find a key to a problem or discovering something new which is not known before the analysis.
+Of course, *hypothesis-generating* (exploratory) and *hypothesis-testing* (confirmatory) modes of analysis are by no means mutually exclusive. Calculating summary statistics and making tables and plots are an important part of inferential analyses, and one can use inferential statistics (e.g., confidence intervals) to summarise patterns seen in exploratory analyses.
 
-## Some basics before EDA
+See [this blog post](https://statmodeling.stat.columbia.edu/2022/09/06/exploratory-and-confirmatory-data-analysis/) by Andrew Gelman for more on how the two modes fit together.
 
-Before one can even think of analysing a data set, one must be familiar with the data. At the very least, one must know:
+# The basics of Exploratory Data Analysis
+
+Following @Chatfield, here are some guidelines for tackling statistical analyses.
+
+1.  Make sure you understand the structure of the data, including what was measured, how, and why. 
+
+2. Write down the purpose of the analysis in the form of aims, research questions, and/or hypotheses, and make a plan for how to test any formal hypotheses, including evaluating the validity of assumptions.
+
+3.  Critically examine the data to check for errors, inconsistencies, and mismatches with the structure of the data as you understand it.
+
+4. Explore the data with summary statistics, tables, and plots.
+
+5. Conduct any inferential statistical analyses. Use statistics, tables, and plots to 
+
+    a) check the assumptions of the analysis and 
+    b) summarise the results.
+
+6. Be honest and use common sense.
+
+As discussed in Chapter 1, one must be congnisant to how the data were collected and any sampling biases that may be present. What is the population of interest, and is the sample representative of that population? Were the methods of recording the data accurate? Finally, what exactly does each variable represent? Are the variables contained in the data direct measurements of the variable of interest, or merely convenient surrogates?
   
-  1.  what population can we make inferences about based on this data,
-
-2.  what sampling strategy was used, and
-
-3.  how are the variables in the data set recorded, and are they directly measuring the quantities of interest?
+## Error checking
   
-  As discussed in Chapter 1, one must be alert to sampling biases that may result in the sampled data being drawn from a different population to the stated population of interest. Particular care is needed if one is using data from another source (e.g. a similar study commissioned at a different location).
+  The data are assumed to be in some sort of electronic form; e.g. text file, spreadsheet, database, etc. Before analysing the data, it is prudent to check for mistakes in the data. If one has access to the raw data (e.g. returned questionnaires), one can check observations by hand. If the raw data are not available, then the best one can do is to look for observations whose values are out of allowable ranges, or are very suspicious. A common problem occurs with the coding of missing information. Missing values are commonly recorded as a blank, `*`, `-1`, `-999`, or `NA`. Only one type of coding should be used. The use of `NA` is preferred since this is easier to spot. The use of blanks is particularly dangerous when one is exporting data from a spreadsheet to a text file. When the data from the text file is read into a computer package, a missing value may be skipped and the value from the next observation read in its place. When the data set is large, looking at a data set one observation at a time may not be feasible. In this case, plotting the data may show any observations with illegal values.
 
-The sampling strategy is also crucial to which inferences can be made. For instance, if the data were sampled with a gender stratified design assuming 50% of the population was female, no inference can be made about the percentage of each gender; this has been fixed by the sampling strategy.
-
-We should also know which measuring devices were used to collect the data; in particular, their accuracy, and whether or not they are susceptible to any biases.
-
-Finally, what exactly does each variable record? Are the variables contained in the data the actual variables we are interested in, or merely convenient surrogates?
+## Understanding data
   
-### Error checking
+After any data errors have been found and corrected, the data understanding stage commences. This stage involves tabulating, summarising, and plotting the data in many ways to gain insight into the data set. We typically want to: 
   
-  The data are assumed to be in some sort of electronic form; e.g. text file, spreadsheet, database, etc. Before any time is expended on analysing the data set, it is prudent to check if the data have been recorded correctly. If one has access to the raw data (e.g. returned questionnaires), one can check each observation by hand. If the raw data are not available, then the best one can do is to look for observations whose values are out of allowable ranges, or are very suspicious. A common problem occurs with the coding of missing information. Missing values are commonly recorded as a blank, `*`, `-1`, `-999`, or `NA`. Only one type of coding should be used. The use of `NA` is preferred since this is easier to spot. The use of blanks is particularly dangerous when one is exporting data from a spreadsheet to a text file. When the data from the text file is read into a computer package, a missing value may be skipped and the value from the next observation read in its place. When the data set is large, looking at a data set one observation at a time may not be feasible. In this case, plotting the data may show any observations with illegal values.
+  - examine the distributions, or shapes, of individual variables; 
+  - compare different groups of data, with special emphasis on location and scale; 
+  - and discover any trends and relationships exhibited between pairs of variables. 
 
-### Understanding data
-  
-  After any data errors have been found and corrected, the data understanding stage commences. This stage involves tabulating, summarising, and plotting the data in many ways to gain insight into the data set. We typically want to: examine the distributions, or shapes, of individual variables; compare different groups of data, with special emphasis on location and scale; and discover any trends and relationships exhibited between pairs of variables. During this procedure, plots are typically constructed for ones own understanding. Excessive time should not be spent on the stylistic appearance of the plots, e.g. adding elaborate titles, axis labels, legends, etc. This will be done in the data presentation stage.
+Again, don't fall into the trap of **data snooping**, where you develop and test hypotheses with the same data. For instance, suppose that boxplots of the income of individuals in different age groups show that youngest and oldest age groups are the most different. If one elects to perform the hypothesis test for the difference between these two groups based on observations made during EDA, the resulting $p$-value is not valid.
 
-There is a danger, at this stage of the analysis, to fall into the trap of **data snooping**. Data snooping is the practice of selecting hypotheses to test based on the results of the EDA, and then testing them on the same data. For instance, suppose that boxplots of the income of individuals in different age groups show that youngest and oldest age groups are the most different. If one elects to perform the hypothesis test for the difference between these two groups based on the EDA, the resulting $p$-value will not be valid. Why is this so? The $p$-value is the probability that the observed difference between the groups is as large as it is by chance; in this case the difference we have observed is the largest of several inter-group distances. As such, the probability that it exceeds a certain value by chance is larger than the $p$-value reported by a test that assumes there are only two groups. However, if we had decided to perform this particular test before performing the results of the EDA the resulting $p$-value will be valid.
+In the sections below, we briefly review many common tools used to visualise data during EDA.
 
-In the forthcoming sections, a quick review of many of the common data visualisation tools useful for EDA is presented.
+# Categorical Data
 
-## Categorical Data
+There are many methods for examining categorical variables. We will explore several methods, including tables, bar charts, dot plots, and pie charts. These tools are covered in foundation courses and hence we will briefly review them.
 
-There are many methods for examining data that is categorical in nature. We will explore several methods, including: tables; bar charts; dot charts; and pie charts. These tools are covered in foundation courses and hence we will briefly review them.
-
-### Bar chart
+## Bar chart
 
 The rules for constructing a bar chart are very simple and perhaps they can be reduced to a single rule and that is to make the *height of each bar proportional to the quantity displayed*. Consider the dataset **Snodgrass** available in the `R` package `archdata`. This dataset contains information on the size, location and contents of 91 house pits at the Snodgrass site which was occupied between about CE 1325-1420. The variable names and their description are given below:
   
@@ -105,7 +112,11 @@ theme_set(theme_bw())
 #| label: fig-barchart
 #| fig-cap: 'Bar Chart of Ceramics counts'
 data(Snodgrass, package = "archdata")
-ggplot(Snodgrass, aes(x=Ceramics)) + geom_bar()
+
+Snodgrass |> 
+  ggplot() + 
+  aes(x = Ceramics) + 
+  geom_bar()
 ```
 
 The bar graph illustrates clearly that no ceramics were found in many houses but a lot were found in a few houses. This may be due to status and wealth of the occupants.
@@ -154,39 +165,39 @@ p4 <- ggplot(Snodgrass) +
 gridExtra::grid.arrange(p1, p2, p3, p4, ncol=2)
 ```
 
-It is easy to spot that the Ceramics findings were largely from the first segment. This EDA conclusion can be drawn from all of the above plots. However, these bar plots do not rate the same as a "presentation style graphic". For example, colour can be a distraction. If you are reading this notes in printed form, the colours used may not be clear to you.
+It is easy to spot that the Ceramics findings were largely from the first segment. This EDA conclusion can be drawn from all of the above plots. However, these bar plots do not rate the same as a "presentation style graphic". 
 
 Tufte (2001) argues in favour of certain principles of graphical integrity for presentation style graphics. These are:
   
-  1.  the representation of numbers in a graph should be directly proportional to the numbers themselves;
+1.  The representation of numbers in a graph should be directly proportional to the numbers themselves;
 
-2.  Clear, detailed, and thorough labelling should be used to defeat graphical distortion and ambiguity;
+2.  Clear and detailed labels should be used to prevent ambiguity;
 
 3.  Provide explanations and important events pertaining to data on the graphic itself;
 
-4.  the graph should display data variation, not design variation, i.e. visual changes in the graph should be due to changes in the data, not changes in way the data are drawn;
+4.  The graph should display data variation, not design variation—visual changes in the graph should be due to the data, not changes in way the data are drawn;
 
-5.  the number of dimensions used in the graph should not exceed the number of dimensions in the data;
+5.  The number of dimensions used in the graph should not exceed the number of dimensions in the data;
 
-6.  graphs must not quote data out of context, e.g. a monthly drop in the murder rate of a city should be plotted within the context of the murder rate over the last few years, or murder rates in comparable cities over the same period.
+6.  Graphs must not quote data out of context; for example, a monthly drop in the murder rate of a city should be plotted within the context of the murder rate over the last few years, or murder rates in comparable cities over the same period.
 
-A final point concerns the use of colour. In many sorts of graphs, data types are differentiated by the use of colour. This practice is perfectly legitimate, but one should be aware that a surprising proportion of people have impaired colour perception, e.g. they cannot distinguish red and green. Also, a graph that is printed in colour may be photocopied as black and white. A remedy to these problems is to use different plotting symbols, line types, or shading, in conjunction with different colours. One should always make sure that the colours selected are clearly visible in the medium in which they are presented, e.g. colours on a computer monitor can appear quite different when projected onto a screen in a lecture theatre, or when printed onto paper.
+A final point concerns the use of colour. In many sorts of graphs, data types are differentiated by the use of colour. This practice is perfectly legitimate, but one should be aware that a surprising proportion of people have impaired colour perception, such as being unable to distinguish between red and green (see [here](https://cran.r-project.org/web/packages/colorBlindness/vignettes/colorBlindness.html) for colourblind-friendly pallettes). A remedy to these problems is to use different plotting symbols, line types, or shading, in conjunction with different colours. One should always make sure that the colours selected are clearly visible in the medium in which they are presented. Colours on a computer monitor can appear quite different when projected onto a screen in a lecture theatre, or when printed onto paper. 
 
 According to @Tufte2001, a good graphical display should:
   
-  1.  display the data;
+1.  Display the data;
 
-2.  encourage the viewer to concentrate on the substance of the data, in the context of the problem, not on the artistic merits of the graph;
+2.  Encourage the viewer to concentrate on the substance of the data, in the context of the problem, not on the artistic merits of the graph;
 
-3.  avoid distorting, intentionally or unintentionally, what the data have to say;
+3.  Avoid distorting, intentionally or unintentionally, what the data have to say;
 
-4.  have a high data to ink ratio, i.e. convey the greatest amount of information in the shortest time with the least ink in the smallest space;
+4.  Have a high data to ink ratio; that is, convey the greatest amount of information in the shortest time with the least ink in the smallest space;
 
-5.  enable one to easily compare different pieces of data;
+5.  Enable one to easily compare different pieces of data;
 
-6.  reveal overall trends and patterns in the data that are not obvious from viewing the raw numbers;
+6.  Reveal overall trends and patterns in the data that are not obvious from viewing the raw numbers;
 
-7.  reveal detailed information secondary to the main trend, e.g. the location of outliers, variability of the response.
+7.  Reveal detailed information secondary to the main trend; for example, the location of outliers, variability of the response.
 
 This Chapter is largely concerned with EDA for discovery of patterns and peculiarities in a dataset. So we will not be too worried if the graphs produced are not aesthetically pleasing or does not meet a particular standard for a presentation style graph.
 
@@ -196,9 +207,9 @@ In addition, a poorly made graph can be deceptive. This is a problem both in the
 
 Another pitfall is to use a clever graphic rather than one that clearly presents the data. The classic example of this is a pictogram, where pictures of varying size represent some quantities. Pictograms are often drawn dishonestly: to show a two-fold difference, each side of the picture is increased by a factor of two, so the area is in fact increased by a factor of four. Dishonesty in data presentation is clearly unacceptable. But even an honest pictogram is usually not the best way to present data. It is difficult to accurately judge differences between areas; which is what a pictogram asks the viewer to do.
 
-### Pie Charts
+## Pie charts
   
-  Pie charts are a popular, though poor, way of presenting data. Like bar charts, they frequently use a large figure to represent just a few numbers. Pie charts also have a poor accuracy of decoding. That means people's impression of the difference in size between two pie slices is often quite different from the actual difference in size. Pie charts use angles to represent percentages; people tend to underestimate the size of acute angles and overestimate the size of obtuse angles (Stevens, 1957). The exploded pie chart makes it more difficult to accurately compare pie slices: the exploded piece always appears bigger. The three dimensional pie chart is even worse. Bar charts, dot charts, or tables should be preferred to pie charts.
+Pie charts are a popular, though usually rather poor, way of presenting data. Like bar charts, they frequently use a large figure to represent just a few numbers. Pie charts also have a poor accuracy of decoding. That means people's impression of the difference in size between two pie slices is often quite different from the actual difference in size. Pie charts use angles to represent percentages; people tend to underestimate the size of acute angles and overestimate the size of obtuse angles (Stevens, 1957). The exploded pie chart makes it more difficult to accurately compare pie slices: the exploded piece always appears bigger. The three dimensional pie chart is even worse. Bar charts, dot charts, or tables should be preferred to pie charts.
 
 Count summaries of two categorical variables can be displayed in the form of a mosaic plot.
 
@@ -247,11 +258,9 @@ A doubledecker plot is used to handle many factors. These plots become harder to
 doubledecker(Effigies~Inside+Segment,  data=Snodgrass)
 ```
 
-<!-- For a number of other presentation style graphics, see http://vita.had.co.nz/papers/prodplots.pdf -->
+# Numerical Data
 
-## Numerical Data
-
-### Dotplot
+## Dotplot
 
 One of the simplest kinds of graph for a numerical variable is the single line (or one dimensional) graph. Each observation is represented by a point (or a star `*` or a dot `.`) on the line. These graphs can be useful to see the rough distribution and gaps, if any, in the data. @fig-dot1 shows a dotplot of Length of the house pits for the Inside and Outside groupings. Evidently privileged tribes lived inside in general, and the length of their dwellings is longer.
 
@@ -286,34 +295,11 @@ ggplot(Snodgrass) +
   coord_flip()
 ```
 
-### Stem-and-Leaf
+## Histograms
 
-Stem plots are useful for raw data collection when done manually. These plots preserve the raw rounded data and can show the distribution and gaps. A simple version stem-and-leaf display for the Length data is shown below.
+The histogram is a standard method of showing the distribution of a quantitative variable. A histogram is made by dividing the range of a variable into "bins" and counting the number of data points that fall within each bin. It is like a bar chart after forcing a quantitative variable into bins. It can be used for discrete ungrouped data, but a bar chart is generally more suitable for discrete data because histograms can mislead the reader into thinking that values exist other than at the centre of the intervals. 
 
-```{r}
-stem(Snodgrass$Length, scale = 2)
-```
-
-This plot essentially shows the rounded data depending on the `scale` selected. Compare the stem plot with the sorted raw data shown below. Also explore the stem plot by changing the `scale` value.
-
-```{r}
-sort(Snodgrass$Length)
-```
-
-An enhanced version of the stem and leaf plot can be obtained using the `R` package `aplpack`. Try:
-
-```{r, results='hide'}
-library(aplpack)
-stem.leaf(Snodgrass$Length)
-```
-
-You will notice that this enhanced plot indicates the stem in which the median is located. This is shown in the first column enclosing the number of observations in this stem by parentheses. For a batch of 91 numbers, the median is the 46th observation namely 14.5. This number falls in the median stem indicated as (13). The other numbers on the left indicate the cumulative counts from the lowest stem or from the largest stem. Thus, the numbers 2, 3, 6, 10, 22, 33 indicate that many observations up to, and including, that particular stem.
-
-In summary, stem-and-leaf displays contain much information, so much so that, at times, they seem 'busy' and messy. If they are carefully studied, they can reveal the overall shape of the distribution and peculiarities such as gaps, the number of modes and the position of the median. Peculiar values are also apparent.
-
-### Histograms
-
-A stem-and-leaf display contains so much information that it may appear cluttered. A simpler display can be formed by drawing blocks over the class intervals **so that the areas of the blocks are proportional to the frequencies in the intervals**. The resulting display is called a **histogram** and is a very common type of display. Histograms are designed for continuous data or when discrete data has been grouped. It can be used for discrete ungrouped data, but a bar chart would be more suitable as such a display does not mislead the reader into thinking that values exist other than at the centre of the intervals. @fig-hist1 shows the histogram of Length. Clearly the distribution is far from symmetric and left skewed. The bimodal pattern also suggests subgrouping.
+@fig-hist1 shows the histogram of `Length`. Clearly the distribution is far from symmetric and left skewed. The bimodal pattern also suggests subgrouping.
 
 ```{r}
 #| echo: true
@@ -322,26 +308,61 @@ A stem-and-leaf display contains so much information that it may appear cluttere
 
 ggplot(Snodgrass) + 
   aes(x = Length) + 
-  geom_histogram(bins=12, color="black", fill="white")
+  geom_histogram(bins=12, 
+                 color="black", 
+                 fill="white")
 ```
 
 Notice that a different shape of histogram may result depending on the class intervals (bins) used (that is by choosing different class widths or different midpoints of the classes). This suggests that it may be wise to draw more than one histogram for a given data set particularly if statements are to be made about modes or gaps in the data. The guideline for the maximum number of intervals, $L$, can follow the same formula as for stem-and-leaf displays. Some software use the @Sturges formula namely $$\texttt{bin width} = \frac {\texttt{range}(x)} {\log_2(n)+1}.$$ For fixing the width of the bins, the range of the data is divided by the sum of one and the base two logarithm of the sample size.
 
-Histograms reveal similar patterns as stem-and-leaf displays but they are not as cluttered because they do not show the individual values.
+There are a few ways to scale the y-axis of a histogram, as shown in @fig-threehist:
 
-It is sometimes helpful to divide the frequency by the sample size to obtain **relative frequencies** . These have the advantage that they sum to unity so that they are closely linked to the probabilities which have the same two basic properties namely (i) Each probability is non-negative, and (ii) The sum of the probabilities = 1. It is easy to plot a relative frequency histogram in place of a frequency one, since this does not alter the shape but merely changes the scale (which is now relative frequency per horizontal unit). @fig-hist2 shows the relative frequency (density) histogram of Length.
+(a) **Frequency histograms** show the counts in each bin; the heights of the bars sum to $n$. 
 
-```{r}
-#| echo: true
-#| label: fig-hist2
-#| fig-cap: 'A typical relative frequency histogram'
+(b) **Relative frequency histograms** show the proportions or percent of data in each bin—the counts in each bin divided by the total; the heights sum to 1 or 100%.
 
-ggplot(Snodgrass) + 
-  aes(x = Length) + 
-  geom_histogram(bins=12, 
-                 aes(y=after_stat(density)), 
-                 color="black", 
-                 fill="white")
+(c) **Density histograms** show the densities; the areas (heights $\times$ widths) of the bars sum to 1. 
+
+
+```{r,  warning=FALSE, message=FALSE}
+#| fig-height: 4 
+#| fig-width: 10
+#| fig-cap: "Three types of histograms"
+#| label: fig-threehist
+
+p1 <-  Snodgrass |> 
+  ggplot() + 
+  aes(x = Length) +
+  geom_histogram(bins = 20) +
+  ylab("") + 
+  ggtitle("(a) Frequency histogram", 
+          "Heights of the bars sum to n")
+
+p2 <-  Snodgrass |> 
+  ggplot() + 
+  aes(x = Length) +
+  geom_histogram(
+    bins = 20, 
+    mapping = aes(y = after_stat(count / sum(count)))
+    ) + 
+  ylab("") +
+  ggtitle("(b) Relative frequency histogram",
+          "Heights sum to 100%") + 
+  scale_y_continuous(labels = scales::percent)
+
+p3 <-  Snodgrass |> 
+  ggplot() + 
+  aes(x = Length) +
+  geom_histogram(
+    bins = 20, 
+    mapping = aes(y = after_stat(density))) +
+  ylab("") + 
+  ggtitle("(c) Density histogram",
+          "Heights x widths sum to 1")
+
+library(patchwork)
+
+p1 + p2 + p3
 ```
 
 If, instead of drawing blocks over the class intervals as in a histogram, we join the mid points of the tops of the bars, we obtain a display known as a **frequency polygon** . If we use relative frequencies, it is a **relative frequency polygon**; see @fig-hist3.
@@ -352,21 +373,40 @@ If, instead of drawing blocks over the class intervals as in a histogram, we joi
 #| fig-cap: 'A typical frequency polygon'
 
 ggplot(Snodgrass) + 
-  aes(x = Length) + 
-  geom_freqpoly(bins=12, 
-                aes(y=after_stat(density)),
-                color="black")
+  aes(x = Length, y = after_stat(density)) +
+  geom_freqpoly( bins = 12, color = "black")
 ```
 
-Graphs such as the one shown in @fig-hist3a are often preferred in biological sciences and other disciplines where a 'smooth curve' is preferred to the boxy histogram representation or to a frequency polygon.
+@fig-hist3a shows a kernel density plot, which is a method that produces a smoother density line. 
+
 
 ```{r}
 #| echo: true
 #| label: fig-hist3a
 #| fig-cap: 'A typical smoothed density curve'
 
-ggplot(Snodgrass) + aes(Length) + geom_density()
+Snodgrass |> 
+  ggplot() + 
+  aes(Length) + 
+  geom_density() + 
+  geom_rug(alpha = .3, colour = "darkorange2")
 ```
+
+
+::: {.content-visible unless-format="pdf"}
+
+Kernel Density Estimation (KDE) is generated by dropping a little mini-distribution, usually a normal curve, on each individual point and summing them up (@fig-kdegif).
+
+![A demonstration of kernel density estimation](../img/kde.gif){#fig-kdegif}
+:::
+
+::: {.content-visible unless-format="html"}
+
+Kernel Density Estimation (KDE) is generated by dropping a little mini-distribution, usually a normal curve, on each individual point and summing them up (@fig-kdepng).
+
+![A demonstration of kernel density estimation; there's a coloured normal kernel for each of the data points, and they sum to the grey density.](../img/kde.png){#fig-kdepng}
+
+:::
 
 These smooth plots are also useful to see the type of skewness involved, multimodality (several peaks) and unusual observations (or outliers). The disadvantage is that we may over-smooth and mask some of the subgrouping patterns; see @fig-hist4. Even though the two distributions appear to be similar, the length distribution for the Inside group has a larger mean/median etc (called the location parameters).
 
@@ -375,12 +415,14 @@ These smooth plots are also useful to see the type of skewness involved, multimo
 #| label: fig-hist4
 #| fig-cap: 'Identification of Subgrouping'
 
-ggplot(Snodgrass) + 
-  aes(x = Length, colour = Inside) + 
+Snodgrass |> 
+  ggplot() + 
+  aes(x = Length, 
+      colour = Inside) + 
   geom_density()
 ```
 
-### Theoretical Distributions
+## Theoretical Distributions
 
 A histogram gives a general picture of the frequencies or relative frequencies of the data. If an observation is taken at random from the population from which the sample was drawn, the chance of it falling in any one of the class intervals should be approximately proportional to the area of the block over that interval (not exactly proportional because the histogram was only based on a sample from the population, not the population itself).
 
@@ -388,7 +430,7 @@ If we could draw a histogram for the whole population, then the probabilities wo
 
 Discrete data also have probability distributions and the bar graph gives a general picture of its shape. One commonly occurring discrete theoretical distribution is known as the **Poisson distribution** and approximates reasonably well the numbers of road accidents over a fixed time period. The main feature of a Poisson distribution is that there is a peak at the nearest integer below or equal to the average, and then a steady falling off. The mean is a parameter of the model, so we want our exploratory techniques to tell us about the mean, and to help us decide whether or not the Poisson model is appropriate for a given set of data. Theoretically, possible values are any whole positive numbers, but large numbers of accidents are very unlikely. Again, any graphical method we use must properly display the discrete nature of Poisson data. The other commonly adopted discrete distribution is the binomial distribution. This distribution is valid when the individual outcomes are classified into two categories such as Success and Failure.
 
-## Summary Statistics and their display
+# Summary Statistics and their display
 
 For a small to moderate size batch of numbers, the stem-and-leaf display may reveal at a glance all of the peculiarities in the data. However it is useful, particularly for large batches, to calculate some statistics which capture the main features of the data. These are called **summary statistics** and they help us to gain an overall picture without being distracted by some individual peculiarities. You must be familiar with the common summary statistics such as mean, median, standard deviation etc.
 
@@ -414,18 +456,30 @@ For EDA purposes, @tukey1977 suggested to generate further positional summaries 
 median(Snodgrass$Length)
 ```
 
+## Symmetry plots
+
 A symmetry plot is based on the distance of left and right side points. If the underlying distribution is symmetric, the points on the left and right side would be roughly equidistant from the median. For the length data, we obtain the symmetry plot after writing a little `R` function as follows:
 
 ```{r, echo=TRUE}
 symmetryplot <- function(x)
 {
+  require(ggplot2)
+  
   x <- na.omit(x)
   m <- length(x) %/% 2
   sx <- sort(x)
-  dfm <- tibble(X= median(x) - sx[1:m], Y=rev(sx)[1:m] - median(x))
-  p1 <- ggplot2::ggplot(dfm, aes(x=X, y=Y)) + geom_point()
-  p1 <- p1 + geom_line(aes(x=X, y=X)) + theme(aspect.ratio=1)
-  p1+xlab("Distance below median")+ylab("Distance above median")
+  dfm <- tibble( 
+    X = median(x) - sx[1:m], 
+    Y = rev(sx)[1:m] - median(x)
+    )
+  
+  dfm |> 
+    ggplot() + 
+    geom_point(mapping = aes(x=X, y=Y)) + 
+    geom_line(mapping = aes(x=X, y=X)) + 
+    theme(aspect.ratio=1) + 
+    xlab("Distance below median") + 
+    ylab("Distance above median")
 }
 ```
 
@@ -433,7 +487,7 @@ symmetryplot <- function(x)
 symmetryplot(Snodgrass$Length)
 ```
 
-The points do not plot about the $Y=X$ or $45^\circ$ line but diverge from it, which indicates lack of symmetry.
+The points do not follow the $45^\circ$ line where $Y=X$; divergence from this line indicates a lack of symmetry.
 
 If each half of the distribution is further divided in halves, we obtain the **fourths** or( **hinges**), as the medians for the lower and upper halves. The end points, the minimum and the maximum are called the lower and upper **extreme** values, respectively.
 
@@ -444,27 +498,79 @@ The `R` function obtains the set (minimum, lower hinge, median, upper hinge, max
 fivenum(Snodgrass$Length)
 ```
 
-A **boxplot** (or sometimes a *box-and-whisker plot*) is a visual display of the 5-number summary using which we can assess the skew in the data. The components of a boxplot is explained in @fig-boxplt.
+## Box plots
+
+A **boxplot** (or sometimes a *box-and-whisker plot*) is a visual display of the five-number summary, which can be used to assess the skew in the data. The components of a boxplot are explained in @fig-boxplt.
+
 
 ```{r}
 #| echo: false
+#| fig-height: 3
+#| fig-width: 8
 #| label: fig-boxplt
+#| fig-cap: "Annotated boxplot"
+
+fn <- fivenum(Snodgrass$Length)
+
+Snodgrass |> 
+  ggplot() + 
+  aes(x=Length) +
+  geom_boxplot(width=.15, col="darkorange2") + 
+  ylim(-.18,.18) +
+  xlim(3.5,21.5) +
+  theme_void() +
+  annotate(
+    "text", 
+    y = c(0.03, 0.02,.1,.1,.1, 0.03),
+    x = c(7.5, fn), 
+    label = c(
+      "Min or\n1.5*IQR", 
+      "Outlier",
+      "Lower\nhinge\nQ1", 
+      "Median\nQ2", 
+      "Upper\nhinge\nQ3",
+      "Max or\n1.5*IQR"
+      )
+  ) + 
+  geom_segment(
+    aes(x = fn[2], xend = fn[4],
+        y = -.1, yend = -.1),
+    arrow = arrow(length = unit(0.1, "inches"), ends = "both")
+  ) + 
+  annotate(
+    "text",
+    y = -.125, 
+    x = mean(fn[2:4]+.3),
+    label = "Inter-Quatile Range\n(IQR)"
+  ) + 
+  geom_segment(
+    aes(x = fn[2], xend = fn[2] - 1.5 * (fn[4] - fn[2]),
+        y = -.05, yend = -.05),
+    arrow = arrow(length = unit(0.1, "inches"))
+  ) + 
+  annotate(
+    "text",
+    y = -.06,
+    x = mean(c(fn[2], fn[2] - 1.5 * (fn[4] - fn[2])) ),
+    label = "1.5 x IQR"
+  )
+```
+
+```{r}
+#| echo: false
+#| output: false
 #| fig-cap: 'Components of a boxplot'
 
 knitr::include_graphics('images/boxplt.png')
 ```
 
-The box shows the positions of the two fourths or hinges and we mark the median with a plus (+). As 50% of the observations fall between the fourths or hinges, the position of the box is important and is the first thing that catches our eyes. If the median is in the centre of the box, this suggests that the distribution may be symmetric; if the median is near one end, the distribution is skewed. In particular, if the median is in the *right* side of the box, it implies that the middle 50% of the data are skewed to the *left*. For right skewed data, the median will be placed at the left end of the box (as against in the centre of the box).
+The box shows the positions of the first and third quartiles, or "hinges", and the thick middle line shows the median. As 50% of the observations fall between the first and third quartiles, the position of the box is important and is the first thing that catches our eyes. If the median is in the centre of the box, this suggests that the distribution may be symmetric; if the median is near one end, the distribution is skewed. In particular, if the median is in the *right* side of the box, it implies that the middle 50% of the data are skewed to the *left*. For right skewed data, the median will be placed at the left end of the box (as against in the centre of the box).
 
-After having considered the 'centre' of a distribution, which we have measured by the median, and looked at where the bulk of the data lies, measured by the fourths; then we are particularly interested in the strange, unusual values. They could be obvious mistakes (incorrectly coded, or decimal places in the wrong place, transposition of digits such as 91 instead of 19) or incorrect measurements or recording. These last two possibilities often occur before the data gets to the statistician so that it may be difficult to check whether these mistakes have occurred. Apart from obvious errors, we can only point to 'far out' values as being strange and we term them **'outliers'**. To help decide this matter, we define a few more terms, of which the most common one is the **step**= 1.5$\times$F-spread. The Step is indicated in @fig-boxplt but not to scale.
+After having considered the 'centre' of a distribution, which we have measured by the median, and looked at where the bulk of the data lies, measured by the quartiles; then we are particularly interested in the strange, unusual values. They could be obvious mistakes (incorrectly coded, or decimal places in the wrong place, transposition of digits such as 91 instead of 19) or incorrect measurements or recording. These last two possibilities often occur before the data gets to the statistician so that it may be difficult to check whether these mistakes have occurred. Apart from obvious errors, we can only point to 'far out' values as being strange and we term them **'outliers'**. To help decide this matter, we define a few more terms, of which the most common one is the **interquartile range** or **IQR**, which is the distance between the first and third quartiles ( $Q3-Q1$ ). Any observation which is more than $1.5 \times IQR$ (sometimes called the "step") less than the first or more than the third quartile can be considered a *possible* outlier (@fig-boxplt. 
 
-Any observation which is more than one step outside of the upper (or lower) hinge can be considered as a **possible** **outlier** and is represented by a star (\*) in some software). If the observation is more than two steps outside of the hinges it can be considered as a **probable outlier** (and is represented by (`0`) in some software). Note that many software fail to distinguish probable outliers from possible ones.
+Boxplots are ideal for comparing a few groups of data because they give a visual summary of certain main features of the distributions but they are not as cluttered as other displays. Common sense must prevail, for there is a limit to the amount of information that the eye can take in. Up to 10 or 12 boxplots can be plotted, preferably on the same scale; more than 12 could be confusing.
 
-Dotted lines are drawn from the box to the furthermost points which are still less than a step away and these points, one on each side of the box, are called **adjacent values** . These points are illustrated in @fig-boxplt. The lines joining the box with the adjacent values are called **whiskers**. Again the position of the median relative to the adjacent values or the outliers gives an indication of skewness or symmetry in the data.
-
-Boxplots are ideal for comparing two batches for they give a visual summary of certain main features of the distributions but they are not as cluttered as stem-and-leaf displays. Indeed, their simplicity enables them to be used to compare a number of batches. Common sense needs to prevail, for there is a limit to the amount of information that the eye can take in. Up to 10 or 12 boxplots can be plotted, preferably on the same scale, but more than that could be confusing.
-
-Shown in @fig-boxplt1 are the boxplots of Length for the Inside-Outside groupings. Note that the boxplots have been constructed on the same scale, i.e. they have common (Length) axis.
+Shown in @fig-boxplt1 are the boxplots of `Length` for the Inside-Outside groupings. Note that the boxplots have been constructed on the same scale; that is, they have common (`Length`) axis.
 
 ```{r}
 #| echo: true
@@ -472,14 +578,18 @@ Shown in @fig-boxplt1 are the boxplots of Length for the Inside-Outside grouping
 #| fig-cap: 'Boxplots'
 
 ggplot(Snodgrass) + 
-  aes(y = Length, x = Inside, fill = Inside) + 
+  aes(y = Length, 
+      x = Inside, 
+      col = Inside) + 
   geom_boxplot() + 
   coord_flip()
 ```
 
-The boxplots in @fig-boxplt1 show that the general shape of the distribution for Length is broadly similar. In each case the median is not at the centre of the box which confirms the opposing nature of skew for the two groups. The whole box for the Outside group is shifted to the right of that for the Inside groups indicating that Length is longer for the Outside group. The outliers pertain to the Inside group only. Overall, that the '5-number summary' values for the Outside group are larger than those of the Inside group.
+The boxplots in @fig-boxplt1 show that the general shapes of the distributions of `Length` are broadly similar. In each case, the median is near the centre of the box. The box of the `Outside` group is entirely to the right of the box of the `Inside` group, indicating that the distribution of `Length` is higher for the `Outside` group. We can also see that the `Inside` group may have greater spread than the `Outside` group.
 
-For large datasets, just a summary based on five positions is not representative. So we chop up the data by repeatedly halving the distance from the extreme values and get the **letter values**, namely, $M$ (median), $F$ (fourth), $E$ (eighth) and so on. Letter values are defined by their **depth**, or distance from the nearer edge of the ordered data.
+## Letter value plots
+
+For large datasets, a summary based on five numbers may be overly simple. So we can chop up the data by repeatedly halving the distance from the extreme values and get the **letter values**, namely, $M$ (median), $F$ (fourth), $E$ (eighth) and so on. Letter values are defined by their **depth**, or distance from the nearer edge of the ordered data.
 
 `median`: found at depth $d(M) = (n + 1)/2$ where $n$ is the number of observations
 
@@ -528,12 +638,12 @@ A `ggplot` version.
 
 ggplot(Snodgrass) + 
   aes(Inside, Length) + 
-  lvplot::geom_lv() + 
+  geom_lv() + 
   scale_fill_lv() +
   coord_flip()
 ```
 
-## Cumulative Frequency Graph and Quantiles
+# Cumulative Frequency Graph and Quantiles
 
 When the data consists of individual points rather than grouped data, we first order the data from smallest to largest and we can plot the row numbers against these.
 
@@ -598,7 +708,7 @@ The `R` function `quantile()` will get the quantiles easily. The following outpu
 quantile(Snodgrass$Length, seq(0,1,0.1))
 ```
 
-### Quantile-Quantile (Q-Q) Plot
+## Quantile-Quantile (Q-Q) Plot
 
 At times, two groups may have different numbers of observations but they may be similar in some ways and it may be appropriate to compare them. This comparison can be done in several ways but Q-Q plot is once such graph useful for such a comparison. The quantiles of the first batch is plotted against the quantiles of the second batch. A 45 degree $(Y=X)$ line is also drawn. If the points on a quantile-quantile plot fall along, or close to, the 45 degree line, then the two variables follow the same distribution; if they fall on a line parallel to the 45 degree line, the two variables follow similar distributions but one has a larger location parameter (say mean, or median) than the other; if the slope differs from the 45 degree line the variables have a similar distribution but have different scale parameters (say, standard deviations or F-spreads); if the plot is linear then the distributions of $Y$ and $X$ are different.
 
@@ -699,7 +809,7 @@ ggplot() +
 
 Note that the distribution of two variables $X$ and $Y$ can be compared in a number of ways using boxplots, overlaid ECDF plots etc.
 
-## Comparing Several Groups of Data
+# Comparing Several Groups of Data
 
 In earlier sections we have seen briefly how to compare two batches of data using boxplots, Q-Q plot etc. Several boxplots can be presented in a single display so that the distributions of the variables can be compared. An example is shown in @fig-boxpl3. Note that we can instead make dotplots instead of boxplots shown in @fig-facetgrid.
 
@@ -738,19 +848,23 @@ ggplot(rangitikei) +
 
 Plots can also be wrapped for better comparison and discovery of patterns and peculiarities. More `R` instructions appear in the software handout and in course `Shiny` apps.
 
-### Exploring Relationships
+## Exploring relationships
 
 Consider data which can be written as pairs ($X$, $Y$). The two groups of data ($X$ and $Y$) need not be in the same units but they are assumed to be related in some way. Scatterplots are useful in exploring the type of relationship between $X$ and $Y$.
+
+```{r}
+download.file(
+  url = "http://www.massey.ac.nz/~anhsmith/data/testmarks.RData", 
+  destfile = "testmarks.RData")
+
+load("testmarks.RData")
+```
+
 
 ```{r}
 #| echo: true
 #| label: fig-sca1
 #| fig-cap: 'Scatter plot of English vs Maths scores'
-
-download.file(
-  url = "http://www.massey.ac.nz/~anhsmith/data/testmarks.RData", 
-  destfile = "testmarks.RData")
-load("testmarks.RData")
 
 ggplot(testmarks) +
   aes(y=English, x=Maths) + 
@@ -804,15 +918,13 @@ If the data is known to be grouped, then this can be shown on the scatterplot by
 #| fig-height: 8
 #| fig-width: 5
 
-
 library(ggExtra)
+
 p1 <- rangitikei |> 
   ggplot() + 
   aes(y=people, x=vehicle) + 
   geom_point() +
   ggtitle("(A): All of the data")
-
-# rangitikei1 <- rangitikei[-which.max(rangitikei$people),]
 
 p2 <- rangitikei |> 
   # remove the rows with highest value of 'people'
@@ -833,6 +945,15 @@ gridExtra::grid.arrange(
 Note that the case which produced the outlier in both the marginal distributions did not produce a scatterplot value that was in any way unusual. While this might not surprise us (the relationship between people and vehicles might be expected to stay the same even for a location with large numbers of each), it follows that an outlier with respect to the underlying relationship between two variables will be different from an outlier in the marginal distribution sense. And such a value may not be an outlier in either marginal distribution. Look again at @fig-marginbp - there is one student with a high Maths mark but a low English mark. While neither mark is unusual in itself, the point stands out from the rest of the scatterplot because it is unusually high or low (i.e. up or down) on the plot. In general an outlier with respect to the relationship between $X$ and $Y$ is one whose $Y$ value is unusually large or small compared to other cases with similar $X$ values.
 
 ```{r}
+download.file(
+  url = "http://www.massey.ac.nz/~anhsmith/data/horsehearts.RData",
+  destfile = "horsehearts.RData")
+
+load("horsehearts.RData")
+```
+
+
+```{r}
 #| echo: true
 #| label: fig-marginbp2
 #| fig-cap: 'Weight vs Exterior Widths'
@@ -840,11 +961,6 @@ Note that the case which produced the outlier in both the marginal distributions
 #| fig-width: 5
 
 library(ggExtra)
-
-download.file(
-  url = "http://www.massey.ac.nz/~anhsmith/data/horsehearts.RData",
-  destfile = "horsehearts.RData")
-load("horsehearts.RData")
 
 p1 <- ggplot(horsehearts) + 
   aes(y=WEIGHT, x=EXTDIA) + 
@@ -862,7 +978,7 @@ Another example of a scatterplot is shown in @fig-marginbp2 which displays the w
 
 One way of quickly assessing whether a straight line fit is reasonable is to smooth the points in the plot using a LOWESS (LOcally WEighted Scatterplot Smoother) smoothed line. The lowess (also called loess) procedure is based on local sets of points (instead of the whole data set) at a given $x$ range, and fits a smoothed line to the data. The second scatterplot in @fig-marginbp2 shows the lowess smoother which confirms that there is curvature in the underlying relationship- possibly a cubic curve would fit this.
 
-#### Scatterplots and Correlation Coefficients
+### Scatterplots and Correlation Coefficients
 
 We will use the data set **horsehearts.txt** of the weights of horses' hearts in relation to other heart measurements to illustrate the measurement of correlation. As we have seen before, scatterplots provide a good starting point for exploring the type of relationship between two variables. In @fig-scaqud, the weight, $Y$, is plotted against the exterior width $X$ (diastole phase in column 7 of **horsehearts.txt**). It is helpful to divide the scatterplot into four quarters, called quadrants, by drawing a line horizontally at the average $Y$ value or weight (2.235kg) and vertically at the average $X$ value (or diastole exterior width 14.13mm). The first quadrant is the top right hand side quarter. We move anti-clockwise for numbering the quadrants, and the bottom left hand side quadrant is called the third quadrant.
 
@@ -886,7 +1002,16 @@ In @fig-scaqud, most of the points fall in the third and first quadrants which i
 
 Although this scatterplot indicates a nonlinear relationship would fit better than a linear relationship, we will continue to use it for illustration. It is useful to have an objective measure of how strong a linear relationship is (as we have seen, stretching or compressing one or both axes can give different impressions). This measure is called the Pearsonian ***correlation coefficient*** between $X$ and $Y$ and is denoted by $r_{xy}$ or $r$ for short:
 
-$$r_{xy}=\frac{{\text {sum}(x - \bar x)(y - \bar y)}}{{\text{squareroot}[\text {sum}(x - \bar x)^2  {\text{sum}}(y - \bar y)^2 ]}}$$ $$= \frac{\sum (x-\bar{x})(y-\bar{y}) }{\sqrt{\sum (x-\bar{x})^{2}  \sum (y-\bar{y})^{2}  } } =\frac{S_{xy} }{\sqrt{[S_{xx} S_{yy} ]} }$$ 
+$$
+\begin{aligned}
+r_{xy} &= \frac{{\text {sum}(x - \bar x)(y - \bar y)}}{{\text{squareroot}[\text {sum}(x - \bar x)^2  {\text{sum}}(y - \bar y)^2 ]}} \\
+\\
+&= \frac{\sum (x-\bar{x})(y-\bar{y}) }{\sqrt{\sum (x-\bar{x})^{2}  \sum (y-\bar{y})^{2}  } } \\
+\\
+&=\frac{S_{xy} }{\sqrt{S_{xx} S_{yy} } }
+\end{aligned}
+$$ 
+
 Here $S_{xx}=S_x^2$ is the variance of $X$, $S_{yy}=S_y^2$ is the variance of $Y$, and $S_{xy}$ is the covariance between $X$ and $Y$.
 
 
@@ -965,7 +1090,7 @@ To see why the sign of $r$ indicates the direction of the relationship, consider
 
 3.  Points in the second and fourth quadrant contribute negative amounts, $(-)\times (+)$ or $(+)\times (-)$, to the cross product $S_{xy}$. If there are a considerable number of points in quadrants 2 and 4, the correlation coefficient will tend to be negative.
 
-#### Scatterplot and correlation Matrices
+### Scatterplot and correlation Matrices
   
   When there are more than two variables of interest, it is possible to draw scatterplots of each pair of variables but this becomes a bewildering exercise as the number of variables increases. One way to keep track of these plots is to set them out in a scatterplot matrix as in @fig-matplt2 which is based on the data set **pinetree.txt** containing the circumference measurements of pine trees at four positions (Top, Third, Second and First) and in three areas of a forest. This plot also shows the simple correlation coefficients on the upper diagonal and smoothed density plots on the main diagonal of the matrix. This plot clearly shows that the variables are strongly related to each other. In particular, the Top circumference can be predicted reasonably well based on the bottom circumference. Even though the correlations are high, a quadratic model may fit better. @fig-matplt2 seems to show a non-random pattern in the way points appear on the plot. This may be due to the Area effect because the circumference data were collected from three different areas. @fig-matplt2 confirms that this is indeed the case.
 
@@ -1000,7 +1125,7 @@ ggpairs(pinetree[,2:5],
         mapping=aes(color=pinetree$Area))
 ```
 
-#### Exploring bivariate distributions
+### Exploring bivariate distributions
   
   The two-dimensional or the **bivariate probability distribution** of $X$ and $Y$ can be displayed as a 2-d smoothed density plot or as a probability contour plot. @fig-matplt3 shows such plots. This figure rather suggests that there may be two separate joint probability distributions of Maths and English scores. This clue is not obtained in the scatter plot of English score against Maths score but only from the other three plots.
   
@@ -1070,7 +1195,7 @@ In summary, scatterplots may reveal many properties and peculiarities about the 
 
 Both joint and marginal distributions of $X$ and $Y$ are important. We also consider the distribution of each variable separately, and explore whether they have symmetric distributions or not.
 
-### Higher dimensional data
+## Higher dimensional data
 
 A short-cut to explore three numerical variables is to obtain a contour plot. In @fig-matplt3, the contours were the joint density of Maths and English marks. Instead, we can just use three numerical variables and show the third variable (Z) as a contour on a scatter plot of Y vs. X. What this means is that several combinations of X and Y can lead to the same Z. So we have to use some smoothing method or a model to obtain the contours and form a grid. The `R` package *plotly* is rather simple and powerful to obtain dynamic or interactive plots. The plots produced with this package are colour optimised for viewing and hence they may not be the best for printing but good for EDA purposes. We can also hover over the graph and view the graphed data. After loading the pine tree data, try-
 
@@ -1179,7 +1304,7 @@ For interpreting the biplot, consider the following patterns:
 
 Note that the biplot is not useful if the first two principal components account for only a small part of the overall variation. We can also examine relationship between the categorical factors and the principal components but this topic is skipped in this course.
 
-## Time series EDA
+# Time series EDA
 
 A **Time Series** is an ordered sequence of observations of a variable(s) (often) made at equally spaced time points. Time series data may have internal structures such as trends, seasonality, cycles etc. Such internal structural variation is largely absent in randomly collected data which are observed one-at-a-time (called cross-section data). Time series data analysis is useful in business and economic forecasting, stock market analysis, quality control etc. The objective of time series analysis is to understand the structure that generated the time-oriented data, fit a model, monitor and forecast if necessary.
 
@@ -1267,7 +1392,7 @@ credit.balance <- hc12b |>
 forecast::autoplot(credit.balance, xlab="Year", ylab="Rate")
 ```
 
-### Autocorrelation
+## Autocorrelation
 
 Time series data are not often independent and there often exists a relationship between the current observation $X_t$ at time $t$ with the past observations $X_j$ $(j=t-1, t-2, \ldots, 1)$. The term *first order lag* refers to $X_{j-1}$ for $X_j$. In general the $k^\text {th}$ lag refers to a past observation of $k$ periods back. We may explore the time related linear dependency in time series data using lagplots. @fig-lplt is a lag plot for the NZ \$20 series.
 
@@ -1309,11 +1434,11 @@ ggPacf(NZnotes20)
 
 Both ACF and PACF plots are useful to assess the time series components which is discussed next.
 
-### Time Series Components of Variation
+## Time Series Components of Variation
 
 The nature of structural variations in a time series are broadly classified under three major headings:
   
-#### Trend
+### Trend
   
 The trend component is to represent long term positive (upward) or negative (downward) movement. See @fig-trendtype below which lists some of the parametric models for fitting the trend component:
 
@@ -1321,7 +1446,7 @@ The trend component is to represent long term positive (upward) or negative (dow
 
 We will cover more on fitting models to capture the trend later on.
 
-#### Seasonal
+### Seasonal
   
 The seasonal component is to account for the periodic behaviour happening *within* a block (say Christmas time) of a given time period (say in a calendar year) but this periodic behaviour will repeat fairly regularly over time (say year after year). Seasonality is often present in business related time series data. EDA tools are useful for judging the presence of seasonality. A simple scatterplot of the response variable against time may reveal seasonality directly. @fig-uvplot is a time series plot of monthly means of Erythemal UV, the sunburn causing UV, measured at Lauder (45.0S, 169.7E), New Zealand (**uv.txt**).
 
@@ -1371,7 +1496,7 @@ ggAcf(uv)
 
 `Spectral plot` is another graphical technique for examining cyclic structure of variation in time series data. This plot is based on a sinusoidal model. The cycle frequency is expressed per unit of time where a unit of time is the distance between 2 time series points. A frequency of 0.5 means a cycle of 2 time series data points. Methods are available to determine the amplitude and the dominant frequency etc under the sinusoidal model.
 
-#### Error
+### Error
   
   This component of the time series is to account for the random or irregular movement in the series. Ideally the plot of errors should not show any time effect; for example plotting a set of random normal data will not show any of the systematic time related components, see @fig-whtnoise. Such a series is called a `white noise` series.
 
@@ -1447,7 +1572,7 @@ It is not always easy to completely separate trends from seasonal effect but tim
 
 `R` packages are available for exploring spatial data, particularly for integrating with maps. Some software programs also employ audio to augment exploration of higher dimensional data. Plots for EDA are introduced at an introductory level in this Chapter but there are many dedicated `R` packages available for conducting EDA in a specialised area such as finance or ecology.
 
-## Summary
+# Summary
 
 The first step in EDA is to familiarise oneself with the data. The dataset should be checked for errors. This is particularly important if this is to be the first time the data will be analysed. It is essential to know story behind the data such as the objectives for the collection of the data, and in what way was it collected etc. The answers to these questions should provide the focus for our own analysis of the data; i.e. what questions do we want to be able answer by our analysis of the data. Note that data may not always contain an answer to the questions we may have.
 

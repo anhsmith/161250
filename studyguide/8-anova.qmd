@@ -1,12 +1,11 @@
-
-# Chapter 8: Analysis of Variance (ANOVA) and Covariance (ANCOVA)
+---
+title: "Chapter 8: Analysis of Variance (ANOVA) and Covariance (ANCOVA)"
+---
 
 > "*To consult a statistician after an experiment is finished is often merely to ask him to conduct a post mortem examination. He can perhaps say what the experiment died of.*"
 > – Sir RA Fisher
 
-
-
-## Introduction to Analysis of Variance (ANOVA)
+# Introduction to Analysis of Variance (ANOVA)
 
 We consider **ANOVA models** for data which have, in many cases, been collected using experimental designs. The model provides a quantitative assessment of the treatment effects. The first model we shall consider is the **One-Way ANOVA** model. The data for these models are used when only one set of treatments is to be compared. Here the set of treatments is called a factor and the various treatments are referred to as the factor levels.
 
@@ -34,7 +33,7 @@ ANCOVA models are, in essence, a mixture of regression and ANOVA models. For all
 
 The residuals are used to test the adequacy of the model fitted as in regression.
 
-## One Way ANOVA
+# One Way ANOVA
 
 As part of a multi-lab study, four fabrics were tested for flammability at the National Bureau of Standards. The burn times in seconds were recorded after a paper tab was ignited on the hem of each fabric. The experimental data are presented below (@tbl-fabricdata; taken from p.496 of @bhattacharyya1977.
 
@@ -210,7 +209,7 @@ par(mar=c(5.1, 9, 4.1, 2.1))
 plot(TukeyHSD(oneway.model), las=1 , col="brown")
 ```
 
-## Assumptions and Transformations
+# Assumptions and Transformations
 
 For the one way ANOVA, it is assumed that the burn time variances for each treatment are the same. Although we can never be sure whether assumptions are valid, we can look for indications that the assumptions may not be realistic.
 
@@ -251,7 +250,7 @@ If the standard deviations seem to be increasing with the means, a transformatio
 
 The $F$ statistic is based on the null hypothesis that there is no difference (in the population) between treatment means. As we have noted before, a large value of $F$ would indicate that the null hypothesis is not valid and that differences between treatments do exist. However, if the variances for the different treatments vary considerably, then this test is no longer valid.
 
-## Two-Way ANOVA
+# Two-Way ANOVA
 
 We discuss **two-way ANOVA** model using the following example. The strength of concrete ($Y$, measured in MPa) is affected by the type of aggregate (stone, a blocking variable) and the type of cement (the treatment factor) used. An experiment was conducted in order to investigate the effect of aggregate and cement on concrete strength. In all other respects the concrete was the same. That is, same mixing ratios, the same water and the same mixing procedure was used. Ignoring any interaction between aggregate and cement the following model is to be fitted to the data:
 
@@ -352,7 +351,7 @@ p2 <- concrete |>
 gridExtra::grid.arrange(p1, p2, ncol=2)
 ```
 
-## Two Way ANOVA with Interaction
+# Two Way ANOVA with Interaction
 
 @Brook provided the following data from a milk mixing time experiment.
 
@@ -534,7 +533,7 @@ visreg2d(aovdsx, "Speed", "Diameter")
 ```
 
 
-## Indicator Variables
+# Indicator Variables
 
 Indicator variable (also known as a dummy or binary variable) is one whose possible values are either 1 or zero. A value of 1 means a particular attribute or characteristic is present and a value of zero means the absence. For example, we may define indicator variables for males and females. Consider- Indicator variable for the male category $$\begin{array}{cccc}
 I_{\text {male}} & = & 1 & \text{for males}\\
@@ -613,7 +612,7 @@ The ANOVA of the regression model is the same as the one-way ANOVA fit (compare 
 anova(mdl)
 ```
 
-### Another example
+## Another example
 
 Consider the pine tree data discussed earlier. Let us model the Top circumference (numerical response) using Area variable (which is categorical). A plot of the raw data and mean circumference along with the associated 95% confidence intervals are shown in @fig-errplot.
 
@@ -735,7 +734,7 @@ lm(Top ~ Area, data=pinetree) |>
   kable_styling(full_width = F)
 ```
 
-## Analysis of Covariance (ANCOVA)
+# Analysis of Covariance (ANCOVA)
 
 Indicator variables are particular useful when both a dependent variable and an independent variable are measured. One would like to use regression to show the relationship between the dependent or response variable and the explanatory variable (covariate) separately for each factor level. However, both the slope and the intercept may differ for the various factor levels. What sort of model does one fit to such data? Consider the Restaurant Sales Data presented in the first four columns of @tbl-Restaurant. This dataset is from @Neter.
 
@@ -835,7 +834,7 @@ tidy(mdl) # also summary(mdl)  or anova(mdl)
 
 
 
-## Summary
+# Summary
 
 
 

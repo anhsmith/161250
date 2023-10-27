@@ -1,17 +1,17 @@
+---
+title: "Chapter 7 Workshop"
+---
 
 ```{r, echo=FALSE, message=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE, comment=NA, fig.show="hide")
 ```
 
-# Chapter 7 Workshop {-}
-
-
-Dataset **`Prestige`**
+# Dataset **`Prestige`**
 
 We will continue to use dataset `Prestige` from the `car`	R package. 
 
 
-## Exercise 7.1 {-}
+# Exercise 7.1 {-}
 
 Obtain the matrix plot of the numerical variables `education`, `income`, `women`, and `prestige`.
 
@@ -77,7 +77,7 @@ plot(full.reg)
 
 
 
-## Exercise 7.2 {-}
+# Exercise 7.2 {-}
 
 Perform stepwise regression analysis of `prestige` on `education`, `income`, & `women`. 
 
@@ -133,7 +133,7 @@ plot(summaryHH(model))
 ```
 
 
-## Exercise 7.3 {-}
+# Exercise 7.3 {-}
 
 Perform a polynomial regression of `prestige` on `income`. 
 

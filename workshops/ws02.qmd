@@ -1,6 +1,8 @@
-# Chapter 2 Workshop {-}
+---
+title: "Chapter 2 Workshop"
+---
 
-Dataset **`Prestige`**
+# Dataset **`Prestige`**
 
 We will be using a well-known dataset called `Prestige` from the `car`	R package.  This dataset deals with prestige ratings of Canadian Occupations. The `Prestige` dataset has 102 rows and 6 columns. The observations are occupations.
 
@@ -38,7 +40,7 @@ data(Prestige)
 
 
 
-## Exercise 2.1 {-}
+# Exercise 2.1 {-}
 
 Draw a bar chart for **type**:
 
@@ -70,7 +72,7 @@ barplot(table(Prestige$type))
 ```
 
 
-## Exercise 2.2 {-}
+# Exercise 2.2 {-}
 
 Draw a histogram of **prestige**:
 
@@ -95,7 +97,7 @@ Prestige |>
 
 
 
-## Exercise 2.3 {-}
+# Exercise 2.3 {-}
 
 Obtain the summary statistics for **prestige**:
 
@@ -111,7 +113,7 @@ describeBy(education + income + women + prestige ~ type,
 ```
 
 
-## Exercise 2.4 {-}
+# Exercise 2.4 {-}
 
 Obtain the boxplot of `prestige ~ type`:
 
@@ -150,7 +152,7 @@ ggplotly(p)
 ```
 
 
-## Exercise 2.5 {-}
+# Exercise 2.5 {-}
 
 Obtain the ECDF graphs of **prestige ~ type**:
 
@@ -172,7 +174,7 @@ ecdfplot(~ prestige | type, data = Prestige)
 ```
 
 
-## Exercise 2.6 {-}
+# Exercise 2.6 {-}
 
 Obtain the \{0.05, 0.1, 0.25, 0.5, 0.75, 0.9, 0.95\} quantiles of `prestige`:
 
@@ -187,7 +189,7 @@ quantile(Prestige$prestige, pr)
 ```
 
 
-## Exercise 2.7 {-}
+# Exercise 2.7 {-}
 
 Obtain the scatter plot (with and without marginal boxplots) **prestige vs. education **:
 
@@ -214,7 +216,7 @@ scatterplot(education ~ prestige, data = Prestige)
 
 The later plot will show prediction interval ribbon while the first plot will show the confidence interval ribbon.
 
-## Exercise 2.8 {-}
+# Exercise 2.8 {-}
 
 Obtain the bubble or balloon plot  **prestige vs. education vs. income** (income forming the bubble size):
 
@@ -240,7 +242,7 @@ ggplotly(p)
 ```
 
 
-## Exercise 2.9 {-}
+# Exercise 2.9 {-}
 
 Obtain the contour plot  **prestige vs. education vs. income** :
 
@@ -334,7 +336,7 @@ cloud(`predicted prestige` ~ income * education,
       data = mygrid) 
 ```
 
-## Exercise 2.10 {-}
+# Exercise 2.10 {-}
 
 Obtain the 3-D plot  **prestige vs. education vs. income** :
 
@@ -346,7 +348,7 @@ scatter3d(prestige ~ education + income,
           data = Prestige)
 ```
 
-## Exercise 2.11 {-}
+# Exercise 2.11 {-}
 
 Create `prestige ~ education | type` graphs.  That is, `prestige ~ education` grouped by `type` as colours and/or panels.
 
@@ -430,7 +432,7 @@ xyplot(prestige ~ education,
 <!-- ``` -->
 
 
-## Exercise 2.12 {-}
+# Exercise 2.12 {-}
 
 Time-series data EDA based on RBNZ house sales data.
 

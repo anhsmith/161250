@@ -1,3 +1,6 @@
+---
+title: "Chapter 6 Workshop"
+---
 
 ```{r, echo=FALSE, message=FALSE}
 knitr::opts_chunk$set(echo = TRUE, 
@@ -7,14 +10,13 @@ knitr::opts_chunk$set(echo = TRUE,
                       fig.show="hide")
 ```
 
-# Chapter 6 Workshop {-}
 
-Dataset **`Prestige`**
+# Dataset **`Prestige`**
 
 We will continue to use dataset `Prestige` from the `car`	R package. 
 
 
-## Exercise 6.1 {-}
+# Exercise 6.1 {-}
 
 Fit a resistant line of `prestige` against `education`.  Show the fitted line on a scatterplot of `prestige ~ education`.  Obtain the plot of the residuals against fitted values.
 
@@ -33,7 +35,7 @@ Median-median line Tukey line()
 line(x,y)
 ```
 
-#Plotting Tukey line & residuals
+# Plotting Tukey line & residuals
 
 ```{r, fig.show='hide',results='hide'}
 Tline <- line(x,y)
@@ -89,7 +91,7 @@ visreg(fit1)
 
 
 
-## Exercise 6.2 {-}
+# Exercise 6.2 {-}
 
 Fit a simple regression line of `prestige` against `education`.  Show the fitted regression line on a scatterplot of `prestige ~ education`.  Obtain the plot of the residuals against fitted values.
 

@@ -40,20 +40,29 @@ theme_set(theme_minimal())
 
 ## Statistical Inference
 
-The term *statistical inference* means that we are making estimates
-and/or claims about the population of interest based on sample data.
+::::{.columns}
 
--   In other words, can we generalise the patterns seen in the sample
-    data or not is the issue.
+:::{.column width="65%"}
 
-Recall that the the variability sample data depends on the population
-variability as well as the size of the sample.
+The term *statistical inference* means that we are making estimates and/or claims about the population of interest based on sample data.
 
--   So sample estimates are affected by the size of the sample in
-    particular.
+In other words, can we generalise the patterns seen in the sample data or not is the issue.
 
-Confidence intervals and test of hypotheses are popular tools for
-statistical inference.
+Recall that the the variability sample data depends on the population variability as well as the size of the sample.
+
+So sample estimates are affected by the size of the sample in particular.
+
+Confidence intervals and test of hypotheses are popular tools for statistical inference.
+
+:::
+
+:::{.column width="35%"}
+
+![](img/sampling_variation2.gif)
+
+:::
+
+::::
 
 ## Normality tests and EDA
 

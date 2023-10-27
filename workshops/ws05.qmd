@@ -1,10 +1,12 @@
+---
+title: "Chapter 5 Workshop"
+---
+
 ```{r, echo=FALSE, message=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE, comment=NA, fig.show="hide")
 ```
 
-# Chapter 5 Workshop {-}
-
-## Dataset `Toxaemia`
+# Dataset `Toxaemia`
 
 This dataset is from the `vcdExtra` package. Two signs of *toxaemia*, an abnormal condition during pregnancy characterized by high blood pressure (hypertension) and high levels of protein in the urine. If untreated, both the mother and baby are at risk of complications or death. The dataset `Toxaemia` represents 13384 expectant mothers in Bradford, England in their first pregnancy, who were also classified according to social class and the number of cigarettes smoked per day.
 
@@ -20,7 +22,7 @@ The dataset is a a 5 x 3 x 2 x 2 contingency table, with 60 observations on the 
 
 `Freq` - frequency in each cell, a numeric vector
 
-## Exercise 5.1 {-}
+# Exercise 5.1 {-}
 
 Obtain relevant graphical displays for this dataset.
 
@@ -68,7 +70,7 @@ strucplot(tab.data)
 sieve(tab.data)
 ```
 
-## Exercise 5.2 {-}
+# Exercise 5.2 {-}
 
 The genetic information of an organism is stored in its Deoxyribonucleic acid (DNA). DNA is a double stranded helix made up of four different nucleotides. These nucleotides differ in which of the four bases Adenine (A), Guanine (G), Cytosine (C), or Thymine (T) they contain. A simple pattern that we may want to detect in a DNA sequence is that of the nucleotide at position `i+1` based on the nucleotide at position `i`. The nucleotide positional data collected by a researcher in a particular case is given in the following table:
 

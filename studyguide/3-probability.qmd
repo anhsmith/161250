@@ -1,5 +1,6 @@
-
-# Chapter 3: Probability Concepts and Distributions
+---
+title: "Chapter 3: Probability Concepts and Distributions"
+---
 
 > “_Misunderstanding of probability may be the greatest of all impediments to scientific literacy_” 
 > 
@@ -11,14 +12,13 @@
 > — George Box
 
 
-
 ## Introduction
 
 The concept of probability is the foundation of statistical inference. In other words, making inferences about a populations based on a sample relies on probability notions, and any uncertainty in our conclusions can be expressed in probabilistic terms. We also informally used the probability concepts in data collection, particularly with the *EPSEM* sampling methods.
 
 The concepts we cover in this Chapter must be largely familiar to you from a first year course. Note that we are covering probability concepts and distributions at a very basic level without much maths. 
 
-## Probability: a placeholder for incomplete knowledge
+# Probability: a placeholder for incomplete knowledge
 
 Probability is a mathematical framework used to quantify and describe expectations of random events. Okay, so what is randomness? Where does it come from? This is a philosophical question, really. 
 
@@ -45,7 +45,7 @@ A simpler case is a shuffled deck of cards. When you shuffle a deck of cards for
 But most of the world isn't as simple as shuffling cards or even rolling a die. Our knowledge is so very limited that concepts of uncertainty, randomness, and probability are indispensable to anyone who wants to make any real sense of it.
 
 
-## Probability as a relative frequency
+# Probability as a relative frequency
 
 The naive or classical definition of probability is just a relative frequency. If $n$ is the total number of equally likely possible outcomes and if $m$ of those $n$ outcomes result in the occurrence of some given event, then the probability of that event is $m/n$. 
 
@@ -59,7 +59,7 @@ Subjective probability (such as expert opinion) is useful in areas such as decis
 
 Probabilities can only be between $0$ and $1$ (impossible to certain).
 
-## Mutually exclusive events
+# Mutually exclusive events
 
 A German researcher [@witt] studied the effects of various drugs on the web-building abilities of orb-web spiders (@fig-webs). 
 
@@ -92,7 +92,7 @@ For example, either a complete web or a partial web being observed is equal to t
 $$P(\text{not complete})	= P(W = \text{partial or}~W \text{ = fail})= 0.3 + 0.5 = 0.8 = 1 – P(W = \text{complete}) $$
 
 	
-## Statistical independence
+# Statistical independence
 
 If events $A$ and $B$ are statistically independent, then 
 $$P(A \textbf{ and } B) = P(A) \times P(B)$$
@@ -119,9 +119,9 @@ $$P(A \textbf{ and } B ) = P(A|B) \times P(B)$$
 
 $$P(A \textbf{ and } B ) = P(B|A) \times P(A)$$
 
-### Examples
+## Examples
 
-#### Blood group example
+### Blood group example
 
 
 There are a large number of genetic-based blood-type systems that have been used for categorising blood. Two of these are the Rh system (Rh+ and Rh–) and the Kell system (K+ and K–). It is found that for any person, their blood type in any one system is independent of their blood type in any other. 
@@ -140,7 +140,7 @@ Suppose that a murder victim has a bloodstain on him with type (Rh– and K+), p
 
 The answer is 0.0152 (verify).
 
-#### Beached whales example
+### Beached whales example
 
 Assume that 0.63 is the probability of a randomly selected beached whale is a male. So the probability of a beached whale being female is $1-0.63=0.37$. Suppose that we also observe whether beached whales are juvenile or adult, and the probability of a whale being juvenile, given that it is female, is 0.8, and the probability it is juvenile, given that it is male, is 0.4.
 
@@ -156,13 +156,13 @@ We are given
    $P(A=j | S=f) = 0.8$   
    $P(A=j | S=m) = 0.4$
 
-### Probability tree diagram
+## Probability tree diagram
 
 Easy to visualise the probabilities with this representation as shown in @fig-PTD.
 
 ![Probability tree diagram](images/tree.png){#fig-PTD}
 
-#### Rules of the Probability Tree
+### Rules of the Probability Tree
 
 1. Within each level, all branches are mutually exclusive events. 
 
@@ -176,7 +176,7 @@ What is the overall probability that a whale is juvenile? That is, what is $P(A 
 
 $$P(j) = P(m \textbf{ and } j) + P(f \textbf{ and } j)= 0.63\times 0.4+0.37 \times 0.8 = 0.548 $$
 
-### Bayes rule
+## Bayes rule
 
 What is the probability of the whale being female given that it is juvenile? i.e., what is $P(f | j)$ ?
 
@@ -196,7 +196,7 @@ This is known as the *Bayes rule* or theorem.
 For our question
 $$P(f | j) = \frac {P(j | f) × P(f)} {P(j)}= \frac{0.8 \times 0.37}{0.548}= 0.54$$
 
-## Discrete probability distributions
+# Discrete probability distributions
 
 Consider the number of eggs $(X)$ in an Adelie penguin’s nest. The values range from $1$ to $5$, each with a certain probability (or relative frequency) of occurrence.
 
@@ -272,7 +272,7 @@ Mean <- sum(X * P)
 ```
 
 
-## Binomial distribution
+# Binomial distribution
 
 Let $X$ be the number of heads when two coins are tossed. The possible outcomes are shown in @fig-twocoins.
 
@@ -343,7 +343,7 @@ with SD
 
 $$\sigma_X=\sqrt {np(1-p)}=1.129159$$
 
-## Poisson distribution
+# Poisson distribution
 
 The Poisson distribution is used to obtain the probabilities of counts of relatively rare events or outcomes that occur independently in space or time. 
 
@@ -421,7 +421,7 @@ ggplot(dfm, aes(x = x, y = probability, fill = parasites)) +
   annotate(geom = "table", label = list(dfm[,1:2]), x=10, y=.3)
 ```
 
-## Continuous probability distributions
+# Continuous probability distributions
 
 A discrete random variable takes values which are simply points on a real line.  In other words, there is an inherent discontinuity in the values a discrete random variable can take.
 
@@ -480,7 +480,7 @@ $$F(b)-F(a)=0.8-0.2=0.6$$
 
 
 
-## Normal distribution
+# Normal distribution
 
 The Gaussian or normal distribution is parameterised in terms of the mean $\mu$ and the variance $\sigma ^{2}$ and its density function is given by
 
@@ -610,7 +610,7 @@ library(patchwork)
 p1+p2+p3+p4
 ```
 
-## Skewed distributions
+# Skewed distributions
 
 There are many probability distributions which are asymmetrical. A few of them are briefed here.
 
@@ -792,7 +792,7 @@ p1+p2+p3+p4
 
 When $\alpha=\beta=1$, the beta distribution becomes the continuous uniform distribution.  This distribution is useful to model component fractions such as percentage of protein in milk powder, and is also widely used in Bayesian analysis.
 
-## Empirical distributions
+# Empirical distributions
 
 Data from a normal (or any other distribution) may not look very much like the expected theoretical shape ('bell-curve\` for normal)  unless there is very large amount of it.  @fig-rn200 is for a random sample of 200 from the standard normal distribution.  Compare the departures from the expected theoretical shape.  Recall that we covered the ECDF curves in the last Chapter.  The CDF curve is just theoretical one but fitted with data.  More on this later.
 
@@ -846,7 +846,7 @@ p1
 ```
 
 
-## Importance of the normal distribution
+# Importance of the normal distribution
 
 ***Question***: Why do we use the Normal distribution so much? Answer: Because:
 
@@ -858,7 +858,7 @@ p1
 
 4.  We shall see in this course that residuals play a large part. These are, for example, the 'errors' left over after fitting a regression line to data. Quite often, we expect residuals to follow a Normal distribution.
 
-## Normal data in practice
+# Normal data in practice
 
 In practice, data from a 'Normal distribution' *may* not look very much like the 'bell-curve' unless there is very large amount of it. This statement has practical implications but first let us check whether the statement is true. We can do this by simulating batches of data from a Normal distribution (using software) and noting the variations across the data sets. Moreover, because the Normal distribution and its bell shaped curve are so important and ubiquitous, it is instructive to apply EDA methods to Normal data, for we would certainly like EDA methods to work well for that type of curve.
 
@@ -933,7 +933,7 @@ The probability that an observation falls between these fences is 0.993, or the 
 
 The probability of a point falling outside of this range is the extremely small amount of 0.000002. It is not surprising, then, that none of the values in our simulated batches fell outside of the outer fences. If they did, we would class them as probable outliers. Of course, with distributions other than the Gaussian one, and particularly for asymmetric distributions, the probability of a value falling outside these fences is higher.
 
-## Assessment of Normality
+# Assessment of Normality
 
 The shapes of the ECDF curves shown in @fig-simnorecdf are typical of the empirical cumulative distributions for data from Normal populations. This curve was drawn using 1000 and 100 simulated random normal data. It could perhaps be described as an S-shape on its side (or lazy or stretched out S). The curve is flatter at either end which reflects the small amounts of relative frequency in the tails of the Normal distribution. The theoretical Cumulative Distribution Function (CDF) curve for the normal distribution is also shown in @fig-simnorecdf as a smooth curve. For smaller samples from a Normal population, the ECDF curve will vary about the theoretical curve, and, of course, the variation is likely to be larger the smaller the sample; see @fig-simnorecdf(B).
 
@@ -962,7 +962,7 @@ p2 <- p2+xlab("N(80,12) random data n=1000")+ylab("Cumulative proportion/probabi
 gridExtra::grid.arrange(p2,p1, ncol=2)
 ```
 
-### Normal quantile-quantile plots
+## Normal quantile-quantile plots
 
 To visually check whether a given set of data are normally distributed, one can create a normal quantile-quantile (Q-Q) plot. In this plot the quantiles of the sample are plotted against the theoretical quantiles of a standard normal distribution N(0,1). If the data, $Y_{i}$, are normally distributed N($\mu, \sigma$) then $Z_{i} = \left(Y_{i} -\mu \right)/\sigma$ has a standard normal distribution. If we plot the quantiles of the data against corresponding quantiles of the standard normal distribution, the points should roughly lie on the straight line: $$Y_{i} =\mu +\sigma Z_{i}$$ that is, a line with intercept $\mu$, and slope $\sigma$.
 
@@ -1040,7 +1040,7 @@ p4 <- ggplot(data.frame(x), aes(sample = x)) +  stat_qq() +
 gridExtra::grid.arrange(p1,p2, p3, p4, ncol=2) 
 ```
 
-## Fitting non-normal distributions to data
+# Fitting non-normal distributions to data
 
 For a normal distribution, which is specified by its mean $\mu$ and variance $\sigma^2$, parameter estimation is fairly straight forward.  The sample mean and variance become the estimates.   The Poisson parameter  $\lambda$ is also the mean of the distribution and hence the sample mean becomes the estimate.  On the other hand, distributions such as beta, and gamma involve shape and/or scale parameters and hence their estimation becomes complicated.  The population mean and SD of these distributions are functions of the distributional parameters.  Data from skewed distributions are not well represented by the sample mean and SD.
 
@@ -1112,7 +1112,7 @@ When the observed data is a mixture from two or more distributions or contain a 
 
 We will cover the power transformation of data in the next Chapter, which is a remedy for dampening the effect of outliers and mixture of subgroups (distributions).
 
-## Summary
+# Summary
 
 This Chapter provided a revision of probability concepts usually covered the first year level covered at the seventh form level or in a first year Statistics course.  A few popular probability distributions are also introduced.
 

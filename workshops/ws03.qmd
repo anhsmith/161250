@@ -1,4 +1,6 @@
-# Chapter 3 Workshop {-}
+---
+title: "Chapter 3 Workshop"
+---
 
 ```{r, echo=FALSE, message=FALSE}
 knitr::opts_chunk$set(echo = TRUE, 
@@ -11,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE,
 ```
 
 
-Dataset **`Prestige`**
+# Dataset **`Prestige`**
 
 We will be using a well-known dataset called `Prestige` from the `car`	R package.  This dataset deals with prestige ratings of Canadian Occupations. The `Prestige` dataset has 102 rows and 6 columns. The observations are occupations.
 
@@ -41,7 +43,7 @@ knitr::opts_chunk$set(warning=FALSE, message=FALSE, comment=NA, fig.show = "hide
 
 
 
-## Exercise 3.1 {-}
+# Exercise 3.1 {-}
 
 For a standard normal variable $z$ , obtain the area between  -1.8 and 2.1.  
  
@@ -57,7 +59,7 @@ pnorm(2.1) - pnorm(-1.8)
 ```
 
 
-## Exercise 3.2 {-}
+# Exercise 3.2 {-}
 
 Plot the `prestige` scores data as a histogram and show the theoretical normal curve fitted to the data. 
 
@@ -90,7 +92,7 @@ curve(dnorm(x,
 ```
 
 
-## Exercise 3.3 {-}
+# Exercise 3.3 {-}
 
 Obtain the normal quantile plot and test for the normality for `prestige` scores data.
 
@@ -117,7 +119,7 @@ ks.test(Prestige$prestige,
         sd(Prestige$prestige) )
 ```
 
-## Exercise 3.4 {-}
+# Exercise 3.4 {-}
 
 Examine the fit of non-normal distributions for `prestige` scores data.
 

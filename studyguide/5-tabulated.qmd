@@ -1,17 +1,19 @@
+---
+title: "Chapter 5: Tabulated Counts"
+---
 
-# Chapter 5: Tabulated Counts
 
 > *"....the Chi-square statistical test is one of twenty important scientific breakthroughs of the 20th century..."*
 >
 > — Ian @hacking
 
-## Introduction
+# Introduction
 
 In this chapter we consider tests of fit and tests of association. Tests of fit and association are used to determine whether the data complies with some hypothesis. In the first case, Goodness of Fit tests are used to determine whether the frequency distribution of some variable observed in sample data (for example the frequencies associated with the two categories of gender) complies with some hypothesised frequency breakdown. This test would involve comparing the number of males and females in the sample with the numbers of males and females expected under the hypothesis. Sometimes it is the Goodness of Fit of a particular distribution which is in question. For example, can we assume that the residuals follow a Normal distribution? We have already seen in Chapters 3 and 4 how Normal probability plotting can be used to asses for normality. Chi-squared Goodness of Fit Tests can also be used to test whether the data follows a specific distribution.
 
 Tests of association, on the other hand, are tests for a relationship between two categorical variables when the data is arranged as a cross-tabulation (contingency table). Observed frequencies are compared with the frequencies which would be expected if the rows and columns of the tables were independent. If they are not independent, then we can use a numerical and graphical technique called Correspondence Analysis to help us explore the 'correspondence' (i.e. association) of the various row and column categories. Correspondence Analysis will be introduced only at a very basic level.
 
-## Goodness of Fit Tests for Frequencies
+# Goodness of Fit Tests for Frequencies
 
 In this section, we consider a row of numbers and consider the question, How do observed frequency counts compare with known, or assumed, expected counts? Consider the following hypothetical example. Of the people who emigrated from New Zealand in a particular year, the percentages in three age categories were as shown in @tbl-emigdat.
 
@@ -140,7 +142,7 @@ kable(Mendel) |>
 
 The observed results are very close to those expected and therefore a very small Chi-squared value is obtained. Sir R A Fisher (1890--1962) has some claim to being the father of inferential statistics. He examined the results of a number of Mendel's experiments and discovered that, without exception, the Chi-squared values were much smaller than expected. While one can be lucky on a few occasions obtaining results close to what a theory suggests, the probability that the Chi-squared values would be small in every experiment is so low as to be unbelievable. Did the great Mendel cheat? @Fisher1936 gave him the benefit of the doubt but noted that Mendel's assistant may well have been aware of the anticipated results and consciously, or unconsciously, had classified the peas in the appropriate cell. After all, it was not always easy to classify some of the pea seeds. The moral is that some people are just too helpful.
 
-### Goodness of Fit for Distributions
+## Goodness of Fit for Distributions
 
 When testing for the goodness of fit for a distribution, observations in various non-overlapping ranges are classified into categories and a frequency count is obtained for each category or range. These (observed) frequency counts are compared to the counts which would be obtained if the hypothesised distribution fitted the data exactly. We call these counts the expected counts. In general one assumes that the parameters of the hypothesised distribution equal the estimates obtained from the data. Thus we are effectively just testing whether the *shape* of the hypothesised distribution is correct.
 
@@ -152,7 +154,7 @@ where again we sum over all $c$ categories. For example, for $n=100$ data we wou
 
 The degrees of freedom for this test equals the number of data categories minus one more than the number of parameters estimated $c-1-2 = c-3$ in this case). These tests were covered in your first-year paper. You should revise your notes on them. Note that we have seen in Chapter 4 that it is possible to test for normality using an tests such as Shapiro-Wilk test.
 
-## Contingency Tables
+# Contingency Tables
 
 Contingency tables are frequency counts arranged in a two way table. We can test for independence between the rows and columns of such a table using a Chi-squared statistic. There are two main points which need to be noted:
 
@@ -180,7 +182,7 @@ In more theoretical courses, you may learn that data expressed as counts often f
 
 $$\chi ^{2} =\sum \frac{\left({\text {residual}}\right)^{2} }{{\text {variance}}} =\sum \left(\frac{{\text {residual}}}{{\text {std dev}}} \right)^{2}.$$ which looks like a sum of squared standardised residuals. As noted in chapter 6 any standardised residuals which are greater than 2 (approximately) in absolute value can be regarded as significant. Squaring this we find that any cell which makes a contribution of more than 4 to the Chi-squared statistic is a significant source of the dependence between rows and columns. So this idea helps in the interpretation of contingency tables. Any cells contributing more than 4 to the Chi-squared statistic should be studied carefully in order to gain an understanding regarding the nature of any dependence between the rows and columns.
 
-### Example: Porcine Stress Syndrome (PSS)
+## Example: Porcine Stress Syndrome (PSS)
 
 Porcine Stress Syndrome (PSS) can result in the development of pale, soft meat in pigs and, under conditions of stress, sudden death. It can therefore result in severe economic loss. It is believed to be controlled by a single gene and its incidence could therefore be reduced by a selective breeding program. In a survey of its incidence, the following results were obtained for four major breeds. (The presence of PSS can be detected by a positive reaction to the breathing of halothane). The observed counts are shown in @tbl-pss1.
 
@@ -239,7 +241,7 @@ Notice that the large counts in the second column (halothane negative) lead to l
 
 Another view of the idea of degrees of freedom can be obtained by noting that if the three expected values at the top of Column 2 are calculated (70.7, 80.7 and 76.2) then the remaining expected value can be found by subtraction from the appropriate row or column totals. Thus if the row and column totals are known, then only three numbers inside the contingency table are free before the whole table of numbers is then determined.
 
-## Points to Watch Out For
+# Points to Watch Out For
 
 The Chi-squared statistic should only be used with frequency counts. Sometimes, researchers convert the counts in the cells of a table to percentages of the total. For example in @fig-chisq, the cell counts could be divided by 343 and multiplied by 100 to give percentages. In this case, the numbers in the cells would be reduced and the Chi-squared statistic likewise would be reduced from 16.43 to 16.43/343 = 0.048. An incorrect conclusion of independence of rows and columns would be drawn from this statistic.
 
@@ -249,7 +251,7 @@ If the expected value in a cell is small, the contribution to the Chi-squared st
 
 2.  If the Chi-squared statistic is significant in comparison with tabulated values, then consider the contributions of each cell. If cells with large expected value (that is, greater than 5) contribute a large amount to the Chi-squared statistic, again there is no problem. If cells with expected values less than 5 yield large contributions to the Chi-squared statistic, now you can worry and any declaration of significant values of Chi-squared statistic should be treated with caution.
 
-### Example: Paturition in Sows
+## Example: Paturition in Sows
 
 Consider the data on the effects of parturition in sows shown in @tbl-sows1.
 
@@ -354,7 +356,7 @@ Evidently the association seen in the subgroups is lost after amalgamation.
 
 The opposite can also happen. That is, when populations are separated somewhat parallelly by a factor like Gender, the overall association may not filter to the same level of association for the two gender groups.
 
-## Square contingency tables
+# Square contingency tables
 
 Assume that two observers independently classifying the same $n$ items into the same $k$ categories. The resulting contingency table becomes a $k \times k$ square contingency table. In biostatistical studies, such square contingency tables are common. Often such contingency tables would have very low cell counts for the off-diagonal cells. The main interest with a square contingency table is the assessment or measurement of the agreement between rows and columns. So there is no need to perform any ChiSq test. @tbl-britrel gives the religion of origin cross-classified by current religion using the six groupings in Britain (data taken from @Breen).
 
@@ -422,7 +424,7 @@ Kappa(drelmatrix)
 
 This topic is not covered in depth. It is sufficient if you recognise the special form of two-way contingency table such as this one.
 
-## Correspondence Analysis (CA)
+# Correspondence Analysis (CA)
 
 **Correspondence Analysis** is an exploratory statistical technique for assessing the interdependence of categorical variables whose data are presented primarily in the form of a two-way table of frequencies (or ***contingency table***). Applied in an advanced way, the methodology can help researchers to "quantify the qualitative data" found in many disciplines. However we will introduce CA at a very basic level, just picking up on those aspects that can help one interpret a contingency table.
 
@@ -629,7 +631,7 @@ abline(v=0)
 abline(h=0)
 ```
 
-## Summary
+# Summary
 
 In this chapter, we considered Goodness of Fit Tests and Tests of Association. Two different Goodness of Fit Tests were considered. Chi-square Goodness of Fit Tests are used to test whether a set of frequency data complies with a hypothesised distribution. Only one test of association, the Chi-square Test of Association was considered. For Chi-square tests of association we perform a test on a table of frequencies, that is counts. The null hypothesis is that the row categories are independent of the column categories. A Chi-squared statistic with $(r-1)(c-1)$ degrees of freedom is calculated. The contribution of a cell to the total Chi-squared statistic will be large if $(O-E)$ is large; that is the observed count is considerably different from the expected (fitted) value. We are interested in this difference.
 
