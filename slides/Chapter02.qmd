@@ -255,37 +255,59 @@ vital1 |>
   theme_minimal()
 ```
 
-## Letter Value Display
+## Letter-Value table
 
--   EDA summary in the form of a Table
--   This display represents the tail of the distribution very well
+-   EDA summary in the form of a table
+-   This display represents the tail of the distribution well
 
 ```{r}
 set.seed(123)
+
 x <- rnorm(50, 100)
+
 # source("https://www.massey.ac.nz/~kgovinda/eda/lva.R")
 # lva(x)
 
-structure(list(X = c("M", "F", "E", "D", "C", "B", "A"), Depth = c(25.5, 
-13, 7, 4, 2.5, 1.5, 1), Lower = c(99.92736, 99.43952, 98.93218, 
-98.73494, 98.52396, 98.17334, 98.03338), Upper = c(99.92736, 
+structure(list(X = c("M", "F", "E", "D", "C", "B", "A"), Depth = c(25.5,
+13, 7, 4, 2.5, 1.5, 1), Lower = c(99.92736, 99.43952, 98.93218,
+98.73494, 98.52396, 98.17334, 98.03338), Upper = c(99.92736,
 100.70136, 101.20796, 101.55871, 101.75099, 101.97793, 102.16896
-), Mid = c(99.92736, 100.07044, 100.07007, 100.14682, 100.13747, 
-100.07564, 100.10117), Spread = c(0, 1.261832, 2.275786, 2.82377, 
-3.227034, 3.80459, 4.135573)), class = "data.frame", row.names = c(NA, 
+), Mid = c(99.92736, 100.07044, 100.07007, 100.14682, 100.13747,
+100.07564, 100.10117), Spread = c(0, 1.261832, 2.275786, 2.82377,
+3.227034, 3.80459, 4.135573)), class = "data.frame", row.names = c(NA,
 -7L)) |> column_to_rownames("X")
+
+# source("https://raw.githubusercontent.com/mgimond/ES218/gh-pages/es218.R")
+# lsum(x)
+
+# lvtable( x, k = determineDepth( length(x) , alpha = 0.05 ) )
+
 
 ```
 
-## Letter Value Plot
+## Letter-Value Plot
 
 Suitable for large datasets
 
 ```{r}
 set.seed(123)
-x <- rlnorm(5000, 100)
+
 library(lvplot)
-LVboxplot(x, xlab = "Random log-normal data of size 5000")
+
+data.frame(
+  y = c( rlnorm(n=1e4, mean = 10) , 
+         rnorm(n=1e4, mean = 5e5, sd = 1e5) 
+         ),
+  x = rep(c("Log-normal(10,1)","Normal(500k,100k)"), each=1e4) |> factor()
+) |> 
+  ggplot() + 
+  aes(x=x, y=y, fill=after_stat(LV)) +
+  geom_lv() + 
+  scale_fill_lv() +
+  coord_flip() +
+  theme_bw() +
+  xlab("")
+
 ```
 
 ## Cumulative frequency graphs

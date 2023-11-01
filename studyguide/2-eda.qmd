@@ -587,13 +587,17 @@ ggplot(Snodgrass) +
 
 The boxplots in @fig-boxplt1 show that the general shapes of the distributions of `Length` are broadly similar. In each case, the median is near the centre of the box. The box of the `Outside` group is entirely to the right of the box of the `Inside` group, indicating that the distribution of `Length` is higher for the `Outside` group. We can also see that the `Inside` group may have greater spread than the `Outside` group.
 
-## Letter value plots
+## Letter-value plots
 
-For large datasets, a summary based on five numbers may be overly simple. So we can chop up the data by repeatedly halving the distance from the extreme values and get the **letter values**, namely, $M$ (median), $F$ (fourth), $E$ (eighth) and so on. Letter values are defined by their **depth**, or distance from the nearer edge of the ordered data.
+For large datasets, a summary based on five numbers may be overly simple, showing too many 'outliers' and obscuring some structure in the more extreme range of the data. @hofmann_letter-value_2017 describe an extension to the boxplot called the "letter-value plot". 
+
+Like boxplots, letter-value plots include the median and the two middle fourths of the data. However, the whiskers are replaced by smaller boxes, representing ever-decreasing proportions of the data, such as eighths, sixteenths, etc., represented by letter values. The extent of this extra boxing depends on the quantity and shape of the data. 
+
+Letter values are defined by their **depths**, or distances from the nearer edge of the ordered data.
 
 `median`: found at depth $d(M) = (n + 1)/2$ where $n$ is the number of observations
 
-`fourths`: found at depth $d(F) = \{\verb"int"[d(M)] + 1\}/2$ where `int` refers to the integer part function.
+`fourths`: found at depth $d(F) = \{\verb"int"[d(M)] + 1\}/2$ where $\verb"int[]"$ refers to the integer part function.
 
 `eighths`: found at depth $d(E) = \{\verb"int"[d(F)] + 1\}/2$
 
@@ -605,16 +609,18 @@ Similarly if we had enough data, we could extend further
 
 and thus define points $B, A, Z, Y, X,$ and so on.
 
-Note the M, F and E could be termed measures of **location**. It is also helpful to have some measures of **spread** which indicate the variability in the distribution. One such measure, the **F-spread**, is the distance between the two F (fourths) values. Finally, the **range** is the distance between the two extreme points.
+Note the M, F and E could be termed measures of **location**. It is also helpful to have some measures of **spread** which indicate the variability in the distribution. One such measure, the **F-spread**, is the distance between the two F (fourths) values; that is, the inter-quartile range (IQR). Finally, the **range** is the distance between the two extreme points.
 
-Another useful measure of location is obtained by averaging the two hinges which is termed the **mid-fourth** (or **mid-F**). If the distribution were perfectly symmetrical, the mid-F would be the same as the median. If mid-F is smaller (larger) than the median, the distribution is skewed to the left (right). Note that the mid values can be found at all depth.
+Another useful measure of location is obtained by averaging the two hinges which is termed the **mid-fourth** (or **mid-F**). If the distribution were perfectly symmetrical, the mid-F would be the same as the median. If mid-F is smaller (larger) than the median, the distribution is skewed to the left (right). Note that the mid values can be found at any depths.
+
+See [here](https://mgimond.github.io/ES218/letter_values.html) for more details.
 
 Letter values are displayed as a graph called letter value plot; see @fig-LVplt1. This type of plot is a better display than a boxplot for `big data` which tend to show many unusual points. Boxplots are suitable to moderate size datasets only. For large datasets, the skew may not be consistent within the data. The LV plot will show such anomalies in the skew patterns.
 
 ```{r}
 #| echo: true
 #| label: fig-LVplt1
-#| fig-cap: 'Letter Value plot for Length data'
+#| fig-cap: 'Letter-value plot for `length` data'
 
 library(lvplot)
 LVboxplot(Snodgrass$Length, xlab = "Length")
@@ -625,22 +631,36 @@ A letter value plot showing the eighths is shown in @fig-boxplt2. Note that this
 ```{r}
 #| echo: true
 #| label: fig-boxplt2
-#| fig-cap: 'LV plots'
+#| fig-cap: 'Letter-value plots of `Length` by `Inside`'
 LVboxplot(Snodgrass$Length ~ Snodgrass$Inside, xlab = "Length")
 ```
 
-A `ggplot` version.
+If we compare @fig-boxplt1 with @fig-boxplt2, we can see that the whiskers have been replaced with more 'outliers' and two extra boxes. The middle boxes are the same; they show the first and third quartiles. The smaller, darker boxes in @fig-boxplt2 show the first and seventh eighths.
+
+@fig-lvggplot shows a `ggplot` version of an LV plot for a big random data set.
 
 ```{r}
 #| echo: true
 #| label: fig-lvggplot
-#| fig-cap: 'LV ggplot'
+#| fig-cap: 'A ggplot letter-value plot'
 
-ggplot(Snodgrass) + 
-  aes(Inside, Length) + 
+set.seed(123)
+
+library(lvplot)
+
+data.frame(
+  y = c( rlnorm(n=1e4, mean = 10) , 
+         rnorm(n=1e4, mean = 5e5, sd = 1e5) 
+         ),
+  x = rep(c("Log-normal(10,1)","Normal(500k,100k)"), each=1e4) |> factor()
+) |> 
+  ggplot() + 
+  aes(x=x, y=y, fill=after_stat(LV)) +
   geom_lv() + 
   scale_fill_lv() +
-  coord_flip()
+  coord_flip() +
+  theme_bw() +
+  xlab("")
 ```
 
 # Cumulative Frequency Graph and Quantiles
