@@ -74,7 +74,7 @@ ggplot(tea, aes(x="", fill = price)) +
 :::
 :::
 
-<https://shiny.massey.ac.nz/kgovinda/demos/explore.counts.of.factors/>
+<https://shiny.massey.ac.nz/anhsmith/demos/explore.counts.of.factors/>
 
 ## One-dimensional graphs
 
@@ -323,9 +323,9 @@ ggplot(data.frame(x), aes(x)) + stat_ecdf()
 
 ## Shiny apps
 
-<https://shiny.massey.ac.nz/kgovinda/demos/explore.univariate.graphs/>
+<https://shiny.massey.ac.nz/anhsmith/demos/explore.univariate.graphs/>
 
-<https://shiny.massey.ac.nz/kgovinda/demos/get.univariate.plots/>
+<https://shiny.massey.ac.nz/anhsmith/demos/get.univariate.plots/>
 
 Lots of examples are available 
  
@@ -398,15 +398,15 @@ ggMarginal(p1, type="boxplot")
 
 Explore-
 
-<https://shiny.massey.ac.nz/kgovinda/demos/explore.bivariate.plots/>
+<https://shiny.massey.ac.nz/anhsmith/demos/explore.bivariate.plots/>
 
-<https://shiny.massey.ac.nz/kgovinda/demos/get.bivariate.plots/>
+<https://shiny.massey.ac.nz/anhsmith/demos/get.bivariate.plots/>
 
-<https://shiny.massey.ac.nz/kgovinda/demos/explore.facet.wrapped.plots/>
+<https://shiny.massey.ac.nz/anhsmith/demos/explore.facet.wrapped.plots/>
 
-<https://shiny.massey.ac.nz/kgovinda/demos/get.facet.wrapped.plots/>
+<https://shiny.massey.ac.nz/anhsmith/demos/get.facet.wrapped.plots/>
 
-<https://shiny.massey.ac.nz/kgovinda/demos/explore.facet.grid.plots/>
+<https://shiny.massey.ac.nz/anhsmith/demos/explore.facet.grid.plots/>
 
 ## Pairs plot / scatterplot matrix (all pairwise scatterplots)
 

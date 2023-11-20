@@ -182,7 +182,7 @@ p1 <- p1 + labs(title = "F density for (2,10) dfs")
 p1+theme_minimal()
 ```
 
-<https://shiny.massey.ac.nz/kgovinda/demos/demo.critical.values/>
+<https://shiny.massey.ac.nz/anhsmith/demos/demo.critical.values/>
 
 ## Confidence interval for the population mean
 
@@ -225,7 +225,7 @@ p1+theme_minimal()
 -   If the P value is below the set significance level $\alpha$, reject
     the null hypothesis
 
--   <https://shiny.massey.ac.nz/kgovinda/demos/demo.p.is.rv/>
+-   <https://shiny.massey.ac.nz/anhsmith/demos/demo.p.is.rv/>
 
 -   Learn how to perform t-tests in R
 
@@ -292,15 +292,15 @@ attach(twins)
 t.test(x=A, y=B, paired=TRUE)
 ```
 
-## Shiny apps
+## Shiny apps (not currently working)
 
-<https://shiny.massey.ac.nz/kgovinda/demos/demo.2sample.t.test/>
+<https://shiny.massey.ac.nz/anhsmith/demos/demo.2sample.t.test/>
 
-<https://shiny.massey.ac.nz/kgovinda/demos/explore.2sample.t-test/>
+<https://shiny.massey.ac.nz/anhsmith/demos/explore.2sample.t-test/>
 
-<https://shiny.massey.ac.nz/kgovinda/demos/explore.paired.t-test/>
+<https://shiny.massey.ac.nz/anhsmith/demos/explore.paired.t-test/>
 
--   Covers non-parametric tests, see SG.
+-   Covers non-parametric tests, see Study Guide.
 
 ## Test of proportions
 
@@ -462,8 +462,8 @@ gg_boxcox(lm(rangitikei$vehicle ~ 1))
     hypothesised under the null
 
 -   Explore
-    https://shiny.massey.ac.nz/kgovinda/demos/explore.transformations/
-    app
+    https://shiny.massey.ac.nz/anhsmith/demos/explore.transformations/
+    app (not currently working)
 
 -   Example: Brain weight data is extremely skewed to the right. So rely
     on the back-transformed CI.
@@ -507,7 +507,7 @@ exp(t.test(log(BrainWt))$conf.int)[1:2]
 
 <!-- library(tidyverse) -->
 
-<!-- hospital <- read.table("https://www.massey.ac.nz/~kgovinda/data/hospital.txt", header=TRUE, sep=",") -->
+<!-- hospital <- read.table("https://www.massey.ac.nz/~anhsmith/data/hospital.txt", header=TRUE, sep=",") -->
 
 <!-- dat <- hospital %>% group_by(YEAR) %>%  -->
 
@@ -531,9 +531,9 @@ exp(t.test(log(BrainWt))$conf.int)[1:2]
 
 ## Shiny apps
 
-<https://shiny.massey.ac.nz/kgovinda/demos/explore.transformations/>
+<https://shiny.massey.ac.nz/anhsmith/demos/explore.transformations/>
 
-<https://shiny.massey.ac.nz/kgovinda/demos/perform.transformations/>
+<https://shiny.massey.ac.nz/anhsmith/demos/perform.transformations/>
 
 ## Non-parametric tests
 

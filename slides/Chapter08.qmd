@@ -398,9 +398,9 @@ qualitative factors for modelling.
 
 ## Shiny apps
 
-https://shiny.massey.ac.nz/kgovinda/demos/explore.simple.experimental.ANOVA.models/
+https://shiny.massey.ac.nz/anhsmith/demos/explore.simple.experimental.ANOVA.models/
 
-https://shiny.massey.ac.nz/kgovinda/demos/fit.multiple.regression/
+https://shiny.massey.ac.nz/anhsmith/demos/fit.multiple.regression/
 
 <!-- ## Exercises -->
 

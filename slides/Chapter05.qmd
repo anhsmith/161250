@@ -419,7 +419,7 @@ CA(tabledata) |> summary()
 
     -   For $r\times c$ cells the test involves $(r-1)(c-1)$ df
     -   shiny app
-        <http://shiny.massey.ac.nz/kgovinda/demos/explore.counts.of.factors/>
+        <http://shiny.massey.ac.nz/anhsmith/demos/explore.counts.of.factors/>
 
 -   $\chi ^{2}$ test works well if $E> 5$. Some could be as low as 1.
 

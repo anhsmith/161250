@@ -53,14 +53,14 @@ knitr::opts_chunk$set(warning = FALSE,
         uncorrelated with the rest.
 
     -   Try
-        <https://shiny.massey.ac.nz/kgovinda/demos/explore.multiple.numerical.variables/>
+        <https://shiny.massey.ac.nz/anhsmith/demos/explore.multiple.numerical.variables/>
 
 ## Pinetree data example
 
 \small
 
 ```{r}
-# url1 <- "http://www.massey.ac.nz/~kgovinda/data/pinetree.RData"
+# url1 <- "http://www.massey.ac.nz/~anhsmith/data/pinetree.RData"
 # download.file(url = url1, destfile = "pinetree.RData")
 load("../data/pinetree.RData")
 ```
@@ -115,7 +115,7 @@ summary(full_reg)
 ```
 
 -   Also try the app -
-    <https://shiny.massey.ac.nz/kgovinda/demos/fit.multiple.regression/>
+    <https://shiny.massey.ac.nz/anhsmith/demos/fit.multiple.regression/>
 
 ## Multicollinearity {.increment}
 
@@ -149,7 +149,7 @@ vif(full_reg)
 ```
 
 -   Try
-    <https://shiny.massey.ac.nz/kgovinda/demos/explore.collinearity/>
+    <https://shiny.massey.ac.nz/anhsmith/demos/explore.collinearity/>
 
 ## Additional variation explained
 
@@ -236,7 +236,7 @@ Anova(full_reg,  type=3)
 -   $R^2_{adj}=1-\frac{MS~Error}{MS~Total}$
 
     -   Try
-        <https://shiny.massey.ac.nz/kgovinda/demos/demo.RSq.and.adjusted.RSq/>
+        <https://shiny.massey.ac.nz/anhsmith/demos/demo.RSq.and.adjusted.RSq/>
 
 -   Residual SD depends on its degrees of freedom
 
@@ -261,7 +261,7 @@ $$\frac{\sum \frac{\left|{\rm observation-fit}\right|}{{\rm observation}} }{{\rm
 -   Avoid over-fitting.
 
     -   Try
-        <https://shiny.massey.ac.nz/kgovinda/demos/demo.over-fitting.model/>
+        <https://shiny.massey.ac.nz/anhsmith/demos/demo.over-fitting.model/>
 
 -   So place a penalty for excessive model parameters
 
@@ -294,7 +294,7 @@ $$C_{p} =\; \frac{{\rm SS\; Error\; for\; Smaller\; Model}}{{\rm Mean\; Square\;
 Example: (try)
 
 ```{r, results='hide'}
-# url1 <- "http://www.massey.ac.nz/~kgovinda/data/suppressor.RData"
+# url1 <- "http://www.massey.ac.nz/~anhsmith/data/suppressor.RData"
 # download.file(url = url1, destfile = "suppressor.RData")
 load("../data/suppressor.RData")
 summary(lm(y~x1, data=suppressor))
@@ -323,7 +323,7 @@ summary(lm(y~x1+x2, data=suppressor))
 
 Examples:
 
-<https://shiny.massey.ac.nz/kgovinda/demos/explore.multiple.regression/>
+<https://shiny.massey.ac.nz/anhsmith/demos/explore.multiple.regression/>
 
 ## Cross validated selection
 
@@ -920,15 +920,15 @@ plot(forecast(model1,h=20))
 
 ## Shiny apps
 
-<http://shiny.massey.ac.nz/kgovinda/demos/explore.multiple.regression/>
+<http://shiny.massey.ac.nz/anhsmith/demos/explore.multiple.regression/>
 
-<http://shiny.massey.ac.nz/kgovinda/demos/fit.multiple.regression/>
+<http://shiny.massey.ac.nz/anhsmith/demos/fit.multiple.regression/>
 
-<http://shiny.massey.ac.nz/kgovinda/demos/explore.collinearity/>
+<http://shiny.massey.ac.nz/anhsmith/demos/explore.collinearity/>
 
-<http://shiny.massey.ac.nz/kgovinda/demos/explore.Cooks.distances.and.leverages/>
+<http://shiny.massey.ac.nz/anhsmith/demos/explore.Cooks.distances.and.leverages/>
 
-<http://shiny.massey.ac.nz/kgovinda/demos/demo.RSq.and.adjusted.RSq/>
+<http://shiny.massey.ac.nz/anhsmith/demos/demo.RSq.and.adjusted.RSq/>
 
 <!-- download.file("http://www.massey.ac.nz/~kgovinda/220exer/Chap5moreexamples.R", destfile="Chap5moreexamples.R") -->
 
