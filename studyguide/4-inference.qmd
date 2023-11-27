@@ -424,7 +424,7 @@ Usually, we reject $H_0$ in favour of $H_{1}$ if the $p$-value of the data is $<
 
 Unfortunately the P-values are often misunderstood in practice. The advice issued by the American Statistical Association (<https://www.amstat.org/asa/files/pdfs/P-ValueStatement.pdf>) is noteworthy:
 
-> The statement's six principles, many of which address misconceptions and misuse of the pvalue, are the following:
+> The statement's six principles, many of which address misconceptions and misuse of the p-value, are the following:
 >
 > 1.  P-values can indicate how incompatible the data are with a specified statistical model.
 >
@@ -438,11 +438,11 @@ Unfortunately the P-values are often misunderstood in practice. The advice issue
 >
 > 6.  By itself, a p-value does not provide a good measure of evidence regarding a model or hypothesis.
 
-In order to fully appreciate the reasons behind the above advice, we need learn more theory but you should be able to understand the following distinction between `statistical` significance and `practical` significance. A hypothesis test may suggest that the estimated size of the effect is not big enough compared to the effect that can occur due to errors under the assumed model. A small effect, particularly if it is known to be *caused* by a variable, can be of practical importance and can contribute to scientific knowledge. The opposite scenario is also possible. We may find a small difference to be statistically significant because of the large sample size but such a difference may not be of much practical significance.
+In order to fully appreciate the reasons behind the above advice, we need learn more theory but you should be able to understand the following distinction between *statistical* significance and *practical* significance. A hypothesis test may suggest that the estimated size of the effect is not big enough compared to the effect that can occur due to errors under the assumed model. A small effect, particularly if it is known to be *caused* by a variable, can be of practical importance and can contribute to scientific knowledge. The opposite scenario is also possible. We may find a small difference to be statistically significant because of the large sample size but such a difference may not be of much practical significance.
 
 A hypothesis test has a certain power (probability) to reject the null hypothesis when it is false. This power (probability) is a function of the sample size and the unknown parameters of the probability model adopted for testing.
 
-Assume that we are testing the null hypothesis $H_0:\mu = 0$ using the null model $N(0,1)$. The power of the one sample t test can be evaluated using the `R` function *power.t.test* for a given $\delta$, the difference in the true mean and what was hypothesised under $H_0$. For example, the power of the $t$-test for $n=30$ is lower than the power when $n=50$ (say) when other settings are the same. Try-
+Assume that we are testing the null hypothesis $H_0:\mu = 0$ using the null model $N(0,1)$. The power of the one sample t test can be evaluated using the `R` function `power.t.test()` for a given $\delta$, the difference in the true mean and what was hypothesised under $H_0$. For example, the power of the $t$-test for $n=30$ is lower than the power when $n=50$ (say) when other settings are the same. Try-
 
 ```{r, results=FALSE}
 power.t.test(n = 30, delta = 1, sd = 1, sig.level = 0.05)

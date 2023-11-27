@@ -4,6 +4,19 @@ $code-block-border-color: #FF;
 $code-block-font-size:	13px;
 $presentation-font-size-root:	28px;
 
+.reveal .custom3070 > div.column:first-child {
+  width: 30%;
+}
+.reveal .custom3070 div.column:not(:first-child) {
+  width: 70%;
+}
+
+.reveal .custom4060 > div.column:first-child {
+  width: 40%;
+}
+.reveal .custom4060 div.column:not(:first-child) {
+  width: 60%;
+}
 
 .background-black {
   color: white;

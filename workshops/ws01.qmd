@@ -180,6 +180,27 @@ using the `ctv` package command `install.views()`.
 
 You might have to install quite a few packages as you work through this course.
 
+# Quarto {.unnumbered}
+
+I encourage you to get into the habit of using [Quarto](https://quarto.org/) `*.qmd` files rather than raw `*.R` files. If you've heard of Rmarkdown, Quarto is the successor to Rmarkdown. So, if you're just starting to use R, then you should begin with Quarto rather than Rmarkdown, because most/all new development will be going into Quarto.
+
+Quarto files contain text and code, and can be 'knitted' to produce a nicely formatted document, usually in HTML or PDF format, containing sections, text, code, plots, and output. Quarto can also be used to make websites; in fact, the website for this course was made using Quarto.
+
+Take a look at the website for more information: <https://quarto.org/>.
+
+Here's a primer to get you started with Quarto: <https://r4ds.hadley.nz/quarto>.
+
+# R Projects and GitHub {.unnumbered}
+
+Instead of putting your R code into an ordinary directory on your computer, I encourage you to use Rstudio Projects. A Project is a self-contained directory of code and data, pertaining to a particular project. You might create a single project for your work during this course, with a folder for workshops and another folder for assignments. 
+
+Here's a primer on R projects: <https://r4ds.hadley.nz/workflow-scripts#projects>
+
+An advantage of Projects is that they work nicely with [GitHub](https://github.com/), a cloud code-repository service. If you plan to do any programming during your career, you'll probably need to learn how to use GitHub. It can be a little tricky to use at first. You don't have to use it for this course, but feel free to have a go at it if you're interested.
+
+If you're using R projects and GitHub, this online book is a great place to start: [Happy Git and GitHub for the useR](https://happygitwithr.com/).
+
+
 # Loading/Importing Data {.unnumbered}
 
 Most data sets we shall consider in this course are in a tabular form.

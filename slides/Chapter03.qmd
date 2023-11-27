@@ -508,9 +508,7 @@ or
 
 ## Binomial
 
-The code\
-`pbinom(k,size=n,prob=p)`\
-gives the cumulative probabilities up to and including the quantile $k$.
+The code `pbinom(k,size=n,prob=p)` gives the cumulative probabilities up to and including the quantile $k$.
 
 The Probability Mass Function (PMS) for a binomial random variable is:
 
@@ -529,7 +527,7 @@ with standard deviation
 
 $$\sigma_X=\sqrt {np(1-p)}=1.129159$$
 
-## Poisson distribution {.smaller}
+## Poisson distribution 
 
 The Poisson distribution is used to obtain the probabilities of counts
 of relatively rare events that occur independently in space or time.
@@ -541,6 +539,9 @@ Some Examples:
 -   Fish counts in a visual transect (25m x 5m)
 
 -   Bacterial colonies in 2 litres of milk
+
+
+## Poisson distribution 
 
 The random variable $X$, the number of occurrences (count), often
 follows the Poisson distribution whose probability function is given by
@@ -1034,13 +1035,42 @@ For small samples, we do not expect many outliers but the shape might be
 difficult to judge.
 
 ```{r}
+#| echo: true
+#| output-location: column
+#| classes: custom4060
+#| fig-width: 5
+#| fig-height: 7
+
 set.seed(1234)
-dfm <- data.frame(x=rnorm(50, mean=80, sd=12))
-p1 <- ggplot(dfm, aes(x))+geom_histogram(aes(y=..density..), colour=1)
-p1 <- p1 + stat_function(fun = dnorm, args=list(mean=mean(dfm$x), sd=sd(dfm$x)), geom = "line")
-p2 <- ggplot(dfm, aes(x))+geom_boxplot()
+dfm <- data.frame(
+  x=rnorm(50, 
+          mean=80, 
+          sd=12)
+  )
+
+p1 <- ggplot(dfm) + 
+  geom_histogram(
+    aes(x=x, y=after_stat(density)), 
+    colour=1
+    ) + 
+  stat_function(
+    fun = dnorm, 
+    args = list(mean = 80, sd = 12), 
+    geom = "line"
+    ) +
+  xlim(min(dfm), max(dfm))
+
+p2 <- ggplot(dfm) + aes(x) + 
+  geom_boxplot() +
+  xlim(min(dfm), max(dfm))
+
 library(patchwork)
-p1/p2+ plot_layout(heights = unit(c(6, 1), c('cm', 'null'))) 
+p1 / p2 + 
+  plot_layout(
+    heights = unit(c(6, 1), 
+                   c('cm', 'null'))
+    ) 
+
 ```
 
 ::: footer
