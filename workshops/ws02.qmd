@@ -74,9 +74,10 @@ barplot(table(Prestige$type))
 
 Draw a histogram of **prestige**. 
 
-Below demonstrates the flexibility of `ggplot` code. You can specify the `data` argument by piping it into `ggplot`, or by putting it as an argument to `ggplot` or a `geom_`. Likewise, the `aes` information, which determines which variables are used where, can be added as an extra line or specified inside the `ggplot` or `geom_` function. 
+Below demonstrates the flexibility of `ggplot` code. You can specify the `data` argument by piping it into `ggplot`, or by putting it as an argument to `ggplot` or a `geom_`. Likewise, the `aes` information, which determines which variables are used where, can be added as an extra line or specified inside the `ggplot` or `geom_` function.
 
 ```{r, fig.show="hide"}
+
 Prestige |> 
   ggplot() +
   aes(x = prestige) +
@@ -110,11 +111,13 @@ ggplot() +
 #| fig-height: 12
 #| output: true
 #| fig-show: asis
-Prestige |> 
+
+Prestige |>
   ggplot() + 
   aes(x = rownames(Prestige), y = prestige) +
   geom_point() +
   coord_flip()
+
 ```
 
 What a mess! 
@@ -125,11 +128,14 @@ We can tidy it up by ordering the professions according to prestige. First, we m
 #| fig-height: 12
 #| output: true
 #| fig-show: asis
+
 Prestige |> 
   rownames_to_column(var = "profession") |> 
-  mutate(profession = fct_reorder(profession, prestige)) |> 
+  mutate(
+    profession = fct_reorder(profession, prestige)
+    ) |>
   ggplot() + 
-  aes(x = profession, y = prestige, col = type) +
+  aes(x = profession, y = prestige, colour = type) +
   geom_point() +
   coord_flip()
 ```
