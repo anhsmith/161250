@@ -484,7 +484,7 @@ The sample space is <span class="math inline">\(\{0,1,2,3,4,5,6,7,8,9\}\)</span>
 </div>
 <div class="callout-content">
 <ul>
-<li><p><span class="math inline">\(P(A|B)\)</span> is the probability of event A occurring given that event <span class="math inline">\(B\)</span> is has occurred.</p></li>
+<li><p><span class="math inline">\(P(A|B)\)</span> is the probability of event <span class="math inline">\(A\)</span> occurring given that event <span class="math inline">\(B\)</span> is has occurred.</p></li>
 <li><p>For example, the probability of a card you’ve drawn being a 5, given that it is a spade.</p></li>
 <li><p>The sample space is reduced to that where <span class="math inline">\(B\)</span> (e.g.&nbsp;the card is a spade) has occurred.</p></li>
 </ul>
@@ -531,65 +531,41 @@ about 81% are Rh+ and about 8% are K+.</p>
 <li><p><span class="math inline">\(P(A\mid B)\)</span> and <span class="math inline">\(P(B\mid A)\)</span> are conditional probabilities.</p></li>
 <li><p><span class="math inline">\(P(A)\)</span> and <span class="math inline">\(P(B)\)</span> are marginal or prior probabilities.</p></li>
 </ul>
-<p>For epidemiological tests, the following definitions are used:</p>
-<ul>
-<li><p><em>sensitivity</em> of the test: The subject has the disease and the test is also positive.</p></li>
-<li><p><em>specificity</em> of the test: The subject is free from disease and the test is also negative.</p></li>
-<li><p><em>prevalence</em> of the disease is the probability of a randomly selected subject from the population having the disease.</p></li>
-</ul>
-<p>Both specificity and sensitivity are conditional probabilities.</p>
-<p>Prevalence is the marginal or prior probability.</p>
 </section>
-<section id="example" class="slide level2 smaller">
+<section id="prevalence-sensitivity-specificity-ppv-and-npv" class="slide level2">
+<h2>Prevalence, sensitivity, specificity, PPV, and NPV</h2>
+<p>Let <span class="math inline">\(D\)</span> be the event of a person having the Disease and <span class="math inline">\(H\)</span> be the event of a person being Healthy (i.e., not having the disease). The outcome of a test for the disease can be either positive <span class="math inline">\((T_+)\)</span> or negative <span class="math inline">\((T_-)\)</span>.</p>
+<p>Consider the following definitions of conditional probabilities:</p>
+<ul>
+<li><strong>prevalence</strong> is the overall probability one has the disease, or <span class="math inline">\(P(D)\)</span>.</li>
+<li><strong>sensitivity</strong> the probability that one tests positive given one has the disease, or <span class="math inline">\(P(T_+ | D)\)</span>.</li>
+<li><strong>specificity</strong> the probability that one tests negative given one does not have the disease, or <span class="math inline">\(P(T_- | H)\)</span>.</li>
+<li><strong>positive predictive value</strong> of a test is the probability one has the disease given that one has tested positive, or <span class="math inline">\(P(D \mid T_{+})\)</span></li>
+<li><strong>negative predictive value</strong> of a test is the probability that one is healthy given that one has tested negative, or <span class="math inline">\(P(H \mid T_{-})\)</span></li>
+</ul>
+</section>
+<section id="example" class="slide level2">
 <h2>Example</h2>
-<p>Let <span class="math inline">\(D\)</span> be the event of a person having the disease and <span class="math inline">\(H\)</span> be the event of a person not having the disease (Healthy).</p>
-<p>Let the prevalence be 3%. That is, <span class="math inline">\(P(D) = 0.03\)</span> and <span class="math inline">\(P(H) = 1-0.03=0.97\)</span>.</p>
-<p>The test outcome can be positive <span class="math inline">\((T_+)\)</span> or negative <span class="math inline">\((T_-)\)</span>.</p>
-<p>Say the test has sensitivity <span class="math inline">\(P(T_+\mid D) = 0.98\)</span> and specificity <span class="math inline">\(P(T_{-}\mid H) = 0.95\)</span>.</p>
-<table>
-<thead>
-<tr class="header">
-<th></th>
-<th>positive Test</th>
-<th>negative Test</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>D</td>
-<td><strong>0.98</strong></td>
-<td>0.02</td>
-</tr>
-<tr class="even">
-<td>H</td>
-<td>0.05</td>
-<td><strong>0.95</strong></td>
-</tr>
-</tbody>
-</table>
-<p><strong>How well does the test predict?</strong></p>
+<p>Say the following were true:</p>
 <ul>
-<li><p><strong>positive predictive value</strong> of a test is the probability that someone with a positive test actually has the disease or <span class="math inline">\(P(D \mid T_{+})\)</span></p></li>
-<li><p><strong>negative predictive value</strong> of a test is the probability that someone with a negative test actually is healthy or <span class="math inline">\(P(H \mid T_{-})\)</span></p></li>
+<li>Prevalence: <span class="math inline">\(P(D) = 0.03\)</span> and <span class="math inline">\(P(H) = 1-0.03=0.97\)</span></li>
+<li>Sensitivity: <span class="math inline">\(P(T_+\mid D) = 0.98\)</span></li>
+<li>Specificity: <span class="math inline">\(P(T_{-}\mid H) = 0.95\)</span></li>
+</ul>
+<p>We can use Bayes Rule to answer the following questions:</p>
+<ul>
+<li>What proportion of the overall population will test positive vs negative?</li>
+<li>What are the implications of a positive or negative test result?</li>
 </ul>
 </section>
-<section id="example-continued" class="slide level2 smaller">
-<h2>Example continued</h2>
-<p>Given Bayes Rule,</p>
-<p><span class="math display">\[P(D\mid T_{+})=\frac {P(T_{+}\mid D)P(D)}{P(T_{+})}\]</span></p>
-<p>Since <span class="math inline">\(P(T_{+})=P(T_{+} \mid D)P(D) + P(T_{+} \mid H)P(H)\)</span>, <span class="math display">\[P(D\mid T_{+})=\frac {P(T_{+}\mid D)P(D)}{P(T_{+} \mid D)P(D) + P(T_{+} \mid H)P(H)} \\ = \frac{0.98 \times 0.03}  {0.98 \times 0.03 + 0.05 \times 0.97} = 0.3774\]</span></p>
-<p>The positive predictive value of the test is poor because only 37% of the subjects who tested positive will have the disease. This test is not a <em>gold standard</em> test.</p>
-<p>The positive predictive value of the test is not bad.</p>
-<p><span class="math display">\[P(D\mid T_{-})=\frac {P(T_{-}\mid D)P(D)}{P(T_{-} \mid D)P(D) + P(T_{-} \mid H)P(H)} \\ = \frac{0.02 \times 0.03}  {0.02 \times 0.03 + 0.95 \times 0.97} =0.001123\]</span></p>
-<p>This conclusion is valid for the current prevalence range.</p>
-</section>
-<section id="probability-tree-diagram" class="slide level2 smaller">
-<h2>Probability tree diagram</h2>
-<p>It can be useful to visualise the probabilities using a tree diagram.</p>
+<section id="probability-tree" class="slide level2 smaller">
+<h2>Probability tree</h2>
+<p>It can be useful to visualise the probabilities of the four possible states using a tree diagram.</p>
+<div class="left-code-wide">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-6a95d1505f674542794c" style="width:480px;height:384px;"></div>
-<script type="application/json" data-for="htmlwidget-6a95d1505f674542794c">{"x":{"diagram":"digraph {\n\ngraph [rankdir = \"LR\"]\n\n\n\n  \"1\" [label = \"Start\", fontname = \"helvetica\", shape = \"box\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"2\" [label = \"Healthy\", fontname = \"helvetica\", shape = \"\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"3\" [label = \"Positive\", fontname = \"helvetica\", shape = \"\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"4\" [label = \"Prob: 0.0485\", fontname = \"helvetica\", shape = \"none\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"5\" [label = \"Negative\", fontname = \"helvetica\", shape = \"\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"6\" [label = \"Prob: 0.9215\", fontname = \"helvetica\", shape = \"none\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"7\" [label = \"Disease\", fontname = \"helvetica\", shape = \"\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"8\" [label = \"Positive\", fontname = \"helvetica\", shape = \"\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"9\" [label = \"Prob: 0.0294\", fontname = \"helvetica\", shape = \"none\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"10\" [label = \"Negative\", fontname = \"helvetica\", shape = \"\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"11\" [label = \"Prob: 6e-04\", fontname = \"helvetica\", shape = \"none\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n\"1\"->\"2\" [fontname = \"helvetica\", label = \"0.97\"] \n\"1\"->\"7\" [fontname = \"helvetica\", label = \"0.03\"] \n\"2\"->\"3\" [fontname = \"helvetica\", label = \"0.05\"] \n\"2\"->\"5\" [fontname = \"helvetica\", label = \"0.95\"] \n\"7\"->\"8\" [fontname = \"helvetica\", label = \"0.98\"] \n\"7\"->\"10\" [fontname = \"helvetica\", label = \"0.02\"] \n\"3\"->\"4\" [fontname = \"helvetica\"] \n\"5\"->\"6\" [fontname = \"helvetica\"] \n\"8\"->\"9\" [fontname = \"helvetica\"] \n\"10\"->\"11\" [fontname = \"helvetica\"] \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-cde48eefe032f3b3467b" style="width:576px;height:384px;"></div>
+<script type="application/json" data-for="htmlwidget-cde48eefe032f3b3467b">{"x":{"diagram":"digraph {\n  \n  # horizontal alignment\n  graph [rankdir = LR]\n  \n  # Nodes with labels\n  node [shape = oval]\n  Start [label = \"Start\", shape = box]\n  Healthy [label = \"Healthy\"]\n  Disease [label = \"Disease\"]\n  PosH [label = \"Positive\"]\n  NegH [label = \"Negative\"]\n  PosD [label = \"Positive\"]\n  NegD [label = \"Negative\"]\n  pPosH [label = \"P(H & T+) = 0.0485\", shape = none]\n  pNegH [label = \"P(H & T-) = 0.9215\", shape = none]\n  pPosD [label = \"P(D & T+) = 0.0294\", shape = none]\n  pNegD [label = \"P(D & T-) = 0.0006\", shape = none]\n  \n  # Edges with labels\n  Start -> Healthy [label = \"0.97\"]\n  Start -> Disease [label = \"0.03\"]\n  Healthy -> PosH [label = \"0.05\"]\n  Healthy -> NegH [label = \"0.95\"]\n  Disease -> PosD [label = \"0.98\"]\n  Disease -> NegD [label = \"0.02\"]\n  PosH -> pPosH \n  NegH -> pNegH \n  PosD -> pPosD \n  NegD -> pNegD \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p><strong>Rules of the Probability Tree</strong></p>
@@ -599,6 +575,105 @@ about 81% are Rh+ and about 8% are K+.</p>
 <li><p>We multiply as we move along branches.</p></li>
 <li><p>We add when we move across branches.</p></li>
 </ol>
+</div>
+<div class="left-plot-narrow">
+<p><br><br><br><br><br><br></p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>T+</th>
+<th>T-</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><em>D</em></td>
+<td>0.0294</td>
+<td>0.0006</td>
+<td>0.03</td>
+</tr>
+<tr class="even">
+<td><em>H</em></td>
+<td>0.0485</td>
+<td>0.9215</td>
+<td>0.97</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="example-continued" class="slide level2 smaller">
+<h2>Example continued</h2>
+<p><strong>What proportion of the overall population will test positive vs negative?</strong></p>
+<p>The overall proportion of positive tests will be given by:</p>
+<p><span class="math display">\[
+\begin{aligned}
+P(T_{+}) &amp;= P(T_{+} \&amp; D) + P(T_{+} \&amp; H) \\
+&amp;= P(T_{+} \mid D)P(D) + P(T_{+} \mid H)P(H) \\
+&amp;= 0.98 \times 0.03 + 0.05 \times 0.97 \\
+&amp;= 0.0779
+\end{aligned}
+\]</span> The overall proportion of negative tests will be given by:</p>
+<p><span class="math display">\[
+\begin{aligned}
+P(T_{-}) &amp;= 1 - P(T_{+}) \\ &amp;= 0.9221
+\end{aligned}
+\]</span></p>
+<p>Complete table of probabilities:</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>T+</th>
+<th>T-</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><em>D</em></td>
+<td>0.0294</td>
+<td>0.0006</td>
+<td>0.03</td>
+</tr>
+<tr class="even">
+<td><em>H</em></td>
+<td>0.0485</td>
+<td>0.9215</td>
+<td>0.97</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>0.0779</td>
+<td>0.9221</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="example-continued-1" class="slide level2 smaller">
+<h2>Example continued</h2>
+<p><strong>What are the implications of a positive or negative test result?</strong></p>
+<p>According to Bayes rule, the probability of a random person having the disease given they’ve tested positive is given by:</p>
+<p><span class="math display">\[
+\begin{aligned}
+P(D\mid T_{+}) &amp;= \frac {P(T_{+}\mid D)P(D)} {P(T_{+})} \\
+&amp;= \frac{0.98 \times 0.03}  {0.0779} \\
+&amp;= 0.3774
+\end{aligned}
+\]</span></p>
+<p>According to Bayes rule, the probability of a random person <strong><em>not</em></strong> having the disease given they’ve tested <strong><em>negative</em></strong> is given by:</p>
+<p><span class="math display">\[
+\begin{aligned}
+P(H \mid T_{-}) &amp;= \frac {P(T_{-} \mid H)P(H)} {P(T_{-})} \\
+&amp;= \frac{0.95 \times 0.97}  {0.9221} \\
+&amp;= 0.9993
+\end{aligned}
+\]</span></p>
+<p>The positive predictive value of the test is poor—only 38% of the subjects who tested positive will have the disease.</p>
+<p>The negative predictive value is better—if a random subject tests negative, they’re very unlikely to have the disease.</p>
 </section></section>
 <section>
 <section id="discrete-probability-distributions" class="title-slide slide level1 background-black center">

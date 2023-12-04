@@ -143,7 +143,7 @@ $P(A \text{ and } B) = P(A) \times P(B)$.
 ::: callout-tip
 ## Conditional probability
 
--   $P(A|B)$ is the probability of event A occurring given that event
+-   $P(A|B)$ is the probability of event $A$ occurring given that event
     $B$ is has occurred.
 
 -   For example, the probability of a card you've drawn being a 5, given
@@ -205,166 +205,77 @@ $$P(A\mid B)=\frac {P(B\mid A)P(A)}{P(B)}~~~~~~~~\rm{s.t}~~ P(B)>0$$
 
 -   $P(A)$ and $P(B)$ are marginal or prior probabilities.
 
-For epidemiological tests, the following definitions are used:
+## Prevalence, sensitivity, specificity, PPV, and NPV
 
--   *sensitivity* of the test: The subject has the disease and the test
-    is also positive.
+Let $D$ be the event of a person having the Disease and $H$ be the event
+of a person being Healthy (i.e., not having the disease). The outcome of a test for the disease can be either positive $(T_+)$ or negative $(T_-)$.
 
--   *specificity* of the test: The subject is free from disease and the
-    test is also negative.
+Consider the following definitions of conditional probabilities:
 
--   *prevalence* of the disease is the probability of a randomly
-    selected subject from the population having the disease.
+-   **prevalence** is the overall probability one has the disease, or $P(D)$.
+-   **sensitivity** the probability that one tests positive given one has the disease, or $P(T_+ | D)$.
+-   **specificity** the probability that one tests negative given one does not have the disease, or $P(T_- | H)$.
+-   **positive predictive value** of a test is the probability one has the disease given that one has tested positive, or $P(D \mid T_{+})$
+-   **negative predictive value** of a test is the probability that one is healthy given that one has tested negative, or $P(H \mid T_{-})$
 
-Both specificity and sensitivity are conditional probabilities.
+## Example
 
-Prevalence is the marginal or prior probability.
+Say the following were true:
 
-## Example {.smaller}
+- Prevalence: $P(D) = 0.03$ and $P(H) = 1-0.03=0.97$
+- Sensitivity: $P(T_+\mid D) = 0.98$ 
+- Specificity: $P(T_{-}\mid H) = 0.95$
 
-Let $D$ be the event of a person having the disease and $H$ be the event
-of a person not having the disease (Healthy).
+We can use Bayes Rule to answer the following questions:
 
-Let the prevalence be 3%. That is, $P(D) = 0.03$ and
-$P(H) = 1-0.03=0.97$.
+- What proportion of the overall population will test positive vs negative?
+- What are the implications of a positive or negative test result?
 
-The test outcome can be positive $(T_+)$ or negative $(T_-)$.
 
-Say the test has sensitivity $P(T_+\mid D) = 0.98$ and specificity
-$P(T_{-}\mid H) = 0.95$.
+## Probability tree {.smaller}
 
-|     | positive Test | negative Test |
-|-----|---------------|---------------|
-| D   | **0.98**      | 0.02          |
-| H   | 0.05          | **0.95**      |
+It can be useful to visualise the probabilities of the four possible states using a tree diagram.
 
-**How well does the test predict?**
+::: left-code-wide
 
--   **positive predictive value** of a test is the probability that
-    someone with a positive test actually has the disease or
-    $P(D \mid T_{+})$
+```{r}
+#| echo: false
+#| fig-height: 4
+#| fig-width: 6
 
--   **negative predictive value** of a test is the probability that
-    someone with a negative test actually is healthy or
-    $P(H \mid T_{-})$
+library(DiagrammeR)
 
-## Example continued {.smaller}
-
-Given Bayes Rule,
-
-$$P(D\mid T_{+})=\frac {P(T_{+}\mid D)P(D)}{P(T_{+})}$$
-
-Since $P(T_{+})=P(T_{+} \mid D)P(D) + P(T_{+} \mid H)P(H)$,
-$$P(D\mid T_{+})=\frac {P(T_{+}\mid D)P(D)}{P(T_{+} \mid D)P(D) + P(T_{+} \mid H)P(H)} \\ = \frac{0.98 \times 0.03}  {0.98 \times 0.03 + 0.05 \times 0.97} = 0.3774$$
-
-```{r, results='hide', echo=FALSE}
-0.98*0.03/(0.98*0.03+0.05*0.97)
-```
-
-The positive predictive value of the test is poor because only 37% of
-the subjects who tested positive will have the disease. This test is not
-a *gold standard* test.
-
-The positive predictive value of the test is not bad.
-
-$$P(D\mid T_{-})=\frac {P(T_{-}\mid D)P(D)}{P(T_{-} \mid D)P(D) + P(T_{-} \mid H)P(H)} \\ = \frac{0.02 \times 0.03}  {0.02 \times 0.03 + 0.95 \times 0.97} =0.001123$$
-
-```{r, results='hide', echo=FALSE}
-0.02*0.03/(0.02*0.03+0.55*0.97)
-```
-
-This conclusion is valid for the current prevalence range.
-
-## Probability tree diagram {.smaller}
-
-It can be useful to visualise the probabilities using a tree diagram.
-
-```{r, echo=FALSE}
-library(data.tree)
-library(tidyverse)
-#https://github.com/Alex-Chisholm/r-tree-diagram
-make_my_tree <- function(mydf = prob_data, 
-                         branch_levels = NULL, 
-                         show_rank = TRUE, 
-                         direction = "LR",  
-                         root_name = "Start", 
-                         font_name = 'helvetica') {
-
-  mydf <- mydf %>%  mutate(
-    tree_level = str_count(string = pathString, pattern = "/") + 1,
-    tree_group = str_replace(string = pathString, pattern = "/.*", replacement = ""),
-    node_type = "decision_node"
-    )
+grViz("digraph {
   
-  max_tree_level <- max(mydf$tree_level, na.rm = T) 
+  # horizontal alignment
+  graph [rankdir = LR]
   
-  parent_lookup <- mydf %>% distinct(pathString, prob) # get distinct probabilities to facilitate finding parent node probability
+  # Nodes with labels
+  node [shape = oval]
+  Start [label = 'Start', shape = box]
+  Healthy [label = 'Healthy']
+  Disease [label = 'Disease']
+  PosH [label = 'Positive']
+  NegH [label = 'Negative']
+  PosD [label = 'Positive']
+  NegD [label = 'Negative']
+  pPosH [label = 'P(H & T+) = 0.0485', shape = none]
+  pNegH [label = 'P(H & T-) = 0.9215', shape = none]
+  pPosD [label = 'P(D & T+) = 0.0294', shape = none]
+  pNegD [label = 'P(D & T-) = 0.0006', shape = none]
   
-  for (i in 1:(max_tree_level -  1)) { # loop through all tree layers to get all immediate parent probabilities (to calculate cumulative prob)
-    
-    names(parent_lookup)[1] <-paste0("parent",i)
-    names(parent_lookup)[2] <-paste0("parent_prob",i)
-    
-    for (j in 1:i) {
-      
-      if (j == 1)  mydf[[paste0("parent",i)]] <- sub("/[^/]+$", "", mydf$pathString)
-      else if (j  > 1) mydf[[paste0("parent",i)]] <- sub("/[^/]+$", "", mydf[[paste0("parent",i)]])
-    }
-    
-    mydf <- mydf %>% left_join(parent_lookup, by = paste0("parent",i))
-    
-  }
-  
-  mydf$overall_prob <- apply(mydf %>% select(contains("prob"))  , 1, prod, na.rm = T)  # calculate cumulative probability  
-  
-  terminal_data <- mydf %>%  filter(tree_level == max_tree_level) %>% # create new rows that will display terminal/final step calculations on the tree
-    mutate(node_type = 'terminal',
-           pathString = paste0(pathString, "/overall"),
-           prob = NA,
-           tree_level = max_tree_level + 1)
-  
-  start_node <- root_name # name the root node
-  
-  mydf = bind_rows(mydf, terminal_data) %>%  # bind everything together 
-    mutate(pathString = paste0(start_node,"/",pathString),
-           overall_prob = ifelse(node_type == 'terminal', overall_prob, NA),
-           prob_rank = rank(-overall_prob, ties.method = "min", na.last = "keep"))
-  
-  mydf = bind_rows(mydf, data.frame(pathString = start_node, node_type = 'start', tree_level = 0)) %>% # add one new row to serve as the start node label
-    select(-contains("parent"))
-  
-    if (!is.null(branch_levels) ) {
-      mydf <- mydf %>% filter(tree_level <= branch_levels)
-      
-    }
-    
-  mytree <- as.Node(mydf) 
-  
-  GetEdgeLabel <- function(node) switch(node$node_type, node$prob)
-  
-  GetNodeShape <- function(node) switch(node$node_type, start = "box", node_decision = "circle", terminal = "none")
-  
-  
-  GetNodeLabel <- function(node) switch(node$node_type, 
-                                        terminal = ifelse(show_rank  == TRUE, paste0("Prob: ", node$overall_prob,"\nRank: ", node$prob_rank),
-                                                          paste0("Prob: ", node$overall_prob)),
-                                        node$node_name)
-  
-  SetEdgeStyle(mytree, fontname = font_name, label = GetEdgeLabel)
-  
-  SetNodeStyle(mytree, fontname = font_name, label = GetNodeLabel, shape = GetNodeShape)
-  
-  SetGraphStyle(mytree, rankdir = direction) 
-  
-  plot(mytree)
-  
-}
-```
-
-```{r, echo=FALSE, fig.width=5, fig.height=4}
-library(readr)
-prob_data <- read_csv("../data/prb.csv")
-make_my_tree(prob_data,  show_rank = FALSE)
+  # Edges with labels
+  Start -> Healthy [label = '0.97']
+  Start -> Disease [label = '0.03']
+  Healthy -> PosH [label = '0.05']
+  Healthy -> NegH [label = '0.95']
+  Disease -> PosD [label = '0.98']
+  Disease -> NegD [label = '0.02']
+  PosH -> pPosH 
+  NegH -> pNegH 
+  PosD -> pPosD 
+  NegD -> pNegD 
+}")
 ```
 
 **Rules of the Probability Tree**
@@ -376,6 +287,93 @@ make_my_tree(prob_data,  show_rank = FALSE)
 3.  We multiply as we move along branches.
 
 4.  We add when we move across branches.
+
+
+:::
+
+::: left-plot-narrow
+<br><br><br><br><br><br>
+
+|     | T+     | T-     |      |
+|-----|--------|--------|------|
+| *D* | 0.0294 | 0.0006 | 0.03 |
+| *H* | 0.0485 | 0.9215 | 0.97 |
+
+:::
+
+
+
+## Example continued {.smaller}
+
+**What proportion of the overall population will test positive vs negative?**
+
+The overall proportion of positive tests will be given by:
+
+```{r, results='hide', echo=FALSE}
+(0.98*0.03+0.05*0.97)
+1 - (0.98*0.03+0.05*0.97)
+```
+
+$$
+\begin{aligned}
+P(T_{+}) &= P(T_{+} \& D) + P(T_{+} \& H) \\
+&= P(T_{+} \mid D)P(D) + P(T_{+} \mid H)P(H) \\
+&= 0.98 \times 0.03 + 0.05 \times 0.97 \\
+&= 0.0779
+\end{aligned}
+$$
+The overall proportion of negative tests will be given by:
+
+
+$$
+\begin{aligned}
+P(T_{-}) &= 1 - P(T_{+}) \\ &= 0.9221
+\end{aligned}
+$$
+
+Complete table of probabilities:
+
+|     | T+     | T-     |      |
+|-----|--------|--------|------|
+| *D* | 0.0294 | 0.0006 | 0.03 |
+| *H* | 0.0485 | 0.9215 | 0.97 |
+|     | 0.0779 | 0.9221 | 1    |
+
+## Example continued {.smaller}
+
+**What are the implications of a positive or negative test result?**
+ 
+According to Bayes rule, the probability of a random person having the disease given they've tested positive is given by:
+
+$$
+\begin{aligned}
+P(D\mid T_{+}) &= \frac {P(T_{+}\mid D)P(D)} {P(T_{+})} \\
+&= \frac{0.98 \times 0.03}  {0.0779} \\
+&= 0.3774
+\end{aligned}
+$$
+
+```{r, results='hide', echo=FALSE}
+0.98*0.03/(0.0779)
+```
+
+According to Bayes rule, the probability of a random person ***not*** having the disease given they've tested ***negative*** is given by:
+
+$$
+\begin{aligned}
+P(H \mid T_{-}) &= \frac {P(T_{-} \mid H)P(H)} {P(T_{-})} \\ 
+&= \frac{0.95 \times 0.97}  {0.9221} \\
+&= 0.9993
+\end{aligned}
+$$
+
+```{r, results='hide', echo=FALSE}
+0.95*0.97/(0.02*0.03+0.95*0.97)
+```
+The positive predictive value of the test is poor—only 38% of the subjects who tested positive will have the disease. 
+
+The negative predictive value is better—if a random subject tests negative, they're very unlikely to have the disease.
+
 
 # Discrete probability distributions {.background-black}
 

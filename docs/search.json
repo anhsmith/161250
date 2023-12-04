@@ -1523,7 +1523,7 @@
     "href": "slides/Chapter03.html#statistical-independence",
     "title": "Chapter 3:Probability Concepts & Distributions",
     "section": "Statistical Independence",
-    "text": "Statistical Independence\nIf events \\(A\\) and \\(B\\) are statistically independent, then \\(P(A \\text{ and } B) = P(A) \\times P(B)\\).\n\n\n\n\n\n\nConditional probability\n\n\n\n\\(P(A|B)\\) is the probability of event A occurring given that event \\(B\\) is has occurred.\nFor example, the probability of a card you’ve drawn being a 5, given that it is a spade.\nThe sample space is reduced to that where \\(B\\) (e.g. the card is a spade) has occurred.\n\n\n\n\n\nWe say that two events (\\(A\\) and \\(B\\)) are independent if \\(P(A | B) = P(A)\\) and \\(P(B | A) = P(B)\\).\nObserving event \\(A\\) doesn’t make event \\(B\\) any more or less likely, and vice versa.\nFor any two independent events \\(A\\) and \\(B\\), \\(P(A \\text{ and } B ) = P(A|B) \\times P(B)\\) and \\(P(A \\textbf{ and } B ) = P(B|A) \\times P(A)\\)."
+    "text": "Statistical Independence\nIf events \\(A\\) and \\(B\\) are statistically independent, then \\(P(A \\text{ and } B) = P(A) \\times P(B)\\).\n\n\n\n\n\n\nConditional probability\n\n\n\n\\(P(A|B)\\) is the probability of event \\(A\\) occurring given that event \\(B\\) is has occurred.\nFor example, the probability of a card you’ve drawn being a 5, given that it is a spade.\nThe sample space is reduced to that where \\(B\\) (e.g. the card is a spade) has occurred.\n\n\n\n\n\nWe say that two events (\\(A\\) and \\(B\\)) are independent if \\(P(A | B) = P(A)\\) and \\(P(B | A) = P(B)\\).\nObserving event \\(A\\) doesn’t make event \\(B\\) any more or less likely, and vice versa.\nFor any two independent events \\(A\\) and \\(B\\), \\(P(A \\text{ and } B ) = P(A|B) \\times P(B)\\) and \\(P(A \\textbf{ and } B ) = P(B|A) \\times P(A)\\)."
   },
   {
     "objectID": "slides/Chapter03.html#blood-group-example",
@@ -1537,21 +1537,21 @@
     "href": "slides/Chapter03.html#bayes-rule",
     "title": "Chapter 3:Probability Concepts & Distributions",
     "section": "Bayes rule",
-    "text": "Bayes rule\n\\[P(A\\mid B)=\\frac {P(B\\mid A)P(A)}{P(B)}~~~~~~~~\\rm{s.t}~~ P(B)&gt;0\\]\n\n\\(P(A\\mid B)\\) and \\(P(B\\mid A)\\) are conditional probabilities.\n\\(P(A)\\) and \\(P(B)\\) are marginal or prior probabilities.\n\nFor epidemiological tests, the following definitions are used:\n\nsensitivity of the test: The subject has the disease and the test is also positive.\nspecificity of the test: The subject is free from disease and the test is also negative.\nprevalence of the disease is the probability of a randomly selected subject from the population having the disease.\n\nBoth specificity and sensitivity are conditional probabilities.\nPrevalence is the marginal or prior probability."
+    "text": "Bayes rule\n\\[P(A\\mid B)=\\frac {P(B\\mid A)P(A)}{P(B)}~~~~~~~~\\rm{s.t}~~ P(B)&gt;0\\]\n\n\\(P(A\\mid B)\\) and \\(P(B\\mid A)\\) are conditional probabilities.\n\\(P(A)\\) and \\(P(B)\\) are marginal or prior probabilities."
   },
   {
     "objectID": "slides/Chapter03.html#example",
     "href": "slides/Chapter03.html#example",
     "title": "Chapter 3:Probability Concepts & Distributions",
     "section": "Example",
-    "text": "Example\nLet \\(D\\) be the event of a person having the disease and \\(H\\) be the event of a person not having the disease (Healthy).\nLet the prevalence be 3%. That is, \\(P(D) = 0.03\\) and \\(P(H) = 1-0.03=0.97\\).\nThe test outcome can be positive \\((T_+)\\) or negative \\((T_-)\\).\nSay the test has sensitivity \\(P(T_+\\mid D) = 0.98\\) and specificity \\(P(T_{-}\\mid H) = 0.95\\).\n\n\n\n\npositive Test\nnegative Test\n\n\n\n\nD\n0.98\n0.02\n\n\nH\n0.05\n0.95\n\n\n\nHow well does the test predict?\n\npositive predictive value of a test is the probability that someone with a positive test actually has the disease or \\(P(D \\mid T_{+})\\)\nnegative predictive value of a test is the probability that someone with a negative test actually is healthy or \\(P(H \\mid T_{-})\\)"
+    "text": "Example\nSay the following were true:\n\nPrevalence: \\(P(D) = 0.03\\) and \\(P(H) = 1-0.03=0.97\\)\nSensitivity: \\(P(T_+\\mid D) = 0.98\\)\nSpecificity: \\(P(T_{-}\\mid H) = 0.95\\)\n\nWe can use Bayes Rule to answer the following questions:\n\nWhat proportion of the overall population will test positive vs negative?\nWhat are the implications of a positive or negative test result?"
   },
   {
     "objectID": "slides/Chapter03.html#example-continued",
     "href": "slides/Chapter03.html#example-continued",
     "title": "Chapter 3:Probability Concepts & Distributions",
     "section": "Example continued",
-    "text": "Example continued\nGiven Bayes Rule,\n\\[P(D\\mid T_{+})=\\frac {P(T_{+}\\mid D)P(D)}{P(T_{+})}\\]\nSince \\(P(T_{+})=P(T_{+} \\mid D)P(D) + P(T_{+} \\mid H)P(H)\\), \\[P(D\\mid T_{+})=\\frac {P(T_{+}\\mid D)P(D)}{P(T_{+} \\mid D)P(D) + P(T_{+} \\mid H)P(H)} \\\\ = \\frac{0.98 \\times 0.03}  {0.98 \\times 0.03 + 0.05 \\times 0.97} = 0.3774\\]\nThe positive predictive value of the test is poor because only 37% of the subjects who tested positive will have the disease. This test is not a gold standard test.\nThe positive predictive value of the test is not bad.\n\\[P(D\\mid T_{-})=\\frac {P(T_{-}\\mid D)P(D)}{P(T_{-} \\mid D)P(D) + P(T_{-} \\mid H)P(H)} \\\\ = \\frac{0.02 \\times 0.03}  {0.02 \\times 0.03 + 0.95 \\times 0.97} =0.001123\\]\nThis conclusion is valid for the current prevalence range."
+    "text": "Example continued\nWhat proportion of the overall population will test positive vs negative?\nThe overall proportion of positive tests will be given by:\n\\[\n\\begin{aligned}\nP(T_{+}) &= P(T_{+} \\& D) + P(T_{+} \\& H) \\\\\n&= P(T_{+} \\mid D)P(D) + P(T_{+} \\mid H)P(H) \\\\\n&= 0.98 \\times 0.03 + 0.05 \\times 0.97 \\\\\n&= 0.0779\n\\end{aligned}\n\\] The overall proportion of negative tests will be given by:\n\\[\n\\begin{aligned}\nP(T_{-}) &= 1 - P(T_{+}) \\\\ &= 0.9221\n\\end{aligned}\n\\]\nComplete table of probabilities:\n\n\n\n\nT+\nT-\n\n\n\n\n\nD\n0.0294\n0.0006\n0.03\n\n\nH\n0.0485\n0.9215\n0.97\n\n\n\n0.0779\n0.9221\n1"
   },
   {
     "objectID": "slides/Chapter03.html#probability-tree-diagram",
@@ -2623,5 +2623,40 @@
     "title": "Chapter 3:Probability Concepts & Distributions",
     "section": "Which distribution is most appropriate?",
     "text": "Which distribution is most appropriate?\n\nRemember, theoretical distributions aren’t real—they’re just models—but they can be useful. Keep your purpose in mind.\nChoose the simplest distribution that provides an adequate fit.\nData may be best served by a mixture of two or more distributions rather than a single distribution.\n\n\n\n\n161250 Data Analysis"
+  },
+  {
+    "objectID": "slides/Chapter03.html#sensitivity-specificity-and-prevalence",
+    "href": "slides/Chapter03.html#sensitivity-specificity-and-prevalence",
+    "title": "Chapter 3:Probability Concepts & Distributions",
+    "section": "Sensitivity, specificity, and prevalence",
+    "text": "Sensitivity, specificity, and prevalence\nLet \\(D\\) be the event of a person having the Disease and \\(H\\) be the event of a person being Healthy, that is, not having the disease.\nWe can test for whether someone has the disease. The outcome can be positive \\((T_+)\\) or negative \\((T_-)\\).\nConsider the following definitions:\n\nsensitivity of the test is the probability that the test is positive given the subject has the disease, or \\(P(T_+ | D)\\).\nspecificity of the test is the probability that the test is negative given the subject does not have the disease, or \\(P(T_- | H)\\).\nprevalence of the disease is the probability of a randomly selected subject from the population having the disease, or , or \\(P(D)\\).\n\nBoth specificity and sensitivity are conditional probabilities.\nPrevalence is the marginal or prior probability."
+  },
+  {
+    "objectID": "slides/Chapter03.html#prevalence-sensitivity-specificity-ppv-and-npv",
+    "href": "slides/Chapter03.html#prevalence-sensitivity-specificity-ppv-and-npv",
+    "title": "Chapter 3:Probability Concepts & Distributions",
+    "section": "Prevalence, sensitivity, specificity, PPV, and NPV",
+    "text": "Prevalence, sensitivity, specificity, PPV, and NPV\nLet \\(D\\) be the event of a person having the Disease and \\(H\\) be the event of a person being Healthy (i.e., not having the disease). The outcome of a test for the disease can be either positive \\((T_+)\\) or negative \\((T_-)\\).\nConsider the following definitions of conditional probabilities:\n\nprevalence is the overall probability one has the disease, or \\(P(D)\\).\nsensitivity the probability that one tests positive given one has the disease, or \\(P(T_+ | D)\\).\nspecificity the probability that one tests negative given one does not have the disease, or \\(P(T_- | H)\\).\npositive predictive value of a test is the probability one has the disease given that one has tested positive, or \\(P(D \\mid T_{+})\\)\nnegative predictive value of a test is the probability that one is healthy given that one has tested negative, or \\(P(H \\mid T_{-})\\)"
+  },
+  {
+    "objectID": "slides/Chapter03.html#table-of-probabilities",
+    "href": "slides/Chapter03.html#table-of-probabilities",
+    "title": "Chapter 3:Probability Concepts & Distributions",
+    "section": "Table of probabilities",
+    "text": "Table of probabilities\n\n\n\n\nT+\nT-\n\n\n\n\n\nD\n0.0294\n0.0006\n0.03\n\n\nH\n0.0485\n0.9215\n0.97\n\n\n\n0.0779\n0.9221\n1"
+  },
+  {
+    "objectID": "slides/Chapter03.html#probability-tree",
+    "href": "slides/Chapter03.html#probability-tree",
+    "title": "Chapter 3:Probability Concepts & Distributions",
+    "section": "Probability tree",
+    "text": "Probability tree\nIt can be useful to visualise the probabilities of the four possible states using a tree diagram.\n\n\n\n\n\n\n\nRules of the Probability Tree\n\nWithin each level, all branches are mutually exclusive events.\nThe tree covers all possibilities (i.e., the entire sample space).\nWe multiply as we move along branches.\nWe add when we move across branches.\n\n\n\n\n\n\n\n\nT+\nT-\n\n\n\n\n\nD\n0.0294\n0.0006\n0.03\n\n\nH\n0.0485\n0.9215\n0.97"
+  },
+  {
+    "objectID": "slides/Chapter03.html#example-continued-1",
+    "href": "slides/Chapter03.html#example-continued-1",
+    "title": "Chapter 3:Probability Concepts & Distributions",
+    "section": "Example continued",
+    "text": "Example continued\nWhat are the implications of a positive or negative test result?\nAccording to Bayes rule, the probability of a random person having the disease given they’ve tested positive is given by:\n\\[\n\\begin{aligned}\nP(D\\mid T_{+}) &= \\frac {P(T_{+}\\mid D)P(D)} {P(T_{+})} \\\\\n&= \\frac{0.98 \\times 0.03}  {0.0779} \\\\\n&= 0.3774\n\\end{aligned}\n\\]\nAccording to Bayes rule, the probability of a random person not having the disease given they’ve tested negative is given by:\n\\[\n\\begin{aligned}\nP(H \\mid T_{-}) &= \\frac {P(T_{-} \\mid H)P(H)} {P(T_{-})} \\\\\n&= \\frac{0.95 \\times 0.97}  {0.9221} \\\\\n&= 0.9993\n\\end{aligned}\n\\]\nThe positive predictive value of the test is poor—only 38% of the subjects who tested positive will have the disease.\nThe negative predictive value is better—if a random subject tests negative, they’re very unlikely to have the disease."
   }
 ]
