@@ -626,14 +626,13 @@ E.g., height, weight, length, percentage protein
 
 For a discrete random variable $X$, the associated probabilities
 $P(X=x)$ are also just points or masses, and hence the probability
-function $P(x)$ is also called as the probability mass function (pmf).
+function $P(x)$ is also called as the probability mass function (PMF).
 
 For continuous random variables, probabilities can be computed when the
 variable falls in an interval such as $5$ to $15$, but not when it takes
-a fixed value such as $10$ (which is equal to zero).
+a fixed value such as $10$ (which is equal to zero). 
 
-The probability density function (pdf) gives the probabilities as an
-area under the curve.
+The Probability Density Function (PDF) gives the *relative likelihood* of any particular value.
 
 ## Continuous probability distributions
 
@@ -653,7 +652,7 @@ tibble(x = seq(-.5, 1.5, length=1000),
        `f(x)` = dunif(x, min=0, max=1)) |> 
   ggplot() + 
   aes(x = x, y = `f(x)`) +
-  geom_line()
+  geom_area(colour = 1, alpha = .2)
 ```
 :::
 
@@ -663,17 +662,114 @@ Continuous probability distributions
 
 ## Continuous probability distributions
 
+The *density* is the relative likelihood of any value of $x$; that is, the height of the Probability Density Function (PDF). Say, the leaves of a particular tree had mean length 20 cm, SD 2. 
+
+```{r}
+#| output-location: column
+#| fig-height: 3
+#| fig-width: 6
+d <- tibble(x = seq(13, 27, by=0.01),
+            Density = dnorm(x, 20, 2)) 
+
+p <- ggplot(d) + aes(x, Density) + 
+  geom_hline(yintercept=0) +
+  geom_area(colour = 1,
+            fill = "darkorange", 
+            size = 1.1, alpha = .6) 
+  
+p
+  
+```
+
+The **black line** is the PDF, or $f(x)$. The orange area underneath the whole PDF is 1. 
+
+## Continuous probability distributions
+
+The *density* is the relative likelihood of any value of $x$; that is, the height of the Probability Density Function (PDF). Say, the leaves of a particular tree had mean length 20 cm, SD 2. 
+
+```{r}
+#| output-location: column
+#| fig-height: 3
+#| fig-width: 6
+d <- tibble(x = seq(13, 27, by=0.01),
+            Density = dnorm(x, 20, 2)) 
+
+p <- ggplot(d) + aes(x, Density) + 
+  geom_hline(yintercept=0) +
+  geom_area(colour = 1,
+            fill = "darkorange", 
+            size = 1.1, alpha = .6) 
+
+p +
+  annotate(geom = "path", 
+    x = c(19.3, 19.3, 13), 
+    y = c(0, rep(dnorm(19.3,20,2),2) ),
+    arrow = arrow(),
+    colour = "dodgerblue4", size = 1.1)
+  
+  
+```
+
+The **black line** is the PDF, or $f(x)$. The orange area underneath the whole PDF is 1. 
+
+The **density** at 19.3 is $f(19.3) = 0.1876$). 
+
+```{r}
+dnorm(19.3, mean = 20, sd = 2)
+```
+
+## Continuous probability distributions
+
+The *density* is the relative likelihood of any value of $x$; that is, the height of the Probability Density Function (PDF). Say, the leaves of a particular tree had mean length 20 cm, SD 2. 
+
+```{r}
+#| output-location: column
+#| fig-height: 3
+#| fig-width: 6
+d <- tibble(x = seq(13, 27, by=0.01),
+            Density = dnorm(x, 20, 2)) 
+
+p <- ggplot(d) + aes(x, Density) + 
+  geom_hline(yintercept=0) +
+  geom_area(colour = 1,
+            fill = "darkorange", 
+            size = 1.1, alpha = .6) 
+
+p +
+  geom_area(
+    data = d |> filter(x <= 19.3),
+    fill = "dodgerblue4",
+    size  = 1.1, alpha = .6)
+  
+  
+```
+
+The **black line** is the PDF, or $f(x)$. The orange area underneath the whole PDF is 1. 
+
+The area under the curve to the left of the value 19.3 is given by the Cumulative Density Function (CDF), or $F(x)$. It gives the probability that x < 19.3; $F(19.3) = 0.3632$. 
+
+```{r}
+pnorm(19.3, mean = 20, sd = 2)
+```
+
+
+
+## Continuous probability distributions
+
 The cumulative distribution function, CDF, $F(x)$ gives the left tail
 area or probability up to $x$. This is probability is found as
 
-$$F_{X}(x)=\int _{-\infty }^{x}f_{X}(t)\,dt$$ The relationship between
+$$F_{X}(x)=\int _{-\infty }^{x}f_{X}(t)\,dt$$
+The relationship between
 the density function $f(x)$ and the distribution function $F(x)$ is
 given by the Fundamental Theorem of Calculus.
 
 $$f(x)={dF(x) \over dx}$$
 
-The total area under the pdf curve is $1$. The probability of obtaining
-a value between two points ($a$ and $b$) is the area under the pdf curve
+## Continuous probability distributions
+
+The total area under the PDF curve is $1$. The probability of obtaining
+a value between two points ($a$ and $b$) is the area under the PDF curve
 between those two points. This probability is given by $F(b)-F(a)$.
 
 For the uniform distribution $U(0,1)$, $f(x)=1$. So
@@ -740,9 +836,6 @@ p1/p2
 Continuous probability distributions
 :::
 
-## The Standard Normal Distribution
-
-![](img/standard_68_95_99.png)
 
 ## Example of a normal {.smaller}
 
@@ -820,7 +913,7 @@ ps +
 
 ## Areas (probabilities) under the standard normal
 
-Under standard normal, the areas under the pdf curve are shown below for
+Under standard normal, the areas under the PDF curve are shown below for
 various situations.
 
 ```{r, fig.height=6, echo=FALSE}
@@ -845,7 +938,7 @@ plot_area <- function(lower, upper) {
 p1 <- plot_area(-1, 1)
 p2 <- plot_area(-2, 2)
 p3 <- plot_area(-3, 3)
-p4 <- plot_area(-1.946, 1.946)
+p4 <- plot_area(-1.96, 1.96)
 library(patchwork)
 p1+p2+p3+p4
 ```
@@ -1031,15 +1124,14 @@ Skewed continuous probability distributions
 
 ## Small sample effect
 
-For small samples, we do not expect many outliers but the shape might be
-difficult to judge.
+For small samples, the shape might be difficult to judge.
 
 ```{r}
 #| echo: true
 #| output-location: column
 #| classes: custom4060
-#| fig-width: 5
-#| fig-height: 7
+#| fig-height: 5
+#| fig-width: 6
 
 set.seed(1234)
 dfm <- data.frame(
@@ -1062,14 +1154,11 @@ p1 <- ggplot(dfm) +
 
 p2 <- ggplot(dfm) + aes(x) + 
   geom_boxplot() +
-  xlim(min(dfm), max(dfm))
+  xlim(min(dfm), max(dfm)) +
+  theme_void()
 
 library(patchwork)
-p1 / p2 + 
-  plot_layout(
-    heights = unit(c(6, 1), 
-                   c('cm', 'null'))
-    ) 
+p1 / p2 + plot_layout(heights = c(5, 1))
 
 ```
 
@@ -1220,10 +1309,7 @@ the square of a measure of *skew*.
 descdist(rangitikei$people)
 ```
 
-Symmetrical distributions such as normal (read corresponding to zero
-skew) are poor fits.
-
-Lognormal also does not fare well
+Symmetrical distributions such as normal (read corresponding to zero skew) are poor fits. Lognormal also does not fare well.
 
 **When the observed data is a mixture from two or more distributions or
 contain a large number of unusual observations, no single distributional
@@ -1245,21 +1331,12 @@ descdist(tv$TELETIME)
 Skewed continuous probability distributions
 :::
 
-## Which distribution?
+## Which distribution is most appropriate?
 
--   This is a difficult task
+-   Remember, theoretical distributions aren't real—they're just models—but they can be useful. Keep your purpose in mind. 
 
--   Not judged purely on statistical grounds
+-   Choose the simplest distribution that provides an adequate fit. 
 
--   Look for the cases in the literature; see whether any mechanistic
-    justification is available in particular.
+-   Data may be best served by a mixture of two or more distributions rather than a single distribution.
 
--   Large amount of data needed, often over 300.
 
--   If observed data is a mixture from 2 or more distributions, no point
-    in fitting a single distribution.
-
-    -   Do adequate EDA of the data
-
--   Be liberal for small sample sizes but fit models based on normal and
-    employ techniques such as the transformation method (covered later)

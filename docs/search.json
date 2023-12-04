@@ -1614,21 +1614,21 @@
     "href": "slides/Chapter03.html#continuous-probability-distributions-1",
     "title": "Chapter 3:Probability Concepts & Distributions",
     "section": "Continuous probability distributions",
-    "text": "Continuous probability distributions\nA discrete random variable takes values which are simply points on a real line. In other words, there is an inherent discontinuity in the values a discrete random variable can take.\nIf a random variable, \\(X\\), can take any value (i.e., not just integers) in some interval of the real line, it is called a continuous random variable.\nE.g., height, weight, length, percentage protein\nFor a discrete random variable \\(X\\), the associated probabilities \\(P(X=x)\\) are also just points or masses, and hence the probability function \\(P(x)\\) is also called as the probability mass function (pmf).\nFor continuous random variables, probabilities can be computed when the variable falls in an interval such as \\(5\\) to \\(15\\), but not when it takes a fixed value such as \\(10\\) (which is equal to zero).\nThe probability density function (pdf) gives the probabilities as an area under the curve."
+    "text": "Continuous probability distributions\nA discrete random variable takes values which are simply points on a real line. In other words, there is an inherent discontinuity in the values a discrete random variable can take.\nIf a random variable, \\(X\\), can take any value (i.e., not just integers) in some interval of the real line, it is called a continuous random variable.\nE.g., height, weight, length, percentage protein\nFor a discrete random variable \\(X\\), the associated probabilities \\(P(X=x)\\) are also just points or masses, and hence the probability function \\(P(x)\\) is also called as the probability mass function (PMF).\nFor continuous random variables, probabilities can be computed when the variable falls in an interval such as \\(5\\) to \\(15\\), but not when it takes a fixed value such as \\(10\\) (which is equal to zero).\nThe Probability Density Function (PDF) gives the relative likelihood of any particular value."
   },
   {
     "objectID": "slides/Chapter03.html#continuous-probability-distributions-2",
     "href": "slides/Chapter03.html#continuous-probability-distributions-2",
     "title": "Chapter 3:Probability Concepts & Distributions",
     "section": "Continuous probability distributions",
-    "text": "Continuous probability distributions\n\nFor example, consider a random proportion \\((X)\\) between \\(0\\) and \\(1\\). Here \\(X\\) follows a (standard) continuous uniform distribution whose (probability) density function \\(f(x)\\) is defined as follows:\n\\[f(x)=\\begin{cases}{1}~~~\\mathrm {for} \\ 0\\leq x\\leq 1,\\\\[9pt]0~~~\\mathrm {for} \\ x&lt;0\\ \\mathrm {or} \\ x&gt;1\\end{cases}\\] This constant density function is the simple one in the graph to the right.\n\n\n\ntibble(x = seq(-.5, 1.5, length=1000),\n       `f(x)` = dunif(x, min=0, max=1)) |&gt; \n  ggplot() + \n  aes(x = x, y = `f(x)`) +\n  geom_line()\n\n\n\n\n\n\n\n\n\n\nContinuous probability distributions"
+    "text": "Continuous probability distributions\n\nFor example, consider a random proportion \\((X)\\) between \\(0\\) and \\(1\\). Here \\(X\\) follows a (standard) continuous uniform distribution whose (probability) density function \\(f(x)\\) is defined as follows:\n\\[f(x)=\\begin{cases}{1}~~~\\mathrm {for} \\ 0\\leq x\\leq 1,\\\\[9pt]0~~~\\mathrm {for} \\ x&lt;0\\ \\mathrm {or} \\ x&gt;1\\end{cases}\\] This constant density function is the simple one in the graph to the right.\n\n\n\ntibble(x = seq(-.5, 1.5, length=1000),\n       `f(x)` = dunif(x, min=0, max=1)) |&gt; \n  ggplot() + \n  aes(x = x, y = `f(x)`) +\n  geom_area(colour = 1, alpha = .2)\n\n\n\n\n\n\n\n\n\n\nContinuous probability distributions"
   },
   {
     "objectID": "slides/Chapter03.html#continuous-probability-distributions-3",
     "href": "slides/Chapter03.html#continuous-probability-distributions-3",
     "title": "Chapter 3:Probability Concepts & Distributions",
     "section": "Continuous probability distributions",
-    "text": "Continuous probability distributions\nThe cumulative distribution function, CDF, \\(F(x)\\) gives the left tail area or probability up to \\(x\\). This is probability is found as\n\\[F_{X}(x)=\\int _{-\\infty }^{x}f_{X}(t)\\,dt\\] The relationship between the density function \\(f(x)\\) and the distribution function \\(F(x)\\) is given by the Fundamental Theorem of Calculus.\n\\[f(x)={dF(x) \\over dx}\\]\nThe total area under the pdf curve is \\(1\\). The probability of obtaining a value between two points (\\(a\\) and \\(b\\)) is the area under the pdf curve between those two points. This probability is given by \\(F(b)-F(a)\\).\nFor the uniform distribution \\(U(0,1)\\), \\(f(x)=1\\). So\n\\[F_{X}(x)=\\int _{-\\infty }^{x}\\,dt=x\\]\nFor example, the probability of a randomly drawn fraction from the interval \\([0,1]\\) to fall below \\(x=0.5\\) is 50%.\nThe probability of a random fraction falling between \\(a=0.2\\) and \\(b=0.8\\) is\n\\[F(b)-F(a)=0.8-0.2=0.6\\]\n\nContinuous probability distributions"
+    "text": "Continuous probability distributions\nThe density is the relative likelihood of any value of \\(x\\); that is, the height of the Probability Density Function (PDF). Say, the leaves of a particular tree had mean length 20 cm, SD 2.\n\n\nd &lt;- tibble(x = seq(13, 27, by=0.01),\n            Density = dnorm(x, 20, 2)) \n\np &lt;- ggplot(d) + aes(x, Density) + \n  geom_hline(yintercept=0) +\n  geom_area(colour = 1,\n            fill = \"darkorange\", \n            size = 1.1, alpha = .6) \n  \np\n\n\n\n\n\n\n\n\n\n\nThe black line is the PDF, or \\(f(x)\\). The orange area underneath the whole PDF is 1."
   },
   {
     "objectID": "slides/Chapter03.html#the-normal-gaussian-distribution",
@@ -1656,7 +1656,7 @@
     "href": "slides/Chapter03.html#areas-probabilities-under-the-standard-normal",
     "title": "Chapter 3:Probability Concepts & Distributions",
     "section": "Areas (probabilities) under the standard normal",
-    "text": "Areas (probabilities) under the standard normal\nUnder standard normal, the areas under the pdf curve are shown below for various situations.\n\n\nContinuous probability distributions"
+    "text": "Areas (probabilities) under the standard normal\nUnder standard normal, the areas under the PDF curve are shown below for various situations.\n\n\nContinuous probability distributions"
   },
   {
     "objectID": "slides/Chapter03.html#log-normal-distribution",
@@ -1691,7 +1691,7 @@
     "href": "slides/Chapter03.html#small-sample-effect",
     "title": "Chapter 3:Probability Concepts & Distributions",
     "section": "Small sample effect",
-    "text": "Small sample effect\nFor small samples, we do not expect many outliers but the shape might be difficult to judge.\n\n\nset.seed(1234)\ndfm &lt;- data.frame(\n  x=rnorm(50, \n          mean=80, \n          sd=12)\n  )\n\np1 &lt;- ggplot(dfm) + \n  geom_histogram(\n    aes(x=x, y=after_stat(density)), \n    colour=1\n    ) + \n  stat_function(\n    fun = dnorm, \n    args = list(mean = 80, sd = 12), \n    geom = \"line\"\n    ) +\n  xlim(min(dfm), max(dfm))\n\np2 &lt;- ggplot(dfm) + aes(x) + \n  geom_boxplot() +\n  xlim(min(dfm), max(dfm))\n\nlibrary(patchwork)\np1 / p2 + \n  plot_layout(\n    heights = unit(c(6, 1), \n                   c('cm', 'null'))\n    ) \n\n\n\n\n\n\n\n\n\n\n\nSkewed continuous probability distributions"
+    "text": "Small sample effect\nFor small samples, the shape might be difficult to judge.\n\n\nset.seed(1234)\ndfm &lt;- data.frame(\n  x=rnorm(50, \n          mean=80, \n          sd=12)\n  )\n\np1 &lt;- ggplot(dfm) + \n  geom_histogram(\n    aes(x=x, y=after_stat(density)), \n    colour=1\n    ) + \n  stat_function(\n    fun = dnorm, \n    args = list(mean = 80, sd = 12), \n    geom = \"line\"\n    ) +\n  xlim(min(dfm), max(dfm))\n\np2 &lt;- ggplot(dfm) + aes(x) + \n  geom_boxplot() +\n  xlim(min(dfm), max(dfm)) +\n  theme_void()\n\nlibrary(patchwork)\np1 / p2 + plot_layout(heights = c(5, 1))\n\n\n\n\n\n\n\n\n\n\n\nSkewed continuous probability distributions"
   },
   {
     "objectID": "slides/Chapter03.html#normal-quantile-plots",
@@ -1733,7 +1733,7 @@
     "href": "slides/Chapter03.html#cullen-and-frey-plot",
     "title": "Chapter 3:Probability Concepts & Distributions",
     "section": "Cullen and Frey plot",
-    "text": "Cullen and Frey plot\nThis is a plot of kurtosis, a measure of excessive peakedness, against the square of a measure of skew.\n\ndescdist(rangitikei$people)\n\n\nsummary statistics\n------\nmin:  4   max:  470 \nmedian:  46 \nmean:  71.72727 \nestimated sd:  86.28089 \nestimated skewness:  3.3264 \nestimated kurtosis:  17.11618 \n\n\nSymmetrical distributions such as normal (read corresponding to zero skew) are poor fits.\nLognormal also does not fare well\nWhen the observed data is a mixture from two or more distributions or contain a large number of unusual observations, no single distributional fit will be satisfactory.\n\nSkewed continuous probability distributions"
+    "text": "Cullen and Frey plot\nThis is a plot of kurtosis, a measure of excessive peakedness, against the square of a measure of skew.\n\ndescdist(rangitikei$people)\n\n\nsummary statistics\n------\nmin:  4   max:  470 \nmedian:  46 \nmean:  71.72727 \nestimated sd:  86.28089 \nestimated skewness:  3.3264 \nestimated kurtosis:  17.11618 \n\n\nSymmetrical distributions such as normal (read corresponding to zero skew) are poor fits. Lognormal also does not fare well.\nWhen the observed data is a mixture from two or more distributions or contain a large number of unusual observations, no single distributional fit will be satisfactory.\n\nSkewed continuous probability distributions"
   },
   {
     "objectID": "slides/Chapter03.html#tv-watching-time-data",
@@ -2588,5 +2588,40 @@
     "title": "Chapter 7 Workshop",
     "section": "",
     "text": "Dataset Prestige\nWe will continue to use dataset Prestige from the car R package.\n\n\nExercise 7.1\nObtain the matrix plot of the numerical variables education, income, women, and prestige.\nObtain their correlation matrix.\nFit a (full) multiple regression of prestige on education, income, & women.\nObtain the plots for residual diagnostics.\n\n\nCode\nlibrary(car)\nlibrary(tidyverse)\nlibrary(GGally)\n\nPrestige |&gt; \n  select(prestige, education, income, women) |&gt; \n  ggpairs(aes(colour=Prestige$type))\n\n\n\n\nCode\n# Old style pairs plot\nPrestige |&gt; \n  select(prestige, education, income, women) |&gt;\n  pairs()\n\n\nCode\nPrestige |&gt; \n  select(prestige, education, income, women) |&gt;\n  cor()\n\n\nRegression outputs\n\n\nCode\nfull.reg &lt;- lm(prestige ~ education + income + women,\n               data = Prestige)\n\nsummary(full.reg)\n\nanova(full.reg)\n\nextractAIC(full.reg)\n\n\nResidual plots\n\n\nCode\nlibrary(ggfortify)\n\nautoplot(full.reg, 1:6)\n\n\n\n\nCode\n# Old style plots\nplot(full.reg, 1) # the argument 1 can be changed up to 6\n\n\nCode\n# or just use\npar(mfrow=c(2,2))\nplot(full.reg)\n\n\n\n\nExercise 7.2\nPerform stepwise regression analysis of prestige on education, income, & women.\n\n\nCode\nfull.reg = lm(prestige ~ education + income + women,\n              data = Prestige)\n\nstep(full.reg)\n\nstep(full.reg, direction=\"backward\")\n\nstep(full.reg, direction=\"both\")\n\n\nYou can also use the MASS package.\n\n\nCode\nlibrary(\"MASS\")\n\nstepAIC(full.reg, direction=\"backward\")\n\nstepAIC(full.reg, direction=\"both\")\n\n\nThe function update() will be handy. For example, see try the following codes:\n\n\nCode\nm1 = update(full.reg,.~.-women)\n\nsummary(m1)\n\n\nNote that .~.-women means that the model is fitted without the women variable.\nFurther options are available in leaps and HH packages (installation commands are given below).\ninstall.packages(\"leaps\", repos = \"https://cran.r-project.org\") install.packages(\"HH\", repos = \"https://cran.r-project.org\")\n\n\nCode\nlibrary(leaps)\n\nmodel = regsubsets(prestige ~ education + income + women, \n                   data=Prestige)\n\nlibrary(HH)\n\nsummaryHH(model)\n\nplot(summaryHH(model))\n\n\n\n\nExercise 7.3\nPerform a polynomial regression of prestige on income.\n\n\nCode\n# Cubic fit\np.model &lt;- lm(prestige ~ poly(income,3),\n              data = Prestige)\n\nsummary(p.model)\n\nextractAIC(p.model)\n\nplot(p.model)\n\n\nCode\nautoplot(p.model)\n\n\n\nMore R code examples are here"
+  },
+  {
+    "objectID": "slides/Chapter03.html#continuous-probability-distributions-4",
+    "href": "slides/Chapter03.html#continuous-probability-distributions-4",
+    "title": "Chapter 3:Probability Concepts & Distributions",
+    "section": "Continuous probability distributions",
+    "text": "Continuous probability distributions\nThe density is the relative likelihood of any value of \\(x\\); that is, the height of the Probability Density Function (PDF). Say, the leaves of a particular tree had mean length 20 cm, SD 2.\n\n\nd &lt;- tibble(x = seq(13, 27, by=0.01),\n            Density = dnorm(x, 20, 2)) \n\np &lt;- ggplot(d) + aes(x, Density) + \n  geom_hline(yintercept=0) +\n  geom_area(colour = 1,\n            fill = \"darkorange\", \n            size = 1.1, alpha = .6) \n\np +\n  annotate(geom = \"path\", \n    x = c(19.3, 19.3, 13), \n    y = c(0, rep(dnorm(19.3,20,2),2) ),\n    arrow = arrow(),\n    colour = \"dodgerblue4\", size = 1.1)\n\n\n\n\n\n\n\n\n\n\nThe black line is the PDF, or \\(f(x)\\). The orange area underneath the whole PDF is 1.\nThe density at 19.3 is \\(f(19.3) = 0.1876\\)).\n\ndnorm(19.3, mean = 20, sd = 2)\n\n[1] 0.1876202"
+  },
+  {
+    "objectID": "slides/Chapter03.html#continuous-probability-distributions-5",
+    "href": "slides/Chapter03.html#continuous-probability-distributions-5",
+    "title": "Chapter 3:Probability Concepts & Distributions",
+    "section": "Continuous probability distributions",
+    "text": "Continuous probability distributions\nThe density is the relative likelihood of any value of \\(x\\); that is, the height of the Probability Density Function (PDF). Say, the leaves of a particular tree had mean length 20 cm, SD 2.\n\n\nd &lt;- tibble(x = seq(13, 27, by=0.01),\n            Density = dnorm(x, 20, 2)) \n\np &lt;- ggplot(d) + aes(x, Density) + \n  geom_hline(yintercept=0) +\n  geom_area(colour = 1,\n            fill = \"darkorange\", \n            size = 1.1, alpha = .6) \n\np +\n  geom_area(\n    data = d |&gt; filter(x &lt;= 19.3),\n    fill = \"dodgerblue4\",\n    size  = 1.1, alpha = .6)\n\n\n\n\n\n\n\n\n\n\nThe black line is the PDF, or \\(f(x)\\). The orange area underneath the whole PDF is 1.\nThe area under the curve to the left of the value 19.3 is given by the Cumulative Density Function (CDF), or \\(F(x)\\). It gives the probability that x &lt; 19.3; \\(F(19.3) = 0.3632\\).\n\npnorm(19.3, mean = 20, sd = 2)\n\n[1] 0.3631693"
+  },
+  {
+    "objectID": "slides/Chapter03.html#continuous-probability-distributions-6",
+    "href": "slides/Chapter03.html#continuous-probability-distributions-6",
+    "title": "Chapter 3:Probability Concepts & Distributions",
+    "section": "Continuous probability distributions",
+    "text": "Continuous probability distributions\nThe cumulative distribution function, CDF, \\(F(x)\\) gives the left tail area or probability up to \\(x\\). This is probability is found as\n\\[F_{X}(x)=\\int _{-\\infty }^{x}f_{X}(t)\\,dt\\] The relationship between the density function \\(f(x)\\) and the distribution function \\(F(x)\\) is given by the Fundamental Theorem of Calculus.\n\\[f(x)={dF(x) \\over dx}\\]"
+  },
+  {
+    "objectID": "slides/Chapter03.html#continuous-probability-distributions-7",
+    "href": "slides/Chapter03.html#continuous-probability-distributions-7",
+    "title": "Chapter 3:Probability Concepts & Distributions",
+    "section": "Continuous probability distributions",
+    "text": "Continuous probability distributions\nThe total area under the PDF curve is \\(1\\). The probability of obtaining a value between two points (\\(a\\) and \\(b\\)) is the area under the PDF curve between those two points. This probability is given by \\(F(b)-F(a)\\).\nFor the uniform distribution \\(U(0,1)\\), \\(f(x)=1\\). So\n\\[F_{X}(x)=\\int _{-\\infty }^{x}\\,dt=x\\]\nFor example, the probability of a randomly drawn fraction from the interval \\([0,1]\\) to fall below \\(x=0.5\\) is 50%.\nThe probability of a random fraction falling between \\(a=0.2\\) and \\(b=0.8\\) is\n\\[F(b)-F(a)=0.8-0.2=0.6\\]\n\nContinuous probability distributions"
+  },
+  {
+    "objectID": "slides/Chapter03.html#which-distribution-is-most-appropriate",
+    "href": "slides/Chapter03.html#which-distribution-is-most-appropriate",
+    "title": "Chapter 3:Probability Concepts & Distributions",
+    "section": "Which distribution is most appropriate?",
+    "text": "Which distribution is most appropriate?\n\nRemember, theoretical distributions aren’t real—they’re just models—but they can be useful. Keep your purpose in mind.\nChoose the simplest distribution that provides an adequate fit.\nData may be best served by a mixture of two or more distributions rather than a single distribution.\n\n\n\n\n161250 Data Analysis"
   }
 ]

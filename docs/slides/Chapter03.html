@@ -588,8 +588,8 @@ about 81% are Rh+ and about 8% are K+.</p>
 <p>It can be useful to visualise the probabilities using a tree diagram.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-e48cdf4694b4958ab9a7" style="width:480px;height:384px;"></div>
-<script type="application/json" data-for="htmlwidget-e48cdf4694b4958ab9a7">{"x":{"diagram":"digraph {\n\ngraph [rankdir = \"LR\"]\n\n\n\n  \"1\" [label = \"Start\", fontname = \"helvetica\", shape = \"box\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"2\" [label = \"Healthy\", fontname = \"helvetica\", shape = \"\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"3\" [label = \"Positive\", fontname = \"helvetica\", shape = \"\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"4\" [label = \"Prob: 0.0485\", fontname = \"helvetica\", shape = \"none\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"5\" [label = \"Negative\", fontname = \"helvetica\", shape = \"\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"6\" [label = \"Prob: 0.9215\", fontname = \"helvetica\", shape = \"none\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"7\" [label = \"Disease\", fontname = \"helvetica\", shape = \"\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"8\" [label = \"Positive\", fontname = \"helvetica\", shape = \"\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"9\" [label = \"Prob: 0.0294\", fontname = \"helvetica\", shape = \"none\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"10\" [label = \"Negative\", fontname = \"helvetica\", shape = \"\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"11\" [label = \"Prob: 6e-04\", fontname = \"helvetica\", shape = \"none\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n\"1\"->\"2\" [fontname = \"helvetica\", label = \"0.97\"] \n\"1\"->\"7\" [fontname = \"helvetica\", label = \"0.03\"] \n\"2\"->\"3\" [fontname = \"helvetica\", label = \"0.05\"] \n\"2\"->\"5\" [fontname = \"helvetica\", label = \"0.95\"] \n\"7\"->\"8\" [fontname = \"helvetica\", label = \"0.98\"] \n\"7\"->\"10\" [fontname = \"helvetica\", label = \"0.02\"] \n\"3\"->\"4\" [fontname = \"helvetica\"] \n\"5\"->\"6\" [fontname = \"helvetica\"] \n\"8\"->\"9\" [fontname = \"helvetica\"] \n\"10\"->\"11\" [fontname = \"helvetica\"] \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-6a95d1505f674542794c" style="width:480px;height:384px;"></div>
+<script type="application/json" data-for="htmlwidget-6a95d1505f674542794c">{"x":{"diagram":"digraph {\n\ngraph [rankdir = \"LR\"]\n\n\n\n  \"1\" [label = \"Start\", fontname = \"helvetica\", shape = \"box\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"2\" [label = \"Healthy\", fontname = \"helvetica\", shape = \"\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"3\" [label = \"Positive\", fontname = \"helvetica\", shape = \"\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"4\" [label = \"Prob: 0.0485\", fontname = \"helvetica\", shape = \"none\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"5\" [label = \"Negative\", fontname = \"helvetica\", shape = \"\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"6\" [label = \"Prob: 0.9215\", fontname = \"helvetica\", shape = \"none\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"7\" [label = \"Disease\", fontname = \"helvetica\", shape = \"\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"8\" [label = \"Positive\", fontname = \"helvetica\", shape = \"\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"9\" [label = \"Prob: 0.0294\", fontname = \"helvetica\", shape = \"none\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"10\" [label = \"Negative\", fontname = \"helvetica\", shape = \"\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"11\" [label = \"Prob: 6e-04\", fontname = \"helvetica\", shape = \"none\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n\"1\"->\"2\" [fontname = \"helvetica\", label = \"0.97\"] \n\"1\"->\"7\" [fontname = \"helvetica\", label = \"0.03\"] \n\"2\"->\"3\" [fontname = \"helvetica\", label = \"0.05\"] \n\"2\"->\"5\" [fontname = \"helvetica\", label = \"0.95\"] \n\"7\"->\"8\" [fontname = \"helvetica\", label = \"0.98\"] \n\"7\"->\"10\" [fontname = \"helvetica\", label = \"0.02\"] \n\"3\"->\"4\" [fontname = \"helvetica\"] \n\"5\"->\"6\" [fontname = \"helvetica\"] \n\"8\"->\"9\" [fontname = \"helvetica\"] \n\"10\"->\"11\" [fontname = \"helvetica\"] \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p><strong>Rules of the Probability Tree</strong></p>
@@ -777,9 +777,9 @@ population mean of <span class="math inline">\(\lambda=kt\)</span>, where<br>
 <p>A discrete random variable takes values which are simply points on a real line. In other words, there is an inherent discontinuity in the values a discrete random variable can take.</p>
 <p>If a random variable, <span class="math inline">\(X\)</span>, can take any value (i.e., not just integers) in some interval of the real line, it is called a <em>continuous</em> random variable.</p>
 <p>E.g., height, weight, length, percentage protein</p>
-<p>For a discrete random variable <span class="math inline">\(X\)</span>, the associated probabilities <span class="math inline">\(P(X=x)\)</span> are also just points or masses, and hence the probability function <span class="math inline">\(P(x)\)</span> is also called as the probability mass function (pmf).</p>
+<p>For a discrete random variable <span class="math inline">\(X\)</span>, the associated probabilities <span class="math inline">\(P(X=x)\)</span> are also just points or masses, and hence the probability function <span class="math inline">\(P(x)\)</span> is also called as the probability mass function (PMF).</p>
 <p>For continuous random variables, probabilities can be computed when the variable falls in an interval such as <span class="math inline">\(5\)</span> to <span class="math inline">\(15\)</span>, but not when it takes a fixed value such as <span class="math inline">\(10\)</span> (which is equal to zero).</p>
-<p>The probability density function (pdf) gives the probabilities as an area under the curve.</p>
+<p>The Probability Density Function (PDF) gives the <em>relative likelihood</em> of any particular value.</p>
 </section>
 <section id="continuous-probability-distributions-2" class="slide level2">
 <h2>Continuous probability distributions</h2>
@@ -793,7 +793,7 @@ population mean of <span class="math inline">\(\lambda=kt\)</span>, where<br>
 <span id="cb14-2"><a href="#cb14-2"></a>       <span class="st">`</span><span class="at">f(x)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">dunif</span>(x, <span class="at">min=</span><span class="dv">0</span>, <span class="at">max=</span><span class="dv">1</span>)) <span class="sc">|&gt;</span> </span>
 <span id="cb14-3"><a href="#cb14-3"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
 <span id="cb14-4"><a href="#cb14-4"></a>  <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> <span class="st">`</span><span class="at">f(x)</span><span class="st">`</span>) <span class="sc">+</span></span>
-<span id="cb14-5"><a href="#cb14-5"></a>  <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-5"><a href="#cb14-5"></a>  <span class="fu">geom_area</span>(<span class="at">colour =</span> <span class="dv">1</span>, <span class="at">alpha =</span> .<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -809,10 +809,117 @@ population mean of <span class="math inline">\(\lambda=kt\)</span>, where<br>
 </section>
 <section id="continuous-probability-distributions-3" class="slide level2">
 <h2>Continuous probability distributions</h2>
+<p>The <em>density</em> is the relative likelihood of any value of <span class="math inline">\(x\)</span>; that is, the height of the Probability Density Function (PDF). Say, the leaves of a particular tree had mean length 20 cm, SD 2.</p>
+<div class="cell columns column-output-location" data-layout-align="center">
+<div class="column">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>d <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">seq</span>(<span class="dv">13</span>, <span class="dv">27</span>, <span class="at">by=</span><span class="fl">0.01</span>),</span>
+<span id="cb15-2"><a href="#cb15-2"></a>            <span class="at">Density =</span> <span class="fu">dnorm</span>(x, <span class="dv">20</span>, <span class="dv">2</span>)) </span>
+<span id="cb15-3"><a href="#cb15-3"></a></span>
+<span id="cb15-4"><a href="#cb15-4"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(d) <span class="sc">+</span> <span class="fu">aes</span>(x, Density) <span class="sc">+</span> </span>
+<span id="cb15-5"><a href="#cb15-5"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb15-6"><a href="#cb15-6"></a>  <span class="fu">geom_area</span>(<span class="at">colour =</span> <span class="dv">1</span>,</span>
+<span id="cb15-7"><a href="#cb15-7"></a>            <span class="at">fill =</span> <span class="st">"darkorange"</span>, </span>
+<span id="cb15-8"><a href="#cb15-8"></a>            <span class="at">size =</span> <span class="fl">1.1</span>, <span class="at">alpha =</span> .<span class="dv">6</span>) </span>
+<span id="cb15-9"><a href="#cb15-9"></a>  </span>
+<span id="cb15-10"><a href="#cb15-10"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Chapter03_files/figure-revealjs/unnamed-chunk-15-1.png" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>The <strong>black line</strong> is the PDF, or <span class="math inline">\(f(x)\)</span>. The orange area underneath the whole PDF is 1.</p>
+</section>
+<section id="continuous-probability-distributions-4" class="slide level2">
+<h2>Continuous probability distributions</h2>
+<p>The <em>density</em> is the relative likelihood of any value of <span class="math inline">\(x\)</span>; that is, the height of the Probability Density Function (PDF). Say, the leaves of a particular tree had mean length 20 cm, SD 2.</p>
+<div class="cell columns column-output-location" data-layout-align="center">
+<div class="column">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>d <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">seq</span>(<span class="dv">13</span>, <span class="dv">27</span>, <span class="at">by=</span><span class="fl">0.01</span>),</span>
+<span id="cb16-2"><a href="#cb16-2"></a>            <span class="at">Density =</span> <span class="fu">dnorm</span>(x, <span class="dv">20</span>, <span class="dv">2</span>)) </span>
+<span id="cb16-3"><a href="#cb16-3"></a></span>
+<span id="cb16-4"><a href="#cb16-4"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(d) <span class="sc">+</span> <span class="fu">aes</span>(x, Density) <span class="sc">+</span> </span>
+<span id="cb16-5"><a href="#cb16-5"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb16-6"><a href="#cb16-6"></a>  <span class="fu">geom_area</span>(<span class="at">colour =</span> <span class="dv">1</span>,</span>
+<span id="cb16-7"><a href="#cb16-7"></a>            <span class="at">fill =</span> <span class="st">"darkorange"</span>, </span>
+<span id="cb16-8"><a href="#cb16-8"></a>            <span class="at">size =</span> <span class="fl">1.1</span>, <span class="at">alpha =</span> .<span class="dv">6</span>) </span>
+<span id="cb16-9"><a href="#cb16-9"></a></span>
+<span id="cb16-10"><a href="#cb16-10"></a>p <span class="sc">+</span></span>
+<span id="cb16-11"><a href="#cb16-11"></a>  <span class="fu">annotate</span>(<span class="at">geom =</span> <span class="st">"path"</span>, </span>
+<span id="cb16-12"><a href="#cb16-12"></a>    <span class="at">x =</span> <span class="fu">c</span>(<span class="fl">19.3</span>, <span class="fl">19.3</span>, <span class="dv">13</span>), </span>
+<span id="cb16-13"><a href="#cb16-13"></a>    <span class="at">y =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">rep</span>(<span class="fu">dnorm</span>(<span class="fl">19.3</span>,<span class="dv">20</span>,<span class="dv">2</span>),<span class="dv">2</span>) ),</span>
+<span id="cb16-14"><a href="#cb16-14"></a>    <span class="at">arrow =</span> <span class="fu">arrow</span>(),</span>
+<span id="cb16-15"><a href="#cb16-15"></a>    <span class="at">colour =</span> <span class="st">"dodgerblue4"</span>, <span class="at">size =</span> <span class="fl">1.1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Chapter03_files/figure-revealjs/unnamed-chunk-16-1.png" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>The <strong>black line</strong> is the PDF, or <span class="math inline">\(f(x)\)</span>. The orange area underneath the whole PDF is 1.</p>
+<p>The <strong>density</strong> at 19.3 is <span class="math inline">\(f(19.3) = 0.1876\)</span>).</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">dnorm</span>(<span class="fl">19.3</span>, <span class="at">mean =</span> <span class="dv">20</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1876202</code></pre>
+</div>
+</div>
+</section>
+<section id="continuous-probability-distributions-5" class="slide level2">
+<h2>Continuous probability distributions</h2>
+<p>The <em>density</em> is the relative likelihood of any value of <span class="math inline">\(x\)</span>; that is, the height of the Probability Density Function (PDF). Say, the leaves of a particular tree had mean length 20 cm, SD 2.</p>
+<div class="cell columns column-output-location" data-layout-align="center">
+<div class="column">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>d <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">seq</span>(<span class="dv">13</span>, <span class="dv">27</span>, <span class="at">by=</span><span class="fl">0.01</span>),</span>
+<span id="cb19-2"><a href="#cb19-2"></a>            <span class="at">Density =</span> <span class="fu">dnorm</span>(x, <span class="dv">20</span>, <span class="dv">2</span>)) </span>
+<span id="cb19-3"><a href="#cb19-3"></a></span>
+<span id="cb19-4"><a href="#cb19-4"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(d) <span class="sc">+</span> <span class="fu">aes</span>(x, Density) <span class="sc">+</span> </span>
+<span id="cb19-5"><a href="#cb19-5"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb19-6"><a href="#cb19-6"></a>  <span class="fu">geom_area</span>(<span class="at">colour =</span> <span class="dv">1</span>,</span>
+<span id="cb19-7"><a href="#cb19-7"></a>            <span class="at">fill =</span> <span class="st">"darkorange"</span>, </span>
+<span id="cb19-8"><a href="#cb19-8"></a>            <span class="at">size =</span> <span class="fl">1.1</span>, <span class="at">alpha =</span> .<span class="dv">6</span>) </span>
+<span id="cb19-9"><a href="#cb19-9"></a></span>
+<span id="cb19-10"><a href="#cb19-10"></a>p <span class="sc">+</span></span>
+<span id="cb19-11"><a href="#cb19-11"></a>  <span class="fu">geom_area</span>(</span>
+<span id="cb19-12"><a href="#cb19-12"></a>    <span class="at">data =</span> d <span class="sc">|&gt;</span> <span class="fu">filter</span>(x <span class="sc">&lt;=</span> <span class="fl">19.3</span>),</span>
+<span id="cb19-13"><a href="#cb19-13"></a>    <span class="at">fill =</span> <span class="st">"dodgerblue4"</span>,</span>
+<span id="cb19-14"><a href="#cb19-14"></a>    <span class="at">size  =</span> <span class="fl">1.1</span>, <span class="at">alpha =</span> .<span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Chapter03_files/figure-revealjs/unnamed-chunk-18-1.png" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>The <strong>black line</strong> is the PDF, or <span class="math inline">\(f(x)\)</span>. The orange area underneath the whole PDF is 1.</p>
+<p>The area under the curve to the left of the value 19.3 is given by the Cumulative Density Function (CDF), or <span class="math inline">\(F(x)\)</span>. It gives the probability that x &lt; 19.3; <span class="math inline">\(F(19.3) = 0.3632\)</span>.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">pnorm</span>(<span class="fl">19.3</span>, <span class="at">mean =</span> <span class="dv">20</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.3631693</code></pre>
+</div>
+</div>
+</section>
+<section id="continuous-probability-distributions-6" class="slide level2">
+<h2>Continuous probability distributions</h2>
 <p>The cumulative distribution function, CDF, <span class="math inline">\(F(x)\)</span> gives the left tail area or probability up to <span class="math inline">\(x\)</span>. This is probability is found as</p>
 <p><span class="math display">\[F_{X}(x)=\int _{-\infty }^{x}f_{X}(t)\,dt\]</span> The relationship between the density function <span class="math inline">\(f(x)\)</span> and the distribution function <span class="math inline">\(F(x)\)</span> is given by the Fundamental Theorem of Calculus.</p>
 <p><span class="math display">\[f(x)={dF(x) \over dx}\]</span></p>
-<p>The total area under the pdf curve is <span class="math inline">\(1\)</span>. The probability of obtaining a value between two points (<span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>) is the area under the pdf curve between those two points. This probability is given by <span class="math inline">\(F(b)-F(a)\)</span>.</p>
+</section>
+<section id="continuous-probability-distributions-7" class="slide level2">
+<h2>Continuous probability distributions</h2>
+<p>The total area under the PDF curve is <span class="math inline">\(1\)</span>. The probability of obtaining a value between two points (<span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>) is the area under the PDF curve between those two points. This probability is given by <span class="math inline">\(F(b)-F(a)\)</span>.</p>
 <p>For the uniform distribution <span class="math inline">\(U(0,1)\)</span>, <span class="math inline">\(f(x)=1\)</span>. So</p>
 <p><span class="math display">\[F_{X}(x)=\int _{-\infty }^{x}\,dt=x\]</span></p>
 <p>For example, the probability of a randomly drawn fraction from the interval <span class="math inline">\([0,1]\)</span> to fall below <span class="math inline">\(x=0.5\)</span> is 50%.</p>
@@ -835,22 +942,22 @@ population mean of <span class="math inline">\(\lambda=kt\)</span>, where<br>
 <div class="right-code-narrow">
 <p><br> <br></p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>dfn <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x=</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">4</span>,<span class="dv">4</span>,<span class="at">length=</span><span class="dv">1000</span>), </span>
-<span id="cb15-2"><a href="#cb15-2"></a>              <span class="st">`</span><span class="at">f(x)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">dnorm</span>(x), </span>
-<span id="cb15-3"><a href="#cb15-3"></a>              <span class="st">`</span><span class="at">F(x)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">pnorm</span>(x))</span>
-<span id="cb15-4"><a href="#cb15-4"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dfn) <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x=</span>x,<span class="at">y=</span><span class="st">`</span><span class="at">f(x)</span><span class="st">`</span>) <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
-<span id="cb15-5"><a href="#cb15-5"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>) <span class="sc">+</span> </span>
-<span id="cb15-6"><a href="#cb15-6"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Standard Normal Density"</span>, </span>
-<span id="cb15-7"><a href="#cb15-7"></a>       <span class="at">x =</span> <span class="st">"standard normal deviate, z"</span>)</span>
-<span id="cb15-8"><a href="#cb15-8"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dfn) <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x=</span>x,<span class="at">y=</span><span class="st">`</span><span class="at">F(x)</span><span class="st">`</span>) <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
-<span id="cb15-9"><a href="#cb15-9"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>) <span class="sc">+</span> </span>
-<span id="cb15-10"><a href="#cb15-10"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Cumulative Standard Normal Density"</span>, </span>
-<span id="cb15-11"><a href="#cb15-11"></a>       <span class="at">x =</span> <span class="st">"standard normal deviate, z"</span>)</span>
-<span id="cb15-12"><a href="#cb15-12"></a>p1<span class="sc">/</span>p2 </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>dfn <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x=</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">4</span>,<span class="dv">4</span>,<span class="at">length=</span><span class="dv">1000</span>), </span>
+<span id="cb22-2"><a href="#cb22-2"></a>              <span class="st">`</span><span class="at">f(x)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">dnorm</span>(x), </span>
+<span id="cb22-3"><a href="#cb22-3"></a>              <span class="st">`</span><span class="at">F(x)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">pnorm</span>(x))</span>
+<span id="cb22-4"><a href="#cb22-4"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dfn) <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x=</span>x,<span class="at">y=</span><span class="st">`</span><span class="at">f(x)</span><span class="st">`</span>) <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb22-5"><a href="#cb22-5"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>) <span class="sc">+</span> </span>
+<span id="cb22-6"><a href="#cb22-6"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Standard Normal Density"</span>, </span>
+<span id="cb22-7"><a href="#cb22-7"></a>       <span class="at">x =</span> <span class="st">"standard normal deviate, z"</span>)</span>
+<span id="cb22-8"><a href="#cb22-8"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dfn) <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x=</span>x,<span class="at">y=</span><span class="st">`</span><span class="at">F(x)</span><span class="st">`</span>) <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb22-9"><a href="#cb22-9"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>) <span class="sc">+</span> </span>
+<span id="cb22-10"><a href="#cb22-10"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Cumulative Standard Normal Density"</span>, </span>
+<span id="cb22-11"><a href="#cb22-11"></a>       <span class="at">x =</span> <span class="st">"standard normal deviate, z"</span>)</span>
+<span id="cb22-12"><a href="#cb22-12"></a>p1<span class="sc">/</span>p2 </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="Chapter03_files/figure-revealjs/unnamed-chunk-15-1.png" width="480"></p>
+<p><img data-src="Chapter03_files/figure-revealjs/unnamed-chunk-20-1.png" width="480"></p>
 </figure>
 </div>
 </div>
@@ -860,10 +967,6 @@ population mean of <span class="math inline">\(\lambda=kt\)</span>, where<br>
 <p>Continuous probability distributions</p>
 </div>
 </section>
-<section id="the-standard-normal-distribution" class="slide level2">
-<h2>The Standard Normal Distribution</h2>
-
-<img data-src="img/standard_68_95_99.png" class="r-stretch"></section>
 <section id="example-of-a-normal" class="slide level2 smaller">
 <h2>Example of a normal</h2>
 <p><img data-src="img/snail.jpg" class="absolute" style="top: 1px; right: 120px; width: 200px; "></p>
@@ -872,18 +975,18 @@ is normally distributed with a mean of <span class="math inline">\(40g\)</span> 
 <div class="right-plot-narrow">
 <p><br> <br> <br></p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>dfs <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x=</span><span class="fu">seq</span>(<span class="dv">20</span>, <span class="dv">60</span>, <span class="at">length=</span><span class="dv">1000</span>), </span>
-<span id="cb16-2"><a href="#cb16-2"></a>    <span class="st">`</span><span class="at">f(x)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">dnorm</span>(x, <span class="at">mean=</span><span class="dv">40</span>, <span class="at">sd=</span><span class="fu">sqrt</span>(<span class="dv">20</span>)))</span>
-<span id="cb16-3"><a href="#cb16-3"></a></span>
-<span id="cb16-4"><a href="#cb16-4"></a>ps <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dfs) <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> <span class="st">`</span><span class="at">f(x)</span><span class="st">`</span>) <span class="sc">+</span> </span>
-<span id="cb16-5"><a href="#cb16-5"></a>  <span class="fu">geom_area</span>(<span class="at">fill=</span><span class="st">"gray"</span>) <span class="sc">+</span></span>
-<span id="cb16-6"><a href="#cb16-6"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="dv">40</span>) </span>
-<span id="cb16-7"><a href="#cb16-7"></a></span>
-<span id="cb16-8"><a href="#cb16-8"></a>ps</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>dfs <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x=</span><span class="fu">seq</span>(<span class="dv">20</span>, <span class="dv">60</span>, <span class="at">length=</span><span class="dv">1000</span>), </span>
+<span id="cb23-2"><a href="#cb23-2"></a>    <span class="st">`</span><span class="at">f(x)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">dnorm</span>(x, <span class="at">mean=</span><span class="dv">40</span>, <span class="at">sd=</span><span class="fu">sqrt</span>(<span class="dv">20</span>)))</span>
+<span id="cb23-3"><a href="#cb23-3"></a></span>
+<span id="cb23-4"><a href="#cb23-4"></a>ps <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dfs) <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> <span class="st">`</span><span class="at">f(x)</span><span class="st">`</span>) <span class="sc">+</span> </span>
+<span id="cb23-5"><a href="#cb23-5"></a>  <span class="fu">geom_area</span>(<span class="at">fill=</span><span class="st">"gray"</span>) <span class="sc">+</span></span>
+<span id="cb23-6"><a href="#cb23-6"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="dv">40</span>) </span>
+<span id="cb23-7"><a href="#cb23-7"></a></span>
+<span id="cb23-8"><a href="#cb23-8"></a>ps</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="Chapter03_files/figure-revealjs/unnamed-chunk-16-1.png" width="480"></p>
+<p><img data-src="Chapter03_files/figure-revealjs/unnamed-chunk-21-1.png" width="480"></p>
 </figure>
 </div>
 </div>
@@ -899,8 +1002,8 @@ is normally distributed with a mean of <span class="math inline">\(40g\)</span> 
 <div class="fragment fade-out" data-fragment-index="4">
 <p>In R, the function <code>pnorm()</code> gives the CDF.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">pnorm</span>(<span class="dv">50</span>, <span class="at">mean=</span><span class="dv">40</span>, <span class="at">sd=</span><span class="fu">sqrt</span>(<span class="dv">20</span>)) <span class="sc">-</span> </span>
-<span id="cb17-2"><a href="#cb17-2"></a>  <span class="fu">pnorm</span>(<span class="dv">35</span>, <span class="at">mean=</span><span class="dv">40</span>, <span class="at">sd=</span><span class="fu">sqrt</span>(<span class="dv">20</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">pnorm</span>(<span class="dv">50</span>, <span class="at">mean=</span><span class="dv">40</span>, <span class="at">sd=</span><span class="fu">sqrt</span>(<span class="dv">20</span>)) <span class="sc">-</span> </span>
+<span id="cb24-2"><a href="#cb24-2"></a>  <span class="fu">pnorm</span>(<span class="dv">35</span>, <span class="at">mean=</span><span class="dv">40</span>, <span class="at">sd=</span><span class="fu">sqrt</span>(<span class="dv">20</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.8555501</code></pre>
 </div>
@@ -910,13 +1013,13 @@ is normally distributed with a mean of <span class="math inline">\(40g\)</span> 
 <div class="fragment fade-in" data-fragment-index="3">
 <div class="fragment fade-out" data-fragment-index="4">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>ps <span class="sc">+</span> </span>
-<span id="cb19-2"><a href="#cb19-2"></a>  <span class="fu">geom_area</span>(<span class="at">data =</span> dfs <span class="sc">|&gt;</span> <span class="fu">filter</span>(x <span class="sc">&lt;</span> <span class="dv">50</span> <span class="sc">&amp;</span> x <span class="sc">&gt;</span> <span class="dv">35</span>),</span>
-<span id="cb19-3"><a href="#cb19-3"></a>            <span class="at">fill=</span><span class="st">"coral1"</span>, <span class="at">alpha=</span>.<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>ps <span class="sc">+</span> </span>
+<span id="cb26-2"><a href="#cb26-2"></a>  <span class="fu">geom_area</span>(<span class="at">data =</span> dfs <span class="sc">|&gt;</span> <span class="fu">filter</span>(x <span class="sc">&lt;</span> <span class="dv">50</span> <span class="sc">&amp;</span> x <span class="sc">&gt;</span> <span class="dv">35</span>),</span>
+<span id="cb26-3"><a href="#cb26-3"></a>            <span class="at">fill=</span><span class="st">"coral1"</span>, <span class="at">alpha=</span>.<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="Chapter03_files/figure-revealjs/unnamed-chunk-18-1.png" width="480"></p>
+<p><img data-src="Chapter03_files/figure-revealjs/unnamed-chunk-23-1.png" width="480"></p>
 </figure>
 </div>
 </div>
@@ -930,22 +1033,22 @@ is normally distributed with a mean of <span class="math inline">\(40g\)</span> 
 </div>
 <div class="fragment fade-in" data-fragment-index="6">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">pnorm</span>(<span class="dv">35</span>, <span class="at">mean=</span><span class="dv">40</span>, <span class="at">sd=</span><span class="fu">sqrt</span>(<span class="dv">20</span>)) <span class="sc">+</span> </span>
-<span id="cb20-2"><a href="#cb20-2"></a>  <span class="fu">pnorm</span>(<span class="dv">50</span>, <span class="at">mean=</span><span class="dv">40</span>, <span class="at">sd=</span><span class="fu">sqrt</span>(<span class="dv">20</span>), <span class="at">lower.tail=</span><span class="cn">FALSE</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">pnorm</span>(<span class="dv">35</span>, <span class="at">mean=</span><span class="dv">40</span>, <span class="at">sd=</span><span class="fu">sqrt</span>(<span class="dv">20</span>)) <span class="sc">+</span> </span>
+<span id="cb27-2"><a href="#cb27-2"></a>  <span class="fu">pnorm</span>(<span class="dv">50</span>, <span class="at">mean=</span><span class="dv">40</span>, <span class="at">sd=</span><span class="fu">sqrt</span>(<span class="dv">20</span>), <span class="at">lower.tail=</span><span class="cn">FALSE</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.1444499</code></pre>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>ps <span class="sc">+</span> </span>
-<span id="cb22-2"><a href="#cb22-2"></a>  <span class="fu">geom_area</span>(<span class="at">data =</span> dfs <span class="sc">|&gt;</span> <span class="fu">filter</span>(x <span class="sc">&gt;</span> <span class="dv">50</span>),</span>
-<span id="cb22-3"><a href="#cb22-3"></a>            <span class="at">fill=</span><span class="st">"coral1"</span>, <span class="at">alpha=</span>.<span class="dv">5</span>) <span class="sc">+</span> </span>
-<span id="cb22-4"><a href="#cb22-4"></a>  <span class="fu">geom_area</span>(<span class="at">data =</span> dfs <span class="sc">|&gt;</span> <span class="fu">filter</span>(x <span class="sc">&lt;</span> <span class="dv">35</span>),</span>
-<span id="cb22-5"><a href="#cb22-5"></a>            <span class="at">fill=</span><span class="st">"coral1"</span>, <span class="at">alpha=</span>.<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>ps <span class="sc">+</span> </span>
+<span id="cb29-2"><a href="#cb29-2"></a>  <span class="fu">geom_area</span>(<span class="at">data =</span> dfs <span class="sc">|&gt;</span> <span class="fu">filter</span>(x <span class="sc">&gt;</span> <span class="dv">50</span>),</span>
+<span id="cb29-3"><a href="#cb29-3"></a>            <span class="at">fill=</span><span class="st">"coral1"</span>, <span class="at">alpha=</span>.<span class="dv">5</span>) <span class="sc">+</span> </span>
+<span id="cb29-4"><a href="#cb29-4"></a>  <span class="fu">geom_area</span>(<span class="at">data =</span> dfs <span class="sc">|&gt;</span> <span class="fu">filter</span>(x <span class="sc">&lt;</span> <span class="dv">35</span>),</span>
+<span id="cb29-5"><a href="#cb29-5"></a>            <span class="at">fill=</span><span class="st">"coral1"</span>, <span class="at">alpha=</span>.<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="Chapter03_files/figure-revealjs/unnamed-chunk-20-1.png" width="480"></p>
+<p><img data-src="Chapter03_files/figure-revealjs/unnamed-chunk-25-1.png" width="480"></p>
 </figure>
 </div>
 </div>
@@ -955,9 +1058,9 @@ is normally distributed with a mean of <span class="math inline">\(40g\)</span> 
 </section>
 <section id="areas-probabilities-under-the-standard-normal" class="slide level2">
 <h2>Areas (probabilities) under the standard normal</h2>
-<p>Under standard normal, the areas under the pdf curve are shown below for various situations.</p>
+<p>Under standard normal, the areas under the PDF curve are shown below for various situations.</p>
 
-<img data-src="Chapter03_files/figure-revealjs/unnamed-chunk-21-1.png" width="960" class="r-stretch quarto-figure-center"><div class="footer">
+<img data-src="Chapter03_files/figure-revealjs/unnamed-chunk-26-1.png" width="960" class="r-stretch quarto-figure-center"><div class="footer">
 <p>Continuous probability distributions</p>
 </div>
 </section></section>
@@ -984,20 +1087,20 @@ is normally distributed with a mean of <span class="math inline">\(40g\)</span> 
 </div>
 <div class="pull-right">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>dfln <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x=</span><span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">4</span>, <span class="at">length=</span><span class="dv">1000</span>), </span>
-<span id="cb23-2"><a href="#cb23-2"></a>              <span class="st">`</span><span class="at">f(x)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">dlnorm</span>(x), </span>
-<span id="cb23-3"><a href="#cb23-3"></a>              <span class="st">`</span><span class="at">F(x)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">plnorm</span>(x))</span>
-<span id="cb23-4"><a href="#cb23-4"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dfln) <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x=</span>x,<span class="at">y=</span><span class="st">`</span><span class="at">f(x)</span><span class="st">`</span>) <span class="sc">+</span> <span class="fu">geom_area</span>(<span class="at">alpha=</span>.<span class="dv">8</span>) <span class="sc">+</span> </span>
-<span id="cb23-5"><a href="#cb23-5"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Standard log-normal density"</span>, </span>
-<span id="cb23-6"><a href="#cb23-6"></a>       <span class="at">x =</span> <span class="st">"standard log-normal deviate, z"</span>)</span>
-<span id="cb23-7"><a href="#cb23-7"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dfln) <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x=</span>x,<span class="at">y=</span><span class="st">`</span><span class="at">F(x)</span><span class="st">`</span>) <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
-<span id="cb23-8"><a href="#cb23-8"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Cumulative standard log-normal density"</span>, </span>
-<span id="cb23-9"><a href="#cb23-9"></a>       <span class="at">x =</span> <span class="st">"standard log-normal deviate, z"</span>)</span>
-<span id="cb23-10"><a href="#cb23-10"></a>p1<span class="sc">/</span>p2 </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>dfln <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x=</span><span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">4</span>, <span class="at">length=</span><span class="dv">1000</span>), </span>
+<span id="cb30-2"><a href="#cb30-2"></a>              <span class="st">`</span><span class="at">f(x)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">dlnorm</span>(x), </span>
+<span id="cb30-3"><a href="#cb30-3"></a>              <span class="st">`</span><span class="at">F(x)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">plnorm</span>(x))</span>
+<span id="cb30-4"><a href="#cb30-4"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dfln) <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x=</span>x,<span class="at">y=</span><span class="st">`</span><span class="at">f(x)</span><span class="st">`</span>) <span class="sc">+</span> <span class="fu">geom_area</span>(<span class="at">alpha=</span>.<span class="dv">8</span>) <span class="sc">+</span> </span>
+<span id="cb30-5"><a href="#cb30-5"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Standard log-normal density"</span>, </span>
+<span id="cb30-6"><a href="#cb30-6"></a>       <span class="at">x =</span> <span class="st">"standard log-normal deviate, z"</span>)</span>
+<span id="cb30-7"><a href="#cb30-7"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dfln) <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x=</span>x,<span class="at">y=</span><span class="st">`</span><span class="at">F(x)</span><span class="st">`</span>) <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb30-8"><a href="#cb30-8"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Cumulative standard log-normal density"</span>, </span>
+<span id="cb30-9"><a href="#cb30-9"></a>       <span class="at">x =</span> <span class="st">"standard log-normal deviate, z"</span>)</span>
+<span id="cb30-10"><a href="#cb30-10"></a>p1<span class="sc">/</span>p2 </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="Chapter03_files/figure-revealjs/unnamed-chunk-22-1.png" width="480"></p>
+<p><img data-src="Chapter03_files/figure-revealjs/unnamed-chunk-27-1.png" width="480"></p>
 </figure>
 </div>
 </div>
@@ -1025,7 +1128,7 @@ is normally distributed with a mean of <span class="math inline">\(40g\)</span> 
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="Chapter03_files/figure-revealjs/unnamed-chunk-23-1.png" width="384"></p>
+<p><img data-src="Chapter03_files/figure-revealjs/unnamed-chunk-28-1.png" width="384"></p>
 </figure>
 </div>
 </div>
@@ -1057,43 +1160,40 @@ is normally distributed with a mean of <span class="math inline">\(40g\)</span> 
 </section>
 <section id="small-sample-effect" class="slide level2">
 <h2>Small sample effect</h2>
-<p>For small samples, we do not expect many outliers but the shape might be difficult to judge.</p>
+<p>For small samples, the shape might be difficult to judge.</p>
 <div class="cell custom4060 columns column-output-location" data-layout-align="center">
 <div class="column">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb24-2"><a href="#cb24-2"></a>dfm <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb24-3"><a href="#cb24-3"></a>  <span class="at">x=</span><span class="fu">rnorm</span>(<span class="dv">50</span>, </span>
-<span id="cb24-4"><a href="#cb24-4"></a>          <span class="at">mean=</span><span class="dv">80</span>, </span>
-<span id="cb24-5"><a href="#cb24-5"></a>          <span class="at">sd=</span><span class="dv">12</span>)</span>
-<span id="cb24-6"><a href="#cb24-6"></a>  )</span>
-<span id="cb24-7"><a href="#cb24-7"></a></span>
-<span id="cb24-8"><a href="#cb24-8"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dfm) <span class="sc">+</span> </span>
-<span id="cb24-9"><a href="#cb24-9"></a>  <span class="fu">geom_histogram</span>(</span>
-<span id="cb24-10"><a href="#cb24-10"></a>    <span class="fu">aes</span>(<span class="at">x=</span>x, <span class="at">y=</span><span class="fu">after_stat</span>(density)), </span>
-<span id="cb24-11"><a href="#cb24-11"></a>    <span class="at">colour=</span><span class="dv">1</span></span>
-<span id="cb24-12"><a href="#cb24-12"></a>    ) <span class="sc">+</span> </span>
-<span id="cb24-13"><a href="#cb24-13"></a>  <span class="fu">stat_function</span>(</span>
-<span id="cb24-14"><a href="#cb24-14"></a>    <span class="at">fun =</span> dnorm, </span>
-<span id="cb24-15"><a href="#cb24-15"></a>    <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="dv">80</span>, <span class="at">sd =</span> <span class="dv">12</span>), </span>
-<span id="cb24-16"><a href="#cb24-16"></a>    <span class="at">geom =</span> <span class="st">"line"</span></span>
-<span id="cb24-17"><a href="#cb24-17"></a>    ) <span class="sc">+</span></span>
-<span id="cb24-18"><a href="#cb24-18"></a>  <span class="fu">xlim</span>(<span class="fu">min</span>(dfm), <span class="fu">max</span>(dfm))</span>
-<span id="cb24-19"><a href="#cb24-19"></a></span>
-<span id="cb24-20"><a href="#cb24-20"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dfm) <span class="sc">+</span> <span class="fu">aes</span>(x) <span class="sc">+</span> </span>
-<span id="cb24-21"><a href="#cb24-21"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb24-22"><a href="#cb24-22"></a>  <span class="fu">xlim</span>(<span class="fu">min</span>(dfm), <span class="fu">max</span>(dfm))</span>
-<span id="cb24-23"><a href="#cb24-23"></a></span>
-<span id="cb24-24"><a href="#cb24-24"></a><span class="fu">library</span>(patchwork)</span>
-<span id="cb24-25"><a href="#cb24-25"></a>p1 <span class="sc">/</span> p2 <span class="sc">+</span> </span>
-<span id="cb24-26"><a href="#cb24-26"></a>  <span class="fu">plot_layout</span>(</span>
-<span id="cb24-27"><a href="#cb24-27"></a>    <span class="at">heights =</span> <span class="fu">unit</span>(<span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">1</span>), </span>
-<span id="cb24-28"><a href="#cb24-28"></a>                   <span class="fu">c</span>(<span class="st">'cm'</span>, <span class="st">'null'</span>))</span>
-<span id="cb24-29"><a href="#cb24-29"></a>    ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb31-2"><a href="#cb31-2"></a>dfm <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb31-3"><a href="#cb31-3"></a>  <span class="at">x=</span><span class="fu">rnorm</span>(<span class="dv">50</span>, </span>
+<span id="cb31-4"><a href="#cb31-4"></a>          <span class="at">mean=</span><span class="dv">80</span>, </span>
+<span id="cb31-5"><a href="#cb31-5"></a>          <span class="at">sd=</span><span class="dv">12</span>)</span>
+<span id="cb31-6"><a href="#cb31-6"></a>  )</span>
+<span id="cb31-7"><a href="#cb31-7"></a></span>
+<span id="cb31-8"><a href="#cb31-8"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dfm) <span class="sc">+</span> </span>
+<span id="cb31-9"><a href="#cb31-9"></a>  <span class="fu">geom_histogram</span>(</span>
+<span id="cb31-10"><a href="#cb31-10"></a>    <span class="fu">aes</span>(<span class="at">x=</span>x, <span class="at">y=</span><span class="fu">after_stat</span>(density)), </span>
+<span id="cb31-11"><a href="#cb31-11"></a>    <span class="at">colour=</span><span class="dv">1</span></span>
+<span id="cb31-12"><a href="#cb31-12"></a>    ) <span class="sc">+</span> </span>
+<span id="cb31-13"><a href="#cb31-13"></a>  <span class="fu">stat_function</span>(</span>
+<span id="cb31-14"><a href="#cb31-14"></a>    <span class="at">fun =</span> dnorm, </span>
+<span id="cb31-15"><a href="#cb31-15"></a>    <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="dv">80</span>, <span class="at">sd =</span> <span class="dv">12</span>), </span>
+<span id="cb31-16"><a href="#cb31-16"></a>    <span class="at">geom =</span> <span class="st">"line"</span></span>
+<span id="cb31-17"><a href="#cb31-17"></a>    ) <span class="sc">+</span></span>
+<span id="cb31-18"><a href="#cb31-18"></a>  <span class="fu">xlim</span>(<span class="fu">min</span>(dfm), <span class="fu">max</span>(dfm))</span>
+<span id="cb31-19"><a href="#cb31-19"></a></span>
+<span id="cb31-20"><a href="#cb31-20"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dfm) <span class="sc">+</span> <span class="fu">aes</span>(x) <span class="sc">+</span> </span>
+<span id="cb31-21"><a href="#cb31-21"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb31-22"><a href="#cb31-22"></a>  <span class="fu">xlim</span>(<span class="fu">min</span>(dfm), <span class="fu">max</span>(dfm)) <span class="sc">+</span></span>
+<span id="cb31-23"><a href="#cb31-23"></a>  <span class="fu">theme_void</span>()</span>
+<span id="cb31-24"><a href="#cb31-24"></a></span>
+<span id="cb31-25"><a href="#cb31-25"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb31-26"><a href="#cb31-26"></a>p1 <span class="sc">/</span> p2 <span class="sc">+</span> <span class="fu">plot_layout</span>(<span class="at">heights =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="Chapter03_files/figure-revealjs/unnamed-chunk-24-1.png" width="480"></p>
+<p><img data-src="Chapter03_files/figure-revealjs/unnamed-chunk-29-1.png" width="576"></p>
 </figure>
 </div>
 </div>
@@ -1112,7 +1212,7 @@ is normally distributed with a mean of <span class="math inline">\(40g\)</span> 
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="Chapter03_files/figure-revealjs/unnamed-chunk-25-1.png" width="960"></p>
+<p><img data-src="Chapter03_files/figure-revealjs/unnamed-chunk-30-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1122,7 +1222,7 @@ is normally distributed with a mean of <span class="math inline">\(40g\)</span> 
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="Chapter03_files/figure-revealjs/unnamed-chunk-26-1.png" width="960"></p>
+<p><img data-src="Chapter03_files/figure-revealjs/unnamed-chunk-31-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1136,7 +1236,7 @@ is normally distributed with a mean of <span class="math inline">\(40g\)</span> 
 <p>The number of <em>people</em> who made use of a recreational facility is in the <strong>rangitikei</strong> dataset.</p>
 <p>The deviation of points from the line indicate that this variable does not conform to a normal distribution.</p>
 
-<img data-src="Chapter03_files/figure-revealjs/unnamed-chunk-27-1.png" width="960" class="r-stretch quarto-figure-center"><div class="footer">
+<img data-src="Chapter03_files/figure-revealjs/unnamed-chunk-32-1.png" width="960" class="r-stretch quarto-figure-center"><div class="footer">
 <p>Skewed continuous probability distributions</p>
 </div>
 </section>
@@ -1149,8 +1249,8 @@ is normally distributed with a mean of <span class="math inline">\(40g\)</span> 
 <li><code>fitdistrplus</code> default is the ML method</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">library</span>(fitdistrplus)</span>
-<span id="cb25-2"><a href="#cb25-2"></a><span class="fu">fitdist</span>(rangitikei<span class="sc">$</span>people, <span class="st">"lnorm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">library</span>(fitdistrplus)</span>
+<span id="cb32-2"><a href="#cb32-2"></a><span class="fu">fitdist</span>(rangitikei<span class="sc">$</span>people, <span class="st">"lnorm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Fitting of the distribution ' lnorm ' by maximum likelihood 
 Parameters:
@@ -1170,13 +1270,13 @@ sdlog   1.028191  0.1265611</code></pre>
 <p>The ML method maximises the likelihood function to estimate the distributional (model) parameters. Examine the fit using graphical displays.</p>
 <div class="cell columns column-output-location" data-layout-align="center">
 <div class="column">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>lnormfit <span class="ot">&lt;-</span> <span class="fu">fitdist</span>(rangitikei<span class="sc">$</span>people, <span class="st">"lnorm"</span>)</span>
-<span id="cb27-2"><a href="#cb27-2"></a><span class="fu">plot</span>(lnormfit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>lnormfit <span class="ot">&lt;-</span> <span class="fu">fitdist</span>(rangitikei<span class="sc">$</span>people, <span class="st">"lnorm"</span>)</span>
+<span id="cb34-2"><a href="#cb34-2"></a><span class="fu">plot</span>(lnormfit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="Chapter03_files/figure-revealjs/unnamed-chunk-29-1.png" width="576"></p>
+<p><img data-src="Chapter03_files/figure-revealjs/unnamed-chunk-34-1.png" width="576"></p>
 </figure>
 </div>
 </div>
@@ -1192,7 +1292,7 @@ sdlog   1.028191  0.1265611</code></pre>
 <p>Outliers and subgroups will affect the Maximum Likelihood (ML) employed in the <code>fitdistrplus</code> package.</p>
 <div class="cell columns column-output-location" data-layout-align="center">
 <div class="column">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">fitdist</span>(rangitikei<span class="sc">$</span>people, <span class="st">"gamma"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="fu">fitdist</span>(rangitikei<span class="sc">$</span>people, <span class="st">"gamma"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output cell-output-stdout">
 <pre><code>Fitting of the distribution ' gamma ' by maximum likelihood 
@@ -1205,13 +1305,13 @@ rate  0.01593588 0.004314727</code></pre>
 </div>
 <div class="cell columns column-output-location" data-layout-align="center">
 <div class="column">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>gammafit <span class="ot">&lt;-</span> <span class="fu">fitdist</span>(rangitikei<span class="sc">$</span>people, <span class="st">"gamma"</span>)</span>
-<span id="cb30-2"><a href="#cb30-2"></a><span class="fu">plot</span>(gammafit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a>gammafit <span class="ot">&lt;-</span> <span class="fu">fitdist</span>(rangitikei<span class="sc">$</span>people, <span class="st">"gamma"</span>)</span>
+<span id="cb37-2"><a href="#cb37-2"></a><span class="fu">plot</span>(gammafit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="Chapter03_files/figure-revealjs/unnamed-chunk-31-1.png" width="576"></p>
+<p><img data-src="Chapter03_files/figure-revealjs/unnamed-chunk-36-1.png" width="576"></p>
 </figure>
 </div>
 </div>
@@ -1225,7 +1325,7 @@ rate  0.01593588 0.004314727</code></pre>
 <h2>Cullen and Frey plot</h2>
 <p>This is a plot of <em>kurtosis</em>, a measure of excessive peakedness, against the square of a measure of <em>skew</em>.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="fu">descdist</span>(rangitikei<span class="sc">$</span>people)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="fu">descdist</span>(rangitikei<span class="sc">$</span>people)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 <div class="cell-output cell-output-stdout">
 <pre><code>summary statistics
@@ -1238,8 +1338,7 @@ estimated skewness:  3.3264
 estimated kurtosis:  17.11618 </code></pre>
 </div>
 </div>
-<img data-src="Chapter03_files/figure-revealjs/unnamed-chunk-32-1.png" width="960" class="r-stretch quarto-figure-center"><p>Symmetrical distributions such as normal (read corresponding to zero skew) are poor fits.</p>
-<p>Lognormal also does not fare well</p>
+<img data-src="Chapter03_files/figure-revealjs/unnamed-chunk-37-1.png" width="960" class="r-stretch quarto-figure-center"><p>Symmetrical distributions such as normal (read corresponding to zero skew) are poor fits. Lognormal also does not fare well.</p>
 <p><strong>When the observed data is a mixture from two or more distributions or contain a large number of unusual observations, no single distributional fit will be satisfactory.</strong></p>
 <div class="footer">
 <p>Skewed continuous probability distributions</p>
@@ -1249,7 +1348,7 @@ estimated kurtosis:  17.11618 </code></pre>
 <h2>TV watching time data</h2>
 <p>Normal fit is supported.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="fu">descdist</span>(tv<span class="sc">$</span>TELETIME)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="fu">descdist</span>(tv<span class="sc">$</span>TELETIME)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 <div class="cell-output cell-output-stdout">
 <pre><code>summary statistics
@@ -1262,22 +1361,16 @@ estimated skewness:  -0.004088284
 estimated kurtosis:  2.32614 </code></pre>
 </div>
 </div>
-<img data-src="Chapter03_files/figure-revealjs/unnamed-chunk-33-1.png" width="960" class="r-stretch quarto-figure-center"><div class="footer">
+<img data-src="Chapter03_files/figure-revealjs/unnamed-chunk-38-1.png" width="960" class="r-stretch quarto-figure-center"><div class="footer">
 <p>Skewed continuous probability distributions</p>
 </div>
 </section>
-<section id="which-distribution" class="slide level2">
-<h2>Which distribution?</h2>
+<section id="which-distribution-is-most-appropriate" class="slide level2">
+<h2>Which distribution is most appropriate?</h2>
 <ul>
-<li><p>This is a difficult task</p></li>
-<li><p>Not judged purely on statistical grounds</p></li>
-<li><p>Look for the cases in the literature; see whether any mechanistic justification is available in particular.</p></li>
-<li><p>Large amount of data needed, often over 300.</p></li>
-<li><p>If observed data is a mixture from 2 or more distributions, no point in fitting a single distribution.</p>
-<ul>
-<li>Do adequate EDA of the data</li>
-</ul></li>
-<li><p>Be liberal for small sample sizes but fit models based on normal and employ techniques such as the transformation method (covered later)</p></li>
+<li><p>Remember, theoretical distributions aren’t real—they’re just models—but they can be useful. Keep your purpose in mind.</p></li>
+<li><p>Choose the simplest distribution that provides an adequate fit.</p></li>
+<li><p>Data may be best served by a mixture of two or more distributions rather than a single distribution.</p></li>
 </ul>
 
 
