@@ -753,7 +753,7 @@
     "href": "slides/Chapter04.html#statistical-inference",
     "title": "Chapter 4:Introduction to Statistical Inference",
     "section": "Statistical Inference",
-    "text": "Statistical Inference\n\n\nThe term statistical inference means that we are making estimates and/or claims about the population of interest based on sample data.\nIn other words, can we generalise the patterns seen in the sample data or not is the issue.\nRecall that the the variability sample data depends on the population variability as well as the size of the sample.\nSo sample estimates are affected by the size of the sample in particular.\nConfidence intervals and test of hypotheses are popular tools for statistical inference."
+    "text": "Statistical Inference\n\n\nThe term statistical inference means that we are using properties of a sample to make statements about the population from which the sample was drawn.\nFor example, say you wanted to know the mean length of the leaves on a tree (\\(\\mu\\)). You wouldn’t want to (nor need to) measure every single leaf! You would take a random sample of leaves and measure their lengths (\\(x_i\\)), calculate the sample mean (\\(\\bar x\\)), and use \\(\\bar x\\) as an estimate of \\(\\mu\\)."
   },
   {
     "objectID": "slides/Chapter04.html#normality-tests-and-eda",
@@ -2321,7 +2321,7 @@
     "href": "studyguide/4-inference.html#sampling-error",
     "title": "Chapter 4: Statistical Inference",
     "section": "Sampling Error",
-    "text": "Sampling Error\nThis brings us to the next important concept of statistical inference: sampling error. A consequence of having collected data from a sample rather than the whole population is that there is uncertainty in our knowledge of the population parameter. Our sample mean is an estimate of the population mean; if we wanted to know population mean with zero uncertainty, we’d have to measure all the fish. This is the trade-off of sampling. It’s a lot cheaper to sample, but we sacrifice certainty.\nThe practical application of statistical inference involves (1) making estimates and (2) quantifying the uncertainty of those estimates. Uncertainty is often quantified using standard errors, confidence intervals, and P-values. All these quantities relate to sampling error. They’re all expressions of the uncertainty of an estimate of a population parameter.\nIn the fish farm example (Figure 1), sampling error is the hypothetical variation in the means of the lengths of samples of fish, with a sample size of \\(n\\) = 10. That is, if we were to (hypothetically) repeat the scientific process (i.e., randomly select 10 fish, measure their lengths, and calculate the sample mean), over and over again, how much would those sample means vary? That variation of sample statistics is sampling variation, or sampling error. And understanding sampling variation is the key to understanding most of undergraduate statistics.\nSo, when we do our study (i.e., randomly select 10 fish, measure their lengths, and calculate the sample mean), we are drawing one value of the sample mean, \\(\\bar y\\), from a random variable, \\(\\bar Y\\), which is the distribution of sample means that we could hypothetically draw.\nGiven this random sampling variation, here are some explanations for some commonly used measure of uncertainty:\n\nA standard error is simply the standard deviation of a statistic under repeated sampling–that is, how much it would vary (hypothetically) from sample to sample.\nA confidence interval is a pair of numbers that contain the true value of the population parameter with 95% confidence. It is a simple function of the sample statistic and its standard error.\nA p-value is the probability of obtaining a sample statistic as or more extreme than the one observed, given a particular hypothesised value (usually zero) of the population parameter.\n\nDon’t worry if those definitions aren’t completely clear to you right now, but I encourage you to refer back to this section again and again as you learn about them in more detail during the rest of this course.\nKeep sampling error front of mind whenever you see a standard error, a confidence interval, or a p-value.\nNow, we’ll introduce some specific inference methods."
+    "text": "Sampling Error\nThis brings us to the next important concept of statistical inference: sampling error. A consequence of having collected data from a sample rather than the whole population is that there is uncertainty in our knowledge of the population parameter. Our sample mean is an estimate of the population mean; if we wanted to know population mean with zero uncertainty, we’d have to measure all the fish. This is the trade-off of sampling. It’s a lot cheaper to sample, but we sacrifice certainty.\nThe practical application of statistical inference involves (1) making estimates and (2) quantifying the uncertainty of those estimates. Uncertainty is often quantified using standard errors, confidence intervals, and P-values. All these quantities relate to sampling error. They’re all expressions of the uncertainty of an estimate of a population parameter.\nIn the fish farm example (Figure 1), sampling error is the hypothetical variation in the means of the lengths of samples of fish, with a sample size of \\(n\\) = 10. That is, if we were to (hypothetically) repeat the scientific process (i.e., randomly select 10 fish, measure their lengths, and calculate the sample mean), over and over again, how much would those sample means vary? That variation of sample statistics is sampling variation, or sampling error. And understanding sampling variation is the key to understanding most of undergraduate statistics.\nSo, when we do our study (i.e., randomly select 10 fish, measure their lengths, and calculate the sample mean), we are drawing one value of the sample mean, \\(\\bar y\\), from a random variable, \\(\\bar Y\\), which is the distribution of sample means that we could hypothetically draw.\nGiven this random sampling variation, here are some explanations for some commonly used measures of uncertainty:\n\nA standard error is simply the standard deviation of a statistic under repeated sampling–that is, how much it would vary (hypothetically) from sample to sample.\nA confidence interval is a pair of numbers that contain the true value of the population parameter with 95% confidence. It is a simple function of the sample statistic and its standard error.\nA p-value is the probability of obtaining a sample statistic as or more extreme than the one observed, given a particular hypothesised value (usually zero) of the population parameter.\n\nDon’t worry if those definitions aren’t completely clear to you right now, but I encourage you to refer back to this section again and again as you learn about them in more detail during the rest of this course.\nKeep sampling error front of mind whenever you see a standard error, a confidence interval, or a p-value.\nNow, we’ll introduce some specific inference methods."
   },
   {
     "objectID": "studyguide/4-inference.html#example-rangitikei",
@@ -2433,7 +2433,7 @@
     "href": "studyguide/4-inference.html#bootstrap-methods",
     "title": "Chapter 4: Statistical Inference",
     "section": "Bootstrap methods",
-    "text": "Bootstrap methods\nWhen a random sample is taken from a population, the expectation is that it is representative. So why not sample from the sample (i.e. resample) so that the quality of how well the sample is representative can be examined. We cannot gain extra information hugely by ordinary resampling and it is more like moving forward pulling the bootstrap! The methodology bootstrapping or resampling was introduced by Efron (1979). This computational intensive procedure can be implemented very mechanically and simpler. By computing the sampling distribution of a statistic of interest, issues such as its bias and the standard error can be addressed.\nR package boot has many features and several variations (types) of the bootstrap resampling method but harder to use. We will use the resample package instead because it is simpler and also includes simple permutation tests.\nUnder the simple bootstrap method, observations are resampled with replacement from the original sample to create a bootstrap sample. We can then compute a statistic such as the sample mean for this resample. This process can be repeated many times, say 10000, and we form the bootstrap distribution of the statistic. Consider the tv dataset. If we resample TELETIME, and compute the mean television viewing time for each sample, we construct the bootstrap distribution of mean. Using the resample package, we get-\n\n\nCode\nlibrary(resample)\nbootC &lt;- bootstrap(tv$TELETIME, mean)\nbootC\n\n\nCall:\nbootstrap(data = tv$TELETIME, statistic = mean)\nReplications: 10000\n\nSummary Statistics:\n     Observed       SE     Mean      Bias\nmean 1729.283 82.16306 1729.501 0.2183261\n\n\nThis output shows the observed sample mean 1729.283 and the mean of all bootstrap means which is 1729.114. The bias is the difference, which is -0.168. The main advantage of the bootstrap method is that it can quantify the bias that can occur due to sampling. Figure 18 and Figure 19, respectively, show the histogram and the normal quantile plots for the bootstrap means. Obviously the bootstrap means follow normal (due to CLT).\n\n\nCode\nhist(bootC)\n\n\n\n\n\nFigure 18: Histogram of the bootstrap means of TELETIME\n\n\n\n\n\n\nCode\nqqnorm(bootC)\n\n\n\n\n\nFigure 19: QQ plot of the bootstrap means of TELETIME\n\n\n\n\nThere are many versions of bootstrap confidence intervals depending on the way bootstrapping is done. Without going into details, the 95% confidence interval for the true mean viewing time is obtained as follows:\n\n\nCode\nCI.t(bootC)\n\n\n         2.5%    97.5%\nmean 1561.823 1896.742\n\n\nThis interval compares well with the confidence interval using t-distribution found earlier namely (1560.633, 1897.932). The same approach can be taken to construct a confidence interval for the mean of the paired differences and thereby perform a test analogous to paired t-test. See the testsmarks data example given below:\n\n\nCode\ndiffer &lt;- testmarks$Maths-testmarks$English\nbootC &lt;- bootstrap(differ, mean)\nCI.t(bootC)\n\n\n          2.5%    97.5%\nmean -4.193646 4.943646\n\n\nThe parametric (i.e. t-test based) and bootstrap results are very similar. The bootstrap method can obtain better confidence intervals for the mean when the population is skewed because resampling tends to adjust for the skew in the population when captured by the sample well. The bootstrap approach will work well only when reasonably large sample sizes are available because of the inherent uncertainty in the tails of the underlying distribution. Small samples are not sufficient to identify capture the tails of the distribution and hence certain types of inferences involving tail part of distribution will not work well. Parametric assumptions can be made to improve the bootstrap method and this approach is known as parametric bootstrapping. We will not study such methods in this course.\nThe resample package also has options to bootstrap from two vectors. Consider the television viewing times for the boys and girls groupings. We resample from the two groups to perform the two sample test.\n\n\nCode\nbootC &lt;- bootstrap2(tv$TELETIME, statistic=mean, treatment=tv$SEX)\nCI.t(bootC)\n\n\n               2.5%    97.5%\nmean: 1-2 -474.4906 230.4036\n\n\nThe bootstrap test conclusion again agrees with the Welch two-sample t-test conclusion.\nYou will not be examined on the use of permutation and bootstrap tests in the final exam. We may occasionally use this approach for assignments."
+    "text": "Bootstrap methods\nWhen a random sample is taken from a population, the expectation is that it is representative. So why not sample from the sample (i.e. resample) so that the quality of how well the sample is representative can be examined. We cannot gain extra information hugely by ordinary resampling and it is more like moving forward pulling the bootstrap! The methodology bootstrapping or resampling was introduced by Efron (1979). This computational intensive procedure can be implemented very mechanically and simpler. By computing the sampling distribution of a statistic of interest, issues such as its bias and the standard error can be addressed.\nR package boot has many features and several variations (types) of the bootstrap resampling method but harder to use. We will use the resample package instead because it is simpler and also includes simple permutation tests.\nUnder the simple bootstrap method, observations are resampled with replacement from the original sample to create a bootstrap sample. We can then compute a statistic such as the sample mean for this resample. This process can be repeated many times, say 10000, and we form the bootstrap distribution of the statistic. Consider the tv dataset. If we resample TELETIME, and compute the mean television viewing time for each sample, we construct the bootstrap distribution of mean. Using the resample package, we get-\n\n\nCode\nlibrary(resample)\nbootC &lt;- bootstrap(tv$TELETIME, mean)\nbootC\n\n\nCall:\nbootstrap(data = tv$TELETIME, statistic = mean)\nReplications: 10000\n\nSummary Statistics:\n     Observed       SE    Mean      Bias\nmean 1729.283 82.74484 1728.54 -0.742787\n\n\nThis output shows the observed sample mean 1729.283 and the mean of all bootstrap means which is 1729.114. The bias is the difference, which is -0.168. The main advantage of the bootstrap method is that it can quantify the bias that can occur due to sampling. Figure 18 and Figure 19, respectively, show the histogram and the normal quantile plots for the bootstrap means. Obviously the bootstrap means follow normal (due to CLT).\n\n\nCode\nhist(bootC)\n\n\n\n\n\nFigure 18: Histogram of the bootstrap means of TELETIME\n\n\n\n\n\n\nCode\nqqnorm(bootC)\n\n\n\n\n\nFigure 19: QQ plot of the bootstrap means of TELETIME\n\n\n\n\nThere are many versions of bootstrap confidence intervals depending on the way bootstrapping is done. Without going into details, the 95% confidence interval for the true mean viewing time is obtained as follows:\n\n\nCode\nCI.t(bootC)\n\n\n         2.5%    97.5%\nmean 1560.637 1897.928\n\n\nThis interval compares well with the confidence interval using t-distribution found earlier namely (1560.633, 1897.932). The same approach can be taken to construct a confidence interval for the mean of the paired differences and thereby perform a test analogous to paired t-test. See the testsmarks data example given below:\n\n\nCode\ndiffer &lt;- testmarks$Maths-testmarks$English\nbootC &lt;- bootstrap(differ, mean)\nCI.t(bootC)\n\n\n          2.5%    97.5%\nmean -4.175863 4.925863\n\n\nThe parametric (i.e. t-test based) and bootstrap results are very similar. The bootstrap method can obtain better confidence intervals for the mean when the population is skewed because resampling tends to adjust for the skew in the population when captured by the sample well. The bootstrap approach will work well only when reasonably large sample sizes are available because of the inherent uncertainty in the tails of the underlying distribution. Small samples are not sufficient to identify capture the tails of the distribution and hence certain types of inferences involving tail part of distribution will not work well. Parametric assumptions can be made to improve the bootstrap method and this approach is known as parametric bootstrapping. We will not study such methods in this course.\nThe resample package also has options to bootstrap from two vectors. Consider the television viewing times for the boys and girls groupings. We resample from the two groups to perform the two sample test.\n\n\nCode\nbootC &lt;- bootstrap2(tv$TELETIME, statistic=mean, treatment=tv$SEX)\nCI.t(bootC)\n\n\n               2.5%    97.5%\nmean: 1-2 -468.7219 224.6349\n\n\nThe bootstrap test conclusion again agrees with the Welch two-sample t-test conclusion.\nYou will not be examined on the use of permutation and bootstrap tests in the final exam. We may occasionally use this approach for assignments."
   },
   {
     "objectID": "studyguide/6-single.html",
@@ -2658,5 +2658,215 @@
     "title": "Chapter 3:Probability Concepts & Distributions",
     "section": "Example continued",
     "text": "Example continued\nWhat are the implications of a positive or negative test result?\nAccording to Bayes rule, the probability of a random person having the disease given they’ve tested positive is given by:\n\\[\n\\begin{aligned}\nP(D\\mid T_{+}) &= \\frac {P(T_{+}\\mid D)P(D)} {P(T_{+})} \\\\\n&= \\frac{0.98 \\times 0.03}  {0.0779} \\\\\n&= 0.3774\n\\end{aligned}\n\\]\nAccording to Bayes rule, the probability of a random person not having the disease given they’ve tested negative is given by:\n\\[\n\\begin{aligned}\nP(H \\mid T_{-}) &= \\frac {P(T_{-} \\mid H)P(H)} {P(T_{-})} \\\\\n&= \\frac{0.95 \\times 0.97}  {0.9221} \\\\\n&= 0.9993\n\\end{aligned}\n\\]\nThe positive predictive value of the test is poor—only 38% of the subjects who tested positive will have the disease.\nThe negative predictive value is better—if a random subject tests negative, they’re very unlikely to have the disease."
+  },
+  {
+    "objectID": "studyguide/4-inference.html#footnotes",
+    "href": "studyguide/4-inference.html#footnotes",
+    "title": "Chapter 4: Statistical Inference",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nBear in mind though that no real population of values (except for synthetic ones, simulated by a computer) is normally distributed in reality. A variable can only be normally distributed in theory. The real world just is what it is. Recall Box’s adage: “All models are wrong, but some are useful”. When we test for a departure of a variable from, say, a normal distribution, we are simply testing whether the normal distribution provides an adequate model for the data.↩︎"
+  },
+  {
+    "objectID": "slides/Chapter04.html#statistical-inference-1",
+    "href": "slides/Chapter04.html#statistical-inference-1",
+    "title": "Chapter 4:Introduction to Statistical Inference",
+    "section": "Statistical Inference",
+    "text": "Statistical Inference\n\n\nThe term statistical inference means that we are using properties of a sample to make statements about the population from which the sample was drawn.\nFor example, say you wanted to know the mean length of the leaves on a tree (\\(\\mu\\)). You wouldn’t want to (nor need to) measure every single leaf! You would take a random sample of leaves and measure their lengths (\\(x_i\\)), calculate the sample mean (\\(\\bar x\\)), and use \\(\\bar x\\) as an estimate of \\(\\mu\\)."
+  },
+  {
+    "objectID": "slides/Chapter04.html#statistical-inference-2",
+    "href": "slides/Chapter04.html#statistical-inference-2",
+    "title": "Chapter 4:Introduction to Statistical Inference",
+    "section": "Statistical Inference",
+    "text": "Statistical Inference\n\n\nWhenever we use sample data to make statements about a population (i.e., do inference):\n\nThe sample mean \\(\\bar x\\) is a single draw from a random variable \\(\\bar X\\). It will never be exactly equal to \\(\\mu\\) unless you measure every single leaf.\nEach sample yields a different \\(\\bar x\\). This is called sampling error.\nTherefore, there is uncertainty in our estimate of \\(\\mu\\).\n\n\n\n\n\nThe variability of the sample means from sample to sample, \\(\\text{Var}(\\bar X)\\), depends on two things: the variability of the population values, \\(\\text{Var}(x)\\), and the size of the sample, \\(n\\).\nThe variability of the sample estimate of a parameter is usually expressed as a standard error, which is simply the theoretical standard deviation of \\(\\bar X\\) from sample to sample."
+  },
+  {
+    "objectID": "slides/Chapter04.html#quetelets-dataset",
+    "href": "slides/Chapter04.html#quetelets-dataset",
+    "title": "Chapter 4:Introduction to Statistical Inference",
+    "section": "Quetelet’s dataset",
+    "text": "Quetelet’s dataset\n\n\nIn 1846, a Belgian scholar Adolphe Quetelet published an analysis of the chest sizes of a full population of 5,738 Scottish soldiers.\nThe distribution of the measurements (in inches) in his database has a mean of \\(\\mu\\) = 39.83 inches, a standard deviation of \\(\\sigma\\) = 2.05 inches, and is well approximated by a normal distribution.\n\n\n\n\nAdolphe Quetelet1796-1874\n\n\n\n\n\n\nqd &lt;- tibble(\n  Chest = 33:48, \n  Count = c(3, 18, 81, 185, 420, 749, 1073, 1079, \n            934, 658, 370, 92, 50, 21, 4, 1),\n  Prob = Count / sum(Count)\n  )\n\nqd |&gt; \n  ggplot() +\n  aes(x = Chest, y = Count) +\n  geom_col() +\n  xlab(\"\") + ylab(\"\") +\n  ggtitle(\"Chest circumferences of Scottish soldiers\")"
+  },
+  {
+    "objectID": "slides/Chapter04.html#quetelets-dataset-1",
+    "href": "slides/Chapter04.html#quetelets-dataset-1",
+    "title": "Chapter 4:Introduction to Statistical Inference",
+    "section": "Quetelet’s dataset",
+    "text": "Quetelet’s dataset\nEvery soldier was measured so we can treat this as the population, and \\(\\mu\\) = 39.83 and \\(\\sigma\\) = 2.05 as population parameters. Let’s take some samples of size \\(n\\) = 6 from this population.\n\n# Convert to a long vector of values\nqd_long &lt;- rep(qd$Chest, qd$Count)\n\n\n\n# A single sample\nsample(qd_long, size = 6)\n\n[1] 42 40 37 40 39 42\n\n\n\n\n\n# Ten samples\nmap(1:7, ~ sample(qd_long, size = 6))\n\n[[1]]\n[1] 40 39 39 42 39 38\n\n[[2]]\n[1] 39 39 41 41 38 41\n\n[[3]]\n[1] 40 40 39 38 43 42\n\n[[4]]\n[1] 38 40 44 43 40 38\n\n[[5]]\n[1] 43 40 40 42 39 39\n\n[[6]]\n[1] 39 43 42 40 35 38\n\n[[7]]\n[1] 40 40 38 42 36 41"
+  },
+  {
+    "objectID": "slides/Chapter04.html#sampling-variation",
+    "href": "slides/Chapter04.html#sampling-variation",
+    "title": "Chapter 4:Introduction to Statistical Inference",
+    "section": "Sampling Variation",
+    "text": "Sampling Variation"
+  },
+  {
+    "objectID": "slides/Chapter04.html#quetelets-dataset-2",
+    "href": "slides/Chapter04.html#quetelets-dataset-2",
+    "title": "Chapter 4:Introduction to Statistical Inference",
+    "section": "Quetelet’s dataset",
+    "text": "Quetelet’s dataset\nEvery soldier was measured so we can treat this as the population, and \\(\\mu\\) = 39.83 and \\(\\sigma\\) = 2.05 as population parameters. Let’s take some samples of size \\(n\\) = 6 from this population.\n\n# Convert to a long vector of values\nqd_long &lt;- rep(qd$Chest, qd$Count)\n\n\n\n# Put ten samples in a tibble\nq_samples &lt;- tibble( sample = as_factor(1:10) ) |&gt; \n  mutate( \n    values = map(sample, ~ sample(qd_long, size = 6)) \n    ) |&gt; \n  unnest()\n\nhead(q_samples, 15)\n\n# A tibble: 15 × 2\n   sample values\n   &lt;fct&gt;   &lt;int&gt;\n 1 1          36\n 2 1          38\n 3 1          43\n 4 1          41\n 5 1          41\n 6 1          41\n 7 2          43\n 8 2          40\n 9 2          38\n10 2          40\n11 2          41\n12 2          39\n13 3          38\n14 3          45\n15 3          37"
+  },
+  {
+    "objectID": "slides/Chapter04.html#quetelets-dataset-3",
+    "href": "slides/Chapter04.html#quetelets-dataset-3",
+    "title": "Chapter 4:Introduction to Statistical Inference",
+    "section": "Quetelet’s dataset",
+    "text": "Quetelet’s dataset\nEvery soldier was measured so we can treat this as the population, and \\(\\mu\\) = 39.83 and \\(\\sigma\\) = 2.05 as population parameters. Let’s take some samples of size \\(n\\) = 6 from this population.\n\n# Convert to a long vector of values\nqd_long &lt;- rep(qd$Chest, qd$Count)\n\n\n# Put ten samples in a tibble\nq_samples &lt;- tibble( sample = as_factor(1:10) ) |&gt; \n  mutate( \n    values = map(sample, ~ sample(qd_long, size = 6)) \n    ) |&gt; \n  unnest()\n\n\n\n# Calculate means of each sample\nsample_means &lt;- q_samples |&gt; group_by(sample) |&gt; \n  summarise(mean = mean(values))\n\nsample_means\n\n# A tibble: 10 × 2\n   sample  mean\n   &lt;fct&gt;  &lt;dbl&gt;\n 1 1       40.5\n 2 2       39.8\n 3 3       41.3\n 4 4       41.7\n 5 5       40.7\n 6 6       41  \n 7 7       40.2\n 8 8       39.2\n 9 9       40  \n10 10      38.5"
+  },
+  {
+    "objectID": "slides/Chapter04.html#quetelets-dataset-4",
+    "href": "slides/Chapter04.html#quetelets-dataset-4",
+    "title": "Chapter 4:Introduction to Statistical Inference",
+    "section": "Quetelet’s dataset",
+    "text": "Quetelet’s dataset\n\n\n\n# Make a function to do it all and plot\nplot_samples &lt;- function(dat = qd_long,\n                         no_samples = 12,\n                         sample_size = 6) {\n\n  # Put samples in a tibble\n  q_samples &lt;- tibble( \n    sample = as_factor(1:no_samples),\n    values = map(sample, ~ sample(dat, size = sample_size))\n    ) |&gt; unnest()\n  \n  # Calculate means of each sample\n  sample_means &lt;- q_samples |&gt; group_by(sample) |&gt; \n    summarise(mean = mean(values))\n  \n  ggplot() + \n    xlim(min(dat), max(dat)) +\n    geom_vline(xintercept = mean(dat), alpha = .4) +\n    geom_jitter(\n      data = q_samples,\n      mapping = aes(y = sample, x = values),\n      width = 0, height = 0.1, alpha = .8\n      ) + \n    geom_point(\n      data = sample_means,\n      mapping = aes(y = sample, x = mean),\n      shape = 15, size = 3, \n      colour = \"dark orange\"\n      ) +\n    ggtitle(paste(\"Sample size =\", sample_size))\n}\n\n\n\nplot_samples(sample_size = 6)"
+  },
+  {
+    "objectID": "slides/Chapter04.html#quetelets-dataset-5",
+    "href": "slides/Chapter04.html#quetelets-dataset-5",
+    "title": "Chapter 4:Introduction to Statistical Inference",
+    "section": "Quetelet’s dataset",
+    "text": "Quetelet’s dataset\nEvery soldier was measured so we can treat this as the population, and \\(\\mu\\) = 39.8 and \\(\\sigma\\) = 2.05 as population parameters. Let’s take some samples of size \\(n\\) = 6 from this population.\n\n\nggplot() +\n  geom_jitter(\n    data = q_samples,\n    mapping = aes(x = sample, y = values),\n    width = 0.05, height = 0\n    ) + \n  geom_point(\n    data = sample_means,\n    mapping = aes(x = sample, y = mean),\n    shape = 15, size = 3,\n    colour = \"dark orange\"\n    ) + \n  coord_flip()"
+  },
+  {
+    "objectID": "slides/Chapter04.html#sample-means-and-sample-sizes",
+    "href": "slides/Chapter04.html#sample-means-and-sample-sizes",
+    "title": "Chapter 4:Introduction to Statistical Inference",
+    "section": "Sample means and sample sizes",
+    "text": "Sample means and sample sizes\n\n\nLet’s compare the distribution of means for different sample sizes.\n\nplot_samples(sample_size = 3)\nplot_samples(sample_size = 5)\nplot_samples(sample_size = 10)\nplot_samples(sample_size = 20)\nplot_samples(sample_size = 50)\nplot_samples(sample_size = 100)\nplot_samples(sample_size = 200)\n\n\n\n\n\n\n\n\n\n\n\n\n\nThe larger the \\(n\\), the less the sample means vary."
+  },
+  {
+    "objectID": "slides/Chapter04.html#standard-error",
+    "href": "slides/Chapter04.html#standard-error",
+    "title": "Chapter 4:Introduction to Statistical Inference",
+    "section": "Standard error",
+    "text": "Standard error\nIf is distributed as a normal random variable with mean \\(\\mu\\) and variance \\(\\sigma^2\\),\n\\[X \\sim \\text{Normal}(\\mu, \\sigma)\\]\nthen sample means of size \\(n\\) are distributed as\n\\[\\bar X \\sim \\text{Normal}(\\mu_\\bar{X} = \\mu, \\sigma_\\bar{X} = \\sigma/\\sqrt{n})\\] \\(\\text{SE}(\\bar{X}) = \\sigma_\\bar{X}= \\sigma/\\sqrt{n})\\) is known as the standard error of the sample mean.\nMore generally, a standard error is the standard deviation of an estimated parameter over \\(\\infty\\) theoretical samples.\nAccording to the Central Limit Theorem (CLT), raw \\(X\\) values don’t have to be normally distributed for the sample means to be normally distributed (for any decent sample size)!"
+  },
+  {
+    "objectID": "slides/Chapter04.html#standard-error-of-means-for-samples-of-scottish-soldiers",
+    "href": "slides/Chapter04.html#standard-error-of-means-for-samples-of-scottish-soldiers",
+    "title": "Chapter 4:Introduction to Statistical Inference",
+    "section": "Standard error of means for samples of Scottish soldiers",
+    "text": "Standard error of means for samples of Scottish soldiers\nIf Quetelet’s dataset of chest circumferences is distributed as \\(\\text{N}(\\mu=39.8, \\sigma=2.05)\\), then how variable are the means of samples of size \\(n\\) = 6?\n\\[\n\\begin{aligned}\nSE(\\bar{X}_{n=6})&=\\sigma/\\sqrt{n} \\\\\n&=2.05/\\sqrt{6} \\\\\n&=0.8369\n\\end{aligned}\n\\] So sample means of size \\(n\\) = 6 would be distributed as \\(\\bar{X}_{n=6} \\sim \\text{N}(\\mu=39.8, \\sigma=0.8369)\\)."
+  },
+  {
+    "objectID": "slides/Chapter04.html#standard-error-of-means-for-samples-of-scottish-soldiers-1",
+    "href": "slides/Chapter04.html#standard-error-of-means-for-samples-of-scottish-soldiers-1",
+    "title": "Chapter 4:Introduction to Statistical Inference",
+    "section": "Standard error of means for samples of Scottish soldiers",
+    "text": "Standard error of means for samples of Scottish soldiers"
+  },
+  {
+    "objectID": "slides/Chapter04.html#distribution-of-means-for-samples-of-scottish-soldiers",
+    "href": "slides/Chapter04.html#distribution-of-means-for-samples-of-scottish-soldiers",
+    "title": "Chapter 4:Introduction to Statistical Inference",
+    "section": "Distribution of means for samples of Scottish soldiers",
+    "text": "Distribution of means for samples of Scottish soldiers"
+  },
+  {
+    "objectID": "slides/Chapter04.html#estimating-the-distribution-of-sample-means-from-data",
+    "href": "slides/Chapter04.html#estimating-the-distribution-of-sample-means-from-data",
+    "title": "Chapter 4:Introduction to Statistical Inference",
+    "section": "Estimating the distribution of sample means from data",
+    "text": "Estimating the distribution of sample means from data\n\n\nIt’s all very well deriving the distribution of sample means when we know the population parameters (\\(\\mu\\) and \\(\\sigma\\)) but in most cases we only have our one sample.\nWe don’t know any of the population parameters. We have to estimate the population mean (usually denoted \\(\\hat\\mu\\) or \\(\\bar x\\)) and estimate of the population standard deviation (usually denoted \\(\\hat\\sigma\\) or \\(s\\)) from the sample data.\nThis additional uncertainty complicates things a bit. In fact, we can’t even use the normal distribution any more!"
+  },
+  {
+    "objectID": "slides/Chapter04.html#quetelets-chests-standard-error-of-means-of-samples",
+    "href": "slides/Chapter04.html#quetelets-chests-standard-error-of-means-of-samples",
+    "title": "Chapter 4:Introduction to Statistical Inference",
+    "section": "Quetelet’s chests: Standard error of means of samples",
+    "text": "Quetelet’s chests: Standard error of means of samples\nIf Quetelet’s chest circumferences are distributed as \\(X \\sim \\text{N}(\\mu=39.83, \\sigma=2.05)\\), then how variable are the means of samples of size \\(n\\) = 6?\n\\[\n\\begin{aligned}\nSE(\\bar{X}_{n=6})&=\\sigma/\\sqrt{n} \\\\\n&=2.05/\\sqrt{6} \\\\\n&=0.8369\n\\end{aligned}\n\\] Sample means of size \\(n\\) = 6 would be distributed as\n\\(\\bar{X}_{n=6} \\sim \\text{N}(\\mu=39.83, \\sigma=0.8369)\\)"
+  },
+  {
+    "objectID": "slides/Chapter04.html#quetelets-chests-distribution-of-means-of-samples",
+    "href": "slides/Chapter04.html#quetelets-chests-distribution-of-means-of-samples",
+    "title": "Chapter 4:Introduction to Statistical Inference",
+    "section": "Quetelet’s chests: Distribution of means of samples",
+    "text": "Quetelet’s chests: Distribution of means of samples"
+  },
+  {
+    "objectID": "slides/Chapter04.html#confidence-intervals",
+    "href": "slides/Chapter04.html#confidence-intervals",
+    "title": "Chapter 4:Introduction to Statistical Inference",
+    "section": "Confidence intervals",
+    "text": "Confidence intervals\n\n\nAnother common way of expressing uncertainty when making statistical inferences is to present:\n\na point estimate (e.g., the sample mean) and\na confidence interval around that estimate.\n\nA confidence interval gives an indication of the sampling error.\nA 95% confidence interval is constructed so that intervals from 95% of samples will contain the true population parameter.\nIn reality the interval either contains the true value or not, so you must not interpret a confidence interval as “there’s a 95% probability that the interval contains the true parameter”.\nWe can say:\n\n“95% of so-constructed intervals will contain the true value of the parameter” or\n“with 95% confidence, the interval contains the true value of the parameter”."
+  },
+  {
+    "objectID": "slides/Chapter04.html#confidence-intervals-1",
+    "href": "slides/Chapter04.html#confidence-intervals-1",
+    "title": "Chapter 4:Introduction to Statistical Inference",
+    "section": "Confidence intervals",
+    "text": "Confidence intervals\n\n\nBecause we know the population parameters for the Quetelet dataset, we can calculate were 95% of sample means will lie for any particular sample size.\nRecall that, for a normal distribution, 95% of values lie between \\(\\mu \\pm 1.96\\times\\sigma\\)\n(i.e., \\(\\mu - 1.96\\times\\sigma\\) and \\(\\mu + 1.96\\times\\sigma\\)).\nIt follows that 95% of means of samples of size \\(n\\) will lie within \\(\\mu \\pm 1.96 \\times \\sigma/\\sqrt{n}\\).\nFor example, for samples of size 6 from the Quetelet dataset, 95% of means will lie within \\(39.83 \\pm 1.96\\times 2.05 / \\sqrt 6\\),\nso \\(\\{ 37.02 , 42.64\\}\\)."
+  },
+  {
+    "objectID": "slides/Chapter04.html#the-t-distribution",
+    "href": "slides/Chapter04.html#the-t-distribution",
+    "title": "Chapter 4:Introduction to Statistical Inference",
+    "section": "The t distribution",
+    "text": "The t distribution\n\n\n\nIntroducing William Sealy Gosset, who described the t distribution after working with random numbers.\nGosset was a chemist and mathematician who worked for the Guinness brewery in Dublin.\nGuinness forbade anyone from publishing under their own names so that competing breweries wouldn’t know what they were up to, so he published his discovery in 1908 under the penname “Student”. Student’s identity was only revealed when he died. It is therefore often called “Student’s t distribution”.\n\n\n\n\n\nWillam Sealy Gosset1876-1937"
+  },
+  {
+    "objectID": "slides/Chapter04.html#the-t-distribution-1",
+    "href": "slides/Chapter04.html#the-t-distribution-1",
+    "title": "Chapter 4:Introduction to Statistical Inference",
+    "section": "The t distribution",
+    "text": "The t distribution\n\nThe t distribution is like the standard normal. It is bell-shaped and symmetric with mean = 0, but it has fatter tails (greater uncertainty) due to the fact that we do not know \\(\\sigma\\); we have to estimate it.\nThe t distribution is not just a single distribution. It is really an entire series of distributions which is indexed by something called the “degrees of freedom” (or \\(df\\)).\n\n\n\n\nAs \\(df \\rightarrow \\infty\\), \\(t \\rightarrow Z\\).\n\n\np &lt;- expand_grid(\n  df = c(2, 5, Inf),\n  x = seq(-4, 4, by = .01)\n  ) |&gt; \n  mutate(\n    Density = dt(x = x, df = df),\n    `degrees of freedom` = as_factor(df)\n  ) |&gt; \n  ggplot() +\n  aes(x = x, y = Density, \n      group = `degrees of freedom`, \n      colour = `degrees of freedom`) +\n  geom_line()"
+  },
+  {
+    "objectID": "slides/Chapter04.html#the-t-distribution-2",
+    "href": "slides/Chapter04.html#the-t-distribution-2",
+    "title": "Chapter 4:Introduction to Statistical Inference",
+    "section": "The t distribution",
+    "text": "The t distribution\nFor a sample of size \\(n\\), if\n\n\\(X\\) is a normal random variable with mean \\(\\mu\\),\n\\(\\bar X\\) is the sample mean, and\n\\(s\\) is the sample standard deviation,\n\nthen the variable:\n\\[\nT = \\frac{\\bar X - \\mu} {s/\\sqrt{n}}\n\\]\nis distributed as a \\(t\\) distribution with \\((n – 1)\\) degrees of freedom."
+  },
+  {
+    "objectID": "slides/Chapter04.html#confidence-intervals-and-the-t-distribution",
+    "href": "slides/Chapter04.html#confidence-intervals-and-the-t-distribution",
+    "title": "Chapter 4:Introduction to Statistical Inference",
+    "section": "Confidence intervals and the t distribution",
+    "text": "Confidence intervals and the t distribution\nThe process of using sample data to try and make useful statements about an unknown parameter, \\(\\theta\\), is called statistical inference.\nA confidence interval for the true value of a parameter is often obtained by:\n\\[\n\\hat \\theta \\pm t \\times \\text{SE}(\\hat \\theta)\n\\] where \\(\\hat \\theta\\) is the sample estimate of \\(\\theta\\).\nThe piece that is being added and subtracted, \\(t \\times \\text{SE}(\\hat \\theta)\\), is often called the margin of error."
+  },
+  {
+    "objectID": "slides/Chapter04.html#confidence-intervals-and-the-t-distribution-1",
+    "href": "slides/Chapter04.html#confidence-intervals-and-the-t-distribution-1",
+    "title": "Chapter 4:Introduction to Statistical Inference",
+    "section": "Confidence intervals and the t distribution",
+    "text": "Confidence intervals and the t distribution"
+  },
+  {
+    "objectID": "slides/Chapter04.html#t-as-a-test-statistic",
+    "href": "slides/Chapter04.html#t-as-a-test-statistic",
+    "title": "Chapter 4:Introduction to Statistical Inference",
+    "section": "t as a test statistic",
+    "text": "t as a test statistic\nThis method can be used when the estimator \\(\\hat\\theta\\) is approximately normally distributed and\n\\[\n\\frac{\\hat\\theta - \\theta} {\\text{SE}(\\hat \\theta)}\n\\]\nhas approximately a Student’s t distribution.\nThis paves the way for hypothesis testing for specific values of \\(\\theta\\). Many of the methods you will learn in this course are based on this general rule."
+  },
+  {
+    "objectID": "slides/Chapter04.html#confidence-intervals-for-a-sample-mean",
+    "href": "slides/Chapter04.html#confidence-intervals-for-a-sample-mean",
+    "title": "Chapter 4:Introduction to Statistical Inference",
+    "section": "Confidence intervals for a sample mean",
+    "text": "Confidence intervals for a sample mean\nWe can calculate a 95% confidence interval for a sample mean with the following information:\n\n\nsample mean \\(\\bar x\\),\nsample standard deviation \\(s\\),\nthe sample size \\(n\\), and\nthe 0.025th quantile of the \\(t\\) distribution with degrees of freedom \\(df=n-1\\).\n\n\nWith a sample of size \\(n\\) = 6 from the Quetelet dataset.\n\nn1 &lt;- 6; df1 &lt;- n1-1\n( dq1 &lt;- sample(qd_long, size = n1) )\n\n[1] 39 42 38 36 40 38\n\n( mean1 &lt;- mean(dq1) )\n\n[1] 38.83333\n\n( sd1 &lt;- sd(dq1) )\n\n[1] 2.041241\n\n( t1 &lt;- qt(c(0.025, 0.975), df = df1) )\n\n[1] -2.570582  2.570582\n\nmean1 + t1 * sd1 / sqrt(n1)\n\n[1] 36.69118 40.97548"
+  },
+  {
+    "objectID": "slides/Chapter04.html#confidence-intervals-for-a-sample-mean-1",
+    "href": "slides/Chapter04.html#confidence-intervals-for-a-sample-mean-1",
+    "title": "Chapter 4:Introduction to Statistical Inference",
+    "section": "Confidence intervals for a sample mean",
+    "text": "Confidence intervals for a sample mean\nWe can calculate a 95% confidence interval for a sample mean with the following information:\n\n\nsample mean \\(\\bar x\\),\nsample standard deviation \\(s\\),\nthe sample size \\(n\\), and\nthe 0.025th quantile of the \\(t\\) distribution with degrees of freedom \\(df=n-1\\).\n\n\nOr, more simply…\n\nn1 &lt;- 6; df1 &lt;- n1-1\n( dq1 &lt;- sample(qd_long, size = n1) )\n\n[1] 43 43 41 40 38 40\n\nt.test(dq1)\n\n\n    One Sample t-test\n\ndata:  dq1\nt = 51.536, df = 5, p-value = 5.2e-08\nalternative hypothesis: true mean is not equal to 0\n95 percent confidence interval:\n 38.79660 42.87007\nsample estimates:\nmean of x \n 40.83333"
+  },
+  {
+    "objectID": "slides/Chapter04.html#confidence-intervals-for-a-sample-mean-2",
+    "href": "slides/Chapter04.html#confidence-intervals-for-a-sample-mean-2",
+    "title": "Chapter 4:Introduction to Statistical Inference",
+    "section": "Confidence intervals for a sample mean",
+    "text": "Confidence intervals for a sample mean"
+  },
+  {
+    "objectID": "slides/Chapter04.html#confidence-intervals-for-sample-means",
+    "href": "slides/Chapter04.html#confidence-intervals-for-sample-means",
+    "title": "Chapter 4:Introduction to Statistical Inference",
+    "section": "Confidence intervals for sample means",
+    "text": "Confidence intervals for sample means"
   }
 ]

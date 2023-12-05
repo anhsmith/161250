@@ -1,0 +1,18 @@
+---
+title: "161250 Slides"
+format:
+  html:
+    page-layout: full
+listing:
+  - id: slide-cards
+    contents: slides
+    type: grid
+    fields: [image, title]
+    grid-columns: 4
+    sort:
+      - "title"
+---
+
+:::{#slide-cards}
+
+:::

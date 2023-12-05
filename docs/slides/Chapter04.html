@@ -396,19 +396,532 @@
 </div>
 
 </section>
-<section id="statistical-inference" class="slide level2">
+<section>
+<section id="statistical-inference" class="title-slide slide level1 background-black center">
+<h1>Statistical Inference</h1>
+<blockquote>
+<p>“A statistical analysis, properly conducted, is a delicate dissection of uncertainties, a surgery of suppositions.”</p>
+<p>— M.J. Moroney</p>
+</blockquote>
+</section>
+<section id="statistical-inference-1" class="slide level2">
 <h2>Statistical Inference</h2>
 <div class="columns">
 <div class="column" style="width:65%;">
-<p>The term <em>statistical inference</em> means that we are making estimates and/or claims about the population of interest based on sample data.</p>
-<p>In other words, can we generalise the patterns seen in the sample data or not is the issue.</p>
-<p>Recall that the the variability sample data depends on the population variability as well as the size of the sample.</p>
-<p>So sample estimates are affected by the size of the sample in particular.</p>
-<p>Confidence intervals and test of hypotheses are popular tools for statistical inference.</p>
+<p>The term <em>statistical inference</em> means that we are using properties of a sample to make statements about the population from which the sample was drawn.</p>
+<p>For example, say you wanted to know the mean length of the leaves on a tree (<span class="math inline">\(\mu\)</span>). You wouldn’t want to (nor need to) measure every single leaf! You would take a random sample of leaves and measure their lengths (<span class="math inline">\(x_i\)</span>), calculate the sample mean (<span class="math inline">\(\bar x\)</span>), and use <span class="math inline">\(\bar x\)</span> as an estimate of <span class="math inline">\(\mu\)</span>.</p>
 </div><div class="column" style="width:35%;">
 <p><img data-src="img/sampling_variation2.gif"></p>
 </div>
 </div>
+</section>
+<section id="statistical-inference-2" class="slide level2">
+<h2>Statistical Inference</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p>Whenever we use sample data to make statements about a population (i.e., do inference):</p>
+<ul>
+<li>The sample mean <span class="math inline">\(\bar x\)</span> is a single draw from a random variable <span class="math inline">\(\bar X\)</span>. It will never be exactly equal to <span class="math inline">\(\mu\)</span> unless you measure every single leaf.</li>
+<li>Each sample yields a different <span class="math inline">\(\bar x\)</span>. This is called <strong><em>sampling error</em></strong>.</li>
+<li>Therefore, there is <strong><em>uncertainty</em></strong> in our estimate of <span class="math inline">\(\mu\)</span>.</li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p><img data-src="img/inference.png"></p>
+</div>
+</div>
+<p>The variability of the sample means from sample to sample, <span class="math inline">\(\text{Var}(\bar X)\)</span>, depends on two things: the variability of the population values, <span class="math inline">\(\text{Var}(x)\)</span>, and the size of the sample, <span class="math inline">\(n\)</span>.</p>
+<p>The variability of the sample estimate of a parameter is usually expressed as a <strong><em>standard error</em></strong>, which is simply the theoretical standard deviation of <span class="math inline">\(\bar X\)</span> from sample to sample.</p>
+</section>
+<section id="sampling-variation" class="slide level2">
+<h2>Sampling Variation</h2>
+
+<img data-src="img/samp_dist.gif" class="r-stretch"></section>
+<section id="quetelets-dataset" class="slide level2">
+<h2>Quetelet’s dataset</h2>
+<div class="columns">
+<div class="column" style="width:70%;">
+<p>In 1846, a Belgian scholar Adolphe Quetelet published an analysis of the chest sizes of a full population of 5,738 Scottish soldiers.</p>
+<p>The distribution of the measurements (in inches) in his database has a mean of <span class="math inline">\(\mu\)</span> = 39.83 inches, a standard deviation of <span class="math inline">\(\sigma\)</span> = 2.05 inches, and is well approximated by a normal distribution.</p>
+</div><div class="column" style="width:30%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/quetelet_face.jpg"></p>
+<figcaption>Adolphe Quetelet<br>1796-1874</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell columns column-output-location" data-layout-align="center">
+<div class="column">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>qd <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb1-2"><a href="#cb1-2"></a>  <span class="at">Chest =</span> <span class="dv">33</span><span class="sc">:</span><span class="dv">48</span>, </span>
+<span id="cb1-3"><a href="#cb1-3"></a>  <span class="at">Count =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">18</span>, <span class="dv">81</span>, <span class="dv">185</span>, <span class="dv">420</span>, <span class="dv">749</span>, <span class="dv">1073</span>, <span class="dv">1079</span>, </span>
+<span id="cb1-4"><a href="#cb1-4"></a>            <span class="dv">934</span>, <span class="dv">658</span>, <span class="dv">370</span>, <span class="dv">92</span>, <span class="dv">50</span>, <span class="dv">21</span>, <span class="dv">4</span>, <span class="dv">1</span>),</span>
+<span id="cb1-5"><a href="#cb1-5"></a>  <span class="at">Prob =</span> Count <span class="sc">/</span> <span class="fu">sum</span>(Count)</span>
+<span id="cb1-6"><a href="#cb1-6"></a>  )</span>
+<span id="cb1-7"><a href="#cb1-7"></a></span>
+<span id="cb1-8"><a href="#cb1-8"></a>qd <span class="sc">|&gt;</span> </span>
+<span id="cb1-9"><a href="#cb1-9"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a>  <span class="fu">aes</span>(<span class="at">x =</span> Chest, <span class="at">y =</span> Count) <span class="sc">+</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a>  <span class="fu">ggtitle</span>(<span class="st">"Chest circumferences of Scottish soldiers"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Chapter04_files/figure-revealjs/unnamed-chunk-1-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="quetelets-dataset-1" class="slide level2">
+<h2>Quetelet’s dataset</h2>
+<p>Every soldier was measured so we can treat this as the population, and <span class="math inline">\(\mu\)</span> = 39.83 and <span class="math inline">\(\sigma\)</span> = 2.05 as population parameters. Let’s take some samples of size <span class="math inline">\(n\)</span> = 6 from this population.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Convert to a long vector of values</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>qd_long <span class="ot">&lt;-</span> <span class="fu">rep</span>(qd<span class="sc">$</span>Chest, qd<span class="sc">$</span>Count)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="fragment">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># A single sample</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">sample</span>(qd_long, <span class="at">size =</span> <span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 42 40 37 40 39 42</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Ten samples</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">map</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>, <span class="sc">~</span> <span class="fu">sample</span>(qd_long, <span class="at">size =</span> <span class="dv">6</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1] 40 39 39 42 39 38
+
+[[2]]
+[1] 39 39 41 41 38 41
+
+[[3]]
+[1] 40 40 39 38 43 42
+
+[[4]]
+[1] 38 40 44 43 40 38
+
+[[5]]
+[1] 43 40 40 42 39 39
+
+[[6]]
+[1] 39 43 42 40 35 38
+
+[[7]]
+[1] 40 40 38 42 36 41</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="quetelets-dataset-2" class="slide level2">
+<h2>Quetelet’s dataset</h2>
+<p>Every soldier was measured so we can treat this as the population, and <span class="math inline">\(\mu\)</span> = 39.83 and <span class="math inline">\(\sigma\)</span> = 2.05 as population parameters. Let’s take some samples of size <span class="math inline">\(n\)</span> = 6 from this population.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Convert to a long vector of values</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>qd_long <span class="ot">&lt;-</span> <span class="fu">rep</span>(qd<span class="sc">$</span>Chest, qd<span class="sc">$</span>Count)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="fragment">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Put ten samples in a tibble</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>q_samples <span class="ot">&lt;-</span> <span class="fu">tibble</span>( <span class="at">sample =</span> <span class="fu">as_factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) ) <span class="sc">|&gt;</span> </span>
+<span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">mutate</span>( </span>
+<span id="cb8-4"><a href="#cb8-4"></a>    <span class="at">values =</span> <span class="fu">map</span>(sample, <span class="sc">~</span> <span class="fu">sample</span>(qd_long, <span class="at">size =</span> <span class="dv">6</span>)) </span>
+<span id="cb8-5"><a href="#cb8-5"></a>    ) <span class="sc">|&gt;</span> </span>
+<span id="cb8-6"><a href="#cb8-6"></a>  <span class="fu">unnest</span>()</span>
+<span id="cb8-7"><a href="#cb8-7"></a></span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="fu">head</span>(q_samples, <span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 15 × 2
+   sample values
+   &lt;fct&gt;   &lt;int&gt;
+ 1 1          36
+ 2 1          38
+ 3 1          43
+ 4 1          41
+ 5 1          41
+ 6 1          41
+ 7 2          43
+ 8 2          40
+ 9 2          38
+10 2          40
+11 2          41
+12 2          39
+13 3          38
+14 3          45
+15 3          37</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="quetelets-dataset-3" class="slide level2">
+<h2>Quetelet’s dataset</h2>
+<p>Every soldier was measured so we can treat this as the population, and <span class="math inline">\(\mu\)</span> = 39.83 and <span class="math inline">\(\sigma\)</span> = 2.05 as population parameters. Let’s take some samples of size <span class="math inline">\(n\)</span> = 6 from this population.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># Convert to a long vector of values</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>qd_long <span class="ot">&lt;-</span> <span class="fu">rep</span>(qd<span class="sc">$</span>Chest, qd<span class="sc">$</span>Count)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Put ten samples in a tibble</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>q_samples <span class="ot">&lt;-</span> <span class="fu">tibble</span>( <span class="at">sample =</span> <span class="fu">as_factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) ) <span class="sc">|&gt;</span> </span>
+<span id="cb11-3"><a href="#cb11-3"></a>  <span class="fu">mutate</span>( </span>
+<span id="cb11-4"><a href="#cb11-4"></a>    <span class="at">values =</span> <span class="fu">map</span>(sample, <span class="sc">~</span> <span class="fu">sample</span>(qd_long, <span class="at">size =</span> <span class="dv">6</span>)) </span>
+<span id="cb11-5"><a href="#cb11-5"></a>    ) <span class="sc">|&gt;</span> </span>
+<span id="cb11-6"><a href="#cb11-6"></a>  <span class="fu">unnest</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="fragment">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># Calculate means of each sample</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>sample_means <span class="ot">&lt;-</span> q_samples <span class="sc">|&gt;</span> <span class="fu">group_by</span>(sample) <span class="sc">|&gt;</span> </span>
+<span id="cb12-3"><a href="#cb12-3"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(values))</span>
+<span id="cb12-4"><a href="#cb12-4"></a></span>
+<span id="cb12-5"><a href="#cb12-5"></a>sample_means</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 2
+   sample  mean
+   &lt;fct&gt;  &lt;dbl&gt;
+ 1 1       40.5
+ 2 2       39.8
+ 3 3       41.3
+ 4 4       41.7
+ 5 5       40.7
+ 6 6       41  
+ 7 7       40.2
+ 8 8       39.2
+ 9 9       40  
+10 10      38.5</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="quetelets-dataset-4" class="slide level2">
+<h2>Quetelet’s dataset</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># Make a function to do it all and plot</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a>plot_samples <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">dat =</span> qd_long,</span>
+<span id="cb14-3"><a href="#cb14-3"></a>                         <span class="at">no_samples =</span> <span class="dv">12</span>,</span>
+<span id="cb14-4"><a href="#cb14-4"></a>                         <span class="at">sample_size =</span> <span class="dv">6</span>) {</span>
+<span id="cb14-5"><a href="#cb14-5"></a></span>
+<span id="cb14-6"><a href="#cb14-6"></a>  <span class="co"># Put samples in a tibble</span></span>
+<span id="cb14-7"><a href="#cb14-7"></a>  q_samples <span class="ot">&lt;-</span> <span class="fu">tibble</span>( </span>
+<span id="cb14-8"><a href="#cb14-8"></a>    <span class="at">sample =</span> <span class="fu">as_factor</span>(<span class="dv">1</span><span class="sc">:</span>no_samples),</span>
+<span id="cb14-9"><a href="#cb14-9"></a>    <span class="at">values =</span> <span class="fu">map</span>(sample, <span class="sc">~</span> <span class="fu">sample</span>(dat, <span class="at">size =</span> sample_size))</span>
+<span id="cb14-10"><a href="#cb14-10"></a>    ) <span class="sc">|&gt;</span> <span class="fu">unnest</span>()</span>
+<span id="cb14-11"><a href="#cb14-11"></a>  </span>
+<span id="cb14-12"><a href="#cb14-12"></a>  <span class="co"># Calculate means of each sample</span></span>
+<span id="cb14-13"><a href="#cb14-13"></a>  sample_means <span class="ot">&lt;-</span> q_samples <span class="sc">|&gt;</span> <span class="fu">group_by</span>(sample) <span class="sc">|&gt;</span> </span>
+<span id="cb14-14"><a href="#cb14-14"></a>    <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(values))</span>
+<span id="cb14-15"><a href="#cb14-15"></a>  </span>
+<span id="cb14-16"><a href="#cb14-16"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb14-17"><a href="#cb14-17"></a>    <span class="fu">xlim</span>(<span class="fu">min</span>(dat), <span class="fu">max</span>(dat)) <span class="sc">+</span></span>
+<span id="cb14-18"><a href="#cb14-18"></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(dat), <span class="at">alpha =</span> .<span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb14-19"><a href="#cb14-19"></a>    <span class="fu">geom_jitter</span>(</span>
+<span id="cb14-20"><a href="#cb14-20"></a>      <span class="at">data =</span> q_samples,</span>
+<span id="cb14-21"><a href="#cb14-21"></a>      <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y =</span> sample, <span class="at">x =</span> values),</span>
+<span id="cb14-22"><a href="#cb14-22"></a>      <span class="at">width =</span> <span class="dv">0</span>, <span class="at">height =</span> <span class="fl">0.1</span>, <span class="at">alpha =</span> .<span class="dv">8</span></span>
+<span id="cb14-23"><a href="#cb14-23"></a>      ) <span class="sc">+</span> </span>
+<span id="cb14-24"><a href="#cb14-24"></a>    <span class="fu">geom_point</span>(</span>
+<span id="cb14-25"><a href="#cb14-25"></a>      <span class="at">data =</span> sample_means,</span>
+<span id="cb14-26"><a href="#cb14-26"></a>      <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y =</span> sample, <span class="at">x =</span> mean),</span>
+<span id="cb14-27"><a href="#cb14-27"></a>      <span class="at">shape =</span> <span class="dv">15</span>, <span class="at">size =</span> <span class="dv">3</span>, </span>
+<span id="cb14-28"><a href="#cb14-28"></a>      <span class="at">colour =</span> <span class="st">"dark orange"</span></span>
+<span id="cb14-29"><a href="#cb14-29"></a>      ) <span class="sc">+</span></span>
+<span id="cb14-30"><a href="#cb14-30"></a>    <span class="fu">ggtitle</span>(<span class="fu">paste</span>(<span class="st">"Sample size ="</span>, sample_size))</span>
+<span id="cb14-31"><a href="#cb14-31"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:45%;">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">plot_samples</span>(<span class="at">sample_size =</span> <span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Chapter04_files/figure-revealjs/unnamed-chunk-11-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sample-means-and-sample-sizes" class="slide level2">
+<h2>Sample means and sample sizes</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p>Let’s compare the distribution of means for different sample sizes.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">plot_samples</span>(<span class="at">sample_size =</span> <span class="dv">3</span>)</span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="fu">plot_samples</span>(<span class="at">sample_size =</span> <span class="dv">5</span>)</span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="fu">plot_samples</span>(<span class="at">sample_size =</span> <span class="dv">10</span>)</span>
+<span id="cb16-4"><a href="#cb16-4"></a><span class="fu">plot_samples</span>(<span class="at">sample_size =</span> <span class="dv">20</span>)</span>
+<span id="cb16-5"><a href="#cb16-5"></a><span class="fu">plot_samples</span>(<span class="at">sample_size =</span> <span class="dv">50</span>)</span>
+<span id="cb16-6"><a href="#cb16-6"></a><span class="fu">plot_samples</span>(<span class="at">sample_size =</span> <span class="dv">100</span>)</span>
+<span id="cb16-7"><a href="#cb16-7"></a><span class="fu">plot_samples</span>(<span class="at">sample_size =</span> <span class="dv">200</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:60%;">
+<div class="cell" data-layout-align="center" data-animation.hook="gifski">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Chapter04_files/figure-revealjs/unnamed-chunk-13-.gif" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>The larger the <span class="math inline">\(n\)</span>, the less the sample means vary.</p>
+</section>
+<section id="standard-error" class="slide level2">
+<h2>Standard error</h2>
+<p>If is distributed as a normal random variable with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>,</p>
+<p><span class="math display">\[X \sim \text{Normal}(\mu, \sigma)\]</span></p>
+<p>then sample means of size <span class="math inline">\(n\)</span> are distributed as</p>
+<p><span class="math display">\[\bar X \sim \text{Normal}(\mu_\bar{X} = \mu, \sigma_\bar{X} = \sigma/\sqrt{n})\]</span> <span class="math inline">\(\text{SE}(\bar{X}) = \sigma_\bar{X}= \sigma/\sqrt{n})\)</span> is known as the <strong><em>standard error of the sample mean</em></strong>.</p>
+<p>More generally, a standard error is the standard deviation of an estimated parameter over <span class="math inline">\(\infty\)</span> theoretical samples.</p>
+<p>According to the Central Limit Theorem (CLT), raw <span class="math inline">\(X\)</span> values don’t have to be normally distributed for the sample means to be normally distributed (for any decent sample size)!</p>
+</section>
+<section id="quetelets-chests-standard-error-of-means-of-samples" class="slide level2">
+<h2>Quetelet’s chests: Standard error of means of samples</h2>
+<p>If Quetelet’s chest circumferences are distributed as <span class="math inline">\(X \sim \text{N}(\mu=39.83, \sigma=2.05)\)</span>, then how variable are the means of samples of size <span class="math inline">\(n\)</span> = 6?</p>
+<p><span class="math display">\[
+\begin{aligned}
+SE(\bar{X}_{n=6})&amp;=\sigma/\sqrt{n} \\
+&amp;=2.05/\sqrt{6} \\
+&amp;=0.8369
+\end{aligned}
+\]</span> Sample means of size <span class="math inline">\(n\)</span> = 6 would be distributed as</p>
+<p><span class="math inline">\(\bar{X}_{n=6} \sim \text{N}(\mu=39.83, \sigma=0.8369)\)</span></p>
+</section>
+<section id="quetelets-chests-distribution-of-means-of-samples" class="slide level2">
+<h2>Quetelet’s chests: Distribution of means of samples</h2>
+
+<img data-src="Chapter04_files/figure-revealjs/unnamed-chunk-14-.gif" width="480" class="r-stretch quarto-figure-center"></section>
+<section id="confidence-intervals" class="slide level2">
+<h2>Confidence intervals</h2>
+<div>
+<ul>
+<li class="fragment"><p>Another common way of expressing uncertainty when making statistical inferences is to present:</p>
+<ul>
+<li class="fragment">a point estimate (e.g., the sample mean) and</li>
+<li class="fragment">a confidence interval around that estimate.</li>
+</ul></li>
+<li class="fragment"><p>A confidence interval gives an indication of the sampling error.</p></li>
+<li class="fragment"><p>A 95% confidence interval is constructed so that <strong><em>intervals from 95% of samples will contain the true population parameter</em></strong>.</p></li>
+<li class="fragment"><p>In reality the interval either contains the true value or not, so you must <strong>not</strong> interpret a confidence interval as “there’s a 95% probability that the interval contains the true parameter”.</p></li>
+<li class="fragment"><p>We can say:</p>
+<ul>
+<li class="fragment">“95% of so-constructed intervals will contain the true value of the parameter” or</li>
+<li class="fragment">“with 95% confidence, the interval contains the true value of the parameter”.</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="confidence-intervals-1" class="slide level2">
+<h2>Confidence intervals</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Because we know the population parameters for the Quetelet dataset, we can calculate were 95% of sample means will lie for any particular sample size.</p>
+<p>Recall that, for a normal distribution, 95% of values lie between <span class="math inline">\(\mu \pm 1.96\times\sigma\)</span><br>
+(i.e., <span class="math inline">\(\mu - 1.96\times\sigma\)</span> and <span class="math inline">\(\mu + 1.96\times\sigma\)</span>).</p>
+<p>It follows that 95% of means of samples of size <span class="math inline">\(n\)</span> will lie within <span class="math inline">\(\mu \pm 1.96 \times \sigma/\sqrt{n}\)</span>.</p>
+<p>For example, for samples of size 6 from the Quetelet dataset, 95% of means will lie within <span class="math inline">\(39.83 \pm 1.96\times 2.05 / \sqrt 6\)</span>,<br>
+so <span class="math inline">\(\{ 37.02 , 42.64\}\)</span>.</p>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Chapter04_files/figure-revealjs/unnamed-chunk-16-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="estimating-the-distribution-of-sample-means-from-data" class="slide level2">
+<h2>Estimating the distribution of sample means from data</h2>
+<div>
+<ul>
+<li class="fragment"><p>It’s all very well deriving the distribution of sample means when we <em>know the population parameters</em> (<span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>) but <em>in most cases we only have our one sample</em>.</p></li>
+<li class="fragment"><p>We don’t know any of the population parameters. We have to <em>estimate</em> the population mean (usually denoted <span class="math inline">\(\hat\mu\)</span> or <span class="math inline">\(\bar x\)</span>) and <em>estimate</em> of the population standard deviation (usually denoted <span class="math inline">\(\hat\sigma\)</span> or <span class="math inline">\(s\)</span>) from the sample data.</p></li>
+<li class="fragment"><p>This additional uncertainty complicates things a bit. In fact, we can’t even use the normal distribution any more!</p></li>
+</ul>
+</div>
+</section>
+<section id="the-t-distribution" class="slide level2">
+<h2>The <em>t</em> distribution</h2>
+<div class="columns">
+<div class="column" style="width:70%;">
+<ul>
+<li><p>Introducing William Sealy Gosset, who described the <em>t</em> distribution after working with random numbers.</p></li>
+<li><p>Gosset was a chemist and mathematician who worked for the Guinness brewery in Dublin.</p></li>
+<li><p>Guinness forbade anyone from publishing under their own names so that competing breweries wouldn’t know what they were up to, so he published his discovery in 1908 under the penname “Student”. Student’s identity was only revealed when he died. It is therefore often called “Student’s <em>t</em> distribution”.</p></li>
+</ul>
+</div><div class="column" style="width:30%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/gosset_1876-1937.jpg"></p>
+<figcaption>Willam Sealy Gosset<br>1876-1937</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="the-t-distribution-1" class="slide level2">
+<h2>The <em>t</em> distribution</h2>
+<ul>
+<li><p>The <em>t</em> distribution is like the standard normal. It is bell-shaped and symmetric with mean = 0, but it has fatter tails (greater uncertainty) due to the fact that we do not <em>know</em> <span class="math inline">\(\sigma\)</span>; we have to <em>estimate</em> it.</p></li>
+<li><p>The <em>t</em> distribution is not just a single distribution. It is really an entire series of distributions which is indexed by something called the “degrees of freedom” (or <span class="math inline">\(df\)</span>).</p></li>
+</ul>
+<div class="columns">
+<div class="column" style="width:40%;">
+<ul>
+<li>As <span class="math inline">\(df \rightarrow \infty\)</span>, <span class="math inline">\(t \rightarrow Z\)</span>.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>p <span class="ot">&lt;-</span> <span class="fu">expand_grid</span>(</span>
+<span id="cb17-2"><a href="#cb17-2"></a>  <span class="at">df =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">5</span>, <span class="cn">Inf</span>),</span>
+<span id="cb17-3"><a href="#cb17-3"></a>  <span class="at">x =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="at">by =</span> .<span class="dv">01</span>)</span>
+<span id="cb17-4"><a href="#cb17-4"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb17-5"><a href="#cb17-5"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb17-6"><a href="#cb17-6"></a>    <span class="at">Density =</span> <span class="fu">dt</span>(<span class="at">x =</span> x, <span class="at">df =</span> df),</span>
+<span id="cb17-7"><a href="#cb17-7"></a>    <span class="st">`</span><span class="at">degrees of freedom</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as_factor</span>(df)</span>
+<span id="cb17-8"><a href="#cb17-8"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb17-9"><a href="#cb17-9"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb17-10"><a href="#cb17-10"></a>  <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> Density, </span>
+<span id="cb17-11"><a href="#cb17-11"></a>      <span class="at">group =</span> <span class="st">`</span><span class="at">degrees of freedom</span><span class="st">`</span>, </span>
+<span id="cb17-12"><a href="#cb17-12"></a>      <span class="at">colour =</span> <span class="st">`</span><span class="at">degrees of freedom</span><span class="st">`</span>) <span class="sc">+</span></span>
+<span id="cb17-13"><a href="#cb17-13"></a>  <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:60%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Chapter04_files/figure-revealjs/unnamed-chunk-18-1.png" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-t-distribution-2" class="slide level2">
+<h2>The <em>t</em> distribution</h2>
+<p>For a sample of size <span class="math inline">\(n\)</span>, if</p>
+<ul>
+<li><span class="math inline">\(X\)</span> is a normal random variable with mean <span class="math inline">\(\mu\)</span>,</li>
+<li><span class="math inline">\(\bar X\)</span> is the sample mean, and</li>
+<li><span class="math inline">\(s\)</span> is the sample standard deviation,</li>
+</ul>
+<p>then the variable:</p>
+<p><span class="math display">\[
+T = \frac{\bar X - \mu} {s/\sqrt{n}}
+\]</span></p>
+<p>is distributed as a <span class="math inline">\(t\)</span> distribution with <span class="math inline">\((n – 1)\)</span> degrees of freedom.</p>
+</section>
+<section id="confidence-intervals-and-the-t-distribution" class="slide level2">
+<h2>Confidence intervals and the <em>t</em> distribution</h2>
+<p>The process of using sample data to try and make useful statements about an unknown parameter, <span class="math inline">\(\theta\)</span>, is called statistical inference.</p>
+<p>A confidence interval for the true value of a parameter is often obtained by:</p>
+<p><span class="math display">\[
+\hat \theta \pm t \times \text{SE}(\hat \theta)
+\]</span> where <span class="math inline">\(\hat \theta\)</span> is the sample estimate of <span class="math inline">\(\theta\)</span>.</p>
+<p>The piece that is being added and subtracted, <span class="math inline">\(t \times \text{SE}(\hat \theta)\)</span>, is often called the <em>margin of error</em>.</p>
+</section>
+<section id="confidence-intervals-for-a-sample-mean" class="slide level2">
+<h2>Confidence intervals for a sample mean</h2>
+<p>We can calculate a 95% confidence interval for a sample mean with the following information:</p>
+<div style="font-size: 75%;">
+<ul>
+<li>sample mean <span class="math inline">\(\bar x\)</span>,</li>
+<li>sample standard deviation <span class="math inline">\(s\)</span>,</li>
+<li>the sample size <span class="math inline">\(n\)</span>, and</li>
+<li>the 0.025th quantile of the <span class="math inline">\(t\)</span> distribution with degrees of freedom <span class="math inline">\(df=n-1\)</span>.</li>
+</ul>
+</div>
+<p>With a sample of size <span class="math inline">\(n\)</span> = 6 from the Quetelet dataset.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>n1 <span class="ot">&lt;-</span> <span class="dv">6</span>; df1 <span class="ot">&lt;-</span> n1<span class="dv">-1</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a>( dq1 <span class="ot">&lt;-</span> <span class="fu">sample</span>(qd_long, <span class="at">size =</span> n1) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 39 42 38 36 40 38</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>( mean1 <span class="ot">&lt;-</span> <span class="fu">mean</span>(dq1) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 38.83333</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>( sd1 <span class="ot">&lt;-</span> <span class="fu">sd</span>(dq1) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.041241</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>( t1 <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>), <span class="at">df =</span> df1) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -2.570582  2.570582</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>mean1 <span class="sc">+</span> t1 <span class="sc">*</span> sd1 <span class="sc">/</span> <span class="fu">sqrt</span>(n1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 36.69118 40.97548</code></pre>
+</div>
+</div>
+</section>
+<section id="confidence-intervals-for-a-sample-mean-1" class="slide level2">
+<h2>Confidence intervals for a sample mean</h2>
+<p>We can calculate a 95% confidence interval for a sample mean with the following information:</p>
+<div style="font-size: 75%;">
+<ul>
+<li>sample mean <span class="math inline">\(\bar x\)</span>,</li>
+<li>sample standard deviation <span class="math inline">\(s\)</span>,</li>
+<li>the sample size <span class="math inline">\(n\)</span>, and</li>
+<li>the 0.025th quantile of the <span class="math inline">\(t\)</span> distribution with degrees of freedom <span class="math inline">\(df=n-1\)</span>.</li>
+</ul>
+</div>
+<p>Or, more simply…</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>n1 <span class="ot">&lt;-</span> <span class="dv">6</span>; df1 <span class="ot">&lt;-</span> n1<span class="dv">-1</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a>( dq1 <span class="ot">&lt;-</span> <span class="fu">sample</span>(qd_long, <span class="at">size =</span> n1) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 43 43 41 40 38 40</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">t.test</span>(dq1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One Sample t-test
+
+data:  dq1
+t = 51.536, df = 5, p-value = 5.2e-08
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 38.79660 42.87007
+sample estimates:
+mean of x 
+ 40.83333 </code></pre>
+</div>
+</div>
+</section>
+<section id="confidence-intervals-for-sample-means" class="slide level2">
+<h2>Confidence intervals for sample means</h2>
+
+<img data-src="Chapter04_files/figure-revealjs/unnamed-chunk-22-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<section id="t-as-a-test-statistic" class="slide level2">
+<h2><em>t</em> as a test statistic</h2>
+<p>This method can be used when the estimator <span class="math inline">\(\hat\theta\)</span> is approximately normally distributed and</p>
+<p><span class="math display">\[
+\frac{\hat\theta - \theta} {\text{SE}(\hat \theta)}
+\]</span></p>
+<p>has approximately a Student’s <em>t</em> distribution.</p>
+<p>This paves the way for hypothesis testing for specific values of <span class="math inline">\(\theta\)</span>. Many of the methods you will learn in this course are based on this general rule.</p>
 </section>
 <section id="normality-tests-and-eda" class="slide level2">
 <h2>Normality tests and EDA</h2>
@@ -448,7 +961,7 @@ alternative hypothesis: two-sided</code></pre>
 <section id="example" class="slide level2">
 <h2>Example</h2>
 
-<img data-src="Chapter04_files/figure-revealjs/unnamed-chunk-2-1.png" width="384" class="r-stretch quarto-figure-center"></section>
+<img data-src="Chapter04_files/figure-revealjs/unnamed-chunk-24-1.png" width="384" class="r-stretch quarto-figure-center"></section>
 <section id="sampling-distributions" class="slide level2">
 <h2>Sampling distributions</h2>
 <p>The term <em>sampling distribution</em> means the distribution of the computed statistic such as the sample mean when sampling is repeated many times.</p>
@@ -485,7 +998,7 @@ alternative hypothesis: two-sided</code></pre>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="Chapter04_files/figure-revealjs/unnamed-chunk-3-1.png" width="384"></p>
+<p><img data-src="Chapter04_files/figure-revealjs/unnamed-chunk-25-1.png" width="384"></p>
 </figure>
 </div>
 </div>
@@ -495,7 +1008,7 @@ alternative hypothesis: two-sided</code></pre>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="Chapter04_files/figure-revealjs/unnamed-chunk-4-1.png" width="384"></p>
+<p><img data-src="Chapter04_files/figure-revealjs/unnamed-chunk-26-1.png" width="384"></p>
 </figure>
 </div>
 </div>
@@ -505,7 +1018,7 @@ alternative hypothesis: two-sided</code></pre>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="Chapter04_files/figure-revealjs/unnamed-chunk-5-1.png" width="384"></p>
+<p><img data-src="Chapter04_files/figure-revealjs/unnamed-chunk-27-1.png" width="384"></p>
 </figure>
 </div>
 </div>
@@ -525,7 +1038,7 @@ alternative hypothesis: two-sided</code></pre>
 </ul></li>
 </ul>
 
-<img data-src="Chapter04_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="Chapter04_files/figure-revealjs/unnamed-chunk-28-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="one-sample-t-test" class="slide level2">
 <h2>One-sample t-test</h2>
 <ul>
@@ -548,7 +1061,7 @@ alternative hypothesis: two-sided</code></pre>
 <p>A hypothesis test has a certain <strong>power</strong> (probability) to reject the null hypothesis when it is false.</p>
 <p>The power of the t test can be evaluated using R for given effect size <span class="math inline">\(\delta\)</span></p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">power.t.test</span>(<span class="at">n =</span> <span class="dv">30</span>, <span class="at">delta =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">sig.level =</span> <span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="fu">power.t.test</span>(<span class="at">n =</span> <span class="dv">30</span>, <span class="at">delta =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">sig.level =</span> <span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
      Two-sample t test power calculation 
@@ -562,7 +1075,7 @@ alternative hypothesis: two-sided</code></pre>
 
 NOTE: n is number in *each* group</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">power.t.test</span>(<span class="at">n =</span> <span class="dv">50</span>, <span class="at">delta =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">sig.level =</span> <span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="fu">power.t.test</span>(<span class="at">n =</span> <span class="dv">50</span>, <span class="at">delta =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">sig.level =</span> <span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
      Two-sample t test power calculation 
@@ -652,7 +1165,7 @@ mean difference
 <li>Can we treat the survey as unbiased?</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">prop.test</span>(<span class="dv">450</span>, <span class="dv">1000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="fu">prop.test</span>(<span class="dv">450</span>, <span class="dv">1000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     1-sample proportions test with continuity correction
@@ -688,9 +1201,9 @@ probability of success
 <h2>Comparing several proportions</h2>
 <p>Fleiss (1981) <em>Statistical methods for rates and proportions</em> data on smokers in four group of patients</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>smokers  <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">83</span>, <span class="dv">90</span>, <span class="dv">129</span>, <span class="dv">70</span> )</span>
-<span id="cb13-2"><a href="#cb13-2"></a>patients <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">86</span>, <span class="dv">93</span>, <span class="dv">136</span>, <span class="dv">82</span> )</span>
-<span id="cb13-3"><a href="#cb13-3"></a><span class="fu">prop.test</span>(smokers, patients)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a>smokers  <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">83</span>, <span class="dv">90</span>, <span class="dv">129</span>, <span class="dv">70</span> )</span>
+<span id="cb44-2"><a href="#cb44-2"></a>patients <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">86</span>, <span class="dv">93</span>, <span class="dv">136</span>, <span class="dv">82</span> )</span>
+<span id="cb44-3"><a href="#cb44-3"></a><span class="fu">prop.test</span>(smokers, patients)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     4-sample test for equality of proportions without continuity correction
@@ -725,7 +1238,7 @@ sample estimates:
 <li>Right skewed distribution is made roughly symmetric using a log transformation for no. of vehicles variable (rangitikei.* dataset)</li>
 </ul>
 
-<img data-src="Chapter04_files/figure-revealjs/unnamed-chunk-13-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="Chapter04_files/figure-revealjs/unnamed-chunk-35-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="a-ladder-of-powers-for-transforming-data" class="slide level2">
 <h2>A Ladder of Powers for Transforming Data</h2>
 <ul>
@@ -803,7 +1316,7 @@ sample estimates:
 <li><p>A simple approach is to plot the distance from the median for points below and above the median.</p></li>
 </ul>
 
-<img data-src="Chapter04_files/figure-revealjs/unnamed-chunk-14-1.png" width="960" class="r-stretch quarto-figure-center"><ul>
+<img data-src="Chapter04_files/figure-revealjs/unnamed-chunk-36-1.png" width="960" class="r-stretch quarto-figure-center"><ul>
 <li><p>(mean-median) measures skew but we can standardise it in 3 ways</p>
 <ul>
 <li>D1 = |mean-median| / std.dev.</li>
@@ -829,7 +1342,7 @@ sample estimates:
 <li>R gives a point estimate of power &amp; the CI.</li>
 </ul>
 
-<img data-src="Chapter04_files/figure-revealjs/unnamed-chunk-16-1.png" width="960" class="r-stretch quarto-figure-center"><ul>
+<img data-src="Chapter04_files/figure-revealjs/unnamed-chunk-38-1.png" width="960" class="r-stretch quarto-figure-center"><ul>
 <li>Focus on the confidence interval for the estimated <span class="math inline">\(\lambda\)</span> and it may be wider</li>
 </ul>
 </section>
@@ -995,7 +1508,7 @@ mean in group 1 mean in group 2
 <section id="another-form-of-test" class="slide level2">
 <h2>Another form of test</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">kruskal.test</span>(rangitikei<span class="sc">$</span>people<span class="sc">~</span>rangitikei<span class="sc">$</span>time)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a><span class="fu">kruskal.test</span>(rangitikei<span class="sc">$</span>people<span class="sc">~</span>rangitikei<span class="sc">$</span>time)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Kruskal-Wallis rank sum test
@@ -1005,7 +1518,7 @@ Kruskal-Wallis chi-squared = 7.2171, df = 1, p-value = 0.007221</code></pre>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">wilcox.test</span>(rangitikei<span class="sc">$</span>people<span class="sc">~</span>rangitikei<span class="sc">$</span>time)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a><span class="fu">wilcox.test</span>(rangitikei<span class="sc">$</span>people<span class="sc">~</span>rangitikei<span class="sc">$</span>time)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Wilcoxon rank sum test with continuity correction
@@ -1021,8 +1534,8 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <p>A permutation (or randomisation) test is based on the idea of randomly permuting the observed data and then answering whether a hypothesis is negated or not.</p>
 <p>One sample hypothesis test example follows:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">library</span>(exactRankTests)</span>
-<span id="cb27-2"><a href="#cb27-2"></a><span class="fu">perm.test</span>(tv<span class="sc">$</span>TELETIME, <span class="at">null.value=</span><span class="dv">1500</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1"></a><span class="fu">library</span>(exactRankTests)</span>
+<span id="cb58-2"><a href="#cb58-2"></a><span class="fu">perm.test</span>(tv<span class="sc">$</span>TELETIME, <span class="at">null.value=</span><span class="dv">1500</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     1-sample Permutation Test
@@ -1037,7 +1550,7 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
 <section id="two-group-comparison" class="slide level2">
 <h2>Two group comparison</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="fu">perm.test</span>(TELETIME<span class="sc">~</span>SEX, <span class="at">distribution =</span><span class="st">'exact'</span>, <span class="at">data=</span>tv)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1"></a><span class="fu">perm.test</span>(TELETIME<span class="sc">~</span>SEX, <span class="at">distribution =</span><span class="st">'exact'</span>, <span class="at">data=</span>tv)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     2-sample Permutation Test
@@ -1049,8 +1562,8 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
 </div>
 <p>Also using a linear model fit (cover later)</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="fu">library</span>(lmPerm)</span>
-<span id="cb31-2"><a href="#cb31-2"></a><span class="fu">summary</span>(<span class="fu">lmp</span>(TELETIME<span class="sc">~</span>SEX, <span class="at">data=</span>tv))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1"></a><span class="fu">library</span>(lmPerm)</span>
+<span id="cb62-2"><a href="#cb62-2"></a><span class="fu">summary</span>(<span class="fu">lmp</span>(TELETIME<span class="sc">~</span>SEX, <span class="at">data=</span>tv))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Settings:  unique SS : numeric variables centered"</code></pre>
 </div>
@@ -1097,9 +1610,9 @@ F-statistic: 0.5255 on 1 and 44 DF,  p-value: 0.4723 </code></pre>
 
 
 <img src="img/L_Color.png" class="slide-logo r-stretch"><div class="footer footer-default">
-<p><a href="https://anhsmith.quarto.pub/161250-data-analysis/slides.html">161250 Data Analysis</a></p>
+<p><a href="../slides.qmd">161250 Data Analysis</a></p>
 </div>
-</section>
+</section></section>
     </div>
   </div>
 

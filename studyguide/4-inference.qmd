@@ -57,7 +57,7 @@ In the fish farm example (@fig-inf), sampling error is the hypothetical variatio
 
 So, when we do our study (i.e., randomly select 10 fish, measure their lengths, and calculate the sample mean), we are drawing one value of the sample mean, $\bar y$, from a random variable, $\bar Y$, which is the distribution of sample means that we *could* hypothetically draw.
 
-Given this random sampling variation, here are some explanations for some commonly used measure of uncertainty:
+Given this random sampling variation, here are some explanations for some commonly used measures of uncertainty:
 
 - A **standard error** is simply the standard deviation of a statistic under repeated sampling–that is, how much it would vary (hypothetically) from sample to sample.
 
@@ -74,7 +74,9 @@ Now, we'll introduce some specific inference methods.
 
 # Tests for normality
 
-Let's say we have some data and we wish to test the idea that the data came from a population that is normally distributed. The null hypothesis is that the population conforms a normal distribution. We calculate a test statistic that quantifies the degree of *departure* of the data from what we'd expect if the null hypothesis were true, and the population was indeed normal. 
+Let's say we have some data and we wish to test the idea that the data came from a population that is normally distributed. The null hypothesis is that the population conforms to a normal distribution. We calculate a test statistic that quantifies the degree of *departure* of the data from what we'd expect if the null hypothesis were true (i.e., the population were indeed normally distributed)[^1].
+
+[^1]: Bear in mind though that no real population of values (except for synthetic ones, simulated by a computer) is normally distributed *in reality*. A variable can only be normally distributed *in theory*. The real world just is what it is. Recall Box's adage: "*All models are wrong, but some are useful*". When we test for a departure of a variable from, say, a normal distribution, we are simply testing whether the normal distribution provides an adequate model for the data. 
 
 If the data look substantially different to a normal distribution, then we will expect the associated test statistic to be large. How large does it have to be before we can reject the idea that the data came from a normal distribution? This question can be answered by calculating a $p$-value for the test statistic. **The _p_-value is the probability of obtaining a test statistic as or more extreme than the one we have calculated** ***if the null hypothesis were true***.
 
@@ -187,7 +189,7 @@ To recapitulate, Normal (or Gaussian) curves are determined by just two numbers,
 
 It is usual to take the measure of location as the mean, denoted by $\mu$, and the measure of spread as the standard deviation, denoted by $\sigma$. If a variable, Y, follows a Normal distribution with mean $\mu$ and standard deviation $\sigma$, we write Y $\sim$ N($\mu$, $\sigma$) where $\sim$ means is *distributed as* (The squiggly symbol $\sim$ is known as *tilde*).
 
-Note, however, that the Normal distribution, like all statistical distributions, is a theoretical concept and no naturally occurring measurement will **exactly** follow a probability distribution model. For one thing, any measurement is finite whereas the Normal curve is continuous in the interval $\left(-\infty ,\infty \right)$. Also, the curve is asymptotic to the $X$-axis so that any range of values of $Y$ however large or small will have a certain probability according to the Normal distribution, but in practice there will be limitations such as that a person's blood pressure must be greater than zero.
+Note, again, that the normal distribution, like all statistical distributions, is a theoretical concept and no naturally occurring measurement will **exactly** follow a probability distribution model. For one thing, any measurement is finite whereas the Normal curve is continuous in the interval $\left(-\infty ,\infty \right)$. Also, the curve is asymptotic to the $X$-axis so that any range of values of $Y$ however large or small will have a certain probability according to the Normal distribution, but in practice there will be limitations such as that a person's blood pressure must be greater than zero.
 
 Suppose we didn't know that $\mu$ = 80 and $\sigma$ = 12. The obvious **estimator** of $\mu$, based solely on the sample, is the sample mean $\bar{y}$, and the obvious estimator of $\sigma$ is the sample standard deviation $S$. Note that by estimator we don't mean the observed value based on the **particular** sample. Rather the word estimator means the mathematical formula or procedure that we use to produce our estimates, namely $\bar{y}={\frac{1}{n}} \sum y$ and $S=\sqrt{{\frac{1}{n-1}} \sum _{i=1}^{n}(y_{i} -\bar{y})^{2} }$.
 
@@ -213,7 +215,7 @@ For these sampling distributions, the sample size acts as the proxy parameter, c
 
 
 The tail quantiles of $t$, $\chi^2$ and $F$ distributions are used for hypothesis tests.  You may like to visit
-https://shiny.massey.ac.nz/kgovinda/demos/demo.critical.values/ for exploring their probability densities and quantiles.
+https://shiny.massey.ac.nz/anhsmith/demos/demo.critical.values/ to explore their probability densities and quantiles.
 
 Sampling distributions of certain statistic such as the sample Range (=Maximum-Minimum) does not exist in a closed form but the quantiles of the distribution can be obtained numerically.
 
@@ -293,7 +295,7 @@ For the TV viewing time data, the sample mean = 1729.28 with (estimated) standar
 ```{r}
 #| echo: true
 #| label: fig-tquant
-#| fig-cap: "Student's t quantiles for CI construction"
+#| fig-cap: "Student's t quantiles for construction of confidence intervals"
 
 curve( dt(x,45), xlim=c(-3.5, 3.5), ylim=c(0, 0.4), ylab="Density")
 lowert=qt(.025, 45)

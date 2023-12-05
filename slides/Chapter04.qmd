@@ -10,7 +10,7 @@ format:
     theme: [default, myquarto.scss]
     slide-number: c/t  
     logo: img/L_Color.png
-    footer: "[161250 Data Analysis](https://anhsmith.quarto.pub/161250-data-analysis/slides.html)"
+    footer: "[161250 Data Analysis](../slides.qmd)"
     styles:
       - revealjs.dark:
         background-color: #222
@@ -38,21 +38,22 @@ library(patchwork)
 theme_set(theme_minimal())
 ```
 
+# Statistical Inference {.background-black}
+
+> “A statistical analysis, properly conducted, is a delicate dissection of uncertainties, a surgery of suppositions.”
+>
+> — M.J. Moroney
+
+
 ## Statistical Inference
 
 ::::{.columns}
 
 :::{.column width="65%"}
 
-The term *statistical inference* means that we are making estimates and/or claims about the population of interest based on sample data.
+The term *statistical inference* means that we are using properties of a sample to make statements about the population from which the sample was drawn. 
 
-In other words, can we generalise the patterns seen in the sample data or not is the issue.
-
-Recall that the the variability sample data depends on the population variability as well as the size of the sample.
-
-So sample estimates are affected by the size of the sample in particular.
-
-Confidence intervals and test of hypotheses are popular tools for statistical inference.
+For example, say you wanted to know the mean length of the leaves on a tree ($\mu$). You wouldn't want to (nor need to) measure every single leaf! You would take a random sample of leaves and measure their lengths ($x_i$), calculate the sample mean ($\bar x$), and use $\bar x$ as an estimate of $\mu$.
 
 :::
 
@@ -63,6 +64,674 @@ Confidence intervals and test of hypotheses are popular tools for statistical in
 :::
 
 ::::
+
+
+## Statistical Inference
+
+::::{.columns}
+
+:::{.column width="60%"}
+
+Whenever we use sample data to make statements about a population (i.e., do inference): 
+
+- The sample mean $\bar x$ is a single draw from a random variable $\bar X$. It will never be exactly equal to $\mu$ unless you measure every single leaf. 
+- Each sample yields a different $\bar x$. This is called ***sampling error***. 
+- Therefore, there is ***uncertainty*** in our estimate of $\mu$.
+
+
+
+:::
+
+:::{.column width="40%"}
+
+![](img/inference.png)
+
+:::
+
+::::
+
+The variability of the sample means from sample to sample, $\text{Var}(\bar X)$, depends on two things: the variability of the population values, $\text{Var}(x)$, and the size of the sample, $n$.
+
+The variability of the sample estimate of a parameter is usually expressed as a ***standard error***, which is simply the theoretical standard deviation of $\bar X$ from sample to sample.
+
+
+## Sampling Variation
+
+![](img/samp_dist.gif)
+
+## Quetelet's dataset
+
+::::{.columns}
+
+:::{.column width="70%"}
+
+In 1846, a Belgian scholar Adolphe Quetelet published an analysis of the chest sizes of a full population of 5,738 Scottish soldiers.
+
+The distribution of the measurements (in inches) in his database has a mean of $\mu$ = 39.83 inches, a standard deviation of $\sigma$ = 2.05 inches, and is well approximated by a normal distribution.
+
+:::
+
+:::{.column width="30%"}
+
+![Adolphe Quetelet<br>1796-1874](img/quetelet_face.jpg)
+:::
+
+::::
+
+```{r}
+#| echo: true
+#| fig-width: 5
+#| fig-height: 3
+#| output-location: column
+
+qd <- tibble(
+  Chest = 33:48, 
+  Count = c(3, 18, 81, 185, 420, 749, 1073, 1079, 
+            934, 658, 370, 92, 50, 21, 4, 1),
+  Prob = Count / sum(Count)
+  )
+
+qd |> 
+  ggplot() +
+  aes(x = Chest, y = Count) +
+  geom_col() +
+  xlab("") + ylab("") +
+  ggtitle("Chest circumferences of Scottish soldiers")
+
+```
+
+
+
+## Quetelet's dataset
+
+Every soldier was measured so we can treat this as the population, and $\mu$ = 39.83 and $\sigma$ = 2.05 as population parameters. Let's take some samples of size $n$ = 6 from this population.
+
+```{r}
+#| echo: true
+# Convert to a long vector of values
+qd_long <- rep(qd$Chest, qd$Count)
+```
+
+::: {.fragment}
+
+```{r}
+#| echo: true
+# A single sample
+sample(qd_long, size = 6)
+```
+
+:::
+
+::: {.fragment}
+
+```{r}
+#| echo: true
+# Ten samples
+map(1:7, ~ sample(qd_long, size = 6))
+```
+
+:::
+
+## Quetelet's dataset
+
+Every soldier was measured so we can treat this as the population, and $\mu$ = 39.83 and $\sigma$ = 2.05 as population parameters. Let's take some samples of size $n$ = 6 from this population.
+
+```{r}
+#| echo: true
+# Convert to a long vector of values
+qd_long <- rep(qd$Chest, qd$Count)
+```
+
+::: {.fragment}
+
+```{r}
+#| echo: true
+# Put ten samples in a tibble
+q_samples <- tibble( sample = as_factor(1:10) ) |> 
+  mutate( 
+    values = map(sample, ~ sample(qd_long, size = 6)) 
+    ) |> 
+  unnest()
+
+head(q_samples, 15)
+```
+
+:::
+
+
+## Quetelet's dataset
+
+Every soldier was measured so we can treat this as the population, and $\mu$ = 39.83 and $\sigma$ = 2.05 as population parameters. Let's take some samples of size $n$ = 6 from this population.
+
+```{r}
+#| echo: true
+# Convert to a long vector of values
+qd_long <- rep(qd$Chest, qd$Count)
+```
+
+```{r}
+#| echo: true
+# Put ten samples in a tibble
+q_samples <- tibble( sample = as_factor(1:10) ) |> 
+  mutate( 
+    values = map(sample, ~ sample(qd_long, size = 6)) 
+    ) |> 
+  unnest()
+
+```
+
+
+::: {.fragment}
+
+```{r}
+#| echo: true
+# Calculate means of each sample
+sample_means <- q_samples |> group_by(sample) |> 
+  summarise(mean = mean(values))
+
+sample_means
+```
+
+:::
+
+## Quetelet's dataset
+
+
+::::{.columns}
+
+:::{.column width="55%"}
+
+```{r}
+#| echo: true
+# Make a function to do it all and plot
+plot_samples <- function(dat = qd_long,
+                         no_samples = 12,
+                         sample_size = 6) {
+
+  # Put samples in a tibble
+  q_samples <- tibble( 
+    sample = as_factor(1:no_samples),
+    values = map(sample, ~ sample(dat, size = sample_size))
+    ) |> unnest()
+  
+  # Calculate means of each sample
+  sample_means <- q_samples |> group_by(sample) |> 
+    summarise(mean = mean(values))
+  
+  ggplot() + 
+    xlim(min(dat), max(dat)) +
+    geom_vline(xintercept = mean(dat), alpha = .4) +
+    geom_jitter(
+      data = q_samples,
+      mapping = aes(y = sample, x = values),
+      width = 0, height = 0.1, alpha = .8
+      ) + 
+    geom_point(
+      data = sample_means,
+      mapping = aes(y = sample, x = mean),
+      shape = 15, size = 3, 
+      colour = "dark orange"
+      ) +
+    ggtitle(paste("Sample size =", sample_size))
+}
+```
+
+:::
+
+:::{.column width="45%"}
+
+```{r}
+#| echo: true
+#| eval: true
+#| fig-width: 5
+#| fig-height: 4.5
+plot_samples(sample_size = 6)
+```
+
+:::
+::::
+
+## Sample means and sample sizes
+
+::::{.columns}
+
+:::{.column width="40%"}
+
+Let's compare the distribution of means for different sample sizes.
+
+```{r}
+#| echo: true
+#| eval: false
+
+plot_samples(sample_size = 3)
+plot_samples(sample_size = 5)
+plot_samples(sample_size = 10)
+plot_samples(sample_size = 20)
+plot_samples(sample_size = 50)
+plot_samples(sample_size = 100)
+plot_samples(sample_size = 200)
+
+```
+
+:::
+:::{.column width="60%"}
+
+```{r}
+#| fig-width: 5
+#| fig-height: 4.5
+#| fig-show: animate
+
+plot_samples(sample_size = 3)
+plot_samples(sample_size = 5)
+plot_samples(sample_size = 10)
+plot_samples(sample_size = 20)
+plot_samples(sample_size = 50)
+plot_samples(sample_size = 100)
+plot_samples(sample_size = 200)
+
+```
+:::
+::::
+
+The larger the $n$, the less the sample means vary.
+
+
+
+## Standard error
+
+If is distributed as a normal random variable with mean $\mu$ and variance $\sigma^2$,
+
+$$X \sim \text{Normal}(\mu, \sigma)$$
+
+then sample means of size $n$ are distributed as
+
+$$\bar X \sim \text{Normal}(\mu_\bar{X} = \mu, \sigma_\bar{X} = \sigma/\sqrt{n})$$
+$\text{SE}(\bar{X}) = \sigma_\bar{X}= \sigma/\sqrt{n})$ is known as the ***standard error of the sample mean***. 
+
+More generally, a standard error is the standard deviation of an estimated parameter over $\infty$ theoretical samples. 
+
+According to the Central Limit Theorem (CLT), raw $X$ values don't have to be normally distributed for the sample means to be normally distributed (for any decent sample size)!
+
+## Quetelet's chests: Standard error of means of samples
+
+If Quetelet's chest circumferences are distributed as $X \sim \text{N}(\mu=39.83, \sigma=2.05)$, then how variable are the means of samples of size $n$ = 6?
+
+$$
+\begin{aligned}
+SE(\bar{X}_{n=6})&=\sigma/\sqrt{n} \\
+&=2.05/\sqrt{6} \\
+&=0.8369 
+\end{aligned}
+$$
+Sample means of size $n$ = 6 would be distributed as 
+
+$\bar{X}_{n=6} \sim \text{N}(\mu=39.83, \sigma=0.8369)$
+
+
+## Quetelet's chests: Distribution of means of samples
+
+```{r}
+#| fig-width: 5
+#| fig-height: 4.5
+#| fig-show: animate
+
+
+plot_samples_dist <- function(n) {
+  
+  require(patchwork)
+  
+  se = sd(qd_long) / sqrt(n)
+  
+  plot_samples(sample_size = n) / 
+    ggplot(
+      tibble(
+        x = seq( mean(qd_long) - 3.5*se, 
+                 mean(qd_long) + 3.5*se, 
+                 length = 10 )
+        )
+      ) + 
+    xlim(min(qd_long), max(qd_long)) + 
+    aes(x) +
+    stat_function(
+      xlim = c(mean(qd_long) - 3.5*se, 
+               mean(qd_long) + 3.5*se),
+      geom = "area",
+      fun = dnorm, 
+      args = list(mean = mean(qd_long), sd = se),
+      colour = "dark orange",
+      fill = "dark orange",
+      alpha = .4) + 
+    theme_void() + 
+    annotate("text", label = "Theoretical distribution\nof sample means", 
+             x=36, 
+             y=0.5 * dnorm(mean(qd_long), mean(qd_long), sd = se)
+             ) +
+    plot_layout(heights = c(5, 2))
+  }
+  
+plot_samples_dist(5)
+plot_samples_dist(10)
+plot_samples_dist(20)
+plot_samples_dist(50)
+plot_samples_dist(100)
+plot_samples_dist(200)
+
+```
+## Confidence intervals
+
+:::{.incremental}
+
+- Another common way of expressing uncertainty when making statistical inferences is to present:
+  + a point estimate (e.g., the sample mean) and 
+  + a confidence interval around that estimate.
+      
+- A confidence interval gives an indication of the sampling error. 
+
+- A 95% confidence interval is constructed so that ***intervals from 95% of samples will contain the true population parameter***. 
+
+- In reality the interval either contains the true value or not, so you must **not** interpret a confidence interval as "there's a 95% probability that the interval contains the true parameter". 
+
+- We can say:
+  + “95% of so-constructed intervals will contain the true value of the parameter” or
+  + “with 95% confidence, the interval contains the true value of the parameter”.
+
+:::
+
+## Confidence intervals
+
+::::{.columns}
+
+:::{.column width="50%"}
+
+Because we know the population parameters for the Quetelet dataset, we can calculate were 95% of sample means will lie for any particular sample size.
+
+Recall that, for a normal distribution, 95% of values lie between $\mu \pm 1.96\times\sigma$ \
+(i.e., $\mu - 1.96\times\sigma$ and $\mu + 1.96\times\sigma$). 
+
+It follows that 95% of means of samples of size $n$ will lie within $\mu \pm 1.96 \times \sigma/\sqrt{n}$.
+
+For example, for samples of size 6 from the Quetelet dataset, 95% of means will lie within $39.83 \pm 1.96\times 2.05 / \sqrt 6$, \
+so $\{ 37.02 , 42.64\}$.
+
+:::
+:::{.column width="50%"}
+
+```{r}
+# Make a function to do it all and plot
+plot_samples_intervals <- function(dat = qd_long,
+                         no_samples = 12,
+                         sample_size = 6) {
+
+  # Put samples in a tibble
+  q_samples <- tibble( 
+    sample = as_factor(1:no_samples),
+    values = map(sample, ~ sample(dat, size = sample_size))
+    ) |> unnest()
+  
+  # Calculate means of each sample
+  sample_means <- q_samples |> group_by(sample) |> 
+    summarise(mean = mean(values))
+  
+  ggplot() + 
+    xlim(min(dat), max(dat)) +
+    annotate(
+      "rect", 
+      xmin = mean(dat) - 1.96 * sd(dat) / sqrt(sample_size),
+      xmax = mean(dat) + 1.96 * sd(dat) / sqrt(sample_size),
+      ymin = -Inf, ymax = Inf,
+      fill = "dark orange", 
+      alpha = .4) +
+    geom_vline(xintercept = mean(dat)) +
+    geom_jitter(
+      data = q_samples,
+      mapping = aes(y = sample, x = values),
+      width = 0, height = 0.1, alpha = .8
+      ) + 
+    geom_point(
+      data = sample_means,
+      mapping = aes(y = sample, x = mean),
+      shape = 15, size = 3, 
+      colour = "dark orange"
+      ) +
+    ggtitle(
+      "95% of sample means will be within the orange band",
+      subtitle = paste("Sample size =", sample_size))
+}
+```
+
+```{r}
+#| fig-width: 5
+#| fig-height: 6
+set.seed(1232)
+plot_samples_intervals(no_samples=20)
+```
+:::
+::::
+
+## Estimating the distribution of sample means from data
+
+:::{.incremental}
+
+- It's all very well deriving the distribution of sample means when we *know the population parameters* ($\mu$ and $\sigma$) but *in most cases we only have our one sample*.
+
+- We don't know any of the population parameters. We have to *estimate* the population mean (usually denoted $\hat\mu$ or $\bar x$) and *estimate* of the population standard deviation (usually denoted $\hat\sigma$ or $s$) from the sample data.
+
+- This additional uncertainty complicates things a bit. In fact, we can't even use the normal distribution any more!
+
+:::
+
+## The *t* distribution
+
+
+::::{.columns}
+
+:::{.column width="70%"}
+
+- Introducing William Sealy Gosset, who described the *t* distribution after working with random numbers.
+
+- Gosset was a chemist and mathematician who worked for the Guinness brewery in Dublin. 
+
+- Guinness forbade anyone from publishing under their own names so that competing breweries wouldn’t know what they were up to, so he published his discovery in 1908 under the penname “Student”. Student’s identity was only revealed when he died. It is therefore often called “Student’s *t* distribution”. 
+
+:::
+:::{.column width="30%"}
+
+![Willam Sealy Gosset<br>1876-1937](img/gosset_1876-1937.jpg)
+
+:::
+::::
+
+
+## The *t* distribution
+
+
+- The *t* distribution is like the standard normal. It is bell-shaped and symmetric with mean = 0, but it has fatter tails (greater uncertainty) due to the fact that we do not *know* $\sigma$; we have to *estimate* it.
+
+- The *t* distribution is not just a single distribution. It is really an entire series of distributions which is indexed by something called the “degrees of freedom” (or $df$).
+
+::::{.columns}
+
+:::{.column width="40%"}
+
+- As $df \rightarrow \infty$, $t \rightarrow Z$.
+
+```{r}
+#| echo: true
+
+p <- expand_grid(
+  df = c(2, 5, Inf),
+  x = seq(-4, 4, by = .01)
+  ) |> 
+  mutate(
+    Density = dt(x = x, df = df),
+    `degrees of freedom` = as_factor(df)
+  ) |> 
+  ggplot() +
+  aes(x = x, y = Density, 
+      group = `degrees of freedom`, 
+      colour = `degrees of freedom`) +
+  geom_line()
+```
+
+
+:::
+:::{.column width="60%"}
+
+```{r}
+#| fig-height: 3
+#| fig-width: 6
+
+p
+```
+
+:::
+::::
+
+## The *t* distribution
+
+For a sample of size $n$, if
+
+- $X$ is a normal random variable with mean $\mu$,
+- $\bar X$ is the sample mean, and 
+- $s$ is the sample standard deviation, 
+
+then the variable:
+
+$$
+T = \frac{\bar X - \mu} {s/\sqrt{n}}
+$$
+
+is distributed as a $t$ distribution with $(n – 1)$ degrees of freedom.
+
+## Confidence intervals and the *t* distribution
+
+The process of using sample data to try and make useful statements about an unknown parameter, $\theta$, is called statistical inference.
+
+A confidence interval for the true value of a parameter is often obtained by:
+
+$$
+\hat \theta \pm t \times \text{SE}(\hat \theta)
+$$
+where $\hat \theta$ is the sample estimate of $\theta$. 
+
+The piece that is being added and subtracted, $t \times \text{SE}(\hat \theta)$, is often called the *margin of error*.
+
+
+## Confidence intervals for a sample mean
+
+We can calculate a 95% confidence interval for a sample mean with the following information:
+
+::: {style="font-size: 75%;"}
+- sample mean $\bar x$,
+- sample standard deviation $s$, 
+- the sample size $n$, and 
+- the 0.025th quantile of the $t$ distribution with degrees of freedom $df=n-1$.
+:::
+
+With a sample of size $n$ = 6 from the Quetelet dataset.
+
+```{r}
+#| echo: true
+n1 <- 6; df1 <- n1-1
+( dq1 <- sample(qd_long, size = n1) )
+( mean1 <- mean(dq1) )
+( sd1 <- sd(dq1) )
+( t1 <- qt(c(0.025, 0.975), df = df1) )
+mean1 + t1 * sd1 / sqrt(n1)
+```
+
+
+## Confidence intervals for a sample mean
+
+
+We can calculate a 95% confidence interval for a sample mean with the following information:
+
+::: {style="font-size: 75%;"}
+- sample mean $\bar x$,
+- sample standard deviation $s$, 
+- the sample size $n$, and 
+- the 0.025th quantile of the $t$ distribution with degrees of freedom $df=n-1$.
+:::
+
+Or, more simply...
+
+```{r}
+#| echo: true
+n1 <- 6; df1 <- n1-1
+( dq1 <- sample(qd_long, size = n1) )
+t.test(dq1)
+```
+## Confidence intervals for sample means
+
+```{r}
+#| echo: false
+# Make a function to do it all and plot
+plot_samples_ci <- function(dat = qd_long,
+                         no_samples = 12,
+                         sample_size = 6) {
+
+  # Put samples in a tibble
+  q_samples <- tibble( 
+    sample = as_factor(1:no_samples),
+    values = map(sample, ~ sample(dat, size = sample_size))
+    ) |> unnest()
+  
+  # Calculate means of each sample
+  sample_means <- q_samples |> group_by(sample) |> 
+    summarise(mean = mean(values),
+              sd = sd(values)) |> 
+    mutate(
+      lower = mean + qt(0.025, df = sample_size-1) * sd / sqrt(sample_size),
+      upper = mean + qt(0.975, df = sample_size-1) * sd / sqrt(sample_size)
+      )
+  
+  ggplot() + 
+    xlim(min(dat), max(dat)) +
+    geom_vline(xintercept = mean(dat), alpha = .4) +
+    geom_jitter(
+      data = q_samples,
+      mapping = aes(y = sample, x = values),
+      width = 0, height = 0.1, alpha = .8
+      ) + 
+    geom_pointrange(
+      data = sample_means,
+      mapping = aes(
+        y = sample, 
+        x = mean,
+        xmin = lower,
+        xmax = upper
+        ),
+      shape = 15, size = 0.5, 
+      colour = "dark orange"
+      ) +
+    ggtitle(paste("Sample size =", sample_size))
+}
+```
+
+```{r}
+#| fig-height: 5
+#| fig-width: 10
+#| output-location: fragment
+
+set.seed(123)
+
+plot_samples_ci(no_samples = 30, sample_size = 5) +
+  plot_samples_ci(no_samples = 30, sample_size = 10) +
+  plot_samples_ci(no_samples = 30, sample_size = 50)
+```
+
+## *t* as a test statistic
+
+This method can be used when the estimator $\hat\theta$ is approximately normally distributed and
+
+$$
+ \frac{\hat\theta - \theta} {\text{SE}(\hat \theta)}
+$$
+
+has approximately a Student’s *t* distribution.
+
+This paves the way for hypothesis testing for specific values of $\theta$. Many of the methods you will learn in this course are based on this general rule.
+
 
 ## Normality tests and EDA
 
