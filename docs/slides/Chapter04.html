@@ -489,7 +489,7 @@
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># A single sample</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="fu">sample</span>(qd_long, <span class="at">size =</span> <span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 42 40 37 40 39 42</code></pre>
+<pre><code>[1] 39 38 39 40 38 42</code></pre>
 </div>
 </div>
 </div>
@@ -499,25 +499,25 @@
 <span id="cb5-2"><a href="#cb5-2"></a><span class="fu">map</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>, <span class="sc">~</span> <span class="fu">sample</span>(qd_long, <span class="at">size =</span> <span class="dv">6</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[1]]
-[1] 40 39 39 42 39 38
+[1] 36 40 38 40 41 42
 
 [[2]]
-[1] 39 39 41 41 38 41
+[1] 39 38 43 34 40 40
 
 [[3]]
-[1] 40 40 39 38 43 42
+[1] 42 40 38 42 40 38
 
 [[4]]
-[1] 38 40 44 43 40 38
+[1] 37 36 37 43 40 42
 
 [[5]]
-[1] 43 40 40 42 39 39
+[1] 40 39 41 38 38 40
 
 [[6]]
-[1] 39 43 42 40 35 38
+[1] 39 38 41 35 45 43
 
 [[7]]
-[1] 40 40 38 42 36 41</code></pre>
+[1] 38 39 39 37 41 41</code></pre>
 </div>
 </div>
 </div>
@@ -543,21 +543,21 @@
 <pre><code># A tibble: 15 × 2
    sample values
    &lt;fct&gt;   &lt;int&gt;
- 1 1          36
+ 1 1          42
  2 1          38
- 3 1          43
- 4 1          41
+ 3 1          39
+ 4 1          39
  5 1          41
- 6 1          41
- 7 2          43
- 8 2          40
- 9 2          38
-10 2          40
-11 2          41
-12 2          39
-13 3          38
-14 3          45
-15 3          37</code></pre>
+ 6 1          42
+ 7 2          38
+ 8 2          39
+ 9 2          40
+10 2          42
+11 2          38
+12 2          42
+13 3          37
+14 3          39
+15 3          39</code></pre>
 </div>
 </div>
 </div>
@@ -588,16 +588,16 @@
 <pre><code># A tibble: 10 × 2
    sample  mean
    &lt;fct&gt;  &lt;dbl&gt;
- 1 1       40.5
- 2 2       39.8
- 3 3       41.3
- 4 4       41.7
- 5 5       40.7
- 6 6       41  
- 7 7       40.2
- 8 8       39.2
- 9 9       40  
-10 10      38.5</code></pre>
+ 1 1       39.2
+ 2 2       39.7
+ 3 3       38.7
+ 4 4       41.3
+ 5 5       40.3
+ 6 6       38.5
+ 7 7       39.3
+ 8 8       40.7
+ 9 9       40.7
+10 10      39.5</code></pre>
 </div>
 </div>
 </div>
@@ -851,7 +851,9 @@ T = \frac{\bar X - \mu} {s/\sqrt{n}}
 <li>the 0.025th quantile of the <span class="math inline">\(t\)</span> distribution with degrees of freedom <span class="math inline">\(df=n-1\)</span>.</li>
 </ul>
 </div>
-<p>With a sample of size <span class="math inline">\(n\)</span> = 6 from the Quetelet dataset.</p>
+<div class="fragment">
+<div class="absolute" style="top: 45%; left: 0px; ">
+<p>A sample of size <span class="math inline">\(n\)</span> = 6 from Quetelet data</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>n1 <span class="ot">&lt;-</span> <span class="dv">6</span>; df1 <span class="ot">&lt;-</span> n1<span class="dv">-1</span></span>
 <span id="cb18-2"><a href="#cb18-2"></a>( dq1 <span class="ot">&lt;-</span> <span class="fu">sample</span>(qd_long, <span class="at">size =</span> n1) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -875,38 +877,27 @@ T = \frac{\bar X - \mu} {s/\sqrt{n}}
 <pre><code>[1] 36.69118 40.97548</code></pre>
 </div>
 </div>
-</section>
-<section id="confidence-intervals-for-a-sample-mean-1" class="slide level2">
-<h2>Confidence intervals for a sample mean</h2>
-<p>We can calculate a 95% confidence interval for a sample mean with the following information:</p>
-<div style="font-size: 75%;">
-<ul>
-<li>sample mean <span class="math inline">\(\bar x\)</span>,</li>
-<li>sample standard deviation <span class="math inline">\(s\)</span>,</li>
-<li>the sample size <span class="math inline">\(n\)</span>, and</li>
-<li>the 0.025th quantile of the <span class="math inline">\(t\)</span> distribution with degrees of freedom <span class="math inline">\(df=n-1\)</span>.</li>
-</ul>
 </div>
+</div>
+<div class="fragment">
+<div class="absolute" style="top: 45%; right: 0px; ">
 <p>Or, more simply…</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>n1 <span class="ot">&lt;-</span> <span class="dv">6</span>; df1 <span class="ot">&lt;-</span> n1<span class="dv">-1</span></span>
-<span id="cb28-2"><a href="#cb28-2"></a>( dq1 <span class="ot">&lt;-</span> <span class="fu">sample</span>(qd_long, <span class="at">size =</span> n1) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 43 43 41 40 38 40</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">t.test</span>(dq1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">t.test</span>(dq1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     One Sample t-test
 
 data:  dq1
-t = 51.536, df = 5, p-value = 5.2e-08
+t = 46.6, df = 5, p-value = 8.595e-08
 alternative hypothesis: true mean is not equal to 0
 95 percent confidence interval:
- 38.79660 42.87007
+ 36.69118 40.97548
 sample estimates:
 mean of x 
- 40.83333 </code></pre>
+ 38.83333 </code></pre>
+</div>
+</div>
 </div>
 </div>
 </section>
@@ -1061,7 +1052,7 @@ alternative hypothesis: two-sided</code></pre>
 <p>A hypothesis test has a certain <strong>power</strong> (probability) to reject the null hypothesis when it is false.</p>
 <p>The power of the t test can be evaluated using R for given effect size <span class="math inline">\(\delta\)</span></p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="fu">power.t.test</span>(<span class="at">n =</span> <span class="dv">30</span>, <span class="at">delta =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">sig.level =</span> <span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">power.t.test</span>(<span class="at">n =</span> <span class="dv">30</span>, <span class="at">delta =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">sig.level =</span> <span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
      Two-sample t test power calculation 
@@ -1075,7 +1066,7 @@ alternative hypothesis: two-sided</code></pre>
 
 NOTE: n is number in *each* group</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="fu">power.t.test</span>(<span class="at">n =</span> <span class="dv">50</span>, <span class="at">delta =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">sig.level =</span> <span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="fu">power.t.test</span>(<span class="at">n =</span> <span class="dv">50</span>, <span class="at">delta =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">sig.level =</span> <span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
      Two-sample t test power calculation 
@@ -1165,7 +1156,7 @@ mean difference
 <li>Can we treat the survey as unbiased?</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="fu">prop.test</span>(<span class="dv">450</span>, <span class="dv">1000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="fu">prop.test</span>(<span class="dv">450</span>, <span class="dv">1000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     1-sample proportions test with continuity correction
@@ -1201,9 +1192,9 @@ probability of success
 <h2>Comparing several proportions</h2>
 <p>Fleiss (1981) <em>Statistical methods for rates and proportions</em> data on smokers in four group of patients</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a>smokers  <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">83</span>, <span class="dv">90</span>, <span class="dv">129</span>, <span class="dv">70</span> )</span>
-<span id="cb44-2"><a href="#cb44-2"></a>patients <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">86</span>, <span class="dv">93</span>, <span class="dv">136</span>, <span class="dv">82</span> )</span>
-<span id="cb44-3"><a href="#cb44-3"></a><span class="fu">prop.test</span>(smokers, patients)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a>smokers  <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">83</span>, <span class="dv">90</span>, <span class="dv">129</span>, <span class="dv">70</span> )</span>
+<span id="cb42-2"><a href="#cb42-2"></a>patients <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">86</span>, <span class="dv">93</span>, <span class="dv">136</span>, <span class="dv">82</span> )</span>
+<span id="cb42-3"><a href="#cb42-3"></a><span class="fu">prop.test</span>(smokers, patients)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     4-sample test for equality of proportions without continuity correction
@@ -1508,7 +1499,7 @@ mean in group 1 mean in group 2
 <section id="another-form-of-test" class="slide level2">
 <h2>Another form of test</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a><span class="fu">kruskal.test</span>(rangitikei<span class="sc">$</span>people<span class="sc">~</span>rangitikei<span class="sc">$</span>time)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a><span class="fu">kruskal.test</span>(rangitikei<span class="sc">$</span>people<span class="sc">~</span>rangitikei<span class="sc">$</span>time)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Kruskal-Wallis rank sum test
@@ -1518,7 +1509,7 @@ Kruskal-Wallis chi-squared = 7.2171, df = 1, p-value = 0.007221</code></pre>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a><span class="fu">wilcox.test</span>(rangitikei<span class="sc">$</span>people<span class="sc">~</span>rangitikei<span class="sc">$</span>time)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a><span class="fu">wilcox.test</span>(rangitikei<span class="sc">$</span>people<span class="sc">~</span>rangitikei<span class="sc">$</span>time)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Wilcoxon rank sum test with continuity correction
@@ -1534,8 +1525,8 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <p>A permutation (or randomisation) test is based on the idea of randomly permuting the observed data and then answering whether a hypothesis is negated or not.</p>
 <p>One sample hypothesis test example follows:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1"></a><span class="fu">library</span>(exactRankTests)</span>
-<span id="cb58-2"><a href="#cb58-2"></a><span class="fu">perm.test</span>(tv<span class="sc">$</span>TELETIME, <span class="at">null.value=</span><span class="dv">1500</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a><span class="fu">library</span>(exactRankTests)</span>
+<span id="cb56-2"><a href="#cb56-2"></a><span class="fu">perm.test</span>(tv<span class="sc">$</span>TELETIME, <span class="at">null.value=</span><span class="dv">1500</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     1-sample Permutation Test
@@ -1550,7 +1541,7 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
 <section id="two-group-comparison" class="slide level2">
 <h2>Two group comparison</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1"></a><span class="fu">perm.test</span>(TELETIME<span class="sc">~</span>SEX, <span class="at">distribution =</span><span class="st">'exact'</span>, <span class="at">data=</span>tv)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1"></a><span class="fu">perm.test</span>(TELETIME<span class="sc">~</span>SEX, <span class="at">distribution =</span><span class="st">'exact'</span>, <span class="at">data=</span>tv)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     2-sample Permutation Test
@@ -1562,8 +1553,8 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
 </div>
 <p>Also using a linear model fit (cover later)</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1"></a><span class="fu">library</span>(lmPerm)</span>
-<span id="cb62-2"><a href="#cb62-2"></a><span class="fu">summary</span>(<span class="fu">lmp</span>(TELETIME<span class="sc">~</span>SEX, <span class="at">data=</span>tv))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1"></a><span class="fu">library</span>(lmPerm)</span>
+<span id="cb60-2"><a href="#cb60-2"></a><span class="fu">summary</span>(<span class="fu">lmp</span>(TELETIME<span class="sc">~</span>SEX, <span class="at">data=</span>tv))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Settings:  unique SS : numeric variables centered"</code></pre>
 </div>

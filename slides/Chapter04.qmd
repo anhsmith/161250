@@ -628,7 +628,11 @@ We can calculate a 95% confidence interval for a sample mean with the following 
 - the 0.025th quantile of the $t$ distribution with degrees of freedom $df=n-1$.
 :::
 
-With a sample of size $n$ = 6 from the Quetelet dataset.
+
+::::{.fragment}
+:::{.absolute top="45%" left=0}
+
+A sample of size $n$ = 6 from Quetelet data
 
 ```{r}
 #| echo: true
@@ -640,27 +644,21 @@ n1 <- 6; df1 <- n1-1
 mean1 + t1 * sd1 / sqrt(n1)
 ```
 
-
-## Confidence intervals for a sample mean
-
-
-We can calculate a 95% confidence interval for a sample mean with the following information:
-
-::: {style="font-size: 75%;"}
-- sample mean $\bar x$,
-- sample standard deviation $s$, 
-- the sample size $n$, and 
-- the 0.025th quantile of the $t$ distribution with degrees of freedom $df=n-1$.
 :::
+::::
 
+::::{.fragment}
+:::{.absolute top="45%" right=0}
 Or, more simply...
 
 ```{r}
 #| echo: true
-n1 <- 6; df1 <- n1-1
-( dq1 <- sample(qd_long, size = n1) )
 t.test(dq1)
 ```
+
+:::
+::::
+
 ## Confidence intervals for sample means
 
 ```{r}
