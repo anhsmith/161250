@@ -21,7 +21,7 @@ colorize <- function(x, color) {
 
 You are NOT expected to become an expert in R programming or required to be one for doing this course.
 
-Feel free to post your queries regarding R and RStudio on the class Stream discussion forum.
+Feel free to post your queries regarding R and RStudio on the class discussion forum on Stream.
 
 :::
 
@@ -170,7 +170,7 @@ within RStudio can download and install these optional packages under
 the menu `Packages >> Install`. You can also do this using the command
 `install.packages`. For example
 
-`install.packages("tidyverse", "car"), dependencies = TRUE)`
+`install.packages(c("tidyverse", "car"), dependencies = TRUE)`
 
 This command installs two packages `tidyverse` and `car` in one go.
 
@@ -186,9 +186,9 @@ I encourage you to get into the habit of using [Quarto](https://quarto.org/) `*.
 
 Quarto files contain text and code, and can be 'knitted' to produce a nicely formatted document, usually in HTML or PDF format, containing sections, text, code, plots, and output. Quarto can also be used to make websites; in fact, the website for this course was made using Quarto.
 
-Take a look at the website for more information: <https://quarto.org/>.
+Here's some information to get you started: <https://quarto.org/docs/get-started/hello/rstudio.html>.
 
-Here's a primer to get you started with Quarto: <https://r4ds.hadley.nz/quarto>.
+And some other useful tips: <https://r4ds.hadley.nz/quarto>.
 
 # R Projects and GitHub {.unnumbered}
 

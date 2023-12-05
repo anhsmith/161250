@@ -295,7 +295,7 @@ Tip
 </div>
 <div class="callout-body-container callout-body">
 <p>You are NOT expected to become an expert in R programming or required to be one for doing this course.</p>
-<p>Feel free to post your queries regarding R and RStudio on the class Stream discussion forum.</p>
+<p>Feel free to post your queries regarding R and RStudio on the class discussion forum on Stream.</p>
 </div>
 </div>
 <p>R <a href="https://www.r-project.org/" class="uri">https://www.r-project.org/</a> is an open-source (i.e., free) software package. This software is available for essentially all computing platforms (e.g.&nbsp;Windows, Linux, Unix, Mac) is maintained and developed by an energetic community of users including many of the world’s foremost statisticians.</p>
@@ -387,7 +387,7 @@ Tip
 </details>
 </div>
 <p>A huge number of other dedicated packages are available to improve the power of R. Many R packages are hosted at a repository called CRAN (<em>C</em>omprehensive <em>R</em> <em>A</em>rchive <em>N</em>etwork). The package install option within RStudio can download and install these optional packages under the menu <code>Packages &gt;&gt; Install</code>. You can also do this using the command <code>install.packages</code>. For example</p>
-<p><code>install.packages("tidyverse", "car"), dependencies = TRUE)</code></p>
+<p><code>install.packages(c("tidyverse", "car"), dependencies = TRUE)</code></p>
 <p>This command installs two packages <code>tidyverse</code> and <code>car</code> in one go.</p>
 <p>Contributed R packages are grouped in various headings at <a href="https://cran.r-project.org/web/views/" class="uri">https://cran.r-project.org/web/views/</a>. They can be installed in bulk using the <code>ctv</code> package command <code>install.views()</code>.</p>
 <p>You might have to install quite a few packages as you work through this course.</p>
@@ -396,8 +396,8 @@ Tip
 <h1 class="unnumbered">Quarto</h1>
 <p>I encourage you to get into the habit of using <a href="https://quarto.org/">Quarto</a> <code>*.qmd</code> files rather than raw <code>*.R</code> files. If you’ve heard of Rmarkdown, Quarto is the successor to Rmarkdown. So, if you’re just starting to use R, then you should begin with Quarto rather than Rmarkdown, because most/all new development will be going into Quarto.</p>
 <p>Quarto files contain text and code, and can be ‘knitted’ to produce a nicely formatted document, usually in HTML or PDF format, containing sections, text, code, plots, and output. Quarto can also be used to make websites; in fact, the website for this course was made using Quarto.</p>
-<p>Take a look at the website for more information: <a href="https://quarto.org/" class="uri">https://quarto.org/</a>.</p>
-<p>Here’s a primer to get you started with Quarto: <a href="https://r4ds.hadley.nz/quarto" class="uri">https://r4ds.hadley.nz/quarto</a>.</p>
+<p>Here’s some information to get you started: <a href="https://quarto.org/docs/get-started/hello/rstudio.html" class="uri">https://quarto.org/docs/get-started/hello/rstudio.html</a>.</p>
+<p>And some other useful tips: <a href="https://r4ds.hadley.nz/quarto" class="uri">https://r4ds.hadley.nz/quarto</a>.</p>
 </section>
 <section id="r-projects-and-github" class="level1 unnumbered">
 <h1 class="unnumbered">R Projects and GitHub</h1>
@@ -2407,7 +2407,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb138-21"><a href="#cb138-21" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb138-22"><a href="#cb138-22" aria-hidden="true" tabindex="-1"></a>You are NOT expected to become an expert in R programming or required to be one for doing this course.</span>
 <span id="cb138-23"><a href="#cb138-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb138-24"><a href="#cb138-24" aria-hidden="true" tabindex="-1"></a>Feel free to post your queries regarding R and RStudio on the class Stream discussion forum.</span>
+<span id="cb138-24"><a href="#cb138-24" aria-hidden="true" tabindex="-1"></a>Feel free to post your queries regarding R and RStudio on the class discussion forum on Stream.</span>
 <span id="cb138-25"><a href="#cb138-25" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb138-26"><a href="#cb138-26" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb138-27"><a href="#cb138-27" aria-hidden="true" tabindex="-1"></a></span>
@@ -2556,7 +2556,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb138-180"><a href="#cb138-180" aria-hidden="true" tabindex="-1"></a>the menu <span class="in">`Packages &gt;&gt; Install`</span>. You can also do this using the command</span>
 <span id="cb138-181"><a href="#cb138-181" aria-hidden="true" tabindex="-1"></a><span class="in">`install.packages`</span>. For example</span>
 <span id="cb138-182"><a href="#cb138-182" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb138-183"><a href="#cb138-183" aria-hidden="true" tabindex="-1"></a><span class="in">`install.packages("tidyverse", "car"), dependencies = TRUE)`</span></span>
+<span id="cb138-183"><a href="#cb138-183" aria-hidden="true" tabindex="-1"></a><span class="in">`install.packages(c("tidyverse", "car"), dependencies = TRUE)`</span></span>
 <span id="cb138-184"><a href="#cb138-184" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb138-185"><a href="#cb138-185" aria-hidden="true" tabindex="-1"></a>This command installs two packages <span class="in">`tidyverse`</span> and <span class="in">`car`</span> in one go.</span>
 <span id="cb138-186"><a href="#cb138-186" aria-hidden="true" tabindex="-1"></a></span>
@@ -2572,9 +2572,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb138-196"><a href="#cb138-196" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb138-197"><a href="#cb138-197" aria-hidden="true" tabindex="-1"></a>Quarto files contain text and code, and can be 'knitted' to produce a nicely formatted document, usually in HTML or PDF format, containing sections, text, code, plots, and output. Quarto can also be used to make websites; in fact, the website for this course was made using Quarto.</span>
 <span id="cb138-198"><a href="#cb138-198" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb138-199"><a href="#cb138-199" aria-hidden="true" tabindex="-1"></a>Take a look at the website for more information: <span class="ot">&lt;https://quarto.org/&gt;</span>.</span>
+<span id="cb138-199"><a href="#cb138-199" aria-hidden="true" tabindex="-1"></a>Here's some information to get you started: <span class="ot">&lt;https://quarto.org/docs/get-started/hello/rstudio.html&gt;</span>.</span>
 <span id="cb138-200"><a href="#cb138-200" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb138-201"><a href="#cb138-201" aria-hidden="true" tabindex="-1"></a>Here's a primer to get you started with Quarto: <span class="ot">&lt;https://r4ds.hadley.nz/quarto&gt;</span>.</span>
+<span id="cb138-201"><a href="#cb138-201" aria-hidden="true" tabindex="-1"></a>And some other useful tips: <span class="ot">&lt;https://r4ds.hadley.nz/quarto&gt;</span>.</span>
 <span id="cb138-202"><a href="#cb138-202" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb138-203"><a href="#cb138-203" aria-hidden="true" tabindex="-1"></a><span class="fu"># R Projects and GitHub {.unnumbered}</span></span>
 <span id="cb138-204"><a href="#cb138-204" aria-hidden="true" tabindex="-1"></a></span>

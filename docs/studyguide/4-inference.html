@@ -521,7 +521,7 @@ alternative hypothesis: two-sided</code></pre>
 <p>As indicated earlier, a large number of naturally occurring measurements, such as height, appear to follow a Normal distribution so that a considerable amount of theory has been built on this distribution.</p>
 <p>To recapitulate, Normal (or Gaussian) curves are determined by just two numbers, one indicating the <strong>location</strong> and the other the <strong>spread</strong>. Although there are an infinite number of Normal curves, their shapes are similar and, of course, the area under each curve is 1. Indeed, the location and spread parameters are the only differences between curves.</p>
 <p>It is usual to take the measure of location as the mean, denoted by <span class="math inline">\(\mu\)</span>, and the measure of spread as the standard deviation, denoted by <span class="math inline">\(\sigma\)</span>. If a variable, Y, follows a Normal distribution with mean <span class="math inline">\(\mu\)</span> and standard deviation <span class="math inline">\(\sigma\)</span>, we write Y <span class="math inline">\(\sim\)</span> N(<span class="math inline">\(\mu\)</span>, <span class="math inline">\(\sigma\)</span>) where <span class="math inline">\(\sim\)</span> means is <em>distributed as</em> (The squiggly symbol <span class="math inline">\(\sim\)</span> is known as <em>tilde</em>).</p>
-<p>Note, however, that the Normal distribution, like all statistical distributions, is a theoretical concept and no naturally occurring measurement will <strong>exactly</strong> follow a probability distribution model. For one thing, any measurement is finite whereas the Normal curve is continuous in the interval <span class="math inline">\(\left(-\infty ,\infty \right)\)</span>. Also, the curve is asymptotic to the <span class="math inline">\(X\)</span>-axis so that any range of values of <span class="math inline">\(Y\)</span> however large or small will have a certain probability according to the Normal distribution, but in practice there will be limitations such as that a person’s blood pressure must be greater than zero.</p>
+<p>Note, again, that the normal distribution, like all statistical distributions, is a theoretical concept and no naturally occurring measurement will <strong>exactly</strong> follow a probability distribution model. For one thing, any measurement is finite whereas the Normal curve is continuous in the interval <span class="math inline">\(\left(-\infty ,\infty \right)\)</span>. Also, the curve is asymptotic to the <span class="math inline">\(X\)</span>-axis so that any range of values of <span class="math inline">\(Y\)</span> however large or small will have a certain probability according to the Normal distribution, but in practice there will be limitations such as that a person’s blood pressure must be greater than zero.</p>
 <p>Suppose we didn’t know that <span class="math inline">\(\mu\)</span> = 80 and <span class="math inline">\(\sigma\)</span> = 12. The obvious <strong>estimator</strong> of <span class="math inline">\(\mu\)</span>, based solely on the sample, is the sample mean <span class="math inline">\(\bar{y}\)</span>, and the obvious estimator of <span class="math inline">\(\sigma\)</span> is the sample standard deviation <span class="math inline">\(S\)</span>. Note that by estimator we don’t mean the observed value based on the <strong>particular</strong> sample. Rather the word estimator means the mathematical formula or procedure that we use to produce our estimates, namely <span class="math inline">\(\bar{y}={\frac{1}{n}} \sum y\)</span> and <span class="math inline">\(S=\sqrt{{\frac{1}{n-1}} \sum _{i=1}^{n}(y_{i} -\bar{y})^{2} }\)</span>.</p>
 <p>The point is that there can be several alternative procedures for estimating the same parameters <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>, and in particular samples the actual computed estimates may be the same or different. For example, since the mean and median are the same for Normal data, we could estimate <span class="math inline">\(\mu\)</span> by the sample median, namely 81.313 for our example. This different procedure has given rise to a different number, and if we didn’t know the answer we would not know which estimate to use. The median estimate has a lot of attraction, since the median is robust, that is, is not affected by outliers.</p>
 <p>Clearly all these estimates are close to the true parameter values, but not the same. A statistical question relates to how close estimates are to their true values <em>in general</em>. We usually can’t answer this question about the actual estimates (observed numbers) since we usually don’t know the correct answer. One approach, which is often used to test procedures in research, is to try a number of <strong>simulations</strong> and see which approach produces the closest results on average. We can also give error bounds that say, for example, that 95% of the time the estimator is within such-and-such a distance of the true parameter. This leads to the idea of using probability or so-called ‘confidence’. By making probability statements about the estimators we can say something useful about how trustworthy the particular estimates are also. We use <strong>standard errors</strong> to measure the trustworthiness of the estimators. The standard error is the standard deviation of the estimator, so the smaller the standard error the better.</p>
@@ -536,7 +536,7 @@ alternative hypothesis: two-sided</code></pre>
 <p>The <span class="math inline">\(t\)</span> distribution is the sampling distribution of the mean when <span class="math inline">\(\sigma\)</span> is unknown. The <span class="math inline">\(\chi^2\)</span> distribution is the sampling distribution of the sample variance <span class="math inline">\(S^2\)</span> when re-expressed as <span class="math inline">\((n-1)S^2/\sigma^2\)</span>. The <span class="math inline">\(F\)</span> distribution is ratio of two <span class="math inline">\(\chi^2\)</span> distributions, and hence it becomes the sampling distribution of the ratio of two sample variances <span class="math inline">\(S_1^2/S_2^2\)</span> from two normal populations (after appropriate scaling for the sample sizes).</p>
 <p>While the <span class="math inline">\(t\)</span> distribution is symmetric, the <span class="math inline">\(\chi^2\)</span> and <span class="math inline">\(F\)</span> distributions are right skewed. When the sample size <span class="math inline">\(n\)</span> approaches infinity, both distributions become normal but you will start observing symmetry when the sample size(s) exceed 30.</p>
 <p>For these sampling distributions, the sample size acts as the proxy parameter, called the degrees of freedom. For both <span class="math inline">\(t\)</span>, <span class="math inline">\(\chi^2\)</span>, the degrees of freedom, <span class="math inline">\(\nu\)</span> is <span class="math inline">\((n-1)\)</span>. What this means is that the sampling distribution or the probability density of these two distributions depend only on the degrees of freedom <span class="math inline">\(\nu\)</span>. The F distribution is based on two samples of size <span class="math inline">\(n_1\)</span> and <span class="math inline">\(n_2\)</span>. So, the F density has two parameters, <span class="math inline">\(v_1=(n_1-1)\)</span> and <span class="math inline">\(v_2=(n_2-1)\)</span> (often called the numerator and denominator degrees of freedom respectively).</p>
-<p>The tail quantiles of <span class="math inline">\(t\)</span>, <span class="math inline">\(\chi^2\)</span> and <span class="math inline">\(F\)</span> distributions are used for hypothesis tests. You may like to visit https://shiny.massey.ac.nz/kgovinda/demos/demo.critical.values/ for exploring their probability densities and quantiles.</p>
+<p>The tail quantiles of <span class="math inline">\(t\)</span>, <span class="math inline">\(\chi^2\)</span> and <span class="math inline">\(F\)</span> distributions are used for hypothesis tests. You may like to visit https://shiny.massey.ac.nz/anhsmith/demos/demo.critical.values/ to explore their probability densities and quantiles.</p>
 <p>Sampling distributions of certain statistic such as the sample Range (=Maximum-Minimum) does not exist in a closed form but the quantiles of the distribution can be obtained numerically.</p>
 <p>We cover the <span class="math inline">\(t\)</span> distribution in some detail below:</p>
 <p><strong><span class="math inline">\(t\)</span> distribution</strong></p>
@@ -602,7 +602,7 @@ alternative hypothesis: two-sided</code></pre>
 <div id="fig-tquant" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="4-inference_files/figure-html/fig-tquant-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Figure&nbsp;5: Student’s t quantiles for CI construction</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;5: Student’s t quantiles for construction of confidence intervals</figcaption>
 </figure>
 </div>
 </div>
@@ -1622,8 +1622,8 @@ bootstrap(data = tv$TELETIME, statistic = mean)
 Replications: 10000
 
 Summary Statistics:
-     Observed       SE    Mean      Bias
-mean 1729.283 82.74484 1728.54 -0.742787</code></pre>
+     Observed       SE     Mean      Bias
+mean 1729.283 82.39226 1728.282 -1.000228</code></pre>
 </div>
 </div>
 <p>This output shows the observed sample mean 1729.283 and the mean of all bootstrap means which is 1729.114. The bias is the difference, which is -0.168. The main advantage of the bootstrap method is that it can quantify the bias that can occur due to sampling. <a href="#fig-bootc">Figure&nbsp;18</a> and <a href="#fig-bootqq">Figure&nbsp;19</a>, respectively, show the histogram and the normal quantile plots for the bootstrap means. Obviously the bootstrap means follow normal (due to CLT).</p>
@@ -1662,8 +1662,8 @@ mean 1729.283 82.74484 1728.54 -0.742787</code></pre>
 <div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">CI.t</span>(bootC)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>         2.5%    97.5%
-mean 1560.637 1897.928</code></pre>
+<pre><code>         2.5%   97.5%
+mean 1561.356 1897.21</code></pre>
 </div>
 </div>
 <p>This interval compares well with the confidence interval using t-distribution found earlier namely (1560.633, 1897.932). The same approach can be taken to construct a confidence interval for the mean of the paired differences and thereby perform a test analogous to paired t-test. See the <em>testsmarks</em> data example given below:</p>
@@ -1676,7 +1676,7 @@ mean 1560.637 1897.928</code></pre>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>          2.5%    97.5%
-mean -4.175863 4.925863</code></pre>
+mean -4.133625 4.883625</code></pre>
 </div>
 </div>
 <p>The parametric (i.e.&nbsp;t-test based) and bootstrap results are very similar. The bootstrap method can obtain better confidence intervals for the mean when the population is skewed because resampling tends to adjust for the skew in the population when captured by the sample well. The bootstrap approach will work well only when reasonably large sample sizes are available because of the inherent uncertainty in the tails of the underlying distribution. Small samples are not sufficient to identify capture the tails of the distribution and hence certain types of inferences involving tail part of distribution will not work well. Parametric assumptions can be made to improve the bootstrap method and this approach is known as parametric bootstrapping. We will not study such methods in this course.</p>
@@ -1689,7 +1689,7 @@ mean -4.175863 4.925863</code></pre>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>               2.5%    97.5%
-mean: 1-2 -468.7219 224.6349</code></pre>
+mean: 1-2 -468.6157 224.5288</code></pre>
 </div>
 </div>
 <p>The bootstrap test conclusion again agrees with the Welch two-sample t-test conclusion.</p>
@@ -2242,7 +2242,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb68-203"><a href="#cb68-203" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-204"><a href="#cb68-204" aria-hidden="true" tabindex="-1"></a>It is usual to take the measure of location as the mean, denoted by $\mu$, and the measure of spread as the standard deviation, denoted by $\sigma$. If a variable, Y, follows a Normal distribution with mean $\mu$ and standard deviation $\sigma$, we write Y $\sim$ N($\mu$, $\sigma$) where $\sim$ means is *distributed as* (The squiggly symbol $\sim$ is known as *tilde*).</span>
 <span id="cb68-205"><a href="#cb68-205" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-206"><a href="#cb68-206" aria-hidden="true" tabindex="-1"></a>Note, however, that the Normal distribution, like all statistical distributions, is a theoretical concept and no naturally occurring measurement will **exactly** follow a probability distribution model. For one thing, any measurement is finite whereas the Normal curve is continuous in the interval $\left(-\infty ,\infty \right)$. Also, the curve is asymptotic to the $X$-axis so that any range of values of $Y$ however large or small will have a certain probability according to the Normal distribution, but in practice there will be limitations such as that a person's blood pressure must be greater than zero.</span>
+<span id="cb68-206"><a href="#cb68-206" aria-hidden="true" tabindex="-1"></a>Note, again, that the normal distribution, like all statistical distributions, is a theoretical concept and no naturally occurring measurement will **exactly** follow a probability distribution model. For one thing, any measurement is finite whereas the Normal curve is continuous in the interval $\left(-\infty ,\infty \right)$. Also, the curve is asymptotic to the $X$-axis so that any range of values of $Y$ however large or small will have a certain probability according to the Normal distribution, but in practice there will be limitations such as that a person's blood pressure must be greater than zero.</span>
 <span id="cb68-207"><a href="#cb68-207" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-208"><a href="#cb68-208" aria-hidden="true" tabindex="-1"></a>Suppose we didn't know that $\mu$ = 80 and $\sigma$ = 12. The obvious **estimator** of $\mu$, based solely on the sample, is the sample mean $\bar{y}$, and the obvious estimator of $\sigma$ is the sample standard deviation $S$. Note that by estimator we don't mean the observed value based on the **particular** sample. Rather the word estimator means the mathematical formula or procedure that we use to produce our estimates, namely $\bar{y}={\frac{1}{n}} \sum y$ and $S=\sqrt{{\frac{1}{n-1}} \sum _{i=1}^{n}(y_{i} -\bar{y})^{2} }$.</span>
 <span id="cb68-209"><a href="#cb68-209" aria-hidden="true" tabindex="-1"></a></span>
@@ -2268,7 +2268,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb68-229"><a href="#cb68-229" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-230"><a href="#cb68-230" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-231"><a href="#cb68-231" aria-hidden="true" tabindex="-1"></a>The tail quantiles of $t$, $\chi^2$ and $F$ distributions are used for hypothesis tests.  You may like to visit</span>
-<span id="cb68-232"><a href="#cb68-232" aria-hidden="true" tabindex="-1"></a>https://shiny.massey.ac.nz/kgovinda/demos/demo.critical.values/ for exploring their probability densities and quantiles.</span>
+<span id="cb68-232"><a href="#cb68-232" aria-hidden="true" tabindex="-1"></a>https://shiny.massey.ac.nz/anhsmith/demos/demo.critical.values/ to explore their probability densities and quantiles.</span>
 <span id="cb68-233"><a href="#cb68-233" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-234"><a href="#cb68-234" aria-hidden="true" tabindex="-1"></a>Sampling distributions of certain statistic such as the sample Range (=Maximum-Minimum) does not exist in a closed form but the quantiles of the distribution can be obtained numerically.</span>
 <span id="cb68-235"><a href="#cb68-235" aria-hidden="true" tabindex="-1"></a></span>
@@ -2348,7 +2348,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb68-313"><a href="#cb68-313" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb68-314"><a href="#cb68-314" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
 <span id="cb68-315"><a href="#cb68-315" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-tquant</span></span>
-<span id="cb68-316"><a href="#cb68-316" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Student's t quantiles for CI construction"</span></span>
+<span id="cb68-316"><a href="#cb68-316" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Student's t quantiles for construction of confidence intervals"</span></span>
 <span id="cb68-317"><a href="#cb68-317" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-318"><a href="#cb68-318" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>( <span class="fu">dt</span>(x,<span class="dv">45</span>), <span class="at">xlim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="fl">3.5</span>, <span class="fl">3.5</span>), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.4</span>), <span class="at">ylab=</span><span class="st">"Density"</span>)</span>
 <span id="cb68-319"><a href="#cb68-319" aria-hidden="true" tabindex="-1"></a>lowert<span class="ot">=</span><span class="fu">qt</span>(.<span class="dv">025</span>, <span class="dv">45</span>)</span>
