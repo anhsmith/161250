@@ -848,6 +848,7 @@ $\ \ \ \ \ H_0: \mu = 0$, that is, the mean difference is zero.
 This can be done more easily:
 
 ```{r}
+#| echo: true
 t.test(diff)
 ```
 
