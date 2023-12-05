@@ -816,14 +816,14 @@
     "href": "slides/Chapter04.html#two-sample-t-test",
     "title": "Chapter 4:Introduction to Statistical Inference",
     "section": "Two sample t-test",
-    "text": "Two sample t-test\n\nIn a two-sample t-test, the equality of two population means is tested. Null hypothesis \\(H_0:\\mu=\\mu_1=\\mu_2\\). Two-sided Alternative hypothesis \\(H_1:\\mu_1 \\neq \\mu_2\\)\nIf EDA suggests that the two populations have the same spread, we perform a pooled t-test in which the variance common to the two population is estimated as \\(S_{p}^{2} = w_{1} S_{1}^{2} +w_{2} S_{2}^{2}\\) where the weights are \\(w_{1} =\\frac{n_{1}-1}{n_{1} +n_{2}-2}\\) and \\(w_{2} =\\frac{n_{2}-1}{n_{1} +n_{2}-2}\\)\nFor the pooled case, the \\(df\\) for the \\(t\\)-test is \\(n_{1}+n_{2}-2\\) but becomes smaller for the unpooled case to \\[df=\\frac{\\left(\\frac{S_{1}^{2}}{n_{1}} +\\frac{S_{2}^{2} }{n_{2}} \\right)^{2} }{\\frac{1}{n_{1} -1} \\left(\\frac{S_{1}^{2}}{n_{1}}\\right)^{2} +\\frac{1}{n_{2} -1} \\left(\\frac{S_{2}^{2}}{n_{2} } \\right)^{2}} \\]"
+    "text": "Two sample t-test\n\nIn a two-sample t-test, the equality of two population means is tested. Null hypothesis \\(H_0:\\mu=\\mu_1=\\mu_2\\). Two-sided Alternative hypothesis \\(H_1:\\mu_1 \\neq \\mu_2\\)\nIf EDA suggests that the two populations have the same spread, we perform a pooled-sample t-test in which the variance common to the two population is estimated as \\(S_{p}^{2} = w_{1} S_{1}^{2} +w_{2} S_{2}^{2}\\) where the weights are \\(w_{1} =\\frac{n_{1}-1}{n_{1} +n_{2}-2}\\) and \\(w_{2} =\\frac{n_{2}-1}{n_{1} +n_{2}-2}\\)\nFor the pooled case, the \\(df\\) for the \\(t\\)-test is \\(n_{1}+n_{2}-2\\) but becomes smaller for the unpooled case to \\[df=\\frac{\\left(\\frac{S_{1}^{2}}{n_{1}} +\\frac{S_{2}^{2} }{n_{2}} \\right)^{2} }{\\frac{1}{n_{1} -1} \\left(\\frac{S_{1}^{2}}{n_{1}}\\right)^{2} +\\frac{1}{n_{2} -1} \\left(\\frac{S_{2}^{2}}{n_{2} } \\right)^{2}} \\]"
   },
   {
     "objectID": "slides/Chapter04.html#validity-of-equal-variance-assumption",
     "href": "slides/Chapter04.html#validity-of-equal-variance-assumption",
     "title": "Chapter 4:Introduction to Statistical Inference",
     "section": "Validity of equal variance assumption",
-    "text": "Validity of equal variance assumption\n\nEqual variance assumption is found plausible in the following output:\n\n\n\n\n    Bartlett test of homogeneity of variances\n\ndata:  TELETIME by SEX\nBartlett's K-squared = 1.8482, df = 1, p-value = 0.174\n\n\nLevene's Test for Homogeneity of Variance (center = median)\n      Df F value  Pr(&gt;F)  \ngroup  1  3.1789 0.08149 .\n      44                  \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
+    "text": "Validity of equal variance assumption\nEqual variance assumption is found plausible in the following output:\n\ntv = read_csv(\"https://www.massey.ac.nz/~anhsmith/data/tv.csv\")\nbartlett.test(TELETIME~SEX, data=tv)\n\n\n    Bartlett test of homogeneity of variances\n\ndata:  TELETIME by SEX\nBartlett's K-squared = 1.8482, df = 1, p-value = 0.174\n\ncar::leveneTest(TELETIME~factor(SEX), data=tv)\n\nLevene's Test for Homogeneity of Variance (center = median)\n      Df F value  Pr(&gt;F)  \ngroup  1  3.1789 0.08149 .\n      44                  \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nHighish p-values means there’s no strong evidence against the null hypothesis that the variances are equal."
   },
   {
     "objectID": "slides/Chapter04.html#paired-t-test",
@@ -844,7 +844,7 @@
     "href": "slides/Chapter04.html#test-of-proportions",
     "title": "Chapter 4:Introduction to Statistical Inference",
     "section": "Test of proportions",
-    "text": "Test of proportions\nTesting for a single proportion\nA sample survey of size 1000 has had 450 females.\n\nCan we treat the survey as unbiased?\n\n\nprop.test(450, 1000)\n\n\n    1-sample proportions test with continuity correction\n\ndata:  450 out of 1000, null probability 0.5\nX-squared = 9.801, df = 1, p-value = 0.001744\nalternative hypothesis: true p is not equal to 0.5\n95 percent confidence interval:\n 0.4189204 0.4814685\nsample estimates:\n   p \n0.45 \n\n\nAn exact version of the test\n\n\n\n    Exact binomial test\n\ndata:  c(450, 550)\nnumber of successes = 450, number of trials = 1000, p-value &lt; 2.2e-16\nalternative hypothesis: true probability of success is not equal to 0.75\n95 percent confidence interval:\n 0.4188517 0.4814435\nsample estimates:\nprobability of success \n                  0.45"
+    "text": "Test of proportions\nTesting for a single proportion being different to 0.5, or some other value.\nA sample survey of size 1000 has had 450 females.\nCan we treat the survey as unbiased?\n\nprop.test(450, 1000)\n\n\n    1-sample proportions test with continuity correction\n\ndata:  450 out of 1000, null probability 0.5\nX-squared = 9.801, df = 1, p-value = 0.001744\nalternative hypothesis: true p is not equal to 0.5\n95 percent confidence interval:\n 0.4189204 0.4814685\nsample estimates:\n   p \n0.45 \n\n\nAn exact version of the test\n\n\n\n    Exact binomial test\n\ndata:  c(450, 550)\nnumber of successes = 450, number of trials = 1000, p-value = 0.001731\nalternative hypothesis: true probability of success is not equal to 0.5\n95 percent confidence interval:\n 0.4188517 0.4814435\nsample estimates:\nprobability of success \n                  0.45 \n\n\nOr, for a test for a proportion other than 0.5\n\n\n\n    Exact binomial test\n\ndata:  c(450, 550)\nnumber of successes = 450, number of trials = 1000, p-value &lt; 2.2e-16\nalternative hypothesis: true probability of success is not equal to 0.75\n95 percent confidence interval:\n 0.4188517 0.4814435\nsample estimates:\nprobability of success \n                  0.45"
   },
   {
     "objectID": "slides/Chapter04.html#comparing-several-proportions",
@@ -858,7 +858,7 @@
     "href": "slides/Chapter04.html#transformations",
     "title": "Chapter 4:Introduction to Statistical Inference",
     "section": "Transformations",
-    "text": "Transformations\n\nTransformations re-express the data\nThe linear transformation \\(Y^*= a+bY\\) result only in a change of scale or of origin\nA linear transformation does not change the shape of the distribution i.e. histogram, boxplot etc. remain the same shape\nWe prefer non-linear transformations which alter the shape of the distribution\nTransformations are needed to-\n\nto bring symmetry\nnormality\nstabilise the variance etc"
+    "text": "Transformations\n\nI can be useful to transform data to make the distribution more ‘normal’\nThe linear transformation \\(Y^*= a+bY\\) result only in a change of scale or of origin\nA linear transformation does not change the shape of the distribution i.e. histogram, boxplot etc. remain the same shape\nWe prefer non-linear transformations which alter the shape of the distribution\nTransformations are needed to-\n\nto bring symmetry\nnormality\nstabilise the variance etc"
   },
   {
     "objectID": "slides/Chapter04.html#example-1",
@@ -2692,7 +2692,7 @@
     "href": "slides/Chapter04.html#quetelets-dataset-1",
     "title": "Chapter 4:Introduction to Statistical Inference",
     "section": "Quetelet’s dataset",
-    "text": "Quetelet’s dataset\nEvery soldier was measured so we can treat this as the population, and \\(\\mu\\) = 39.83 and \\(\\sigma\\) = 2.05 as population parameters. Let’s take some samples of size \\(n\\) = 6 from this population.\n\n# Convert to a long vector of values\nqd_long &lt;- rep(qd$Chest, qd$Count)\n\n\n\n# A single sample\nsample(qd_long, size = 6)\n\n[1] 39 38 39 40 38 42\n\n\n\n\n\n# Ten samples\nmap(1:7, ~ sample(qd_long, size = 6))\n\n[[1]]\n[1] 36 40 38 40 41 42\n\n[[2]]\n[1] 39 38 43 34 40 40\n\n[[3]]\n[1] 42 40 38 42 40 38\n\n[[4]]\n[1] 37 36 37 43 40 42\n\n[[5]]\n[1] 40 39 41 38 38 40\n\n[[6]]\n[1] 39 38 41 35 45 43\n\n[[7]]\n[1] 38 39 39 37 41 41"
+    "text": "Quetelet’s dataset\nEvery soldier was measured so we can treat this as the population, and \\(\\mu\\) = 39.83 and \\(\\sigma\\) = 2.05 as population parameters. Let’s take some samples of size \\(n\\) = 6 from this population.\n\n# Convert to a long vector of values\nqd_long &lt;- rep(qd$Chest, qd$Count)\n\n\n\n# A single sample\nsample(qd_long, size = 6)\n\n[1] 39 42 38 37 40 36\n\n\n\n\n\n# Ten samples\nmap(1:7, ~ sample(qd_long, size = 6))\n\n[[1]]\n[1] 40 40 40 40 41 41\n\n[[2]]\n[1] 40 41 39 41 42 40\n\n[[3]]\n[1] 42 43 41 43 38 37\n\n[[4]]\n[1] 40 38 41 41 38 39\n\n[[5]]\n[1] 42 46 39 38 39 42\n\n[[6]]\n[1] 39 39 43 43 42 40\n\n[[7]]\n[1] 40 39 40 41 40 43"
   },
   {
     "objectID": "slides/Chapter04.html#sampling-variation",
@@ -2706,14 +2706,14 @@
     "href": "slides/Chapter04.html#quetelets-dataset-2",
     "title": "Chapter 4:Introduction to Statistical Inference",
     "section": "Quetelet’s dataset",
-    "text": "Quetelet’s dataset\nEvery soldier was measured so we can treat this as the population, and \\(\\mu\\) = 39.83 and \\(\\sigma\\) = 2.05 as population parameters. Let’s take some samples of size \\(n\\) = 6 from this population.\n\n# Convert to a long vector of values\nqd_long &lt;- rep(qd$Chest, qd$Count)\n\n\n\n# Put ten samples in a tibble\nq_samples &lt;- tibble( sample = as_factor(1:10) ) |&gt; \n  mutate( \n    values = map(sample, ~ sample(qd_long, size = 6)) \n    ) |&gt; \n  unnest()\n\nhead(q_samples, 15)\n\n# A tibble: 15 × 2\n   sample values\n   &lt;fct&gt;   &lt;int&gt;\n 1 1          42\n 2 1          38\n 3 1          39\n 4 1          39\n 5 1          41\n 6 1          42\n 7 2          38\n 8 2          39\n 9 2          40\n10 2          42\n11 2          38\n12 2          42\n13 3          37\n14 3          39\n15 3          39"
+    "text": "Quetelet’s dataset\nEvery soldier was measured so we can treat this as the population, and \\(\\mu\\) = 39.83 and \\(\\sigma\\) = 2.05 as population parameters. Let’s take some samples of size \\(n\\) = 6 from this population.\n\n# Convert to a long vector of values\nqd_long &lt;- rep(qd$Chest, qd$Count)\n\n\n\n# Put ten samples in a tibble\nq_samples &lt;- tibble( sample = as_factor(1:10) ) |&gt; \n  mutate( \n    values = map(sample, ~ sample(qd_long, size = 6)) \n    ) |&gt; \n  unnest()\n\nhead(q_samples, 15)\n\n# A tibble: 15 × 2\n   sample values\n   &lt;fct&gt;   &lt;int&gt;\n 1 1          39\n 2 1          39\n 3 1          42\n 4 1          39\n 5 1          41\n 6 1          41\n 7 2          36\n 8 2          40\n 9 2          39\n10 2          38\n11 2          41\n12 2          44\n13 3          41\n14 3          40\n15 3          39"
   },
   {
     "objectID": "slides/Chapter04.html#quetelets-dataset-3",
     "href": "slides/Chapter04.html#quetelets-dataset-3",
     "title": "Chapter 4:Introduction to Statistical Inference",
     "section": "Quetelet’s dataset",
-    "text": "Quetelet’s dataset\nEvery soldier was measured so we can treat this as the population, and \\(\\mu\\) = 39.83 and \\(\\sigma\\) = 2.05 as population parameters. Let’s take some samples of size \\(n\\) = 6 from this population.\n\n# Convert to a long vector of values\nqd_long &lt;- rep(qd$Chest, qd$Count)\n\n\n# Put ten samples in a tibble\nq_samples &lt;- tibble( sample = as_factor(1:10) ) |&gt; \n  mutate( \n    values = map(sample, ~ sample(qd_long, size = 6)) \n    ) |&gt; \n  unnest()\n\n\n\n# Calculate means of each sample\nsample_means &lt;- q_samples |&gt; group_by(sample) |&gt; \n  summarise(mean = mean(values))\n\nsample_means\n\n# A tibble: 10 × 2\n   sample  mean\n   &lt;fct&gt;  &lt;dbl&gt;\n 1 1       39.2\n 2 2       39.7\n 3 3       38.7\n 4 4       41.3\n 5 5       40.3\n 6 6       38.5\n 7 7       39.3\n 8 8       40.7\n 9 9       40.7\n10 10      39.5"
+    "text": "Quetelet’s dataset\nEvery soldier was measured so we can treat this as the population, and \\(\\mu\\) = 39.83 and \\(\\sigma\\) = 2.05 as population parameters. Let’s take some samples of size \\(n\\) = 6 from this population.\n\n# Convert to a long vector of values\nqd_long &lt;- rep(qd$Chest, qd$Count)\n\n\n# Put ten samples in a tibble\nq_samples &lt;- tibble( sample = as_factor(1:10) ) |&gt; \n  mutate( \n    values = map(sample, ~ sample(qd_long, size = 6)) \n    ) |&gt; \n  unnest()\n\n\n\n# Calculate means of each sample\nsample_means &lt;- q_samples |&gt; group_by(sample) |&gt; \n  summarise(mean = mean(values))\n\nsample_means\n\n# A tibble: 10 × 2\n   sample  mean\n   &lt;fct&gt;  &lt;dbl&gt;\n 1 1       40  \n 2 2       38.5\n 3 3       40.5\n 4 4       40  \n 5 5       38.2\n 6 6       39.5\n 7 7       40.8\n 8 8       39.7\n 9 9       39.8\n10 10      39.8"
   },
   {
     "objectID": "slides/Chapter04.html#quetelets-dataset-4",
@@ -2868,5 +2868,54 @@
     "title": "Chapter 4:Introduction to Statistical Inference",
     "section": "Confidence intervals for sample means",
     "text": "Confidence intervals for sample means"
+  },
+  {
+    "objectID": "slides/Chapter04.html#testing-hypotheses",
+    "href": "slides/Chapter04.html#testing-hypotheses",
+    "title": "Chapter 4:Introduction to Statistical Inference",
+    "section": "Testing hypotheses",
+    "text": "Testing hypotheses\n\nTesting hypotheses underpins a lot of scientific work.\nA hypothesis is a proposition, a specific idea about the state of the world that can be tested with data.\nFor logical reasons, instead of measuring evidence for a hypothesis of interest, scientists will often:\n\nspecify a null hypotheses, a hypothesis that is true if our hypothesis of interest is false, and\nmeasure the evidence against the null hypothesis, usually in the form of a p-value."
+  },
+  {
+    "objectID": "slides/Chapter04.html#example-growth-of-alfalfa",
+    "href": "slides/Chapter04.html#example-growth-of-alfalfa",
+    "title": "Chapter 4:Introduction to Statistical Inference",
+    "section": "Example: growth of alfalfa",
+    "text": "Example: growth of alfalfa\nSay a farmer has 9 paddocks of alfalfa. He’s hired a new manager, and wants to know if, on average, this year’s crop is different to last year’s. He measures the yield for each paddock in year 1 and year 2, and calculates the difference.\n\nyear1 &lt;- c(0.8, 1.3, 1.7, 1.7, 1.8, 2.0, 2.0, 2.0, 2.2)\nyear2 &lt;- c(0.7, 1.4, 1.8, 1.8, 2.0, 2.0, 2.1, 2.1, 2.2)\ndiff &lt;- year2 - year1\n( xbar &lt;- mean(diff) ) ; ( s &lt;- sd(diff) )\n\n[1] 0.06666667\n\n\n[1] 0.08660254\n\n\nThe mean difference is 0.067. On average, yields were 0.067 greater than last year.\nIs that convincing different from zero?\nHow likely is such a difference to have arisen just by chance, and really, if we had a million paddocks, there would be no difference?\nWhat is the probability of seeing a difference of 0.067 or more in our dataset if the true mean were zero?\nThese questions can be addressed with a \\(p\\)-value from a hypothesis test."
+  },
+  {
+    "objectID": "slides/Chapter04.html#example-growth-of-alfalfa-1",
+    "href": "slides/Chapter04.html#example-growth-of-alfalfa-1",
+    "title": "Chapter 4:Introduction to Statistical Inference",
+    "section": "Example: growth of alfalfa",
+    "text": "Example: growth of alfalfa\nThe hypothesis of interest (called the “alternative” hypothesis) is:\n\\(\\ \\ \\ \\ \\ H_A: \\mu \\ne 0\\), that is, the mean difference in yield \\(\\mu\\) between the two years is not zero.\nThe null hypothesis (the case if the alternative hypothesis is wrong) is:\n\\(\\ \\ \\ \\ \\ H_0: \\mu = 0\\), that is, the mean difference is zero.\nWe can test the null hypothesis using a t statistic \\(t_0 = \\frac{\\bar x - \\mu_0} {text{SE}(\\bar x)}\\), where\n\\(\\ \\ \\ \\ \\ \\mu_0 = 0\\) is the hypothesised value of the mean and\n\\(\\ \\ \\ \\ \\ \\text{SE}(\\bar x) = s/\\sqrt{n}\\) is the standard error of the sample mean.\n\n( t0 &lt;- (xbar - 0) / ( s / sqrt(9) ) )\n\n[1] 2.309401\n\n\nThe p-value is \\(\\text{Pr}(|t_{df=8}| &gt; t_0)\\)\n\n2 * pt(t0, df = 8, lower = F)\n\n[1] 0.04973556"
+  },
+  {
+    "objectID": "slides/Chapter04.html#example-growth-of-alfalfa-2",
+    "href": "slides/Chapter04.html#example-growth-of-alfalfa-2",
+    "title": "Chapter 4:Introduction to Statistical Inference",
+    "section": "Example: growth of alfalfa",
+    "text": "Example: growth of alfalfa\nThe hypothesis of interest (called the “alternative” hypothesis) is:\n\\(\\ \\ \\ \\ \\ H_A: \\mu \\ne 0\\), that is, the mean difference in yield \\(\\mu\\) between the two years is not zero.\nThe null hypothesis (the case if the alternative hypothesis is wrong) is:\n\\(\\ \\ \\ \\ \\ H_0: \\mu = 0\\), that is, the mean difference is zero.\nThis can be done more easily:\n\n\n\n    One Sample t-test\n\ndata:  diff\nt = 2.3094, df = 8, p-value = 0.04974\nalternative hypothesis: true mean is not equal to 0\n95 percent confidence interval:\n 9.806126e-05 1.332353e-01\nsample estimates:\n mean of x \n0.06666667"
+  },
+  {
+    "objectID": "slides/Chapter04.html#example-growth-of-alfalfa-3",
+    "href": "slides/Chapter04.html#example-growth-of-alfalfa-3",
+    "title": "Chapter 4:Introduction to Statistical Inference",
+    "section": "Example: growth of alfalfa",
+    "text": "Example: growth of alfalfa\nThe \\(p\\)-value of 0.05 means that, if the null hypothesis were true, only 5% of sample means would be as or more extreme than the observed value of 0.067. It is the area in orange in the graph below.\nWe can therefore reject the null hypothesis at the conventional 5% level, and conclude that, on average, yields were indeed higher this year.\nThis is an example of a paired t test. They two samples (year 1 and year 2) are not independent of one another because we have the same paddocks in both years. So, we take the differences, treat them like a single sample, and do a one-sample t test for the mean difference being zero.\n\\(p\\)-values are random variables too.\nhttps://shiny.massey.ac.nz/anhsmith/demos/demo.p.is.rv/"
+  },
+  {
+    "objectID": "slides/Chapter04.html#shiny-apps-some-not-currently-working",
+    "href": "slides/Chapter04.html#shiny-apps-some-not-currently-working",
+    "title": "Chapter 4:Introduction to Statistical Inference",
+    "section": "Shiny apps (some not currently working)",
+    "text": "Shiny apps (some not currently working)\nhttps://shiny.massey.ac.nz/anhsmith/demos/demo.2sample.t.test/\nhttps://shiny.massey.ac.nz/anhsmith/demos/explore.2sample.t-test/\nhttps://shiny.massey.ac.nz/anhsmith/demos/explore.paired.t-test/\nFor more on non-parametric tests, see Study Guide."
+  },
+  {
+    "objectID": "slides/Chapter04.html#tests-for-normality",
+    "href": "slides/Chapter04.html#tests-for-normality",
+    "title": "Chapter 4:Introduction to Statistical Inference",
+    "section": "Tests for normality",
+    "text": "Tests for normality\n\nEDA approaches\n\nnormal quantile plot, Boxplots,mids vs. spreads plot etc.\n\nHypothesis tests\n\nKolmogorov-Smirnov test (based on the biggest difference between the empirical and theoretical cumulative distributions)\nShapiro-Wilk test (based on variance of the difference)\n\nExample: N(100,1) random data of size \\(n=50\\)\n\nThe null hypothesis of normality must be justified on empirical grounds\n\n\n\n\n\n    Shapiro-Wilk normality test\n\ndata:  rnorm(50, mean = 100)\nW = 0.94504, p-value = 0.02142\n\n\n\n    Exact one-sample Kolmogorov-Smirnov test\n\ndata:  rnorm(50)\nD = 0.088169, p-value = 0.7995\nalternative hypothesis: two-sided"
   }
 ]
