@@ -206,12 +206,32 @@ If you're using R projects and GitHub, this online book is a great place to star
 Most data sets we shall consider in this course are in a tabular form.
 This means that each variable is a column, each row is an observation,
 columns are separated by white space (or comma), and each column or row
-may have a name. If a data set of this form is stored in a plain ASCII
-text file, then we can import this file using the `Import Dataset`option
-in RStudio.
+may have a name. 
 
-![](img/rstudioimport.jpg)
+If the data file is stored locally, you should put the data into the same directory as your Quarto or R markdown script. That way, you can (usually) load it easily without having to type the full pathway (e.g., `mydata.csv` rather than `C:/Users/anhsmith/Work/Project1/data/mydata.csv`). Better yet, [Projects](https://r4ds.hadley.nz/workflow-scripts#projects) make this much easier.
 
+You can also load data from the web using a URL. For example,
+
+```{r}
+read_csv("https://www.massey.ac.nz/~anhsmith/data/rangitikei.csv")
+```
+
+We'd usually want to store the data as an object though, like so:
+
+```{r}
+rangitikei <- read_csv("https://www.massey.ac.nz/~anhsmith/data/rangitikei.csv")
+```
+
+Now the data are available in R as an object.
+
+```{r}
+glimpse(rangitikei)
+```
+
+
+If the data are stored as a `*.csv` or "comma separated values" file, then you can use the `read.csv()` or `read_csv()` function to load the file. If it's a text file with columns separated by spaces or tabs, you can use  `read.table()` or `read_table()` function. The ones with underscores ( `read_csv()` and `read_table()`) are in the `readr` package, so you'll need to load it first (though `readr` is part of `tidyverse`, so if you load `tidyverse` you're all set). 
+
+You can also load Microsoft Excel files using functions `read_excel()`, available in the `readxl` package.
 
 As an exercise, try importing the Telomeres data file (in Excel format)
 available at
@@ -222,13 +242,10 @@ Note that Excel files usually contain blanks for missing or unreported
 data or allocate many rows for variable description, which can cause
 issues while importing them.
 
+Native R data, stored as `*.RData` or `*.rds` files, can be loaded using the `load()` or `readRDS()` functions, respectively.
+
 SQLite is a public-domain, light-weight database engine (https://sqlite.org/about.html). The R package `RSQLite` will import *.sqlite files. Databases are usually large in size, and hence R packages such as `dbplyr` can be used package to query a database.
 
-Existing `*.RData` files can be added to the RStudio Environment for
-further analysis just by double clicking.
-
-We will be mainly using RStudio menus for loading the data or use R
-commands to load the data for assignments.
 
 # Graphing with `ggplot2` {.unnumbered}
 
@@ -239,7 +256,7 @@ website](https://ggplot2.tidyverse.org/reference/). The `ggplot2` package is loa
 
 Advantages of `ggplot2` are the following:
 
--   employs the `grammar of graphics` of [@Wilkinson]
+-   employs the "grammar of graphics" of [@Wilkinson]
 -   plotting involves a high level of abstraction
 -   very flexible and complete graphics system
 -   theme system for getting attractive plots
