@@ -213,18 +213,21 @@ If the data file is stored locally, you should put the data into the same direct
 You can also load data from the web using a URL. For example,
 
 ```{r}
+#| code-fold: show
 read_csv("https://www.massey.ac.nz/~anhsmith/data/rangitikei.csv")
 ```
 
 We'd usually want to store the data as an object though, like so:
 
 ```{r}
+#| code-fold: show
 rangitikei <- read_csv("https://www.massey.ac.nz/~anhsmith/data/rangitikei.csv")
 ```
 
 Now the data are available in R as an object.
 
 ```{r}
+#| code-fold: show
 glimpse(rangitikei)
 ```
 
