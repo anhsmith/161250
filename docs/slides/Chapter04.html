@@ -489,7 +489,7 @@
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># A single sample</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="fu">sample</span>(qd_long, <span class="at">size =</span> <span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 40 38 37 41 42 40</code></pre>
+<pre><code>[1] 37 38 40 44 38 41</code></pre>
 </div>
 </div>
 </div>
@@ -499,25 +499,25 @@
 <span id="cb5-2"><a href="#cb5-2"></a><span class="fu">map</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>, <span class="sc">~</span> <span class="fu">sample</span>(qd_long, <span class="at">size =</span> <span class="dv">6</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[1]]
-[1] 41 39 42 41 41 37
+[1] 40 40 40 35 39 37
 
 [[2]]
-[1] 40 37 43 39 41 41
+[1] 40 41 39 40 41 38
 
 [[3]]
-[1] 36 41 40 41 41 41
+[1] 39 40 39 43 41 39
 
 [[4]]
-[1] 41 41 38 36 46 41
+[1] 40 42 42 43 37 41
 
 [[5]]
-[1] 40 41 40 39 41 40
+[1] 41 38 39 40 37 40
 
 [[6]]
-[1] 37 38 41 35 40 39
+[1] 39 39 40 41 40 42
 
 [[7]]
-[1] 40 41 41 41 39 41</code></pre>
+[1] 40 42 39 40 40 37</code></pre>
 </div>
 </div>
 </div>
@@ -543,21 +543,21 @@
 <pre><code># A tibble: 15 × 2
    sample values
    &lt;fct&gt;   &lt;int&gt;
- 1 1          42
- 2 1          40
- 3 1          41
- 4 1          41
+ 1 1          41
+ 2 1          41
+ 3 1          37
+ 4 1          43
  5 1          39
- 6 1          40
- 7 2          37
- 8 2          42
- 9 2          39
-10 2          38
-11 2          39
-12 2          43
+ 6 1          41
+ 7 2          38
+ 8 2          39
+ 9 2          42
+10 2          40
+11 2          41
+12 2          39
 13 3          41
-14 3          41
-15 3          36</code></pre>
+14 3          37
+15 3          38</code></pre>
 </div>
 </div>
 </div>
@@ -588,16 +588,16 @@
 <pre><code># A tibble: 10 × 2
    sample  mean
    &lt;fct&gt;  &lt;dbl&gt;
- 1 1       40.5
- 2 2       39.7
- 3 3       38.8
- 4 4       39.3
- 5 5       38  
+ 1 1       38.8
+ 2 2       41.2
+ 3 3       37.7
+ 4 4       40.5
+ 5 5       39.8
  6 6       40.2
- 7 7       40  
- 8 8       40  
- 9 9       39.7
-10 10      38.5</code></pre>
+ 7 7       38.8
+ 8 8       41.5
+ 9 9       39.5
+10 10      39  </code></pre>
 </div>
 </div>
 </div>

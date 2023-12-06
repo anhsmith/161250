@@ -605,7 +605,8 @@ plot_area <- function(lower, upper) {
 p1 <- plot_area(-1, 1)
 p2 <- plot_area(-2, 2)
 p3 <- plot_area(-3, 3)
-p4 <- plot_area(-1.946, 1.946)
+p4 <- plot_area(-1.96, 1.96)
+
 library(patchwork)
 p1+p2+p3+p4
 ```

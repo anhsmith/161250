@@ -1133,16 +1133,17 @@ load("pinetree.RData")
 
 library(GGally)
 
-ggpairs(pinetree[,2:5],
-        mapping=aes(shape=pinetree$Area))
-
+ggpairs(pinetree, columns = 2:5)
 ```
 
 It is also possible to use the colour option as well as the subgroup-wise correlation coefficients. Try
 
 ```
-ggpairs(pinetree[,2:5],
-        mapping=aes(color=pinetree$Area))
+ggpairs(
+  pinetree, 
+  columns = 2:5,
+  mapping = aes(colour = Area)
+  )
 ```
 
 ### Exploring bivariate distributions

@@ -71,10 +71,11 @@ Prestige |>
   ggplot() + 
   aes(prestige) +
   geom_histogram(aes(y=after_stat(density)), bins=10) +
-  stat_function(fun = dnorm,
-                args=list(mean=mean(Prestige$prestige),
-                          sd=sd(Prestige$prestige)), 
-                geom = "line")
+  stat_function(
+    fun = dnorm,
+    args = list(mean = mean(Prestige$prestige),
+                sd = sd(Prestige$prestige) ), 
+    geom = "line")
 
 ```
 
@@ -85,10 +86,14 @@ library(car)
 
 hist(Prestige$prestige, probability=T)
 
-curve(dnorm(x, 
-            mean(Prestige$prestige), 
-            sd(Prestige$prestige)), 
-      add= T, lty=2)
+curve(
+  dnorm(x, 
+        mean(Prestige$prestige), 
+        sd(Prestige$prestige)
+        ), 
+  add= T, 
+  lty=2
+  )
 ```
 
 
@@ -156,7 +161,7 @@ descdist(Prestige$prestige)
 ```
 
 
-More graphing examples are [here](https://www.massey.ac.nz/~anhsmith/250/exercises/chap03more.R) (R codes file).
+More graphing examples are [here](https://www.massey.ac.nz/~anhsmith/161250/exercises/chap03more.R) (R code file).
 
 
 
