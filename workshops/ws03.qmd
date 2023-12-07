@@ -79,28 +79,31 @@ Prestige |>
 
 ```
 
-or
+Let's try a square-root transformation
 
 ```{r, fig.show="hide"}
+library(tidyverse)
 library(car)
 
-hist(Prestige$prestige, probability=T)
+Prestige |> 
+  ggplot() + 
+  aes(sqrt(prestige)) +
+  geom_histogram(aes(y=after_stat(density)), bins=10) +
+  stat_function(
+    fun = dnorm,
+    args = list(mean = mean(sqrt(Prestige$prestige)),
+                sd = sd(sqrt(Prestige$prestige)) ), 
+    geom = "line") +
+  ggtitle("Square-root prestige")
 
-curve(
-  dnorm(x, 
-        mean(Prestige$prestige), 
-        sd(Prestige$prestige)
-        ), 
-  add= T, 
-  lty=2
-  )
 ```
 
 
 # Exercise 3.3 {-}
 
-Obtain the normal quantile plot and test for the normality for `prestige` scores data.
+Let's look at the `prestige` scores variable to see how well it conforms with a normal distribution. 
 
+First, make a normal quantile plot.
 
 ```{r, fig.show="hide"}
 Prestige |> 
@@ -109,24 +112,64 @@ Prestige |>
   stat_qq() + 
   stat_qq_line()
 
-# or
-qqnorm(Prestige$prestige)
-qqline(Prestige$prestige)
+```
+The x-axis are theoretical quantiles of a normal distribution; the y-axis are the quantiles of the actual data. 
+
+If the data conformed perfectly to a normal distribution, the points would lie perfectly along the line. 
+
+The above plot shows that these data conform pretty well to the normal. There is very often some departure in the 'tails' at either end, like there is here. Here's a plot of data that were *actually simulated from a normal distribution* for comparison:
+
+```{r}
+set.seed(111)
+
+data.frame(x = rnorm(
+  n = nrow(Prestige),
+  mean = mean(Prestige$prestige), 
+  sd = sd(Prestige$prestige)
+  )) |> 
+  ggplot() + 
+  aes(sample = x) + 
+  stat_qq() + 
+  stat_qq_line()
+
 ```
 
+Now, we'll do some tests for whether `prestige` scores show a "significant" departure from the normal distribution.
+
+The null hypothesis is that the data came from a normal distribution. A small *p*-value (say, < 0.05) would lead us to reject the null hypothesis and conclude that the data are unlikely to have come from a normal distribution. A large *p*-value (> 0.05) means we have no evidence of non-normality. 
+
+First, the Shapiro-Wilk test.
 
 ```{r, results='hide'}
 shapiro.test(Prestige$prestige)
+```
+Here, the null hypothesis is rejected, so the data are unlikely to have come from a normal. 
 
+The Kolmogorov-Smirnov test can also be used. It differs from the Shapiro-Wilk in that you specify the mean and SD of the distribution (here using the sample mean and SD). 
+
+```{r, results='hide'}
 ks.test(Prestige$prestige, 
         "pnorm", 
         mean(Prestige$prestige), 
         sd(Prestige$prestige) )
 ```
+Here we have a discrepancy. S-W rejected the null hypothesis, and K-S did not. It is well-known that S-W is generally more powerful (i.e., more likely to reject a false null hypothesis). 
+
+At any rate, I don't believe in "true" distributions. Would I feel comfortable using a normal here? Possibly. It all depends on the context. Remember, there are no true models, only useful ones. 
+
+We can try the square-root transformed `prestige` with . 
+
+```{r, results='hide'}
+shapiro.test(sqrt(Prestige$prestige))
+```
+No significant departure from normality for the sqrt-transformed data.
+
 
 # Exercise 3.4 {-}
 
 Examine the fit of non-normal distributions for `prestige` scores data.
+
+## Log-normal
 
 ```{r}
 library(fitdistrplus)
@@ -135,7 +178,7 @@ m1 <- fitdist(Prestige$prestige, "lnorm")
 
 plot(m1)
 ```
-
+## Gamma
 
 ```{r}
 library(fitdistrplus)
@@ -146,6 +189,7 @@ plot(m2)
 ```
 
 
+## Weibull
 
 ```{r}
 library(fitdistrplus)
