@@ -489,7 +489,7 @@
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># A single sample</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="fu">sample</span>(qd_long, <span class="at">size =</span> <span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 37 40 42 42 41 39</code></pre>
+<pre><code>[1] 37 34 39 38 38 39</code></pre>
 </div>
 </div>
 </div>
@@ -499,25 +499,25 @@
 <span id="cb5-2"><a href="#cb5-2"></a><span class="fu">map</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>, <span class="sc">~</span> <span class="fu">sample</span>(qd_long, <span class="at">size =</span> <span class="dv">6</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[1]]
-[1] 40 42 44 37 41 41
+[1] 37 38 40 39 42 41
 
 [[2]]
-[1] 42 43 37 38 42 36
+[1] 40 41 37 41 40 39
 
 [[3]]
-[1] 39 40 37 39 42 39
+[1] 39 41 40 43 40 38
 
 [[4]]
-[1] 41 40 41 40 40 39
+[1] 45 35 39 40 38 41
 
 [[5]]
-[1] 40 37 41 38 37 40
+[1] 40 40 42 41 37 43
 
 [[6]]
-[1] 42 37 41 40 41 37
+[1] 41 41 40 38 42 41
 
 [[7]]
-[1] 42 39 39 43 37 43</code></pre>
+[1] 38 40 36 43 38 42</code></pre>
 </div>
 </div>
 </div>
@@ -543,21 +543,21 @@
 <pre><code># A tibble: 15 × 2
    sample values
    &lt;fct&gt;   &lt;int&gt;
- 1 1          41
- 2 1          42
- 3 1          41
- 4 1          38
- 5 1          39
+ 1 1          40
+ 2 1          38
+ 3 1          40
+ 4 1          37
+ 5 1          40
  6 1          41
- 7 2          41
- 8 2          39
+ 7 2          39
+ 8 2          37
  9 2          43
 10 2          41
-11 2          38
-12 2          38
-13 3          41
+11 2          39
+12 2          42
+13 3          38
 14 3          42
-15 3          42</code></pre>
+15 3          38</code></pre>
 </div>
 </div>
 </div>
@@ -588,16 +588,16 @@
 <pre><code># A tibble: 10 × 2
    sample  mean
    &lt;fct&gt;  &lt;dbl&gt;
- 1 1       38.5
- 2 2       39.8
- 3 3       40.3
- 4 4       40.3
- 5 5       40.8
- 6 6       37.8
- 7 7       39.8
- 8 8       40.5
- 9 9       38.7
-10 10      38.3</code></pre>
+ 1 1       39.5
+ 2 2       40.7
+ 3 3       39  
+ 4 4       39.3
+ 5 5       39.5
+ 6 6       39.7
+ 7 7       39  
+ 8 8       39.3
+ 9 9       41.5
+10 10      39.2</code></pre>
 </div>
 </div>
 </div>
@@ -1035,9 +1035,45 @@ sample estimates:
 </div>
 </div>
 </section>
+<section id="truth-and-outcomes" class="slide level2">
+<h2>Truth and outcomes</h2>
+<p>In reality, the null hypothesis is either true or false.</p>
+<p>The outcome of a test is either we reject the null hypothesis, or we fail to reject the null hypothesis (note, we never “confirm” or “accept” the null hypothesis – absence of evidence is not evidence of absence!).</p>
+<p>This gives us four possibilities:</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th><em><span class="math inline">\(H_0\)</span> is true</em></th>
+<th><em><span class="math inline">\(H_0\)</span> is false</em></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><em>Reject <span class="math inline">\(H_0\)</span></em></td>
+<td>Type I error</td>
+<td>Correct result</td>
+</tr>
+<tr class="even">
+<td><em>Fail to reject <span class="math inline">\(H_0\)</span></em></td>
+<td>Correct result</td>
+<td>Type II error</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="truth-and-outcomes-1" class="slide level2">
+<h2>Truth and outcomes</h2>
+<ul>
+<li><p>The probability of making a Type I error is set by the experimenter <em>a priori</em> (beforehand) as the significance level, <span class="math inline">\(\alpha\)</span>.</p></li>
+<li><p>For example, if we set <span class="math inline">\(\alpha\)</span> = 0.05, we know that we have a 5% chance of rejecting <span class="math inline">\(H_0\)</span> even when it is true (the Type I error rate is 0.05).</p></li>
+<li><p>The probability of retaining <span class="math inline">\(H_0\)</span> when it is false is usually represented by <span class="math inline">\(\beta\)</span> (“beta”).</p></li>
+<li><p>We usually do not know what this is. It depends on lots of things, like <span class="math inline">\(\sigma\)</span>, <span class="math inline">\(n\)</span> and also what the actual alternative hypothesis is.</p></li>
+</ul>
+</section>
 <section id="concept-of-power" class="slide level2">
 <h2>Concept of power</h2>
-<p>A hypothesis test has a certain <strong>power</strong> (probability) to reject the null hypothesis when it is false.</p>
+<p>The <strong><em>power</em></strong> of a hypothesis test is the probability of rejecting the null hypothesis if it is indeed false.</p>
 <p>The power of the t test can be evaluated using R for given effect size <span class="math inline">\(\delta\)</span></p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="fu">power.t.test</span>(<span class="at">n =</span> <span class="dv">30</span>, <span class="at">delta =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">sig.level =</span> <span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1069,6 +1105,8 @@ NOTE: n is number in *each* group</code></pre>
 NOTE: n is number in *each* group</code></pre>
 </div>
 </div>
+<p>The bigger the sample size, the bigger more power we have to detect an effect.</p>
+<p>Often, experimenters might aim to have a power of 80% or more, so they will most likely reject the null if it is false.</p>
 </section>
 <section id="sampling-distributions" class="slide level2">
 <h2>Sampling distributions</h2>
@@ -1093,24 +1131,16 @@ NOTE: n is number in *each* group</code></pre>
 <h2>Two sample t-test</h2>
 <ul>
 <li><p>In a two-sample t-test, the equality of two population means is tested. Null hypothesis <span class="math inline">\(H_0:\mu=\mu_1=\mu_2\)</span>. Two-sided Alternative hypothesis <span class="math inline">\(H_1:\mu_1 \neq \mu_2\)</span></p></li>
-<li><p>If EDA suggests that the two populations have the same spread, we perform a <strong>pooled-sample t-test</strong> in which the variance common to the two population is estimated as <span class="math inline">\(S_{p}^{2} = w_{1} S_{1}^{2} +w_{2} S_{2}^{2}\)</span> where the <em>weights</em> are <span class="math inline">\(w_{1} =\frac{n_{1}-1}{n_{1} +n_{2}-2}\)</span> and <span class="math inline">\(w_{2} =\frac{n_{2}-1}{n_{1} +n_{2}-2}\)</span></p></li>
+<li><p>If we can assume that two populations have the same spread, we perform a <strong>pooled-sample t-test</strong> in which the pooled variance (common to both populations) is estimated as <span class="math inline">\(S_{p}^{2} = w_{1} S_{1}^{2} +w_{2} S_{2}^{2}\)</span> where the <em>weights</em> are <span class="math inline">\(w_{1} =\frac{n_{1}-1}{n_{1} +n_{2}-2}\)</span> and <span class="math inline">\(w_{2} =\frac{n_{2}-1}{n_{1} +n_{2}-2}\)</span></p></li>
 <li><p>For the pooled case, the <span class="math inline">\(df\)</span> for the <span class="math inline">\(t\)</span>-test is <span class="math inline">\(n_{1}+n_{2}-2\)</span> but becomes smaller for the unpooled case to <span class="math display">\[df=\frac{\left(\frac{S_{1}^{2}}{n_{1}} +\frac{S_{2}^{2} }{n_{2}} \right)^{2} }{\frac{1}{n_{1} -1} \left(\frac{S_{1}^{2}}{n_{1}}\right)^{2} +\frac{1}{n_{2} -1} \left(\frac{S_{2}^{2}}{n_{2} } \right)^{2}} \]</span></p></li>
 </ul>
 </section>
 <section id="validity-of-equal-variance-assumption" class="slide level2">
 <h2>Validity of equal variance assumption</h2>
-<p>Equal variance assumption is found plausible in the following output:</p>
+<p>We can test the null hypothesis that the variances are equal using either a Bartlett’s test or Levene’s test. Levene’s is generally favourable over Bartlett’s.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a>tv <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="st">"https://www.massey.ac.nz/~anhsmith/data/tv.csv"</span>)</span>
-<span id="cb43-2"><a href="#cb43-2"></a><span class="fu">bartlett.test</span>(TELETIME<span class="sc">~</span>SEX, <span class="at">data=</span>tv)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Bartlett test of homogeneity of variances
-
-data:  TELETIME by SEX
-Bartlett's K-squared = 1.8482, df = 1, p-value = 0.174</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a>car<span class="sc">::</span><span class="fu">leveneTest</span>(TELETIME<span class="sc">~</span><span class="fu">factor</span>(SEX), <span class="at">data=</span>tv)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb43-2"><a href="#cb43-2"></a>car<span class="sc">::</span><span class="fu">leveneTest</span>(TELETIME<span class="sc">~</span><span class="fu">factor</span>(SEX), <span class="at">data=</span>tv)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Levene's Test for Homogeneity of Variance (center = median)
       Df F value  Pr(&gt;F)  
@@ -1120,7 +1150,44 @@ group  1  3.1789 0.08149 .
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
-<p>Highish <em>p-values</em> means there’s no strong evidence against the null hypothesis that the variances are equal.</p>
+<p>Highish <em>p-value</em> means there’s no strong evidence against the null hypothesis that the variances are equal. Therefore, we might feel happy to assume equal variances and use a pooled variance estimate.</p>
+</section>
+<section id="validity-of-equal-variance-assumption-1" class="slide level2">
+<h2>Validity of equal variance assumption</h2>
+<p><em>t</em>-test assuming equal variances:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a><span class="fu">t.test</span>(TELETIME <span class="sc">~</span> <span class="fu">factor</span>(SEX), <span class="at">var.equal =</span> <span class="cn">TRUE</span>, <span class="at">data=</span>tv)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Two Sample t-test
+
+data:  TELETIME by factor(SEX)
+t = -0.7249, df = 44, p-value = 0.4723
+alternative hypothesis: true difference in means between group 1 and group 2 is not equal to 0
+95 percent confidence interval:
+ -461.3476  217.2606
+sample estimates:
+mean in group 1 mean in group 2 
+       1668.261        1790.304 </code></pre>
+</div>
+</div>
+<p><em>t</em>-test <em>not</em> assuming equal variances (Welch test):</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a><span class="fu">t.test</span>(TELETIME <span class="sc">~</span> <span class="fu">factor</span>(SEX), <span class="at">data=</span>tv)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  TELETIME by factor(SEX)
+t = -0.7249, df = 40.653, p-value = 0.4727
+alternative hypothesis: true difference in means between group 1 and group 2 is not equal to 0
+95 percent confidence interval:
+ -462.1384  218.0514
+sample estimates:
+mean in group 1 mean in group 2 
+       1668.261        1790.304 </code></pre>
+</div>
+</div>
 </section>
 <section id="shiny-apps-some-not-currently-working" class="slide level2">
 <h2>Shiny apps (some not currently working)</h2>
@@ -1135,7 +1202,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>A sample survey of size 1000 has had 450 females.</p>
 <p>Can we treat the survey as unbiased?</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a><span class="fu">prop.test</span>(<span class="dv">450</span>, <span class="dv">1000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a><span class="fu">prop.test</span>(<span class="dv">450</span>, <span class="dv">1000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     1-sample proportions test with continuity correction
@@ -1187,9 +1254,9 @@ probability of success
 <h2>Comparing several proportions</h2>
 <p>Fleiss (1981) <em>Statistical methods for rates and proportions</em> data on smokers in four group of patients</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a>smokers  <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">83</span>, <span class="dv">90</span>, <span class="dv">129</span>, <span class="dv">70</span> )</span>
-<span id="cb51-2"><a href="#cb51-2"></a>patients <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">86</span>, <span class="dv">93</span>, <span class="dv">136</span>, <span class="dv">82</span> )</span>
-<span id="cb51-3"><a href="#cb51-3"></a><span class="fu">prop.test</span>(smokers, patients)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a>smokers  <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">83</span>, <span class="dv">90</span>, <span class="dv">129</span>, <span class="dv">70</span> )</span>
+<span id="cb53-2"><a href="#cb53-2"></a>patients <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">86</span>, <span class="dv">93</span>, <span class="dv">136</span>, <span class="dv">82</span> )</span>
+<span id="cb53-3"><a href="#cb53-3"></a><span class="fu">prop.test</span>(smokers, patients)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     4-sample test for equality of proportions without continuity correction
@@ -1221,6 +1288,8 @@ sample estimates:
 </ul></li>
 </ul>
 <div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb55-2"><a href="#cb55-2"></a><span class="fu">shapiro.test</span>(<span class="fu">rnorm</span>(<span class="dv">50</span>, <span class="at">mean=</span><span class="dv">100</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Shapiro-Wilk normality test
@@ -1228,6 +1297,7 @@ sample estimates:
 data:  rnorm(50, mean = 100)
 W = 0.94504, p-value = 0.02142</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a><span class="fu">ks.test</span>(<span class="fu">rnorm</span>(<span class="dv">50</span>), <span class="st">"pnorm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Exact one-sample Kolmogorov-Smirnov test
@@ -1240,12 +1310,19 @@ alternative hypothesis: two-sided</code></pre>
 </section>
 <section id="example" class="slide level2">
 <h2>Example</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1"></a>tv <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="st">"https://www.massey.ac.nz/~anhsmith/data/tv.csv"</span>)</span>
+<span id="cb59-2"><a href="#cb59-2"></a></span>
+<span id="cb59-3"><a href="#cb59-3"></a><span class="fu">ggplot</span>(tv, <span class="fu">aes</span>(<span class="at">sample =</span> TELETIME)) <span class="sc">+</span> </span>
+<span id="cb59-4"><a href="#cb59-4"></a>  <span class="fu">stat_qq</span>() <span class="sc">+</span> <span class="fu">stat_qq_line</span>() <span class="sc">+</span></span>
+<span id="cb59-5"><a href="#cb59-5"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Normal quantile plot for TV viewing times"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
-<img data-src="Chapter04_files/figure-revealjs/unnamed-chunk-37-1.png" width="384" class="r-stretch quarto-figure-center"></section>
+</div>
+<img data-src="Chapter04_files/figure-revealjs/unnamed-chunk-39-1.png" width="384" class="r-stretch quarto-figure-center"></section>
 <section id="transformations" class="slide level2">
 <h2>Transformations</h2>
 <ul>
-<li><p>I can be useful to transform data to make the distribution more ‘normal’</p></li>
+<li><p>I can be useful to transform data to make the distribution more like a ‘normal’</p></li>
 <li><p>The linear transformation <span class="math inline">\(Y^*= a+bY\)</span> result only in a change of scale or of origin</p></li>
 <li><p>A linear transformation does not change the shape of the distribution i.e.&nbsp;histogram, boxplot etc. remain the same shape</p></li>
 <li><p>We prefer non-linear transformations which alter the shape of the distribution</p></li>
@@ -1263,7 +1340,7 @@ alternative hypothesis: two-sided</code></pre>
 <li>Right skewed distribution is made roughly symmetric using a log transformation for no. of vehicles variable (rangitikei.* dataset)</li>
 </ul>
 
-<img data-src="Chapter04_files/figure-revealjs/unnamed-chunk-38-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="Chapter04_files/figure-revealjs/unnamed-chunk-40-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="a-ladder-of-powers-for-transforming-data" class="slide level2">
 <h2>A Ladder of Powers for Transforming Data</h2>
 <ul>
@@ -1333,33 +1410,6 @@ alternative hypothesis: two-sided</code></pre>
 </tbody>
 </table>
 </section>
-<section id="d-statistics" class="slide level2">
-<h2>D-statistics</h2>
-<ul>
-<li><p>D-statistics are used for checking the adequacy of a transformation</p></li>
-<li><p>Symmetry implies mean = median</p></li>
-<li><p>A simple approach is to plot the distance from the median for points below and above the median.</p></li>
-</ul>
-
-<img data-src="Chapter04_files/figure-revealjs/unnamed-chunk-39-1.png" width="960" class="r-stretch quarto-figure-center"><ul>
-<li><p>(mean-median) measures skew but we can standardise it in 3 ways</p>
-<ul>
-<li>D1 = |mean-median| / std.dev.</li>
-<li>D2 = |mean-median| / F-spread</li>
-<li>D3 = |mid_F-median| / F-spread</li>
-</ul></li>
-<li><p>D3 - sensitive to skewness in the middle 50% of data.<br>
-</p></li>
-<li><p>D1 &amp; D2 - sensitive to skewness in whole data</p></li>
-<li><p>Smaller the D value, the better the transformation for symmetry</p></li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="cell-output cell-output-stdout">
-<pre><code>         D1          D2          D3 
--0.04152225 -0.05830871  0.24199369 </code></pre>
-</div>
-</div>
-</section>
 <section id="box-cox-transformation" class="slide level2">
 <h2>Box-Cox transformation</h2>
 <ul>
@@ -1372,13 +1422,12 @@ alternative hypothesis: two-sided</code></pre>
 </ul>
 </section>
 <section id="statistical-inference-based-on-transformed-data" class="slide level2">
-<h2>Statistical Inference Based on Transformed data</h2>
+<h2>Statistical inference based on transformed data</h2>
 <ul>
-<li><p>Confidence intervals found as <code>estimate</code> <span class="math inline">\(\pm\)</span> <code>margin of error</code> require symmetry.</p></li>
 <li><p>Obtain the confidence interval using transformed data and then back transform the limits (to keep the original scale)</p>
 <ul>
-<li>The confidence limits of log transformed data can be exponentiated back (ie. <span class="math inline">\(e^{\text{confidence limit}}\)</span>)</li>
-<li>The confidence limits of square-root transformed data can be squared back (ie. <span class="math inline">\({\text{confidence limit}^2}\)</span>)</li>
+<li>The confidence limits calculated on log-transformed data can be exponentiated back to the raw scale (i.e., <span class="math inline">\(e^{\text{confidence limit}}\)</span>)</li>
+<li>The confidence limits of square-root-transformed data can be squared back to the raw scale (ie. <span class="math inline">\({\text{confidence limit}^2}\)</span>)</li>
 </ul></li>
 <li><p>For hypothesis test, apply the same transformation on the value hypothesised under the null</p></li>
 <li><p>Explore https://shiny.massey.ac.nz/anhsmith/demos/explore.transformations/ app (not currently working)</p></li>
@@ -1400,12 +1449,9 @@ alternative hypothesis: two-sided</code></pre>
 <h2>A Caution on the transformation technique</h2>
 <ul>
 <li>Perform EDA in addition to computing coefficients of skewness or D-Statistics etc</li>
-<li>Small datasets may reveal skewness (So ignore)</li>
-<li>Avoid a transformation if marginal improvement happens.</li>
-<li>Transformed data may be difficult to interpret</li>
-<li>Try other options such as subgrouping etc.</li>
-<li>Normalising transformations are different from transformations for symmetry</li>
-<li>Read the section from your SG</li>
+<li>Small datasets may look skewed, but might not be.</li>
+<li>Transformations make the data more difficult to interpret.</li>
+<li>In the context statistical models, we are only interested in whether the residuals (deviations from the fitted means) are normal—not whether the original variable is normal.</li>
 </ul>
 </section>
 <section id="variance-stabilisation" class="slide level2">
@@ -1418,26 +1464,6 @@ alternative hypothesis: two-sided</code></pre>
 <li>If there exists a relationship between spreads and averages, a single transformation can be applied for all the batches.</li>
 </ul>
 </section>
-<section id="example-2" class="slide level2">
-<h2>Example</h2>
-<ul>
-<li>Common shrinking transformation can be found in the following case</li>
-</ul>
-<!-- ```{r} -->
-<!-- library(tidyverse) -->
-
-<!-- hospital <- read.table("https://www.massey.ac.nz/~anhsmith/data/hospital.txt", header=TRUE, sep=",") -->
-<!-- dat <- hospital %>% group_by(YEAR) %>%  -->
-<!--   pivot_longer(cols =3:8, names_to = "Region", values_to = "Admissions") -->
-<!-- dat %>% group_by(interaction(YEAR, Region)) %>%  -->
-<!--   summarise(medians=median(Admissions), ranges=max(Admissions)-min(Admissions)) ->dat -->
-<!-- p1 <- ggplot(dat, aes(x=medians, y=ranges))+geom_point() -->
-<!-- p1 <- p1 +geom_smooth(method="lm", se=FALSE) -->
-<!-- p1 <- p1 +labs(title = "Range vs Median Plot") -->
-<!-- p1 -->
-<!-- ``` -->
-
-<img data-src="img/hospital_rangevmedian.png" class="r-stretch"></section>
 <section id="shiny-apps" class="slide level2">
 <h2>Shiny apps</h2>
 <p><a href="https://shiny.massey.ac.nz/anhsmith/demos/explore.transformations/" class="uri">https://shiny.massey.ac.nz/anhsmith/demos/explore.transformations/</a></p>
@@ -1533,7 +1559,7 @@ mean in group 1 mean in group 2
 <section id="another-form-of-test" class="slide level2">
 <h2>Another form of test</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1"></a><span class="fu">kruskal.test</span>(rangitikei<span class="sc">$</span>people<span class="sc">~</span>rangitikei<span class="sc">$</span>time)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1"></a><span class="fu">kruskal.test</span>(rangitikei<span class="sc">$</span>people<span class="sc">~</span>rangitikei<span class="sc">$</span>time)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Kruskal-Wallis rank sum test
@@ -1543,7 +1569,7 @@ Kruskal-Wallis chi-squared = 7.2171, df = 1, p-value = 0.007221</code></pre>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1"></a><span class="fu">wilcox.test</span>(rangitikei<span class="sc">$</span>people<span class="sc">~</span>rangitikei<span class="sc">$</span>time)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1"></a><span class="fu">wilcox.test</span>(rangitikei<span class="sc">$</span>people<span class="sc">~</span>rangitikei<span class="sc">$</span>time)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Wilcoxon rank sum test with continuity correction
@@ -1559,8 +1585,8 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <p>A permutation (or randomisation) test is based on the idea of randomly permuting the observed data and then answering whether a hypothesis is negated or not.</p>
 <p>One sample hypothesis test example follows:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1"></a><span class="fu">library</span>(exactRankTests)</span>
-<span id="cb67-2"><a href="#cb67-2"></a><span class="fu">perm.test</span>(tv<span class="sc">$</span>TELETIME, <span class="at">null.value=</span><span class="dv">1500</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1"></a><span class="fu">library</span>(exactRankTests)</span>
+<span id="cb71-2"><a href="#cb71-2"></a><span class="fu">perm.test</span>(tv<span class="sc">$</span>TELETIME, <span class="at">null.value=</span><span class="dv">1500</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     1-sample Permutation Test
@@ -1575,7 +1601,7 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
 <section id="two-group-comparison" class="slide level2">
 <h2>Two group comparison</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1"></a><span class="fu">perm.test</span>(TELETIME<span class="sc">~</span>SEX, <span class="at">distribution =</span><span class="st">'exact'</span>, <span class="at">data=</span>tv)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1"></a><span class="fu">perm.test</span>(TELETIME<span class="sc">~</span>SEX, <span class="at">distribution =</span><span class="st">'exact'</span>, <span class="at">data=</span>tv)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     2-sample Permutation Test
@@ -1587,8 +1613,8 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
 </div>
 <p>Also using a linear model fit (cover later)</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1"></a><span class="fu">library</span>(lmPerm)</span>
-<span id="cb71-2"><a href="#cb71-2"></a><span class="fu">summary</span>(<span class="fu">lmp</span>(TELETIME<span class="sc">~</span>SEX, <span class="at">data=</span>tv))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1"></a><span class="fu">library</span>(lmPerm)</span>
+<span id="cb75-2"><a href="#cb75-2"></a><span class="fu">summary</span>(<span class="fu">lmp</span>(TELETIME<span class="sc">~</span>SEX, <span class="at">data=</span>tv))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Settings:  unique SS : numeric variables centered"</code></pre>
 </div>
@@ -1603,7 +1629,7 @@ Residuals:
 
 Coefficients:
     Estimate Iter Pr(Prob)
-SEX      122   56    0.643
+SEX      122  129    0.442
 
 Residual standard error: 570.9 on 44 degrees of freedom
 Multiple R-Squared: 0.0118, Adjusted R-squared: -0.01066 
@@ -1614,18 +1640,23 @@ F-statistic: 0.5255 on 1 and 44 DF,  p-value: 0.4723 </code></pre>
 </section>
 <section id="summary" class="slide level2">
 <h2>Summary</h2>
-<p>Inference is less complicated for normal populations</p>
+<p>Basic methods of inference include:</p>
 <ul>
-<li>Assessment of normality is particularly important for small sample sizes</li>
-<li>Student t-tests are generally robust and can be used for non-normal populations (as long as there are no subgrouping or sample sizes are large)</li>
+<li>estimating a population parameter (e.g.&nbsp;mean) using a sample of values,</li>
+<li>estimating sampling variation using the standard error,</li>
+<li>constructing confidence intervals for an estimate, and</li>
+<li>testing hypotheses about particular values of the population parameter.</li>
 </ul>
-<p>Power transformations aim to achieve symmetry</p>
+<p>Inference is relatively easy for normally distributed populations.</p>
+<p>Student’s <em>t</em>-tests include:</p>
 <ul>
-<li>Box-Cox transformations aim to normalise the data</li>
-<li>Improved Inference can be made</li>
-<li>Subgrouping effect can be dampened</li>
+<li>one-sample <em>t</em>-test, including paired-sample <em>t</em>-test for a difference of zero</li>
+<li>two-sample <em>t</em>-test assuming equal variances (estimating pooled variance)</li>
+<li>two-sample <em>t</em>-test not assuming equal variances (Welch test)</li>
 </ul>
-<p>Permutation tests can be done for a second opinion</p>
+<p>The <em>t</em>-test is generally robust for non-normal populations (especially for large samples).</p>
+<p>Power transformations, such as square-root, log, or Box-Cox aim to reduce skewness.</p>
+<p>Non-parametric tests can be used for non-normal data.</p>
 <!-- ## Exercises -->
 <!-- download.file("<https://www.massey.ac.nz/~kgovinda/220exer/Chap3moreexamples.R>", destfile="Chap3moreexamples.R") -->
 <!-- download.file("<https://www.massey.ac.nz/~kgovinda/220exer/chapter-3-exercises.html>", destfile="chapter-3-exercises.html") -->

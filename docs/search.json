@@ -781,21 +781,21 @@
     "href": "slides/Chapter04.html#quetelets-dataset-1",
     "title": "Chapter 4:Introduction to Statistical Inference",
     "section": "Quetelet’s dataset",
-    "text": "Quetelet’s dataset\nEvery soldier was measured so we can treat this as the population, and \\(\\mu\\) = 39.83 and \\(\\sigma\\) = 2.05 as population parameters. Let’s take some samples of size \\(n\\) = 6 from this population.\n\n# Convert to a long vector of values\nqd_long &lt;- rep(qd$Chest, qd$Count)\n\n\n\n# A single sample\nsample(qd_long, size = 6)\n\n[1] 37 40 42 42 41 39\n\n\n\n\n\n# Ten samples\nmap(1:7, ~ sample(qd_long, size = 6))\n\n[[1]]\n[1] 40 42 44 37 41 41\n\n[[2]]\n[1] 42 43 37 38 42 36\n\n[[3]]\n[1] 39 40 37 39 42 39\n\n[[4]]\n[1] 41 40 41 40 40 39\n\n[[5]]\n[1] 40 37 41 38 37 40\n\n[[6]]\n[1] 42 37 41 40 41 37\n\n[[7]]\n[1] 42 39 39 43 37 43"
+    "text": "Quetelet’s dataset\nEvery soldier was measured so we can treat this as the population, and \\(\\mu\\) = 39.83 and \\(\\sigma\\) = 2.05 as population parameters. Let’s take some samples of size \\(n\\) = 6 from this population.\n\n# Convert to a long vector of values\nqd_long &lt;- rep(qd$Chest, qd$Count)\n\n\n\n# A single sample\nsample(qd_long, size = 6)\n\n[1] 37 34 39 38 38 39\n\n\n\n\n\n# Ten samples\nmap(1:7, ~ sample(qd_long, size = 6))\n\n[[1]]\n[1] 37 38 40 39 42 41\n\n[[2]]\n[1] 40 41 37 41 40 39\n\n[[3]]\n[1] 39 41 40 43 40 38\n\n[[4]]\n[1] 45 35 39 40 38 41\n\n[[5]]\n[1] 40 40 42 41 37 43\n\n[[6]]\n[1] 41 41 40 38 42 41\n\n[[7]]\n[1] 38 40 36 43 38 42"
   },
   {
     "objectID": "slides/Chapter04.html#quetelets-dataset-2",
     "href": "slides/Chapter04.html#quetelets-dataset-2",
     "title": "Chapter 4:Introduction to Statistical Inference",
     "section": "Quetelet’s dataset",
-    "text": "Quetelet’s dataset\nEvery soldier was measured so we can treat this as the population, and \\(\\mu\\) = 39.83 and \\(\\sigma\\) = 2.05 as population parameters. Let’s take some samples of size \\(n\\) = 6 from this population.\n\n# Convert to a long vector of values\nqd_long &lt;- rep(qd$Chest, qd$Count)\n\n\n\n# Put ten samples in a tibble\nq_samples &lt;- tibble( sample = as_factor(1:10) ) |&gt; \n  mutate( \n    values = map(sample, ~ sample(qd_long, size = 6)) \n    ) |&gt; \n  unnest()\n\nhead(q_samples, 15)\n\n# A tibble: 15 × 2\n   sample values\n   &lt;fct&gt;   &lt;int&gt;\n 1 1          41\n 2 1          42\n 3 1          41\n 4 1          38\n 5 1          39\n 6 1          41\n 7 2          41\n 8 2          39\n 9 2          43\n10 2          41\n11 2          38\n12 2          38\n13 3          41\n14 3          42\n15 3          42"
+    "text": "Quetelet’s dataset\nEvery soldier was measured so we can treat this as the population, and \\(\\mu\\) = 39.83 and \\(\\sigma\\) = 2.05 as population parameters. Let’s take some samples of size \\(n\\) = 6 from this population.\n\n# Convert to a long vector of values\nqd_long &lt;- rep(qd$Chest, qd$Count)\n\n\n\n# Put ten samples in a tibble\nq_samples &lt;- tibble( sample = as_factor(1:10) ) |&gt; \n  mutate( \n    values = map(sample, ~ sample(qd_long, size = 6)) \n    ) |&gt; \n  unnest()\n\nhead(q_samples, 15)\n\n# A tibble: 15 × 2\n   sample values\n   &lt;fct&gt;   &lt;int&gt;\n 1 1          40\n 2 1          38\n 3 1          40\n 4 1          37\n 5 1          40\n 6 1          41\n 7 2          39\n 8 2          37\n 9 2          43\n10 2          41\n11 2          39\n12 2          42\n13 3          38\n14 3          42\n15 3          38"
   },
   {
     "objectID": "slides/Chapter04.html#quetelets-dataset-3",
     "href": "slides/Chapter04.html#quetelets-dataset-3",
     "title": "Chapter 4:Introduction to Statistical Inference",
     "section": "Quetelet’s dataset",
-    "text": "Quetelet’s dataset\nEvery soldier was measured so we can treat this as the population, and \\(\\mu\\) = 39.83 and \\(\\sigma\\) = 2.05 as population parameters. Let’s take some samples of size \\(n\\) = 6 from this population.\n\n# Convert to a long vector of values\nqd_long &lt;- rep(qd$Chest, qd$Count)\n\n\n# Put ten samples in a tibble\nq_samples &lt;- tibble( sample = as_factor(1:10) ) |&gt; \n  mutate( \n    values = map(sample, ~ sample(qd_long, size = 6)) \n    ) |&gt; \n  unnest()\n\n\n\n# Calculate means of each sample\nsample_means &lt;- q_samples |&gt; group_by(sample) |&gt; \n  summarise(mean = mean(values))\n\nsample_means\n\n# A tibble: 10 × 2\n   sample  mean\n   &lt;fct&gt;  &lt;dbl&gt;\n 1 1       38.5\n 2 2       39.8\n 3 3       40.3\n 4 4       40.3\n 5 5       40.8\n 6 6       37.8\n 7 7       39.8\n 8 8       40.5\n 9 9       38.7\n10 10      38.3"
+    "text": "Quetelet’s dataset\nEvery soldier was measured so we can treat this as the population, and \\(\\mu\\) = 39.83 and \\(\\sigma\\) = 2.05 as population parameters. Let’s take some samples of size \\(n\\) = 6 from this population.\n\n# Convert to a long vector of values\nqd_long &lt;- rep(qd$Chest, qd$Count)\n\n\n# Put ten samples in a tibble\nq_samples &lt;- tibble( sample = as_factor(1:10) ) |&gt; \n  mutate( \n    values = map(sample, ~ sample(qd_long, size = 6)) \n    ) |&gt; \n  unnest()\n\n\n\n# Calculate means of each sample\nsample_means &lt;- q_samples |&gt; group_by(sample) |&gt; \n  summarise(mean = mean(values))\n\nsample_means\n\n# A tibble: 10 × 2\n   sample  mean\n   &lt;fct&gt;  &lt;dbl&gt;\n 1 1       39.5\n 2 2       40.7\n 3 3       39  \n 4 4       39.3\n 5 5       39.5\n 6 6       39.7\n 7 7       39  \n 8 8       39.3\n 9 9       41.5\n10 10      39.2"
   },
   {
     "objectID": "slides/Chapter04.html#quetelets-dataset-4",
@@ -942,7 +942,7 @@
     "href": "slides/Chapter04.html#concept-of-power",
     "title": "Chapter 4:Introduction to Statistical Inference",
     "section": "Concept of power",
-    "text": "Concept of power\nA hypothesis test has a certain power (probability) to reject the null hypothesis when it is false.\nThe power of the t test can be evaluated using R for given effect size \\(\\delta\\)\n\npower.t.test(n = 30, delta = 1, sd = 1, sig.level = 0.05)\n\n\n     Two-sample t test power calculation \n\n              n = 30\n          delta = 1\n             sd = 1\n      sig.level = 0.05\n          power = 0.9677083\n    alternative = two.sided\n\nNOTE: n is number in *each* group\n\npower.t.test(n = 50, delta = 1, sd = 1, sig.level = 0.05)\n\n\n     Two-sample t test power calculation \n\n              n = 50\n          delta = 1\n             sd = 1\n      sig.level = 0.05\n          power = 0.9986074\n    alternative = two.sided\n\nNOTE: n is number in *each* group"
+    "text": "Concept of power\nThe power of a hypothesis test is the probability of rejecting the null hypothesis if it is indeed false.\nThe power of the t test can be evaluated using R for given effect size \\(\\delta\\)\n\npower.t.test(n = 30, delta = 1, sd = 1, sig.level = 0.05)\n\n\n     Two-sample t test power calculation \n\n              n = 30\n          delta = 1\n             sd = 1\n      sig.level = 0.05\n          power = 0.9677083\n    alternative = two.sided\n\nNOTE: n is number in *each* group\n\npower.t.test(n = 50, delta = 1, sd = 1, sig.level = 0.05)\n\n\n     Two-sample t test power calculation \n\n              n = 50\n          delta = 1\n             sd = 1\n      sig.level = 0.05\n          power = 0.9986074\n    alternative = two.sided\n\nNOTE: n is number in *each* group\n\n\nThe bigger the sample size, the bigger more power we have to detect an effect.\nOften, experimenters might aim to have a power of 80% or more, so they will most likely reject the null if it is false."
   },
   {
     "objectID": "slides/Chapter04.html#sampling-distributions",
@@ -956,14 +956,14 @@
     "href": "slides/Chapter04.html#two-sample-t-test",
     "title": "Chapter 4:Introduction to Statistical Inference",
     "section": "Two sample t-test",
-    "text": "Two sample t-test\n\nIn a two-sample t-test, the equality of two population means is tested. Null hypothesis \\(H_0:\\mu=\\mu_1=\\mu_2\\). Two-sided Alternative hypothesis \\(H_1:\\mu_1 \\neq \\mu_2\\)\nIf EDA suggests that the two populations have the same spread, we perform a pooled-sample t-test in which the variance common to the two population is estimated as \\(S_{p}^{2} = w_{1} S_{1}^{2} +w_{2} S_{2}^{2}\\) where the weights are \\(w_{1} =\\frac{n_{1}-1}{n_{1} +n_{2}-2}\\) and \\(w_{2} =\\frac{n_{2}-1}{n_{1} +n_{2}-2}\\)\nFor the pooled case, the \\(df\\) for the \\(t\\)-test is \\(n_{1}+n_{2}-2\\) but becomes smaller for the unpooled case to \\[df=\\frac{\\left(\\frac{S_{1}^{2}}{n_{1}} +\\frac{S_{2}^{2} }{n_{2}} \\right)^{2} }{\\frac{1}{n_{1} -1} \\left(\\frac{S_{1}^{2}}{n_{1}}\\right)^{2} +\\frac{1}{n_{2} -1} \\left(\\frac{S_{2}^{2}}{n_{2} } \\right)^{2}} \\]"
+    "text": "Two sample t-test\n\nIn a two-sample t-test, the equality of two population means is tested. Null hypothesis \\(H_0:\\mu=\\mu_1=\\mu_2\\). Two-sided Alternative hypothesis \\(H_1:\\mu_1 \\neq \\mu_2\\)\nIf we can assume that two populations have the same spread, we perform a pooled-sample t-test in which the pooled variance (common to both populations) is estimated as \\(S_{p}^{2} = w_{1} S_{1}^{2} +w_{2} S_{2}^{2}\\) where the weights are \\(w_{1} =\\frac{n_{1}-1}{n_{1} +n_{2}-2}\\) and \\(w_{2} =\\frac{n_{2}-1}{n_{1} +n_{2}-2}\\)\nFor the pooled case, the \\(df\\) for the \\(t\\)-test is \\(n_{1}+n_{2}-2\\) but becomes smaller for the unpooled case to \\[df=\\frac{\\left(\\frac{S_{1}^{2}}{n_{1}} +\\frac{S_{2}^{2} }{n_{2}} \\right)^{2} }{\\frac{1}{n_{1} -1} \\left(\\frac{S_{1}^{2}}{n_{1}}\\right)^{2} +\\frac{1}{n_{2} -1} \\left(\\frac{S_{2}^{2}}{n_{2} } \\right)^{2}} \\]"
   },
   {
     "objectID": "slides/Chapter04.html#validity-of-equal-variance-assumption",
     "href": "slides/Chapter04.html#validity-of-equal-variance-assumption",
     "title": "Chapter 4:Introduction to Statistical Inference",
     "section": "Validity of equal variance assumption",
-    "text": "Validity of equal variance assumption\nEqual variance assumption is found plausible in the following output:\n\ntv = read_csv(\"https://www.massey.ac.nz/~anhsmith/data/tv.csv\")\nbartlett.test(TELETIME~SEX, data=tv)\n\n\n    Bartlett test of homogeneity of variances\n\ndata:  TELETIME by SEX\nBartlett's K-squared = 1.8482, df = 1, p-value = 0.174\n\ncar::leveneTest(TELETIME~factor(SEX), data=tv)\n\nLevene's Test for Homogeneity of Variance (center = median)\n      Df F value  Pr(&gt;F)  \ngroup  1  3.1789 0.08149 .\n      44                  \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nHighish p-values means there’s no strong evidence against the null hypothesis that the variances are equal."
+    "text": "Validity of equal variance assumption\nWe can test the null hypothesis that the variances are equal using either a Bartlett’s test or Levene’s test. Levene’s is generally favourable over Bartlett’s.\n\ntv = read_csv(\"https://www.massey.ac.nz/~anhsmith/data/tv.csv\")\ncar::leveneTest(TELETIME~factor(SEX), data=tv)\n\nLevene's Test for Homogeneity of Variance (center = median)\n      Df F value  Pr(&gt;F)  \ngroup  1  3.1789 0.08149 .\n      44                  \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nHighish p-value means there’s no strong evidence against the null hypothesis that the variances are equal. Therefore, we might feel happy to assume equal variances and use a pooled variance estimate."
   },
   {
     "objectID": "slides/Chapter04.html#shiny-apps-some-not-currently-working",
@@ -991,21 +991,21 @@
     "href": "slides/Chapter04.html#tests-for-normality",
     "title": "Chapter 4:Introduction to Statistical Inference",
     "section": "Tests for normality",
-    "text": "Tests for normality\n\nEDA approaches\n\nnormal quantile plot, Boxplots,mids vs. spreads plot etc.\n\nHypothesis tests\n\nKolmogorov-Smirnov test (based on the biggest difference between the empirical and theoretical cumulative distributions)\nShapiro-Wilk test (based on variance of the difference)\n\nExample: N(100,1) random data of size \\(n=50\\)\n\nThe null hypothesis of normality must be justified on empirical grounds\n\n\n\n\n\n    Shapiro-Wilk normality test\n\ndata:  rnorm(50, mean = 100)\nW = 0.94504, p-value = 0.02142\n\n\n\n    Exact one-sample Kolmogorov-Smirnov test\n\ndata:  rnorm(50)\nD = 0.088169, p-value = 0.7995\nalternative hypothesis: two-sided"
+    "text": "Tests for normality\n\nEDA approaches\n\nnormal quantile plot, Boxplots,mids vs. spreads plot etc.\n\nHypothesis tests\n\nKolmogorov-Smirnov test (based on the biggest difference between the empirical and theoretical cumulative distributions)\nShapiro-Wilk test (based on variance of the difference)\n\nExample: N(100,1) random data of size \\(n=50\\)\n\nThe null hypothesis of normality must be justified on empirical grounds\n\n\n\nset.seed(1234)\nshapiro.test(rnorm(50, mean=100))\n\n\n    Shapiro-Wilk normality test\n\ndata:  rnorm(50, mean = 100)\nW = 0.94504, p-value = 0.02142\n\nks.test(rnorm(50), \"pnorm\")\n\n\n    Exact one-sample Kolmogorov-Smirnov test\n\ndata:  rnorm(50)\nD = 0.088169, p-value = 0.7995\nalternative hypothesis: two-sided"
   },
   {
     "objectID": "slides/Chapter04.html#example",
     "href": "slides/Chapter04.html#example",
     "title": "Chapter 4:Introduction to Statistical Inference",
     "section": "Example",
-    "text": "Example"
+    "text": "Example\n\ntv = read_csv(\"https://www.massey.ac.nz/~anhsmith/data/tv.csv\")\n\nggplot(tv, aes(sample = TELETIME)) + \n  stat_qq() + stat_qq_line() +\n  labs(title = \"Normal quantile plot for TV viewing times\")"
   },
   {
     "objectID": "slides/Chapter04.html#transformations",
     "href": "slides/Chapter04.html#transformations",
     "title": "Chapter 4:Introduction to Statistical Inference",
     "section": "Transformations",
-    "text": "Transformations\n\nI can be useful to transform data to make the distribution more ‘normal’\nThe linear transformation \\(Y^*= a+bY\\) result only in a change of scale or of origin\nA linear transformation does not change the shape of the distribution i.e. histogram, boxplot etc. remain the same shape\nWe prefer non-linear transformations which alter the shape of the distribution\nTransformations are needed to-\n\nto bring symmetry\nnormality\nstabilise the variance etc"
+    "text": "Transformations\n\nI can be useful to transform data to make the distribution more like a ‘normal’\nThe linear transformation \\(Y^*= a+bY\\) result only in a change of scale or of origin\nA linear transformation does not change the shape of the distribution i.e. histogram, boxplot etc. remain the same shape\nWe prefer non-linear transformations which alter the shape of the distribution\nTransformations are needed to-\n\nto bring symmetry\nnormality\nstabilise the variance etc"
   },
   {
     "objectID": "slides/Chapter04.html#example-1",
@@ -1039,15 +1039,15 @@
     "objectID": "slides/Chapter04.html#statistical-inference-based-on-transformed-data",
     "href": "slides/Chapter04.html#statistical-inference-based-on-transformed-data",
     "title": "Chapter 4:Introduction to Statistical Inference",
-    "section": "Statistical Inference Based on Transformed data",
-    "text": "Statistical Inference Based on Transformed data\n\nConfidence intervals found as estimate \\(\\pm\\) margin of error require symmetry.\nObtain the confidence interval using transformed data and then back transform the limits (to keep the original scale)\n\nThe confidence limits of log transformed data can be exponentiated back (ie. \\(e^{\\text{confidence limit}}\\))\nThe confidence limits of square-root transformed data can be squared back (ie. \\({\\text{confidence limit}^2}\\))\n\nFor hypothesis test, apply the same transformation on the value hypothesised under the null\nExplore https://shiny.massey.ac.nz/anhsmith/demos/explore.transformations/ app (not currently working)\nExample: Brain weight data is extremely skewed to the right. So rely on the back-transformed CI.\n\n\n\n[1]  46.88888 519.38209\n\n\n[1] 2.518901 3.761498\n\n\n[1] 12.41495 43.01280"
+    "section": "Statistical inference based on transformed data",
+    "text": "Statistical inference based on transformed data\n\nObtain the confidence interval using transformed data and then back transform the limits (to keep the original scale)\n\nThe confidence limits calculated on log-transformed data can be exponentiated back to the raw scale (i.e., \\(e^{\\text{confidence limit}}\\))\nThe confidence limits of square-root-transformed data can be squared back to the raw scale (ie. \\({\\text{confidence limit}^2}\\))\n\nFor hypothesis test, apply the same transformation on the value hypothesised under the null\nExplore https://shiny.massey.ac.nz/anhsmith/demos/explore.transformations/ app (not currently working)\nExample: Brain weight data is extremely skewed to the right. So rely on the back-transformed CI.\n\n\n\n[1]  46.88888 519.38209\n\n\n[1] 2.518901 3.761498\n\n\n[1] 12.41495 43.01280"
   },
   {
     "objectID": "slides/Chapter04.html#a-caution-on-the-transformation-technique",
     "href": "slides/Chapter04.html#a-caution-on-the-transformation-technique",
     "title": "Chapter 4:Introduction to Statistical Inference",
     "section": "A Caution on the transformation technique",
-    "text": "A Caution on the transformation technique\n\nPerform EDA in addition to computing coefficients of skewness or D-Statistics etc\nSmall datasets may reveal skewness (So ignore)\nAvoid a transformation if marginal improvement happens.\nTransformed data may be difficult to interpret\nTry other options such as subgrouping etc.\nNormalising transformations are different from transformations for symmetry\nRead the section from your SG"
+    "text": "A Caution on the transformation technique\n\nPerform EDA in addition to computing coefficients of skewness or D-Statistics etc\nSmall datasets may look skewed, but might not be.\nTransformations make the data more difficult to interpret.\nIn the context statistical models, we are only interested in whether the residuals (deviations from the fitted means) are normal—not whether the original variable is normal."
   },
   {
     "objectID": "slides/Chapter04.html#variance-stabilisation",
@@ -1110,14 +1110,14 @@
     "href": "slides/Chapter04.html#two-group-comparison",
     "title": "Chapter 4:Introduction to Statistical Inference",
     "section": "Two group comparison",
-    "text": "Two group comparison\n\nperm.test(TELETIME~SEX, distribution ='exact', data=tv)\n\n\n    2-sample Permutation Test\n\ndata:  TELETIME by SEX\nT = 38370, p-value = 0.471\nalternative hypothesis: true mu is not equal to 0\n\n\nAlso using a linear model fit (cover later)\n\nlibrary(lmPerm)\nsummary(lmp(TELETIME~SEX, data=tv))\n\n[1] \"Settings:  unique SS : numeric variables centered\"\n\n\n\nCall:\nlmp(formula = TELETIME ~ SEX, data = tv)\n\nResiduals:\n      Min        1Q    Median        3Q       Max \n-1178.261  -510.793    -7.283   402.989  1130.739 \n\nCoefficients:\n    Estimate Iter Pr(Prob)\nSEX      122   56    0.643\n\nResidual standard error: 570.9 on 44 degrees of freedom\nMultiple R-Squared: 0.0118, Adjusted R-squared: -0.01066 \nF-statistic: 0.5255 on 1 and 44 DF,  p-value: 0.4723 \n\n\nRead the study guide example for bootstrap tests (not examined)"
+    "text": "Two group comparison\n\nperm.test(TELETIME~SEX, distribution ='exact', data=tv)\n\n\n    2-sample Permutation Test\n\ndata:  TELETIME by SEX\nT = 38370, p-value = 0.471\nalternative hypothesis: true mu is not equal to 0\n\n\nAlso using a linear model fit (cover later)\n\nlibrary(lmPerm)\nsummary(lmp(TELETIME~SEX, data=tv))\n\n[1] \"Settings:  unique SS : numeric variables centered\"\n\n\n\nCall:\nlmp(formula = TELETIME ~ SEX, data = tv)\n\nResiduals:\n      Min        1Q    Median        3Q       Max \n-1178.261  -510.793    -7.283   402.989  1130.739 \n\nCoefficients:\n    Estimate Iter Pr(Prob)\nSEX      122  129    0.442\n\nResidual standard error: 570.9 on 44 degrees of freedom\nMultiple R-Squared: 0.0118, Adjusted R-squared: -0.01066 \nF-statistic: 0.5255 on 1 and 44 DF,  p-value: 0.4723 \n\n\nRead the study guide example for bootstrap tests (not examined)"
   },
   {
     "objectID": "slides/Chapter04.html#summary",
     "href": "slides/Chapter04.html#summary",
     "title": "Chapter 4:Introduction to Statistical Inference",
     "section": "Summary",
-    "text": "Summary\nInference is less complicated for normal populations\n\nAssessment of normality is particularly important for small sample sizes\nStudent t-tests are generally robust and can be used for non-normal populations (as long as there are no subgrouping or sample sizes are large)\n\nPower transformations aim to achieve symmetry\n\nBox-Cox transformations aim to normalise the data\nImproved Inference can be made\nSubgrouping effect can be dampened\n\nPermutation tests can be done for a second opinion\n\n\n\n\n\n\n\n\n\n161250 Data Analysis"
+    "text": "Summary\nBasic methods of inference include:\n\nestimating a population parameter (e.g. mean) using a sample of values,\nestimating sampling variation using the standard error,\nconstructing confidence intervals for an estimate, and\ntesting hypotheses about particular values of the population parameter.\n\nInference is relatively easy for normally distributed populations.\nStudent’s t-tests include:\n\none-sample t-test, including paired-sample t-test for a difference of zero\ntwo-sample t-test assuming equal variances (estimating pooled variance)\ntwo-sample t-test not assuming equal variances (Welch test)\n\nThe t-test is generally robust for non-normal populations (especially for large samples).\nPower transformations, such as square-root, log, or Box-Cox aim to reduce skewness.\nNon-parametric tests can be used for non-normal data.\n\n\n\n\n\n\n\n\n\n161250 Data Analysis"
   },
   {
     "objectID": "slides/Chapter02.html#two-modes-of-data-analysis",
@@ -2798,5 +2798,26 @@
     "title": "Chapter 7 Workshop",
     "section": "",
     "text": "Dataset Prestige\nWe will continue to use dataset Prestige from the car R package.\n\n\nExercise 7.1\nObtain the matrix plot of the numerical variables education, income, women, and prestige.\nObtain their correlation matrix.\nFit a (full) multiple regression of prestige on education, income, & women.\nObtain the plots for residual diagnostics.\n\n\nCode\nlibrary(car)\nlibrary(tidyverse)\nlibrary(GGally)\n\nPrestige |&gt; \n  select(prestige, education, income, women) |&gt; \n  ggpairs(aes(colour=Prestige$type))\n\n\n\n\nCode\n# Old style pairs plot\nPrestige |&gt; \n  select(prestige, education, income, women) |&gt;\n  pairs()\n\n\nCode\nPrestige |&gt; \n  select(prestige, education, income, women) |&gt;\n  cor()\n\n\nRegression outputs\n\n\nCode\nfull.reg &lt;- lm(prestige ~ education + income + women,\n               data = Prestige)\n\nsummary(full.reg)\n\nanova(full.reg)\n\nextractAIC(full.reg)\n\n\nResidual plots\n\n\nCode\nlibrary(ggfortify)\n\nautoplot(full.reg, 1:6)\n\n\n\n\nCode\n# Old style plots\nplot(full.reg, 1) # the argument 1 can be changed up to 6\n\n\nCode\n# or just use\npar(mfrow=c(2,2))\nplot(full.reg)\n\n\n\n\nExercise 7.2\nPerform stepwise regression analysis of prestige on education, income, & women.\n\n\nCode\nfull.reg = lm(prestige ~ education + income + women,\n              data = Prestige)\n\nstep(full.reg)\n\nstep(full.reg, direction=\"backward\")\n\nstep(full.reg, direction=\"both\")\n\n\nYou can also use the MASS package.\n\n\nCode\nlibrary(\"MASS\")\n\nstepAIC(full.reg, direction=\"backward\")\n\nstepAIC(full.reg, direction=\"both\")\n\n\nThe function update() will be handy. For example, see try the following codes:\n\n\nCode\nm1 = update(full.reg,.~.-women)\n\nsummary(m1)\n\n\nNote that .~.-women means that the model is fitted without the women variable.\nFurther options are available in leaps and HH packages (installation commands are given below).\ninstall.packages(\"leaps\", repos = \"https://cran.r-project.org\") install.packages(\"HH\", repos = \"https://cran.r-project.org\")\n\n\nCode\nlibrary(leaps)\n\nmodel = regsubsets(prestige ~ education + income + women, \n                   data=Prestige)\n\nlibrary(HH)\n\nsummaryHH(model)\n\nplot(summaryHH(model))\n\n\n\n\nExercise 7.3\nPerform a polynomial regression of prestige on income.\n\n\nCode\n# Cubic fit\np.model &lt;- lm(prestige ~ poly(income,3),\n              data = Prestige)\n\nsummary(p.model)\n\nextractAIC(p.model)\n\nplot(p.model)\n\n\nCode\nautoplot(p.model)\n\n\n\nMore R code examples are here"
+  },
+  {
+    "objectID": "slides/Chapter04.html#truth-and-outcomes",
+    "href": "slides/Chapter04.html#truth-and-outcomes",
+    "title": "Chapter 4:Introduction to Statistical Inference",
+    "section": "Truth and outcomes",
+    "text": "Truth and outcomes\nIn reality, the null hypothesis is either true or false.\nThe outcome of a test is either we reject the null hypothesis, or we fail to reject the null hypothesis (note, we never “confirm” or “accept” the null hypothesis – absence of evidence is not evidence of absence!).\nThis gives us four possibilities:\n\n\n\n\n\\(H_0\\) is true\n\\(H_0\\) is false\n\n\n\n\nReject \\(H_0\\)\nType I error\nCorrect result\n\n\nFail to reject \\(H_0\\)\nCorrect result\nType II error"
+  },
+  {
+    "objectID": "slides/Chapter04.html#truth-and-outcomes-1",
+    "href": "slides/Chapter04.html#truth-and-outcomes-1",
+    "title": "Chapter 4:Introduction to Statistical Inference",
+    "section": "Truth and outcomes",
+    "text": "Truth and outcomes\n\nThe probability of making a Type I error is set by the experimenter a priori (beforehand) as the significance level, \\(\\alpha\\).\nFor example, if we set \\(\\alpha\\) = 0.05, we know that we have a 5% chance of rejecting \\(H_0\\) even when it is true (the Type I error rate is 0.05).\nThe probability of retaining \\(H_0\\) when it is false is usually represented by \\(\\beta\\) (“beta”).\nWe usually do not know what this is. It depends on lots of things, like \\(\\sigma\\), \\(n\\) and also what the actual alternative hypothesis is."
+  },
+  {
+    "objectID": "slides/Chapter04.html#validity-of-equal-variance-assumption-1",
+    "href": "slides/Chapter04.html#validity-of-equal-variance-assumption-1",
+    "title": "Chapter 4:Introduction to Statistical Inference",
+    "section": "Validity of equal variance assumption",
+    "text": "Validity of equal variance assumption\nt-test assuming equal variances:\n\nt.test(TELETIME ~ factor(SEX), var.equal = TRUE, data=tv)\n\n\n    Two Sample t-test\n\ndata:  TELETIME by factor(SEX)\nt = -0.7249, df = 44, p-value = 0.4723\nalternative hypothesis: true difference in means between group 1 and group 2 is not equal to 0\n95 percent confidence interval:\n -461.3476  217.2606\nsample estimates:\nmean in group 1 mean in group 2 \n       1668.261        1790.304 \n\n\nt-test not assuming equal variances (Welch test):\n\nt.test(TELETIME ~ factor(SEX), data=tv)\n\n\n    Welch Two Sample t-test\n\ndata:  TELETIME by factor(SEX)\nt = -0.7249, df = 40.653, p-value = 0.4727\nalternative hypothesis: true difference in means between group 1 and group 2 is not equal to 0\n95 percent confidence interval:\n -462.1384  218.0514\nsample estimates:\nmean in group 1 mean in group 2 \n       1668.261        1790.304"
   }
 ]
