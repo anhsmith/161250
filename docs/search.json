@@ -1936,21 +1936,21 @@
     "href": "slides/Chapter05.html#tables-and-frequencies",
     "title": "Chapter 5:Tabulated Counts",
     "section": "Tables and frequencies",
-    "text": "Tables and frequencies\n\nMain question\n\nHow do the observed counts compare with known (assumed or expected) counts?\n\nModel\n`data = fit + error`  (or)\n\n`observed = expected + residual`\nObserved comes from sample data\nExpected comes from model or from assumption about the population"
+    "text": "Tables and frequencies\n\nWe often have hypotheses regarding the frequencies of levels of a factor or group of factors.\n\nFor a single two-level factor (e.g., male vs female, survived vs died), we might wish to know how likely the data are to have come from a population with equal proportions (or some other specified proportion).\nFor two factors, we might wish to know whether they are independent.\n\nIn either case, we can specify a null hypothesis and test it using data.\nTo do so, compare observed counts with expected counts, where the expected counts are derived from our null model about the population."
   },
   {
     "objectID": "slides/Chapter05.html#example",
     "href": "slides/Chapter05.html#example",
     "title": "Chapter 5:Tabulated Counts",
     "section": "Example",
-    "text": "Example\n\nDoes the distribution of rejects of metal castings by causes in a particular week vary from the long term average counts?\n\n\n\n\nCauses of rejection\nRejects during the week\nlong term\n\n\n\n\nsand\n90\n82\n\n\nmisrun\n8\n4\n\n\nshift\n16\n10\n\n\ndrop-\n8\n6\n\n\ncorebreak\n23\n21\n\n\nbroken\n21\n20\n\n\nother\n5\n8\n\n\n\n\nLong term average counts are the expected counts.\nHow to compare observed with expected?"
+    "text": "Example\nA survey of voters included 550 males and 450 females. Will you call this survey as a biased one?\n\n\n\nGender\n\\(O\\)\n\\(E\\)\n\\((O-E)^2/E\\)\n\n\n\n\nmale\n550\n500\n\\((550-500)^2/ 500=5\\)\n\n\nfemale\n450\n500\n\\((450-500)^2/ 500=5\\)\n\n\nsum\n1000\n1000\n10\n\n\n\n\ndf= (2-1)=1\nAt 5% level, the critical value is only 3.84. So the sample is a biased one."
   },
   {
     "objectID": "slides/Chapter05.html#goodness-of-fit-test",
     "href": "slides/Chapter05.html#goodness-of-fit-test",
     "title": "Chapter 5:Tabulated Counts",
     "section": "Goodness of fit test",
-    "text": "Goodness of fit test\n\nChi-squared test statistic (\\(\\chi ^ 2\\) = Ki Sq.)\n\n\\[\n\\chi ^{2} =\\sum _{1}^{c}\\frac{\\left({\\rm Observed-Expected}\\right)^{{\\rm 2}} }{{\\rm Expected}}  =\\sum _{1}^{c}\\frac{\\left( O-E\\right)^{2}}{E}\n\\]\n\nIf the number of categories is \\(c\\), then the degrees of freedom is \\(c-1\\)\n\nA single df is lost due to \\(\\sum E= \\sum O\\)\n\n\\(\\chi ^ 2\\) distribution is a continuous distribution. When used for discrete data, Chi-squared approximation is very good for \\(E&gt;5\\) and often good if some expected values are as small as 1.\n\nMerge/combine categories in case of small expected counts."
+    "text": "Goodness of fit test\nHypotheses of this sort can be tested using the Chi-squared test statistic (\\(\\chi ^ 2\\) = Ki Sq.)\n\\[\n\\chi ^{2} =\\sum _{1}^{c}\\frac{\\left({\\rm Observed-Expected}\\right)^{{\\rm 2}} }{{\\rm Expected}}  =\\sum _{1}^{c}\\frac{\\left( O-E\\right)^{2}}{E}\n\\]\nIf the number of categories is \\(c\\), then the degrees of freedom is \\(c-1\\).\n\\(\\chi ^ 2\\) distribution is a continuous distribution. When used for discrete data, Chi-squared approximation is very good for \\(E&gt;5\\) and often good if some expected values are as small as 1.\nSometimes, one can merge/combine categories in case of small expected counts."
   },
   {
     "objectID": "slides/Chapter05.html#example-1",
@@ -2868,5 +2868,26 @@
     "title": "Chapter 4:Introduction to Statistical Inference",
     "section": "Spearman’s Rank Correlation",
     "text": "Spearman’s Rank Correlation\n\n\nRank the \\(X\\) and \\(Y\\) variables, and then obtain usual Pearson correlation coefficient.\nThe plot shows non-parametric Spearman in the the upper triangle and parametric Pearson in the bottom triangle.\n\nlibrary(GGally)\n\np &lt;- ggpairs(\n  trees, \n  upper = list(continuous = wrap('cor', method = \"spearman\")),\n  lower = list(continuous = 'cor') \n  )\n\n\n\n\n\n\n\nFigure 1: Comparison of Pearsonian and Spearman’s rank correlations"
+  },
+  {
+    "objectID": "slides/Chapter05.html#examples-with-one-factor",
+    "href": "slides/Chapter05.html#examples-with-one-factor",
+    "title": "Chapter 5:Tabulated Counts",
+    "section": "Examples with one factor",
+    "text": "Examples with one factor\nExample 1\n\nA dataset contains 40 males and 50 females.\nHow plausible is the null model of these counts coming from a population with 50% males and 50% females?\nThe expected counts in this case would be 45 males and 45 females.\n\nExample 2\n\n\n\nDoes the distribution of rejects of metal castings by causes in a particular week vary from the long-term average counts?\nTreat the long-term average counts as the expected counts.\nCompare observed counts with expected counts.\n\n\n\n\n\nCauses of rejection\nRejects during the week\nLong-term average\n\n\n\n\nsand\n90\n82\n\n\nmisrun\n8\n4\n\n\nshift\n16\n10\n\n\ndrop-\n8\n6\n\n\ncorebreak\n23\n21\n\n\nbroken\n21\n20\n\n\nother\n5\n8"
+  },
+  {
+    "objectID": "slides/Chapter05.html#example-3",
+    "href": "slides/Chapter05.html#example-3",
+    "title": "Chapter 5:Tabulated Counts",
+    "section": "Example",
+    "text": "Example\nContext: Porcine Stress Syndrome (PSS) result in pale, soft meat in pigs and under conditions of stress- death.\n\nPresence of PPS is a positive reaction to breathing halothane.\n\nSelective breeding for reducing incidence of PSS\n\n\n\n\n\nPorcine Stress Syndrome (PSS) data\n\n\n\nHalothane.positive\nHalothane.negative\nTotals\n\n\n\n\nLarge White\n2\n76\n78\n\n\nHampshire\n3\n86\n89\n\n\nLandrace(B)\n11\n73\n84\n\n\nLandrace(S)\n16\n76\n92\n\n\nTotals\n32\n311\n343\n\n\n\n\n\n\n\n\nchisq.test(dt)\n\n\n    Pearson's Chi-squared test\n\ndata:  dt\nX-squared = 16.433, df = 8, p-value = 0.03659"
+  },
+  {
+    "objectID": "slides/Chapter05.html#mendels-experiment-see-study-guide",
+    "href": "slides/Chapter05.html#mendels-experiment-see-study-guide",
+    "title": "Chapter 5:Tabulated Counts",
+    "section": "Mendel’s experiment (see Study Guide)",
+    "text": "Mendel’s experiment (see Study Guide)\n\n\nMendel discovered the principles of heredity by breeding garden peas. In one Mendel’s trials ratios of various types of peas (dihybrid-crosses) were 9:3:3:1\nThe observed results are very close to expected results. This results in a small chi squared value. Were experimental results fudged or was there a confirmation bias?"
   }
 ]

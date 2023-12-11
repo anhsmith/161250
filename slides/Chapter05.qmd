@@ -37,29 +37,37 @@ knitr::opts_chunk$set(warning = FALSE,
 
 ## Tables and frequencies
 
--   Main question
+-   We often have hypotheses regarding the frequencies of levels of a factor or group of factors.
 
-    -   How do the observed counts compare with known (assumed or
-        expected) counts?
+    - For a single two-level factor (e.g., male vs female, survived vs died), we might wish to know how likely the data are to have come from a population with equal proportions (or some other specified proportion). 
 
--   Model
+    - For two factors, we might wish to know whether they are independent. 
 
-    ```         
-    `data = fit + error`  (or)
+- In either case, we can specify a null hypothesis and test it using data. 
 
-    `observed = expected + residual`
-    ```
+- To do so, compare *observed* counts with *expected* counts, where the *expected* counts are derived from our null model about the population.
 
--   `Observed` comes from sample data
+## Examples with one factor 
 
--   `Expected` comes from model or from assumption about the population
+#### Example 1
 
-## Example
+- A dataset contains 40 males and 50 females.
+- How plausible is the null model of these counts coming from a population with 50% males and 50% females?
+- The expected counts in this case would be 45 males and 45 females.
 
--   Does the distribution of rejects of metal castings by causes in a
-    particular week vary from the long term average counts?
+#### Example 2
 
-| Causes of rejection | Rejects during the week | long term |
+::::{.columns}
+:::{.column}
+
+-   Does the distribution of rejects of metal castings by causes in a particular week vary from the long-term average counts?
+-   Treat the long-term average counts as the *expected* counts.
+-   Compare *observed* counts with *expected* counts.
+
+:::
+:::{.column style="font-size: 85%;"}
+
+| Causes of rejection | Rejects during the week | Long-term average |
 |---------------------|-------------------------|-----------|
 | sand                | 90                      | 82        |
 | misrun              | 8                       | 4         |
@@ -69,24 +77,24 @@ knitr::opts_chunk$set(warning = FALSE,
 | broken              | 21                      | 20        |
 | other               | 5                       | 8         |
 
--   Long term average counts are the `expected` counts.
--   How to compare `observed` with `expected`?
+:::
+::::
 
 ## Goodness of fit test
 
--   Chi-squared test statistic ($\chi ^ 2$ = Ki Sq.)
+Hypotheses of this sort can be tested using the **Chi-squared test statistic** ($\chi ^ 2$ = Ki Sq.)
 
 $$
 \chi ^{2} =\sum _{1}^{c}\frac{\left({\rm Observed-Expected}\right)^{{\rm 2}} }{{\rm Expected}}  =\sum _{1}^{c}\frac{\left( O-E\right)^{2}}{E}
 $$
 
--   If the number of categories is $c$, then the degrees of freedom is
-    $c-1$
-    -   A single df is lost due to $\sum E= \sum O$
--   $\chi ^ 2$ distribution is a continuous distribution. When used for
+If the number of categories is $c$, then the degrees of freedom is $c-1$. 
+
+$\chi ^ 2$ distribution is a continuous distribution. When used for
     discrete data, Chi-squared approximation is very good for $E>5$ and
     often good if some expected values are as small as 1.
-    -   Merge/combine categories in case of small expected counts.
+    
+Sometimes, one can merge/combine categories in case of small expected counts.
 
 ## Example
 
@@ -103,7 +111,7 @@ this survey as a biased one?
 -   At 5% level, the critical value is only 3.84. So the sample is a
     biased one.
 
-## Mendel's experiment (Read SG)
+## Mendel's experiment (see Study Guide)
 
 ::: left-narrow
 -   Mendel discovered the principles of heredity by breeding garden

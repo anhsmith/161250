@@ -402,29 +402,38 @@
 <section id="tables-and-frequencies" class="slide level2">
 <h2>Tables and frequencies</h2>
 <ul>
-<li><p>Main question</p>
+<li><p>We often have hypotheses regarding the frequencies of levels of a factor or group of factors.</p>
 <ul>
-<li>How do the observed counts compare with known (assumed or expected) counts?</li>
+<li><p>For a single two-level factor (e.g., male vs female, survived vs died), we might wish to know how likely the data are to have come from a population with equal proportions (or some other specified proportion).</p></li>
+<li><p>For two factors, we might wish to know whether they are independent.</p></li>
 </ul></li>
-<li><p>Model</p>
-<pre><code>`data = fit + error`  (or)
-
-`observed = expected + residual`</code></pre></li>
-<li><p><code>Observed</code> comes from sample data</p></li>
-<li><p><code>Expected</code> comes from model or from assumption about the population</p></li>
+<li><p>In either case, we can specify a null hypothesis and test it using data.</p></li>
+<li><p>To do so, compare <em>observed</em> counts with <em>expected</em> counts, where the <em>expected</em> counts are derived from our null model about the population.</p></li>
 </ul>
 </section>
-<section id="example" class="slide level2">
-<h2>Example</h2>
+<section id="examples-with-one-factor" class="slide level2">
+<h2>Examples with one factor</h2>
+<h4 id="example-1">Example 1</h4>
 <ul>
-<li>Does the distribution of rejects of metal castings by causes in a particular week vary from the long term average counts?</li>
+<li>A dataset contains 40 males and 50 females.</li>
+<li>How plausible is the null model of these counts coming from a population with 50% males and 50% females?</li>
+<li>The expected counts in this case would be 45 males and 45 females.</li>
 </ul>
+<h4 id="example-2">Example 2</h4>
+<div class="columns">
+<div class="column">
+<ul>
+<li>Does the distribution of rejects of metal castings by causes in a particular week vary from the long-term average counts?</li>
+<li>Treat the long-term average counts as the <em>expected</em> counts.</li>
+<li>Compare <em>observed</em> counts with <em>expected</em> counts.</li>
+</ul>
+</div><div class="column" style="font-size: 85%;">
 <table>
 <thead>
 <tr class="header">
 <th>Causes of rejection</th>
 <th>Rejects during the week</th>
-<th>long term</th>
+<th>Long-term average</th>
 </tr>
 </thead>
 <tbody>
@@ -465,31 +474,20 @@
 </tr>
 </tbody>
 </table>
-<ul>
-<li>Long term average counts are the <code>expected</code> counts.</li>
-<li>How to compare <code>observed</code> with <code>expected</code>?</li>
-</ul>
+</div>
+</div>
 </section>
 <section id="goodness-of-fit-test" class="slide level2">
 <h2>Goodness of fit test</h2>
-<ul>
-<li>Chi-squared test statistic (<span class="math inline">\(\chi ^ 2\)</span> = Ki Sq.)</li>
-</ul>
+<p>Hypotheses of this sort can be tested using the <strong>Chi-squared test statistic</strong> (<span class="math inline">\(\chi ^ 2\)</span> = Ki Sq.)</p>
 <p><span class="math display">\[
 \chi ^{2} =\sum _{1}^{c}\frac{\left({\rm Observed-Expected}\right)^{{\rm 2}} }{{\rm Expected}}  =\sum _{1}^{c}\frac{\left( O-E\right)^{2}}{E}
 \]</span></p>
-<ul>
-<li>If the number of categories is <span class="math inline">\(c\)</span>, then the degrees of freedom is <span class="math inline">\(c-1\)</span>
-<ul>
-<li>A single df is lost due to <span class="math inline">\(\sum E= \sum O\)</span></li>
-</ul></li>
-<li><span class="math inline">\(\chi ^ 2\)</span> distribution is a continuous distribution. When used for discrete data, Chi-squared approximation is very good for <span class="math inline">\(E&gt;5\)</span> and often good if some expected values are as small as 1.
-<ul>
-<li>Merge/combine categories in case of small expected counts.</li>
-</ul></li>
-</ul>
+<p>If the number of categories is <span class="math inline">\(c\)</span>, then the degrees of freedom is <span class="math inline">\(c-1\)</span>.</p>
+<p><span class="math inline">\(\chi ^ 2\)</span> distribution is a continuous distribution. When used for discrete data, Chi-squared approximation is very good for <span class="math inline">\(E&gt;5\)</span> and often good if some expected values are as small as 1.</p>
+<p>Sometimes, one can merge/combine categories in case of small expected counts.</p>
 </section>
-<section id="example-1" class="slide level2">
+<section id="example" class="slide level2">
 <h2>Example</h2>
 <p>A survey of voters included 550 males and 450 females. Will you call this survey as a biased one?</p>
 <table>
@@ -527,8 +525,8 @@
 <li>At 5% level, the critical value is only 3.84. So the sample is a biased one.</li>
 </ul>
 </section>
-<section id="mendels-experiment-read-sg" class="slide level2">
-<h2>Mendel’s experiment (Read SG)</h2>
+<section id="mendels-experiment-see-study-guide" class="slide level2">
+<h2>Mendel’s experiment (see Study Guide)</h2>
 <div class="left-narrow">
 <ul>
 <li><p>Mendel discovered the principles of heredity by breeding garden peas. In one Mendel’s trials ratios of various types of peas (dihybrid-crosses) were 9:3:3:1</p></li>
@@ -568,7 +566,7 @@
 <li><p>degrees of freedom: <span class="math inline">\((r-1)(c-1)\)</span></p></li>
 </ul>
 </section>
-<section id="example-2" class="slide level2">
+<section id="example-3" class="slide level2">
 <h2>Example</h2>
 <p><code>Context</code>: Porcine Stress Syndrome (PSS) result in pale, soft meat in pigs and under conditions of stress- death.</p>
 <ul>
@@ -627,7 +625,7 @@
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">chisq.test</span>(dt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">chisq.test</span>(dt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's Chi-squared test
@@ -792,8 +790,8 @@ X-squared = 0.053808, df = 1, p-value = 0.8166</code></pre>
 </div>
 <p>Permutation test</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">set.seed</span>(<span class="dv">12321</span>)</span>
-<span id="cb11-2"><a href="#cb11-2"></a><span class="fu">chisq.test</span>(tabledata, <span class="at">simulate.p.value =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">set.seed</span>(<span class="dv">12321</span>)</span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="fu">chisq.test</span>(tabledata, <span class="at">simulate.p.value =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's Chi-squared test with simulated p-value (based on 2000
@@ -805,7 +803,7 @@ X-squared = 15.672, df = NA, p-value = 0.04948</code></pre>
 </div>
 <p>Regular Chi-square test</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">chisq.test</span>(tabledata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">chisq.test</span>(tabledata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's Chi-squared test
@@ -829,8 +827,8 @@ $ Counts       &lt;dbl&gt; 18, 57, 13, 4, 10, 4, 10, 13, 2, 25, 22, 4, 4, 5, 2</
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">library</span>(MASS)</span>
-<span id="cb16-2"><a href="#cb16-2"></a>MASS<span class="sc">::</span><span class="fu">loglm</span>(Counts<span class="sc">~</span> Smoke_status<span class="sc">+</span>Employ, smk)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb15-2"><a href="#cb15-2"></a>MASS<span class="sc">::</span><span class="fu">loglm</span>(Counts<span class="sc">~</span> Smoke_status<span class="sc">+</span>Employ, smk)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Call:
 MASS::loglm(formula = Counts ~ Smoke_status + Employ, data = smk)
@@ -902,8 +900,8 @@ rowmass          0.316    0.554 0.1295</code></pre>
 <section id="symmetric-plots-to-find-subgrouping" class="slide level2 scrollable">
 <h2>Symmetric plots to find subgrouping</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">library</span>(<span class="st">"FactoMineR"</span>)</span>
-<span id="cb21-2"><a href="#cb21-2"></a><span class="fu">CA</span>(tabledata) <span class="sc">|&gt;</span> <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">library</span>(<span class="st">"FactoMineR"</span>)</span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="fu">CA</span>(tabledata) <span class="sc">|&gt;</span> <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 <div class="cell-output cell-output-stdout">
 <pre><code>
