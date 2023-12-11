@@ -468,7 +468,7 @@ plot_samples_dist(200)
 
 :::{.column width="50%"}
 
-Because we know the population parameters for the Quetelet dataset, we can calculate were 95% of sample means will lie for any particular sample size.
+Because we know the population parameters for the Quetelet dataset, we can calculate where 95% of sample means will lie for any particular sample size.
 
 Recall that, for a normal distribution, 95% of values lie between $\mu \pm 1.96\times\sigma$ \
 (i.e., $\mu - 1.96\times\sigma$ and $\mu + 1.96\times\sigma$). 
@@ -642,6 +642,7 @@ where $\hat \theta$ is the sample estimate of $\theta$ and $t$ is a quantile fro
 For example, to get the $t$ score for a 95% confidence interval with 9 degrees of freedom:
 
 ```{r}
+#| echo: true
 qt(p = 0.975, df = 9)
 ```
 
