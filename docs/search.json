@@ -781,21 +781,21 @@
     "href": "slides/Chapter04.html#quetelets-dataset-1",
     "title": "Chapter 4:Introduction to Statistical Inference",
     "section": "Quetelet’s dataset",
-    "text": "Quetelet’s dataset\nEvery soldier was measured so we can treat this as the population, and \\(\\mu\\) = 39.83 and \\(\\sigma\\) = 2.05 as population parameters. Let’s take some samples of size \\(n\\) = 6 from this population.\n\n# Convert to a long vector of values\nqd_long &lt;- rep(qd$Chest, qd$Count)\n\n\n\n# A single sample\nsample(qd_long, size = 6)\n\n[1] 37 34 39 38 38 39\n\n\n\n\n\n# Ten samples\nmap(1:7, ~ sample(qd_long, size = 6))\n\n[[1]]\n[1] 37 38 40 39 42 41\n\n[[2]]\n[1] 40 41 37 41 40 39\n\n[[3]]\n[1] 39 41 40 43 40 38\n\n[[4]]\n[1] 45 35 39 40 38 41\n\n[[5]]\n[1] 40 40 42 41 37 43\n\n[[6]]\n[1] 41 41 40 38 42 41\n\n[[7]]\n[1] 38 40 36 43 38 42"
+    "text": "Quetelet’s dataset\nEvery soldier was measured so we can treat this as the population, and \\(\\mu\\) = 39.83 and \\(\\sigma\\) = 2.05 as population parameters. Let’s take some samples of size \\(n\\) = 6 from this population.\n\n# Convert to a long vector of values\nqd_long &lt;- rep(qd$Chest, qd$Count)\n\n\n\n# A single sample\nsample(qd_long, size = 6)\n\n[1] 41 38 38 40 41 34\n\n\n\n\n\n# Ten samples\nmap(1:7, ~ sample(qd_long, size = 6))\n\n[[1]]\n[1] 43 39 38 38 39 41\n\n[[2]]\n[1] 41 38 41 36 39 37\n\n[[3]]\n[1] 38 41 42 35 39 40\n\n[[4]]\n[1] 40 39 39 37 38 39\n\n[[5]]\n[1] 43 40 39 41 37 40\n\n[[6]]\n[1] 40 41 39 41 40 39\n\n[[7]]\n[1] 34 40 38 41 43 41"
   },
   {
     "objectID": "slides/Chapter04.html#quetelets-dataset-2",
     "href": "slides/Chapter04.html#quetelets-dataset-2",
     "title": "Chapter 4:Introduction to Statistical Inference",
     "section": "Quetelet’s dataset",
-    "text": "Quetelet’s dataset\nEvery soldier was measured so we can treat this as the population, and \\(\\mu\\) = 39.83 and \\(\\sigma\\) = 2.05 as population parameters. Let’s take some samples of size \\(n\\) = 6 from this population.\n\n# Convert to a long vector of values\nqd_long &lt;- rep(qd$Chest, qd$Count)\n\n\n\n# Put ten samples in a tibble\nq_samples &lt;- tibble( sample = as_factor(1:10) ) |&gt; \n  mutate( \n    values = map(sample, ~ sample(qd_long, size = 6)) \n    ) |&gt; \n  unnest()\n\nhead(q_samples, 15)\n\n# A tibble: 15 × 2\n   sample values\n   &lt;fct&gt;   &lt;int&gt;\n 1 1          40\n 2 1          38\n 3 1          40\n 4 1          37\n 5 1          40\n 6 1          41\n 7 2          39\n 8 2          37\n 9 2          43\n10 2          41\n11 2          39\n12 2          42\n13 3          38\n14 3          42\n15 3          38"
+    "text": "Quetelet’s dataset\nEvery soldier was measured so we can treat this as the population, and \\(\\mu\\) = 39.83 and \\(\\sigma\\) = 2.05 as population parameters. Let’s take some samples of size \\(n\\) = 6 from this population.\n\n# Convert to a long vector of values\nqd_long &lt;- rep(qd$Chest, qd$Count)\n\n\n\n# Put ten samples in a tibble\nq_samples &lt;- tibble( sample = as_factor(1:10) ) |&gt; \n  mutate( \n    values = map(sample, ~ sample(qd_long, size = 6)) \n    ) |&gt; \n  unnest()\n\nhead(q_samples, 15)\n\n# A tibble: 15 × 2\n   sample values\n   &lt;fct&gt;   &lt;int&gt;\n 1 1          37\n 2 1          42\n 3 1          41\n 4 1          40\n 5 1          39\n 6 1          38\n 7 2          41\n 8 2          40\n 9 2          38\n10 2          39\n11 2          38\n12 2          39\n13 3          39\n14 3          43\n15 3          42"
   },
   {
     "objectID": "slides/Chapter04.html#quetelets-dataset-3",
     "href": "slides/Chapter04.html#quetelets-dataset-3",
     "title": "Chapter 4:Introduction to Statistical Inference",
     "section": "Quetelet’s dataset",
-    "text": "Quetelet’s dataset\nEvery soldier was measured so we can treat this as the population, and \\(\\mu\\) = 39.83 and \\(\\sigma\\) = 2.05 as population parameters. Let’s take some samples of size \\(n\\) = 6 from this population.\n\n# Convert to a long vector of values\nqd_long &lt;- rep(qd$Chest, qd$Count)\n\n\n# Put ten samples in a tibble\nq_samples &lt;- tibble( sample = as_factor(1:10) ) |&gt; \n  mutate( \n    values = map(sample, ~ sample(qd_long, size = 6)) \n    ) |&gt; \n  unnest()\n\n\n\n# Calculate means of each sample\nsample_means &lt;- q_samples |&gt; group_by(sample) |&gt; \n  summarise(mean = mean(values))\n\nsample_means\n\n# A tibble: 10 × 2\n   sample  mean\n   &lt;fct&gt;  &lt;dbl&gt;\n 1 1       39.5\n 2 2       40.7\n 3 3       39  \n 4 4       39.3\n 5 5       39.5\n 6 6       39.7\n 7 7       39  \n 8 8       39.3\n 9 9       41.5\n10 10      39.2"
+    "text": "Quetelet’s dataset\nEvery soldier was measured so we can treat this as the population, and \\(\\mu\\) = 39.83 and \\(\\sigma\\) = 2.05 as population parameters. Let’s take some samples of size \\(n\\) = 6 from this population.\n\n# Convert to a long vector of values\nqd_long &lt;- rep(qd$Chest, qd$Count)\n\n\n# Put ten samples in a tibble\nq_samples &lt;- tibble( sample = as_factor(1:10) ) |&gt; \n  mutate( \n    values = map(sample, ~ sample(qd_long, size = 6)) \n    ) |&gt; \n  unnest()\n\n\n\n# Calculate means of each sample\nsample_means &lt;- q_samples |&gt; \n  group_by(sample) |&gt; \n  summarise(mean = mean(values))\n\nsample_means\n\n# A tibble: 10 × 2\n   sample  mean\n   &lt;fct&gt;  &lt;dbl&gt;\n 1 1       39.5\n 2 2       41.5\n 3 3       39.7\n 4 4       39.5\n 5 5       40  \n 6 6       38.7\n 7 7       38.8\n 8 8       39.7\n 9 9       40.7\n10 10      38.7"
   },
   {
     "objectID": "slides/Chapter04.html#quetelets-dataset-4",
@@ -809,7 +809,7 @@
     "href": "slides/Chapter04.html#sample-means-and-sample-sizes",
     "title": "Chapter 4:Introduction to Statistical Inference",
     "section": "Sample means and sample sizes",
-    "text": "Sample means and sample sizes\n\n\nLet’s compare the distribution of means for different sample sizes.\n\nplot_samples(sample_size = 3)\nplot_samples(sample_size = 5)\nplot_samples(sample_size = 10)\nplot_samples(sample_size = 20)\nplot_samples(sample_size = 50)\nplot_samples(sample_size = 100)\nplot_samples(sample_size = 200)\n\n\n\n\n\n\n\n\n\n\n\n\n\nThe larger the \\(n\\), the less the sample means vary."
+    "text": "Sample means and sample sizes\n\n\nLet’s compare the distribution of means for different sample sizes across the samples.\n\nplot_samples(sample_size = 3)\nplot_samples(sample_size = 5)\nplot_samples(sample_size = 10)\nplot_samples(sample_size = 20)\nplot_samples(sample_size = 50)\nplot_samples(sample_size = 100)\nplot_samples(sample_size = 200)\n\n\n\n\n\n\n\n\n\n\n\n\n\nThe larger the \\(n\\), the less the sample means vary."
   },
   {
     "objectID": "slides/Chapter04.html#standard-error",
@@ -823,7 +823,7 @@
     "href": "slides/Chapter04.html#quetelets-chests-standard-error-of-means-of-samples",
     "title": "Chapter 4:Introduction to Statistical Inference",
     "section": "Quetelet’s chests: Standard error of means of samples",
-    "text": "Quetelet’s chests: Standard error of means of samples\nIf Quetelet’s chest circumferences are distributed as \\(X \\sim \\text{N}(\\mu=39.83, \\sigma=2.05)\\), then how variable are the means of samples of size \\(n\\) = 6?\n\\[\n\\begin{aligned}\nSE(\\bar{X}_{n=6})&=\\sigma/\\sqrt{n} \\\\\n&=2.05/\\sqrt{6} \\\\\n&=0.8369\n\\end{aligned}\n\\] Sample means of size \\(n\\) = 6 would be distributed as\n\\(\\bar{X}_{n=6} \\sim \\text{N}(\\mu=39.83, \\sigma=0.8369)\\)"
+    "text": "Quetelet’s chests: Standard error of means of samples\nQuestion:\nIf Quetelet’s chest circumferences are distributed as \\(X \\sim \\text{N}(\\mu=39.83, \\sigma=2.05)\\), then how variable are the means of samples of size \\(n\\) = 6?\nAnswer:\n\\[\n\\begin{aligned}\nSE(\\bar{X}_{n=6})&=\\sigma/\\sqrt{n} \\\\\n&=2.05/\\sqrt{6} \\\\\n&=0.8369\n\\end{aligned}\n\\] Sample means of size \\(n\\) = 6 would be distributed as\n\\(\\bar{X}_{n=6} \\sim \\text{N}(\\mu=39.83, \\sigma=0.8369)\\)"
   },
   {
     "objectID": "slides/Chapter04.html#quetelets-chests-distribution-of-means-of-samples",
@@ -879,7 +879,7 @@
     "href": "slides/Chapter04.html#confidence-intervals-and-the-t-distribution",
     "title": "Chapter 4:Introduction to Statistical Inference",
     "section": "Confidence intervals and the t distribution",
-    "text": "Confidence intervals and the t distribution\nThe process of using sample data to try and make useful statements about an unknown parameter, \\(\\theta\\), is called statistical inference.\nA confidence interval for the true value of a parameter is often obtained by:\n\\[\n\\hat \\theta \\pm t \\times \\text{SE}(\\hat \\theta)\n\\] where \\(\\hat \\theta\\) is the sample estimate of \\(\\theta\\).\nThe piece that is being added and subtracted, \\(t \\times \\text{SE}(\\hat \\theta)\\), is often called the margin of error."
+    "text": "Confidence intervals and the t distribution\nThe process of using sample data to try and make useful statements about an unknown parameter, \\(\\theta\\), is called statistical inference.\nA confidence interval for the true value of a parameter is often obtained by:\n\\[\n\\hat \\theta \\pm t \\times \\text{SE}(\\hat \\theta)\n\\] where \\(\\hat \\theta\\) is the sample estimate of \\(\\theta\\) and \\(t\\) is a quantile from the \\(t\\) distribution with the appropriate degrees of freedom.\nFor example, to get the \\(t\\) score for a 95% confidence interval with 9 degrees of freedom:\n\n\n[1] 2.262157\n\n\nThe piece that is being added and subtracted, \\(t \\times \\text{SE}(\\hat \\theta)\\), is often called the margin of error."
   },
   {
     "objectID": "slides/Chapter04.html#confidence-intervals-for-a-sample-mean",
@@ -907,7 +907,7 @@
     "href": "slides/Chapter04.html#testing-hypotheses",
     "title": "Chapter 4:Introduction to Statistical Inference",
     "section": "Testing hypotheses",
-    "text": "Testing hypotheses\n\nTesting hypotheses underpins a lot of scientific work.\nA hypothesis is a proposition, a specific idea about the state of the world that can be tested with data.\nFor logical reasons, instead of measuring evidence for a hypothesis of interest, scientists will often:\n\nspecify a null hypotheses, a hypothesis that is true if our hypothesis of interest is false, and\nmeasure the evidence against the null hypothesis, usually in the form of a p-value."
+    "text": "Testing hypotheses\n\nTesting hypotheses underpins a lot of scientific work.\nA hypothesis is a proposition, a specific idea about the state of the world that can be tested with data.\nFor logical reasons, instead of measuring evidence for a hypothesis of interest, scientists will often:\n\nspecify a null hypotheses, which must be true if our hypothesis of interest is false, and\nmeasure the evidence against the null hypothesis, usually in the form of a p-value."
   },
   {
     "objectID": "slides/Chapter04.html#example-growth-of-alfalfa",
@@ -921,7 +921,7 @@
     "href": "slides/Chapter04.html#example-growth-of-alfalfa-1",
     "title": "Chapter 4:Introduction to Statistical Inference",
     "section": "Example: growth of alfalfa",
-    "text": "Example: growth of alfalfa\nThe hypothesis of interest (called the “alternative” hypothesis) is:\n\\(\\ \\ \\ \\ \\ H_A: \\mu \\ne 0\\), that is, the mean difference in yield \\(\\mu\\) between the two years is not zero.\nThe null hypothesis (the case if the alternative hypothesis is wrong) is:\n\\(\\ \\ \\ \\ \\ H_0: \\mu = 0\\), that is, the mean difference is zero.\nWe can test the null hypothesis using a t statistic \\(t_0 = \\frac{\\bar x - \\mu_0} {text{SE}(\\bar x)}\\), where\n\\(\\ \\ \\ \\ \\ \\mu_0 = 0\\) is the hypothesised value of the mean and\n\\(\\ \\ \\ \\ \\ \\text{SE}(\\bar x) = s/\\sqrt{n}\\) is the standard error of the sample mean.\n\n( t0 &lt;- (xbar - 0) / ( s / sqrt(9) ) )\n\n[1] 2.309401\n\n\nThe p-value is \\(\\text{Pr}(|t_{df=8}| &gt; t_0)\\)\n\n2 * pt(t0, df = 8, lower = F)\n\n[1] 0.04973556"
+    "text": "Example: growth of alfalfa\nThe hypothesis of interest (called the “alternative” hypothesis) is:\n\\(\\ \\ \\ \\ \\ H_A: \\mu \\ne 0\\), that is, the mean difference in yield \\(\\mu\\) between the two years is not zero.\nThe null hypothesis (the case if the alternative hypothesis is wrong) is:\n\\(\\ \\ \\ \\ \\ H_0: \\mu = 0\\), that is, the mean difference is zero.\nWe can test the null hypothesis using a t statistic \\(t_0 = \\frac{\\bar x - \\mu_0} {\\text{SE}(\\bar x)}\\), where\n\\(\\ \\ \\ \\ \\ \\mu_0 = 0\\) is the hypothesised value of the mean and\n\\(\\ \\ \\ \\ \\ \\text{SE}(\\bar x) = s/\\sqrt{n}\\) is the (estimated) standard error of the sample mean.\n\n( t0 &lt;- (xbar - 0) / ( s / sqrt(9) ) )\n\n[1] 2.309401\n\n\nThe p-value is \\(\\text{Pr}(|t_{df=8}| &gt; t_0)\\)\n\n2 * pt(t0, df = 8, lower = F)\n\n[1] 0.04973556"
   },
   {
     "objectID": "slides/Chapter04.html#example-growth-of-alfalfa-2",
@@ -942,7 +942,7 @@
     "href": "slides/Chapter04.html#concept-of-power",
     "title": "Chapter 4:Introduction to Statistical Inference",
     "section": "Concept of power",
-    "text": "Concept of power\nThe power of a hypothesis test is the probability of rejecting the null hypothesis if it is indeed false.\nThe power of the t test can be evaluated using R for given effect size \\(\\delta\\)\n\npower.t.test(n = 30, delta = 1, sd = 1, sig.level = 0.05)\n\n\n     Two-sample t test power calculation \n\n              n = 30\n          delta = 1\n             sd = 1\n      sig.level = 0.05\n          power = 0.9677083\n    alternative = two.sided\n\nNOTE: n is number in *each* group\n\npower.t.test(n = 50, delta = 1, sd = 1, sig.level = 0.05)\n\n\n     Two-sample t test power calculation \n\n              n = 50\n          delta = 1\n             sd = 1\n      sig.level = 0.05\n          power = 0.9986074\n    alternative = two.sided\n\nNOTE: n is number in *each* group\n\n\nThe bigger the sample size, the bigger more power we have to detect an effect.\nOften, experimenters might aim to have a power of 80% or more, so they will most likely reject the null if it is false."
+    "text": "Concept of power\nThe power of a hypothesis test is the probability of rejecting the null hypothesis if it is indeed false. Basically, “if we’re right, what is the probability that we’ll be able to show it?”\nThe power of the \\(t\\) test can be evaluated using R if you assert the effect size \\(\\delta\\): ::::{.columns} :::{.column}\n\npower.t.test(n = 10, delta = 1, sd = 1, sig.level = 0.05)\n\n\n     Two-sample t test power calculation \n\n              n = 10\n          delta = 1\n             sd = 1\n      sig.level = 0.05\n          power = 0.5619846\n    alternative = two.sided\n\nNOTE: n is number in *each* group\n\n\n::: :::{.column}\n\npower.t.test(n = 50, delta = 1, sd = 1, sig.level = 0.05)\n\n\n     Two-sample t test power calculation \n\n              n = 50\n          delta = 1\n             sd = 1\n      sig.level = 0.05\n          power = 0.9986074\n    alternative = two.sided\n\nNOTE: n is number in *each* group\n\n\n::: ::::\nThe bigger the sample size, the bigger more power we have to detect an effect.\nOften, experimenters might aim to have a power of 80% or more, so they will most likely reject the null if it is false."
   },
   {
     "objectID": "slides/Chapter04.html#sampling-distributions",
@@ -956,7 +956,7 @@
     "href": "slides/Chapter04.html#two-sample-t-test",
     "title": "Chapter 4:Introduction to Statistical Inference",
     "section": "Two sample t-test",
-    "text": "Two sample t-test\n\nIn a two-sample t-test, the equality of two population means is tested. Null hypothesis \\(H_0:\\mu=\\mu_1=\\mu_2\\). Two-sided Alternative hypothesis \\(H_1:\\mu_1 \\neq \\mu_2\\)\nIf we can assume that two populations have the same spread, we perform a pooled-sample t-test in which the pooled variance (common to both populations) is estimated as \\(S_{p}^{2} = w_{1} S_{1}^{2} +w_{2} S_{2}^{2}\\) where the weights are \\(w_{1} =\\frac{n_{1}-1}{n_{1} +n_{2}-2}\\) and \\(w_{2} =\\frac{n_{2}-1}{n_{1} +n_{2}-2}\\)\nFor the pooled case, the \\(df\\) for the \\(t\\)-test is \\(n_{1}+n_{2}-2\\) but becomes smaller for the unpooled case to \\[df=\\frac{\\left(\\frac{S_{1}^{2}}{n_{1}} +\\frac{S_{2}^{2} }{n_{2}} \\right)^{2} }{\\frac{1}{n_{1} -1} \\left(\\frac{S_{1}^{2}}{n_{1}}\\right)^{2} +\\frac{1}{n_{2} -1} \\left(\\frac{S_{2}^{2}}{n_{2} } \\right)^{2}} \\]"
+    "text": "Two sample t-test\n\nThe two-sample t-test is a common statistical test. You have two populations, \\(X_1\\) and \\(X_2\\), with means \\(\\mu_1\\) and \\(\\mu_2\\) and variances \\(\\sigma^2_1\\) and \\(\\sigma^2_2\\), respectively.\nWe wish to test whether the two population means are equal.\nNull hypothesis: \\(H_0:\\mu=\\mu_1=\\mu_2\\)\nTwo-sided alternative hypothesis: \\(H_1:\\mu_1 \\neq \\mu_2\\)\nThe basic t-test assumes equal variances; that is, \\(\\sigma^2_1 = \\sigma^2_2\\).\nIf we make this assumption and it is false, the test may give the wrong conclusion!"
   },
   {
     "objectID": "slides/Chapter04.html#validity-of-equal-variance-assumption",
@@ -977,42 +977,42 @@
     "href": "slides/Chapter04.html#test-of-proportions",
     "title": "Chapter 4:Introduction to Statistical Inference",
     "section": "Test of proportions",
-    "text": "Test of proportions\nTesting for a single proportion being different to 0.5, or some other value.\nA sample survey of size 1000 has had 450 females.\nCan we treat the survey as unbiased?\n\nprop.test(450, 1000)\n\n\n    1-sample proportions test with continuity correction\n\ndata:  450 out of 1000, null probability 0.5\nX-squared = 9.801, df = 1, p-value = 0.001744\nalternative hypothesis: true p is not equal to 0.5\n95 percent confidence interval:\n 0.4189204 0.4814685\nsample estimates:\n   p \n0.45 \n\n\nAn exact version of the test\n\n\n\n    Exact binomial test\n\ndata:  c(450, 550)\nnumber of successes = 450, number of trials = 1000, p-value = 0.001731\nalternative hypothesis: true probability of success is not equal to 0.5\n95 percent confidence interval:\n 0.4188517 0.4814435\nsample estimates:\nprobability of success \n                  0.45 \n\n\nOr, for a test for a proportion other than 0.5\n\n\n\n    Exact binomial test\n\ndata:  c(450, 550)\nnumber of successes = 450, number of trials = 1000, p-value &lt; 2.2e-16\nalternative hypothesis: true probability of success is not equal to 0.75\n95 percent confidence interval:\n 0.4188517 0.4814435\nsample estimates:\nprobability of success \n                  0.45"
+    "text": "Test of proportions\nTesting the null hypothesis that a proportion \\(p=0.5\\)\nAlternative hypothesis: \\(p \\ne 0.5\\)\nSay a survey of 1000 beached whales had 450 females.\n\n\nIs the population 50:50?\n\nprop.test(450, 1000)\n\n\n    1-sample proportions test with continuity correction\n\ndata:  450 out of 1000, null probability 0.5\nX-squared = 9.801, df = 1, p-value = 0.001744\nalternative hypothesis: true p is not equal to 0.5\n95 percent confidence interval:\n 0.4189204 0.4814685\nsample estimates:\n   p \n0.45 \n\n\n\nAn exact version of the test\n\nbinom.test(c(450, 550))\n\n\n    Exact binomial test\n\ndata:  c(450, 550)\nnumber of successes = 450, number of trials = 1000, p-value = 0.001731\nalternative hypothesis: true probability of success is not equal to 0.5\n95 percent confidence interval:\n 0.4188517 0.4814435\nsample estimates:\nprobability of success \n                  0.45 \n\n\n\n\nTo test for a proportion other than 0.5\n\nbinom.test(c(450, 550), p = 3/4)\n\n\n    Exact binomial test\n\ndata:  c(450, 550)\nnumber of successes = 450, number of trials = 1000, p-value &lt; 2.2e-16\nalternative hypothesis: true probability of success is not equal to 0.75\n95 percent confidence interval:\n 0.4188517 0.4814435\nsample estimates:\nprobability of success \n                  0.45"
   },
   {
     "objectID": "slides/Chapter04.html#comparing-several-proportions",
     "href": "slides/Chapter04.html#comparing-several-proportions",
     "title": "Chapter 4:Introduction to Statistical Inference",
     "section": "Comparing several proportions",
-    "text": "Comparing several proportions\nFleiss (1981) Statistical methods for rates and proportions data on smokers in four group of patients\n\nsmokers  &lt;- c( 83, 90, 129, 70 )\npatients &lt;- c( 86, 93, 136, 82 )\nprop.test(smokers, patients)\n\n\n    4-sample test for equality of proportions without continuity correction\n\ndata:  smokers out of patients\nX-squared = 12.6, df = 3, p-value = 0.005585\nalternative hypothesis: two.sided\nsample estimates:\n   prop 1    prop 2    prop 3    prop 4 \n0.9651163 0.9677419 0.9485294 0.8536585"
+    "text": "Comparing several proportions\nData on smokers in four group of patients\n(from Fleiss, 1981, Statistical methods for rates and proportions).\n\nsmokers  &lt;- c( 83, 90, 129, 70 )\npatients &lt;- c( 86, 93, 136, 82 )\nprop.test(smokers, patients)\n\n\n    4-sample test for equality of proportions without continuity correction\n\ndata:  smokers out of patients\nX-squared = 12.6, df = 3, p-value = 0.005585\nalternative hypothesis: two.sided\nsample estimates:\n   prop 1    prop 2    prop 3    prop 4 \n0.9651163 0.9677419 0.9485294 0.8536585 \n\n\nMore on chi-squared tests next week."
   },
   {
     "objectID": "slides/Chapter04.html#tests-for-normality",
     "href": "slides/Chapter04.html#tests-for-normality",
     "title": "Chapter 4:Introduction to Statistical Inference",
     "section": "Tests for normality",
-    "text": "Tests for normality\n\nEDA approaches\n\nnormal quantile plot, Boxplots,mids vs. spreads plot etc.\n\nHypothesis tests\n\nKolmogorov-Smirnov test (based on the biggest difference between the empirical and theoretical cumulative distributions)\nShapiro-Wilk test (based on variance of the difference)\n\nExample: N(100,1) random data of size \\(n=50\\)\n\nThe null hypothesis of normality must be justified on empirical grounds\n\n\n\nset.seed(1234)\nshapiro.test(rnorm(50, mean=100))\n\n\n    Shapiro-Wilk normality test\n\ndata:  rnorm(50, mean = 100)\nW = 0.94504, p-value = 0.02142\n\nks.test(rnorm(50), \"pnorm\")\n\n\n    Exact one-sample Kolmogorov-Smirnov test\n\ndata:  rnorm(50)\nD = 0.088169, p-value = 0.7995\nalternative hypothesis: two-sided"
+    "text": "Tests for normality\nTesting the hypothesis that sample data came from a normally distributed population. \\(H_0: X \\sim N(\\mu, \\sigma)\\).\n\nKolmogorov-Smirnov test (based on the biggest difference between the empirical and theoretical cumulative distributions)\nShapiro-Wilk test (based on variance of the difference)\n\nExample: a sample of \\(n\\) = 50 from N(100,1).\n\n\n\nset.seed(123)\nshapiro.test(rnorm(50, mean=100))\n\n\n    Shapiro-Wilk normality test\n\ndata:  rnorm(50, mean = 100)\nW = 0.98928, p-value = 0.9279\n\n\n\n\nset.seed(123)\nks.test(rnorm(50), \"pnorm\")\n\n\n    Exact one-sample Kolmogorov-Smirnov test\n\ndata:  rnorm(50)\nD = 0.073034, p-value = 0.9347\nalternative hypothesis: two-sided\n\n\n\n\nThe large p-values mean that there’s no evidence of non-normality.\nLike all tests, they can give the wrong answer. Try with set.seed(1234)."
   },
   {
     "objectID": "slides/Chapter04.html#example",
     "href": "slides/Chapter04.html#example",
     "title": "Chapter 4:Introduction to Statistical Inference",
     "section": "Example",
-    "text": "Example\n\ntv = read_csv(\"https://www.massey.ac.nz/~anhsmith/data/tv.csv\")\n\nggplot(tv, aes(sample = TELETIME)) + \n  stat_qq() + stat_qq_line() +\n  labs(title = \"Normal quantile plot for TV viewing times\")"
+    "text": "Example\nRight skewed distribution is made roughly symmetric using a log transformation for no. of vehicles variable (rangitikei.* dataset)"
   },
   {
     "objectID": "slides/Chapter04.html#transformations",
     "href": "slides/Chapter04.html#transformations",
     "title": "Chapter 4:Introduction to Statistical Inference",
     "section": "Transformations",
-    "text": "Transformations\n\nI can be useful to transform data to make the distribution more like a ‘normal’\nThe linear transformation \\(Y^*= a+bY\\) result only in a change of scale or of origin\nA linear transformation does not change the shape of the distribution i.e. histogram, boxplot etc. remain the same shape\nWe prefer non-linear transformations which alter the shape of the distribution\nTransformations are needed to-\n\nto bring symmetry\nnormality\nstabilise the variance etc"
+    "text": "Transformations\n\nIt can be useful to transform skewed data to make the distribution more like a ‘normal’ if that is required for a particular analysis.\nA linear transformation \\(Y^*= a+bY\\) only changes the scale or centre, not the shape of the distribution.\nTransformations can help to improve symmetry, normality, and stabilise the variance."
   },
   {
     "objectID": "slides/Chapter04.html#example-1",
     "href": "slides/Chapter04.html#example-1",
     "title": "Chapter 4:Introduction to Statistical Inference",
     "section": "Example",
-    "text": "Example\n\nRight skewed distribution is made roughly symmetric using a log transformation for no. of vehicles variable (rangitikei.* dataset)"
+    "text": "Example\nBrain weights of Animals data are right-skewed.\n\n\ndata(Animals, package = \"MASS\")\n\nbind_cols( \n  # confidence intervals on raw data\n  `raw x` = Animals |&gt; \n    pull(brain) |&gt; \n    t.test() |&gt; \n    pluck(\"conf.int\"),\n  # confidence intervals on log-transformed data\n  `log x` = Animals |&gt; \n    pull(brain) |&gt; \n    log() |&gt; \n    t.test() |&gt; \n    pluck(\"conf.int\"),\n  # confidence intervals on log-transformed data \n  # and then back-transformed\n  `log x, CIs back-transformed` = Animals |&gt; \n    pull(brain) |&gt; \n    log() |&gt; \n    t.test() |&gt; \n    pluck(\"conf.int\") |&gt;\n    exp()\n  ) |&gt; \n  kable()\n\n\n\nLower and upper confidence limits \n\n\nraw x\nlog x\nlog x, CIs back-transformed\n\n\n\n\n56.88993\n3.495101\n32.95362\n\n\n1092.15293\n5.355790\n211.83131"
   },
   {
     "objectID": "slides/Chapter04.html#a-ladder-of-powers-for-transforming-data",
@@ -1033,14 +1033,14 @@
     "href": "slides/Chapter04.html#box-cox-transformation",
     "title": "Chapter 4:Introduction to Statistical Inference",
     "section": "Box-Cox transformation",
-    "text": "Box-Cox transformation\n\nThis is a normalising transformation (i.e more than just symmetry) but we may not always find a suitable Box-Cox power \\(\\lambda\\).\nR gives a point estimate of power & the CI.\n\n\n\nFocus on the confidence interval for the estimated \\(\\lambda\\) and it may be wider"
+    "text": "Box-Cox transformation\n\n\nThis is a normalising transformation based on the Box-Cox power parameter, \\(\\lambda\\).\nR gives a point estimate of the Box-Cox power & a confidence interval.\nUsually, we are concerned about whether the residuals from a model are normally distributed – put the model in the lm statement.\nSometimes, no “good” value of \\(\\lambda\\) can be found.\n\n\nlibrary(lindia)\ngg_boxcox(lm(rangitikei$vehicle ~ 1))"
   },
   {
     "objectID": "slides/Chapter04.html#statistical-inference-based-on-transformed-data",
     "href": "slides/Chapter04.html#statistical-inference-based-on-transformed-data",
     "title": "Chapter 4:Introduction to Statistical Inference",
     "section": "Statistical inference based on transformed data",
-    "text": "Statistical inference based on transformed data\n\nObtain the confidence interval using transformed data and then back transform the limits (to keep the original scale)\n\nThe confidence limits calculated on log-transformed data can be exponentiated back to the raw scale (i.e., \\(e^{\\text{confidence limit}}\\))\nThe confidence limits of square-root-transformed data can be squared back to the raw scale (ie. \\({\\text{confidence limit}^2}\\))\n\nFor hypothesis test, apply the same transformation on the value hypothesised under the null\nExplore https://shiny.massey.ac.nz/anhsmith/demos/explore.transformations/ app (not currently working)\nExample: Brain weight data is extremely skewed to the right. So rely on the back-transformed CI.\n\n\n\n[1]  46.88888 519.38209\n\n\n[1] 2.518901 3.761498\n\n\n[1] 12.41495 43.01280"
+    "text": "Statistical inference based on transformed data\n\nObtain the confidence interval using transformed data and then back transform the limits (to keep the original scale)\n\nThe confidence limits calculated on log-transformed data can be exponentiated back to the raw scale (i.e., \\(e^{\\text{confidence limit}}\\))\nThe confidence limits of square-root-transformed data can be squared back to the raw scale (ie. \\({\\text{confidence limit}^2}\\))\n\nFor hypothesis test, apply the same transformation on the value hypothesised under the null\nExplore https://shiny.massey.ac.nz/anhsmith/demos/explore.transformations/ app (not currently working)"
   },
   {
     "objectID": "slides/Chapter04.html#a-caution-on-the-transformation-technique",
@@ -1075,49 +1075,49 @@
     "href": "slides/Chapter04.html#non-parametric-tests",
     "title": "Chapter 4:Introduction to Statistical Inference",
     "section": "Non-parametric tests",
-    "text": "Non-parametric tests\nAn alternative to using power transformations\nRelies on replacing the actual observed data by their ranks\nSpearman’s Rank Correlation\n\nRank the \\(X\\) and \\(Y\\) variables, and then obtain usual Pearson correlation coefficient\nThe following plot shows both (Spearman correlation in the upper triangle)\n\n\nComparison of Pearsonian and Spearman’s rank correlations"
+    "text": "Non-parametric tests\nNon-parametric tests are light on assumptions, and can be used for highly asymmetric data (as an alternative to using transformations).\nMany non-parametric methods rely on replacing the observed data by their ranks."
   },
   {
     "objectID": "slides/Chapter04.html#wilcoxon-signed-rank-test",
     "href": "slides/Chapter04.html#wilcoxon-signed-rank-test",
     "title": "Chapter 4:Introduction to Statistical Inference",
     "section": "Wilcoxon signed rank test",
-    "text": "Wilcoxon signed rank test\nA non-parametric alternative to the one-sample t-test\n\n\\(H_0: \\eta=\\eta_0\\) where \\(\\eta\\) (Greek letter ‘eta’) is the population median\nBased on based on ranking \\((|Y-\\eta_0|)\\), where the ranks for data with \\(Y&lt;\\eta_0\\) are compared to the ranks for data with \\(Y&gt;\\eta_0\\)\n\n\n\n\n    Wilcoxon signed rank exact test\n\ndata:  tv$TELETIME\nV = 588, p-value = 0.6108\nalternative hypothesis: true location is not equal to 1680\n95 percent confidence interval:\n 1557.5 1906.5\nsample estimates:\n(pseudo)median \n          1728 \n\n\n\n\n\n    One Sample t-test\n\ndata:  tv$TELETIME\nt = 0.58856, df = 45, p-value = 0.5591\nalternative hypothesis: true mean is not equal to 1680\n95 percent confidence interval:\n 1560.633 1897.932\nsample estimates:\nmean of x \n 1729.283"
+    "text": "Wilcoxon signed rank test\nA non-parametric alternative to the one-sample t-test\n\\(H_0: \\eta=\\eta_0\\) where \\(\\eta\\) (Greek letter ‘eta’) is the population median\nBased on based on ranking \\((|Y-\\eta_0|)\\), where the ranks for data with \\(Y&lt;\\eta_0\\) are compared to the ranks for data with \\(Y&gt;\\eta_0\\)\n\n\n\nwilcox.test(tv$TELETIME, mu=1680, conf.int=T)\n\n\n    Wilcoxon signed rank exact test\n\ndata:  tv$TELETIME\nV = 588, p-value = 0.6108\nalternative hypothesis: true location is not equal to 1680\n95 percent confidence interval:\n 1557.5 1906.5\nsample estimates:\n(pseudo)median \n          1728 \n\n\n\n\nt.test(tv$TELETIME, mu=1680)\n\n\n    One Sample t-test\n\ndata:  tv$TELETIME\nt = 0.58856, df = 45, p-value = 0.5591\nalternative hypothesis: true mean is not equal to 1680\n95 percent confidence interval:\n 1560.633 1897.932\nsample estimates:\nmean of x \n 1729.283"
   },
   {
     "objectID": "slides/Chapter04.html#mann-whitney-test",
     "href": "slides/Chapter04.html#mann-whitney-test",
     "title": "Chapter 4:Introduction to Statistical Inference",
     "section": "Mann-Whitney test",
-    "text": "Mann-Whitney test\nFor two group comparison, pool the two group responses and then rank the pooled data\nRanks for the first group are compared to the ranks for the second group\n\nThe null hypothesis is that the two group medians are the same: \\(H_0: \\eta_1=\\eta_2\\).\n\n\n\n\n    Wilcoxon rank sum test with continuity correction\n\ndata:  rangitikei$people by rangitikei$time\nW = 30, p-value = 0.007711\nalternative hypothesis: true location shift is not equal to 0\n95 percent confidence interval:\n -88.99996 -10.00005\nsample estimates:\ndifference in location \n             -36.46835 \n\n\n\n\n\n    Welch Two Sample t-test\n\ndata:  rangitikei$people by rangitikei$time\nt = -3.1677, df = 30.523, p-value = 0.003478\nalternative hypothesis: true difference in means between group 1 and group 2 is not equal to 0\n95 percent confidence interval:\n -102.28710  -22.13049\nsample estimates:\nmean in group 1 mean in group 2 \n       22.71429        84.92308"
+    "text": "Mann-Whitney test\nFor two group comparison, pool the two group responses and then rank the pooled data\nRanks for the first group are compared to the ranks for the second group\nThe null hypothesis is that the two group medians are the same: \\(H_0: \\eta_1=\\eta_2\\).\n\n\n\nwilcox.test(rangitikei$people~rangitikei$time, conf.int=T)\n\n\n    Wilcoxon rank sum test with continuity correction\n\ndata:  rangitikei$people by rangitikei$time\nW = 30, p-value = 0.007711\nalternative hypothesis: true location shift is not equal to 0\n95 percent confidence interval:\n -88.99996 -10.00005\nsample estimates:\ndifference in location \n             -36.46835 \n\n\n\n\nt.test(rangitikei$people~rangitikei$time)\n\n\n    Welch Two Sample t-test\n\ndata:  rangitikei$people by rangitikei$time\nt = -3.1677, df = 30.523, p-value = 0.003478\nalternative hypothesis: true difference in means between group 1 and group 2 is not equal to 0\n95 percent confidence interval:\n -102.28710  -22.13049\nsample estimates:\nmean in group 1 mean in group 2 \n       22.71429        84.92308"
   },
   {
     "objectID": "slides/Chapter04.html#another-form-of-test",
     "href": "slides/Chapter04.html#another-form-of-test",
     "title": "Chapter 4:Introduction to Statistical Inference",
     "section": "Another form of test",
-    "text": "Another form of test\n\nkruskal.test(rangitikei$people~rangitikei$time)\n\n\n    Kruskal-Wallis rank sum test\n\ndata:  rangitikei$people by rangitikei$time\nKruskal-Wallis chi-squared = 7.2171, df = 1, p-value = 0.007221\n\n\n\nwilcox.test(rangitikei$people~rangitikei$time)\n\n\n    Wilcoxon rank sum test with continuity correction\n\ndata:  rangitikei$people by rangitikei$time\nW = 30, p-value = 0.007711\nalternative hypothesis: true location shift is not equal to 0"
+    "text": "Another form of test\n\n\n\nkruskal.test(rangitikei$people~rangitikei$time)\n\n\n    Kruskal-Wallis rank sum test\n\ndata:  rangitikei$people by rangitikei$time\nKruskal-Wallis chi-squared = 7.2171, df = 1, p-value = 0.007221\n\n\n\n\nwilcox.test(rangitikei$people~rangitikei$time)\n\n\n    Wilcoxon rank sum test with continuity correction\n\ndata:  rangitikei$people by rangitikei$time\nW = 30, p-value = 0.007711\nalternative hypothesis: true location shift is not equal to 0"
   },
   {
     "objectID": "slides/Chapter04.html#permutation-tests",
     "href": "slides/Chapter04.html#permutation-tests",
     "title": "Chapter 4:Introduction to Statistical Inference",
     "section": "Permutation tests",
-    "text": "Permutation tests\nA permutation (or randomisation) test is based on the idea of randomly permuting the observed data and then answering whether a hypothesis is negated or not.\nOne sample hypothesis test example follows:\n\nlibrary(exactRankTests)\nperm.test(tv$TELETIME, null.value=1500)\n\n\n    1-sample Permutation Test\n\ndata:  tv$TELETIME\nT = 79547, p-value = 2.842e-14\nalternative hypothesis: true mu is not equal to 0\n\n\nFor small samples, this test is not powerful."
+    "text": "Permutation tests\nA permutation (or randomisation) test has the following steps:\n\nRandomly permute the observed data many times, thereby destroying any real relationship,\nRecalculate the test statistic \\(T\\) for each random permutation\nCompare the observed value of \\(T\\) (from the actual data) with the values of \\(T\\) under permutation.\n\nOne sample hypothesis test example follows:\n\nlibrary(exactRankTests)\nperm.test(tv$TELETIME, null.value=1500)\n\n\n    1-sample Permutation Test\n\ndata:  tv$TELETIME\nT = 79547, p-value = 2.842e-14\nalternative hypothesis: true mu is not equal to 0\n\n\nFor small samples, this approach is not powerful."
   },
   {
     "objectID": "slides/Chapter04.html#two-group-comparison",
     "href": "slides/Chapter04.html#two-group-comparison",
     "title": "Chapter 4:Introduction to Statistical Inference",
     "section": "Two group comparison",
-    "text": "Two group comparison\n\nperm.test(TELETIME~SEX, distribution ='exact', data=tv)\n\n\n    2-sample Permutation Test\n\ndata:  TELETIME by SEX\nT = 38370, p-value = 0.471\nalternative hypothesis: true mu is not equal to 0\n\n\nAlso using a linear model fit (cover later)\n\nlibrary(lmPerm)\nsummary(lmp(TELETIME~SEX, data=tv))\n\n[1] \"Settings:  unique SS : numeric variables centered\"\n\n\n\nCall:\nlmp(formula = TELETIME ~ SEX, data = tv)\n\nResiduals:\n      Min        1Q    Median        3Q       Max \n-1178.261  -510.793    -7.283   402.989  1130.739 \n\nCoefficients:\n    Estimate Iter Pr(Prob)\nSEX      122  129    0.442\n\nResidual standard error: 570.9 on 44 degrees of freedom\nMultiple R-Squared: 0.0118, Adjusted R-squared: -0.01066 \nF-statistic: 0.5255 on 1 and 44 DF,  p-value: 0.4723 \n\n\nRead the study guide example for bootstrap tests (not examined)"
+    "text": "Two group comparison\n\nperm.test(TELETIME~SEX, distribution ='exact', data=tv)\n\n\n    2-sample Permutation Test\n\ndata:  TELETIME by SEX\nT = 38370, p-value = 0.471\nalternative hypothesis: true mu is not equal to 0\n\n\nAlso using a linear model fit (cover later)\n\nlibrary(lmPerm)\nsummary(lmp(TELETIME~SEX, data=tv))\n\n[1] \"Settings:  unique SS : numeric variables centered\"\n\n\n\nCall:\nlmp(formula = TELETIME ~ SEX, data = tv)\n\nResiduals:\n      Min        1Q    Median        3Q       Max \n-1178.261  -510.793    -7.283   402.989  1130.739 \n\nCoefficients:\n    Estimate Iter Pr(Prob)\nSEX      122   51     0.98\n\nResidual standard error: 570.9 on 44 degrees of freedom\nMultiple R-Squared: 0.0118, Adjusted R-squared: -0.01066 \nF-statistic: 0.5255 on 1 and 44 DF,  p-value: 0.4723 \n\n\nRead the study guide example for bootstrap tests (not examined)"
   },
   {
     "objectID": "slides/Chapter04.html#summary",
     "href": "slides/Chapter04.html#summary",
     "title": "Chapter 4:Introduction to Statistical Inference",
     "section": "Summary",
-    "text": "Summary\nBasic methods of inference include:\n\nestimating a population parameter (e.g. mean) using a sample of values,\nestimating sampling variation using the standard error,\nconstructing confidence intervals for an estimate, and\ntesting hypotheses about particular values of the population parameter.\n\nInference is relatively easy for normally distributed populations.\nStudent’s t-tests include:\n\none-sample t-test, including paired-sample t-test for a difference of zero\ntwo-sample t-test assuming equal variances (estimating pooled variance)\ntwo-sample t-test not assuming equal variances (Welch test)\n\nThe t-test is generally robust for non-normal populations (especially for large samples).\nPower transformations, such as square-root, log, or Box-Cox aim to reduce skewness.\nNon-parametric tests can be used for non-normal data.\n\n\n\n\n\n\n\n\n\n161250 Data Analysis"
+    "text": "Summary\nBasic methods of inference include:\n\nestimating a population parameter (e.g. mean) using a sample of values,\nestimating standard deviation of a sample estimate using the standard error,\nconstructing confidence intervals for an estimate, and\ntesting hypotheses about particular values of the population parameter.\n\nInference is relatively easy for normally distributed populations.\nStudent’s t-tests include:\n\none-sample t-test, including paired-sample t-test for a difference of zero\ntwo-sample t-test assuming equal variances (estimating pooled variance)\ntwo-sample t-test not assuming equal variances (Welch test)\n\nThe t-test is generally robust for non-normal populations (especially for large samples).\nPower transformations, such as square-root, log, or Box-Cox aim to reduce skewness.\nNon-parametric tests can be used for non-normal data, but they are usually less powerful than parametric tests.\n\n\n\n\n\n\n\n\n\n161250 Data Analysis"
   },
   {
     "objectID": "slides/Chapter02.html#two-modes-of-data-analysis",
@@ -2804,14 +2804,14 @@
     "href": "slides/Chapter04.html#truth-and-outcomes",
     "title": "Chapter 4:Introduction to Statistical Inference",
     "section": "Truth and outcomes",
-    "text": "Truth and outcomes\nIn reality, the null hypothesis is either true or false.\nThe outcome of a test is either we reject the null hypothesis, or we fail to reject the null hypothesis (note, we never “confirm” or “accept” the null hypothesis – absence of evidence is not evidence of absence!).\nThis gives us four possibilities:\n\n\n\n\n\\(H_0\\) is true\n\\(H_0\\) is false\n\n\n\n\nReject \\(H_0\\)\nType I error\nCorrect result\n\n\nFail to reject \\(H_0\\)\nCorrect result\nType II error"
+    "text": "Truth and outcomes\nIn reality, the null hypothesis is either true or false.\nThe outcome of a test is either we reject the null hypothesis, or we fail to reject the null hypothesis (note, we never “confirm” or “accept” the null hypothesis – absence of evidence is not evidence of absence!).\nThis gives us four possibilities:\n\n\n\n\n\\(H_0\\) is true\n\\(H_0\\) is false\n\n\n\n\nReject \\(H_0\\)\nType I error\nCorrect result\n\n\nDo not reject \\(H_0\\)\nCorrect result\nType II error\n\n\n\nWith probabilities usually represented by:\n\n\n\n\n\\(H_0\\) is true\n\\(H_0\\) is false\n\n\n\n\nReject \\(H_0\\)\n\\(\\alpha\\)\n\\(1-\\beta\\) = “power”\n\n\nDo not reject \\(H_0\\)\n\\(1 - \\alpha\\)\n\\(\\beta\\)"
   },
   {
     "objectID": "slides/Chapter04.html#truth-and-outcomes-1",
     "href": "slides/Chapter04.html#truth-and-outcomes-1",
     "title": "Chapter 4:Introduction to Statistical Inference",
     "section": "Truth and outcomes",
-    "text": "Truth and outcomes\n\nThe probability of making a Type I error is set by the experimenter a priori (beforehand) as the significance level, \\(\\alpha\\).\nFor example, if we set \\(\\alpha\\) = 0.05, we know that we have a 5% chance of rejecting \\(H_0\\) even when it is true (the Type I error rate is 0.05).\nThe probability of retaining \\(H_0\\) when it is false is usually represented by \\(\\beta\\) (“beta”).\nWe usually do not know what this is. It depends on lots of things, like \\(\\sigma\\), \\(n\\) and also what the actual alternative hypothesis is."
+    "text": "Truth and outcomes\nThe probability of making a Type I error, rejecting \\(H_0\\) when \\(H_0\\) is true, is set by the experimenter a priori (beforehand) as the significance level, \\(\\alpha\\).\n\nSay we set \\(\\alpha\\) at the conventional 0.05. We know that, if \\(H_0\\) is true, we have a 5% chance of rejecting \\(H_0\\) (the Type I error rate is 0.05) and a 95% chance of not rejecting \\(H_0\\).\n\nThe probability of retaining (not rejecting) \\(H_0\\) when \\(H_0\\) is false is usually represented by \\(\\beta\\) (“beta”).\n\nWe usually do not know \\(\\beta\\) because it depends on \\(\\sigma\\), \\(n\\) and also the effect size under the alternative hypothesis. These must be asserted to calculate \\(\\beta\\) and power, \\(1-\\beta\\)."
   },
   {
     "objectID": "slides/Chapter04.html#validity-of-equal-variance-assumption-1",
@@ -2819,5 +2819,54 @@
     "title": "Chapter 4:Introduction to Statistical Inference",
     "section": "Validity of equal variance assumption",
     "text": "Validity of equal variance assumption\nt-test assuming equal variances:\n\nt.test(TELETIME ~ factor(SEX), var.equal = TRUE, data=tv)\n\n\n    Two Sample t-test\n\ndata:  TELETIME by factor(SEX)\nt = -0.7249, df = 44, p-value = 0.4723\nalternative hypothesis: true difference in means between group 1 and group 2 is not equal to 0\n95 percent confidence interval:\n -461.3476  217.2606\nsample estimates:\nmean in group 1 mean in group 2 \n       1668.261        1790.304 \n\n\nt-test not assuming equal variances (Welch test):\n\nt.test(TELETIME ~ factor(SEX), data=tv)\n\n\n    Welch Two Sample t-test\n\ndata:  TELETIME by factor(SEX)\nt = -0.7249, df = 40.653, p-value = 0.4727\nalternative hypothesis: true difference in means between group 1 and group 2 is not equal to 0\n95 percent confidence interval:\n -462.1384  218.0514\nsample estimates:\nmean in group 1 mean in group 2 \n       1668.261        1790.304"
+  },
+  {
+    "objectID": "slides/Chapter04.html#statistical-inference-for-a-population-mean",
+    "href": "slides/Chapter04.html#statistical-inference-for-a-population-mean",
+    "title": "Chapter 4:Introduction to Statistical Inference",
+    "section": "Statistical Inference for a Population Mean",
+    "text": "Statistical Inference for a Population Mean\n\n\nConsider a population \\(X\\) with mean \\(\\mu\\),\nvariance \\(\\text{Var}(X)=\\sigma^2\\), and\nstandard deviation \\(\\sigma\\).\nWe can estimate \\(\\mu\\) by:\n\ntaking a random sample of values \\(\\{x_1, x_2, ..., x_n\\}\\) from the population, \\(X\\), and\ncalculating the sample mean \\(\\bar x = \\frac 1 n \\sum_{i=1}^{n}x_i\\).\n\n\n\n\n\nImportantly:\n\nThe sample mean \\(\\bar x\\) is a single draw from a random variable \\(\\bar X\\). It will never be exactly equal to the population mean, \\(\\mu\\), unless you measure every single leaf.\nThere is uncertainty in our estimate of \\(\\mu\\). Each sample yields a different \\(\\bar x\\). This is called sampling error."
+  },
+  {
+    "objectID": "slides/Chapter04.html#sampling-error",
+    "href": "slides/Chapter04.html#sampling-error",
+    "title": "Chapter 4:Introduction to Statistical Inference",
+    "section": "Sampling Error",
+    "text": "Sampling Error\nThe variability of the sample means from sample to sample, \\(\\text{Var}(\\bar X)\\), depends on two things:\n\nthe variability of the population values, \\(\\text{Var}(x)\\), and\nthe size of the sample, \\(n\\).\n\nThe variability of the sample estimate of a parameter is usually expressed as a standard error (SE), which is simply the theoretical standard deviation of \\(\\bar X\\) from sample to sample.\nThe equation is surprisingly simple!\n\\(\\text{Var}(\\bar X) = \\text{Var}(X)/n\\)\n\\(\\text{SE}(\\bar X) = \\text{SD}(\\bar X) = \\sigma/\\sqrt n\\)"
+  },
+  {
+    "objectID": "slides/Chapter04.html#calculating-power",
+    "href": "slides/Chapter04.html#calculating-power",
+    "title": "Chapter 4:Introduction to Statistical Inference",
+    "section": "Calculating power",
+    "text": "Calculating power\nThe power of a hypothesis test is the probability of rejecting the null hypothesis if it is indeed false. Basically, “if we’re right, what is the probability that we’ll be able to show it?”\nThe power of the \\(t\\) test can be evaluated using R if you assert the effect size \\(\\delta\\):\n\n\n\npower.t.test(n = 10, delta = 1, sd = 1, sig.level = 0.05)\n\n\n     Two-sample t test power calculation \n\n              n = 10\n          delta = 1\n             sd = 1\n      sig.level = 0.05\n          power = 0.5619846\n    alternative = two.sided\n\nNOTE: n is number in *each* group\n\n\n\n\npower.t.test(n = 50, delta = 1, sd = 1, sig.level = 0.05)\n\n\n     Two-sample t test power calculation \n\n              n = 50\n          delta = 1\n             sd = 1\n      sig.level = 0.05\n          power = 0.9986074\n    alternative = two.sided\n\nNOTE: n is number in *each* group\n\n\n\n\nThe bigger the sample size, the bigger more power we have to detect an effect.\nOften, experimenters might aim to have a power of 80% or more, so they will most likely reject the null if it is false."
+  },
+  {
+    "objectID": "slides/Chapter04.html#two-sample-t-test-with-equal-variances",
+    "href": "slides/Chapter04.html#two-sample-t-test-with-equal-variances",
+    "title": "Chapter 4:Introduction to Statistical Inference",
+    "section": "Two sample t-test with equal variances",
+    "text": "Two sample t-test with equal variances\nUnder the assumption of equal variances \\(\\sigma^2_1 = \\sigma^2_2\\), we can perform a pooled-sample t-test.\nWe calculate the estimated pooled variance as:\n\\[s_{p}^{2} = w_{1} s_{1}^{2} +w_{2} s_{2}^{2}\\]\nwhere the weights are \\(w_{1} =\\frac{n_{1}-1}{n_{1} +n_{2}-2}\\) and \\(w_{2} =\\frac{n_{2}-1}{n_{1} +n_{2}-2}\\),\nand \\(n_1\\) and \\(n_2\\) are the sample sizes for samples 1 and 2, respectively.\nFor the pooled case, the \\(df\\) for the \\(t\\)-test is simply\n\\[df = n_{1}+n_{2}-2\\]"
+  },
+  {
+    "objectID": "slides/Chapter04.html#two-sample-t-test-with-unequal-variances",
+    "href": "slides/Chapter04.html#two-sample-t-test-with-unequal-variances",
+    "title": "Chapter 4:Introduction to Statistical Inference",
+    "section": "Two sample t-test with unequal variances",
+    "text": "Two sample t-test with unequal variances\nThis is often called the “Welch test”.\nWe do not need to calculated the pooled variance \\(s^2_p\\);\nwe simply use \\(s^2_1\\) and \\(s^2_2\\) as they are.\nFor the unpooled case, the \\(df\\) for the test is smaller: \\[df=\\frac{\\left(\\frac{s_{1}^{2}}{n_{1}} +\\frac{s_{2}^{2} }{n_{2}} \\right)^{2} }{\\frac{1}{n_{1} -1} \\left(\\frac{s_{1}^{2}}{n_{1}}\\right)^{2} +\\frac{1}{n_{2} -1} \\left(\\frac{s_{2}^{2}}{n_{2} } \\right)^{2}}\\] The \\(df\\) doesn’t have to be an integer in this case."
+  },
+  {
+    "objectID": "slides/Chapter04.html#can-also-use-plots-to-assess-normality",
+    "href": "slides/Chapter04.html#can-also-use-plots-to-assess-normality",
+    "title": "Chapter 4:Introduction to Statistical Inference",
+    "section": "Can also use plots to assess normality",
+    "text": "Can also use plots to assess normality\n\ntv = read_csv(\"https://www.massey.ac.nz/~anhsmith/data/tv.csv\")\n\nggplot(tv, aes(sample = TELETIME)) + \n  stat_qq() + stat_qq_line() +\n  labs(title = \"Normal quantile plot for TV viewing times\")"
+  },
+  {
+    "objectID": "slides/Chapter04.html#spearmans-rank-correlation",
+    "href": "slides/Chapter04.html#spearmans-rank-correlation",
+    "title": "Chapter 4:Introduction to Statistical Inference",
+    "section": "Spearman’s Rank Correlation",
+    "text": "Spearman’s Rank Correlation\n\n\nRank the \\(X\\) and \\(Y\\) variables, and then obtain usual Pearson correlation coefficient.\nThe plot shows non-parametric Spearman in the the upper triangle and parametric Pearson in the bottom triangle.\n\nlibrary(GGally)\n\np &lt;- ggpairs(\n  trees, \n  upper = list(continuous = wrap('cor', method = \"spearman\")),\n  lower = list(continuous = 'cor') \n  )\n\n\n\n\n\n\n\nFigure 1: Comparison of Pearsonian and Spearman’s rank correlations"
   }
 ]

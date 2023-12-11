@@ -10,7 +10,7 @@ format:
     theme: [default, myquarto.scss]
     slide-number: c/t  
     logo: img/L_Color.png
-    footer: "[161250 Data Analysis](../slides.qmd)"
+    footer: "[161250 Data Analysis](https://anhsmith.github.io/161250/slides.html)"
     styles:
       - revealjs.dark:
         background-color: #222
@@ -35,6 +35,7 @@ knitr::opts_chunk$set(warning = FALSE,
                       fig.align="center")
 library(tidyverse)
 library(patchwork)
+library(kableExtra)
 theme_set(theme_minimal())
 ```
 
@@ -66,18 +67,20 @@ For example, say you wanted to know the mean length of the leaves on a tree ($\m
 ::::
 
 
-## Statistical Inference
+## Statistical Inference for a Population Mean
 
 ::::{.columns}
 
 :::{.column width="60%"}
 
-Whenever we use sample data to make statements about a population (i.e., do inference): 
+Consider a population $X$ with mean $\mu$,\
+variance $\text{Var}(X)=\sigma^2$, and\
+standard deviation $\sigma$.
 
-- The sample mean $\bar x$ is a single draw from a random variable $\bar X$. It will never be exactly equal to $\mu$ unless you measure every single leaf. 
-- Each sample yields a different $\bar x$. This is called ***sampling error***. 
-- Therefore, there is ***uncertainty*** in our estimate of $\mu$.
+We can estimate $\mu$ by: 
 
+- taking a random sample of values $\{x_1, x_2, ..., x_n\}$ from the population, $X$, and
+- calculating the sample mean $\bar x = \frac 1 n \sum_{i=1}^{n}x_i$.
 
 
 :::
@@ -90,14 +93,31 @@ Whenever we use sample data to make statements about a population (i.e., do infe
 
 ::::
 
-The variability of the sample means from sample to sample, $\text{Var}(\bar X)$, depends on two things: the variability of the population values, $\text{Var}(x)$, and the size of the sample, $n$.
+Importantly:
 
-The variability of the sample estimate of a parameter is usually expressed as a ***standard error***, which is simply the theoretical standard deviation of $\bar X$ from sample to sample.
+- The sample mean $\bar x$ is a single draw from a random variable $\bar X$. It will never be exactly equal to the population mean, $\mu$, unless you measure every single leaf. 
+- There is ***uncertainty*** in our estimate of $\mu$. Each sample yields a different $\bar x$. This is called ***sampling error***. 
 
 
 ## Sampling Variation
 
 ![](img/samp_dist.gif)
+
+## Sampling Error
+
+The variability of the sample means from sample to sample, $\text{Var}(\bar X)$, depends on two things: 
+
+- the variability of the population values, $\text{Var}(x)$, and 
+- the size of the sample, $n$.
+
+The variability of the sample estimate of a parameter is usually expressed as a ***standard error*** (SE), which is simply the theoretical standard deviation of $\bar X$ from sample to sample.
+
+The equation is surprisingly simple!
+
+$\text{Var}(\bar X) = \text{Var}(X)/n$
+
+$\text{SE}(\bar X) = \text{SD}(\bar X) = \sigma/\sqrt n$
+
 
 ## Quetelet's dataset
 
@@ -226,7 +246,8 @@ q_samples <- tibble( sample = as_factor(1:10) ) |>
 ```{r}
 #| echo: true
 # Calculate means of each sample
-sample_means <- q_samples |> group_by(sample) |> 
+sample_means <- q_samples |> 
+  group_by(sample) |> 
   summarise(mean = mean(values))
 
 sample_means
@@ -297,7 +318,7 @@ plot_samples(sample_size = 6)
 
 :::{.column width="40%"}
 
-Let's compare the distribution of means for different sample sizes.
+Let's compare the distribution of means for different sample sizes *across the samples*.
 
 ```{r}
 #| echo: true
@@ -354,7 +375,11 @@ According to the Central Limit Theorem (CLT), raw $X$ values don't have to be no
 
 ## Quetelet's chests: Standard error of means of samples
 
+**Question:**
+
 If Quetelet's chest circumferences are distributed as $X \sim \text{N}(\mu=39.83, \sigma=2.05)$, then how variable are the means of samples of size $n$ = 6?
+
+**Answer:**
 
 $$
 \begin{aligned}
@@ -612,7 +637,13 @@ A confidence interval for the true value of a parameter is often obtained by:
 $$
 \hat \theta \pm t \times \text{SE}(\hat \theta)
 $$
-where $\hat \theta$ is the sample estimate of $\theta$. 
+where $\hat \theta$ is the sample estimate of $\theta$ and $t$ is a quantile from the $t$ distribution with the appropriate degrees of freedom. 
+
+For example, to get the $t$ score for a 95% confidence interval with 9 degrees of freedom:
+
+```{r}
+qt(p = 0.975, df = 9)
+```
 
 The piece that is being added and subtracted, $t \times \text{SE}(\hat \theta)$, is often called the *margin of error*.
 
@@ -736,7 +767,7 @@ This paves the way for hypothesis testing for specific values of $\theta$. Many 
 - Testing hypotheses underpins a lot of scientific work.
 - A hypothesis is a proposition, a specific idea about the state of the world that can be tested with data.
 - For logical reasons, instead of measuring evidence for a hypothesis of interest, scientists will often:
-   + specify a ***null hypotheses***, a hypothesis that is true if our hypothesis of interest is false, and 
+   + specify a ***null hypotheses***, which must be true if our hypothesis of interest is false, and 
    + measure the evidence *against* the null hypothesis, usually in the form of a *p*-value.
 
 ## Example: growth of alfalfa
@@ -769,9 +800,9 @@ The **null** hypothesis (the case if the alternative hypothesis is wrong) is:
 
 $\ \ \ \ \ H_0: \mu = 0$, that is, the mean difference is zero.
 
-We can test the null hypothesis using a *t* statistic $t_0 = \frac{\bar x - \mu_0} {text{SE}(\bar x)}$, where \
+We can test the null hypothesis using a *t* statistic $t_0 = \frac{\bar x - \mu_0} {\text{SE}(\bar x)}$, where \
 $\ \ \ \ \ \mu_0 = 0$ is the hypothesised value of the mean and\
-$\ \ \ \ \ \text{SE}(\bar x) = s/\sqrt{n}$ is the standard error of the sample mean. 
+$\ \ \ \ \ \text{SE}(\bar x) = s/\sqrt{n}$ is the (estimated) standard error of the sample mean. 
 
 ```{r}
 #| echo: true
@@ -892,36 +923,53 @@ The outcome of a test is either we reject the null hypothesis, or we fail to rej
 
 This gives us four possibilities:
 
-|                        | *$H_0$ is true*  | *$H_0$ is false*  |
-|------------------------|------------------|-------------------|
-| *Reject $H_0$*         | Type I error     | Correct result    |
-| *Fail to reject $H_0$* | Correct result   | Type II error     |
+|                          | *$H_0$ is true*  | *$H_0$ is false*  |
+|--------------------------|------------------|-------------------|
+| **Reject $H_0$**         | Type I error     | Correct result    |
+| **Do not reject $H_0$**  | Correct result   | Type II error     |
 
+
+With probabilities usually represented by:
+
+|                          | *$H_0$ is true*  | *$H_0$ is false*    |
+|--------------------------|------------------|---------------------|
+| **Reject $H_0$**         | $\alpha$         | $1-\beta$ = "power" |
+| **Do not reject $H_0$**  | $1 - \alpha$     | $\beta$             |
 
 
 ## Truth and outcomes
 
-- The probability of making a Type I error is set by the experimenter *a priori* (beforehand) as the significance level, $\alpha$.
+The probability of making a Type I error, rejecting $H_0$ when $H_0$ is true, is set by the experimenter *a priori* (beforehand) as the significance level, $\alpha$.
 
-- For example, if we set $\alpha$ = 0.05, we know that we have a 5% chance of rejecting $H_0$ even when it is true (the Type I error rate is 0.05).
+- Say we set $\alpha$ at the conventional 0.05. We know that, if $H_0$ is true, we have a 5% chance of rejecting $H_0$ (the Type I error rate is 0.05) and a 95% chance of not rejecting $H_0$.
 
-- The probability of retaining $H_0$ when it is false is usually represented by $\beta$ (“beta”).
+The probability of retaining (not rejecting) $H_0$ when $H_0$ is false is usually represented by $\beta$ (“beta”).
 
-- We usually do not know what this is. It depends on lots of things, like $\sigma$, $n$ and also what the actual alternative hypothesis is.
+- We usually do not know $\beta$ because it depends on $\sigma$, $n$ and also the *effect size* under the alternative hypothesis. These must be asserted to calculate $\beta$ and power, $1-\beta$. 
 
 
-## Concept of power
+## Calculating power
 
 The ***power*** of a hypothesis test is the probability of rejecting the
-null hypothesis if it is indeed false.
+null hypothesis if it is indeed false. Basically, *"if we're right, what is the probability that we'll be able to show it?"*
 
-The power of the t test can be evaluated using R for given effect size
-$\delta$
+The power of the $t$ test can be evaluated using R if you assert the effect size $\delta$:
 
+::::{.columns}
+
+:::{.column}
 ```{r, echo=TRUE}
-power.t.test(n = 30, delta = 1, sd = 1, sig.level = 0.05)
+power.t.test(n = 10, delta = 1, sd = 1, sig.level = 0.05)
+```
+:::
+
+:::{.column}
+```{r, echo=TRUE}
 power.t.test(n = 50, delta = 1, sd = 1, sig.level = 0.05)
 ```
+:::
+
+::::
 
 The bigger the sample size, the bigger more power we have to detect an effect.
 
@@ -958,19 +1006,41 @@ proxy parameter, called the degrees of freedom (df).
 
 ## Two sample t-test
 
--   In a two-sample t-test, the equality of two population means is
-    tested. Null hypothesis $H_0:\mu=\mu_1=\mu_2$. Two-sided Alternative
-    hypothesis $H_1:\mu_1 \neq \mu_2$
+- The two-sample *t*-test is a common statistical test. You have two populations, $X_1$ and $X_2$, with means $\mu_1$ and $\mu_2$ and variances $\sigma^2_1$ and $\sigma^2_2$, respectively. 
 
--   If we can assume that two populations have the same spread, we
-    perform a **pooled-sample t-test** in which the pooled variance (common to both populations) is estimated as
-    $S_{p}^{2} = w_{1} S_{1}^{2} +w_{2} S_{2}^{2}$ where the *weights*
-    are $w_{1} =\frac{n_{1}-1}{n_{1} +n_{2}-2}$ and
-    $w_{2} =\frac{n_{2}-1}{n_{1} +n_{2}-2}$
+- We wish to test whether the two population means are equal.\
+Null hypothesis: $H_0:\mu=\mu_1=\mu_2$\
+Two-sided alternative hypothesis: $H_1:\mu_1 \neq \mu_2$
 
--   For the pooled case, the $df$ for the $t$-test is $n_{1}+n_{2}-2$
-    but becomes smaller for the unpooled case to
-    $$df=\frac{\left(\frac{S_{1}^{2}}{n_{1}} +\frac{S_{2}^{2} }{n_{2}} \right)^{2} }{\frac{1}{n_{1} -1} \left(\frac{S_{1}^{2}}{n_{1}}\right)^{2} +\frac{1}{n_{2} -1} \left(\frac{S_{2}^{2}}{n_{2} } \right)^{2}} $$
+- The basic *t*-test ***assumes equal variances***; that is, $\sigma^2_1 = \sigma^2_2$.\
+If we make this assumption and it is false, the test may give the wrong conclusion!
+
+## Two sample t-test with equal variances
+
+Under the assumption of equal variances $\sigma^2_1 = \sigma^2_2$, we can perform a **pooled-sample t-test**. 
+
+We calculate the estimated pooled variance as:
+
+$$s_{p}^{2} = w_{1} s_{1}^{2} +w_{2} s_{2}^{2}$$
+
+where the *weights* are $w_{1} =\frac{n_{1}-1}{n_{1} +n_{2}-2}$ and $w_{2} =\frac{n_{2}-1}{n_{1} +n_{2}-2}$, \
+and $n_1$ and $n_2$ are the sample sizes for samples 1 and 2, respectively. 
+
+For the pooled case, the $df$ for the $t$-test is simply
+
+$$df = n_{1}+n_{2}-2$$
+
+## Two sample t-test with unequal variances
+
+This is often called the "Welch test".
+
+We do not need to calculated the pooled variance $s^2_p$;\
+we simply use $s^2_1$ and $s^2_2$ as they are. 
+
+For the unpooled case, the $df$ for the test is smaller:
+    $$df=\frac{\left(\frac{s_{1}^{2}}{n_{1}} +\frac{s_{2}^{2} }{n_{2}} \right)^{2} }{\frac{1}{n_{1} -1} \left(\frac{s_{1}^{2}}{n_{1}}\right)^{2} +\frac{1}{n_{2} -1} \left(\frac{s_{2}^{2}}{n_{2} } \right)^{2}}$$
+The $df$ doesn't have to be an integer in this case. 
+
 
 ## Validity of equal variance assumption 
 
@@ -982,6 +1052,7 @@ We can test the null hypothesis that the variances are equal using either a Bart
 tv = read_csv("https://www.massey.ac.nz/~anhsmith/data/tv.csv")
 car::leveneTest(TELETIME~factor(SEX), data=tv)
 ```
+
 Highish *p-value* means there's no strong evidence against the null hypothesis that the variances are equal. Therefore, we might feel happy to assume equal variances and use a pooled variance estimate.
 
 ## Validity of equal variance assumption 
@@ -1012,33 +1083,49 @@ For more on non-parametric tests, see Study Guide.
 
 ## Test of proportions
 
-Testing for a single proportion being different to 0.5, or some other value. 
+Testing the null hypothesis that a proportion $p=0.5$\
+Alternative hypothesis: $p \ne 0.5$ 
 
-A sample survey of size 1000 has had 450 females.
+Say a survey of 1000 beached whales had 450 females. 
 
-Can we treat the survey as unbiased?
+::::{.columns}
 
-```{r, echo=TRUE}
+:::{.column}
+
+Is the population 50:50?
+
+```{r}
+#| echo: true
 prop.test(450, 1000)
 ```
+
+:::
+
+:::{.column}
 
 An exact version of the test
 
 ```{r}
+#| echo: true
 binom.test(c(450, 550))
 ```
 
-Or, for a test for a proportion other than 0.5
+:::
+
+::::
+
+To test for a proportion other than 0.5
 
 ```{r}
+#| echo: true
 binom.test(c(450, 550), p = 3/4)
 ```
 
 
 ## Comparing several proportions
 
-Fleiss (1981) *Statistical methods for rates and proportions* data on
-smokers in four group of patients
+Data on smokers in four group of patients\
+(from Fleiss, 1981, *Statistical methods for rates and proportions*).
 
 ```{r, echo=TRUE}
 smokers  <- c( 83, 90, 129, 70 )
@@ -1046,36 +1133,46 @@ patients <- c( 86, 93, 136, 82 )
 prop.test(smokers, patients)
 ```
 
+More on chi-squared tests next week.
 
 ## Tests for normality
 
--   EDA approaches
+Testing the hypothesis that sample data came from a normally distributed population. $H_0: X \sim N(\mu, \sigma)$.
 
-    -   normal quantile plot, Boxplots,mids vs. spreads plot etc.
+-   Kolmogorov-Smirnov test (based on the biggest difference between the empirical and theoretical cumulative distributions)
+-   Shapiro-Wilk test (based on variance of the difference)
 
--   Hypothesis tests
+Example: a sample of $n$ = 50 from N(100,1).
 
-    -   Kolmogorov-Smirnov test (based on the biggest difference between
-        the empirical and theoretical cumulative distributions)
-    -   Shapiro-Wilk test (based on variance of the difference)
+::::{.columns}
 
--   Example: N(100,1) random data of size $n=50$
-
-    -   **The null hypothesis of normality must be justified on
-        empirical grounds**
-
-\small
+:::{.column}
 
 ```{r, warning=FALSE, message=FALSE}
 #| echo: true
-set.seed(1234)
+set.seed(123)
 shapiro.test(rnorm(50, mean=100))
+
+```
+
+:::
+
+:::{.column}
+
+```{r, warning=FALSE, message=FALSE}
+#| echo: true
+set.seed(123)
 ks.test(rnorm(50), "pnorm")
 ```
 
+:::
+::::
 
+The large p-values mean that there's no evidence of non-normality. 
 
-## Example
+Like all tests, they can give the wrong answer. Try with `set.seed(1234)`. 
+
+## Can also use plots to assess normality
 
 ```{r, warning=FALSE, fig.height=3, fig.width=4}
 #| echo: true
@@ -1089,38 +1186,26 @@ ggplot(tv, aes(sample = TELETIME)) +
 
 ## Transformations
 
--   I can be useful to transform data to make the distribution more like a 'normal'
+-   It can be useful to transform skewed data to make the distribution more like a 'normal' if that is required for a particular analysis. 
 
--   The linear transformation $Y^*= a+bY$ result only in a change of
-    scale or of origin
+-   A linear transformation $Y^*= a+bY$ only changes the scale or centre, not the shape of the distribution.
 
--   A linear transformation does not change the shape of the
-    distribution i.e. histogram, boxplot etc. remain the same shape
-
--   We prefer non-linear transformations which alter the shape of the
-    distribution
-
--   Transformations are needed to-
-
-    -   to bring symmetry
-    -   normality
-    -   stabilise the variance etc
+-   Transformations can help to improve symmetry, normality, and stabilise the variance.
 
 ## Example
 
--   Right skewed distribution is made roughly symmetric using a log
-    transformation for no. of vehicles variable (rangitikei.\* dataset)
+Right skewed distribution is made roughly symmetric using a log transformation for no. of vehicles variable (rangitikei.\* dataset)
 
 ```{r}
 load("../data/rangitikei.Rdata")
 p1 <- ggplot(rangitikei, aes(vehicle))+geom_boxplot()
-p1 <- p1+labs(title = "Boxplot of Vehicle (Raw data)")
+p1 <- p1+labs(title = "Boxplot of vehicle (raw)")
 p2 <- ggplot(rangitikei, aes(vehicle^2))+geom_boxplot()
-p2 <- p2+labs(title = "Boxplot of Vehicle (Squared data)")
+p2 <- p2+labs(title = "Boxplot of vehicle squared")
 p3 <- ggplot(rangitikei, aes(sqrt(vehicle)))+geom_boxplot()
-p3 <- p3+labs(title = "Boxplot of Vehicle (Square Root data)")
+p3 <- p3+labs(title = "Boxplot of square-root of vehicle")
 p4 <- ggplot(rangitikei, aes(log(vehicle)))+geom_boxplot()
-p4 <- p4+labs(title = "Boxplot of Vehicle (log data)")
+p4 <- p4+labs(title = "Boxplot of log vehicle")
 library(patchwork)
 p2+p1+p3+p4  
 ```
@@ -1146,20 +1231,33 @@ p2+p1+p3+p4
 
 ## Box-Cox transformation
 
--   This is a normalising transformation (i.e more than just symmetry)
-    but we may not always find a suitable Box-Cox power $\lambda$.
--   R gives a point estimate of power & the CI.
+::::{.columns}
 
+:::{.column width="40%"}
+
+This is a normalising transformation based on the Box-Cox power parameter, $\lambda$.
+
+R gives a point estimate of the Box-Cox power & a confidence interval.
+
+Usually, we are concerned about whether the *residuals from a model* are normally distributed – put the model in the `lm` statement. 
+
+Sometimes, no "good" value of $\lambda$ can be found.
+
+
+:::
+
+:::{.column width="60%"}
 ```{r}
-# library(MASS)
-# boxcox(rangitikei$vehicle ~ 1)
-# title("Log-likelihood curve of boxcox parameter")
+#| echo: true
+#| fig-width: 6
+#| fig-height: 4
 library(lindia)
 gg_boxcox(lm(rangitikei$vehicle ~ 1))
 ```
 
--   Focus on the confidence interval for the estimated $\lambda$ and it
-    may be wider
+:::
+
+::::
 
 ## Statistical inference based on transformed data
 
@@ -1174,85 +1272,117 @@ gg_boxcox(lm(rangitikei$vehicle ~ 1))
 -   For hypothesis test, apply the same transformation on the value
     hypothesised under the null
 
--   Explore
-    https://shiny.massey.ac.nz/anhsmith/demos/explore.transformations/
-    app (not currently working)
+-   Explore <https://shiny.massey.ac.nz/anhsmith/demos/explore.transformations/> app (not currently working)
 
--   Example: Brain weight data is extremely skewed to the right. So rely
-    on the back-transformed CI.
+## Example 
+
+Brain weights of `Animals` data are right-skewed. 
+
 
 ```{r}
-load("../data/brainweight.RData")
-attach(brainweight)
-t.test(BrainWt)$conf.int[1:2]
-t.test(log(BrainWt))$conf.int[1:2]
-exp(t.test(log(BrainWt))$conf.int)[1:2]
+#| echo: true
+#| tbl-cap: "Lower and upper confidence limits"
+#| output-location: column
+data(Animals, package = "MASS")
+
+bind_cols( 
+  # confidence intervals on raw data
+  `raw x` = Animals |> 
+    pull(brain) |> 
+    t.test() |> 
+    pluck("conf.int"),
+  # confidence intervals on log-transformed data
+  `log x` = Animals |> 
+    pull(brain) |> 
+    log() |> 
+    t.test() |> 
+    pluck("conf.int"),
+  # confidence intervals on log-transformed data 
+  # and then back-transformed
+  `log x, CIs back-transformed` = Animals |> 
+    pull(brain) |> 
+    log() |> 
+    t.test() |> 
+    pluck("conf.int") |>
+    exp()
+  ) |> 
+  kable()
+
 ```
-
-## A Caution on the transformation technique
-
--   Perform EDA in addition to computing coefficients of skewness or
-    D-Statistics etc
--   Small datasets may look skewed, but might not be.
--   Transformations make the data more difficult to interpret.
--   In the context statistical models, we are only interested in whether the residuals (deviations from the fitted means) are normal—not whether the original variable is normal.
-
-
-## Variance stabilisation
-
--   Two or more batches of data may not have equal variance
--   If each batch is skewed in the same direction, then a common
-    transformation can be used.
--   If batches are skewed in different directions, the transformation
-    technique fails
--   Explore LOCATION vs SPREAD plot of batches.
--   If there exists a relationship between spreads and averages, a
-    single transformation can be applied for all the batches.
-
-
-## Shiny apps
-
-<https://shiny.massey.ac.nz/anhsmith/demos/explore.transformations/>
-
-<https://shiny.massey.ac.nz/anhsmith/demos/perform.transformations/>
 
 ## Non-parametric tests
 
-An alternative to using power transformations
+Non-parametric tests are light on assumptions, and can be used for highly asymmetric data (as an alternative to using transformations). 
 
-Relies on replacing the actual observed data by their ranks
+Many non-parametric methods rely on replacing the observed data by their *ranks*. 
 
-**Spearman's Rank Correlation**
+## Spearman's Rank Correlation
 
--   Rank the $X$ and $Y$ variables, and then obtain usual Pearson
-    correlation coefficient
 
--   The following plot shows both (Spearman correlation in the upper
-    triangle)
+::::{.columns}
 
-```{r spear, echo=FALSE, fig.cap="Comparison of Pearsonian and Spearman's rank correlations"}
+:::{.column}
+
+Rank the $X$ and $Y$ variables, and then obtain usual Pearson correlation coefficient.
+
+The plot shows non-parametric Spearman in the the upper triangle and parametric Pearson in the bottom triangle.
+
+```{r}
+#| echo: true
 library(GGally)
-ggpairs(trees, upper = list(continuous = wrap('cor', method = "spearman")), 
-  lower = list(continuous = 'cor'))
+
+p <- ggpairs(
+  trees, 
+  upper = list(continuous = wrap('cor', method = "spearman")),
+  lower = list(continuous = 'cor') 
+  )
 ```
+
+:::
+
+:::{.column}
+
+```{r}
+#| label: fig-spear
+#| echo: false
+#| fig.cap: "Comparison of Pearsonian and Spearman's rank correlations"
+#| fig-width: 5
+#| fig-height: 5
+p
+```
+
+:::
+::::
 
 ## Wilcoxon signed rank test
 
 A non-parametric alternative to the one-sample t-test
 
--   $H_0: \eta=\eta_0$ where $\eta$ (Greek letter 'eta') is the
-    population median
+$H_0: \eta=\eta_0$ where $\eta$ (Greek letter 'eta') is the population median
 
--   Based on based on ranking $(|Y-\eta_0|)$, where the ranks for data
-    with $Y<\eta_0$ are compared to the ranks for data with $Y>\eta_0$
+Based on based on ranking $(|Y-\eta_0|)$, where the ranks for data with $Y<\eta_0$ are compared to the ranks for data with $Y>\eta_0$
+
+
+::::{.columns}
+
+:::{.column}
 
 ```{r}
+#| echo: true
 wilcox.test(tv$TELETIME, mu=1680, conf.int=T)
 ```
 
+:::
+
+:::{.column}
+
 ```{r}
+#| echo: true
 t.test(tv$TELETIME, mu=1680)
 ```
+
+:::
+::::
 
 ## Mann-Whitney test
 
@@ -1261,51 +1391,85 @@ pooled data
 
 Ranks for the first group are compared to the ranks for the second group
 
--   The null hypothesis is that the two group medians are the same:
-    $H_0: \eta_1=\eta_2$.
+The null hypothesis is that the two group medians are the same:     $H_0: \eta_1=\eta_2$.
+
+
+::::{.columns}
+
+:::{.column}
+
 
 ```{r}
+#| echo: true
 wilcox.test(rangitikei$people~rangitikei$time, conf.int=T)
 ```
 
+:::
+
+:::{.column}
+
 ```{r}
+#| echo: true
 t.test(rangitikei$people~rangitikei$time)
 ```
 
+:::
+::::
+
 ## Another form of test
 
-```{r, echo=TRUE}
+
+::::{.columns}
+
+:::{.column}
+
+```{r}
+#| echo: true
 kruskal.test(rangitikei$people~rangitikei$time)
 ```
 
-```{r, echo=TRUE}
+:::
+
+:::{.column}
+
+```{r}
+#| echo: true
 wilcox.test(rangitikei$people~rangitikei$time)
 ```
 
+
+:::
+::::
+
 ## Permutation tests
 
-A permutation (or randomisation) test is based on the idea of randomly
-permuting the observed data and then answering whether a hypothesis is
-negated or not.
+A permutation (or randomisation) test has the following steps:
+
+1. Randomly permute the observed data *many times*, thereby destroying any real relationship, 
+2. Recalculate the test statistic $T$  for each random permutation
+3. Compare the observed value of $T$ (from the actual data) with the values of $T$ under permutation.
 
 One sample hypothesis test example follows:
 
-```{r, echo=TRUE}
+```{r}
+#| echo: true
 library(exactRankTests)
 perm.test(tv$TELETIME, null.value=1500)
 ```
 
-For small samples, this test is not powerful.
+For small samples, this approach is not powerful.
 
 ## Two group comparison
 
-```{r, echo=TRUE}
+```{r}
+#| echo: true
 perm.test(TELETIME~SEX, distribution ='exact', data=tv)
 ```
 
 Also using a linear model fit (cover later)
 
-```{r, echo=TRUE}
+```{r}
+#| echo: true
 library(lmPerm)
 summary(lmp(TELETIME~SEX, data=tv))
 ```
@@ -1314,10 +1478,10 @@ Read the study guide example for bootstrap tests (not examined)
 
 ## Summary
 
-Basic methods of inference include: 
+Basic methods of inference include:
 
 - estimating a population parameter (e.g. mean) using a sample of values,
-- estimating sampling variation using the standard error,
+- estimating standard deviation of a sample estimate using the standard error,
 - constructing confidence intervals for an estimate, and 
 - testing hypotheses about particular values of the population parameter.
 
@@ -1333,7 +1497,7 @@ The *t*-test is generally robust for non-normal populations (especially for larg
 
 Power transformations, such as square-root, log, or Box-Cox aim to reduce skewness.
 
-Non-parametric tests can be used for non-normal data.
+Non-parametric tests can be used for non-normal data, but they are usually less powerful than parametric tests.
 
 
 <!-- ## Exercises -->
