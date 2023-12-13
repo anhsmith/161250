@@ -116,4 +116,4 @@ options(warn=0)
 
 
 
--   More R code examples are [here](https://www.massey.ac.nz/~anhsmith/250/exercises/chap05more.R)
+-   More R code examples are  [here](../exercises/Chap5more.R)

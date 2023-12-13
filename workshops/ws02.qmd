@@ -567,4 +567,4 @@ options(warn=0)
 ```
 
 
-More graphing examples are [here](https://www.massey.ac.nz/~anhsmith/250/exercises/chap02more.R) (R codes file).
+More graphing examples are [here](../exercises/Chap2more.R) (R code file).

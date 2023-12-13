@@ -252,4 +252,4 @@ summary(aov(yield ~ block + A*B ,
             data=plots))
 ```
 
-+ More R code examples are [here](https://www.massey.ac.nz/~anhsmith/250/exercises/chap08more.R) 
++ More R code examples are [here](../exercises/Chap8more.R)

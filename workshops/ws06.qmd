@@ -154,4 +154,4 @@ visreg(fit1)
 
 **Note:**
 
-+ More R code examples are [here](https://www.massey.ac.nz/~anhsmith/250/exercises/chap06more.R) 
++ More R code examples are [here](../exercises/Chap6more.R)

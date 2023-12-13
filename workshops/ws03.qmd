@@ -205,7 +205,7 @@ descdist(Prestige$prestige)
 ```
 
 
-More graphing examples are [here](https://www.massey.ac.nz/~anhsmith/161250/exercises/chap03more.R) (R code file).
+More graphing examples are  [here](../exercises/Chap3more.R) (R code file).
 
 
 

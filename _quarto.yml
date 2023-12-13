@@ -19,7 +19,24 @@ website:
         
       - text: "Workshops"
         href: workshops/ws01.qmd
-      
+        
+      - text: "Exercises"
+        menu: 
+          - text: Ex2
+            file: exercises/Chap2more.R
+          - text: Ex3
+            file: exercises/Chap3more.R
+          - text: Ex4
+            file: exercises/Chap4more.R
+          - text: Ex5
+            file: exercises/Chap5more.R
+          - text: Ex6
+            file: exercises/Chap6more.R
+          - text: Ex7
+            file: exercises/Chap7more.R
+          - text: Ex8
+            file: exercises/Chap8more.R
+        
   sidebar:
   
     - id: studyguide

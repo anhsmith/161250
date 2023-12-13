@@ -46,7 +46,6 @@ knitr::opts_chunk$set(warning=FALSE, message=FALSE, comment=NA, fig.show = "hide
 
 Perform a one-sample t-test to test the hypothesis that the true mean `prestige` is exactly 50.
 
-
 ```{r, results='hide'}
 library(tidyverse)
 library(car)
@@ -64,11 +63,11 @@ t.test(Prestige$prestige, mu=50, alternative="greater")
 Test whether the true mean `prestige` score for professionals is 50% more than the true mean `prestige` score for white collar occupations. 
 
 ```{r, results='hide'}
-prof.data = Prestige |> 
+prof.data <- Prestige |> 
   filter(type=="prof") |> 
   pull(prestige)
 
-wc.data = Prestige |> 
+wc.data <- Prestige |> 
   filter(type=="wc") |> 
   pull(prestige) 
 
@@ -148,4 +147,4 @@ t.test(log(x))
 
 
 
-More R code examples are [here](http://www.massey.ac.nz/~anhsmith/250/exercises/chap04more.R) 
+More R code examples are  [here](../exercises/Chap4more.R)
