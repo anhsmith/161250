@@ -19,7 +19,7 @@ website:
         
       - text: "Workshops"
         href: workshops/ws01.qmd
-        
+
       - text: "Extra Code"
         menu: 
           - text: Ex2
