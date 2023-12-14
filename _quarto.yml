@@ -20,7 +20,7 @@ website:
       - text: "Workshops"
         href: workshops/ws01.qmd
         
-      - text: "Exercises"
+      - text: "Extra Code"
         menu: 
           - text: Ex2
             file: exercises/Chap2more.R

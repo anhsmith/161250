@@ -2,4 +2,8 @@
 title: "About"
 ---
 
-This site contains materials for 161250 Data Analysis.
+This site contains materials for 161250 Data Analysis, including the lecture slides, study guide, workshop code, and some extra code. It is all organised into 8 chapters. 
+
+I've put all the materials on one site like this for ease of access. There is a lot of material here, so if you're looking for something specific, make use of the search function (using the magnifying glass icon on the top-right of the page). It will very quickly locate the text you enter across the whole site.
+
+Feel free to use resources other than this site, particularly when coding (there are lots of links in the first workshop). The internet is full of Q & A about coding R. If you have a persistent error message, copy and paste it into an internet search engine with "R" or "Quarto". Large language models (LLMs), such as Bard and ChatGPT are also very powerful tools to help with coding, if you can accurately describe what you want in words. Be careful though – the often give you code that doesn't work, but it can be useful nonetheless.
