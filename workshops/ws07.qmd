@@ -3,15 +3,290 @@ title: "Chapter 7 Workshop"
 ---
 
 ```{r, echo=FALSE, message=FALSE}
-knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE, comment=NA, fig.show="hide")
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE, comment=NA)
 ```
+
+```{r}
+library(tidyverse)
+```
+
+
+# Horse hearts
+
+We will use again the *horses’ hearts* datasetThere are seven variables represented as columns. They comprise six ultrasound measurements and the weights of 46 horses’ hearts, specifically:
+
+
+1.	`INNERSYS` : Inner-wall ultrasound measurement in systole phase.
+2.	`INNERDIA` : Inner-wall ultrasound measurement in diastole phase.
+3.	`OUTERSYS` : Outer-wall ultrasound measurement in systole phase.
+4.	`OUTERDIA` : Outer-wall ultrasound measurement in diastole phase.
+5.	`EXTSYS`   : Exterior ultrasound measurement in systole phase.
+6.	`EXTDIA`   : Exterior ultrasound measurement in diastole phase.
+7.	`WEIGHT`   : Weight in kilograms.		
+
+We will build a multiple regression model to predict the weights of hearts using the six ultrasound measurements. 
+
+## Load data
+
+```{r}
+hh <- read_csv("https://www.massey.ac.nz/~anhsmith/data/horsehearts.csv")
+```
+
+
+## Pairs plot
+
+```{r}
+library(GGally)
+
+ggpairs(hh)
+
+```
+
+This plot reveals some very high correlation amongst predictors, particularly (not surprisingly) between the same measurements taken in the different phases (diastolic and systolic). Thus, multicollinearity is likely to be a problem when fitting a multiple regression model. The challenge will be choose the subset of variables that provides the best model fit. 
+
+
+
+## `lm` output
+
+Let’s start by fitting the full model with all of the available predictor variables. 
+
+The forumula `WEIGHT ~ .` fits a model with `WEIGHT` as the response variable and all other variables in the data frame as predictor variables.
+
+```{r}
+mf <- lm(WEIGHT ~ . , data = hh)
+
+summary(mf)
+```
+
+:::{.callout-tip}
+
+### Interpreting `summary.lm` output
+
+There is a lot of information in the above summary output to process. Let’s break it down.
+
+1.	The `Call` part shows us the command we used to produce the model. 
+
+2.	The `Residuals` part gives us a five-number summary of the residuals. 
+
+3.	The `Coefficients` table provides the estimates of the model parameters. Specifically, the `Estimate` column gives us the estimates of the $\beta$-coefficients, which can be used to reconstruct the predictive formula. Here, that formula is: 
+
+    $$\hat y = -1.6311 + 0.2321 × INNERSYS + 0.5195 × INNERDIA + ... + 0.3387 × EXTDIA$$
+    The `Std. Error` column gives the standard error for the estimates of the coefficients. That is, the expected average deviation of the estimator of the coefficient ($b$ or $\hat \beta$) from the true population parameter ($\beta$). If we were to take many samples (of size $n$) from this population, a coefficient’s standard error represents how much the estimate is expected to vary (due to sampling variation). 
+
+    The `t value` is the estimate divided by its standard error, which can be used to test whether the effect of that variable is statistically different from zero. The p-value for this test is provided in the next column, headed `Pr(>|t|)`. If the p-value is low, the observed coefficient estimate is unlikely to have resulted by chance due to sampling variation if the null hypothesis ($H_0 : \beta = 0$) is true. Asterisks indicate significant results, as coded by the `Signif. codes`:  given below the table.
+
+4.	The final three lines give results for the entire model.
+
+    The final three lines give results for the entire model.
+
+    The `Residual standard error` is an estimate of the standard deviation of the residuals, i.e. the average absolute difference between the predicted values and the actual values. When estimating the weight of horse’s hearts using this model, we would expect to, on average, be wrong by 0.6 kg. The `degrees of freedom` here are the residual degrees of freedom—the number of independent pieces of information with which the residual standard error was estimated.
+
+    Next, we have the `Multiple R-squared`, which is the proportion of the total variation in y that is explained by the model. Here, 75% of the variation is explained. The `Adjusted R-squared` is adjusted for the number of variables included in the model (see lecture slides). It cannot be interpreted in same way as the unadjusted $R^2$ can, but it can be used to compare models.
+
+    Finally, an `F-statistic`, associated degrees of freedom (`DF`) , and `p-value` are provided. This tests whether the model explains a significant proportion of the total variation in y. This can be thought of as testing whether any of the $\beta$ coefficients in model are non-zero. Here, the p-value is very small so we reject the null hypothesis that all of the $\beta$ coefficients in model are zero.
+
+:::
+
+## Variance Inflation Factor
+
+We mentioned earlier that we were concerned with multicollinearity—correlation among the predictors. A consequence of multicollinearity is that it increases the uncertainty in the estimates of the coefficients—the standard errors of the coefficients are inflated. We can quantify this effect, for each coefficient, with the Variance Inflation Factor (VIF). This is given by the function `car::vif()`[^1]. 
+
+[^1]: The `car::vif()` notation calls the function `vif()` from within the package `car`. Alternatively, you can load the package into R with the command `library(car)`. After doing this, all functions in the car package become available, so you can call the function directly as `vif()`, omitting the `car::`. Either way, you must have the package installed, of course!
+
+
+```{r}
+car::vif(mf)
+```
+
+
+According to a rule of thumb, a VIF > 5 is cause for some concern. A VIF > 10 is definitely problematic. So, we have a problem here. 
+
+The above VIF values pertain to variances. I find it more intuitive to discuss the square root of the VIF because they relate to the standard errors.
+
+```{r}
+sqrt(car::vif(mf))
+```
+
+These $\sqrt{}$VIF values can be interpreted in the following way: the standard error for the effect of `INNERSYS` is around three times larger because of the presence of the other (correlated) variables in the model. The VIF is greatest for `EXTDIA`, which is consistent with this variable seeming to have the highest correlations with the other predictors.  
+
+## Model selection
+
+Statisticians use the term "parsimonious" to describe a model that contains no more predictors than necessary to adequately model the data—a model that has the right balance of complexity. 
+
+Let’s run a stepwise model selection process to try to find a more parsimonious model than the full model created above. The criterion we will use to assess the quality of the models is Akaike Information Criterion (AIC). Lower AIC values (i.e. closer to $-\infty$) are better.
+
+We will undertake a stepwise process in individual steps, using the `drop1()` function.
+
+```{r}
+drop1(mf)
+```
+
+We have taken the full model (all predictors included) and asked what the AIC values[^2] would be obtained if we dropped each one of the predictors (or none). The lowest AIC score is for the model with `INNERSYS` removed... so let’s remove it and then use `drop1()` again. 
+
+[^2]: Negative values of AIC, as seen here, are uncommon but are nothing to worry about. This occurs when the values of the response variable are small.
+
+```{r}
+m2 <- update(mf, ~ . - INNERSYS)
+drop1(m2)
+```
+
+Now we remove `OUTERDIA` and repeat.
+
+```{r}
+m3 <- update(m2, ~ . - OUTERDIA)
+drop1(m3)
+```
+
+This time, the best model is that with none removed, so the model selection process stops there. Note that this whole process could have been done in a single line. 
+
+```{r}
+mstep <- step(mf)
+```
+
+When you run this, the whole three-step process we executed above will print onscreen and the object `mstep` represents the stepwise-selected model.
+
+Let’s examine the stepwise model.
+
+```{r}
+summary(mstep)
+```
+
+We still have two variables that are very highly correlated: `EXTSYS` and `EXTDIA`. Let’s see if this correlation is problematic, according to the VIF criterion.
+
+```{r}
+car::vif(mstep)
+```
+
+With VIF scores for these two variables still well above 5, this is certainly a problem. This illustrates an important point: you must not naively accept a model which results from a stepwise selection process. Always scrutinise a model before accepting it.
+
+We will force a step where we drop either `EXTSYS` or `EXTDIA`.
+
+```{r}
+drop1(mstep)
+```
+
+```{r}
+mstep2 <- update(mstep,  ~ . - EXTDIA)
+```
+
+Now, let’s try another step.
+
+```{r}
+drop1(mstep2)
+```
+
+It seems that the model with `EXTSYS` removed, leaving only `INNERDIA` and `OUTERSYS`, is actually preferable. Once the latter two variables are included, `EXTSYS` does not add any strength to the model. Let’s make this model and check for further removals, and our VIFs.
+
+```{r}
+mstep3 <- update(mstep2, ~ . - EXTSYS)
+drop1(mstep3)
+```
+
+```{r}
+car::vif(mstep3)
+```
+
+It seems that this model cannot be improved by dropping any further variables. The variables `INNERDIA` and `OUTERSYS`, though correlated (r = 0.77), do not exert undue influence on each other in the model. 
+
+To summarise, let’s see the AIC scores for all the models we’ve made so far.
+
+```{r}
+AIC(mf, m2, m3, mstep, mstep2, mstep3)
+```
+
+All of these models have very similar AIC. Statisticians say that AIC scores within, say, 3 points can be considered equivalent, and so often we take the approach of choosing the simplest model (i.e. that with the fewest predictors) of all those within 3 AIC points of the lowest score. So, while the `mstep3` model isn’t the absolute lowest, it is the simplest model from a bunch of models with roughly equivalent AIC scores. Also, it is a good choice because it doesn’t have the problems with severe multicollinearity found in the other models.
+
+
+Don’t worry about the fact that the two functions `drop1()` and `AIC()` give different scores. Remember the AIC is a tool for comparing models—the actual scores don’t matter. If you look at the difference in AIC scores between two models from the two functions, they are the same.
+
+Difference between AIC scores for `mstep2` and `mstep3` from the `drop1(mstep2)` output:
+
+```{r}
+-40.395 - (-42.083)
+```
+
+And from the `AIC(mf, m2, m3, mstep, mstep2, mstep3)` output:
+
+```{r}
+92.14759 - 90.45888
+```
+
+So now we can choose `mstep3` and clean up.
+
+```{r}
+rm(mf, m2, m3, mstep, mstep2)
+```
+
+Let’s examine the summary for our chosen model. 
+
+```{r}
+summary(mstep3)
+```
+
+We are now explaining 72% of the variation in heart weights with two variables, as opposed to 75% of the variation with six variables in the original full model. Note also that, in the full model, `INNERDIA` was not significant and `OUTERSYS` was only weakly significant. In the smaller model, both these predictors were highly significant. Personally, I would definitely prefer the more parsimonious two-variable model, especially if it meant that I had only to take two, rather than six, ultrasound measurements on a thousand horses! 
+
+But we’re not done yet. We must use some diagnostic tools to examine whether our model meets the assumptions of linear regression before we can accept it.
+
+## Model diagnostics
+
+Examine the usual four diagnostic plots.
+
+```{r}
+plot(mstep3)
+```
+
+The Residuals-vs-Fitted plot shows a slight decreasing trend in the residuals at low fitted values, but it is only a few points. It might pay, though, to bear in mind that the model is likely to overestimate lower heart weights.
+
+The normal Q-Q plot is not too worrying, although there are a few higher-than-expected residuals. 
+
+The Scale-Location plot shows no strong evidence of heteroscedasticity—the variance appears fairly constant across fitted values. 
+
+And, finally, there are no very large values of Cook’s distance or leverage.
+
+There are many other diagnostic tools and graphs available, many in the `car` library, which we do not have time to go into here. If you’re interested, this website is a good place to start: <http://www.statmethods.net/stats/rdiagnostics.html>.
+
+
+## 3D plots
+
+Since there are three variables involved in this model, it might be useful to examine their relationship using 3D plots. We can include the 2D plane that represents our regression model on the plot, using the following code.
+
+```{r}
+library(scatterplot3d)
+
+hh3d <- scatterplot3d(
+  hh$INNERDIA, 
+  hh$OUTERSYS, 
+  hh$WEIGHT,
+  type="h", 
+  highlight.3d=T,
+  pch=16
+  )
+
+hh3d$plane3d(mstep3)
+
+```
+
+Finally, use `plotly` to create a dynamic 3D plot which you can rotate using your mouse. Don’t say I never treat you!
+
+```{r}
+library(plotly)
+
+plot_ly(
+  hh, 
+  x = ~INNERDIA, 
+  y = ~OUTERDIA, 
+  z = ~WEIGHT
+  ) |> 
+  add_markers()
+```
+
 
 # Dataset **`Prestige`**
 
 We will continue to use dataset `Prestige` from the `car`	R package. 
 
 
-# Exercise 7.1 {-}
+## Exercise 7.1 {-}
 
 Obtain the matrix plot of the numerical variables `education`, `income`, `women`, and `prestige`.
 
@@ -23,13 +298,19 @@ Obtain the plots for residual diagnostics.
 
 ```{r, fig.show='hide'}
 library(car)
-library(tidyverse)
 library(GGally)
+library(tidyverse)
 
+```
+
+
+```{r, fig.show='hide'}
 Prestige |> 
   select(prestige, education, income, women) |> 
   ggpairs(aes(colour=Prestige$type))
 ```
+
+
 
 ```{r, fig.show='hide', results='hide'}
 # Old style pairs plot
@@ -77,7 +358,7 @@ plot(full.reg)
 
 
 
-# Exercise 7.2 {-}
+## Exercise 7.2 {-}
 
 Perform stepwise regression analysis of `prestige` on `education`, `income`, & `women`. 
 
@@ -92,26 +373,15 @@ step(full.reg, direction="backward")
 step(full.reg, direction="both")
 ```
 
-You can also use the `MASS` package.
+The function `update()` is handy for making adjustments to a model. For example, see try the following codes:
 
 ```{r, results='hide'}
-library("MASS")
-
-stepAIC(full.reg, direction="backward")
-
-stepAIC(full.reg, direction="both")
-
-```
-
-The function `update()` will be handy. For example, see try the following codes:
-
-```{r, results='hide'}
-m1 = update(full.reg,.~.-women)
+m1 = update(full.reg,  . ~ . - women)
 
 summary(m1)
 ```
 
-Note that `.~.-women` means that the model is fitted without the `women` variable.
+Note that ` . ~ . - women` means that the model is fitted without the `women` variable.
 
 Further options are available in `leaps` and `HH` packages 
 (installation commands are given below).
@@ -123,7 +393,7 @@ Further options are available in `leaps` and `HH` packages
 library(leaps)
 
 model = regsubsets(prestige ~ education + income + women, 
-                   data=Prestige)
+                   data = Prestige)
 
 library(HH)
 
@@ -133,7 +403,7 @@ plot(summaryHH(model))
 ```
 
 
-# Exercise 7.3 {-}
+## Exercise 7.3 {-}
 
 Perform a polynomial regression of `prestige` on `income`. 
 
