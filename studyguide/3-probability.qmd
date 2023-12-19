@@ -198,8 +198,6 @@ $$P(f | j) = \frac {P(j | f) × P(f)} {P(j)}= \frac{0.8 \times 0.37}{0.548}= 0.5
 
 # Probability Distributions
 
-## Discrete probability distributions
-
 Consider the number of eggs $(X)$ in an Adelie penguin’s nest. The values range from $1$ to $5$, each with a certain probability (or relative frequency) of occurrence.
 
 
@@ -241,6 +239,8 @@ dfm |>
   scale_x_continuous(breaks = c(0:9))+
   annotate(geom = "table", label = list(dfm), x=8, y=.15)
 ```
+
+This is an example of a theoretical probability distribution, which describes the behaviour of a data-producing system. It's a model for producing random values with specific probabilities. 
 
 Note the probabilities add to $1$ because ${1,2,3,4,5}$ is a complete distribution. There are no other possibilities.
 
@@ -284,7 +284,9 @@ The above example of the distribution of numbers of eggs of penguins is an odd c
 
 The remainder of this chapter will discuss some of the more common probability distributions. 
 
-## Two common discrete probability distributions
+## Discrete probability distributions
+
+Discrete probability distributions are those that can produce a limited set of values, usually non-negative integers \{0, 1, 2, 3, ...\}. The two most useful ones are the Binomial and the Poisson. 
 
 ### Binomial distribution
 

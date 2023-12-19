@@ -21,6 +21,7 @@ The dataset `ch` contains two variables:
  `chirps`:  the number of chirps per second
  `degF`:  the temperature in degrees Fahrenheit. 
  
+The aim is to examine the relationship between these two variables. Specifically, we wish to know whether the number of chirps changes with temperature.
  
 ![The striped ground cricket, *Allonemobius fasciatus*](../img/cricket.jpg) 
 
