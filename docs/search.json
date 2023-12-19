@@ -374,8 +374,8 @@
     "objectID": "slides/Chapter08.html#one-way-anova",
     "href": "slides/Chapter08.html#one-way-anova",
     "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
-    "section": "",
-    "text": "fabric burn-time data\n\n\n\n\nfabric 1\nfabric 2\nfabric 3\nfabric 4\n\n\n\n\n17.8\n11.2\n11.8\n14.9\n\n\n16.2\n11.4\n11\n10.8\n\n\n17.5\n15.8\n10\n12.8\n\n\n17.4\n10\n9.2\n10.7\n\n\n15\n10.4\n9.2\n10.7\n\n\n\n\nCan we regard the mean burn times of the four fabrics as equal?\n\n\nfabric 1 seems to take longer time to burn"
+    "section": "One-way ANOVA",
+    "text": "One-way ANOVA\n\nfabric burn-time data\n\n\n\n\nfabric 1\nfabric 2\nfabric 3\nfabric 4\n\n\n\n\n17.8\n11.2\n11.8\n14.9\n\n\n16.2\n11.4\n11\n10.8\n\n\n17.5\n15.8\n10\n12.8\n\n\n17.4\n10\n9.2\n10.7\n\n\n15\n10.4\n9.2\n10.7\n\n\n\n\nCan we regard the mean burn times of the four fabrics as equal?\n\n\nfabric 1 seems to take longer time to burn"
   },
   {
     "objectID": "slides/Chapter08.html#one-way-single-factor-anova-model",
@@ -452,7 +452,7 @@
     "href": "slides/Chapter08.html#interaction-plot-for-zooplankton-data",
     "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
     "section": "Interaction Plot for Zooplankton data",
-    "text": "Interaction Plot for Zooplankton data\n\nattach(zooplankton)\nlibrary(ggplot2)\np1= ggplot(data = zooplankton, aes(x = factor(Supplement), y = Zooplankton, group=Lake, colour=Lake)) +\n  stat_summary(fun=mean, geom=\"point\")+\n  stat_summary(fun=mean, geom=\"line\")+\n  geom_abline(intercept = mean(Zooplankton), slope=0)+ \n  theme_bw()+ggtitle(\"Lake*Supplement Interaction effect\")\np2= ggplot(data = zooplankton, aes(x = Lake, y = Zooplankton, group=factor(Supplement), colour=factor(Supplement))) +stat_summary(fun=mean, geom=\"point\")+\n  stat_summary(fun=mean, geom=\"line\")+\n  geom_abline(intercept = mean(Zooplankton), slope=0)+ \n  theme_bw()+ggtitle(\"Lake*Supplement Interaction effect\")\nlibrary(patchwork)\np1+p2\n\n\n\n\n\n\n\n\n\nInteraction effect may be present"
+    "text": "Interaction Plot for Zooplankton data\n\nattach(zooplankton)\nlibrary(ggplot2)\np1= ggplot(data = zooplankton, aes(x = factor(Supplement), y = Zooplankton, group=Lake, colour=Lake)) +\n  stat_summary(fun=mean, geom=\"point\")+\n  stat_summary(fun=mean, geom=\"line\")+\n  geom_abline(intercept = mean(Zooplankton), slope=0)+ \n  theme_bw()+ggtitle(\"Lake*Supplement Interaction effect\")\np2= ggplot(data = zooplankton, aes(x = Lake, y = Zooplankton, group=factor(Supplement), colour=factor(Supplement))) +stat_summary(fun=mean, geom=\"point\")+\n  stat_summary(fun=mean, geom=\"line\")+\n  geom_abline(intercept = mean(Zooplankton), slope=0)+ \n  theme_bw()+ggtitle(\"Lake*Supplement Interaction effect\")\nlibrary(patchwork)\np1+p2\n\n\n\nInteraction effect may be present"
   },
   {
     "objectID": "slides/Chapter08.html#two-way-model-fit-1",
@@ -494,7 +494,7 @@
     "href": "slides/Chapter08.html#analysis-of-covariance-ancova",
     "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
     "section": "Analysis of Covariance (ANCOVA)",
-    "text": "Analysis of Covariance (ANCOVA)\n\nIndicator variables are used as additional regressors along with a quantitative predictor (covariate).\n\n\n\n Restaurant  Sales Households Location I1 I2\n          1 135.27        155  Highway  0  0\n          2  72.74         93  Highway  0  0\n          3 114.95        128  Highway  0  0\n          4 102.93        114  Highway  0  0\n          5 131.77        158  Highway  0  0\n          6 160.91        183  Highway  0  0\n          7 179.86        178     Mall  1  0\n          8 220.14        215     Mall  1  0\n          9 179.64        172     Mall  1  0\n         10 185.92        197     Mall  1  0\n         11 207.82        207     Mall  1  0\n         12 113.51         95     Mall  1  0\n         13 203.98        224   Street  0  1\n         14 174.48        199   Street  0  1\n         15 220.43        240   Street  0  1\n         16  93.19        100   Street  0  1\n\n\n\nPlot of data. Do we need three separate models?\n\n\n\n\n\n\n\n\n\n\n\nANCOVA fit\n\n\n\n                          Estimate Std. Error t value Pr(&gt;|t|)\n(Intercept)                 -6.203     11.818  -0.525    0.611\nHouseholds                   0.909      0.083  10.906    0.000\nLocationMall                39.223     16.451   2.384    0.038\nLocationStreet               8.036     16.273   0.494    0.632\nHouseholds:LocationMall     -0.074      0.104  -0.710    0.494\nHouseholds:LocationStreet   -0.012      0.101  -0.120    0.907"
+    "text": "Analysis of Covariance (ANCOVA)\n\nIndicator variables are used as additional regressors along with a quantitative predictor (covariate).\n\n\n\n Restaurant  Sales Households Location I1 I2\n          1 135.27        155  Highway  0  0\n          2  72.74         93  Highway  0  0\n          3 114.95        128  Highway  0  0\n          4 102.93        114  Highway  0  0\n          5 131.77        158  Highway  0  0\n          6 160.91        183  Highway  0  0\n          7 179.86        178     Mall  1  0\n          8 220.14        215     Mall  1  0\n          9 179.64        172     Mall  1  0\n         10 185.92        197     Mall  1  0\n         11 207.82        207     Mall  1  0\n         12 113.51         95     Mall  1  0\n         13 203.98        224   Street  0  1\n         14 174.48        199   Street  0  1\n         15 220.43        240   Street  0  1\n         16  93.19        100   Street  0  1\n\n\n\nPlot of data. Do we need three separate models?\n\n\n\nANCOVA fit\n\n\n\n                          Estimate Std. Error t value Pr(&gt;|t|)\n(Intercept)                 -6.203     11.818  -0.525    0.611\nHouseholds                   0.909      0.083  10.906    0.000\nLocationMall                39.223     16.451   2.384    0.038\nLocationStreet               8.036     16.273   0.494    0.632\nHouseholds:LocationMall     -0.074      0.104  -0.710    0.494\nHouseholds:LocationStreet   -0.012      0.101  -0.120    0.907"
   },
   {
     "objectID": "slides/Chapter08.html#explanation-of-fit",
@@ -522,7 +522,7 @@
     "href": "slides/Chapter08.html#shiny-apps",
     "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
     "section": "Shiny apps",
-    "text": "Shiny apps\nhttps://shiny.massey.ac.nz/anhsmith/demos/explore.simple.experimental.ANOVA.models/\nhttps://shiny.massey.ac.nz/anhsmith/demos/fit.multiple.regression/"
+    "text": "Shiny apps\nhttps://shiny.massey.ac.nz/anhsmith/demos/explore.simple.experimental.ANOVA.models/\nhttps://shiny.massey.ac.nz/anhsmith/demos/fit.multiple.regression/\n\n\n\n\n\n\n\n\n\n161250 Data Analysis"
   },
   {
     "objectID": "slides/Chapter06.html#what-is-a-statistical-model",
@@ -2075,8 +2075,8 @@
     "objectID": "slides/Chapter07.html#multiple-regression",
     "href": "slides/Chapter07.html#multiple-regression",
     "title": "Chapter 7:Models with Multiple Predictors",
-    "section": "",
-    "text": "In a simple regression, there is only one predictor. Multiple regression modelling involves many predictors.\nPerform EDA first\n\nA scatter plot matrix can show nonlinear relationships\nA correlation matrix will only show the strength of pairwise linear relationships\n\nLook for the predictors having the largest correlation with response\n\nLook for inter-correlations between the predictors and choose the one with high correlation with response variable but uncorrelated with the rest.\nTry https://shiny.massey.ac.nz/anhsmith/demos/explore.multiple.numerical.variables/"
+    "section": "Multiple Regression",
+    "text": "Multiple Regression\n\nIn a simple regression, there is only one predictor. Multiple regression modelling involves many predictors.\nPerform EDA first\n\nA scatter plot matrix can show nonlinear relationships\nA correlation matrix will only show the strength of pairwise linear relationships\n\nLook for the predictors having the largest correlation with response\n\nLook for inter-correlations between the predictors and choose the one with high correlation with response variable but uncorrelated with the rest.\nTry https://shiny.massey.ac.nz/anhsmith/demos/explore.multiple.numerical.variables/"
   },
   {
     "objectID": "slides/Chapter07.html#pinetree-data-example",
@@ -2202,7 +2202,7 @@
     "href": "slides/Chapter07.html#comparison-of-regression-and-robust-fits",
     "title": "Chapter 7:Models with Multiple Predictors",
     "section": "Comparison of regression and robust fits",
-    "text": "Comparison of regression and robust fits\n\n\n\n\n\n\n\n\n\n\nother summaries such as MAPE, MAD can also be obtained\n\n\n\n[1] 0.0629 0.0598 0.0602\n\n\n\nTry for the polynomial fit Top~poly(First,degree=3) which is a better model structure for the pinetree data."
+    "text": "Comparison of regression and robust fits\n\n\nother summaries such as MAPE, MAD can also be obtained\n\n\n\n[1] 0.0629 0.0598 0.0602\n\n\n\nTry for the polynomial fit Top~poly(First,degree=3) which is a better model structure for the pinetree data."
   },
   {
     "objectID": "slides/Chapter07.html#categorical-predictors",
@@ -2258,14 +2258,14 @@
     "href": "slides/Chapter07.html#exponential-average-smoothing",
     "title": "Chapter 7:Models with Multiple Predictors",
     "section": "Exponential (Average) Smoothing",
-    "text": "Exponential (Average) Smoothing\n\nIn exponential average smoothing, past observations are given exponentially decreasing weights.\nThe average computed using exponentially decreasing weights is known as the Exponentially Weighted Moving average (EWMA).\n\nEWMA definition: \\[S_t = \\alpha x_t + (1-\\alpha) S_{t-1}\\] where \\(S_t\\) = EWMA at time \\(t\\), \\(x_t\\) = value of time series at time \\(t\\) & \\(\\alpha\\) = weighting factor \\((0 &lt; \\alpha &lt; 1)\\)\n\nEWMA for $20 bills data"
+    "text": "Exponential (Average) Smoothing\n\nIn exponential average smoothing, past observations are given exponentially decreasing weights.\nThe average computed using exponentially decreasing weights is known as the Exponentially Weighted Moving average (EWMA).\n\nEWMA definition: \\[S_t = \\alpha x_t + (1-\\alpha) S_{t-1}\\] where \\(S_t\\) = EWMA at time \\(t\\), \\(x_t\\) = value of time series at time \\(t\\) & \\(\\alpha\\) = weighting factor \\((0 &lt; \\alpha &lt; 1)\\)\nEWMA for $20 bills data"
   },
   {
     "objectID": "slides/Chapter07.html#double-triple-exponential-smoothing",
     "href": "slides/Chapter07.html#double-triple-exponential-smoothing",
     "title": "Chapter 7:Models with Multiple Predictors",
     "section": "Double & triple exponential smoothing",
-    "text": "Double & triple exponential smoothing\n\n\nDouble Smoothing (includes trend)\n\\(S_t = \\alpha X_t+(1-\\alpha)[S_{t-1} + T_{t-1}]\\) (level equation)\n\\(T_t = \\gamma [S_t - S_{t-1}] + (1 - \\gamma)T_{t-1}\\) (trend equation)\n\\(\\hat{Y}= S_{t-1}+T_{t-1}\\)\n\n\n\nTriple Smoothing (includes trend, seasonal)\nAlso called Holt and Winter method\n\\(S_t = \\alpha(X_t-P_{t-p}) + (1-\\alpha)[S_{t-1}+T_{t-1}]\\) (level equation)\n\\(T_t = \\gamma[S_t-S_{t-1}]+ (1-\\gamma)T_{t-1}\\) (trend equation)\n\\(P_t = \\delta (X_t-S_t)+(1-\\delta)P_{t-p}\\) (seasonal equation at period \\(p\\))\n\\(\\hat{Y}= S_{t-1}+T_{t-1}+P_{t-p}\\)"
+    "text": "Double & triple exponential smoothing\n\nDouble Smoothing (includes trend)\n\\(S_t = \\alpha X_t+(1-\\alpha)[S_{t-1} + T_{t-1}]\\) (level equation)\n\\(T_t = \\gamma [S_t - S_{t-1}] + (1 - \\gamma)T_{t-1}\\) (trend equation)\n\\(\\hat{Y}= S_{t-1}+T_{t-1}\\)\n\nTriple Smoothing (includes trend, seasonal)\nAlso called Holt and Winter method\n\\(S_t = \\alpha(X_t-P_{t-p}) + (1-\\alpha)[S_{t-1}+T_{t-1}]\\) (level equation)\n\\(T_t = \\gamma[S_t-S_{t-1}]+ (1-\\gamma)T_{t-1}\\) (trend equation)\n\\(P_t = \\delta (X_t-S_t)+(1-\\delta)P_{t-p}\\) (seasonal equation at period \\(p\\))\n\\(\\hat{Y}= S_{t-1}+T_{t-1}+P_{t-p}\\)"
   },
   {
     "objectID": "slides/Chapter07.html#double-triple-exponential-smoothing-1",
@@ -2307,7 +2307,7 @@
     "href": "slides/Chapter07.html#common-patterns",
     "title": "Chapter 7:Models with Multiple Predictors",
     "section": "Common patterns",
-    "text": "Common patterns\n\nDrifting random walk series (non-stationary)\n\n\\[X_t = \\delta + X_{t-1} + W_t \\]\n\n\n\n\n\n\n\n\n\n\nModel the difference \\(X_{t} - X_{t-1}\\) or just use the first lag \\(X_{t-1}\\) as a predictor in the usual regression\nThe process of differencing can be done on the differences too. This process brings stationarity to a series"
+    "text": "Common patterns\n\nDrifting random walk series (non-stationary)\n\n\\[X_t = \\delta + X_{t-1} + W_t \\]\n\n\nModel the difference \\(X_{t} - X_{t-1}\\) or just use the first lag \\(X_{t-1}\\) as a predictor in the usual regression\nThe process of differencing can be done on the differences too. This process brings stationarity to a series"
   },
   {
     "objectID": "slides/Chapter07.html#auto-regressive-ar-model",
@@ -2356,7 +2356,7 @@
     "href": "slides/Chapter07.html#shiny-apps",
     "title": "Chapter 7:Models with Multiple Predictors",
     "section": "Shiny apps",
-    "text": "Shiny apps\nhttp://shiny.massey.ac.nz/anhsmith/demos/explore.multiple.regression/\nhttp://shiny.massey.ac.nz/anhsmith/demos/fit.multiple.regression/\nhttp://shiny.massey.ac.nz/anhsmith/demos/explore.collinearity/\nhttp://shiny.massey.ac.nz/anhsmith/demos/explore.Cooks.distances.and.leverages/\nhttp://shiny.massey.ac.nz/anhsmith/demos/demo.RSq.and.adjusted.RSq/"
+    "text": "Shiny apps\nhttp://shiny.massey.ac.nz/anhsmith/demos/explore.multiple.regression/\nhttp://shiny.massey.ac.nz/anhsmith/demos/fit.multiple.regression/\nhttp://shiny.massey.ac.nz/anhsmith/demos/explore.collinearity/\nhttp://shiny.massey.ac.nz/anhsmith/demos/explore.Cooks.distances.and.leverages/\nhttp://shiny.massey.ac.nz/anhsmith/demos/demo.RSq.and.adjusted.RSq/\n\n\n\n\n\n\n\n\n161250 Data Analysis"
   },
   {
     "objectID": "studyguide/1-data-collection.html",

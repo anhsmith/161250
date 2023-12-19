@@ -10,7 +10,7 @@ format:
     theme: [default, myquarto.scss]
     slide-number: c/t  
     logo: img/L_Color.png
-    footer: "[161250 Data Analysis](https://anhsmith.quarto.pub/161250-data-analysis/slides.html)"
+    footer: "[161250 Data Analysis](https://anhsmith.github.io/161250/slides.html)"
     styles:
       - revealjs.dark:
         background-color: #222
