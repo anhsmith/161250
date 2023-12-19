@@ -10,146 +10,336 @@ knitr::opts_chunk$set(echo = TRUE,
                       fig.show="hide")
 ```
 
+```{r}
+library(tidyverse)
+```
+
+# Dataset `chirps`
+
+For this tutorial, we will use a dataset on the striped ground cricket collected by George W. Pierce and published in his 1948 book *The Songs of Insects*. 
+
+The dataset `ch` contains two variables: 
+ `chirps`:  the number of chirps per second
+ `degF`:  the temperature in degrees Fahrenheit. 
+ 
+## Load data 
+
+Let's load the data and create a new variable, which is the temperature in Celsius.
+
+```{r}
+ch <- read_csv("https://www.massey.ac.nz/~anhsmith/data/chirps.csv") |> mutate(degC = (degF-32)*5/9)
+```
+
+We will examine how well the temperature predicts the frequency of chirping by this insect. 
+
+## Plot
+
+Plot the data, with temperature on the x-axis and chirps on the y-axis. 
+
+```{r}
+ch |> 
+  ggplot() + 
+  aes(degC, chirps) +
+  geom_point()
+
+```
+
+Add a 'smoother' line.
+
+```{r}
+ch |> 
+  ggplot() + 
+  aes(degC, chirps) +
+  geom_point() +
+  geom_smooth()
+
+```
+
+Well… it’s sort-of linear… ish… not really.
+
+## Linear model
+
+Now let’s fit a linear model and print it. (Just typing an object’s name is the same as applying the function `print`.)
+
+### Fitting linear model
+
+```{r}
+chm <- lm(chirps ~ degC, data = ch)
+
+chm
+# or print(chm)
+```
+
+This object contains a lot of information, but just printing it doesn’t show us all of it. Each object in R has a 'class', which you can reveal like so. 
+
+### Class
+
+```{r}
+class(chm)
+```
+
+
+The model object created by the function `lm()` has class `lm`. If you `unclass()` this object, you will see all the information it contains. 
+
+```{r}
+unclass(chm)
+```
+
+### Attributes
+
+Big compound objects such as a `lm` are often organised into sections called "attributes", which you can view with this function. 
+```{r}
+attributes(chm)
+```
+The attributes under the section "names" can be accessed using the dollar (`$`) notation, and often with specific formulae. You can read what each of these represent in the help file of `lm` (`?lm`). Many of them aren’t that useful, but the following ones certainly are. 
+
+```{r}
+chm$coefficients
+
+# or 
+
+coef(chm)
+```
+
+This shows us $a$ and $b$, the sample estimates of the population parameters, $\alpha$ and $\beta$. The model we have fit to this dataset is thus $Y = 6.47 + 0.38X$. 
+
+We can also extract the fitted values and residuals for the model.
+
+```{r}
+chm$fitted.values
+
+# or
+
+fitted(chm)
+```
+```{r}
+resid(chm)
+```
+### Summary of a linear model
+
+The function `summary()` shows us a useful display of the most important information from the model.
+
+```{r}
+summary(chm)
+```
+
+This presents a summary of the residuals; the estimates, standard errors, and t-tests for the coefficients $\alpha$ and $\beta$; the residual standard error; the coefficient of determination; and the F-test. We can see that the p-values for the F-test and the t-test for the regression coefficient ($\beta$) are the same: we can conclude that temperature has a highly significant effect on the frequency of chirps, accounting for around 70% of the variation. For every degree increase in temperature, the number of chirps per second is expected to increase by 0.38.
+
+We cannot just stop there, however. We need to examine the model and check the assumptions. 
+
+Plot the data again, this time with a linear regression line. 
+
+```{r}
+ch |> 
+  ggplot() + 
+  aes(degC, chirps) +
+  geom_point() +
+  geom_abline(
+    intercept = 6.47246,
+    slope = 0.38146
+    )
+```
+
+We can also use the function `predict()` to extract the fitted values, with confidence or prediction intervals for each data point. 
+
+```{r}
+predict(chm, interval="confidence")
+```
+This gives the predictions for each of the original data points, along with and interval in which the mean prediction lies with 95% confidence (i.e., if we took many many samples and fit a regression model to each, 95% of so-constructed confidence intervals will include the true mean of $Y$ for this value of $X$).
+
+This is not to be confused with a "prediction" interval, which is expected to contain 95% of the actual values of $Y$ for this value of $X$, rather than the mean value. They are thus wider than confidence intervals.
+
+```{r}
+predict(chm, interval="prediction")
+```
+
+
+:::{.callout-important}
+
+### The distinction between confidence and prediction intervals 
+
+- A 95% confidence interval refers to a mean. It is an interval in which the mean of Y, for a given value of X, is expected to lie with 95% confidence. 
+
+- A 95% prediction interval is an interval in which 95% of Y values are expected to lie for a given value of X. Prediction intervals are broader than confidence intervals.
+
+:::
+
+### Predicting for new data
+
+You can also use the model to make predictions for new values of $X$. To do this, first create a data frame object with a column of the same name as the $X$ variable used in the model (i.e., `degC`), and then enter this object as the newdata argument for the predict function.
+
+```{r}
+newdat <- data.frame(degC = 20:34)
+prednew <- predict(chm, newdata = newdat, interval = "confidence")
+prednew
+
+```
+
+
+These correspond to the predicted means and confidence intervals for $Y$, for $X$ values of 20 to 34.
+
+### Plotting confidence intervals
+
+We can automatically plot confidence intervals for a linear fit like so:
+
+
+```{r}
+ch |> 
+  ggplot() + 
+  aes(degC, chirps) +
+  geom_point() +
+  geom_smooth(method = "lm")
+```
+
+Or with the `visreg` package.
+
+```{r}
+library(visreg)
+
+visreg(chm, gg=T)
+
+```
+
+Note that the mean is most certain (i.e., the interval is tighter) around the centre of the data and less so around the extremes.
+
+### Residual plots
+
+The linear regression model looks like it provides a reasonable fit to the data. We should just check the residuals though.
+
+```{r}
+ggplot() + 
+  aes(chm$fitted.values, chm$residuals) +
+  geom_point() +
+  geom_hline(yintercept = 0)
+```
+
+Remember, you want a ***complete mess*** in your residual plot—no pattern is good pattern. We generally look for two things: heteroscedasticity and trend. We can see in the plot above that the residuals appear to have quite a constant variance, so no worries about the heteroscedasticity there. However, there is a hint of a trend—there are more points above zero at low and high fitted values, and more below the line at middle fitted values. This is not too severe, but it warrants further consideration.
+
+Using the function `plot()` on an `lm` object gives four very useful diagnostic graphs. You can read about them in the help file by entering the following.
+
+```{r}
+plot(chm)
+```
+
+:::{.callout-tip}
+
+### Interpreting R’s diagnostic plots
+
+The diagnostic plots are designed to inform the user of any departure from the assumptions of a linear model. 
+
+The **Residuals vs Fitted** plot shows the regular residuals, i.e., the difference between the observed and fitted values on the y-axis plotted against the fitted values on the x-axis. Ideally, this would show a complete trend-less mess. Here, there is a little curvature on the plot, which may concern us a little. 
+
+The **Normal Q-Q plot** compares the residuals with their expected values if they were normally distributed. When lots of points lie away from this line, then there is evidence that the residuals are non-normally distributed, which violates an assumption of linear models. Here, they look pretty good. A little departure from the line at the very ends is common, and no cause for great concern.
+
+The **Scale-Location** plot shows the square-root of the standardised residuals (i.e. divided by their standard deviation) against the predicted values. This can be used to look for heteroscedasticity—changes in the variance of the residuals for different fitted values—which is also an assumption of linear models. Ideally, there would be no trend in these points and the red line would be perfectly horizontal. It doesn’t look bad here.
+
+Finally, the **Residuals vs Leverage** plot shows the standardised residuals against Leverage. The leverage measures the potential influence a point has given the extremeness of its values for the predictor variable. If a point has large leverage and a large residual, then it will have large influence, meaning that it is having a large effect on the estimated parameters. So, this plot is useful for identifying outliers and influential points. Any points that are outside the red dashed lines have high values of Cook’s D reflecting a large influence on the estimates a and b, and are therefore potentially cause for concern. So, ideally, there would be no points outside the dashed lines.
+
+:::
+
+The only problem we can see in the diagnostic plots is in the residuals-vs-fitted one, where there’s a bit of curvature, as identified by the red smoother line. Otherwise, the residuals are fairly normal (Q-Q) and with constant variance (scale-location). 
+
+From the plots above, it looks like there may be little effect of temperature on chirps below, say, 23 degrees. Let’s fit this model again, this time removing the three data points below this temperature.
+
+```{r}
+chmsub <- lm(chirps ~ degC, data=ch, subset = degC > 23)
+
+summary(chmsub)
+```
+
+We now see that if we exclude those points, thus restricting our model to only those times where the temperature is greater than 23°C, we now explain 81% of the variation. The estimated per-degree increase in chirping has gone from 0.38 to 0.57, indicating a much stronger effect.
+
+Let’s have a look at the diagnostic plots.
+
+```{r}
+plot(chmsub)
+```
+
+The residuals seem to be a bit better behaved now. Certainly the trend identified in the previous model has disappeared. The smoother lines might look a little wild at first glance, but this is probably just because the dataset is small. I see no real cause for concern.
+
+Now plot the new model with confidence intervals. 
+
+
+```{r}
+  ggplot() + 
+  aes(degC, chirps) +
+  geom_point(
+    data = ch, 
+    aes(colour = degC > 23)
+    ) +
+  geom_smooth(
+    method = "lm", 
+    data = ch |> filter(degC > 23),
+    colour = 1
+    )
+```
+
+This looks like a much better model overall. Perhaps we can conclude that above approximately 23 degrees, chirping increases linearly with temperature.
+
+It is important to note that subsetting the data in this way changes the inference space to which the model applies. The `chmsub` model should not be used to predict chirps for temperatures less than 23°C (or greater than 34°C, for that matter). **A model should only be used within the range of values spanned by the data used to create it.** Beyond this range, it will very likely be wrong. Our exclusion of the sub-23° data therefore further restricts the range of values for which this model may be used.
+
 
 # Dataset **`Prestige`**
 
 We will continue to use dataset `Prestige` from the `car`	R package. 
+## Linear model
 
+Fit a linear model of `prestige` against `education`. Show the fitted line on a scatterplot of `prestige ~ education`. Check the assumptions using diagnostic plots.
 
-# Exercise 6.1 {-}
-
-Fit a resistant line of `prestige` against `education`.  Show the fitted line on a scatterplot of `prestige ~ education`.  Obtain the plot of the residuals against fitted values.
-
-```{r, fig.show='hide',results='hide'}
-library(tidyverse)
+```{r}
 library(car)
-
-x <- Prestige$education
-y <- Prestige$prestige
+data("Prestige")
 ```
 
 
-Median-median line Tukey line()
+```{r}
+lmp <- lm(prestige ~ education, data = Prestige)
 
-```{r, results='hide'}
-line(x,y)
+summary(lmp)
+
 ```
 
-# Plotting Tukey line & residuals
 
-```{r, fig.show='hide',results='hide'}
-Tline <- line(x,y)
+```{r}
+PrestigeReg <- Prestige |> 
+  mutate(
+    Residuals = residuals(lmp), 
+    Fits = fitted(lmp)
+    )
+```
 
-PrestigeT <- Prestige |> 
-  mutate(Tline.residuals=residuals(Tline),
-         Tline.fits=fitted(Tline)
-         ) 
 
-p1 <- PrestigeT |> 
-  ggplot() +
+```{r}
+PrestigeReg |> 
+  ggplot() + 
   aes(x=education, y=prestige) + 
-  geom_point() +
-  geom_path(aes(x=education, y=Tline.fits))
-
-p2 <- PrestigeT |> 
-  ggplot() +
-  aes(y=Tline.residuals, x=Tline.fits) + 
   geom_point() + 
-  geom_hline(yintercept = 0)
-
-library(patchwork)
-
-p1+p2
+  geom_line(aes(x=education, y=Fits))
 ```
 
 
-```{r, fig.show='hide',results='hide'}
-# Old style plotting
-x <- Prestige$education
-y <- Prestige$prestige
-
-plot(y ~ x) 
-title(main = "Scatterplot prestige ~ education")
-z = line(x,y)  # slightly different Rline
-abline(coef(z), lty=2, col= "blue")
-legend("topleft", legend ="Resistant (Tukey) line", 
-       lty=2, col = "blue")
-plot(residuals(z) ~ fitted(z))
+```{r}
+plot(lmp)
 ```
 
+## Robust regression
 
-The robust regression (which is similar to the robust line) function in the `MASS` package along with the `visreg` package is done with the following codes:
+Fit a robust regression using a function in the `MASS` package.
 
 ```{r, fig.show='hide',results='hide'}
 library(visreg)
 library(car)
 library(MASS)
 
-fit1 <- rlm(prestige ~ education, data = Prestige)
-visreg(fit1)
+rlmp <- rlm(prestige ~ education, data = Prestige)
 ```
 
-
-
-# Exercise 6.2 {-}
-
-Fit a simple regression line of `prestige` against `education`.  Show the fitted regression line on a scatterplot of `prestige ~ education`.  Obtain the plot of the residuals against fitted values.
-
-```{r, results="hide"}
-x <- Prestige$education
-y <- Prestige$prestige
-
-simplereg <- lm(y~x) # Fits the simple regression
-
-summary(simplereg)
-
-anova(simplereg)
-```
-
-
-```{r, fig.show='hide'}
-PrestigeReg <- Prestige |> 
-  mutate(Residuals=residuals(simplereg), 
-         Fits=fitted(simplereg))
-
-PrestigeReg |> 
-  ggplot() + 
-  aes(x=education, y=prestige) + 
-  geom_point() + 
-  geom_line(aes(x=education, y=Fits))
-
-PrestigeReg |> 
-  ggplot() + 
-  aes(y=Residuals, x=Fits) + 
-  geom_point() + 
-  geom_hline(yintercept = 0)
-
-```
-
-
+Plot using the `visreg` package.
 
 ```{r, fig.show='hide',results='hide'}
-# Old style plotting
-plot(y ~ x) 
-abline(simplereg, lty=1, col = "blue")
-abline(h=mean(y), lty=2)
-abline(v=mean(x), lty=2)
-legend("topleft", legend =c("Regression line"), 
-       lty=1, col = "blue")
-
-Fitted = fitted.values(simplereg)
-Residuals = residuals(simplereg)
-plot(Fitted, Residuals, xlab = "Fitted Values")
-abline(h = 0)
-title("Residuals Vs Fitted Values")
+visreg(rlmp)
 ```
 
-Using the `visreg` package.
-
-```{r, fig.show='hide',results='hide'}
-fit1<- lm(prestige ~ education, data = Prestige)
-visreg(fit1)
-```
 
 
 **Note:**
