@@ -11,6 +11,174 @@ knitr::opts_chunk$set(echo = TRUE,
                       out.width='50%')
 ```
 
+```{r}
+#| message : false
+library(tidyverse)
+```
+# Elephants
+
+## Load the data
+
+Load a dataset on elephants.
+
+```{r}
+ele <- read_table("https://www.massey.ac.nz/~anhsmith/data/elephant.txt") |> 
+  rename("Height" = `Shoulder.height`) # renames the variable
+
+str(ele)
+```
+
+There are three variables: 
+
+- `Sex`: M or F
+- `Age`: in years
+- `Height`: shoulder height in cm
+
+
+## Explore the distribution of heights
+
+Examine the distribution of the heights.
+
+```{r}
+ggplot(ele) + 
+  aes(x = Height) +
+  geom_histogram(
+    aes(y = after_stat(density)) # this aes goes here because 
+                                 # it only applies to geom_histogram
+    ) + 
+  geom_density()
+```
+
+Does that look normally distributed to you? Is it symmetrical and bell-shaped?
+
+We can test whether these data conform to a normal distribution model with a Shipiro-Wilk test for normality. The null hypothesis is that the data came from a population that is normal. 
+
+```{r}
+shapiro.test(ele$Height)
+```
+The very low p-value says that we can reject the null hypothesis, and conclude that these data are very unlikely to have come from a normal distribution. 
+
+The data have both male and female elephants, so we should probably look at the sexes separately. 
+
+```{r}
+
+ggplot(ele) + 
+   aes(x = Height) +
+   geom_histogram(
+     aes(y = after_stat(density)) # this aes goes here because 
+                                  # it only applies to geom_histogram
+     ) + 
+   geom_density() + 
+   facet_grid( ~ Sex)
+
+ggplot(ele) + 
+  aes(x = Height, fill = Sex, colour = Sex) +
+  geom_density(alpha = .3)
+
+```
+
+It doesn't look like there's a major difference between the sexes in terms of the distribution of heights. Males might be a bit more variable than females (seeing the thicker tails).
+
+Have a look at the values of age.
+
+```{r}
+ggplot(ele) + aes(Age) + geom_bar()
+```
+
+There is a wide range of ages, from 0 to 15 years old. Many elephants (49, to be exact) are 0 or 1 year old. Are the data normal if we remove these? We'll first make a new copy of the data with the baby elephants removed and then repeat our tests for normality.
+
+```{r}
+ele2 <- ele |> filter(Age > 1) # make new dataset with babies removed
+
+ggplot(ele2) +
+  aes(x = Height) +
+   geom_histogram(
+     aes(y = after_stat(density)) 
+                                  
+     ) + 
+   geom_density() 
+```
+
+That looks a bit more normal. 
+
+```{r}
+shapiro.test(ele2$Height)
+```
+Of elephants 2 years or older, there is no evidence that the heights do not come from a normal distribution (W = 1.0, p = 0.37). So, the heights of non-baby elephants appear approximately normally distributed.
+
+## Confidence interval for the sample
+
+Let's now estimate the population mean (with a 95% confidence interval) of `Heights` in the dataset with the baby elephants removed.
+
+```{r}
+t.test(ele2$Height)
+```
+
+
+The `t.test()` function is very flexible. When given a single sample, it will provide the mean and 95% confidence interval. How would you interpret this confidence interval? 
+
+It also provides a test of whether the mean of the sample is significantly different from zero. If the *p*-value is less than 0.05, then we can say that there is evidence against the null hypothesis of a mean of zero. Now, in this case, of course this isn't useful. Elephants can never have zero or negative height, so a mean height of zero is nonsensical. 
+
+Note that we can extract the estimate of the population mean and its confidence interval in the following way.
+
+```{r}
+t.test(ele2$Height)$estimate
+t.test(ele2$Height)$conf.int
+```
+How was this confidence interval calculated? 
+
+The standard error (the standard deviation over multiple samples) for a sample mean can be estimated by $s / \sqrt n$, where $s$ is the sample standard deviation and $n$ is the sample size.
+
+```{r}
+n = length(ele2$Height)
+s = sd(ele2$Height)
+
+( se = s / sqrt(n) )
+```
+
+Once you have estimated the standard error, a confidence interval for a sample mean $\bar x$ is simply
+
+$$ 
+\bar x \pm t \times \text{se}
+$$
+The $t$ value is the 0.975 quantile of the $t$ distribution with the degrees of freedom given by $n-1$. 
+
+```{r}
+qt(p = 0.975, df = n - 1)
+```
+So, the sample mean and confidence interval is:
+
+```{r}
+( xbar <- mean(ele2$Height) )
+( xbar - qt(p = 0.975, df = n - 1) * se )
+( xbar + qt(p = 0.975, df = n - 1) * se )
+```
+
+## t-test for difference of two sample means
+
+Let's say we are interested in testing whether the mean heights of male and female elephants are different. First, we can test for differences in the variances in the two sexes using Levene's test, which is an important assumption of the t-test. In other words, if the assumption is violated, the results of the test may be misleading.
+
+Let's do the Levene's test.
+
+```{r}
+car::leveneTest(Height ~ Sex, data = ele2)
+```
+A p-value of 0.1 is not huge, but it's not enough evidence to reject the null hypothesis that the variance of male heights is equal to the variance of female heights (at the 5% level).
+
+The default option for a t-test using the `t.test()` function is not *not* assume equal variances. 
+
+```{r}
+t.test(formula = Height ~ Sex, data = ele2) 
+```
+By this test, there is no strong evidence against the null hypothesis that the mean heights of male and female elephants are equal. 
+
+Welch Test does not assume equal variances. If we wanted to make this assumption (and therefore get more power):
+
+```{r}
+t.test(formula = Height ~ Sex, var.equal = T,  data = ele2) 
+```
+The result is essentially the same in this case. 
+
 
 # Dataset **`Prestige`**
 
@@ -42,7 +210,7 @@ knitr::opts_chunk$set(warning=FALSE, message=FALSE, comment=NA, fig.show = "hide
 
 
 
-## Exercise 4.1 {-}
+## One-sample t-tests
 
 Perform a one-sample t-test to test the hypothesis that the true mean `prestige` is exactly 50.
 
@@ -57,8 +225,6 @@ t.test(Prestige$prestige, mu=50)
 # Alternative hyp: greater than 50
 t.test(Prestige$prestige, mu=50, alternative="greater")
 ```
-
-## Exercise 4.2 {-}
 
 Test whether the true mean `prestige` score for professionals is 50% more than the true mean `prestige` score for white collar occupations. 
 
@@ -77,9 +243,9 @@ t.test(prof.data,
        alternative = 'greater')
 ```
 
-## Exercise 4.3 {-}
+## Skewness
 
-Explore the skewness in the `income` variable using a boxplot, mids-vs-spread plot.  Compute the D-Statistics.  Obtain a suitable power transformation to correct the skewness.  Compute the 95% confidence interval for the true mean Top measurement using the raw and transformed data.
+Explore the skewness in the `income` variable using a boxplot. 
 
 ```{r, fig.show="hide", results='hide'}
 Prestige |> 
@@ -91,58 +257,24 @@ Prestige |>
 boxplot(Prestige$income, horizontal = TRUE)
 ```
 
+## Transformation
 
-
-```{r, results='hide'}
-# D-Stat codes under a few shrinking transformations
-
-D1 = function(x) {
-(mean(x) - median(x)) / sd(x)
-}
-
-D2 = function(x) {
-(mean(x) - median(x)) / (fivenum(x)[4] - fivenum(x)[2])
-}
-
-D3 = function(x) {
-((fivenum(x)[4] + fivenum(x)[2]) / 2+-median(x)) / (fivenum(x)[4] - fivenum(x)[2])
-}
-
-x = Prestige$income
-
-VMat <- cbind(
-  Vreci = -1 / x,
-  V = x,
-  VSq = sqrt(x),
-  VLog = log(x)
-  )
-
-apply(VMat, 2, D1)
-apply(VMat, 2, D2)
-apply(VMat, 2, D3)
-
-# or obtain the D-stats individually
-D1(sqrt(x)); D2(sqrt(x)); D3(sqrt(x))
-
-```
+Find a suitable power transformation to correct the skewness. 
 
 ```{r, fig.show='hide'}
 library(lindia)
 
-gg_boxcox(lm(x ~ 1))
+gg_boxcox(lm(income ~ 1, data = Prestige))
 
-# or
-require(MASS)
-b <- boxcox(x ~ 1)
-title("Log-likelihood curve of boxcox parameter")
-k <- b$x[which.max(b$y)]
-mtext(paste("optimum power=", formatC(k)))
 ```
 
+## Confidence interval
+
+Compute the 95% confidence interval for the true mean income using the raw and log-transformed data.
 
 ```{r, results="hide"}
-t.test(x)
-t.test(log(x))
+t.test(Prestige$income)
+t.test(log(Prestige$income))
 ```
 
 

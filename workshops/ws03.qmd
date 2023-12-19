@@ -13,6 +13,12 @@ knitr::opts_chunk$set(echo = TRUE,
 ```
 
 
+# Distribution functions in R
+
+For any distribution, there are four key R functions. In @fig-fourfuncs, they are demonstrated for the normal distribution (`norm`).
+
+![The four R function for the normal probability density function.](../img/r_dist_funs.png){#fig-fourfuncs}
+
 # Dataset **`Prestige`**
 
 We will be using a well-known dataset called `Prestige` from the `car`	R package.  This dataset deals with prestige ratings of Canadian Occupations. The `Prestige` dataset has 102 rows and 6 columns. The observations are occupations.
