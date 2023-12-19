@@ -3,8 +3,416 @@ title: "Chapter 8 Workshop"
 ---
 
 ```{r, echo=FALSE, message=FALSE}
-knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE, comment=NA, fig.show="hide")
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE, comment=NA)
 ```
+
+```{r}
+library(tidyverse)
+```
+
+
+# Insect Sprays – Analysis of Variance
+
+For this ANOVA tutorial, we will use the `InsectSprays`[^1] dataset provided in R, which gives the results of an experiment that examined the effects of six types of insecticide spray on the numbers of insects.  
+
+[^1]: Data originally sourced from Beall, G. 1942. *The transformation of data from entomological field experiments*. Biometrika 32:243.
+
+## Load and look at the data
+
+Load and examine the dataset.
+
+```{r}
+data(InsectSprays)
+str(InsectSprays)
+head(InsectSprays)
+```
+
+You can read a bit about it here: `help(InsectSprays)`.
+
+There are two variables. `count` is the response variable and represents the number of insects found in a plot, and `spray` is the predictor variable which indicates the type of insecticide used. Modelling a quantitative response variable with a categorical factor should make you immediately think of ANOVA!
+
+Let’s give the dataset a shorter name, so we don’t have to write out InsectSprays whenever we want to use it.
+
+```{r}
+IS = InsectSprays
+```
+
+Check the number of replicates (data points) for each group. 
+
+```{r}
+table(IS$spray)
+```
+
+This shows that there are 12 replicates in each group. Because n is the same for each level, we can say that this is a balanced design.
+
+## Plotting the data
+
+Let’s plot the data using a boxplot.
+
+```{r}
+IS |> 
+  ggplot() +
+  aes(x = count, y = spray) + 
+  geom_boxplot()
+
+```
+
+What are your first impressions? Does it look like there is much difference among the groups? 
+
+Boxplots are useful, but for small datasets it can be revealing to plot the actual data.
+
+We can use a dotplot with violins.
+
+```{r}
+dvp <- IS |> 
+  ggplot() +
+  aes(x = count, y = spray) + 
+  geom_violin() +
+  geom_jitter(width = 0, height = 0.1, alpha = .5)
+
+dvp
+```
+
+Do you think the dot/violinplot is more or less informative than the boxplot?
+
+Analysis of variance compares the variation among groups (group means from the overall mean) with the variation within groups (data points from their group means). Recall that, while useful, boxplots do not actually show us the means. So, to help with our visual impression of these data in the context of ANOVA, we’ll now add the means to the dotplot. 
+
+
+
+```{r}
+
+meanIS <- IS |> group_by(spray) |> summarise(count = mean(count))
+
+dvp + 
+  geom_point(
+    data = meanIS,
+    colour = "darkorange" ,
+    shape = "|",
+    size = 8
+    )
+  
+```
+
+Though I do like boxplots, I think this is probably a more useful and revealing plot in this case, especially since we’re about to do an ANOVA, which tests for differences among means. 
+
+## Fitting an ANOVA model
+
+An ANOVA model is fit in R using the function `aov()`. There is a function `anova()`, but this instead can be used to produce an ANOVA table from an existing model.
+
+Let’s do it. 
+
+```{r}
+aov(count ~ spray, data = IS)
+```
+This shows the among-groups (`spray`) and within-groups (`Residuals`) sum of squares, and degrees of freedom. The `Residual standard error` is the square root of the error variance ($\sigma_\varepsilon^2$). It is the expected (average) absolute deviation from the individual data points to their respective group means. If required, you can remind yourself what these values represent from the lecture slides.
+
+We can get the full ANOVA table by commanding a `summary()` of an `aov` object. (Note, a very similar output can be achieved by applying the `anova()` function to an `aov` object.)
+
+```{r}
+aov(count ~ spray, data=IS) |> summary()
+```
+
+The full ANOVA table also gives us the Mean Squares (the SS divided by their respective df), the F value (the ratio of the within-to-among-groups Mean Squares), and the P-value. 
+
+The null hypothesis tested here is that there is no difference between the group means in the population. 
+
+$$H_0 : \mu_1 = \mu_2 = ... = \mu_g$$
+
+The alternative hypothesis is that at least one of the groups is different to the others. 
+
+Remember that we assume that we have taken a sample of data at random from a population. The P-value is the proportion of equivalent samples in which we would obtain the observed test statistic or greater **if the null hypothesis is true** (i.e. no difference among groups). In other words, how likely is it that the observed differences among means have occurred just through chance? Here, the F ratio is high and P-value is tiny (< 0.0000000000000002). So, there is extremely strong evidence against the null hypothesis and we can conclude that there is indeed a difference among the group means—plants subjected to different types of spray have, on average, different numbers of insects on them. 
+
+This, in itself, is not immensely informative. Naturally, we wish to examine which groups (spray types) are different from one another.
+
+But, first, we need to examine our assumptions.
+
+## Examining the assumptions of ANOVA
+
+Like for regression, diagnostic plots are the first step for examining how well the assumptions of ANOVA are met by our model. If these assumptions are not met, then the F-ratio might not behave as it should (i.e. follow an F-distribution) with repeated sampling under a true null hypothesis. 
+
+Those assumptions are:
+
+1.	Appropriateness of an additive linear model
+2.	Independent errors
+3.	Normally distributed errors
+4.	Homogeneity of errors
+
+We will focus on 3 and 4 because 1 and 2 cannot really be checked at this stage of the analysis. 
+
+Let’s make the plots.
+
+```{r}
+plot(aov(count ~ spray, data=IS))
+```
+
+
+There is cause for concern here. As is often the case with counts, there seems to be some heteroscedasticity in the residuals. That is, the residual variance does not appear constant, but rather increases with the fitted value. In an ANOVA context, this means that the groups with high means have greater within-group variation. Let’s have a look at the standard deviations of the groups.
+
+```{r}
+IS |> group_by(spray) |> summarise(sd = sd(count))
+```
+
+Indeed, there is a huge difference between the largest and smallest standard deviation (roughly 3.5-fold).
+
+We can use a Levene’s test to explicitly test for evidence of heterogeneous variances. The function `leveneTest()` in the `car` package does this. Remember, the null hypothesis is that the average absolute deviations are the same in all groups. 
+
+```{r}
+car::leveneTest(aov(count ~ spray, data=IS))
+```
+
+The low P-value here indicates that the null hypothesis is rejected and our suspicions were correct—there are significant differences in the variations among groups. 
+
+The assumption of normality also seems suspect here, according to the fact that many data do not fall along the dotted line in the Q-Q plot. This is probably part of the same problem. 
+
+We can try transforming the response variable `count` and see if that helps. 
+
+## ANOVA for transformed counts
+
+
+We will try a log(x+1) transformation. We add the constant 1 because there are some (two) zeros in the dataset.
+
+```{r}
+table(IS$count)
+```
+
+Let’s test the assumption for the transformed data. 
+
+```{r}
+IS |> 
+  mutate( 
+    lcount  = log(count+1) 
+    ) |> 
+  aov(formula = lcount ~ spray) |> 
+  car::leveneTest()
+```
+The test is now non-significant, but 0.1 is still a fairly small P-value. Looking at the following boxplot, it seems like the log transformation might be too severe—the groups with smaller means now seem to have higher variance than those with larger means. 
+
+
+```{r}
+IS |> 
+  mutate( 
+    lcount  = log(count+1) 
+    ) |> 
+  ggplot() + 
+  aes(x = lcount, y = spray) |> 
+  geom_boxplot()
+```
+
+Now try instead a square-root transformation.  
+
+```{r}
+IS |> 
+  mutate( 
+    sqrt_count  = sqrt(count) 
+    ) |> 
+  aov(formula = sqrt_count ~ spray) |> 
+  car::leveneTest()
+```
+
+```{r}
+IS |> 
+  mutate( 
+ sqrt_count  = sqrt(count) 
+    ) |> 
+  ggplot() + 
+  aes(x = sqrt_count, y = spray) |> 
+  geom_boxplot()
+```
+
+This looks like a better transformation for this model.
+
+## Fitting an ANOVA to the transformed data 
+
+Fit the model.
+
+```{r}
+IS <- IS |> mutate( sqrt_count  = sqrt(count) )
+
+aov(sqrt_count ~ spray, data=IS) |> summary()
+```
+Now show up the diagnostic plots for this model.
+
+```{r}
+aov(sqrt_count ~ spray, data=IS) |> plot()
+```
+
+Much better!
+
+This clearly has not made a substantial impact on the result of the hypothesis test for a difference among group means, but we can be happier that the inference is correct.
+
+Now let’s look at the differences among groups. 
+
+## Post-hoc multiple comparisons 
+
+Tukey’s Honest Significant Differences (HSD) are a method of adjusting for the fact that, in a post-hoc analysis such as this, there are simultaneously hypothesis tests being done. Across all these tests, the probability of erroneously finding a significant difference (i.e. making a Type I error) is greater than the nominated alpha value (usually 0.05). The HSD method makes each individual test slightly more conservative so that the family-wise error rate across all tests is conserved. 
+ 
+Tukey’s HSD can be implemented in R as follows. 
+
+```{r}
+aov(sqrt_count ~ spray, data=IS) |> TukeyHSD()
+```
+
+This table above has each possible pairwise comparison of groups. The number of comparisons is $g(g – 1)/2 = 15$ (where $g$ = the number of groups = 6). 
+
+For each pairwise comparison, the table gives the estimated difference (`diff`), the lower (`lwr`) and upper (`upr`) confidence intervals and the p-value (`p adj`) which tests whether the difference is statistically significant. The confidence intervals and the p-value are adjusted for the fact that multiple simultaneous comparisons are being made, and so are more conservative than if they were done separately. Out of the 15 comparisons, 10 have very low p-values. 
+
+Here are the intervals shown on a plot.
+
+
+```{r}
+aov(sqrt_count ~ spray, data=IS) |> 
+  TukeyHSD() |> 
+  plot(las=1)
+```
+
+This plot provides a visual impression of the size and adjusted confidence intervals for each comparison. An interval that includes zero indicates that the difference between those groups is non-significant (i.e. the null hypothesis of no difference is retained). This was the case for `B-A`, `F-A`, `F-B`, `E-C`, and `E-D`. From the earlier plots, this makes sense. `A-B-F` seem to be quite similar, as do `E-C-D`. 
+
+# Goats – Analysis of **Co**variance
+
+Here, we will use a dataset[^1] containing the weights of 40 goats before and after an experiment where 20 were given a standard drenching treatment and 20 were given a more intensive drenching treatment. There are three columns corresponding to the treatment (`Tmt`), the gain in weight over the experiment (`WtGain`, kg), and the initial weight at the start of the experiment (`InitialWt`, kg). 
+
+[^1] Source: Saville DJ, Wood GR (1991) *Statistical Methods: The Geometric Approach*. Springer, New York.
+
+## Load the data
+ 
+```{r}
+goat <- read_table("https://www.massey.ac.nz/~anhsmith/data/goats.txt")
+
+str(goat)
+```
+The initial weight is included because of commonly observed biological phenomenon known as "regression to the norm", where lighter animals even the ledger by gaining more weight than the heavier animals. By using an ANCOVA model that incorporates the initial weight as a covariate can therefore give us more power to detect an effect of the treatment. 
+
+## Fitting treatment only 
+
+Let’s start with a boxplot of the response variable by reference to the predictor of interest, treatment.
+
+```{r}
+goat |> 
+  ggplot() + 
+  aes(x = WtGain, y = Tmt) + 
+  geom_boxplot()
+```
+
+There seems to be a reasonable effect of treatment. This is apparent in an ANOVA fitted without the covariate. 
+
+```{r}
+aov(WtGain ~ Tmt, data = goat) |> summary()
+```
+
+Sure enough, effect of the treatment is significant, though it is marginally so. The effect size can be viewed in a linear model summary.
+
+```{r}
+lm(WtGain ~ Tmt, data=goat) |> summary()
+```
+
+From here, we can see that the estimated difference between the treatments is 1.3 kg—the mean for intensive is 6.85 kg and the mean for standard is 5.55 kg. 
+
+```{r}
+goat |> group_by(Tmt) |> summarise(mean = mean(WtGain))
+```
+The fitted model explains only 10% of the variation in the data. The average difference between the fitted means and the observations is 2.023, which is greater than the estimated difference in means. So, all in all, there is a significant effect but it is not large. We can estimate a 95% confidence interval for this difference using $\hat d + t_{df,[0.025,0.975]} \times \text{SE}(\hat d)$. 
+
+```{r}
+-1.3 + qt(c(.025,.975), 38) * 0.6397
+```
+So, the confidence interval for the difference is \{0.005 , 2.595\}.
+
+## Fitting Initial Weight only
+
+Now we will look at the effect of the covariate, `InitialWt`. 
+
+```{r}
+goat |> 
+  ggplot() + 
+  aes(x = InitialWt, y = WtGain) +
+  geom_point(alpha = .4)
+```
+
+We can see that there is a relationship between the initial weight of the goats and the gain in weight, in that the goats that were lighter at the start of the experiment gained more weight. 
+
+Look at a linear model using this predictor alone.
+
+```{r}
+lm(WtGain ~ InitialWt, data = goat) |> summary()
+```
+For every extra kilogram of weight at the start, the goat is expected to gain 354 g less over the course of the experiment. The effect is highly significant, and explains 35% of the variation in weight gain. We are not interested in this effect though, per se, because it has been demonstrated many times before. We are most interested in the effect of the treatment.
+
+## Fitting both... ANOVA!
+
+Now we will look at the effect of the `Tmt` in the context of the covariate, `InitialWt.` 
+
+```{r}
+ggoat <- goat |> 
+  ggplot() + 
+  aes(x = InitialWt, y = WtGain, colour = Tmt) +
+  geom_point(alpha = .4)
+
+ggoat
+```
+
+This shows the effects of both predictors simultaneously. We can envisage two lines on this graph—one through the Intensive points and one through the Standard points. The difference in the heights of these lines is the effect of treatment, the slope of the lines is the effect of the initial weight, and any difference in the slopes of the lines is the interaction between the two predictors. 
+
+Now fit a model including both these predictors simultaneously, including any interaction. 
+
+```{r}
+aov(WtGain ~ InitialWt * Tmt, data=goat) |> summary()
+```
+The first thing is to check for a significant interaction. There is not, so we can assume that there is no difference in the slope of the lines for Intensive and Standard treatments. Thus, there is no evidence that the effect of the initial weight varies among the two treatments, or that the treatment effect varies according to the initial weight. 
+
+Applying the `drop1()` function supports that the more parsimonious model is that without the interaction.
+
+```{r}
+aov(WtGain ~ InitialWt * Tmt, data = goat) |> drop1()
+```
+Now we can confidently fit the model with just the two main effects. 
+
+```{r}
+aov(WtGain ~ InitialWt + Tmt, data = goat) |> summary()
+```
+
+I have put the treatment in the model after the initial weight, so we effectively obtain the Type II sum of squares for treatment, i.e., the variation that is attributable to treatment only, after all the variation attributable to initial weight has been accounted for. This provides a more conservative test for our effect of interest. It matters little in this case, however. Review the table for when treatment alone is fit.
+
+```{r}
+aov(WtGain ~ Tmt, data = goat) |> summary()
+```
+
+The SS for treatment has decreased only slightly from the inclusion of initial weight, from 16.9 to 16.0. 
+
+More importantly, though, the F-ratio has increased by 50% and the P-value has decreased from 0.05 to 0.02! Just from including another (potentially competing) predictor in the model! Take a moment to consider how this might have happened.
+
+The key here is the decrease in the residual SS from 156 to 97. The F-ratio is calculated from the treatment SS divided by the residual SS. Therefore, if you decrease the residual SS, you can increase the value of F. By attributing variation to a covariate, it is no longer considered to be part of the random, unexplained variation. Our ability to detect an effect of the treatment is therefore strengthened. 
+
+This is also apparent in the linear model summary.
+
+```{r}
+lm(WtGain ~ InitialWt + Tmt, data=goat) |> summary()
+```
+
+While the estimated effect of the treatment has reduced from a difference of 1.30 to 1.26, the standard error has reduced from 0.64 to 0.51. We can recalculate the confidence interval for the difference (we remove a degree of freedom for the fact that we are also estimating a regression slope).
+
+```{r}
+-1.26 + qt(c(.025,.975),37) * 0.51169
+```
+
+The interval for the difference \{0.223 , 2.297\} is quite a bit smaller than the one obtained earlier when fitting treatment alone \{0.005 , 2.595\}, and no longer brushes so close to zero.
+
+## Plotting the model
+
+We can get `ggplot` to fit two linear models (one for each treatment) on our scatterplot. 
+
+```{r}
+ggoat + stat_smooth(method="lm")
+```
+
+However, notice that the slopes are different. In our model, the slopes are the same, because it doesn't have an interaction between `InitialWt` and `Tmt`. This is where the `visreg` package is very useful!
+
+```{r}
+library(visreg)
+
+lm(WtGain ~ InitialWt + Tmt, data=goat) |> 
+  visreg(xvar = "InitialWt", by = "Tmt", overlay = TRUE, gg = TRUE)
+```
+
 
 
 # Dataset **`alfalfa`**
@@ -13,18 +421,18 @@ This dataset is from the R package `faraway`. The alfalfa dataset frame has 25 r
 
 This data frame contains the following columns:
 
-**shade** - Distance of location from tree line divided into 5 shade areas
+`shade`: Distance of location from tree line divided into 5 shade areas
 
-**irrigation** - Irrigation effect divided into 5 levels
+`irrigation`: Irrigation effect divided into 5 levels
 
-**inoculum** - Four types of seed incolum, A-D with E as control
+`inoculum`: Four types of seed incolum, A-D with E as control
 
-**yield** - Dry matter yield of alfalfa
+`yield`: Dry matter yield of alfalfa
 
 ```{r, results='hide'}
 library(tidyverse)
 
-data(alfalfa, package="faraway")
+data(alfalfa, package = "faraway")
 
 head(alfalfa, 25)
 
@@ -32,7 +440,7 @@ head(alfalfa, 25)
 
 
 
-# Exercise 8.1 {-}
+## Exercise 8.1 {-}
 
 Obtain the main effects and interaction plots.
 
@@ -144,7 +552,7 @@ plot4 / plot5 / plot6
 
 
 
-# Exercise 8.2 {-}
+## Exercise 8.2 {-}
 
 Fit one-way ANOVA models to this dataset.
 
@@ -166,7 +574,7 @@ plot(TukeyHSD(anova3))
 
 
 
-# Exercise 8.3 {-}
+## Exercise 8.3 {-}
 
 Fit a three-factor (additive) ANOVA model without interactions.
 
@@ -188,7 +596,7 @@ plot(anova1)
 ```
 
 
-# Exercise 8.4 {-}
+## Exercise 8.4 {-}
 
 Fit the indicator variable regression model of `yield ~ inoculum`
 
@@ -210,7 +618,7 @@ summary(indicator.reg)
 Note that this regression allows the treatments to be compared with the control.
 
 
-# Exercise 8.5 {-}
+## Exercise 8.5 {-}
 
 `shade` is a categorical variable of factor codes but let us (incorrectly) treat it as numerical (and if the actual distances are given, then the `distance` variable becomes a covariate). Fit ANCOVA of yield on the `inoculum` factor and `shade` covariate.
 
@@ -224,7 +632,7 @@ summary(ancova.model)
 ```
 
 
-# Exercise 8.6 {-}
+## Exercise 8.6 {-}
 
 In a two-factor experiment, one of the factors was assigned to main plot (main-plot factor), the second factor, called the subplot factor, was assigned into subplots.  The dataset `https://www.massey.ac.nz/~kgovinda/data/plots.RData` gives the experimental set up. Perform the ANOVA for this basic split-plot experiment.
 

@@ -26,7 +26,8 @@ The dataset `ch` contains two variables:
 Let's load the data and create a new variable, which is the temperature in Celsius.
 
 ```{r}
-ch <- read_csv("https://www.massey.ac.nz/~anhsmith/data/chirps.csv") |> mutate(degC = (degF-32)*5/9)
+ch <- read_csv("https://www.massey.ac.nz/~anhsmith/data/chirps.csv") |> 
+  mutate(degC = (degF-32)*5/9)
 ```
 
 We will examine how well the temperature predicts the frequency of chirping by this insect. 
