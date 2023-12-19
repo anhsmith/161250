@@ -6,8 +6,7 @@ title: "Chapter 6 Workshop"
 knitr::opts_chunk$set(echo = TRUE, 
                       warning=FALSE, 
                       message=FALSE, 
-                      comment=NA, 
-                      fig.show="hide")
+                      comment=NA)
 ```
 
 ```{r}
