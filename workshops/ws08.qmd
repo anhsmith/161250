@@ -8,6 +8,7 @@ knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE, comment=NA)
 
 ```{r}
 library(tidyverse)
+theme_set(theme_bw())
 ```
 
 
@@ -267,7 +268,205 @@ aov(sqrt_count ~ spray, data=IS) |>
 
 This plot provides a visual impression of the size and adjusted confidence intervals for each comparison. An interval that includes zero indicates that the difference between those groups is non-significant (i.e. the null hypothesis of no difference is retained). This was the case for `B-A`, `F-A`, `F-B`, `E-C`, and `E-D`. From the earlier plots, this makes sense. `A-B-F` seem to be quite similar, as do `E-C-D`. 
 
+
+# Oyster growth – two-way ANOVA
+
+We will analyse a dataset (which I invented) from an experiment that manipulated salinity and temperature and measured the growth of oysters in these different regimes. 
+
+## Load data
+
+```{r}
+oys <- read_csv("https://www.massey.ac.nz/~anhsmith/data/oystergrowth.csv")
+
+str(oys)
+```
+
+The response variable is `Growth.` 
+
+There are two factors:
+
+Factor A: `Temperature`, a = 3 levels (`High`, `Medium`, and `Low`)
+Factor B: `Salinity`, b = 2 levels (`High` and `Low`),
+
+```{r}
+table(oys$Salinity, oys$Temperature)
+```
+The table above shows a count of 10 data points per combination of `Temperature` and `Salinity.` The equal number of observations among cells shows the experiment has a crossed and balanced design. 
+
+## Ordering factors
+
+The `Temperature` variable is ordinal, having a natural order. R does not know this automatically. 
+
+```{r}
+factor(oys$Temperature) |> levels()
+```
+We can tell R the correct order of the factors by turning them into ordered factors.
+
+```{r}
+oys <- oys |> 
+  mutate(
+    Temperature = factor(
+      Temperature, 
+      levels = c("Low","Med","High")
+      ),
+    Salinity = factor(
+      Salinity, 
+      levels = c("Low","High")
+      )
+    )
+```
+
+We will first examine separately the effects of `Temperature` and `Salinity` on `Growth`, first focusing on `Temperature.`
+
+```{r}
+ggplot(oys) + 
+  aes(x = Growth, y = Temperature) + 
+  geom_boxplot()
+
+ggplot(oys) + 
+  aes(x = Growth, y = Temperature) +
+  geom_violin() + 
+  geom_jitter(width=0, height=.1, alpha = .4) 
+```
+
+## One-way ANOVAs
+
+What are your first impressions of these data? Do you think that `Temperature` has an effect on the `Growth` of oysters here? Do you think an ANOVA is an appropriate analysis to use? Would you expect the assumptions of ANOVA to be upheld?
+
+Two things stand out. Firstly, it does not look like `Temperature` has a strong effect `Growth`—the variation within the groups looks to be much larger than the variation among groups. The one-way ANOVA agrees.
+
+```{r}
+aov(Growth ~ Temperature, data=oys) |> summary()
+```
+
+Secondly, the data seem to have different variances among the three groups. We can use a Levene’s test to confirm this.
+
+```{r}
+car::leveneTest(y = oys$Growth, group = oys$Temperature)
+```
+Now make the same plots for `Salinity` and `Growth`.
+
+The same general result was obtained for `Salinity` as it was for `Temperature`—there was not apparent effect of `Salinity` on `Growth`, and the dispersions among groups are significantly different (although only marginally so). 
+
+## Interaction plots
+
+Now we will examine `Growth` simultaneously in terms of both `Temperature` and `Salinity`.
+
+Let's make a plot.
+
+```{r}
+g_oys_st <- oys |> 
+  ggplot() +
+  aes(x = Temperature, y = Growth, colour = Salinity) + 
+  geom_point(
+    alpha = .4,
+    position = position_dodge(width = .3)
+    )
+
+g_oys_st
+```
+
+Let's add the means to the plot above. First, let's calculate the means of each combination of `Temperature` and `Salinity`.
+
+```{r}
+mean_growth <- oys |> 
+  group_by(Temperature, Salinity) |> 
+  summarise(Growth = mean(Growth))
+
+mean_growth
+```
+
+Now add the means as lines.
+
+```{r}
+g_oys_st + 
+  geom_line(
+    data = mean_growth,
+    mapping = aes(group = Salinity),
+    position = position_dodge(width = .3)
+    )
+```
+
+Note, we can make this plot without pre-calculating the means, by way of the `stat_summary()` function. 
+
+```{r}
+g_oys_st + 
+  stat_summary(
+    aes(group = Salinity), 
+    fun = mean, 
+    geom="line",
+    position = position_dodge(width = .3)
+    )
+  
+```
+
+So, our one-group analysis was unable to tell the real story in this dataset. 
+
+Before doing a formal two-way ANOVA, try to understand this graph. 
+
+Do you expect to find a significant interaction? 
+
+Why do you think there was no discernable pattern in the one-factor analyses?
+
+Will differing dispersions among groups still be a problem? 
+
+## Two-way ANOVA
+
+OK, let’s take a look at an ANOVA model with both factors included, plus the interaction. For this, you can write the full formula: `Temperature + Salinity + Temperature:Salinity`. In R, `Temperature:Salinity` is syntax for the interaction between `Temperature` and `Salinity.` Alternatively, this formula can be specified using this syntax: `Temperature*Salinity`. This is equivalent to writing the full formula explicitly. Both factors, and their interaction, are included. 
+ 
+```{r}
+aov(Growth ~ Temperature * Salinity, data = oys) |> summary()
+```
+
+## Interaction
+
+First, we look at the interaction `Temperature:Salinity`. It is highly significant and the most important source of explained variation in the model. This was abundantly clear when we plotted `Growth` according to *both* factors simultaneously. The mean lines on the plot were not parallel, which is indicative of an interaction. 
+
+`Temperature` and `Salinity` have an effect on `Growth` but they are no independent. The effect of `Temperature` on `Growth` depends on `Salinity`, and the effect of `Salinity` on `Growth` depends on `Temperature`.
+
+Without taking `Salinity` into account, `Temperature` has no apparent effect. For low `Salinity` environments, growth increases with increasing `Temperature`. For high `Salinity`, the opposite is true: `Growth` decreases with increasing `Temperature`. 
+
+There is an important lesson to be learned here. A variable that is important for explaining variation in the response, but not included in the model, can obfuscate the relationship between the response and the variables that you have included, particularly when interactions are present. 
+
+So-called 'latent' variables cause problems in science. This highlights the importance of knowing all the important causes of variation in a measured response. Two strategies may then be employed. You can hold a variable constant (e.g., examine temperature in medium salinity environments) but this restricts the inference space of your conclusions (they would only be valid for medium salinity). Alternatively, you can include a variable in the design (or measure it if it is not easily manipulated), ensuring that it is accounted for in any analyses. 
+
+Another potential consequence of an unknown latent variable is excess dispersion in some groups. This resulted in a significant departure from group homogeneity in the Levene’s test for both `Salinity` and `Temperature` when the other was left out. 
+
+Another thing to note is that, when the interaction is significant, we don't need to worry about the main effects of the two factors. 
+
+## Post-hoc group comparisons
+
+The next step in the analysis is to test which levels of the factors differ from each other, using a multiple comparisons procedure, such as Tukey’s Honest Significant Differences. Because the interaction is significant, it is the comparison within the interaction term that will be of most interest. There are six cells (3×2), so the number of comparisons within the interaction term will be six-choose-two:
+
+```{r}
+choose(6,2)
+```
+Run a Tukey analysis.
+
+```{r}
+aov(Growth~Salinity*Temperature, data=oys) |> TukeyHSD()
+```
+
+First, in the single-factor comparisons (ignoring the other factor), only one comparison is significant—between high and low temperatures. The difference is only 0.46, however, and we know that this comparison does not represent the real effects of temperature on growth. It is marginalised over salinity, whereas we now know that the most important effects of temperature are, in fact, conditional on salinity. 
+
+For the interaction comparisons, 13 out of 15 are significantly different. You should refer to the interaction plot on the previous page (or on your screen) to make some sense of which of the comparisons are large or small. For example, the first line gives the comparison between the low-salinity-low-temperature group and the high-salinity-low-temperature group (i.e. the two groups to the left of the interaction plot above). It is one of the largest absolute differences and is highly significant. The greatest difference is on the ninth line of the interaction comparisons: low-salinity-high-temperature vs low-salinity-low-temperature (i.e., those at opposite ends of the low-salinity line on the interaction plot).
+
+We can also plot the comparisons and corresponding Tukey intervals. The `which` argument allows you to restrict the output to particular terms (here, the interaction). 
+
+```{r}
+#| fig-width: 8
+#| fig-height: 10
+tuk <- aov(Growth~Salinity*Temperature, data=oys) |> 
+    TukeyHSD(which = "Salinity:Temperature")
+
+par(mar=c(5,10,3,1)) # adjust the margins so you can read the labels
+plot(tuk, las = 1)
+```
+
+
 # Goats – Analysis of **Co**variance
+
+![A goat](../img/goat.jpg) 
 
 Here, we will use a dataset[^1] containing the weights of 40 goats before and after an experiment where 20 were given a standard drenching treatment and 20 were given a more intensive drenching treatment. There are three columns corresponding to the treatment (`Tmt`), the gain in weight over the experiment (`WtGain`, kg), and the initial weight at the start of the experiment (`InitialWt`, kg). 
 

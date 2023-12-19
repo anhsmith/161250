@@ -21,6 +21,9 @@ The dataset `ch` contains two variables:
  `chirps`:  the number of chirps per second
  `degF`:  the temperature in degrees Fahrenheit. 
  
+ 
+![The striped ground cricket, *Allonemobius fasciatus*](../img/cricket.jpg) 
+
 ## Load data 
 
 Let's load the data and create a new variable, which is the temperature in Celsius.
