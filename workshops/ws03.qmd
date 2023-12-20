@@ -12,12 +12,86 @@ knitr::opts_chunk$set(echo = TRUE,
                       out.width='50%')
 ```
 
+```{r}
+library(tidyverse)
+```
+
 
 # Distribution functions in R
 
-For any distribution, there are four key R functions. In @fig-fourfuncs, they are demonstrated for the normal distribution (`norm`).
+
+R can be used to calculate the probabilities of any range of numbers occurring from a normal distribution. The probability of drawing a value between $a$ and $b$ is simply the area (i.e. intregral) underneath the density curve between the values $a$ and $b$. We can also use R to get quantile values (i.e., the value below which 90% of values lie), or generate random samples from a normal distribution. 
+
 
 ![The four R function for the normal probability density function.](../img/r_dist_funs.png){#fig-fourfuncs}
+
+For any distribution, there are four key R functions, beginning with `q` for 'quantile', `p` for 'probability', `d` for 'density, and `r` for 'random'. In @fig-fourfuncs, the four functions are for the normal distribution are shown (`qnorm()`, `pnorm()`, `dnorm()`, and `rnorm()`).
+
+Let's consider `pnorm()`. For this function, you provide a value of `q`, along with a mean (`mean`) and standard deviation (`sd`), and `pnorm()` returns the probability (area) of drawing a value below `q`; i.e., $\text{P}(X < x)$.
+
+For example, `pnorm(q = 7, mean = 5, sd = 2)` calculates the probability that a normal random variable (with mean 5 and standard deviation 2) has a value less than 7. In short, it answers the question "what is $\text{P}(X < 7)$ when $X \sim \text{N}(\mu=5, \sigma=2)$?" 
+
+Here's the distribution:
+
+```{r}
+dfs <- tibble(
+  x=seq(-2, 12, length=500), 
+  `f(x)` = dnorm(x, mean=5, sd=2)
+  )
+
+ps <- ggplot(dfs) + 
+  aes(x = x, y = `f(x)`) + 
+  geom_area(alpha = 0.4) 
+
+ps
+```
+
+We're asking for the coloured area in the plot below:
+
+```{r}
+ps + 
+  geom_area(
+    data = dfs |> 
+      filter(x < 7),
+    fill="coral1", 
+    alpha=.5
+    ) +
+  geom_segment(
+    aes(x =7, 
+        xend = 7,
+        y = 0,
+        yend = 0.15
+        )
+    ) + 
+  annotate(
+    "text",
+    x = 7,
+    y = 0.16,
+    label = "7"
+    ) 
+
+```
+How do we get R to calculate this? Simple!
+
+```{r}
+pnorm(q = 7, mean = 5, sd = 2)
+```
+## Exercise 3.1
+
+Let $X$ be a normally distributed random variable with mean of 10 and standard deviation of 4. 
+
+Draw the normal distribution in each case, and shade the area of interest. Then, calculate the following values using R. 
+
+a.	$\text{P}(X < 7)$ 					
+
+b.	$\text{P}(8.4 < X < 15.7)$				     
+
+c.	$\text{P}(X > 17)$ 							
+
+d.	Find $x$ such that $\text{P}(X < x) = 0.2$ (i.e. the 0.2 quantile). Hint: use the `qnorm()` function.	
+
+
+Answers are at the end of this document.
 
 # Dataset **`Prestige`**
 
@@ -44,12 +118,12 @@ options(warn=-1)
 
 
 ```{r, echo=FALSE, message=FALSE}
-knitr::opts_chunk$set(warning=FALSE, message=FALSE, comment=NA, fig.show = "hide")
+knitr::opts_chunk$set(warning=FALSE, message=FALSE, comment=NA)
 ```
 
 
 
-# Exercise 3.1 {-}
+## Exercise 3.2 {-}
 
 For a standard normal variable $z$ , obtain the area between  -1.8 and 2.1.  
  
@@ -65,7 +139,7 @@ pnorm(2.1) - pnorm(-1.8)
 ```
 
 
-# Exercise 3.2 {-}
+## Exercise 3.2 {-}
 
 Plot the `prestige` scores data as a histogram and show the theoretical normal curve fitted to the data. 
 
@@ -105,7 +179,7 @@ Prestige |>
 ```
 
 
-# Exercise 3.3 {-}
+## Exercise 3.3 {-}
 
 Let's look at the `prestige` scores variable to see how well it conforms with a normal distribution. 
 
@@ -171,7 +245,7 @@ shapiro.test(sqrt(Prestige$prestige))
 No significant departure from normality for the sqrt-transformed data.
 
 
-# Exercise 3.4 {-}
+## Exercise 3.4 {-}
 
 Examine the fit of non-normal distributions for `prestige` scores data.
 
@@ -204,11 +278,101 @@ m3 <- fitdist(Prestige$prestige, "weibull")
 
 plot(m3)
 ```
+# Answers to Exercise 3.1
 
+$X \sim \text{N}(10,4)$
+
+a.	$\text{P}(X < 7)$ 
 
 ```{r}
-descdist(Prestige$prestige)
+pnorm(q=7, mean=10, sd=4)
 ```
+
+```{r}
+dfs <- tibble(
+  x=seq(-5, 25, length=500), 
+  `f(x)` = dnorm(x, mean=10, sd=4)
+  ) 
+
+gp <- ggplot(dfs) + 
+  aes(x = x, y = `f(x)`) + 
+  geom_area(alpha = 0.4) 
+
+gp + 
+  geom_area(
+    data = dfs |> 
+      filter(x < 7),
+    fill="coral1"
+    ) 
+```
+
+
+b.	$\text{P}(8.4 < X < 15.7)$				     
+
+```{r}
+pnorm(15.7, 10, 4) - pnorm(8.4, 10, 4)
+```
+
+We get this by subtracting the blue area, `pnorm(8.4, 10, 4)`, from `pnorm(15.7, 10, 4)`.
+
+```{r}
+gp + 
+  geom_area(
+    data = dfs |> 
+      filter(x < 15.7),
+    fill="coral1"
+    ) +
+  geom_area(
+    data = dfs |> 
+      filter(x < 8.4),
+    fill="dodgerblue3"
+    ) 
+```
+
+c.	$\text{P}(X > 17)$ 							
+
+```{r}
+1 - pnorm(17, 10, 4)
+
+# or pnorm(17, 10, 4, lower.tail = F)
+```
+```{r}
+gp + 
+  geom_area(
+    data = dfs |> 
+      filter(x > 17),
+    fill="coral1"
+    )
+```
+
+
+d.	Find $x$ such that $\text{P}(X < x) = 0.2$ (i.e. the 0.2 quantile). Hint: use the `qnorm()` function.	
+
+```{r}
+qnorm(p = 0.2, 10, 4)
+```
+```{r}
+gp + 
+  geom_area(
+    data = dfs |> 
+      filter(x < qnorm(p = 0.2, 10, 4)),
+    fill="coral1"
+    ) +
+  geom_segment(
+    aes(x = qnorm(p = 0.2, 10, 4), 
+        xend = qnorm(p = 0.2, 10, 4),
+        y = 0,
+        yend = qnorm(p = 0.2, 10, 4) |> dnorm(10, 4)
+        )
+    ) + 
+  annotate(
+    "text",
+    x = qnorm(p = 0.2, 10, 4),
+    y = qnorm(p = 0.2, 10, 4) |> dnorm(10, 4) + .008,
+    label = qnorm(p = 0.2, 10, 4) |> round(2)
+    ) 
+```
+
 
 
 More graphing examples are  [here](../exercises/Chap3more.R) (R code file).
