@@ -80,7 +80,7 @@ Let's say we have some data and we wish to test the idea that the data came from
 
 If the data look substantially different to a normal distribution, then we will expect the associated test statistic to be large. How large does it have to be before we can reject the idea that the data came from a normal distribution? This question can be answered by calculating a $p$-value for the test statistic. **The _p_-value is the probability of obtaining a test statistic as or more extreme than the one we have calculated** ***if the null hypothesis were true***.
 
-If the $p$-value is smaller than some pre-decided threshold level, such as 5%, then we can reject the null hypothesis that the population is normally distributed, and conclude that the population is **not** normally distributed. If the $p$-value is large, then we have **no evidence** that the population is normally distributed. 
+If the $p$-value is smaller than some pre-decided threshold level, such as 5%, then we can reject the null hypothesis that the population is normally distributed, and conclude that the population is **not** normally distributed. If the $p$-value is large, then we have **no evidence** that the population is **not** normally distributed. 
 
 Two important points to remember about null hypotheses:
 
