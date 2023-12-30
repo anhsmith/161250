@@ -310,12 +310,6 @@ gp +
 b.	$\text{P}(8.4 < X < 15.7)$				     
 
 ```{r}
-pnorm(15.7, 10, 4) - pnorm(8.4, 10, 4)
-```
-
-We get this by subtracting the blue area, `pnorm(8.4, 10, 4)`, from `pnorm(15.7, 10, 4)`.
-
-```{r}
 gp + 
   geom_area(
     data = dfs |> 
@@ -324,10 +318,20 @@ gp +
     ) +
   geom_area(
     data = dfs |> 
-      filter(x < 8.4),
-    fill="dodgerblue3"
+      filter(x > 8.4),
+    fill="dodgerblue3",
+    alpha = 0.5
     ) 
 ```
+
+```{r}
+pnorm(15.7, 10, 4) - (1 - pnorm(8.4, 10, 4))
+# or 
+pnorm(15.7, 10, 4) - pnorm(8.4, 10, 4, lower.tail= FALSE)
+
+```
+
+We get this by subtracting the blue area, `pnorm(8.4, 10, 4)`, from 1 to find $\text{P}(X > 8.4)$ and subtracting this from `pnorm(15.7, 10, 4)` which is $\text{P}(X < 15.7)$.
 
 c.	$\text{P}(X > 17)$ 							
 
