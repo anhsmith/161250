@@ -45,6 +45,24 @@ knitr::opts_chunk$set(warning = FALSE,
 
 **RESIDUAL** - to explain random variation in the data
 
+## What is a statistical model?
+
+::: {align="center"}
+**OBSERVATION = FIT + RESIDUAL**
+:::
+
+-   With paired (related) data (X,Y)
+-   Two variables: one (Y) is random (response) and the other (X) is considered fixed (predictor)
+-   Interested in the functional relationship between these two variables
+    - $Y=f(X)$
+    - predict Y, given X
+    
+      
+## What is a statistical model?
+
+::: {align="center"}
+**OBSERVATION = FIT + RESIDUAL**
+:::
 -   With paired (related) data (X,Y)
     -   Fitted Model: $\hat{Y}=a+bX$ (True Model:
         $Y=\alpha+\beta X+\epsilon$)
@@ -56,6 +74,20 @@ knitr::opts_chunk$set(warning = FALSE,
     -   we need to make residuals free of patterns or trends.
     -   we assume a probability distribution of residuals for
         statistical inference.
+        
+## Predict Y, given X
+```{r, echo=FALSE}
+cirrhosis <- read.table("../data/cirrhosis.txt", header=TRUE)
+
+```
+
+```{r}
+library(tidyverse)
+ggplot(cirrhosis, aes(y=Death, x=Alcohol)) + 
+  geom_point() + 
+  geom_smooth(method = lm, se = FALSE)
+```
+       
 -   A **regression equation** is a function that indicates how the
     **average** value of one response variable for given values of one
     or more predictor variables varies with these predictor variables;
@@ -65,14 +97,13 @@ knitr::opts_chunk$set(warning = FALSE,
 
 -   The term simple means there is a single predictor
 
--   The fitted model remains as: $\hat{Y}=a+bX$\
+-   The fitted model remains as: $\hat{Y}=a+bX_{i}$\
 
 -   The method of least squares is employed to obtain the estimates $a$
     and $b$
 
     -   The sum of squared residuals is minimized in the least squares
         method.
-    -   <https://shiny.massey.ac.nz/anhsmith/demos/demo.least.squares/>
 
 -   `R` regression outputs are bulky
 
@@ -83,7 +114,6 @@ LEARN HOW TO INTERPRET THE REGRESSION OUTPUTS
 ## Example (Alcohol consumption data)
 
 ```{r, echo=FALSE}
-cirrhosis <- read.table("../data/cirrhosis.txt", header=TRUE)
 print(cirrhosis, row.names=FALSE)
 ```
 
@@ -95,17 +125,36 @@ ggplot(cirrhosis, aes(y=Death, x=Alcohol)) +
   geom_point() + 
   geom_smooth(method = lm, se = FALSE)
 ```
+## Plot of Alcohol consumption data
 
-## R Base Output {.smaller}
+```{r}
+library(tidyverse)
+ggplot(cirrhosis, aes(y=Death, x=Alcohol)) + 
+  geom_point() + 
+  geom_smooth(method = lm, se = FALSE)
+```
 
-\scriptsize
+$min \left( \sum_{i=1}(y_{i}-\hat{y_{i}})^2 \right)$
+-   $i$ number of observations
+-   $y_{i}$ observed value of y
+-   $\hat{y_{i}}$ predicted value of y
+
+
+## R Base Output 
+
+```{r}
+library(tidyverse)
+ggplot(cirrhosis, aes(y=Death, x=Alcohol)) + 
+  geom_point() + 
+  geom_smooth(method = lm, se = FALSE)
+```
 
 ```{r}
 mod1 <- lm(Death ~ Alcohol, data=cirrhosis)
 summary(mod1)
 ```
 
--   This is a bulky output. So let us `tidy` it.
+-   Let us `tidy` it.
 
 ## Fitted model and testing its coefficients
 
@@ -122,102 +171,6 @@ kable(out1, caption = "t-tests for model parameters") %>%
 -   Focus on the model, its coefficients
 
     -   Are these coefficient estimates meaningful in the context?
-
--   Tests of significance
-
-    -   $t$ tests of intercept and slope
-
-    -   $H_0=true~slope=0$; $H_0=true~intercept=0$
-
-        -   For `Alcohol~deaths` model, the slope is highly significant
-            but not the intercept
-
-## Model quality measures
-
-```{r}
-#| echo: true
-#| output-location: column
-out1 <- glance(mod1) |> 
-  select(r.squared, sigma, statistic, p.value) |> 
-  mutate_if(is.numeric, round, 2)
-
-out1 |> t() |> 
-  kable(caption = "Model summary measures") |> 
-  kable_classic(full_width = T) 
-```
-
--   Model summary (or Quality) measures
-
-    -   $R^2$ is the proportion of variation explained by the fitted
-        model
-
-        -   A meaningful model must have at least 50% $R^2$
-        -   A large $R^2$ is important to explain the relationship(s)
-
-    -   Residual standard deviation (error) $S$ has to be small
-
-        -   How small? Difficult to say. Compare $S$ with the overall
-            spread in $Y$ or with the mean of $Y$
-        -   A small $S$ is important for prediction
-
-## ANOVA $F$-test
-
--   For the straight line model, the F-test is equivalent to testing the
-    hypothesis that the true slope is zero.
-
-    -   Highly significant F ratio need not always imply that the
-        straight line is the best fit to the data.
-    -   For `Alcohol~deaths` model, the $F$ statistic is highly
-        significant which means that the fitted model explains
-        significant variation
-
-```{r, results='asis', echo=TRUE}
-#| echo: true
-#| output-location: column
-out1 <- anova(mod1) |> tidy() |> mutate_if(is.numeric, round, 2)
-
-options(knitr.kable.NA = " ")
-
-kable(out1, caption = "ANOVA table") |> 
-  kable_classic(full_width = F) 
-```
-
-## ANOVA table construction
-
--   Each source has an associated degrees of freedom.
-
--   For regression, DF = $1$ as there are two parameters $a$ and $b$
-    fitted in the model
-
--   For total, DF = $n-1$ since there are n observations
-
--   For error, DF = by subtraction = $(n-1)-1 = n-2$
-
--   Mean Square (MS) values are obtained as MS = SS/DF
-
--   F ratio for regression =MS(Regression)/MS(Error)
-
--   F ratio follows the $F$ distribution with $(1, n-2)$ d.f and
-    provides the significance of the model fitted.
-
-    -   the ratio of two sample variances (or MS) follows the $F$
-        distribution (normal case)
-
-## Prediction
-
--   The predicted response at value $x=x_0$ is obtained using the fitted
-    regression equation.
--   Confidence & prediction intervals can also be constructed.
--   Note that prediction intervals are for individual observations
-    whereas the confidence intervals are for the expected (mean)
-    response for a given $x_0$
-
-\scriptsize
-
-```{r}
-predict(mod1, new = data.frame(Alcohol=10), interval="confidence", level =0.95)
-predict(mod1, new = data.frame(Alcohol=10), interval="prediction", level =0.95)
-```
 
 ## Types of residuals
 
@@ -251,6 +204,37 @@ library(patchwork)
 p1+p2+p3 & theme_minimal()
 ```
 
+## Assumptions
+
+Model forming assumptions
+
+1.  $X$ is known without error
+2.  $Y$ is linearly related to $X$ 
+3.  There is a random variability of $Y$ about this line
+
+```{r}
+library(tidyverse)
+ggplot(cirrhosis, aes(y=Death, x=Alcohol)) + 
+  geom_point() + 
+  geom_smooth(method = lm, se = FALSE)
+```
+## Assumptions
+**More** assumptions to form $t$ and $F$ statistics:
+
+1.  Variability in $Y$ about the line is constant and independent of $X$
+    variable.
+2.  The variability of $Y$ about the line follows normal distribution.
+3.  The distribution of $Y$ given $X = X_i$ is independent of $Y$ given
+    $X = X_j$.
+
+## Residuals and assumptions
+-   Most assumptions are on the errors (residuals)
+    -   independent
+    -   normal
+    -   random
+-   Is there a pattern in my residuals? 
+-   Do they suggest what to do?
+
 ## Residual plot for `Alcohol~deaths` model
 
 -   For small sample sizes, residual diagnostics is difficult
@@ -272,6 +256,12 @@ p4 <- p4+geom_hline(yintercept = 0)
 p4 <- p4+labs(title = "Residuals Vs Obs. Order")
 library(patchwork)
 p1+p2+p3+p4 & theme_minimal()
+```
+## Residual plot for `Alcohol~deaths` model
+
+```{r, echo=TRUE}
+par(mfrow=(c(2,2)))
+plot(mod1)
 ```
 
 ## Residuals showing need for transformation
@@ -506,29 +496,145 @@ p2 <- p2 +theme(
 p1+p2
 ```
 
-## Assumptions
-
--   Model forming assumptions
-
-1.  $X$ is known without error
-2.  $Y$ is related to $X$ according to a straight line.
-3.  There is a random variability of $Y$ about this line.
-
--   **More** assumptions to form $t$ and $F$ statistics:
-
-1.  Variability in $Y$ about the line is constant and independent of $X$
-    variable.
-2.  The variability of $Y$ about the line follows normal distribution.
-3.  The distribution of $Y$ given $X = X_i$ is independent of $Y$ given
-    $X = X_j$.
-
 ## Improving simple regression
 
 -   Use a different predictor or explanatory variable
 -   Transform the $Y$ variable
--   Add other explanatory variables to the model
+-   Add other explanatory variables to the model (next week)
 -   Deletion of invalid (as opposed to outlier) observations
 -   Reconsider the linear relationship
+
+
+## Tests of significance
+```{r}
+#| echo: true
+#| output-location: column
+library(broom)
+tidy(mod1) |> mutate_if(is.numeric, round, 3) -> out1
+library(kableExtra)
+kable(out1, caption = "t-tests for model parameters") %>% 
+  kable_classic(full_width = F)
+```
+
+    -   $t$ tests of intercept and slope
+
+    -   $H_0=true~slope=0$; $H_0=true~intercept=0$
+
+        -   For `Alcohol~deaths` model, the slope is significant
+            but not the intercept
+
+## Model quality measures
+
+```{r, echo=TRUE}
+summary(mod1)
+```
+-   Model summary (or Quality) measures
+
+    -   $R^2$ is the proportion of variation explained by the fitted
+        model
+
+        -   A meaningful model must have at least 50% $R^2$
+        -   A large $R^2$ is important to explain the relationship(s)
+
+    -   Residual standard deviation (error) $S$ has to be small
+
+        -   How small? Difficult to say. Compare $S$ with the overall
+            spread in $Y$ or with the mean of $Y$
+        -   A small $S$ is important for prediction
+
+## Model quality measures
+```{r}
+#| echo: true
+#| output-location: column
+out1 <- glance(mod1) |> 
+  select(r.squared, sigma, statistic, p.value) |> 
+  mutate_if(is.numeric, round, 2)
+
+out1 |> t() |> 
+  kable(caption = "Model summary measures") |> 
+  kable_classic(full_width = T) 
+```
+
+## ANOVA $F$-test
+```{r}
+#| echo: true
+#| output-location: column
+
+
+mod1  <-  lm(Death ~ Alcohol, data=cirrhosis)
+summary(mod1) 
+```
+```{r}
+#| echo: true
+#| output-location: column
+
+anova(mod1)
+```
+
+```{r}
+#| echo: true
+#| output-location: column
+
+mod1.aov  <-  aov(Death ~ Alcohol, data=cirrhosis)
+summary(mod1.aov) 
+```
+-   For the straight line model, the F-test is equivalent to testing the
+    hypothesis that the true slope is zero.
+
+
+## ANOVA $F$-test
+    -   Significant F ratio need not always imply that the
+        straight line is the best fit to the data.
+    -   For `Alcohol~deaths` model, the $F$ statistic is 
+        significant which means that the fitted model explains significant variation
+
+```{r, results='asis', echo=TRUE}
+#| echo: true
+#| output-location: column
+out1 <- anova(mod1) |> tidy() |> mutate_if(is.numeric, round, 2)
+
+options(knitr.kable.NA = " ")
+
+kable(out1, caption = "ANOVA table") |> 
+  kable_classic(full_width = F) 
+```
+
+## ANOVA table construction
+
+-   Each source has an associated degrees of freedom.
+
+-   For regression, DF = $1$ as there are two parameters $a$ and $b$
+    fitted in the model
+
+-   For total, DF = $n-1$ since there are n observations
+
+-   For error, DF = by subtraction = $(n-1)-1 = n-2$
+
+-   Mean Square (MS) values are obtained as MS = SS/DF
+
+-   F ratio for regression =MS(Regression)/MS(Error)
+
+-   F ratio follows the $F$ distribution with $(1, n-2)$ d.f and
+    provides the significance of the model fitted.
+
+    -   the ratio of two sample variances (or MS) follows the $F$
+        distribution (normal case)
+
+## Prediction
+
+-   The predicted response at value $x=x_0$ is obtained using the fitted
+    regression equation.
+-   Confidence & prediction intervals can also be constructed.
+-   Note that prediction intervals are for individual observations
+    whereas the confidence intervals are for the expected (mean)
+    response for a given $x_0$
+
+\scriptsize
+
+```{r, echo=TRUE}
+predict(mod1, new = data.frame(Alcohol=10), interval="confidence", level =0.95)
+predict(mod1, new = data.frame(Alcohol=10), interval="prediction", level =0.95)
+```
 
 ## Outlier effect on regression
 
@@ -542,6 +648,10 @@ ggplot(rangitikei, aes(x=vehicle, y=people)) +
 ```
 
 ## Leverage and Cook's distance
+```{r}
+par(mfrow=(c(2,2)))
+plot(mod1)
+```
 
 -   A distant $x$ value has a higher ***leverage***.
 
@@ -555,6 +665,12 @@ ggplot(rangitikei, aes(x=vehicle, y=people)) +
         and without the $i^{th}$ data point.
     -   $D_{i} >0.7$ can be deemed as being influential (for $n>15$)
 
+## Leverage and Cook's distance
+```{r}
+par(mfrow=(c(2,2)))
+plot(mod1)
+```
+
 ## Tukey Line
 
 Also called Median-median line, Resistant line or Rline
@@ -563,7 +679,7 @@ Advantages:
 
 ```         
 - Easy to fit
-- Outlier or peculiar values do not affect Rline to  the extent they influence a regression line
+- Outlier or peculiar values do not affect Rline to the extent they influence a regression line
 ```
 
 Rline fitting
@@ -573,7 +689,7 @@ Rline fitting
     values
 3.  Compute the medians of the X values from the lowest and the
     uppermost subgroups, and the corresponding medians of Y values
-4.  The resistant line is then fitted with these two median points
+4.  The resistant line is then fitted with these two median points (x median and y median)
 
 ## Example (Alcohol consumption data)
 
@@ -596,7 +712,7 @@ Rline fitting
 
 ![](img/rline_ch6.png)
 
-R function
+## R function
 
 ```{r, echo=TRUE}
 line(cirrhosis$Death,cirrhosis$Alcohol) 
@@ -647,27 +763,6 @@ p1+p2
 <!-- summary(lmrob(y~x)) -->
 
 <!-- ``` -->
-
-## Orthogonal regresion
-
--   Also called Deming regression.
-
--   The sum of squared perpendicular distance between the line and
-    actual point is minimised.
-
-```{r}
-my.pca  <-  prcomp( ~ Death+Alcohol,  data=cirrhosis)
-slp  <-  my.pca$rotation[2,1]  /  my.pca$rotation[1,1]
-intr  <-  my.pca$center[2]  -  slp*my.pca$center[1]
-
-my.caption <- paste("Slope=", round(slp, 2),
-                    "    Intercept=", round(intr, 2))
-ggplot(cirrhosis) + 
-  geom_point(aes(x=Death,y=Alcohol))  +
-  geom_abline(intercept = intr, slope = slp) +
-  ggtitle("Orthogonal Regression")  +
-  labs(caption = my.caption)
-```
 
 ## Cross Validation (CV)
 
