@@ -8,7 +8,7 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.450">
+  <meta name="generator" content="quarto-1.3.353">
 
   <title>161250 Data Analysis - Chapter 6:Models with a Single Predictor</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -406,6 +406,27 @@
 </div>
 <p><strong>FIT</strong>- to explain systematic (non-random) variation in the data</p>
 <p><strong>RESIDUAL</strong> - to explain random variation in the data</p>
+</section>
+<section id="what-is-a-statistical-model-1" class="slide level2">
+<h2>What is a statistical model?</h2>
+<div data-align="center">
+<p><strong>OBSERVATION = FIT + RESIDUAL</strong></p>
+</div>
+<ul>
+<li>With paired (related) data (X,Y)</li>
+<li>Two variables: one (Y) is random (response) and the other (X) is considered fixed (predictor)</li>
+<li>Interested in the functional relationship between these two variables
+<ul>
+<li><span class="math inline">\(Y=f(X)\)</span></li>
+<li>predict Y, given X</li>
+</ul></li>
+</ul>
+</section>
+<section id="what-is-a-statistical-model-2" class="slide level2">
+<h2>What is a statistical model?</h2>
+<div data-align="center">
+<p><strong>OBSERVATION = FIT + RESIDUAL</strong></p>
+</div>
 <ul>
 <li>With paired (related) data (X,Y)
 <ul>
@@ -418,6 +439,12 @@
 <li>we need to make residuals free of patterns or trends.</li>
 <li>we assume a probability distribution of residuals for statistical inference.</li>
 </ul></li>
+</ul>
+</section>
+<section id="predict-y-given-x" class="slide level2">
+<h2>Predict Y, given X</h2>
+
+<img data-src="Chapter06_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch quarto-figure-center"><ul>
 <li>A <strong>regression equation</strong> is a function that indicates how the <strong>average</strong> value of one response variable for given values of one or more predictor variables varies with these predictor variables; that is, <span class="math inline">\(E(Y|X_1, X_2, ..., X_k)\)</span></li>
 </ul>
 </section>
@@ -425,12 +452,11 @@
 <h2>Simple regression</h2>
 <ul>
 <li><p>The term simple means there is a single predictor</p></li>
-<li><p>The fitted model remains as: <span class="math inline">\(\hat{Y}=a+bX\)</span><br>
+<li><p>The fitted model remains as: <span class="math inline">\(\hat{Y}=a+bX_{i}\)</span><br>
 </p></li>
 <li><p>The method of least squares is employed to obtain the estimates <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span></p>
 <ul>
 <li>The sum of squared residuals is minimized in the least squares method.</li>
-<li><a href="https://shiny.massey.ac.nz/anhsmith/demos/demo.least.squares/" class="uri">https://shiny.massey.ac.nz/anhsmith/demos/demo.least.squares/</a></li>
 </ul></li>
 <li><p><code>R</code> regression outputs are bulky</p></li>
 </ul>
@@ -464,10 +490,16 @@
 <section id="plot-of-alcohol-consumption-data" class="slide level2">
 <h2>Plot of Alcohol consumption data</h2>
 
-<img data-src="Chapter06_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch quarto-figure-center"></section>
-<section id="r-base-output" class="slide level2 smaller">
+<img data-src="Chapter06_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<section id="plot-of-alcohol-consumption-data-1" class="slide level2">
+<h2>Plot of Alcohol consumption data</h2>
+
+<img data-src="Chapter06_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch quarto-figure-center"><p><span class="math inline">\(min \left( \sum_{i=1}(y_{i}-\hat{y_{i}})^2 \right)\)</span> - <span class="math inline">\(i\)</span> number of observations - <span class="math inline">\(y_{i}\)</span> observed value of y - <span class="math inline">\(\hat{y_{i}}\)</span> predicted value of y</p>
+</section>
+<section id="r-base-output" class="slide level2">
 <h2>R Base Output</h2>
-<div class="cell" data-layout-align="center">
+
+<img data-src="Chapter06_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch quarto-figure-center"><div class="cell" data-layout-align="center">
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -490,7 +522,7 @@ F-statistic: 48.35 on 1 and 13 DF,  p-value: 1.001e-05</code></pre>
 </div>
 </div>
 <ul>
-<li>This is a bulky output. So let us <code>tidy</code> it.</li>
+<li>Let us <code>tidy</code> it.</li>
 </ul>
 </section>
 <section id="fitted-model-and-testing-its-coefficients" class="slide level2">
@@ -542,27 +574,205 @@ F-statistic: 48.35 on 1 and 13 DF,  p-value: 1.001e-05</code></pre>
 <ul>
 <li>Are these coefficient estimates meaningful in the context?</li>
 </ul></li>
-<li><p>Tests of significance</p>
+</ul>
+</section>
+<section id="types-of-residuals" class="slide level2">
+<h2>Types of residuals</h2>
 <ul>
-<li><p><span class="math inline">\(t\)</span> tests of intercept and slope</p></li>
-<li><p><span class="math inline">\(H_0=true~slope=0\)</span>; <span class="math inline">\(H_0=true~intercept=0\)</span></p>
+<li><p>raw or ordinary residual is just (observation-fit)</p></li>
+<li><p><code>Standardized Residual</code>= Residual/Std.Dev of residual</p></li>
+<li><p>The regression model is influenced by outliers or unusual points because the slope estimate of the regression line is sensitive to these outliers.</p></li>
+<li><p>So we define <code>Studentised or deleted t Residual</code></p></li>
+<li><p>Similar to Standardized Residual without the observation under consideration. That is,</p>
 <ul>
-<li>For <code>Alcohol~deaths</code> model, the slope is highly significant but not the intercept</li>
+<li>Studentised residual = residual/std. dev of residual (after omitting the particular observation).</li>
+</ul></li>
+</ul>
+
+<img data-src="Chapter06_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<section id="assumptions" class="slide level2">
+<h2>Assumptions</h2>
+<p>Model forming assumptions</p>
+<ol type="1">
+<li><span class="math inline">\(X\)</span> is known without error</li>
+<li><span class="math inline">\(Y\)</span> is linearly related to <span class="math inline">\(X\)</span></li>
+<li>There is a random variability of <span class="math inline">\(Y\)</span> about this line</li>
+</ol>
+
+<img data-src="Chapter06_files/figure-revealjs/unnamed-chunk-10-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<section id="assumptions-1" class="slide level2">
+<h2>Assumptions</h2>
+<p><strong>More</strong> assumptions to form <span class="math inline">\(t\)</span> and <span class="math inline">\(F\)</span> statistics:</p>
+<ol type="1">
+<li>Variability in <span class="math inline">\(Y\)</span> about the line is constant and independent of <span class="math inline">\(X\)</span> variable.</li>
+<li>The variability of <span class="math inline">\(Y\)</span> about the line follows normal distribution.</li>
+<li>The distribution of <span class="math inline">\(Y\)</span> given <span class="math inline">\(X = X_i\)</span> is independent of <span class="math inline">\(Y\)</span> given <span class="math inline">\(X = X_j\)</span>.</li>
+</ol>
+</section>
+<section id="residuals-and-assumptions" class="slide level2">
+<h2>Residuals and assumptions</h2>
+<ul>
+<li>Most assumptions are on the errors (residuals)
+<ul>
+<li>independent</li>
+<li>normal</li>
+<li>random</li>
+</ul></li>
+<li>Is there a pattern in my residuals?</li>
+<li>Do they suggest what to do?</li>
+</ul>
+</section>
+<section id="residual-plot-for-alcoholdeaths-model" class="slide level2">
+<h2>Residual plot for <code>Alcohol~deaths</code> model</h2>
+<ul>
+<li>For small sample sizes, residual diagnostics is difficult</li>
+</ul>
+
+<img data-src="Chapter06_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<section id="residual-plot-for-alcoholdeaths-model-1" class="slide level2">
+<h2>Residual plot for <code>Alcohol~deaths</code> model</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span>(<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>)))</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="fu">plot</span>(mod1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="Chapter06_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<section id="residuals-showing-need-for-transformation" class="slide level2">
+<h2>Residuals showing need for transformation</h2>
+
+<img data-src="Chapter06_files/figure-revealjs/resipattern1-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">Non-constant Residual Variation</p></section>
+<section id="adding-more-predictors" class="slide level2">
+<h2>Adding more predictors</h2>
+
+<img data-src="Chapter06_files/figure-revealjs/resipattern2-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<section id="subgrouping-patterns" class="slide level2">
+<h2>Subgrouping patterns</h2>
+
+<img data-src="Chapter06_files/figure-revealjs/resipattern3-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<section id="outliers" class="slide level2">
+<h2>Outliers</h2>
+
+<img data-src="Chapter06_files/figure-revealjs/resipattern4-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<section id="autocorrelation" class="slide level2">
+<h2>Autocorrelation</h2>
+<ul>
+<li>Neighbouring residuals depend on each other</li>
+</ul>
+
+<img data-src="Chapter06_files/figure-revealjs/resipattern5-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<section id="improving-simple-regression" class="slide level2">
+<h2>Improving simple regression</h2>
+<ul>
+<li>Use a different predictor or explanatory variable</li>
+<li>Transform the <span class="math inline">\(Y\)</span> variable</li>
+<li>Add other explanatory variables to the model (next week)</li>
+<li>Deletion of invalid (as opposed to outlier) observations</li>
+<li>Reconsider the linear relationship</li>
+</ul>
+</section>
+<section id="tests-of-significance" class="slide level2">
+<h2>Tests of significance</h2>
+<div class="cell columns column-output-location" data-layout-align="center">
+<div class="column">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">library</span>(broom)</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">tidy</span>(mod1) <span class="sc">|&gt;</span> <span class="fu">mutate_if</span>(is.numeric, round, <span class="dv">3</span>) <span class="ot">-&gt;</span> out1</span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="fu">kable</span>(out1, <span class="at">caption =</span> <span class="st">"t-tests for model parameters"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-5"><a href="#cb5-5"></a>  <span class="fu">kable_classic</span>(<span class="at">full_width =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output-display">
+<table class="lightable-classic" data-quarto-postprocess="true" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>t-tests for model parameters</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">term</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">estimate</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">std.error</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">statistic</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">-2.318</td>
+<td style="text-align: right;">2.065</td>
+<td style="text-align: right;">-1.123</td>
+<td style="text-align: right;">0.282</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Alcohol</td>
+<td style="text-align: right;">1.405</td>
+<td style="text-align: right;">0.202</td>
+<td style="text-align: right;">6.954</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+<pre><code>-   $t$ tests of intercept and slope
+
+-   $H_0=true~slope=0$; $H_0=true~intercept=0$
+
+    -   For `Alcohol~deaths` model, the slope is significant
+        but not the intercept</code></pre>
+</section>
+<section id="model-quality-measures" class="slide level2">
+<h2>Model quality measures</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">summary</span>(mod1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Death ~ Alcohol, data = cirrhosis)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-9.3966 -1.9639  0.2479  2.9884  4.7716 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   -2.318      2.065  -1.123    0.282    
+Alcohol        1.405      0.202   6.954    1e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 3.942 on 13 degrees of freedom
+Multiple R-squared:  0.7881,    Adjusted R-squared:  0.7718 
+F-statistic: 48.35 on 1 and 13 DF,  p-value: 1.001e-05</code></pre>
+</div>
+</div>
+<ul>
+<li><p>Model summary (or Quality) measures</p>
+<ul>
+<li><p><span class="math inline">\(R^2\)</span> is the proportion of variation explained by the fitted model</p>
+<ul>
+<li>A meaningful model must have at least 50% <span class="math inline">\(R^2\)</span></li>
+<li>A large <span class="math inline">\(R^2\)</span> is important to explain the relationship(s)</li>
+</ul></li>
+<li><p>Residual standard deviation (error) <span class="math inline">\(S\)</span> has to be small</p>
+<ul>
+<li>How small? Difficult to say. Compare <span class="math inline">\(S\)</span> with the overall spread in <span class="math inline">\(Y\)</span> or with the mean of <span class="math inline">\(Y\)</span></li>
+<li>A small <span class="math inline">\(S\)</span> is important for prediction</li>
 </ul></li>
 </ul></li>
 </ul>
 </section>
-<section id="model-quality-measures" class="slide level2">
+<section id="model-quality-measures-1" class="slide level2">
 <h2>Model quality measures</h2>
 <div class="cell columns column-output-location" data-layout-align="center">
 <div class="column">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>out1 <span class="ot">&lt;-</span> <span class="fu">glance</span>(mod1) <span class="sc">|&gt;</span> </span>
-<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">select</span>(r.squared, sigma, statistic, p.value) <span class="sc">|&gt;</span> </span>
-<span id="cb4-3"><a href="#cb4-3"></a>  <span class="fu">mutate_if</span>(is.numeric, round, <span class="dv">2</span>)</span>
-<span id="cb4-4"><a href="#cb4-4"></a></span>
-<span id="cb4-5"><a href="#cb4-5"></a>out1 <span class="sc">|&gt;</span> <span class="fu">t</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb4-6"><a href="#cb4-6"></a>  <span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">"Model summary measures"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb4-7"><a href="#cb4-7"></a>  <span class="fu">kable_classic</span>(<span class="at">full_width =</span> T) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>out1 <span class="ot">&lt;-</span> <span class="fu">glance</span>(mod1) <span class="sc">|&gt;</span> </span>
+<span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">select</span>(r.squared, sigma, statistic, p.value) <span class="sc">|&gt;</span> </span>
+<span id="cb9-3"><a href="#cb9-3"></a>  <span class="fu">mutate_if</span>(is.numeric, round, <span class="dv">2</span>)</span>
+<span id="cb9-4"><a href="#cb9-4"></a></span>
+<span id="cb9-5"><a href="#cb9-5"></a>out1 <span class="sc">|&gt;</span> <span class="fu">t</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb9-6"><a href="#cb9-6"></a>  <span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">"Model summary measures"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb9-7"><a href="#cb9-7"></a>  <span class="fu">kable_classic</span>(<span class="at">full_width =</span> T) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output-display">
 <table class="lightable-classic" data-quarto-postprocess="true" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
@@ -591,39 +801,84 @@ F-statistic: 48.35 on 1 and 13 DF,  p-value: 1.001e-05</code></pre>
 </div>
 </div>
 </div>
-<ul>
-<li><p>Model summary (or Quality) measures</p>
-<ul>
-<li><p><span class="math inline">\(R^2\)</span> is the proportion of variation explained by the fitted model</p>
-<ul>
-<li>A meaningful model must have at least 50% <span class="math inline">\(R^2\)</span></li>
-<li>A large <span class="math inline">\(R^2\)</span> is important to explain the relationship(s)</li>
-</ul></li>
-<li><p>Residual standard deviation (error) <span class="math inline">\(S\)</span> has to be small</p>
-<ul>
-<li>How small? Difficult to say. Compare <span class="math inline">\(S\)</span> with the overall spread in <span class="math inline">\(Y\)</span> or with the mean of <span class="math inline">\(Y\)</span></li>
-<li>A small <span class="math inline">\(S\)</span> is important for prediction</li>
-</ul></li>
-</ul></li>
-</ul>
 </section>
 <section id="anova-f-test" class="slide level2">
 <h2>ANOVA <span class="math inline">\(F\)</span>-test</h2>
-<ul>
-<li><p>For the straight line model, the F-test is equivalent to testing the hypothesis that the true slope is zero.</p>
-<ul>
-<li>Highly significant F ratio need not always imply that the straight line is the best fit to the data.</li>
-<li>For <code>Alcohol~deaths</code> model, the <span class="math inline">\(F\)</span> statistic is highly significant which means that the fitted model explains significant variation</li>
-</ul></li>
-</ul>
 <div class="cell columns column-output-location" data-layout-align="center">
 <div class="column">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>out1 <span class="ot">&lt;-</span> <span class="fu">anova</span>(mod1) <span class="sc">|&gt;</span> <span class="fu">tidy</span>() <span class="sc">|&gt;</span> <span class="fu">mutate_if</span>(is.numeric, round, <span class="dv">2</span>)</span>
-<span id="cb5-2"><a href="#cb5-2"></a></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="fu">options</span>(<span class="at">knitr.kable.NA =</span> <span class="st">" "</span>)</span>
-<span id="cb5-4"><a href="#cb5-4"></a></span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="fu">kable</span>(out1, <span class="at">caption =</span> <span class="st">"ANOVA table"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb5-6"><a href="#cb5-6"></a>  <span class="fu">kable_classic</span>(<span class="at">full_width =</span> F) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>mod1  <span class="ot">&lt;-</span>  <span class="fu">lm</span>(Death <span class="sc">~</span> Alcohol, <span class="at">data=</span>cirrhosis)</span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="fu">summary</span>(mod1) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Death ~ Alcohol, data = cirrhosis)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-9.3966 -1.9639  0.2479  2.9884  4.7716 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   -2.318      2.065  -1.123    0.282    
+Alcohol        1.405      0.202   6.954    1e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 3.942 on 13 degrees of freedom
+Multiple R-squared:  0.7881,    Adjusted R-squared:  0.7718 
+F-statistic: 48.35 on 1 and 13 DF,  p-value: 1.001e-05</code></pre>
+</div>
+</div>
+</div>
+<div class="cell columns column-output-location" data-layout-align="center">
+<div class="column">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">anova</span>(mod1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Response: Death
+          Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+Alcohol    1 751.44  751.44  48.353 1.001e-05 ***
+Residuals 13 202.03   15.54                      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+</div>
+<div class="cell columns column-output-location" data-layout-align="center">
+<div class="column">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>mod1.aov  <span class="ot">&lt;-</span>  <span class="fu">aov</span>(Death <span class="sc">~</span> Alcohol, <span class="at">data=</span>cirrhosis)</span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="fu">summary</span>(mod1.aov) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output cell-output-stdout">
+<pre><code>            Df Sum Sq Mean Sq F value Pr(&gt;F)    
+Alcohol      1  751.4   751.4   48.35  1e-05 ***
+Residuals   13  202.0    15.5                   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+</div>
+<ul>
+<li>For the straight line model, the F-test is equivalent to testing the hypothesis that the true slope is zero.</li>
+</ul>
+</section>
+<section id="anova-f-test-1" class="slide level2">
+<h2>ANOVA <span class="math inline">\(F\)</span>-test</h2>
+<pre><code>-   Significant F ratio need not always imply that the
+    straight line is the best fit to the data.
+-   For `Alcohol~deaths` model, the $F$ statistic is 
+    significant which means that the fitted model explains significant variation</code></pre>
+<div class="cell columns column-output-location" data-layout-align="center">
+<div class="column">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>out1 <span class="ot">&lt;-</span> <span class="fu">anova</span>(mod1) <span class="sc">|&gt;</span> <span class="fu">tidy</span>() <span class="sc">|&gt;</span> <span class="fu">mutate_if</span>(is.numeric, round, <span class="dv">2</span>)</span>
+<span id="cb17-2"><a href="#cb17-2"></a></span>
+<span id="cb17-3"><a href="#cb17-3"></a><span class="fu">options</span>(<span class="at">knitr.kable.NA =</span> <span class="st">" "</span>)</span>
+<span id="cb17-4"><a href="#cb17-4"></a></span>
+<span id="cb17-5"><a href="#cb17-5"></a><span class="fu">kable</span>(out1, <span class="at">caption =</span> <span class="st">"ANOVA table"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb17-6"><a href="#cb17-6"></a>  <span class="fu">kable_classic</span>(<span class="at">full_width =</span> F) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output-display">
 <table class="lightable-classic" data-quarto-postprocess="true" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
@@ -686,88 +941,17 @@ F-statistic: 48.35 on 1 and 13 DF,  p-value: 1.001e-05</code></pre>
 <li>Note that prediction intervals are for individual observations whereas the confidence intervals are for the expected (mean) response for a given <span class="math inline">\(x_0\)</span></li>
 </ul>
 <div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">predict</span>(mod1, <span class="at">new =</span> <span class="fu">data.frame</span>(<span class="at">Alcohol=</span><span class="dv">10</span>), <span class="at">interval=</span><span class="st">"confidence"</span>, <span class="at">level =</span><span class="fl">0.95</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       fit      lwr      upr
 1 11.72778 9.476416 13.97915</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">predict</span>(mod1, <span class="at">new =</span> <span class="fu">data.frame</span>(<span class="at">Alcohol=</span><span class="dv">10</span>), <span class="at">interval=</span><span class="st">"prediction"</span>, <span class="at">level =</span><span class="fl">0.95</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       fit      lwr      upr
 1 11.72778 2.918701 20.53686</code></pre>
 </div>
 </div>
-</section>
-<section id="types-of-residuals" class="slide level2">
-<h2>Types of residuals</h2>
-<ul>
-<li><p>raw or ordinary residual is just (observation-fit)</p></li>
-<li><p><code>Standardized Residual</code>= Residual/Std.Dev of residual</p></li>
-<li><p>The regression model is influenced by outliers or unusual points because the slope estimate of the regression line is sensitive to these outliers.</p></li>
-<li><p>So we define <code>Studentised or deleted t Residual</code></p></li>
-<li><p>Similar to Standardized Residual without the observation under consideration. That is,</p>
-<ul>
-<li>Studentised residual = residual/std. dev of residual (after omitting the particular observation).</li>
-</ul></li>
-</ul>
-
-<img data-src="Chapter06_files/figure-revealjs/unnamed-chunk-8-1.png" width="960" class="r-stretch quarto-figure-center"></section>
-<section id="residual-plot-for-alcoholdeaths-model" class="slide level2">
-<h2>Residual plot for <code>Alcohol~deaths</code> model</h2>
-<ul>
-<li>For small sample sizes, residual diagnostics is difficult</li>
-</ul>
-
-<img data-src="Chapter06_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch quarto-figure-center"></section>
-<section id="residuals-showing-need-for-transformation" class="slide level2">
-<h2>Residuals showing need for transformation</h2>
-
-<img data-src="Chapter06_files/figure-revealjs/resipattern1-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">Non-constant Residual Variation</p></section>
-<section id="adding-more-predictors" class="slide level2">
-<h2>Adding more predictors</h2>
-
-<img data-src="Chapter06_files/figure-revealjs/resipattern2-1.png" width="960" class="r-stretch quarto-figure-center"></section>
-<section id="subgrouping-patterns" class="slide level2">
-<h2>Subgrouping patterns</h2>
-
-<img data-src="Chapter06_files/figure-revealjs/resipattern3-1.png" width="960" class="r-stretch quarto-figure-center"></section>
-<section id="outliers" class="slide level2">
-<h2>Outliers</h2>
-
-<img data-src="Chapter06_files/figure-revealjs/resipattern4-1.png" width="960" class="r-stretch quarto-figure-center"></section>
-<section id="autocorrelation" class="slide level2">
-<h2>Autocorrelation</h2>
-<ul>
-<li>Neighbouring residuals depend on each other</li>
-</ul>
-
-<img data-src="Chapter06_files/figure-revealjs/resipattern5-1.png" width="960" class="r-stretch quarto-figure-center"></section>
-<section id="assumptions" class="slide level2">
-<h2>Assumptions</h2>
-<ul>
-<li>Model forming assumptions</li>
-</ul>
-<ol type="1">
-<li><span class="math inline">\(X\)</span> is known without error</li>
-<li><span class="math inline">\(Y\)</span> is related to <span class="math inline">\(X\)</span> according to a straight line.</li>
-<li>There is a random variability of <span class="math inline">\(Y\)</span> about this line.</li>
-</ol>
-<ul>
-<li><strong>More</strong> assumptions to form <span class="math inline">\(t\)</span> and <span class="math inline">\(F\)</span> statistics:</li>
-</ul>
-<ol type="1">
-<li>Variability in <span class="math inline">\(Y\)</span> about the line is constant and independent of <span class="math inline">\(X\)</span> variable.</li>
-<li>The variability of <span class="math inline">\(Y\)</span> about the line follows normal distribution.</li>
-<li>The distribution of <span class="math inline">\(Y\)</span> given <span class="math inline">\(X = X_i\)</span> is independent of <span class="math inline">\(Y\)</span> given <span class="math inline">\(X = X_j\)</span>.</li>
-</ol>
-</section>
-<section id="improving-simple-regression" class="slide level2">
-<h2>Improving simple regression</h2>
-<ul>
-<li>Use a different predictor or explanatory variable</li>
-<li>Transform the <span class="math inline">\(Y\)</span> variable</li>
-<li>Add other explanatory variables to the model</li>
-<li>Deletion of invalid (as opposed to outlier) observations</li>
-<li>Reconsider the linear relationship</li>
-</ul>
 </section>
 <section id="outlier-effect-on-regression" class="slide level2">
 <h2>Outlier effect on regression</h2>
@@ -775,7 +959,8 @@ F-statistic: 48.35 on 1 and 13 DF,  p-value: 1.001e-05</code></pre>
 <img data-src="Chapter06_files/figure-revealjs/rangiHi-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">Scatter plot of People vs Vehicle</p></section>
 <section id="leverage-and-cooks-distance" class="slide level2">
 <h2>Leverage and Cook’s distance</h2>
-<ul>
+
+<img data-src="Chapter06_files/figure-revealjs/unnamed-chunk-21-1.png" width="960" class="r-stretch quarto-figure-center"><ul>
 <li><p>A distant <span class="math inline">\(x\)</span> value has a higher <strong><em>leverage</em></strong>.</p>
 <ul>
 <li>This leverage is often measured by the <span class="math inline">\(h_{ii}\)</span> or <code>hi</code> value</li>
@@ -788,18 +973,22 @@ F-statistic: 48.35 on 1 and 13 DF,  p-value: 1.001e-05</code></pre>
 </ul></li>
 </ul>
 </section>
+<section id="leverage-and-cooks-distance-1" class="slide level2">
+<h2>Leverage and Cook’s distance</h2>
+
+<img data-src="Chapter06_files/figure-revealjs/unnamed-chunk-22-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="tukey-line" class="slide level2">
 <h2>Tukey Line</h2>
 <p>Also called Median-median line, Resistant line or Rline</p>
 <p>Advantages:</p>
 <pre><code>- Easy to fit
-- Outlier or peculiar values do not affect Rline to  the extent they influence a regression line</code></pre>
+- Outlier or peculiar values do not affect Rline to the extent they influence a regression line</code></pre>
 <p>Rline fitting</p>
 <ol type="1">
 <li>Sort the values of X first and copy the corresponding Y values</li>
 <li>Divide the X values equally into three groups with corresponding Y values</li>
 <li>Compute the medians of the X values from the lowest and the uppermost subgroups, and the corresponding medians of Y values</li>
-<li>The resistant line is then fitted with these two median points</li>
+<li>The resistant line is then fitted with these two median points (x median and y median)</li>
 </ol>
 </section>
 <section id="example-alcohol-consumption-data-1" class="slide level2">
@@ -814,10 +1003,12 @@ F-statistic: 48.35 on 1 and 13 DF,  p-value: 1.001e-05</code></pre>
 <!-- source("https://www.massey.ac.nz/~kgovinda/eda/rline.R") -->
 <!-- rline(y,x) -->
 <!-- ``` -->
-<p><img data-src="img/rline_ch6.png"></p>
-<p>R function</p>
+
+<img data-src="img/rline_ch6.png" class="r-stretch"></section>
+<section id="r-function" class="slide level2">
+<h2>R function</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">line</span>(cirrhosis<span class="sc">$</span>Death,cirrhosis<span class="sc">$</span>Alcohol) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">line</span>(cirrhosis<span class="sc">$</span>Death,cirrhosis<span class="sc">$</span>Alcohol) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -827,16 +1018,8 @@ Coefficients:
 [1]  4.0797  0.4379</code></pre>
 </div>
 </div>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="Chapter06_files/figure-revealjs/unnamed-chunk-11-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>The line() function gives a slightly different slope &amp; intercept.</p>
+
+<img data-src="Chapter06_files/figure-revealjs/unnamed-chunk-24-1.png" width="960" class="r-stretch quarto-figure-center"><p>The line() function gives a slightly different slope &amp; intercept.</p>
 </section>
 <section id="two-more-robust-models" class="slide level2">
 <h2>Two more Robust models</h2>
@@ -846,15 +1029,7 @@ Coefficients:
 <!-- summary(rlm(y~x)) -->
 <!-- summary(lmrob(y~x)) -->
 <!-- ``` -->
-<img data-src="Chapter06_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch quarto-figure-center"></section>
-<section id="orthogonal-regresion" class="slide level2">
-<h2>Orthogonal regresion</h2>
-<ul>
-<li><p>Also called Deming regression.</p></li>
-<li><p>The sum of squared perpendicular distance between the line and actual point is minimised.</p></li>
-</ul>
-
-<img data-src="Chapter06_files/figure-revealjs/unnamed-chunk-13-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="Chapter06_files/figure-revealjs/unnamed-chunk-25-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="cross-validation-cv" class="slide level2">
 <h2>Cross Validation (CV)</h2>
 <ul>
@@ -869,23 +1044,23 @@ Coefficients:
 <section id="example-alcohol-consumption-data-2" class="slide level2">
 <h2>Example (Alcohol consumption data)</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">library</span>(caret);  <span class="fu">library</span>(MASS,  <span class="at">exclude  =</span>  <span class="st">"select"</span>)</span>
-<span id="cb11-2"><a href="#cb11-2"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb11-3"><a href="#cb11-3"></a></span>
-<span id="cb11-4"><a href="#cb11-4"></a>fitControl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"repeatedcv"</span>, <span class="at">number =</span> <span class="dv">5</span>, <span class="at">repeats =</span> <span class="dv">100</span>)</span>
-<span id="cb11-5"><a href="#cb11-5"></a>lmfit <span class="ot">&lt;-</span> <span class="fu">train</span>(Death <span class="sc">~</span>Alcohol,  <span class="at">data=</span> cirrhosis, </span>
-<span id="cb11-6"><a href="#cb11-6"></a>                 <span class="at">trControl =</span> fitControl, <span class="at">method=</span><span class="st">"lm"</span>)</span>
-<span id="cb11-7"><a href="#cb11-7"></a>lm.rmses <span class="ot">&lt;-</span> lmfit<span class="sc">$</span>resample[,<span class="dv">1</span>]</span>
-<span id="cb11-8"><a href="#cb11-8"></a>rlmfit <span class="ot">&lt;-</span> <span class="fu">train</span>(Death <span class="sc">~</span>Alcohol,  <span class="at">data =</span> cirrhosis, </span>
-<span id="cb11-9"><a href="#cb11-9"></a>                  <span class="at">trControl=</span>fitControl, <span class="at">method =</span> <span class="st">"rlm"</span>)</span>
-<span id="cb11-10"><a href="#cb11-10"></a>rlm.rmses <span class="ot">&lt;-</span> rlmfit<span class="sc">$</span>resample[,<span class="dv">1</span>]</span>
-<span id="cb11-11"><a href="#cb11-11"></a>dfm  <span class="ot">&lt;-</span>  <span class="fu">cbind.data.frame</span>(lm.rmses,rlm.rmses)</span>
-<span id="cb11-12"><a href="#cb11-12"></a><span class="fu">library</span>(patchwork)</span>
-<span id="cb11-13"><a href="#cb11-13"></a><span class="fu">qplot</span>(<span class="at">data=</span>dfm,  lm.rmses,  <span class="at">geom=</span><span class="st">"boxplot"</span>)  <span class="sc">/</span></span>
-<span id="cb11-14"><a href="#cb11-14"></a><span class="fu">qplot</span>(<span class="at">data=</span>dfm,  rlm.rmses,  <span class="at">geom=</span><span class="st">"boxplot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">library</span>(caret);  <span class="fu">library</span>(MASS,  <span class="at">exclude  =</span>  <span class="st">"select"</span>)</span>
+<span id="cb25-2"><a href="#cb25-2"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb25-3"><a href="#cb25-3"></a></span>
+<span id="cb25-4"><a href="#cb25-4"></a>fitControl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"repeatedcv"</span>, <span class="at">number =</span> <span class="dv">5</span>, <span class="at">repeats =</span> <span class="dv">100</span>)</span>
+<span id="cb25-5"><a href="#cb25-5"></a>lmfit <span class="ot">&lt;-</span> <span class="fu">train</span>(Death <span class="sc">~</span>Alcohol,  <span class="at">data=</span> cirrhosis, </span>
+<span id="cb25-6"><a href="#cb25-6"></a>                 <span class="at">trControl =</span> fitControl, <span class="at">method=</span><span class="st">"lm"</span>)</span>
+<span id="cb25-7"><a href="#cb25-7"></a>lm.rmses <span class="ot">&lt;-</span> lmfit<span class="sc">$</span>resample[,<span class="dv">1</span>]</span>
+<span id="cb25-8"><a href="#cb25-8"></a>rlmfit <span class="ot">&lt;-</span> <span class="fu">train</span>(Death <span class="sc">~</span>Alcohol,  <span class="at">data =</span> cirrhosis, </span>
+<span id="cb25-9"><a href="#cb25-9"></a>                  <span class="at">trControl=</span>fitControl, <span class="at">method =</span> <span class="st">"rlm"</span>)</span>
+<span id="cb25-10"><a href="#cb25-10"></a>rlm.rmses <span class="ot">&lt;-</span> rlmfit<span class="sc">$</span>resample[,<span class="dv">1</span>]</span>
+<span id="cb25-11"><a href="#cb25-11"></a>dfm  <span class="ot">&lt;-</span>  <span class="fu">cbind.data.frame</span>(lm.rmses,rlm.rmses)</span>
+<span id="cb25-12"><a href="#cb25-12"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb25-13"><a href="#cb25-13"></a><span class="fu">qplot</span>(<span class="at">data=</span>dfm,  lm.rmses,  <span class="at">geom=</span><span class="st">"boxplot"</span>)  <span class="sc">/</span></span>
+<span id="cb25-14"><a href="#cb25-14"></a><span class="fu">qplot</span>(<span class="at">data=</span>dfm,  rlm.rmses,  <span class="at">geom=</span><span class="st">"boxplot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="Chapter06_files/figure-revealjs/unnamed-chunk-14-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="Chapter06_files/figure-revealjs/unnamed-chunk-26-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="choosing-the-best-model" class="slide level2">
 <h2>Choosing the <code>best</code> model</h2>
 <ul>

@@ -529,14 +529,14 @@
     "href": "slides/Chapter06.html#what-is-a-statistical-model",
     "title": "Chapter 6:Models with a Single Predictor",
     "section": "What is a statistical model?",
-    "text": "What is a statistical model?\n\nOBSERVATION = FIT + RESIDUAL\n\nFIT- to explain systematic (non-random) variation in the data\nRESIDUAL - to explain random variation in the data\n\nWith paired (related) data (X,Y)\n\nFitted Model: \\(\\hat{Y}=a+bX\\) (True Model: \\(Y=\\alpha+\\beta X+\\epsilon\\))\nresidual error: \\(e= Y-\\hat{Y}\\) (\\(\\epsilon\\) is not the same as \\(e\\))\n\nWhile fitting models to data\n\nit is required fit the model to the data as closely as possible (e.g. using least squares technique)\nwe need to make residuals free of patterns or trends.\nwe assume a probability distribution of residuals for statistical inference.\n\nA regression equation is a function that indicates how the average value of one response variable for given values of one or more predictor variables varies with these predictor variables; that is, \\(E(Y|X_1, X_2, ..., X_k)\\)"
+    "text": "What is a statistical model?\n\nOBSERVATION = FIT + RESIDUAL\n\nFIT- to explain systematic (non-random) variation in the data\nRESIDUAL - to explain random variation in the data"
   },
   {
     "objectID": "slides/Chapter06.html#simple-regression",
     "href": "slides/Chapter06.html#simple-regression",
     "title": "Chapter 6:Models with a Single Predictor",
     "section": "Simple regression",
-    "text": "Simple regression\n\nThe term simple means there is a single predictor\nThe fitted model remains as: \\(\\hat{Y}=a+bX\\)\n\nThe method of least squares is employed to obtain the estimates \\(a\\) and \\(b\\)\n\nThe sum of squared residuals is minimized in the least squares method.\nhttps://shiny.massey.ac.nz/anhsmith/demos/demo.least.squares/\n\nR regression outputs are bulky\n\n\nLEARN HOW TO INTERPRET THE REGRESSION OUTPUTS"
+    "text": "Simple regression\n\nThe term simple means there is a single predictor\nThe fitted model remains as: \\(\\hat{Y}=a+bX_{i}\\)\n\nThe method of least squares is employed to obtain the estimates \\(a\\) and \\(b\\)\n\nThe sum of squared residuals is minimized in the least squares method.\n\nR regression outputs are bulky\n\n\nLEARN HOW TO INTERPRET THE REGRESSION OUTPUTS"
   },
   {
     "objectID": "slides/Chapter06.html#example-alcohol-consumption-data",
@@ -557,28 +557,28 @@
     "href": "slides/Chapter06.html#r-base-output",
     "title": "Chapter 6:Models with a Single Predictor",
     "section": "R Base Output",
-    "text": "R Base Output\n\n\n\nCall:\nlm(formula = Death ~ Alcohol, data = cirrhosis)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-9.3966 -1.9639  0.2479  2.9884  4.7716 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)   -2.318      2.065  -1.123    0.282    \nAlcohol        1.405      0.202   6.954    1e-05 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 3.942 on 13 degrees of freedom\nMultiple R-squared:  0.7881,    Adjusted R-squared:  0.7718 \nF-statistic: 48.35 on 1 and 13 DF,  p-value: 1.001e-05\n\n\n\nThis is a bulky output. So let us tidy it."
+    "text": "R Base Output\n\n\n\n\nCall:\nlm(formula = Death ~ Alcohol, data = cirrhosis)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-9.3966 -1.9639  0.2479  2.9884  4.7716 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)   -2.318      2.065  -1.123    0.282    \nAlcohol        1.405      0.202   6.954    1e-05 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 3.942 on 13 degrees of freedom\nMultiple R-squared:  0.7881,    Adjusted R-squared:  0.7718 \nF-statistic: 48.35 on 1 and 13 DF,  p-value: 1.001e-05\n\n\n\nLet us tidy it."
   },
   {
     "objectID": "slides/Chapter06.html#fitted-model-and-testing-its-coefficients",
     "href": "slides/Chapter06.html#fitted-model-and-testing-its-coefficients",
     "title": "Chapter 6:Models with a Single Predictor",
     "section": "Fitted model and testing its coefficients",
-    "text": "Fitted model and testing its coefficients\n\n\nlibrary(broom)\ntidy(mod1) |&gt; mutate_if(is.numeric, round, 3) -&gt; out1\nlibrary(kableExtra)\nkable(out1, caption = \"t-tests for model parameters\") %&gt;% \n  kable_classic(full_width = F)\n\n\n\nt-tests for model parameters\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n-2.318\n2.065\n-1.123\n0.282\n\n\nAlcohol\n1.405\n0.202\n6.954\n0.000\n\n\n\n\n\n\n\n\n\nFocus on the model, its coefficients\n\nAre these coefficient estimates meaningful in the context?\n\nTests of significance\n\n\\(t\\) tests of intercept and slope\n\\(H_0=true~slope=0\\); \\(H_0=true~intercept=0\\)\n\nFor Alcohol~deaths model, the slope is highly significant but not the intercept"
+    "text": "Fitted model and testing its coefficients\n\n\nlibrary(broom)\ntidy(mod1) |&gt; mutate_if(is.numeric, round, 3) -&gt; out1\nlibrary(kableExtra)\nkable(out1, caption = \"t-tests for model parameters\") %&gt;% \n  kable_classic(full_width = F)\n\n\n\nt-tests for model parameters\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n-2.318\n2.065\n-1.123\n0.282\n\n\nAlcohol\n1.405\n0.202\n6.954\n0.000\n\n\n\n\n\n\n\n\n\nFocus on the model, its coefficients\n\nAre these coefficient estimates meaningful in the context?"
   },
   {
     "objectID": "slides/Chapter06.html#model-quality-measures",
     "href": "slides/Chapter06.html#model-quality-measures",
     "title": "Chapter 6:Models with a Single Predictor",
     "section": "Model quality measures",
-    "text": "Model quality measures\n\n\nout1 &lt;- glance(mod1) |&gt; \n  select(r.squared, sigma, statistic, p.value) |&gt; \n  mutate_if(is.numeric, round, 2)\n\nout1 |&gt; t() |&gt; \n  kable(caption = \"Model summary measures\") |&gt; \n  kable_classic(full_width = T) \n\n\n\nModel summary measures\n\n\nr.squared\n0.79\n\n\nsigma\n3.94\n\n\nstatistic\n48.35\n\n\np.value\n0.00\n\n\n\n\n\n\n\n\n\nModel summary (or Quality) measures\n\n\\(R^2\\) is the proportion of variation explained by the fitted model\n\nA meaningful model must have at least 50% \\(R^2\\)\nA large \\(R^2\\) is important to explain the relationship(s)\n\nResidual standard deviation (error) \\(S\\) has to be small\n\nHow small? Difficult to say. Compare \\(S\\) with the overall spread in \\(Y\\) or with the mean of \\(Y\\)\nA small \\(S\\) is important for prediction"
+    "text": "Model quality measures\n\nsummary(mod1)\n\n\nCall:\nlm(formula = Death ~ Alcohol, data = cirrhosis)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-9.3966 -1.9639  0.2479  2.9884  4.7716 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)   -2.318      2.065  -1.123    0.282    \nAlcohol        1.405      0.202   6.954    1e-05 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 3.942 on 13 degrees of freedom\nMultiple R-squared:  0.7881,    Adjusted R-squared:  0.7718 \nF-statistic: 48.35 on 1 and 13 DF,  p-value: 1.001e-05\n\n\n\nModel summary (or Quality) measures\n\n\\(R^2\\) is the proportion of variation explained by the fitted model\n\nA meaningful model must have at least 50% \\(R^2\\)\nA large \\(R^2\\) is important to explain the relationship(s)\n\nResidual standard deviation (error) \\(S\\) has to be small\n\nHow small? Difficult to say. Compare \\(S\\) with the overall spread in \\(Y\\) or with the mean of \\(Y\\)\nA small \\(S\\) is important for prediction"
   },
   {
     "objectID": "slides/Chapter06.html#anova-f-test",
     "href": "slides/Chapter06.html#anova-f-test",
     "title": "Chapter 6:Models with a Single Predictor",
     "section": "ANOVA \\(F\\)-test",
-    "text": "ANOVA \\(F\\)-test\n\nFor the straight line model, the F-test is equivalent to testing the hypothesis that the true slope is zero.\n\nHighly significant F ratio need not always imply that the straight line is the best fit to the data.\nFor Alcohol~deaths model, the \\(F\\) statistic is highly significant which means that the fitted model explains significant variation\n\n\n\n\nout1 &lt;- anova(mod1) |&gt; tidy() |&gt; mutate_if(is.numeric, round, 2)\n\noptions(knitr.kable.NA = \" \")\n\nkable(out1, caption = \"ANOVA table\") |&gt; \n  kable_classic(full_width = F) \n\n\n\nANOVA table\n\n\nterm\ndf\nsumsq\nmeansq\nstatistic\np.value\n\n\n\n\nAlcohol\n1\n751.44\n751.44\n48.35\n0\n\n\nResiduals\n13\n202.03\n15.54"
+    "text": "ANOVA \\(F\\)-test\n\n\nmod1  &lt;-  lm(Death ~ Alcohol, data=cirrhosis)\nsummary(mod1) \n\n\n\nCall:\nlm(formula = Death ~ Alcohol, data = cirrhosis)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-9.3966 -1.9639  0.2479  2.9884  4.7716 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)   -2.318      2.065  -1.123    0.282    \nAlcohol        1.405      0.202   6.954    1e-05 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 3.942 on 13 degrees of freedom\nMultiple R-squared:  0.7881,    Adjusted R-squared:  0.7718 \nF-statistic: 48.35 on 1 and 13 DF,  p-value: 1.001e-05\n\n\n\n\n\nanova(mod1)\n\n\nAnalysis of Variance Table\n\nResponse: Death\n          Df Sum Sq Mean Sq F value    Pr(&gt;F)    \nAlcohol    1 751.44  751.44  48.353 1.001e-05 ***\nResiduals 13 202.03   15.54                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\n\n\nmod1.aov  &lt;-  aov(Death ~ Alcohol, data=cirrhosis)\nsummary(mod1.aov) \n\n\n            Df Sum Sq Mean Sq F value Pr(&gt;F)    \nAlcohol      1  751.4   751.4   48.35  1e-05 ***\nResiduals   13  202.0    15.5                   \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\n\nFor the straight line model, the F-test is equivalent to testing the hypothesis that the true slope is zero."
   },
   {
     "objectID": "slides/Chapter06.html#anova-table-construction",
@@ -592,7 +592,7 @@
     "href": "slides/Chapter06.html#prediction",
     "title": "Chapter 6:Models with a Single Predictor",
     "section": "Prediction",
-    "text": "Prediction\n\nThe predicted response at value \\(x=x_0\\) is obtained using the fitted regression equation.\nConfidence & prediction intervals can also be constructed.\nNote that prediction intervals are for individual observations whereas the confidence intervals are for the expected (mean) response for a given \\(x_0\\)\n\n\n\n       fit      lwr      upr\n1 11.72778 9.476416 13.97915\n\n\n       fit      lwr      upr\n1 11.72778 2.918701 20.53686"
+    "text": "Prediction\n\nThe predicted response at value \\(x=x_0\\) is obtained using the fitted regression equation.\nConfidence & prediction intervals can also be constructed.\nNote that prediction intervals are for individual observations whereas the confidence intervals are for the expected (mean) response for a given \\(x_0\\)\n\n\npredict(mod1, new = data.frame(Alcohol=10), interval=\"confidence\", level =0.95)\n\n       fit      lwr      upr\n1 11.72778 9.476416 13.97915\n\npredict(mod1, new = data.frame(Alcohol=10), interval=\"prediction\", level =0.95)\n\n       fit      lwr      upr\n1 11.72778 2.918701 20.53686"
   },
   {
     "objectID": "slides/Chapter06.html#types-of-residuals",
@@ -648,14 +648,14 @@
     "href": "slides/Chapter06.html#assumptions",
     "title": "Chapter 6:Models with a Single Predictor",
     "section": "Assumptions",
-    "text": "Assumptions\n\nModel forming assumptions\n\n\n\\(X\\) is known without error\n\\(Y\\) is related to \\(X\\) according to a straight line.\nThere is a random variability of \\(Y\\) about this line.\n\n\nMore assumptions to form \\(t\\) and \\(F\\) statistics:\n\n\nVariability in \\(Y\\) about the line is constant and independent of \\(X\\) variable.\nThe variability of \\(Y\\) about the line follows normal distribution.\nThe distribution of \\(Y\\) given \\(X = X_i\\) is independent of \\(Y\\) given \\(X = X_j\\)."
+    "text": "Assumptions\nModel forming assumptions\n\n\\(X\\) is known without error\n\\(Y\\) is linearly related to \\(X\\)\nThere is a random variability of \\(Y\\) about this line"
   },
   {
     "objectID": "slides/Chapter06.html#improving-simple-regression",
     "href": "slides/Chapter06.html#improving-simple-regression",
     "title": "Chapter 6:Models with a Single Predictor",
     "section": "Improving simple regression",
-    "text": "Improving simple regression\n\nUse a different predictor or explanatory variable\nTransform the \\(Y\\) variable\nAdd other explanatory variables to the model\nDeletion of invalid (as opposed to outlier) observations\nReconsider the linear relationship"
+    "text": "Improving simple regression\n\nUse a different predictor or explanatory variable\nTransform the \\(Y\\) variable\nAdd other explanatory variables to the model (next week)\nDeletion of invalid (as opposed to outlier) observations\nReconsider the linear relationship"
   },
   {
     "objectID": "slides/Chapter06.html#outlier-effect-on-regression",
@@ -669,21 +669,21 @@
     "href": "slides/Chapter06.html#leverage-and-cooks-distance",
     "title": "Chapter 6:Models with a Single Predictor",
     "section": "Leverage and Cook’s distance",
-    "text": "Leverage and Cook’s distance\n\nA distant \\(x\\) value has a higher leverage.\n\nThis leverage is often measured by the \\(h_{ii}\\) or hi value\nCheck \\(h_{ii}\\) &gt; \\(\\frac{3p}{n}\\) or not\n\nInfluence of a point on the regression is measured using the Cook’s distance \\(D_i\\)\n\nrelated to difference between the regression coefficients with and without the \\(i^{th}\\) data point.\n\\(D_{i} &gt;0.7\\) can be deemed as being influential (for \\(n&gt;15\\))"
+    "text": "Leverage and Cook’s distance\n\n\nA distant \\(x\\) value has a higher leverage.\n\nThis leverage is often measured by the \\(h_{ii}\\) or hi value\nCheck \\(h_{ii}\\) &gt; \\(\\frac{3p}{n}\\) or not\n\nInfluence of a point on the regression is measured using the Cook’s distance \\(D_i\\)\n\nrelated to difference between the regression coefficients with and without the \\(i^{th}\\) data point.\n\\(D_{i} &gt;0.7\\) can be deemed as being influential (for \\(n&gt;15\\))"
   },
   {
     "objectID": "slides/Chapter06.html#tukey-line",
     "href": "slides/Chapter06.html#tukey-line",
     "title": "Chapter 6:Models with a Single Predictor",
     "section": "Tukey Line",
-    "text": "Tukey Line\nAlso called Median-median line, Resistant line or Rline\nAdvantages:\n- Easy to fit\n- Outlier or peculiar values do not affect Rline to  the extent they influence a regression line\nRline fitting\n\nSort the values of X first and copy the corresponding Y values\nDivide the X values equally into three groups with corresponding Y values\nCompute the medians of the X values from the lowest and the uppermost subgroups, and the corresponding medians of Y values\nThe resistant line is then fitted with these two median points"
+    "text": "Tukey Line\nAlso called Median-median line, Resistant line or Rline\nAdvantages:\n- Easy to fit\n- Outlier or peculiar values do not affect Rline to the extent they influence a regression line\nRline fitting\n\nSort the values of X first and copy the corresponding Y values\nDivide the X values equally into three groups with corresponding Y values\nCompute the medians of the X values from the lowest and the uppermost subgroups, and the corresponding medians of Y values\nThe resistant line is then fitted with these two median points (x median and y median)"
   },
   {
     "objectID": "slides/Chapter06.html#example-alcohol-consumption-data-1",
     "href": "slides/Chapter06.html#example-alcohol-consumption-data-1",
     "title": "Chapter 6:Models with a Single Predictor",
     "section": "Example (Alcohol consumption data)",
-    "text": "Example (Alcohol consumption data)\n\nObtain the estimated slope using low and upper group median pairs as \\(b = (18.9-3.7)/(12.3-4.2) = 1.88\\).\nObtain the y-intercept using either the low or upper group median points \\(a = Y-bX = 3.7-1.88*4.2 = -4.2\\).\n\n\n\n\n\n\n\n\nR function\n\nline(cirrhosis$Death,cirrhosis$Alcohol) \n\n\nCall:\nline(cirrhosis$Death, cirrhosis$Alcohol)\n\nCoefficients:\n[1]  4.0797  0.4379\n\n\n\n\n\n\n\n\n\n\n\nThe line() function gives a slightly different slope & intercept."
+    "text": "Example (Alcohol consumption data)\n\nObtain the estimated slope using low and upper group median pairs as \\(b = (18.9-3.7)/(12.3-4.2) = 1.88\\).\nObtain the y-intercept using either the low or upper group median points \\(a = Y-bX = 3.7-1.88*4.2 = -4.2\\)."
   },
   {
     "objectID": "slides/Chapter06.html#two-more-robust-models",
@@ -3337,5 +3337,96 @@
     "title": "Chapter 3 Workshop",
     "section": "Exercise 3.4",
     "text": "Exercise 3.4\nExamine the fit of non-normal distributions for prestige scores data."
+  },
+  {
+    "objectID": "slides/Chapter06.html#what-is-a-statistical-model-1",
+    "href": "slides/Chapter06.html#what-is-a-statistical-model-1",
+    "title": "Chapter 6:Models with a Single Predictor",
+    "section": "What is a statistical model?",
+    "text": "What is a statistical model?\n\nOBSERVATION = FIT + RESIDUAL\n\n\nWith paired (related) data (X,Y)\nTwo variables: one (Y) is random (response) and the other (X) is considered fixed (predictor)\nInterested in the functional relationship between these two variables\n\n\\(Y=f(X)\\)\npredict Y, given X"
+  },
+  {
+    "objectID": "slides/Chapter06.html#what-is-a-statistical-model-2",
+    "href": "slides/Chapter06.html#what-is-a-statistical-model-2",
+    "title": "Chapter 6:Models with a Single Predictor",
+    "section": "What is a statistical model?",
+    "text": "What is a statistical model?\n\nOBSERVATION = FIT + RESIDUAL\n\n\nWith paired (related) data (X,Y)\n\nFitted Model: \\(\\hat{Y}=a+bX\\) (True Model: \\(Y=\\alpha+\\beta X+\\epsilon\\))\nresidual error: \\(e= Y-\\hat{Y}\\) (\\(\\epsilon\\) is not the same as \\(e\\))\n\nWhile fitting models to data\n\nit is required fit the model to the data as closely as possible (e.g. using least squares technique)\nwe need to make residuals free of patterns or trends.\nwe assume a probability distribution of residuals for statistical inference."
+  },
+  {
+    "objectID": "slides/Chapter06.html#regression",
+    "href": "slides/Chapter06.html#regression",
+    "title": "Chapter 6:Models with a Single Predictor",
+    "section": "Regression",
+    "text": "Regression\n\nA regression equation is a function that indicates how the average value of one response variable for given values of one or more predictor variables varies with these predictor variables; that is, \\(E(Y|X_1, X_2, ..., X_k)\\)"
+  },
+  {
+    "objectID": "slides/Chapter06.html#residuals-and-assumptions",
+    "href": "slides/Chapter06.html#residuals-and-assumptions",
+    "title": "Chapter 6:Models with a Single Predictor",
+    "section": "Residuals and assumptions",
+    "text": "Residuals and assumptions\n\nMost assumptions are on the errors (residuals)\n\nindependent\nnormal\nrandom\n\nIs there a pattern in my residuals?\nDo they suggest what to do?"
+  },
+  {
+    "objectID": "slides/Chapter06.html#residual-plot-for-alcoholdeaths-model-1",
+    "href": "slides/Chapter06.html#residual-plot-for-alcoholdeaths-model-1",
+    "title": "Chapter 6:Models with a Single Predictor",
+    "section": "Residual plot for Alcohol~deaths model",
+    "text": "Residual plot for Alcohol~deaths model\n\npar(mfrow=(c(2,2)))\nplot(mod1)"
+  },
+  {
+    "objectID": "slides/Chapter06.html#predict-y-given-x",
+    "href": "slides/Chapter06.html#predict-y-given-x",
+    "title": "Chapter 6:Models with a Single Predictor",
+    "section": "Predict Y, given X",
+    "text": "Predict Y, given X\n\n\nA regression equation is a function that indicates how the average value of one response variable for given values of one or more predictor variables varies with these predictor variables; that is, \\(E(Y|X_1, X_2, ..., X_k)\\)"
+  },
+  {
+    "objectID": "slides/Chapter06.html#plot-of-alcohol-consumption-data-1",
+    "href": "slides/Chapter06.html#plot-of-alcohol-consumption-data-1",
+    "title": "Chapter 6:Models with a Single Predictor",
+    "section": "Plot of Alcohol consumption data",
+    "text": "Plot of Alcohol consumption data\n\n\\(min \\left( \\sum_{i=1}(y_{i}-\\hat{y_{i}})^2 \\right)\\) - \\(i\\) number of observations - \\(y_{i}\\) observed value of y - \\(\\hat{y_{i}}\\) predicted value of y"
+  },
+  {
+    "objectID": "slides/Chapter06.html#assumptions-1",
+    "href": "slides/Chapter06.html#assumptions-1",
+    "title": "Chapter 6:Models with a Single Predictor",
+    "section": "Assumptions",
+    "text": "Assumptions\nMore assumptions to form \\(t\\) and \\(F\\) statistics:\n\nVariability in \\(Y\\) about the line is constant and independent of \\(X\\) variable.\nThe variability of \\(Y\\) about the line follows normal distribution.\nThe distribution of \\(Y\\) given \\(X = X_i\\) is independent of \\(Y\\) given \\(X = X_j\\)."
+  },
+  {
+    "objectID": "slides/Chapter06.html#tests-of-significance",
+    "href": "slides/Chapter06.html#tests-of-significance",
+    "title": "Chapter 6:Models with a Single Predictor",
+    "section": "Tests of significance",
+    "text": "Tests of significance\n\n\nlibrary(broom)\ntidy(mod1) |&gt; mutate_if(is.numeric, round, 3) -&gt; out1\nlibrary(kableExtra)\nkable(out1, caption = \"t-tests for model parameters\") %&gt;% \n  kable_classic(full_width = F)\n\n\n\nt-tests for model parameters\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n-2.318\n2.065\n-1.123\n0.282\n\n\nAlcohol\n1.405\n0.202\n6.954\n0.000\n\n\n\n\n\n\n\n\n-   $t$ tests of intercept and slope\n\n-   $H_0=true~slope=0$; $H_0=true~intercept=0$\n\n    -   For `Alcohol~deaths` model, the slope is significant\n        but not the intercept"
+  },
+  {
+    "objectID": "slides/Chapter06.html#model-quality-measures-1",
+    "href": "slides/Chapter06.html#model-quality-measures-1",
+    "title": "Chapter 6:Models with a Single Predictor",
+    "section": "Model quality measures",
+    "text": "Model quality measures\n\n\nout1 &lt;- glance(mod1) |&gt; \n  select(r.squared, sigma, statistic, p.value) |&gt; \n  mutate_if(is.numeric, round, 2)\n\nout1 |&gt; t() |&gt; \n  kable(caption = \"Model summary measures\") |&gt; \n  kable_classic(full_width = T) \n\n\n\nModel summary measures\n\n\nr.squared\n0.79\n\n\nsigma\n3.94\n\n\nstatistic\n48.35\n\n\np.value\n0.00"
+  },
+  {
+    "objectID": "slides/Chapter06.html#anova-f-test-1",
+    "href": "slides/Chapter06.html#anova-f-test-1",
+    "title": "Chapter 6:Models with a Single Predictor",
+    "section": "ANOVA \\(F\\)-test",
+    "text": "ANOVA \\(F\\)-test\n-   Significant F ratio need not always imply that the\n    straight line is the best fit to the data.\n-   For `Alcohol~deaths` model, the $F$ statistic is \n    significant which means that the fitted model explains significant variation\n\n\nout1 &lt;- anova(mod1) |&gt; tidy() |&gt; mutate_if(is.numeric, round, 2)\n\noptions(knitr.kable.NA = \" \")\n\nkable(out1, caption = \"ANOVA table\") |&gt; \n  kable_classic(full_width = F) \n\n\n\nANOVA table\n\n\nterm\ndf\nsumsq\nmeansq\nstatistic\np.value\n\n\n\n\nAlcohol\n1\n751.44\n751.44\n48.35\n0\n\n\nResiduals\n13\n202.03\n15.54"
+  },
+  {
+    "objectID": "slides/Chapter06.html#r-function",
+    "href": "slides/Chapter06.html#r-function",
+    "title": "Chapter 6:Models with a Single Predictor",
+    "section": "R function",
+    "text": "R function\n\nline(cirrhosis$Death,cirrhosis$Alcohol) \n\n\nCall:\nline(cirrhosis$Death, cirrhosis$Alcohol)\n\nCoefficients:\n[1]  4.0797  0.4379\n\n\n\nThe line() function gives a slightly different slope & intercept."
+  },
+  {
+    "objectID": "slides/Chapter06.html#leverage-and-cooks-distance-1",
+    "href": "slides/Chapter06.html#leverage-and-cooks-distance-1",
+    "title": "Chapter 6:Models with a Single Predictor",
+    "section": "Leverage and Cook’s distance",
+    "text": "Leverage and Cook’s distance"
   }
 ]
