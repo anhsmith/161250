@@ -331,7 +331,7 @@ pnorm(15.7, 10, 4) - pnorm(8.4, 10, 4, lower.tail= FALSE)
 
 ```
 
-We get this by subtracting the blue area, `pnorm(8.4, 10, 4)`, from 1 to find $\text{P}(X > 8.4)$ and subtracting this from `pnorm(15.7, 10, 4)` which is $\text{P}(X < 15.7)$.
+We get this by subtracting the blue area, `pnorm(8.4, 10, 4)`, from the coral area area, `pnorm(15.7, 10, 4)` which is $\text{P}(X < 15.7)$.
 
 c.	$\text{P}(X > 17)$ 							
 
