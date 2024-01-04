@@ -3,7 +3,7 @@ title: "Chapter 7: Models with Multiple Continuous Predictors"
 ---
 
 
-In this chapter, we consider **multiple regression** and other models in which there are more than one predictor (or $X$) variable. Once again our focus is on finding the estimates of coefficients or parameters in multiple linear regression models by the method of **least squares**. For this we assume that
+In this chapter, we consider **multiple regression** and other models in which there are more than one predictor (or $X$) variable. This extends what we covered in the last chapter where we examined one predictor to multiple predictors. Once again our focus is on finding the estimates of coefficients or parameters in multiple linear regression models by the method of **least squares**. For this we assume that
 
 1.  The predictor (or explanatory or controlled or covariate) variables $X_i$ $(i=1,2,...,p)$ are known without error.
 
@@ -979,6 +979,32 @@ Measures such as AIC or BIC need corrections when the normality assumption does 
 
 If a large dataset is in hand, a part of the data (training data) can be used to fit the model and then we can see how well the fitted model works for the remaining data.
 
+# Summary
+
+Regression methods are the most commonly used of statistics techniques. The main aim is to fit a model by least squares to explain the variation in the response variable $Y$ by using one or more explanatory variables $X_1$, $X_2$, ... , $X_k$. The correlation coefficient $r_{xy}$ measures the strength of the linear relationship between $Y$ and $X$; $R^{2}$ measures the strength of the linear relationship between $Y$ and $X_1$, $X_2$, ... , $X_k$. When $k$=1, then $r_{xy}^{2} =R^{2}$. Scatter plots and correlation coefficients provide important clues to the inter-relationships between the variables.
+
+In building up a model by adding new variables, the correlation (or overlap) with $y$ is important but the correlations between a new explanatory variable and each of the existing explanatory variables also determine how effective the addition of the variable will be.
+
+Stepwise regression procedures identify potentially good regression models by repeatedly comparing an existing model with other models in which an explanatory variable has been either deleted or added, using some criterion such as significance of the deleted or added term (as measured by the $p$-value of the relevant $t$ or $F$ statistic) or the AIC of the model. Polynomial regression models employ the square, cube etc terms of the original variables as additional predictors.
+
+When at least two explanatory variables are highly correlated, we have multicollinear data. The effect is that the variance of least square estimators will be inflated rendering the coefficients insignificant and hence we may need to discard one or more of the highly correlated variables.
+
+EDA plots of residuals help to answer the question as to whether the fit is good or whether a transformation may help or whether other variables (including square, cubic etc) should be added. If residuals are plotted against fitted $Y$ or $X$ variables no discernible pattern should be observed. Estimated regression coefficients may be affected by leverage points, and hence influence diagnostics are performed.
+
+# What you should know
+By the end of this chapter you should be able to:
+
+-   Fit and display a multiple regression (2 or more predictor variables).
+-   Check the assumptions of a multiple regression using residual diagnostic plots, tests for assumptions, and examine multicollinearity.
+-   Measure variability explained by the model and predictors.
+-   Use a fitted regression to predict new data.
+-   Explain the significance of your model and interpret findings in context of the data and hypotheses.
+-   Describe model comparison/selection and polynomial terms. 
+
+# Additional Material
+
+Below is information on extensions of multiple regression modeling. This material will not be explicitly covered or tested in this course. Please use the below material as an idea of what is possible in your future endeavors. 
+
 # Smoothing and Regression modeling for Time series
 
 For time series data, the term **smoothing** means the technique of removing random variation in the data but retaining any trend and cyclic/seasonal type of variations. Two types of smoothing methods are considered in this section. These two methods are basically averaging techniques, which use only the immediate past data (rather than all the observations) with constant and variable weights for each observation.
@@ -1359,14 +1385,4 @@ fit <- auto.arima(credit.balance)
 forecast::autoplot(forecast(fit,h=24))
 ```
 
-# Summary
 
-Regression methods are the most commonly used of statistics techniques. The main aim is to fit a model by least squares to explain the variation in the response variable $Y$ by using one or more explanatory variables $X_1$, $X_2$, ... , $X_k$. The correlation coefficient $r_{xy}$ measures the strength of the linear relationship between $Y$ and $X$; $R^{2}$ measures the strength of the linear relationship between $Y$ and $X_1$, $X_2$, ... , $X_k$. When $k$=1, then $r_{xy}^{2} =R^{2}$. Scatter plots and correlation coefficients provide important clues to the inter-relationships between the variables.
-
-In building up a model by adding new variables, the correlation (or overlap) with $y$ is important but the correlations between a new explanatory variable and each of the existing explanatory variables also determine how effective the addition of the variable will be.
-
-Stepwise regression procedures identify potentially good regression models by repeatedly comparing an existing model with other models in which an explanatory variable has been either deleted or added, using some criterion such as significance of the deleted or added term (as measured by the $p$-value of the relevant $t$ or $F$ statistic) or the AIC of the model. Polynomial regression models employ the square, cube etc terms of the original variables as additional predictors.
-
-When at least two explanatory variables are highly correlated, we have multicollinear data. The effect is that the variance of least square estimators will be inflated rendering the coefficients insignificant and hence we may need to discard one or more of the highly correlated variables.
-
-EDA plots of residuals help to answer the question as to whether the fit is good or whether a transformation may help or whether other variables (including square, cubic etc) should be added. If residuals are plotted against fitted $Y$ or $X$ variables no discernible pattern should be observed. Estimated regression coefficients may be affected by leverage points, and hence influence diagnostics are performed.

@@ -2615,7 +2615,7 @@
     "href": "studyguide/7-multiple.html",
     "title": "Chapter 7: Models with Multiple Continuous Predictors",
     "section": "",
-    "text": "In this chapter, we consider multiple regression and other models in which there are more than one predictor (or \\(X\\)) variable. Once again our focus is on finding the estimates of coefficients or parameters in multiple linear regression models by the method of least squares. For this we assume that\nWe will continue to use the data set horsehearts of the weights of horses’ hearts and other related measurements."
+    "text": "In this chapter, we consider multiple regression and other models in which there are more than one predictor (or \\(X\\)) variable. This extends what we covered in the last chapter where we examined one predictor to multiple predictors. Once again our focus is on finding the estimates of coefficients or parameters in multiple linear regression models by the method of least squares. For this we assume that\nWe will continue to use the data set horsehearts of the weights of horses’ hearts and other related measurements."
   },
   {
     "objectID": "studyguide/7-multiple.html#significance-testing-of-type-i-ss",
@@ -3428,5 +3428,523 @@
     "title": "Chapter 6:Models with a Single Predictor",
     "section": "Leverage and Cook’s distance",
     "text": "Leverage and Cook’s distance"
+  },
+  {
+    "objectID": "slides/Mid_term_review.html#chapter-1-data-collection",
+    "href": "slides/Mid_term_review.html#chapter-1-data-collection",
+    "title": "Review Chapters 1-5",
+    "section": "Chapter 1: Data Collection",
+    "text": "Chapter 1: Data Collection\n\nTypes of data\nData collection/sampling design\nSample vs population\nBias"
+  },
+  {
+    "objectID": "slides/Mid_term_review.html#types-of-data",
+    "href": "slides/Mid_term_review.html#types-of-data",
+    "title": "Review Chapters 1-5",
+    "section": "Types of data",
+    "text": "Types of data"
+  },
+  {
+    "objectID": "slides/Mid_term_review.html#data-collection-survey-experiment-census",
+    "href": "slides/Mid_term_review.html#data-collection-survey-experiment-census",
+    "title": "Review Chapters 1-5",
+    "section": "Data Collection: Survey, Experiment, Census",
+    "text": "Data Collection: Survey, Experiment, Census\n\nMost datasets contain a subset, a sample, of a much bigger population of interest.\n\nWe may conduct a survey to collect a sample of data from different places, times, people, or organisms. We would rarely survey all of them.\nWe might conduct an experiment where we take a sample of elements (people, organisms, objects) and apply some treatment in a lab (e.g., drug, temperature, exercise regime, or other treatment) to study its effects.\n\nCensus: every element of the population of interest is represented in the dataset.\n\n:::\n\n\n\n::::"
+  },
+  {
+    "objectID": "slides/Mid_term_review.html#sample-vs-population",
+    "href": "slides/Mid_term_review.html#sample-vs-population",
+    "title": "Review Chapters 1-5",
+    "section": "Sample vs population",
+    "text": "Sample vs population\n\nWhy sample?\n\nSampling conserves resources (money, time, etc.).\nA well collected sample is more useful than a badly designed census.\nCollecting data may be destructive.\nThe disadvantage: the statistics we calculate from sample data is subject to sampling variation, which introduces uncertainty* about their true values."
+  },
+  {
+    "objectID": "slides/Mid_term_review.html#bias-vs-sampling-variance",
+    "href": "slides/Mid_term_review.html#bias-vs-sampling-variance",
+    "title": "Review Chapters 1-5",
+    "section": "Bias vs sampling variance",
+    "text": "Bias vs sampling variance\n\n\nA method used to estimate \\(\\hat{\\theta}\\) a population parameter \\(\\theta\\) is called an estimator. An estimator includes the study design, methods of data collection, and mathematical operations.\nSampling variance is the sample-to-sample variation in an estimator.\nBias is when our estimator doesn’t get it right on average. That is, the average of estimates over \\(\\infty\\) samples is not centred on the population parameter; \\(\\text{Mean}(\\hat{\\theta}) \\neq \\theta\\).\n\n\n\n\nAn estimator can have high/low sampling variance and high/low bias."
+  },
+  {
+    "objectID": "slides/Mid_term_review.html#sampling-design",
+    "href": "slides/Mid_term_review.html#sampling-design",
+    "title": "Review Chapters 1-5",
+    "section": "Sampling Design",
+    "text": "Sampling Design\n\nSimple random sampling\nStratified random sampling\nCluster sampling\nSystematic random sampling"
+  },
+  {
+    "objectID": "slides/Mid_term_review.html#summary",
+    "href": "slides/Mid_term_review.html#summary",
+    "title": "Review Chapters 1-5",
+    "section": "Summary",
+    "text": "Summary\n\nIssues to address\n\nWHAT are collected?\nWHO does the data collection?\nHOW are the data collected?\n\nBias occurs due to\n\nSELECTION\nCOLLECTION\nNON-RESPONSE (the single largest cause of bias!)\n\nA sample may have the same biases as a census along with sampling errors"
+  },
+  {
+    "objectID": "slides/Mid_term_review.html#chapter-2-exploratory-data-analysis",
+    "href": "slides/Mid_term_review.html#chapter-2-exploratory-data-analysis",
+    "title": "Review Chapters 1-5",
+    "section": "Chapter 2: Exploratory Data Analysis",
+    "text": "Chapter 2: Exploratory Data Analysis\n\nHypothesis generative vs testing\nPlots"
+  },
+  {
+    "objectID": "slides/Mid_term_review.html#categorical-data",
+    "href": "slides/Mid_term_review.html#categorical-data",
+    "title": "Review Chapters 1-5",
+    "section": "Categorical Data",
+    "text": "Categorical Data\n\nBar plots\nHistograms\nFrequency ploygon/kernal density\nBoxplots\nCumulative frequency graphs"
+  },
+  {
+    "objectID": "slides/Mid_term_review.html#summary-statistics",
+    "href": "slides/Mid_term_review.html#summary-statistics",
+    "title": "Review Chapters 1-5",
+    "section": "Summary Statistics",
+    "text": "Summary Statistics\n\nFive number: min, lower hinge, median, upper hinge, max"
+  },
+  {
+    "objectID": "slides/Mid_term_review.html#bivatiate-relationships",
+    "href": "slides/Mid_term_review.html#bivatiate-relationships",
+    "title": "Review Chapters 1-5",
+    "section": "Bivatiate relationships",
+    "text": "Bivatiate relationships\n\nScatter plots\nMarginal plots\npairs\nCorrelation plots\nNetwork plots\nContour plots"
+  },
+  {
+    "objectID": "slides/Mid_term_review.html#more-r-resources",
+    "href": "slides/Mid_term_review.html#more-r-resources",
+    "title": "Review Chapters 1-5",
+    "section": "More R resources",
+    "text": "More R resources\n\nR cookbook https://rc2e.com/\nhttps://r-graph-gallery.com/\nhttps://bookdown.org/ansellbr/WEHI_tidyR_course_book/\n\nAnd so many more on the internet"
+  },
+  {
+    "objectID": "slides/Mid_term_review.html#summary-1",
+    "href": "slides/Mid_term_review.html#summary-1",
+    "title": "Review Chapters 1-5",
+    "section": "Summary",
+    "text": "Summary\n\nSize\n\nFor small datasets, we cannot be too confident in any patterns we see. More likely for patterns to occur ‘by chance’.\nSome displays are more affected by sample size than others\n\nShape\n\nIn can be interesting to display the overall shape of distribution.\nAre there gaps and/or many peaks (modes)?\nIs the distribution symmetrical? Is the distribution normal?\n\nOutliers\n\nBoxplots & scatterplots can reveal outliers\nMore influential than points in the middle\n\nGraphs should be simple and informative; certainly not misleading!"
+  },
+  {
+    "objectID": "slides/Mid_term_review.html#chapter-3-probability-concepts-and-distributions",
+    "href": "slides/Mid_term_review.html#chapter-3-probability-concepts-and-distributions",
+    "title": "Review Chapters 1-5",
+    "section": "Chapter 3: Probability Concepts and Distributions",
+    "text": "Chapter 3: Probability Concepts and Distributions"
+  },
+  {
+    "objectID": "slides/Mid_term_review.html#probability-and-randomness",
+    "href": "slides/Mid_term_review.html#probability-and-randomness",
+    "title": "Review Chapters 1-5",
+    "section": "Probability and randomness",
+    "text": "Probability and randomness\nProbability and randomness are placeholders for incomplete knowledge.\n\nA probability is a number between 0 and 1 that quantifies the uncertainty in the occurance of an event\n0 = impossibility\n1 = certainty"
+  },
+  {
+    "objectID": "slides/Mid_term_review.html#relative-frequency-of-an-event",
+    "href": "slides/Mid_term_review.html#relative-frequency-of-an-event",
+    "title": "Review Chapters 1-5",
+    "section": "Relative frequency of an event",
+    "text": "Relative frequency of an event\nToss a coin\n\nThe possible outcomes are heads or tails\nIf you toss a coin 3 times what is the probability of getting 2 heads?\npossible ways to get 2 heads: HHT, HTH, THH\npossible combinations of 3 tosses: HHT, HTH, THH, TTH, THT, HTT\nprobability of getting 2 heads out of 3 tosses = 3/6 = 1/2 = 0.5\n\nToss a 6 sided die\n\nThere are 6 possible outcomes\nWhat is the probability of getting a number 4 or higher?\nof the 6 possible rolls want 4, 5, or 6\nprobability is 3/6 p = 0.5\n\nWhen the sample space is finite and outcomes are equally likely classical probability will be the same as empirical probability\n\ni.e we don’t have to actually toss the coin or roll the die"
+  },
+  {
+    "objectID": "slides/Mid_term_review.html#probability-rules",
+    "href": "slides/Mid_term_review.html#probability-rules",
+    "title": "Review Chapters 1-5",
+    "section": "Probability Rules",
+    "text": "Probability Rules\nFor any event A, probability of A P(A) must satisfy: - $0 P(A) $ - P(S) = 1 for sample space S - Complement of event A is the event that A does not occur \\(P(A^c) = 1 -P(A)\\) - Events A and B are mutually exclusive if they have no outcomes in common (cannot occur together) \\(P(A \\cup B) = P(A) + P(B)\\), where \\(P(A \\cup B)\\) is the event A OR B occurs - If event A and B are not mutually exclusive \\(P(A \\cup B) = P(A) + P(B) - P(A \\cap B)\\), where \\(P(A \\cap B)\\) is the event A AND B occurs"
+  },
+  {
+    "objectID": "slides/Mid_term_review.html#independence",
+    "href": "slides/Mid_term_review.html#independence",
+    "title": "Review Chapters 1-5",
+    "section": "Independence",
+    "text": "Independence\n\nEvents A and B are independent if the occurence of one tells you nothing about whether the other occurred\n\\(P(A \\cap B)\\) = \\(P(A)P(B)\\)\nTwo events are independent if \\(P(A|B) = P(A)\\) and \\(P(B|A) = B\\)\nThis can extend to three or more events\nThe probability of observing two independent events \\(P(A and B) = P(A|B) X P(B)\\) and \\(P(A and B) = P(B|A) X P(A)\\)"
+  },
+  {
+    "objectID": "slides/Mid_term_review.html#conditional-probability",
+    "href": "slides/Mid_term_review.html#conditional-probability",
+    "title": "Review Chapters 1-5",
+    "section": "Conditional Probability",
+    "text": "Conditional Probability\n\nProbability of an event conditional on occurrence of another event\n\\(P(A|B)\\) read as ‘the probability of A given that B has occurred’\nProperties:\n\\(P(A \\cap B)\\) = \\(P(A|B)P(B)\\), where \\(P(A \\cap B)\\) is the probability of both A and B occurring\nLittle bit of rearranging: \\(P(A|B) =\\frac{P(A \\cap B)}{P(B)}\\) as long as \\(P(B)&gt;0\\)\nIf A and B are independent then \\(P(A \\cap B)\\) = \\(P(A)P(B)\\) and so \\(P(A|B) = P(A)\\). If \\(P(A|B) \\ne P(A)\\) then A and B are dependent."
+  },
+  {
+    "objectID": "slides/Mid_term_review.html#bayes-rule",
+    "href": "slides/Mid_term_review.html#bayes-rule",
+    "title": "Review Chapters 1-5",
+    "section": "Bayes rule",
+    "text": "Bayes rule\n\n\\(P(A|B) =\\frac{P(B|A)P(A)}{P(B)}\\)"
+  },
+  {
+    "objectID": "slides/Mid_term_review.html#garden-of-forking-data",
+    "href": "slides/Mid_term_review.html#garden-of-forking-data",
+    "title": "Review Chapters 1-5",
+    "section": "Garden of Forking Data",
+    "text": "Garden of Forking Data\nRules of the Probability Tree\n\nWithin each level, all branches are mutually exclusive events.\nThe tree covers all possibilities (i.e., the entire sample space).\nWe multiply as we move along branches.\nWe add when we move across branches."
+  },
+  {
+    "objectID": "slides/Mid_term_review.html#garden-of-forking-data-1",
+    "href": "slides/Mid_term_review.html#garden-of-forking-data-1",
+    "title": "Review Chapters 1-5",
+    "section": "Garden of Forking Data",
+    "text": "Garden of Forking Data"
+  },
+  {
+    "objectID": "slides/Mid_term_review.html#probability-distributions",
+    "href": "slides/Mid_term_review.html#probability-distributions",
+    "title": "Review Chapters 1-5",
+    "section": "Probability Distributions",
+    "text": "Probability Distributions\nDiscrete - Binomial: collection of Bernoulli trials; success/failure - Poisson: integers; counts of relatively rare events that occure independently\nContinuous - Normal/Gaussian: parameterized by mean and variance - Standard Normal Distribution \\(\\mu = 0\\) and \\(\\sigma = 0\\) - T distrinution/Students T: like a normal but with fatter tails - Log-normal: log(x) follows a normal distribution - Weibull: uses a scale parameter and shape parameter - Gamma: also uses a scale parameter and shape parameter, bounded by 0 - Beta: bounded [0,1] and parameterized by two positive shape parameters"
+  },
+  {
+    "objectID": "slides/Mid_term_review.html#what-distribution-is-most-appropriate",
+    "href": "slides/Mid_term_review.html#what-distribution-is-most-appropriate",
+    "title": "Review Chapters 1-5",
+    "section": "What distribution is most appropriate?",
+    "text": "What distribution is most appropriate?\n\nRemember, theoretical distributions aren’t real—they’re just models—but they can be useful. Keep your purpose in mind.\nChoose the simplest distribution that provides an adequate fit.\nData may be best served by a mixture of two or more distributions rather than a single distribution."
+  },
+  {
+    "objectID": "slides/Mid_term_review.html#chapter-4-statistical-inference",
+    "href": "slides/Mid_term_review.html#chapter-4-statistical-inference",
+    "title": "Review Chapters 1-5",
+    "section": "Chapter 4 Statistical Inference",
+    "text": "Chapter 4 Statistical Inference\nThe term statistical inference means that we are using properties of a sample to make statements about the population from which the sample was drawn."
+  },
+  {
+    "objectID": "slides/Mid_term_review.html#summary-statistics-1",
+    "href": "slides/Mid_term_review.html#summary-statistics-1",
+    "title": "Review Chapters 1-5",
+    "section": "Summary statistics",
+    "text": "Summary statistics\n\nSample mean\nSample variation\nConfidence intervals"
+  },
+  {
+    "objectID": "slides/Mid_term_review.html#testing-hypotheses",
+    "href": "slides/Mid_term_review.html#testing-hypotheses",
+    "title": "Review Chapters 1-5",
+    "section": "Testing Hypotheses",
+    "text": "Testing Hypotheses\n\nA hypothesis is a proposition, a specific idea about the state of the world that can be tested with data.\nFor logical reasons, instead of measuring evidence for a hypothesis of interest, scientists will often:\n\nspecify a null hypotheses, which must be true if our hypothesis of interest is false, and\nmeasure the evidence against the null hypothesis, usually in the form of a p-value."
+  },
+  {
+    "objectID": "slides/Mid_term_review.html#truth-and-outcomes",
+    "href": "slides/Mid_term_review.html#truth-and-outcomes",
+    "title": "Review Chapters 1-5",
+    "section": "Truth and outcomes",
+    "text": "Truth and outcomes\nIn reality, the null hypothesis is either true or false.\nThe outcome of a test is either we reject the null hypothesis, or we fail to reject the null hypothesis (note, we never “confirm” or “accept” the null hypothesis – absence of evidence is not evidence of absence!).\nThis gives us four possibilities:\n\n\n\n\n\\(H_0\\) is true\n\\(H_0\\) is false\n\n\n\n\nReject \\(H_0\\)\nType I error\nCorrect result\n\n\nDo not reject \\(H_0\\)\nCorrect result\nType II error\n\n\n\nWith probabilities usually represented by:\n\n\n\n\n\\(H_0\\) is true\n\\(H_0\\) is false\n\n\n\n\nReject \\(H_0\\)\n\\(\\alpha\\)\n\\(1-\\beta\\) = “power”\n\n\nDo not reject \\(H_0\\)\n\\(1 - \\alpha\\)\n\\(\\beta\\)"
+  },
+  {
+    "objectID": "slides/Mid_term_review.html#sampling-distributions-and-test-statistics",
+    "href": "slides/Mid_term_review.html#sampling-distributions-and-test-statistics",
+    "title": "Review Chapters 1-5",
+    "section": "Sampling distributions and test statistics",
+    "text": "Sampling distributions and test statistics\n\nT distribution\nChi^2\nF distribution"
+  },
+  {
+    "objectID": "slides/Mid_term_review.html#transformations",
+    "href": "slides/Mid_term_review.html#transformations",
+    "title": "Review Chapters 1-5",
+    "section": "Transformations",
+    "text": "Transformations\n\nRight skewed data needs a shrinking transformation\nLeft skewed data needs a stretching transformation\nThe strength or power of the transformation depends on the degree of skew.\n\n\n\n\n\n\n\n\n\n\n\nPOWER\nFormula\nName\nResult\n\n\n\n\n3\n\\(x^3\\)\ncube\nstretches large values\n\n\n2\n\\(x^2\\)\nsquare\nstretches large values\n\n\n1\n\\(x\\)\nraw\nNo change\n\n\n1/2\n\\(\\sqrt{x}\\)\nsquare root\nsquashes large values\n\n\n0\n\\(\\log{x}\\)\nlogarithm\nsquashes large values\n\n\n-1/2\n\\(\\frac{-1}{\\sqrt{x}}\\)\nreciprocal root\nsquashes large values\n\n\n-1\n\\(\\frac{-1}{x}\\)\nreciprocal\nsquashes large values"
+  },
+  {
+    "objectID": "slides/Mid_term_review.html#non-parametric-tests",
+    "href": "slides/Mid_term_review.html#non-parametric-tests",
+    "title": "Review Chapters 1-5",
+    "section": "Non-parametric tests",
+    "text": "Non-parametric tests\n\nSpearman’s Rank Correlation\nWilcoxon signed rank test: alternative to one-sample t-test\nMann-Whitney Test: for two group comparison Null Hypothesis: two group medians are the same\nKruskal-Wallis: rank sum test testing whether samples are from the same distrbution; alternative to ANOVA"
+  },
+  {
+    "objectID": "slides/Mid_term_review.html#summary-2",
+    "href": "slides/Mid_term_review.html#summary-2",
+    "title": "Review Chapters 1-5",
+    "section": "Summary",
+    "text": "Summary\nBasic methods of inference include:\n\nestimating a population parameter (e.g. mean) using a sample of values,\nestimating standard deviation of a sample estimate using the standard error,\nconstructing confidence intervals for an estimate, and\ntesting hypotheses about particular values of the population parameter.\n\nInference is relatively easy for normally distributed populations.\nStudent’s t-tests include:\n\none-sample t-test, including paired-sample t-test for a difference of zero\ntwo-sample t-test assuming equal variances (estimating pooled variance)\ntwo-sample t-test not assuming equal variances (Welch test)\n\nThe t-test is generally robust for non-normal populations (especially for large samples).\nPower transformations, such as square-root, log, or Box-Cox aim to reduce skewness.\nNon-parametric tests can be used for non-normal data, but they are usually less powerful than parametric tests."
+  },
+  {
+    "objectID": "slides/Mid_term_review.html#chapter-5-tabulated-counts",
+    "href": "slides/Mid_term_review.html#chapter-5-tabulated-counts",
+    "title": "Review Chapters 1-5",
+    "section": "Chapter 5: Tabulated counts",
+    "text": "Chapter 5: Tabulated counts\nTables and frequencies\n\nWe often have hypotheses regarding the frequencies of levels of a factor or group of factors.\n\nFor a single two-level factor (e.g., male vs female, survived vs died), we might wish to know how likely the data are to have come from a population with equal proportions (or some other specified proportion).\nFor two factors, we might wish to know whether they are independent.\n\nIn either case, we can specify a null hypothesis and test it using data.\nTo do so, compare observed counts with expected counts, where the expected counts are derived from our null model about the population."
+  },
+  {
+    "objectID": "slides/Mid_term_review.html#goodness-of-fit-test",
+    "href": "slides/Mid_term_review.html#goodness-of-fit-test",
+    "title": "Review Chapters 1-5",
+    "section": "Goodness of fit test",
+    "text": "Goodness of fit test\nHypotheses of this sort can be tested using the Chi-squared test statistic (\\(\\chi ^ 2\\) = Ki Sq.)\n\\[\n\\chi ^{2} =\\sum _{1}^{c}\\frac{\\left({\\rm Observed-Expected}\\right)^{{\\rm 2}} }{{\\rm Expected}}  =\\sum _{1}^{c}\\frac{\\left( O-E\\right)^{2}}{E}\n\\]\nIf the number of categories is \\(c\\), then the degrees of freedom is \\(c-1\\).\n\\(\\chi ^ 2\\) distribution is a continuous distribution. When used for discrete data, Chi-squared approximation is very good for \\(E&gt;5\\) and often good if some expected values are as small as 1.\nSometimes, one can merge/combine categories in case of small expected counts."
+  },
+  {
+    "objectID": "slides/Mid_term_review.html#goodness-of-fit-for-distributions",
+    "href": "slides/Mid_term_review.html#goodness-of-fit-for-distributions",
+    "title": "Review Chapters 1-5",
+    "section": "Goodness of fit for distributions",
+    "text": "Goodness of fit for distributions\n\nTreat class intervals as categories and obtain the actual counts\n\n\n\nThe assumed distribution gives the expected counts (E)\nPerform a goodness of fit and validate the assumed theoretical distribution\nAdjust the degrees of freedom (df) for the number of estimated parameters of the theoretical distribution\n\nFor example, assume that you have 10 class intervals and test for normal distribution, which has 2 parameters.\n\nSo the df for this test will be 10-1-2=7."
+  },
+  {
+    "objectID": "slides/Mid_term_review.html#contingency-table",
+    "href": "slides/Mid_term_review.html#contingency-table",
+    "title": "Review Chapters 1-5",
+    "section": "Contingency table",
+    "text": "Contingency table\n\nGiven a two way table of frequency counts, we test whether the row and column variables are independent\nThe expected count for cell \\((i,j)\\) is given by \\(E_{ij}\\) = \\((T_i \\times T_j)/n\\) where\n\\(~~~~~T_i\\), the total for row \\(i\\);\n\\(~~~~~T_j\\), the total for column \\(j\\)\n\\(~~~~~n\\), the overall total count\nTest statistic : \\(\\chi ^{2} =\\sum _{{i=1}}^{r}\\sum _{{j=1}}^{{\\rm c}}\\frac{\\left({ O}_{{ ij}} { -E}_{{ij}} \\right)^{{ 2}} }{{ E}_{{ij}} }.\\)\ndegrees of freedom: \\((r-1)(c-1)\\)"
+  },
+  {
+    "objectID": "slides/Mid_term_review.html#summary-3",
+    "href": "slides/Mid_term_review.html#summary-3",
+    "title": "Review Chapters 1-5",
+    "section": "Summary",
+    "text": "Summary\n\nGoodness of fit is for testing whether the observed counts are from the hypothesised population groups.\n\nFor \\(c\\) categories (groups), the test involves \\(c-1\\) df.\n\nContingency Table (\\(r\\) rows and \\(c\\) columns) data are tested for the independence.\n\nFor \\(r\\times c\\) cells the test involves \\((r-1)(c-1)\\) df\nshiny app http://shiny.massey.ac.nz/anhsmith/demos/explore.counts.of.factors/\n\n\\(\\chi ^{2}\\) test works well if \\(E&gt; 5\\). Some could be as low as 1.\nDo correspondence analysis (symmetric plots) when independence is rejected.\n\n\n\n\n161250 Data Analysis"
+  },
+  {
+    "objectID": "slides/Chapter_Mid_term_review.html#chapter-1-data-collection",
+    "href": "slides/Chapter_Mid_term_review.html#chapter-1-data-collection",
+    "title": "Review Chapters 1-5",
+    "section": "Chapter 1: Data Collection",
+    "text": "Chapter 1: Data Collection\n\nTypes of data\nData collection/sampling design\nSample vs population\nBias"
+  },
+  {
+    "objectID": "slides/Chapter_Mid_term_review.html#types-of-data",
+    "href": "slides/Chapter_Mid_term_review.html#types-of-data",
+    "title": "Review Chapters 1-5",
+    "section": "Types of data",
+    "text": "Types of data"
+  },
+  {
+    "objectID": "slides/Chapter_Mid_term_review.html#data-collection-survey-experiment-census",
+    "href": "slides/Chapter_Mid_term_review.html#data-collection-survey-experiment-census",
+    "title": "Review Chapters 1-5",
+    "section": "Data Collection: Survey, Experiment, Census",
+    "text": "Data Collection: Survey, Experiment, Census\n\n\n\nMost datasets contain a subset, a sample, of a much bigger population of interest.\n\nWe may conduct a survey to collect a sample of data from different places, times, people, or organisms. We would rarely survey all of them.\nWe might conduct an experiment where we take a sample of elements (people, organisms, objects) and apply some treatment in a lab (e.g., drug, temperature, exercise regime, or other treatment) to study its effects.\n\nCensus: every element of the population of interest is represented in the dataset."
+  },
+  {
+    "objectID": "slides/Chapter_Mid_term_review.html#sample-vs-population",
+    "href": "slides/Chapter_Mid_term_review.html#sample-vs-population",
+    "title": "Review Chapters 1-5",
+    "section": "Sample vs population",
+    "text": "Sample vs population\n\nWhy sample?\n\nSampling conserves resources (money, time, etc.).\nA well collected sample is more useful than a badly designed census.\nCollecting data may be destructive.\nThe disadvantage: the statistics we calculate from sample data is subject to sampling variation, which introduces uncertainty* about their true values."
+  },
+  {
+    "objectID": "slides/Chapter_Mid_term_review.html#bias-vs-sampling-variance",
+    "href": "slides/Chapter_Mid_term_review.html#bias-vs-sampling-variance",
+    "title": "Review Chapters 1-5",
+    "section": "Bias vs sampling variance",
+    "text": "Bias vs sampling variance\n\n\nA method used to estimate \\(\\hat{\\theta}\\) a population parameter \\(\\theta\\) is called an estimator. An estimator includes the study design, methods of data collection, and mathematical operations.\nSampling variance is the sample-to-sample variation in an estimator.\nBias is when our estimator doesn’t get it right on average. That is, the average of estimates over \\(\\infty\\) samples is not centred on the population parameter; \\(\\text{Mean}(\\hat{\\theta}) \\neq \\theta\\).\n\n\n\n\nAn estimator can have high/low sampling variance and high/low bias."
+  },
+  {
+    "objectID": "slides/Chapter_Mid_term_review.html#sampling-design",
+    "href": "slides/Chapter_Mid_term_review.html#sampling-design",
+    "title": "Review Chapters 1-5",
+    "section": "Sampling Design",
+    "text": "Sampling Design\n\nSimple random sampling\nStratified random sampling\nCluster sampling\nSystematic random sampling"
+  },
+  {
+    "objectID": "slides/Chapter_Mid_term_review.html#summary",
+    "href": "slides/Chapter_Mid_term_review.html#summary",
+    "title": "Review Chapters 1-5",
+    "section": "Summary",
+    "text": "Summary\n\nIssues to address\n\nWHAT are collected?\nWHO does the data collection?\nHOW are the data collected?\n\nBias occurs due to\n\nSELECTION\nCOLLECTION\nNON-RESPONSE (the single largest cause of bias!)\n\nA sample may have the same biases as a census along with sampling errors"
+  },
+  {
+    "objectID": "slides/Chapter_Mid_term_review.html#chapter-2-exploratory-data-analysis",
+    "href": "slides/Chapter_Mid_term_review.html#chapter-2-exploratory-data-analysis",
+    "title": "Review Chapters 1-5",
+    "section": "Chapter 2: Exploratory Data Analysis",
+    "text": "Chapter 2: Exploratory Data Analysis\n\nHypothesis generative vs testing\nPlots"
+  },
+  {
+    "objectID": "slides/Chapter_Mid_term_review.html#categorical-data",
+    "href": "slides/Chapter_Mid_term_review.html#categorical-data",
+    "title": "Review Chapters 1-5",
+    "section": "Categorical Data",
+    "text": "Categorical Data\n\nBar plots\nHistograms\nFrequency ploygon/kernal density\nBoxplots\nCumulative frequency graphs"
+  },
+  {
+    "objectID": "slides/Chapter_Mid_term_review.html#summary-statistics",
+    "href": "slides/Chapter_Mid_term_review.html#summary-statistics",
+    "title": "Review Chapters 1-5",
+    "section": "Summary Statistics",
+    "text": "Summary Statistics\n\nFive number: min, lower hinge, median, upper hinge, max"
+  },
+  {
+    "objectID": "slides/Chapter_Mid_term_review.html#bivatiate-relationships",
+    "href": "slides/Chapter_Mid_term_review.html#bivatiate-relationships",
+    "title": "Review Chapters 1-5",
+    "section": "Bivatiate relationships",
+    "text": "Bivatiate relationships\n\nScatter plots\nMarginal plots\npairs\nCorrelation plots\nNetwork plots\nContour plots"
+  },
+  {
+    "objectID": "slides/Chapter_Mid_term_review.html#more-r-resources",
+    "href": "slides/Chapter_Mid_term_review.html#more-r-resources",
+    "title": "Review Chapters 1-5",
+    "section": "More R resources",
+    "text": "More R resources\n\nR cookbook https://rc2e.com/\nhttps://r-graph-gallery.com/\nhttps://bookdown.org/ansellbr/WEHI_tidyR_course_book/\n\nAnd so many more on the internet"
+  },
+  {
+    "objectID": "slides/Chapter_Mid_term_review.html#summary-1",
+    "href": "slides/Chapter_Mid_term_review.html#summary-1",
+    "title": "Review Chapters 1-5",
+    "section": "Summary",
+    "text": "Summary\n\nSize\n\nFor small datasets, we cannot be too confident in any patterns we see. More likely for patterns to occur ‘by chance’.\nSome displays are more affected by sample size than others\n\nShape\n\nIn can be interesting to display the overall shape of distribution.\nAre there gaps and/or many peaks (modes)?\nIs the distribution symmetrical? Is the distribution normal?\n\nOutliers\n\nBoxplots & scatterplots can reveal outliers\nMore influential than points in the middle\n\nGraphs should be simple and informative; certainly not misleading!"
+  },
+  {
+    "objectID": "slides/Chapter_Mid_term_review.html#chapter-3-probability-concepts-and-distributions",
+    "href": "slides/Chapter_Mid_term_review.html#chapter-3-probability-concepts-and-distributions",
+    "title": "Review Chapters 1-5",
+    "section": "Chapter 3: Probability Concepts and Distributions",
+    "text": "Chapter 3: Probability Concepts and Distributions"
+  },
+  {
+    "objectID": "slides/Chapter_Mid_term_review.html#probability-and-randomness",
+    "href": "slides/Chapter_Mid_term_review.html#probability-and-randomness",
+    "title": "Review Chapters 1-5",
+    "section": "Probability and randomness",
+    "text": "Probability and randomness\nProbability and randomness are placeholders for incomplete knowledge.\n\nA probability is a number between 0 and 1 that quantifies the uncertainty in the occurance of an event\n0 = impossibility\n1 = certainty"
+  },
+  {
+    "objectID": "slides/Chapter_Mid_term_review.html#relative-frequency-of-an-event",
+    "href": "slides/Chapter_Mid_term_review.html#relative-frequency-of-an-event",
+    "title": "Review Chapters 1-5",
+    "section": "Relative frequency of an event",
+    "text": "Relative frequency of an event\nToss a coin\n\nThe possible outcomes are heads or tails\nIf you toss a coin 3 times what is the probability of getting 2 heads?\npossible ways to get 2 heads: HHT, HTH, THH\npossible combinations of 3 tosses: HHT, HTH, THH, TTH, THT, HTT\nprobability of getting 2 heads out of 3 tosses = 3/6 = 1/2 = 0.5\n\nRoll a 6 sided die\n\nThere are 6 possible outcomes\nWhat is the probability of getting a number 4 or higher?\nof the 6 possible rolls want 4, 5, or 6\nprobability is 3/6 p = 0.5\n\nWhen the sample space is finite and outcomes are equally likely classical probability will be the same as empirical probability\n\ni.e we don’t have to actually toss the coin or roll the die"
+  },
+  {
+    "objectID": "slides/Chapter_Mid_term_review.html#probability-rules",
+    "href": "slides/Chapter_Mid_term_review.html#probability-rules",
+    "title": "Review Chapters 1-5",
+    "section": "Probability Rules",
+    "text": "Probability Rules\nFor any event A, probability of A P(A) must satisfy:\n\n$0 P(A) $\nP(S) = 1 for sample space S\nComplement of event A is the event that A does not occur \\(P(A^c) = 1 -P(A)\\)\nEvents A and B are mutually exclusive if they have no outcomes in common (cannot occur together) \\(P(A \\cup B) = P(A) + P(B)\\), where \\(P(A \\cup B)\\) is the event A OR B occurs\nIf event A and B are not mutually exclusive \\(P(A \\cup B) = P(A) + P(B) - P(A \\cap B)\\), where \\(P(A \\cap B)\\) is the event A AND B occurs"
+  },
+  {
+    "objectID": "slides/Chapter_Mid_term_review.html#independence",
+    "href": "slides/Chapter_Mid_term_review.html#independence",
+    "title": "Review Chapters 1-5",
+    "section": "Independence",
+    "text": "Independence\n\nEvents A and B are independent if the occurence of one tells you nothing about whether the other occurred\n\\(P(A \\cap B)\\) = \\(P(A)P(B)\\)\nTwo events are independent if \\(P(A|B) = P(A)\\) and \\(P(B|A) = B\\)\nThis can extend to three or more events\nThe probability of observing two independent events \\(P(A and B) = P(A|B) X P(B)\\) and \\(P(A and B) = P(B|A) X P(A)\\)"
+  },
+  {
+    "objectID": "slides/Chapter_Mid_term_review.html#conditional-probability",
+    "href": "slides/Chapter_Mid_term_review.html#conditional-probability",
+    "title": "Review Chapters 1-5",
+    "section": "Conditional Probability",
+    "text": "Conditional Probability\n\nProbability of an event conditional on occurrence of another event\n\\(P(A|B)\\) read as ‘the probability of A given that B has occurred’\nProperties:\n\\(P(A \\cap B)\\) = \\(P(A|B)P(B)\\), where \\(P(A \\cap B)\\) is the probability of both A and B occurring\nLittle bit of rearranging: \\(P(A|B) =\\frac{P(A \\cap B)}{P(B)}\\) as long as \\(P(B)&gt;0\\)\nIf A and B are independent then \\(P(A \\cap B)\\) = \\(P(A)P(B)\\) and so \\(P(A|B) = P(A)\\). If \\(P(A|B) \\ne P(A)\\) then A and B are dependent."
+  },
+  {
+    "objectID": "slides/Chapter_Mid_term_review.html#bayes-rule",
+    "href": "slides/Chapter_Mid_term_review.html#bayes-rule",
+    "title": "Review Chapters 1-5",
+    "section": "Bayes rule",
+    "text": "Bayes rule\n\n\\(P(A|B) =\\frac{P(B|A)P(A)}{P(B)}\\)"
+  },
+  {
+    "objectID": "slides/Chapter_Mid_term_review.html#garden-of-forking-data",
+    "href": "slides/Chapter_Mid_term_review.html#garden-of-forking-data",
+    "title": "Review Chapters 1-5",
+    "section": "Garden of Forking Data",
+    "text": "Garden of Forking Data\nRules of the Probability Tree\n\nWithin each level, all branches are mutually exclusive events.\nThe tree covers all possibilities (i.e., the entire sample space).\nWe multiply as we move along branches.\nWe add when we move across branches."
+  },
+  {
+    "objectID": "slides/Chapter_Mid_term_review.html#garden-of-forking-data-1",
+    "href": "slides/Chapter_Mid_term_review.html#garden-of-forking-data-1",
+    "title": "Review Chapters 1-5",
+    "section": "Garden of Forking Data",
+    "text": "Garden of Forking Data"
+  },
+  {
+    "objectID": "slides/Chapter_Mid_term_review.html#probability-distributions",
+    "href": "slides/Chapter_Mid_term_review.html#probability-distributions",
+    "title": "Review Chapters 1-5",
+    "section": "Probability Distributions",
+    "text": "Probability Distributions\nDiscrete\n\nBinomial: collection of Bernoulli trials; success/failure\nPoisson: integers; counts of relatively rare events that occure independently\n\nContinuous\n\nNormal/Gaussian: parameterized by mean and variance\nStandard Normal Distribution \\(\\mu = 0\\) and \\(\\sigma = 0\\)\nT distrinution/Students T: like a normal but with fatter tails\nLog-normal: log(x) follows a normal distribution\nWeibull: uses a scale parameter and shape parameter\nGamma: also uses a scale parameter and shape parameter, bounded by 0\nBeta: bounded [0,1] and parameterized by two positive shape parameters"
+  },
+  {
+    "objectID": "slides/Chapter_Mid_term_review.html#what-distribution-is-most-appropriate",
+    "href": "slides/Chapter_Mid_term_review.html#what-distribution-is-most-appropriate",
+    "title": "Review Chapters 1-5",
+    "section": "What distribution is most appropriate?",
+    "text": "What distribution is most appropriate?\n\nRemember, theoretical distributions aren’t real—they’re just models—but they can be useful. Keep your purpose in mind.\nChoose the simplest distribution that provides an adequate fit.\nData may be best served by a mixture of two or more distributions rather than a single distribution."
+  },
+  {
+    "objectID": "slides/Chapter_Mid_term_review.html#chapter-4-statistical-inference",
+    "href": "slides/Chapter_Mid_term_review.html#chapter-4-statistical-inference",
+    "title": "Review Chapters 1-5",
+    "section": "Chapter 4 Statistical Inference",
+    "text": "Chapter 4 Statistical Inference\nThe term statistical inference means that we are using properties of a sample to make statements about the population from which the sample was drawn."
+  },
+  {
+    "objectID": "slides/Chapter_Mid_term_review.html#summary-statistics-1",
+    "href": "slides/Chapter_Mid_term_review.html#summary-statistics-1",
+    "title": "Review Chapters 1-5",
+    "section": "Summary statistics",
+    "text": "Summary statistics\n\nSample mean\nSample variation\nConfidence intervals"
+  },
+  {
+    "objectID": "slides/Chapter_Mid_term_review.html#testing-hypotheses",
+    "href": "slides/Chapter_Mid_term_review.html#testing-hypotheses",
+    "title": "Review Chapters 1-5",
+    "section": "Testing Hypotheses",
+    "text": "Testing Hypotheses\n\nA hypothesis is a proposition, a specific idea about the state of the world that can be tested with data.\nFor logical reasons, instead of measuring evidence for a hypothesis of interest, scientists will often:\n\nspecify a null hypotheses, which must be true if our hypothesis of interest is false, and\nmeasure the evidence against the null hypothesis, usually in the form of a p-value."
+  },
+  {
+    "objectID": "slides/Chapter_Mid_term_review.html#truth-and-outcomes",
+    "href": "slides/Chapter_Mid_term_review.html#truth-and-outcomes",
+    "title": "Review Chapters 1-5",
+    "section": "Truth and outcomes",
+    "text": "Truth and outcomes\nIn reality, the null hypothesis is either true or false.\nThe outcome of a test is either we reject the null hypothesis, or we fail to reject the null hypothesis (note, we never “confirm” or “accept” the null hypothesis – absence of evidence is not evidence of absence!).\nThis gives us four possibilities:\n\n\n\n\n\\(H_0\\) is true\n\\(H_0\\) is false\n\n\n\n\nReject \\(H_0\\)\nType I error\nCorrect result\n\n\nDo not reject \\(H_0\\)\nCorrect result\nType II error\n\n\n\nWith probabilities usually represented by:\n\n\n\n\n\\(H_0\\) is true\n\\(H_0\\) is false\n\n\n\n\nReject \\(H_0\\)\n\\(\\alpha\\)\n\\(1-\\beta\\) = “power”\n\n\nDo not reject \\(H_0\\)\n\\(1 - \\alpha\\)\n\\(\\beta\\)"
+  },
+  {
+    "objectID": "slides/Chapter_Mid_term_review.html#sampling-distributions-and-test-statistics",
+    "href": "slides/Chapter_Mid_term_review.html#sampling-distributions-and-test-statistics",
+    "title": "Review Chapters 1-5",
+    "section": "Sampling distributions and test statistics",
+    "text": "Sampling distributions and test statistics\n\nT distribution\nChi^2\nF distribution"
+  },
+  {
+    "objectID": "slides/Chapter_Mid_term_review.html#transformations",
+    "href": "slides/Chapter_Mid_term_review.html#transformations",
+    "title": "Review Chapters 1-5",
+    "section": "Transformations",
+    "text": "Transformations\n\nRight skewed data needs a shrinking transformation\nLeft skewed data needs a stretching transformation\nThe strength or power of the transformation depends on the degree of skew.\n\n\n\n\n\n\n\n\n\n\n\nPOWER\nFormula\nName\nResult\n\n\n\n\n3\n\\(x^3\\)\ncube\nstretches large values\n\n\n2\n\\(x^2\\)\nsquare\nstretches large values\n\n\n1\n\\(x\\)\nraw\nNo change\n\n\n1/2\n\\(\\sqrt{x}\\)\nsquare root\nsquashes large values\n\n\n0\n\\(\\log{x}\\)\nlogarithm\nsquashes large values\n\n\n-1/2\n\\(\\frac{-1}{\\sqrt{x}}\\)\nreciprocal root\nsquashes large values\n\n\n-1\n\\(\\frac{-1}{x}\\)\nreciprocal\nsquashes large values"
+  },
+  {
+    "objectID": "slides/Chapter_Mid_term_review.html#non-parametric-tests",
+    "href": "slides/Chapter_Mid_term_review.html#non-parametric-tests",
+    "title": "Review Chapters 1-5",
+    "section": "Non-parametric tests",
+    "text": "Non-parametric tests\n\nSpearman’s Rank Correlation\nWilcoxon signed rank test: alternative to one-sample t-test\nMann-Whitney Test: for two group comparison Null Hypothesis: two group medians are the same\nKruskal-Wallis: rank sum test testing whether samples are from the same distrbution; alternative to ANOVA"
+  },
+  {
+    "objectID": "slides/Chapter_Mid_term_review.html#summary-2",
+    "href": "slides/Chapter_Mid_term_review.html#summary-2",
+    "title": "Review Chapters 1-5",
+    "section": "Summary",
+    "text": "Summary\nBasic methods of inference include:\n\nestimating a population parameter (e.g. mean) using a sample of values,\nestimating standard deviation of a sample estimate using the standard error,\nconstructing confidence intervals for an estimate, and\ntesting hypotheses about particular values of the population parameter.\n\nInference is relatively easy for normally distributed populations.\nStudent’s t-tests include:\n\none-sample t-test, including paired-sample t-test for a difference of zero\ntwo-sample t-test assuming equal variances (estimating pooled variance)\ntwo-sample t-test not assuming equal variances (Welch test)\n\nThe t-test is generally robust for non-normal populations (especially for large samples).\nPower transformations, such as square-root, log, or Box-Cox aim to reduce skewness.\nNon-parametric tests can be used for non-normal data, but they are usually less powerful than parametric tests."
+  },
+  {
+    "objectID": "slides/Chapter_Mid_term_review.html#chapter-5-tabulated-counts",
+    "href": "slides/Chapter_Mid_term_review.html#chapter-5-tabulated-counts",
+    "title": "Review Chapters 1-5",
+    "section": "Chapter 5: Tabulated counts",
+    "text": "Chapter 5: Tabulated counts\nTables and frequencies\n\nWe often have hypotheses regarding the frequencies of levels of a factor or group of factors.\n\nFor a single two-level factor (e.g., male vs female, survived vs died), we might wish to know how likely the data are to have come from a population with equal proportions (or some other specified proportion).\nFor two factors, we might wish to know whether they are independent.\n\nIn either case, we can specify a null hypothesis and test it using data.\nTo do so, compare observed counts with expected counts, where the expected counts are derived from our null model about the population."
+  },
+  {
+    "objectID": "slides/Chapter_Mid_term_review.html#goodness-of-fit-test",
+    "href": "slides/Chapter_Mid_term_review.html#goodness-of-fit-test",
+    "title": "Review Chapters 1-5",
+    "section": "Goodness of fit test",
+    "text": "Goodness of fit test\nHypotheses of this sort can be tested using the Chi-squared test statistic (\\(\\chi ^ 2\\) = Ki Sq.)\n\\[\n\\chi ^{2} =\\sum _{1}^{c}\\frac{\\left({\\rm Observed-Expected}\\right)^{{\\rm 2}} }{{\\rm Expected}}  =\\sum _{1}^{c}\\frac{\\left( O-E\\right)^{2}}{E}\n\\]\nIf the number of categories is \\(c\\), then the degrees of freedom is \\(c-1\\).\n\\(\\chi ^ 2\\) distribution is a continuous distribution. When used for discrete data, Chi-squared approximation is very good for \\(E&gt;5\\) and often good if some expected values are as small as 1.\nSometimes, one can merge/combine categories in case of small expected counts."
+  },
+  {
+    "objectID": "slides/Chapter_Mid_term_review.html#goodness-of-fit-for-distributions",
+    "href": "slides/Chapter_Mid_term_review.html#goodness-of-fit-for-distributions",
+    "title": "Review Chapters 1-5",
+    "section": "Goodness of fit for distributions",
+    "text": "Goodness of fit for distributions\n\nTreat class intervals as categories and obtain the actual counts\n\n\n\nThe assumed distribution gives the expected counts (E)\nPerform a goodness of fit and validate the assumed theoretical distribution\nAdjust the degrees of freedom (df) for the number of estimated parameters of the theoretical distribution\n\nFor example, assume that you have 10 class intervals and test for normal distribution, which has 2 parameters.\n\nSo the df for this test will be 10-1-2=7."
+  },
+  {
+    "objectID": "slides/Chapter_Mid_term_review.html#contingency-table",
+    "href": "slides/Chapter_Mid_term_review.html#contingency-table",
+    "title": "Review Chapters 1-5",
+    "section": "Contingency table",
+    "text": "Contingency table\n\nGiven a two way table of frequency counts, we test whether the row and column variables are independent\nThe expected count for cell \\((i,j)\\) is given by \\(E_{ij}\\) = \\((T_i \\times T_j)/n\\) where\n\\(~~~~~T_i\\), the total for row \\(i\\);\n\\(~~~~~T_j\\), the total for column \\(j\\)\n\\(~~~~~n\\), the overall total count\nTest statistic : \\(\\chi ^{2} =\\sum _{{i=1}}^{r}\\sum _{{j=1}}^{{\\rm c}}\\frac{\\left({ O}_{{ ij}} { -E}_{{ij}} \\right)^{{ 2}} }{{ E}_{{ij}} }.\\)\ndegrees of freedom: \\((r-1)(c-1)\\)"
+  },
+  {
+    "objectID": "slides/Chapter_Mid_term_review.html#summary-3",
+    "href": "slides/Chapter_Mid_term_review.html#summary-3",
+    "title": "Review Chapters 1-5",
+    "section": "Summary",
+    "text": "Summary\n\nGoodness of fit is for testing whether the observed counts are from the hypothesised population groups.\n\nFor \\(c\\) categories (groups), the test involves \\(c-1\\) df.\n\nContingency Table (\\(r\\) rows and \\(c\\) columns) data are tested for the independence.\n\nFor \\(r\\times c\\) cells the test involves \\((r-1)(c-1)\\) df\n\n\\(\\chi ^{2}\\) test works well if \\(E&gt; 5\\). Some could be as low as 1.\nDo correspondence analysis (symmetric plots) when independence is rejected.\n\n\n\n\n161250 Data Analysis"
   }
 ]
