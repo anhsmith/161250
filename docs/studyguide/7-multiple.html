@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.3.353">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -109,8 +109,7 @@ div.csl-indent {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-submit-button-title": "Submit"
   }
 }</script>
 
@@ -295,6 +294,9 @@ div.csl-indent {
   </ul></li>
   <li><a href="#polynomial-models" id="toc-polynomial-models" class="nav-link" data-scroll-target="#polynomial-models">Polynomial Models</a></li>
   <li><a href="#model-structure-and-other-issues" id="toc-model-structure-and-other-issues" class="nav-link" data-scroll-target="#model-structure-and-other-issues">Model structure and other issues</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#what-you-should-know" id="toc-what-you-should-know" class="nav-link" data-scroll-target="#what-you-should-know">What you should know</a></li>
+  <li><a href="#additional-material" id="toc-additional-material" class="nav-link" data-scroll-target="#additional-material">Additional Material</a></li>
   <li><a href="#smoothing-and-regression-modeling-for-time-series" id="toc-smoothing-and-regression-modeling-for-time-series" class="nav-link" data-scroll-target="#smoothing-and-regression-modeling-for-time-series">Smoothing and Regression modeling for Time series</a>
   <ul class="collapse">
   <li><a href="#time-series-regression-with-seasonality-components" id="toc-time-series-regression-with-seasonality-components" class="nav-link" data-scroll-target="#time-series-regression-with-seasonality-components">Time Series Regression with seasonality components</a></li>
@@ -305,7 +307,6 @@ div.csl-indent {
   <li><a href="#assessment-of-fit" id="toc-assessment-of-fit" class="nav-link" data-scroll-target="#assessment-of-fit">Assessment of Fit:</a></li>
   <li><a href="#intro-to-autoregressive-modelling" id="toc-intro-to-autoregressive-modelling" class="nav-link" data-scroll-target="#intro-to-autoregressive-modelling">Intro to Autoregressive Modelling</a></li>
   </ul></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="7-multiple.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
@@ -329,7 +330,7 @@ div.csl-indent {
 
 </header>
 
-<p>In this chapter, we consider <strong>multiple regression</strong> and other models in which there are more than one predictor (or <span class="math inline">\(X\)</span>) variable. Once again our focus is on finding the estimates of coefficients or parameters in multiple linear regression models by the method of <strong>least squares</strong>. For this we assume that</p>
+<p>In this chapter, we consider <strong>multiple regression</strong> and other models in which there are more than one predictor (or <span class="math inline">\(X\)</span>) variable. This extends what we covered in the last chapter where we examined one predictor to multiple predictors. Once again our focus is on finding the estimates of coefficients or parameters in multiple linear regression models by the method of <strong>least squares</strong>. For this we assume that</p>
 <ol type="1">
 <li><p>The predictor (or explanatory or controlled or covariate) variables <span class="math inline">\(X_i\)</span> <span class="math inline">\((i=1,2,...,p)\)</span> are known without error.</p></li>
 <li><p>The mean or expected value of the dependent (or response) variable <span class="math inline">\(Y\)</span> is related to the <span class="math inline">\(X_i\)</span> <span class="math inline">\((i=1,2,...,p)\)</span> according to a linear expression</p>
@@ -1659,6 +1660,30 @@ Selection Algorithm: forward
 <p>Measures such as AIC or BIC need corrections when the normality assumption does not hold but the above summary measures do not require such a distributional assumption to hold.</p>
 <p>If a large dataset is in hand, a part of the data (training data) can be used to fit the model and then we can see how well the fitted model works for the remaining data.</p>
 </section>
+<section id="summary" class="level1">
+<h1>Summary</h1>
+<p>Regression methods are the most commonly used of statistics techniques. The main aim is to fit a model by least squares to explain the variation in the response variable <span class="math inline">\(Y\)</span> by using one or more explanatory variables <span class="math inline">\(X_1\)</span>, <span class="math inline">\(X_2\)</span>, … , <span class="math inline">\(X_k\)</span>. The correlation coefficient <span class="math inline">\(r_{xy}\)</span> measures the strength of the linear relationship between <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span>; <span class="math inline">\(R^{2}\)</span> measures the strength of the linear relationship between <span class="math inline">\(Y\)</span> and <span class="math inline">\(X_1\)</span>, <span class="math inline">\(X_2\)</span>, … , <span class="math inline">\(X_k\)</span>. When <span class="math inline">\(k\)</span>=1, then <span class="math inline">\(r_{xy}^{2} =R^{2}\)</span>. Scatter plots and correlation coefficients provide important clues to the inter-relationships between the variables.</p>
+<p>In building up a model by adding new variables, the correlation (or overlap) with <span class="math inline">\(y\)</span> is important but the correlations between a new explanatory variable and each of the existing explanatory variables also determine how effective the addition of the variable will be.</p>
+<p>Stepwise regression procedures identify potentially good regression models by repeatedly comparing an existing model with other models in which an explanatory variable has been either deleted or added, using some criterion such as significance of the deleted or added term (as measured by the <span class="math inline">\(p\)</span>-value of the relevant <span class="math inline">\(t\)</span> or <span class="math inline">\(F\)</span> statistic) or the AIC of the model. Polynomial regression models employ the square, cube etc terms of the original variables as additional predictors.</p>
+<p>When at least two explanatory variables are highly correlated, we have multicollinear data. The effect is that the variance of least square estimators will be inflated rendering the coefficients insignificant and hence we may need to discard one or more of the highly correlated variables.</p>
+<p>EDA plots of residuals help to answer the question as to whether the fit is good or whether a transformation may help or whether other variables (including square, cubic etc) should be added. If residuals are plotted against fitted <span class="math inline">\(Y\)</span> or <span class="math inline">\(X\)</span> variables no discernible pattern should be observed. Estimated regression coefficients may be affected by leverage points, and hence influence diagnostics are performed.</p>
+</section>
+<section id="what-you-should-know" class="level1">
+<h1>What you should know</h1>
+<p>By the end of this chapter you should be able to:</p>
+<ul>
+<li>Fit and display a multiple regression (2 or more predictor variables).</li>
+<li>Check the assumptions of a multiple regression using residual diagnostic plots, tests for assumptions, and examine multicollinearity.</li>
+<li>Measure variability explained by the model and predictors.</li>
+<li>Use a fitted regression to predict new data.</li>
+<li>Explain the significance of your model and interpret findings in context of the data and hypotheses.</li>
+<li>Describe model comparison/selection and polynomial terms.</li>
+</ul>
+</section>
+<section id="additional-material" class="level1">
+<h1>Additional Material</h1>
+<p>Below is information on extensions of multiple regression modeling. This material will not be explicitly covered or tested in this course. Please use the below material as an idea of what is possible in your future endeavors.</p>
+</section>
 <section id="smoothing-and-regression-modeling-for-time-series" class="level1">
 <h1>Smoothing and Regression modeling for Time series</h1>
 <p>For time series data, the term <strong>smoothing</strong> means the technique of removing random variation in the data but retaining any trend and cyclic/seasonal type of variations. Two types of smoothing methods are considered in this section. These two methods are basically averaging techniques, which use only the immediate past data (rather than all the observations) with constant and variable weights for each observation.</p>
@@ -2194,20 +2219,12 @@ AIC=3176.78   AICc=3177.2   BIC=3202.1</code></pre>
 </div>
 </div>
 </div>
-</section>
-</section>
-<section id="summary" class="level1">
-<h1>Summary</h1>
-<p>Regression methods are the most commonly used of statistics techniques. The main aim is to fit a model by least squares to explain the variation in the response variable <span class="math inline">\(Y\)</span> by using one or more explanatory variables <span class="math inline">\(X_1\)</span>, <span class="math inline">\(X_2\)</span>, … , <span class="math inline">\(X_k\)</span>. The correlation coefficient <span class="math inline">\(r_{xy}\)</span> measures the strength of the linear relationship between <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span>; <span class="math inline">\(R^{2}\)</span> measures the strength of the linear relationship between <span class="math inline">\(Y\)</span> and <span class="math inline">\(X_1\)</span>, <span class="math inline">\(X_2\)</span>, … , <span class="math inline">\(X_k\)</span>. When <span class="math inline">\(k\)</span>=1, then <span class="math inline">\(r_{xy}^{2} =R^{2}\)</span>. Scatter plots and correlation coefficients provide important clues to the inter-relationships between the variables.</p>
-<p>In building up a model by adding new variables, the correlation (or overlap) with <span class="math inline">\(y\)</span> is important but the correlations between a new explanatory variable and each of the existing explanatory variables also determine how effective the addition of the variable will be.</p>
-<p>Stepwise regression procedures identify potentially good regression models by repeatedly comparing an existing model with other models in which an explanatory variable has been either deleted or added, using some criterion such as significance of the deleted or added term (as measured by the <span class="math inline">\(p\)</span>-value of the relevant <span class="math inline">\(t\)</span> or <span class="math inline">\(F\)</span> statistic) or the AIC of the model. Polynomial regression models employ the square, cube etc terms of the original variables as additional predictors.</p>
-<p>When at least two explanatory variables are highly correlated, we have multicollinear data. The effect is that the variance of least square estimators will be inflated rendering the coefficients insignificant and hence we may need to discard one or more of the highly correlated variables.</p>
-<p>EDA plots of residuals help to answer the question as to whether the fit is good or whether a transformation may help or whether other variables (including square, cubic etc) should be added. If residuals are plotted against fitted <span class="math inline">\(Y\)</span> or <span class="math inline">\(X\)</span> variables no discernible pattern should be observed. Estimated regression coefficients may be affected by leverage points, and hence influence diagnostics are performed.</p>
 
 
 <!-- -->
 
 
+</section>
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
@@ -2516,7 +2533,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-6"><a href="#cb69-6" aria-hidden="true" tabindex="-1"></a>In this chapter, we consider **multiple regression** and other models in which there are more than one predictor (or $X$) variable. Once again our focus is on finding the estimates of coefficients or parameters in multiple linear regression models by the method of **least squares**. For this we assume that</span>
+<span id="cb69-6"><a href="#cb69-6" aria-hidden="true" tabindex="-1"></a>In this chapter, we consider **multiple regression** and other models in which there are more than one predictor (or $X$) variable. This extends what we covered in the last chapter where we examined one predictor to multiple predictors. Once again our focus is on finding the estimates of coefficients or parameters in multiple linear regression models by the method of **least squares**. For this we assume that</span>
 <span id="cb69-7"><a href="#cb69-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb69-8"><a href="#cb69-8" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>The predictor (or explanatory or controlled or covariate) variables $X_i$ $(i=1,2,...,p)$ are known without error.</span>
 <span id="cb69-9"><a href="#cb69-9" aria-hidden="true" tabindex="-1"></a></span>
@@ -3492,397 +3509,412 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb69-1047"><a href="#cb69-1047" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb69-1048"><a href="#cb69-1048" aria-hidden="true" tabindex="-1"></a>If a large dataset is in hand, a part of the data (training data) can be used to fit the model and then we can see how well the fitted model works for the remaining data.</span>
 <span id="cb69-1049"><a href="#cb69-1049" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1050"><a href="#cb69-1050" aria-hidden="true" tabindex="-1"></a><span class="fu"># Smoothing and Regression modeling for Time series</span></span>
+<span id="cb69-1050"><a href="#cb69-1050" aria-hidden="true" tabindex="-1"></a><span class="fu"># Summary</span></span>
 <span id="cb69-1051"><a href="#cb69-1051" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1052"><a href="#cb69-1052" aria-hidden="true" tabindex="-1"></a>For time series data, the term **smoothing** means the technique of removing random variation in the data but retaining any trend and cyclic/seasonal type of variations. Two types of smoothing methods are considered in this section. These two methods are basically averaging techniques, which use only the immediate past data (rather than all the observations) with constant and variable weights for each observation.</span>
+<span id="cb69-1052"><a href="#cb69-1052" aria-hidden="true" tabindex="-1"></a>Regression methods are the most commonly used of statistics techniques. The main aim is to fit a model by least squares to explain the variation in the response variable $Y$ by using one or more explanatory variables $X_1$, $X_2$, ... , $X_k$. The correlation coefficient $r_{xy}$ measures the strength of the linear relationship between $Y$ and $X$; $R^{2}$ measures the strength of the linear relationship between $Y$ and $X_1$, $X_2$, ... , $X_k$. When $k$=1, then $r_{xy}^{2} =R^{2}$. Scatter plots and correlation coefficients provide important clues to the inter-relationships between the variables.</span>
 <span id="cb69-1053"><a href="#cb69-1053" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1054"><a href="#cb69-1054" aria-hidden="true" tabindex="-1"></a><span class="fu">## Time Series Regression with seasonality components</span></span>
+<span id="cb69-1054"><a href="#cb69-1054" aria-hidden="true" tabindex="-1"></a>In building up a model by adding new variables, the correlation (or overlap) with $y$ is important but the correlations between a new explanatory variable and each of the existing explanatory variables also determine how effective the addition of the variable will be.</span>
 <span id="cb69-1055"><a href="#cb69-1055" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1056"><a href="#cb69-1056" aria-hidden="true" tabindex="-1"></a>Indicator variables are used to capture the seasonality such as months and quarters. Time related trends can be picked up with the usual regression. The function <span class="in">`tslm()`</span> from the <span class="in">`forecast`</span> package is handy to model the response $Y$ using the time variable and the seasonal indicators. Consider the credit card balance series discussed in Chapter 2. The fitted linear model is shown in @tbl-cbfit1 and the forecasts made the model for 48 months ahead are shown in @fig-cbforecast.</span>
+<span id="cb69-1056"><a href="#cb69-1056" aria-hidden="true" tabindex="-1"></a>Stepwise regression procedures identify potentially good regression models by repeatedly comparing an existing model with other models in which an explanatory variable has been either deleted or added, using some criterion such as significance of the deleted or added term (as measured by the $p$-value of the relevant $t$ or $F$ statistic) or the AIC of the model. Polynomial regression models employ the square, cube etc terms of the original variables as additional predictors.</span>
 <span id="cb69-1057"><a href="#cb69-1057" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1060"><a href="#cb69-1060" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb69-1061"><a href="#cb69-1061" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb69-1062"><a href="#cb69-1062" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1063"><a href="#cb69-1063" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">"http://www.massey.ac.nz/~anhsmith/data/hc12_daily_average_balances.xlsx"</span></span>
-<span id="cb69-1064"><a href="#cb69-1064" aria-hidden="true" tabindex="-1"></a>destfile <span class="ot">&lt;-</span> <span class="st">"hc12.xlsx"</span></span>
-<span id="cb69-1065"><a href="#cb69-1065" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1066"><a href="#cb69-1066" aria-hidden="true" tabindex="-1"></a>curl<span class="sc">::</span><span class="fu">curl_download</span>(url, destfile)</span>
-<span id="cb69-1067"><a href="#cb69-1067" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1068"><a href="#cb69-1068" aria-hidden="true" tabindex="-1"></a>credit.balance <span class="ot">&lt;-</span> </span>
-<span id="cb69-1069"><a href="#cb69-1069" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_excel</span>(destfile, <span class="at">na =</span> <span class="st">"-"</span>, <span class="at">skip =</span> <span class="dv">4</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb69-1070"><a href="#cb69-1070" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(CRCD.MOA20) <span class="sc">|&gt;</span> </span>
-<span id="cb69-1071"><a href="#cb69-1071" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb69-1072"><a href="#cb69-1072" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ts</span>(<span class="at">start=</span><span class="fu">c</span>(<span class="dv">2000</span>,<span class="dv">7</span>), <span class="at">frequency=</span><span class="dv">12</span>)</span>
-<span id="cb69-1073"><a href="#cb69-1073" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb69-1074"><a href="#cb69-1074" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1077"><a href="#cb69-1077" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb69-1078"><a href="#cb69-1078" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
-<span id="cb69-1079"><a href="#cb69-1079" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb69-1080"><a href="#cb69-1080" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-cbforecast</span></span>
-<span id="cb69-1081"><a href="#cb69-1081" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "tidy() output of the tslm() fit"</span></span>
-<span id="cb69-1082"><a href="#cb69-1082" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1083"><a href="#cb69-1083" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
-<span id="cb69-1084"><a href="#cb69-1084" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1085"><a href="#cb69-1085" aria-hidden="true" tabindex="-1"></a>cbfit <span class="ot">&lt;-</span> <span class="fu">tslm</span>(credit.balance <span class="sc">~</span> trend <span class="sc">+</span> season)</span>
-<span id="cb69-1086"><a href="#cb69-1086" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1087"><a href="#cb69-1087" aria-hidden="true" tabindex="-1"></a>cbfit <span class="sc">|&gt;</span> <span class="fu">forecast</span>(<span class="at">h=</span><span class="dv">48</span>) <span class="sc">|&gt;</span> <span class="fu">autoplot</span>()</span>
-<span id="cb69-1088"><a href="#cb69-1088" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb69-1089"><a href="#cb69-1089" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1092"><a href="#cb69-1092" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb69-1093"><a href="#cb69-1093" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
-<span id="cb69-1094"><a href="#cb69-1094" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
-<span id="cb69-1095"><a href="#cb69-1095" aria-hidden="true" tabindex="-1"></a>cbfit <span class="sc">|&gt;</span> <span class="fu">tidy</span>()  </span>
-<span id="cb69-1096"><a href="#cb69-1096" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb69-1097"><a href="#cb69-1097" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1098"><a href="#cb69-1098" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1101"><a href="#cb69-1101" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb69-1102"><a href="#cb69-1102" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb69-1103"><a href="#cb69-1103" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-cbfit1</span></span>
-<span id="cb69-1104"><a href="#cb69-1104" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: "tidy() output of the tslm() fit"</span></span>
-<span id="cb69-1105"><a href="#cb69-1105" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>()) {</span>
-<span id="cb69-1106"><a href="#cb69-1106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1107"><a href="#cb69-1107" aria-hidden="true" tabindex="-1"></a>  cbfit <span class="sc">|&gt;</span> </span>
-<span id="cb69-1108"><a href="#cb69-1108" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tidy</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb69-1109"><a href="#cb69-1109" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">digits=</span><span class="dv">3</span>,</span>
-<span id="cb69-1110"><a href="#cb69-1110" aria-hidden="true" tabindex="-1"></a>        <span class="at">table.attr =</span> <span class="st">'data-quarto-disable-processing="true"'</span></span>
-<span id="cb69-1111"><a href="#cb69-1111" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">|&gt;</span> </span>
-<span id="cb69-1112"><a href="#cb69-1112" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>(<span class="at">full_width=</span>F)</span>
-<span id="cb69-1113"><a href="#cb69-1113" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb69-1114"><a href="#cb69-1114" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb69-1115"><a href="#cb69-1115" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb69-1116"><a href="#cb69-1116" aria-hidden="true" tabindex="-1"></a>  cbfit <span class="sc">|&gt;</span> </span>
-<span id="cb69-1117"><a href="#cb69-1117" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tidy</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb69-1118"><a href="#cb69-1118" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">digits=</span><span class="dv">3</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb69-1119"><a href="#cb69-1119" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>(<span class="at">full_width=</span>F)</span>
-<span id="cb69-1120"><a href="#cb69-1120" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb69-1121"><a href="#cb69-1121" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb69-1122"><a href="#cb69-1122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1058"><a href="#cb69-1058" aria-hidden="true" tabindex="-1"></a>When at least two explanatory variables are highly correlated, we have multicollinear data. The effect is that the variance of least square estimators will be inflated rendering the coefficients insignificant and hence we may need to discard one or more of the highly correlated variables.</span>
+<span id="cb69-1059"><a href="#cb69-1059" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1060"><a href="#cb69-1060" aria-hidden="true" tabindex="-1"></a>EDA plots of residuals help to answer the question as to whether the fit is good or whether a transformation may help or whether other variables (including square, cubic etc) should be added. If residuals are plotted against fitted $Y$ or $X$ variables no discernible pattern should be observed. Estimated regression coefficients may be affected by leverage points, and hence influence diagnostics are performed.</span>
+<span id="cb69-1061"><a href="#cb69-1061" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1062"><a href="#cb69-1062" aria-hidden="true" tabindex="-1"></a><span class="fu"># What you should know</span></span>
+<span id="cb69-1063"><a href="#cb69-1063" aria-hidden="true" tabindex="-1"></a>By the end of this chapter you should be able to:</span>
+<span id="cb69-1064"><a href="#cb69-1064" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1065"><a href="#cb69-1065" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Fit and display a multiple regression (2 or more predictor variables).</span>
+<span id="cb69-1066"><a href="#cb69-1066" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Check the assumptions of a multiple regression using residual diagnostic plots, tests for assumptions, and examine multicollinearity.</span>
+<span id="cb69-1067"><a href="#cb69-1067" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Measure variability explained by the model and predictors.</span>
+<span id="cb69-1068"><a href="#cb69-1068" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Use a fitted regression to predict new data.</span>
+<span id="cb69-1069"><a href="#cb69-1069" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Explain the significance of your model and interpret findings in context of the data and hypotheses.</span>
+<span id="cb69-1070"><a href="#cb69-1070" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Describe model comparison/selection and polynomial terms. </span>
+<span id="cb69-1071"><a href="#cb69-1071" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1072"><a href="#cb69-1072" aria-hidden="true" tabindex="-1"></a><span class="fu"># Additional Material</span></span>
+<span id="cb69-1073"><a href="#cb69-1073" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1074"><a href="#cb69-1074" aria-hidden="true" tabindex="-1"></a>Below is information on extensions of multiple regression modeling. This material will not be explicitly covered or tested in this course. Please use the below material as an idea of what is possible in your future endeavors. </span>
+<span id="cb69-1075"><a href="#cb69-1075" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1076"><a href="#cb69-1076" aria-hidden="true" tabindex="-1"></a><span class="fu"># Smoothing and Regression modeling for Time series</span></span>
+<span id="cb69-1077"><a href="#cb69-1077" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1078"><a href="#cb69-1078" aria-hidden="true" tabindex="-1"></a>For time series data, the term **smoothing** means the technique of removing random variation in the data but retaining any trend and cyclic/seasonal type of variations. Two types of smoothing methods are considered in this section. These two methods are basically averaging techniques, which use only the immediate past data (rather than all the observations) with constant and variable weights for each observation.</span>
+<span id="cb69-1079"><a href="#cb69-1079" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1080"><a href="#cb69-1080" aria-hidden="true" tabindex="-1"></a><span class="fu">## Time Series Regression with seasonality components</span></span>
+<span id="cb69-1081"><a href="#cb69-1081" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1082"><a href="#cb69-1082" aria-hidden="true" tabindex="-1"></a>Indicator variables are used to capture the seasonality such as months and quarters. Time related trends can be picked up with the usual regression. The function <span class="in">`tslm()`</span> from the <span class="in">`forecast`</span> package is handy to model the response $Y$ using the time variable and the seasonal indicators. Consider the credit card balance series discussed in Chapter 2. The fitted linear model is shown in @tbl-cbfit1 and the forecasts made the model for 48 months ahead are shown in @fig-cbforecast.</span>
+<span id="cb69-1083"><a href="#cb69-1083" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1086"><a href="#cb69-1086" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb69-1087"><a href="#cb69-1087" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb69-1088"><a href="#cb69-1088" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1089"><a href="#cb69-1089" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">"http://www.massey.ac.nz/~anhsmith/data/hc12_daily_average_balances.xlsx"</span></span>
+<span id="cb69-1090"><a href="#cb69-1090" aria-hidden="true" tabindex="-1"></a>destfile <span class="ot">&lt;-</span> <span class="st">"hc12.xlsx"</span></span>
+<span id="cb69-1091"><a href="#cb69-1091" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1092"><a href="#cb69-1092" aria-hidden="true" tabindex="-1"></a>curl<span class="sc">::</span><span class="fu">curl_download</span>(url, destfile)</span>
+<span id="cb69-1093"><a href="#cb69-1093" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1094"><a href="#cb69-1094" aria-hidden="true" tabindex="-1"></a>credit.balance <span class="ot">&lt;-</span> </span>
+<span id="cb69-1095"><a href="#cb69-1095" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_excel</span>(destfile, <span class="at">na =</span> <span class="st">"-"</span>, <span class="at">skip =</span> <span class="dv">4</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb69-1096"><a href="#cb69-1096" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(CRCD.MOA20) <span class="sc">|&gt;</span> </span>
+<span id="cb69-1097"><a href="#cb69-1097" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb69-1098"><a href="#cb69-1098" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ts</span>(<span class="at">start=</span><span class="fu">c</span>(<span class="dv">2000</span>,<span class="dv">7</span>), <span class="at">frequency=</span><span class="dv">12</span>)</span>
+<span id="cb69-1099"><a href="#cb69-1099" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb69-1100"><a href="#cb69-1100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1103"><a href="#cb69-1103" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb69-1104"><a href="#cb69-1104" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb69-1105"><a href="#cb69-1105" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb69-1106"><a href="#cb69-1106" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-cbforecast</span></span>
+<span id="cb69-1107"><a href="#cb69-1107" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "tidy() output of the tslm() fit"</span></span>
+<span id="cb69-1108"><a href="#cb69-1108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1109"><a href="#cb69-1109" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
+<span id="cb69-1110"><a href="#cb69-1110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1111"><a href="#cb69-1111" aria-hidden="true" tabindex="-1"></a>cbfit <span class="ot">&lt;-</span> <span class="fu">tslm</span>(credit.balance <span class="sc">~</span> trend <span class="sc">+</span> season)</span>
+<span id="cb69-1112"><a href="#cb69-1112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1113"><a href="#cb69-1113" aria-hidden="true" tabindex="-1"></a>cbfit <span class="sc">|&gt;</span> <span class="fu">forecast</span>(<span class="at">h=</span><span class="dv">48</span>) <span class="sc">|&gt;</span> <span class="fu">autoplot</span>()</span>
+<span id="cb69-1114"><a href="#cb69-1114" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb69-1115"><a href="#cb69-1115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1118"><a href="#cb69-1118" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb69-1119"><a href="#cb69-1119" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb69-1120"><a href="#cb69-1120" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
+<span id="cb69-1121"><a href="#cb69-1121" aria-hidden="true" tabindex="-1"></a>cbfit <span class="sc">|&gt;</span> <span class="fu">tidy</span>()  </span>
+<span id="cb69-1122"><a href="#cb69-1122" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb69-1123"><a href="#cb69-1123" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1124"><a href="#cb69-1124" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb69-1125"><a href="#cb69-1125" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1126"><a href="#cb69-1126" aria-hidden="true" tabindex="-1"></a>@tbl-cbfit1 shows that the seasonal effects are highly significant. @fig-cbforecast shows that the fitted model is not faring well for the year 2020, which was affected by COVID. The forecasts ahead are also untrustworthy.</span>
-<span id="cb69-1127"><a href="#cb69-1127" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1128"><a href="#cb69-1128" aria-hidden="true" tabindex="-1"></a>Note that the time variable $t$ becomes the predictor in the fitted model but the model is not based on the past or lagged $Y$ data. The smoothing methods discussed below employ such past data.</span>
-<span id="cb69-1129"><a href="#cb69-1129" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1130"><a href="#cb69-1130" aria-hidden="true" tabindex="-1"></a><span class="fu">## Moving Average Smoothing</span></span>
-<span id="cb69-1131"><a href="#cb69-1131" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1132"><a href="#cb69-1132" aria-hidden="true" tabindex="-1"></a>Here we compute the mean of successive smaller sets of numbers of immediate past data. The period or length (also called span) of the **moving average** is the number of observations (including the present one) used for averaging. The general expression for the moving average $M_t$ at time $t$ is $$M_t = <span class="co">[</span><span class="ot">X_t + X_{t-1} + ... + X_{t-N+1}</span><span class="co">]</span> / N$$ where $X_t$ is the observation at time $t$ and $N$ the moving average length. @fig-MAcntr shows the moving average smoothing for the '\$20 Notes in public hands' data. It can be noted that the degree of smoothing is directly related to the length of the moving average (i.e., longer the length, greater the smoothing).</span>
-<span id="cb69-1133"><a href="#cb69-1133" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1136"><a href="#cb69-1136" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb69-1137"><a href="#cb69-1137" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb69-1138"><a href="#cb69-1138" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1139"><a href="#cb69-1139" aria-hidden="true" tabindex="-1"></a>NZnotes20 <span class="ot">&lt;-</span> <span class="fu">read_table</span>(</span>
-<span id="cb69-1140"><a href="#cb69-1140" aria-hidden="true" tabindex="-1"></a>  <span class="st">"http://www.massey.ac.nz/~anhsmith/data/20dollar.txt"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb69-1141"><a href="#cb69-1141" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(value) <span class="sc">|&gt;</span> </span>
-<span id="cb69-1142"><a href="#cb69-1142" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ts</span>(<span class="at">start=</span><span class="dv">1968</span>, <span class="at">frequency=</span><span class="dv">1</span>)</span>
-<span id="cb69-1143"><a href="#cb69-1143" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1144"><a href="#cb69-1144" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb69-1145"><a href="#cb69-1145" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1148"><a href="#cb69-1148" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb69-1149"><a href="#cb69-1149" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
-<span id="cb69-1150"><a href="#cb69-1150" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb69-1151"><a href="#cb69-1151" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-MAcntr</span></span>
-<span id="cb69-1152"><a href="#cb69-1152" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Centred and Non-centred Moving Averages"</span></span>
+<span id="cb69-1124"><a href="#cb69-1124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1127"><a href="#cb69-1127" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb69-1128"><a href="#cb69-1128" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb69-1129"><a href="#cb69-1129" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-cbfit1</span></span>
+<span id="cb69-1130"><a href="#cb69-1130" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: "tidy() output of the tslm() fit"</span></span>
+<span id="cb69-1131"><a href="#cb69-1131" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>()) {</span>
+<span id="cb69-1132"><a href="#cb69-1132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1133"><a href="#cb69-1133" aria-hidden="true" tabindex="-1"></a>  cbfit <span class="sc">|&gt;</span> </span>
+<span id="cb69-1134"><a href="#cb69-1134" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tidy</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb69-1135"><a href="#cb69-1135" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">digits=</span><span class="dv">3</span>,</span>
+<span id="cb69-1136"><a href="#cb69-1136" aria-hidden="true" tabindex="-1"></a>        <span class="at">table.attr =</span> <span class="st">'data-quarto-disable-processing="true"'</span></span>
+<span id="cb69-1137"><a href="#cb69-1137" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">|&gt;</span> </span>
+<span id="cb69-1138"><a href="#cb69-1138" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>(<span class="at">full_width=</span>F)</span>
+<span id="cb69-1139"><a href="#cb69-1139" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb69-1140"><a href="#cb69-1140" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb69-1141"><a href="#cb69-1141" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb69-1142"><a href="#cb69-1142" aria-hidden="true" tabindex="-1"></a>  cbfit <span class="sc">|&gt;</span> </span>
+<span id="cb69-1143"><a href="#cb69-1143" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tidy</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb69-1144"><a href="#cb69-1144" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">digits=</span><span class="dv">3</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb69-1145"><a href="#cb69-1145" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>(<span class="at">full_width=</span>F)</span>
+<span id="cb69-1146"><a href="#cb69-1146" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb69-1147"><a href="#cb69-1147" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb69-1148"><a href="#cb69-1148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1149"><a href="#cb69-1149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1150"><a href="#cb69-1150" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb69-1151"><a href="#cb69-1151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1152"><a href="#cb69-1152" aria-hidden="true" tabindex="-1"></a>@tbl-cbfit1 shows that the seasonal effects are highly significant. @fig-cbforecast shows that the fitted model is not faring well for the year 2020, which was affected by COVID. The forecasts ahead are also untrustworthy.</span>
 <span id="cb69-1153"><a href="#cb69-1153" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1154"><a href="#cb69-1154" aria-hidden="true" tabindex="-1"></a>MA.centred <span class="ot">&lt;-</span> <span class="fu">ma</span>(NZnotes20, <span class="dv">2</span>, <span class="at">centre =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb69-1155"><a href="#cb69-1155" aria-hidden="true" tabindex="-1"></a>MA.noncentred <span class="ot">&lt;-</span> <span class="fu">ma</span>(NZnotes20, <span class="dv">2</span>, <span class="at">centre =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb69-1156"><a href="#cb69-1156" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1157"><a href="#cb69-1157" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
-<span id="cb69-1158"><a href="#cb69-1158" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1159"><a href="#cb69-1159" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(NZnotes20) <span class="sc">+</span> </span>
-<span id="cb69-1160"><a href="#cb69-1160" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autolayer</span>(MA.centred, <span class="at">series =</span> <span class="st">"2 y MA centred"</span>) <span class="sc">+</span> </span>
-<span id="cb69-1161"><a href="#cb69-1161" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autolayer</span>(MA.noncentred, <span class="at">series =</span> <span class="st">"2 y MA noncentred"</span>, <span class="at">linetype=</span><span class="dv">2</span>)</span>
-<span id="cb69-1162"><a href="#cb69-1162" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb69-1163"><a href="#cb69-1163" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1164"><a href="#cb69-1164" aria-hidden="true" tabindex="-1"></a>When placing the moving averages against time, placing them in the middle time period is more appropriate. Strictly speaking the moving average must fall at $t = 1.5, 2.5, 3.5$ etc when the period of the moving average is an even number. Hence we need to smooth again the moving average smoothed values to place the moving averages at $t = 2, 3, 4$ etc. @fig-MAcntr also compares the centred moving average smoothing and non-centred moving average smoothing (length 2) for the '\$20 Notes in public hands' data. It is easy to see that centring has stopped the moving averages from drifting below the original series and 'lined' them with the original data.</span>
-<span id="cb69-1165"><a href="#cb69-1165" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1166"><a href="#cb69-1166" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exponential Smoothing</span></span>
-<span id="cb69-1167"><a href="#cb69-1167" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1168"><a href="#cb69-1168" aria-hidden="true" tabindex="-1"></a>In moving average smoothing all past observations are given equal weight. In exponential average smoothing, past observations (i.e. as the observations become older) are given exponentially decreasing weights. That is, recent observations are given relatively more weight than the older observations. Hence the exponential smoothing method becomes a representative method to produce a smoothed time series. The average computed using exponentially decreasing weights is known as the **Exponentially Weighted Moving average** (EWMA). This fitted average is also called <span class="in">`level`</span> because this method does not allow for trends or seasonality (and everything gets smoothed).</span>
+<span id="cb69-1154"><a href="#cb69-1154" aria-hidden="true" tabindex="-1"></a>Note that the time variable $t$ becomes the predictor in the fitted model but the model is not based on the past or lagged $Y$ data. The smoothing methods discussed below employ such past data.</span>
+<span id="cb69-1155"><a href="#cb69-1155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1156"><a href="#cb69-1156" aria-hidden="true" tabindex="-1"></a><span class="fu">## Moving Average Smoothing</span></span>
+<span id="cb69-1157"><a href="#cb69-1157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1158"><a href="#cb69-1158" aria-hidden="true" tabindex="-1"></a>Here we compute the mean of successive smaller sets of numbers of immediate past data. The period or length (also called span) of the **moving average** is the number of observations (including the present one) used for averaging. The general expression for the moving average $M_t$ at time $t$ is $$M_t = <span class="co">[</span><span class="ot">X_t + X_{t-1} + ... + X_{t-N+1}</span><span class="co">]</span> / N$$ where $X_t$ is the observation at time $t$ and $N$ the moving average length. @fig-MAcntr shows the moving average smoothing for the '\$20 Notes in public hands' data. It can be noted that the degree of smoothing is directly related to the length of the moving average (i.e., longer the length, greater the smoothing).</span>
+<span id="cb69-1159"><a href="#cb69-1159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1162"><a href="#cb69-1162" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb69-1163"><a href="#cb69-1163" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb69-1164"><a href="#cb69-1164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1165"><a href="#cb69-1165" aria-hidden="true" tabindex="-1"></a>NZnotes20 <span class="ot">&lt;-</span> <span class="fu">read_table</span>(</span>
+<span id="cb69-1166"><a href="#cb69-1166" aria-hidden="true" tabindex="-1"></a>  <span class="st">"http://www.massey.ac.nz/~anhsmith/data/20dollar.txt"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb69-1167"><a href="#cb69-1167" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(value) <span class="sc">|&gt;</span> </span>
+<span id="cb69-1168"><a href="#cb69-1168" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ts</span>(<span class="at">start=</span><span class="dv">1968</span>, <span class="at">frequency=</span><span class="dv">1</span>)</span>
 <span id="cb69-1169"><a href="#cb69-1169" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1170"><a href="#cb69-1170" aria-hidden="true" tabindex="-1"></a>EWMA smoothing begins by setting $S_0$ to $x_1$ (usually), where $S$ stands for smoothed observation (or EWMA), and $x$ for the observation. The subscript in $x$ refers to the time periods $t =1, 2, ... ,n$. For the second period, $S_2 = \alpha x_2 + (1-\alpha)x_1$ and so on. Here the parameter $\alpha$ is called the smoothing constant, the weight given to the current observation. A general formula is also available to compute the EWMA for any time period $t$. @fig-ewma shows the single exponential smoothing on the \$20 Notes series for $\alpha=0.5$. Instead of fixing an $\alpha$ value such as 0.5, we may leave it to the software to find an optimum value.</span>
+<span id="cb69-1170"><a href="#cb69-1170" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb69-1171"><a href="#cb69-1171" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb69-1174"><a href="#cb69-1174" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb69-1175"><a href="#cb69-1175" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
 <span id="cb69-1176"><a href="#cb69-1176" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb69-1177"><a href="#cb69-1177" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-ewma</span></span>
-<span id="cb69-1178"><a href="#cb69-1178" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Single exponential smoothing (fits)"</span></span>
+<span id="cb69-1177"><a href="#cb69-1177" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-MAcntr</span></span>
+<span id="cb69-1178"><a href="#cb69-1178" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Centred and Non-centred Moving Averages"</span></span>
 <span id="cb69-1179"><a href="#cb69-1179" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1180"><a href="#cb69-1180" aria-hidden="true" tabindex="-1"></a>single.exp <span class="ot">&lt;-</span> NZnotes20 <span class="sc">|&gt;</span> <span class="fu">ses</span>(<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">|&gt;</span> <span class="fu">fitted</span>()</span>
-<span id="cb69-1181"><a href="#cb69-1181" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1182"><a href="#cb69-1182" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">autoplot</span>(NZnotes20) <span class="sc">+</span> </span>
-<span id="cb69-1183"><a href="#cb69-1183" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autolayer</span>(single.exp, <span class="at">series =</span><span class="st">"alpha=0.5"</span>)</span>
+<span id="cb69-1180"><a href="#cb69-1180" aria-hidden="true" tabindex="-1"></a>MA.centred <span class="ot">&lt;-</span> <span class="fu">ma</span>(NZnotes20, <span class="dv">2</span>, <span class="at">centre =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb69-1181"><a href="#cb69-1181" aria-hidden="true" tabindex="-1"></a>MA.noncentred <span class="ot">&lt;-</span> <span class="fu">ma</span>(NZnotes20, <span class="dv">2</span>, <span class="at">centre =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb69-1182"><a href="#cb69-1182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1183"><a href="#cb69-1183" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
 <span id="cb69-1184"><a href="#cb69-1184" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1185"><a href="#cb69-1185" aria-hidden="true" tabindex="-1"></a>single.exp1 <span class="ot">&lt;-</span> NZnotes20 <span class="sc">|&gt;</span> <span class="fu">ses</span>() <span class="sc">|&gt;</span> <span class="fu">fitted</span>()</span>
-<span id="cb69-1186"><a href="#cb69-1186" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1187"><a href="#cb69-1187" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">autoplot</span>(NZnotes20) <span class="sc">+</span> </span>
-<span id="cb69-1188"><a href="#cb69-1188" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autolayer</span>(single.exp1, <span class="at">series =</span> <span class="st">"optimised alpha"</span>)</span>
+<span id="cb69-1185"><a href="#cb69-1185" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(NZnotes20) <span class="sc">+</span> </span>
+<span id="cb69-1186"><a href="#cb69-1186" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autolayer</span>(MA.centred, <span class="at">series =</span> <span class="st">"2 y MA centred"</span>) <span class="sc">+</span> </span>
+<span id="cb69-1187"><a href="#cb69-1187" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autolayer</span>(MA.noncentred, <span class="at">series =</span> <span class="st">"2 y MA noncentred"</span>, <span class="at">linetype=</span><span class="dv">2</span>)</span>
+<span id="cb69-1188"><a href="#cb69-1188" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb69-1189"><a href="#cb69-1189" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1190"><a href="#cb69-1190" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb69-1190"><a href="#cb69-1190" aria-hidden="true" tabindex="-1"></a>When placing the moving averages against time, placing them in the middle time period is more appropriate. Strictly speaking the moving average must fall at $t = 1.5, 2.5, 3.5$ etc when the period of the moving average is an even number. Hence we need to smooth again the moving average smoothed values to place the moving averages at $t = 2, 3, 4$ etc. @fig-MAcntr also compares the centred moving average smoothing and non-centred moving average smoothing (length 2) for the '\$20 Notes in public hands' data. It is easy to see that centring has stopped the moving averages from drifting below the original series and 'lined' them with the original data.</span>
 <span id="cb69-1191"><a href="#cb69-1191" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1192"><a href="#cb69-1192" aria-hidden="true" tabindex="-1"></a>p1<span class="sc">/</span>p2</span>
-<span id="cb69-1193"><a href="#cb69-1193" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb69-1194"><a href="#cb69-1194" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1195"><a href="#cb69-1195" aria-hidden="true" tabindex="-1"></a>The rate at which the effect of older observations on the current EWMA will be dampened depends on $\alpha$, the smoothing constant. Larger the $\alpha$ value, faster the dampening effect of older observations.</span>
-<span id="cb69-1196"><a href="#cb69-1196" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1197"><a href="#cb69-1197" aria-hidden="true" tabindex="-1"></a>A naive choice for the initial value for $S_0$ (i.e. at the origin) is $x_1$, the first observation. The other choices include the average of two or more successive observations, estimating using regression methods etc. In this course we will not be concerned with the choice of the initial values very much (and accept the defaults of the <span class="in">`R`</span> packages).</span>
-<span id="cb69-1198"><a href="#cb69-1198" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1199"><a href="#cb69-1199" aria-hidden="true" tabindex="-1"></a><span class="fu">## Double Exponential Smoothing</span></span>
-<span id="cb69-1200"><a href="#cb69-1200" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1201"><a href="#cb69-1201" aria-hidden="true" tabindex="-1"></a>Single exponential smoothing is improved to **double exponential smoothing** to account for the trend type of variations. This is achieved by introducing a second smoothing constant say $\beta$. This weighting constant captures linear trends using the successive differences in the fitted EWMAs. The process of double exponential smoothing is conveniently represented by the following two equations.</span>
-<span id="cb69-1202"><a href="#cb69-1202" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1203"><a href="#cb69-1203" aria-hidden="true" tabindex="-1"></a>$S_t = \alpha X_t+(1-\alpha)<span class="co">[</span><span class="ot">S_{t-1} + T_{t-1}</span><span class="co">]</span>$ (called level equation)</span>
-<span id="cb69-1204"><a href="#cb69-1204" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1205"><a href="#cb69-1205" aria-hidden="true" tabindex="-1"></a>where</span>
-<span id="cb69-1206"><a href="#cb69-1206" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1207"><a href="#cb69-1207" aria-hidden="true" tabindex="-1"></a>$T_t =\beta <span class="co">[</span><span class="ot">S_t - S_{t-1}</span><span class="co">]</span> + (1 -\beta)T_{t-1}$ (called trend equation).</span>
-<span id="cb69-1208"><a href="#cb69-1208" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1209"><a href="#cb69-1209" aria-hidden="true" tabindex="-1"></a>The second equation for the trend EWMA gives a weight of $\beta$ to the current differences in the EWMAs (i.e. $S_t - S_{t-1}$) and the balance weight $(1-\beta)$ to the preceding trend EWMA.</span>
+<span id="cb69-1192"><a href="#cb69-1192" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exponential Smoothing</span></span>
+<span id="cb69-1193"><a href="#cb69-1193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1194"><a href="#cb69-1194" aria-hidden="true" tabindex="-1"></a>In moving average smoothing all past observations are given equal weight. In exponential average smoothing, past observations (i.e. as the observations become older) are given exponentially decreasing weights. That is, recent observations are given relatively more weight than the older observations. Hence the exponential smoothing method becomes a representative method to produce a smoothed time series. The average computed using exponentially decreasing weights is known as the **Exponentially Weighted Moving average** (EWMA). This fitted average is also called <span class="in">`level`</span> because this method does not allow for trends or seasonality (and everything gets smoothed).</span>
+<span id="cb69-1195"><a href="#cb69-1195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1196"><a href="#cb69-1196" aria-hidden="true" tabindex="-1"></a>EWMA smoothing begins by setting $S_0$ to $x_1$ (usually), where $S$ stands for smoothed observation (or EWMA), and $x$ for the observation. The subscript in $x$ refers to the time periods $t =1, 2, ... ,n$. For the second period, $S_2 = \alpha x_2 + (1-\alpha)x_1$ and so on. Here the parameter $\alpha$ is called the smoothing constant, the weight given to the current observation. A general formula is also available to compute the EWMA for any time period $t$. @fig-ewma shows the single exponential smoothing on the \$20 Notes series for $\alpha=0.5$. Instead of fixing an $\alpha$ value such as 0.5, we may leave it to the software to find an optimum value.</span>
+<span id="cb69-1197"><a href="#cb69-1197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1200"><a href="#cb69-1200" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb69-1201"><a href="#cb69-1201" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb69-1202"><a href="#cb69-1202" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb69-1203"><a href="#cb69-1203" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-ewma</span></span>
+<span id="cb69-1204"><a href="#cb69-1204" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Single exponential smoothing (fits)"</span></span>
+<span id="cb69-1205"><a href="#cb69-1205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1206"><a href="#cb69-1206" aria-hidden="true" tabindex="-1"></a>single.exp <span class="ot">&lt;-</span> NZnotes20 <span class="sc">|&gt;</span> <span class="fu">ses</span>(<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">|&gt;</span> <span class="fu">fitted</span>()</span>
+<span id="cb69-1207"><a href="#cb69-1207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1208"><a href="#cb69-1208" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">autoplot</span>(NZnotes20) <span class="sc">+</span> </span>
+<span id="cb69-1209"><a href="#cb69-1209" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autolayer</span>(single.exp, <span class="at">series =</span><span class="st">"alpha=0.5"</span>)</span>
 <span id="cb69-1210"><a href="#cb69-1210" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1211"><a href="#cb69-1211" aria-hidden="true" tabindex="-1"></a>The main or usual EWMA (i.e. $S_t$) gives a weight of $\alpha$ to the current observation and the balance weight $(1-\alpha)$ to the sum of preceding main and trend EWMAs (i.e. $S_{t-1} + T_{t-1}$). A naive choice for the initial value for $T_0$ (i.e. at the origin) is $x_2-x_1$, the difference between the first and the second observations. The other choices include the average of two or more successive differences, estimating using regression methods etc. In this course we will not be concerned with the choice of the initial values very much. The smoothing constants $\alpha$ and $\beta$ are obtained by non-linear optimisation methods (such as the Marquardt algorithm). In this course, we will just accept the <span class="in">`R`</span> outputs as the optimised fits. @fig-dewma shows the double exponential smoothing on the \$20 Notes series with optimum $\alpha$ and $\beta$ (as determined by the <span class="in">`forecast`</span> package).</span>
+<span id="cb69-1211"><a href="#cb69-1211" aria-hidden="true" tabindex="-1"></a>single.exp1 <span class="ot">&lt;-</span> NZnotes20 <span class="sc">|&gt;</span> <span class="fu">ses</span>() <span class="sc">|&gt;</span> <span class="fu">fitted</span>()</span>
 <span id="cb69-1212"><a href="#cb69-1212" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1215"><a href="#cb69-1215" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb69-1216"><a href="#cb69-1216" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
-<span id="cb69-1217"><a href="#cb69-1217" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb69-1218"><a href="#cb69-1218" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-dewma</span></span>
-<span id="cb69-1219"><a href="#cb69-1219" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Double exponential smoothing"</span></span>
+<span id="cb69-1213"><a href="#cb69-1213" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">autoplot</span>(NZnotes20) <span class="sc">+</span> </span>
+<span id="cb69-1214"><a href="#cb69-1214" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autolayer</span>(single.exp1, <span class="at">series =</span> <span class="st">"optimised alpha"</span>)</span>
+<span id="cb69-1215"><a href="#cb69-1215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1216"><a href="#cb69-1216" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb69-1217"><a href="#cb69-1217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1218"><a href="#cb69-1218" aria-hidden="true" tabindex="-1"></a>p1<span class="sc">/</span>p2</span>
+<span id="cb69-1219"><a href="#cb69-1219" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb69-1220"><a href="#cb69-1220" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1221"><a href="#cb69-1221" aria-hidden="true" tabindex="-1"></a>double.exp <span class="ot">&lt;-</span> NZnotes20 <span class="sc">|&gt;</span> <span class="fu">holt</span>() <span class="sc">|&gt;</span> <span class="fu">fitted</span>()</span>
+<span id="cb69-1221"><a href="#cb69-1221" aria-hidden="true" tabindex="-1"></a>The rate at which the effect of older observations on the current EWMA will be dampened depends on $\alpha$, the smoothing constant. Larger the $\alpha$ value, faster the dampening effect of older observations.</span>
 <span id="cb69-1222"><a href="#cb69-1222" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1223"><a href="#cb69-1223" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(NZnotes20) <span class="sc">+</span> </span>
-<span id="cb69-1224"><a href="#cb69-1224" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autolayer</span>(double.exp, <span class="at">series =</span> <span class="st">"DEWMA-optimised"</span>)</span>
-<span id="cb69-1225"><a href="#cb69-1225" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb69-1223"><a href="#cb69-1223" aria-hidden="true" tabindex="-1"></a>A naive choice for the initial value for $S_0$ (i.e. at the origin) is $x_1$, the first observation. The other choices include the average of two or more successive observations, estimating using regression methods etc. In this course we will not be concerned with the choice of the initial values very much (and accept the defaults of the <span class="in">`R`</span> packages).</span>
+<span id="cb69-1224"><a href="#cb69-1224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1225"><a href="#cb69-1225" aria-hidden="true" tabindex="-1"></a><span class="fu">## Double Exponential Smoothing</span></span>
 <span id="cb69-1226"><a href="#cb69-1226" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1227"><a href="#cb69-1227" aria-hidden="true" tabindex="-1"></a><span class="fu">## Triple Exponential Smoothing</span></span>
+<span id="cb69-1227"><a href="#cb69-1227" aria-hidden="true" tabindex="-1"></a>Single exponential smoothing is improved to **double exponential smoothing** to account for the trend type of variations. This is achieved by introducing a second smoothing constant say $\beta$. This weighting constant captures linear trends using the successive differences in the fitted EWMAs. The process of double exponential smoothing is conveniently represented by the following two equations.</span>
 <span id="cb69-1228"><a href="#cb69-1228" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1229"><a href="#cb69-1229" aria-hidden="true" tabindex="-1"></a>This approach developed by Holt and Winter (hence the name **Holts-Winter (HW) smoothing**) employs a level equation, a trend equation, and a seasonal equation for smoothing at each time period. Hence three weights, or smoothing parameters are needed.</span>
+<span id="cb69-1229"><a href="#cb69-1229" aria-hidden="true" tabindex="-1"></a>$S_t = \alpha X_t+(1-\alpha)<span class="co">[</span><span class="ot">S_{t-1} + T_{t-1}</span><span class="co">]</span>$ (called level equation)</span>
 <span id="cb69-1230"><a href="#cb69-1230" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1231"><a href="#cb69-1231" aria-hidden="true" tabindex="-1"></a>$S_t = \alpha(X_t-P_{t-p}) + (1-\alpha)<span class="co">[</span><span class="ot">S_{t-1}+T_{t-1}</span><span class="co">]</span>$ (level equation)\</span>
-<span id="cb69-1232"><a href="#cb69-1232" aria-hidden="true" tabindex="-1"></a>$T_t = \beta <span class="co">[</span><span class="ot">S_t-S_{t-1}</span><span class="co">]</span>+ 1-\beta)T_{t-1}$ (trend equation)\</span>
-<span id="cb69-1233"><a href="#cb69-1233" aria-hidden="true" tabindex="-1"></a>$P_t = \phi (X_t-S_t)+(1-\phi)P_{t-p}$ (seasonal equation of a given period $p$)</span>
+<span id="cb69-1231"><a href="#cb69-1231" aria-hidden="true" tabindex="-1"></a>where</span>
+<span id="cb69-1232"><a href="#cb69-1232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1233"><a href="#cb69-1233" aria-hidden="true" tabindex="-1"></a>$T_t =\beta <span class="co">[</span><span class="ot">S_t - S_{t-1}</span><span class="co">]</span> + (1 -\beta)T_{t-1}$ (called trend equation).</span>
 <span id="cb69-1234"><a href="#cb69-1234" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1235"><a href="#cb69-1235" aria-hidden="true" tabindex="-1"></a>The smoothing parameters $\alpha$, $\beta$, and $\phi$ are constants and are usually estimated minimising the MSE. In order to proceed with the triple exponential smoothing, we need at least one complete season's data to determine initial estimates of the seasonal indices. For estimating the trend components, it is preferable to have at least two complete season's data.</span>
+<span id="cb69-1235"><a href="#cb69-1235" aria-hidden="true" tabindex="-1"></a>The second equation for the trend EWMA gives a weight of $\beta$ to the current differences in the EWMAs (i.e. $S_t - S_{t-1}$) and the balance weight $(1-\beta)$ to the preceding trend EWMA.</span>
 <span id="cb69-1236"><a href="#cb69-1236" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1237"><a href="#cb69-1237" aria-hidden="true" tabindex="-1"></a>The initial trend is usually estimated using the average differences in the corresponding observations in two adjacent seasons. The estimating initial values for seasonal components, we use the averages rather than differences. Regression methods are also employed for estimating the initial values. In this course, we will not study the estimation methods for initial values in any detail but will accept computations and optimisation reported in the <span class="in">`forecast`</span> R package. @fig-tewma shows the triple exponential smoothing to the outstanding credit card balances series.</span>
+<span id="cb69-1237"><a href="#cb69-1237" aria-hidden="true" tabindex="-1"></a>The main or usual EWMA (i.e. $S_t$) gives a weight of $\alpha$ to the current observation and the balance weight $(1-\alpha)$ to the sum of preceding main and trend EWMAs (i.e. $S_{t-1} + T_{t-1}$). A naive choice for the initial value for $T_0$ (i.e. at the origin) is $x_2-x_1$, the difference between the first and the second observations. The other choices include the average of two or more successive differences, estimating using regression methods etc. In this course we will not be concerned with the choice of the initial values very much. The smoothing constants $\alpha$ and $\beta$ are obtained by non-linear optimisation methods (such as the Marquardt algorithm). In this course, we will just accept the <span class="in">`R`</span> outputs as the optimised fits. @fig-dewma shows the double exponential smoothing on the \$20 Notes series with optimum $\alpha$ and $\beta$ (as determined by the <span class="in">`forecast`</span> package).</span>
 <span id="cb69-1238"><a href="#cb69-1238" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb69-1241"><a href="#cb69-1241" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb69-1242"><a href="#cb69-1242" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
 <span id="cb69-1243"><a href="#cb69-1243" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb69-1244"><a href="#cb69-1244" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-tewma</span></span>
-<span id="cb69-1245"><a href="#cb69-1245" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Triple exponential smoothing"</span></span>
+<span id="cb69-1244"><a href="#cb69-1244" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-dewma</span></span>
+<span id="cb69-1245"><a href="#cb69-1245" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Double exponential smoothing"</span></span>
 <span id="cb69-1246"><a href="#cb69-1246" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1247"><a href="#cb69-1247" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
+<span id="cb69-1247"><a href="#cb69-1247" aria-hidden="true" tabindex="-1"></a>double.exp <span class="ot">&lt;-</span> NZnotes20 <span class="sc">|&gt;</span> <span class="fu">holt</span>() <span class="sc">|&gt;</span> <span class="fu">fitted</span>()</span>
 <span id="cb69-1248"><a href="#cb69-1248" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1249"><a href="#cb69-1249" aria-hidden="true" tabindex="-1"></a>trp.exp <span class="ot">&lt;-</span> credit.balance <span class="sc">|&gt;</span> <span class="fu">hw</span>() <span class="sc">|&gt;</span> <span class="fu">fitted</span>()</span>
-<span id="cb69-1250"><a href="#cb69-1250" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1251"><a href="#cb69-1251" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(credit.balance) <span class="sc">+</span></span>
-<span id="cb69-1252"><a href="#cb69-1252" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autolayer</span>(trp.exp, </span>
-<span id="cb69-1253"><a href="#cb69-1253" aria-hidden="true" tabindex="-1"></a>            <span class="at">series =</span> <span class="st">"Holt-Winter- optimised"</span>)</span>
+<span id="cb69-1249"><a href="#cb69-1249" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(NZnotes20) <span class="sc">+</span> </span>
+<span id="cb69-1250"><a href="#cb69-1250" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autolayer</span>(double.exp, <span class="at">series =</span> <span class="st">"DEWMA-optimised"</span>)</span>
+<span id="cb69-1251"><a href="#cb69-1251" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb69-1252"><a href="#cb69-1252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1253"><a href="#cb69-1253" aria-hidden="true" tabindex="-1"></a><span class="fu">## Triple Exponential Smoothing</span></span>
 <span id="cb69-1254"><a href="#cb69-1254" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1255"><a href="#cb69-1255" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb69-1255"><a href="#cb69-1255" aria-hidden="true" tabindex="-1"></a>This approach developed by Holt and Winter (hence the name **Holts-Winter (HW) smoothing**) employs a level equation, a trend equation, and a seasonal equation for smoothing at each time period. Hence three weights, or smoothing parameters are needed.</span>
 <span id="cb69-1256"><a href="#cb69-1256" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1257"><a href="#cb69-1257" aria-hidden="true" tabindex="-1"></a><span class="fu">## Assessment of Fit:</span></span>
-<span id="cb69-1258"><a href="#cb69-1258" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1259"><a href="#cb69-1259" aria-hidden="true" tabindex="-1"></a>Forecast accuracy measures such as MSE are useful for fixing the smoothing parameters such as the moving average length or the EWMA smoothing constant. We may minimise MSE (say) to fix a value for the EWMA smoothing constant. This can be done by trial and error or by nonlinear optimisation methods (such as Marquardt's procedure).</span>
+<span id="cb69-1257"><a href="#cb69-1257" aria-hidden="true" tabindex="-1"></a>$S_t = \alpha(X_t-P_{t-p}) + (1-\alpha)<span class="co">[</span><span class="ot">S_{t-1}+T_{t-1}</span><span class="co">]</span>$ (level equation)\</span>
+<span id="cb69-1258"><a href="#cb69-1258" aria-hidden="true" tabindex="-1"></a>$T_t = \beta <span class="co">[</span><span class="ot">S_t-S_{t-1}</span><span class="co">]</span>+ 1-\beta)T_{t-1}$ (trend equation)\</span>
+<span id="cb69-1259"><a href="#cb69-1259" aria-hidden="true" tabindex="-1"></a>$P_t = \phi (X_t-S_t)+(1-\phi)P_{t-p}$ (seasonal equation of a given period $p$)</span>
 <span id="cb69-1260"><a href="#cb69-1260" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1261"><a href="#cb69-1261" aria-hidden="true" tabindex="-1"></a>By the term **forecasting**, we mean projecting the present time series for future time points. For example, assume that we used an uncentered two period moving average to smooth the '\$20 Notes' time series. The moving average value (non-centred) for 1969 is 18.05. A *naive* approach to forecasting will be to use the smoothed value at time $(t-1)$ to forecast for time $t$. Hence the forecasted value (or simply forecast) of \$20 bills for 1970 would be 18.05 as against the actual observed value of 21.76. In the absence of Year 1970 data, the same value 18.05 would be the forecast for 1971 and so on. MAs are not useful for forecasting in general and hence this average is just employed to fit trends or extract trends when seasonal variation is absent.</span>
+<span id="cb69-1261"><a href="#cb69-1261" aria-hidden="true" tabindex="-1"></a>The smoothing parameters $\alpha$, $\beta$, and $\phi$ are constants and are usually estimated minimising the MSE. In order to proceed with the triple exponential smoothing, we need at least one complete season's data to determine initial estimates of the seasonal indices. For estimating the trend components, it is preferable to have at least two complete season's data.</span>
 <span id="cb69-1262"><a href="#cb69-1262" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1263"><a href="#cb69-1263" aria-hidden="true" tabindex="-1"></a>For EWMA Forecasting, the forecast approach is to add an adjustment for the error that occurred in the last forecast. We again consider '\$20 Notes' time series and obtain the EWMA smoothed values for $\alpha = 0.4$. For the year 1969 (say), the EWMA value is 17.78 as against the actual value 19.41 giving an error of 19.41- 17.78= 2.72. This error is given a weight of 0.4 and added to the 1969 forecast (naive estimate) of 16.69 as $16.69+0.4\times2.72$ giving a forecast value of 17.78 for 1970. The term 'adjustment error' will refer to $0.4\times2.72 = 1.088$. This forecast value is also obtained as</span>
+<span id="cb69-1263"><a href="#cb69-1263" aria-hidden="true" tabindex="-1"></a>The initial trend is usually estimated using the average differences in the corresponding observations in two adjacent seasons. The estimating initial values for seasonal components, we use the averages rather than differences. Regression methods are also employed for estimating the initial values. In this course, we will not study the estimation methods for initial values in any detail but will accept computations and optimisation reported in the <span class="in">`forecast`</span> R package. @fig-tewma shows the triple exponential smoothing to the outstanding credit card balances series.</span>
 <span id="cb69-1264"><a href="#cb69-1264" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1265"><a href="#cb69-1265" aria-hidden="true" tabindex="-1"></a>Forecast for $1970 = 0.4\times19.41+0.6\times16.69= 17.78$.</span>
-<span id="cb69-1266"><a href="#cb69-1266" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1267"><a href="#cb69-1267" aria-hidden="true" tabindex="-1"></a>(from the relationship $S_{t+1}=\alpha x_{t+1}+(1-\alpha)S_t$ where the unavailable value $X_{t+1}$ is replaced by the naive estimate $X_t$). This forecasting approach is also not useful in the presence of trend etc. Hence only a forecast of one time period ahead is usually done. For forecasting two or more time periods ahead, methods such as double and triple exponential smoothing are more useful.</span>
-<span id="cb69-1268"><a href="#cb69-1268" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1269"><a href="#cb69-1269" aria-hidden="true" tabindex="-1"></a>If we perform the double exponential forecasting for some $m$ periods ahead from a point at time $t$, the trend part of EWMA, $T_t$, will be added $m$ times to the naive level estimate $S_t$. As shown in @fig-dewmaf, the double exponential smoothing approach provides no nonsense forecasts compared to the naive single exponential forecasts in the presence of trends. The fit/forecast quality measures such as the MSE, MAD etc will also be smaller for the double exponential smoothing in the presence of trends.</span>
-<span id="cb69-1270"><a href="#cb69-1270" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1273"><a href="#cb69-1273" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb69-1274"><a href="#cb69-1274" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
-<span id="cb69-1275"><a href="#cb69-1275" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb69-1276"><a href="#cb69-1276" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-dewmaf</span></span>
-<span id="cb69-1277"><a href="#cb69-1277" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Double and triple exponential forecasts for credit balance data"</span></span>
-<span id="cb69-1278"><a href="#cb69-1278" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1279"><a href="#cb69-1279" aria-hidden="true" tabindex="-1"></a>holt1 <span class="ot">&lt;-</span> <span class="fu">holt</span>(credit.balance)</span>
-<span id="cb69-1280"><a href="#cb69-1280" aria-hidden="true" tabindex="-1"></a>holt2 <span class="ot">&lt;-</span> <span class="fu">hw</span>(credit.balance)</span>
-<span id="cb69-1281"><a href="#cb69-1281" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1282"><a href="#cb69-1282" aria-hidden="true" tabindex="-1"></a>p0 <span class="ot">&lt;-</span> forecast<span class="sc">::</span><span class="fu">autoplot</span>(<span class="fu">window</span>(credit.balance, <span class="at">start=</span><span class="dv">2012</span>)) <span class="sc">+</span> </span>
-<span id="cb69-1283"><a href="#cb69-1283" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">2012</span>, <span class="dv">2025</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">4500</span>,<span class="dv">7000</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">""</span>)</span>
+<span id="cb69-1267"><a href="#cb69-1267" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb69-1268"><a href="#cb69-1268" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb69-1269"><a href="#cb69-1269" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb69-1270"><a href="#cb69-1270" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-tewma</span></span>
+<span id="cb69-1271"><a href="#cb69-1271" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Triple exponential smoothing"</span></span>
+<span id="cb69-1272"><a href="#cb69-1272" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1273"><a href="#cb69-1273" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
+<span id="cb69-1274"><a href="#cb69-1274" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1275"><a href="#cb69-1275" aria-hidden="true" tabindex="-1"></a>trp.exp <span class="ot">&lt;-</span> credit.balance <span class="sc">|&gt;</span> <span class="fu">hw</span>() <span class="sc">|&gt;</span> <span class="fu">fitted</span>()</span>
+<span id="cb69-1276"><a href="#cb69-1276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1277"><a href="#cb69-1277" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(credit.balance) <span class="sc">+</span></span>
+<span id="cb69-1278"><a href="#cb69-1278" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autolayer</span>(trp.exp, </span>
+<span id="cb69-1279"><a href="#cb69-1279" aria-hidden="true" tabindex="-1"></a>            <span class="at">series =</span> <span class="st">"Holt-Winter- optimised"</span>)</span>
+<span id="cb69-1280"><a href="#cb69-1280" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1281"><a href="#cb69-1281" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb69-1282"><a href="#cb69-1282" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1283"><a href="#cb69-1283" aria-hidden="true" tabindex="-1"></a><span class="fu">## Assessment of Fit:</span></span>
 <span id="cb69-1284"><a href="#cb69-1284" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1285"><a href="#cb69-1285" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> p0 <span class="sc">+</span> <span class="fu">autolayer</span>(holt1, <span class="at">series =</span> <span class="st">"Double exponential"</span>)</span>
+<span id="cb69-1285"><a href="#cb69-1285" aria-hidden="true" tabindex="-1"></a>Forecast accuracy measures such as MSE are useful for fixing the smoothing parameters such as the moving average length or the EWMA smoothing constant. We may minimise MSE (say) to fix a value for the EWMA smoothing constant. This can be done by trial and error or by nonlinear optimisation methods (such as Marquardt's procedure).</span>
 <span id="cb69-1286"><a href="#cb69-1286" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1287"><a href="#cb69-1287" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> p0 <span class="sc">+</span> <span class="fu">autolayer</span>(holt2, <span class="at">series =</span> <span class="st">"Triple exponential"</span>)</span>
+<span id="cb69-1287"><a href="#cb69-1287" aria-hidden="true" tabindex="-1"></a>By the term **forecasting**, we mean projecting the present time series for future time points. For example, assume that we used an uncentered two period moving average to smooth the '\$20 Notes' time series. The moving average value (non-centred) for 1969 is 18.05. A *naive* approach to forecasting will be to use the smoothed value at time $(t-1)$ to forecast for time $t$. Hence the forecasted value (or simply forecast) of \$20 bills for 1970 would be 18.05 as against the actual observed value of 21.76. In the absence of Year 1970 data, the same value 18.05 would be the forecast for 1971 and so on. MAs are not useful for forecasting in general and hence this average is just employed to fit trends or extract trends when seasonal variation is absent.</span>
 <span id="cb69-1288"><a href="#cb69-1288" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1289"><a href="#cb69-1289" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb69-1289"><a href="#cb69-1289" aria-hidden="true" tabindex="-1"></a>For EWMA Forecasting, the forecast approach is to add an adjustment for the error that occurred in the last forecast. We again consider '\$20 Notes' time series and obtain the EWMA smoothed values for $\alpha = 0.4$. For the year 1969 (say), the EWMA value is 17.78 as against the actual value 19.41 giving an error of 19.41- 17.78= 2.72. This error is given a weight of 0.4 and added to the 1969 forecast (naive estimate) of 16.69 as $16.69+0.4\times2.72$ giving a forecast value of 17.78 for 1970. The term 'adjustment error' will refer to $0.4\times2.72 = 1.088$. This forecast value is also obtained as</span>
 <span id="cb69-1290"><a href="#cb69-1290" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1291"><a href="#cb69-1291" aria-hidden="true" tabindex="-1"></a>p1<span class="sc">/</span>p2</span>
-<span id="cb69-1292"><a href="#cb69-1292" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb69-1293"><a href="#cb69-1293" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1294"><a href="#cb69-1294" aria-hidden="true" tabindex="-1"></a>The forecast accuracy measures can also be obtained using the accuracy() function in the forecast package. This function also give a few other accuracy measures. For the credit card balances data, we obtain-</span>
-<span id="cb69-1295"><a href="#cb69-1295" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1296"><a href="#cb69-1296" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=TRUE}</span></span>
-<span id="cb69-1297"><a href="#cb69-1297" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_cols</span>(</span>
-<span id="cb69-1298"><a href="#cb69-1298" aria-hidden="true" tabindex="-1"></a>  <span class="at">Method =</span> <span class="fu">c</span>(</span>
-<span id="cb69-1299"><a href="#cb69-1299" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Double exponential smoothing"</span>,</span>
-<span id="cb69-1300"><a href="#cb69-1300" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Triple exponential smoothing"</span></span>
-<span id="cb69-1301"><a href="#cb69-1301" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb69-1302"><a href="#cb69-1302" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>(</span>
-<span id="cb69-1303"><a href="#cb69-1303" aria-hidden="true" tabindex="-1"></a>    <span class="fu">accuracy</span>(holt1)[,<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">5</span>)],</span>
-<span id="cb69-1304"><a href="#cb69-1304" aria-hidden="true" tabindex="-1"></a>    <span class="fu">accuracy</span>(holt2)[,<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">5</span>)]</span>
-<span id="cb69-1305"><a href="#cb69-1305" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb69-1306"><a href="#cb69-1306" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb69-1307"><a href="#cb69-1307" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb69-1308"><a href="#cb69-1308" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1309"><a href="#cb69-1309" aria-hidden="true" tabindex="-1"></a>Evidently the triple exponential smoothing fares well for our credit card balances data.</span>
+<span id="cb69-1291"><a href="#cb69-1291" aria-hidden="true" tabindex="-1"></a>Forecast for $1970 = 0.4\times19.41+0.6\times16.69= 17.78$.</span>
+<span id="cb69-1292"><a href="#cb69-1292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1293"><a href="#cb69-1293" aria-hidden="true" tabindex="-1"></a>(from the relationship $S_{t+1}=\alpha x_{t+1}+(1-\alpha)S_t$ where the unavailable value $X_{t+1}$ is replaced by the naive estimate $X_t$). This forecasting approach is also not useful in the presence of trend etc. Hence only a forecast of one time period ahead is usually done. For forecasting two or more time periods ahead, methods such as double and triple exponential smoothing are more useful.</span>
+<span id="cb69-1294"><a href="#cb69-1294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1295"><a href="#cb69-1295" aria-hidden="true" tabindex="-1"></a>If we perform the double exponential forecasting for some $m$ periods ahead from a point at time $t$, the trend part of EWMA, $T_t$, will be added $m$ times to the naive level estimate $S_t$. As shown in @fig-dewmaf, the double exponential smoothing approach provides no nonsense forecasts compared to the naive single exponential forecasts in the presence of trends. The fit/forecast quality measures such as the MSE, MAD etc will also be smaller for the double exponential smoothing in the presence of trends.</span>
+<span id="cb69-1296"><a href="#cb69-1296" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1299"><a href="#cb69-1299" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb69-1300"><a href="#cb69-1300" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb69-1301"><a href="#cb69-1301" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb69-1302"><a href="#cb69-1302" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-dewmaf</span></span>
+<span id="cb69-1303"><a href="#cb69-1303" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Double and triple exponential forecasts for credit balance data"</span></span>
+<span id="cb69-1304"><a href="#cb69-1304" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1305"><a href="#cb69-1305" aria-hidden="true" tabindex="-1"></a>holt1 <span class="ot">&lt;-</span> <span class="fu">holt</span>(credit.balance)</span>
+<span id="cb69-1306"><a href="#cb69-1306" aria-hidden="true" tabindex="-1"></a>holt2 <span class="ot">&lt;-</span> <span class="fu">hw</span>(credit.balance)</span>
+<span id="cb69-1307"><a href="#cb69-1307" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1308"><a href="#cb69-1308" aria-hidden="true" tabindex="-1"></a>p0 <span class="ot">&lt;-</span> forecast<span class="sc">::</span><span class="fu">autoplot</span>(<span class="fu">window</span>(credit.balance, <span class="at">start=</span><span class="dv">2012</span>)) <span class="sc">+</span> </span>
+<span id="cb69-1309"><a href="#cb69-1309" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">2012</span>, <span class="dv">2025</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">4500</span>,<span class="dv">7000</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">""</span>)</span>
 <span id="cb69-1310"><a href="#cb69-1310" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1311"><a href="#cb69-1311" aria-hidden="true" tabindex="-1"></a><span class="fu">## Intro to Autoregressive Modelling</span></span>
+<span id="cb69-1311"><a href="#cb69-1311" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> p0 <span class="sc">+</span> <span class="fu">autolayer</span>(holt1, <span class="at">series =</span> <span class="st">"Double exponential"</span>)</span>
 <span id="cb69-1312"><a href="#cb69-1312" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1313"><a href="#cb69-1313" aria-hidden="true" tabindex="-1"></a>The concept of **stationarity** plays in important role for building time series models. In crude terms, a time series is said to be **stationary** if the mean and variance do not change over time (alternatively the same probability law applies over time). In fact stationarity is defined in a pure mathematical way but we will not worry about this in this course.</span>
+<span id="cb69-1313"><a href="#cb69-1313" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> p0 <span class="sc">+</span> <span class="fu">autolayer</span>(holt2, <span class="at">series =</span> <span class="st">"Triple exponential"</span>)</span>
 <span id="cb69-1314"><a href="#cb69-1314" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1315"><a href="#cb69-1315" aria-hidden="true" tabindex="-1"></a>A white noise series is defined as a series with a constant mean and variance, and the true mean and variance remain the same for all $t$. Normal random data is an example of white noise but the normal assumption is not required for a series to be white noise. You can also intuitively guess that a white noise series is stationary.</span>
+<span id="cb69-1315"><a href="#cb69-1315" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
 <span id="cb69-1316"><a href="#cb69-1316" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1317"><a href="#cb69-1317" aria-hidden="true" tabindex="-1"></a>A quick collection of EDA displays can be obtained using a single function ggtsdisplay() or tsdisplay() in <span class="in">`R`</span>. This display is shown for the white noise series in @fig-tsdispwn.</span>
-<span id="cb69-1318"><a href="#cb69-1318" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1321"><a href="#cb69-1321" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb69-1322"><a href="#cb69-1322" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
-<span id="cb69-1323"><a href="#cb69-1323" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-tsdispwn</span></span>
-<span id="cb69-1324"><a href="#cb69-1324" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "A summary plots for white noise"</span></span>
-<span id="cb69-1325"><a href="#cb69-1325" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1326"><a href="#cb69-1326" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb69-1327"><a href="#cb69-1327" aria-hidden="true" tabindex="-1"></a>wht.noise <span class="ot">&lt;-</span> <span class="fu">arima.sim</span>(<span class="fu">list</span>(<span class="at">order=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>)),<span class="dv">500</span>)</span>
-<span id="cb69-1328"><a href="#cb69-1328" aria-hidden="true" tabindex="-1"></a><span class="fu">ggtsdisplay</span>(wht.noise)</span>
-<span id="cb69-1329"><a href="#cb69-1329" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb69-1330"><a href="#cb69-1330" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1331"><a href="#cb69-1331" aria-hidden="true" tabindex="-1"></a>Time series modelling is not needed for a series such as this one. The above random series must be distinguished from a series whose autocorrelations are not decaying to zero or becoming significant frequently.</span>
-<span id="cb69-1332"><a href="#cb69-1332" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1333"><a href="#cb69-1333" aria-hidden="true" tabindex="-1"></a>A drifting random walk series is defined as $$X_t = \delta + X_{t-1} + W_t $$</span>
+<span id="cb69-1317"><a href="#cb69-1317" aria-hidden="true" tabindex="-1"></a>p1<span class="sc">/</span>p2</span>
+<span id="cb69-1318"><a href="#cb69-1318" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb69-1319"><a href="#cb69-1319" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1320"><a href="#cb69-1320" aria-hidden="true" tabindex="-1"></a>The forecast accuracy measures can also be obtained using the accuracy() function in the forecast package. This function also give a few other accuracy measures. For the credit card balances data, we obtain-</span>
+<span id="cb69-1321"><a href="#cb69-1321" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1322"><a href="#cb69-1322" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=TRUE}</span></span>
+<span id="cb69-1323"><a href="#cb69-1323" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_cols</span>(</span>
+<span id="cb69-1324"><a href="#cb69-1324" aria-hidden="true" tabindex="-1"></a>  <span class="at">Method =</span> <span class="fu">c</span>(</span>
+<span id="cb69-1325"><a href="#cb69-1325" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Double exponential smoothing"</span>,</span>
+<span id="cb69-1326"><a href="#cb69-1326" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Triple exponential smoothing"</span></span>
+<span id="cb69-1327"><a href="#cb69-1327" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb69-1328"><a href="#cb69-1328" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>(</span>
+<span id="cb69-1329"><a href="#cb69-1329" aria-hidden="true" tabindex="-1"></a>    <span class="fu">accuracy</span>(holt1)[,<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">5</span>)],</span>
+<span id="cb69-1330"><a href="#cb69-1330" aria-hidden="true" tabindex="-1"></a>    <span class="fu">accuracy</span>(holt2)[,<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">5</span>)]</span>
+<span id="cb69-1331"><a href="#cb69-1331" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb69-1332"><a href="#cb69-1332" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb69-1333"><a href="#cb69-1333" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb69-1334"><a href="#cb69-1334" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1335"><a href="#cb69-1335" aria-hidden="true" tabindex="-1"></a>where $\delta$ is the constant drift, and $W_t$ is white noise which induces the random walk for the series. The mean function depends on $t$ for this series and hence not stationary. This is not of concern because we can model the drift and make the residuals stationary. The trick is to model the difference $X_{t} - X_{t-1}$ or just use the first lag $X_{t-1}$ as a predictor in the usual regression.</span>
+<span id="cb69-1335"><a href="#cb69-1335" aria-hidden="true" tabindex="-1"></a>Evidently the triple exponential smoothing fares well for our credit card balances data.</span>
 <span id="cb69-1336"><a href="#cb69-1336" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1339"><a href="#cb69-1339" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb69-1340"><a href="#cb69-1340" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
-<span id="cb69-1341"><a href="#cb69-1341" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-tsdisprw</span></span>
-<span id="cb69-1342"><a href="#cb69-1342" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "A summary plots for drifting random walk series"</span></span>
-<span id="cb69-1343"><a href="#cb69-1343" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1344"><a href="#cb69-1344" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb69-1345"><a href="#cb69-1345" aria-hidden="true" tabindex="-1"></a>rwd <span class="ot">&lt;-</span> <span class="fu">arima.sim</span>(<span class="fu">list</span>(<span class="at">order=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>)),<span class="dv">500</span>)</span>
-<span id="cb69-1346"><a href="#cb69-1346" aria-hidden="true" tabindex="-1"></a><span class="fu">ggtsdisplay</span>(rwd)</span>
-<span id="cb69-1347"><a href="#cb69-1347" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb69-1348"><a href="#cb69-1348" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1349"><a href="#cb69-1349" aria-hidden="true" tabindex="-1"></a>In @fig-tsdisprw, it should also be noted that the ACFs decay to zero which is a good thing when compared to the case where ACFs are not decaying to zero.</span>
-<span id="cb69-1350"><a href="#cb69-1350" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1351"><a href="#cb69-1351" aria-hidden="true" tabindex="-1"></a>$$X_t=\beta_0+\beta_1(\sin(\frac {2\pi}{12} t)+\beta_1(\cos(\frac {2\pi}{12} t)+\epsilon_t$$ The above model introduces a 12-period seasonal pattern using $\sin$ and $\cos$ functions (which are periodic). The time series EDA plots for this function is obtained below:</span>
-<span id="cb69-1352"><a href="#cb69-1352" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1355"><a href="#cb69-1355" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb69-1356"><a href="#cb69-1356" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
-<span id="cb69-1357"><a href="#cb69-1357" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-tsdisptrig</span></span>
-<span id="cb69-1358"><a href="#cb69-1358" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Seasonal series EDA plots"</span></span>
-<span id="cb69-1359"><a href="#cb69-1359" aria-hidden="true" tabindex="-1"></a>t<span class="ot">=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">500</span></span>
-<span id="cb69-1360"><a href="#cb69-1360" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb69-1361"><a href="#cb69-1361" aria-hidden="true" tabindex="-1"></a>Xt<span class="ot">=</span><span class="fu">sin</span>(t<span class="sc">*</span><span class="dv">2</span><span class="sc">*</span>pi<span class="sc">/</span><span class="dv">12</span>)<span class="sc">+</span><span class="fu">cos</span>(t<span class="sc">*</span><span class="dv">2</span><span class="sc">*</span>pi<span class="sc">/</span><span class="dv">12</span>)<span class="sc">+</span><span class="fu">rnorm</span>(<span class="dv">500</span>)</span>
-<span id="cb69-1362"><a href="#cb69-1362" aria-hidden="true" tabindex="-1"></a><span class="fu">ggtsdisplay</span>(Xt)</span>
-<span id="cb69-1363"><a href="#cb69-1363" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb69-1364"><a href="#cb69-1364" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1365"><a href="#cb69-1365" aria-hidden="true" tabindex="-1"></a>Note the periodical patterns in the EDA plots shown in @fig-tsdisptrig. Analysis of a time series using sine and cosine functions is known as <span class="in">`frequency domain`</span> approach and is popular in meteorology, chemistry and geophysics. Instead of using trigonometric functions, say if indicator variables are used to model seasonality, we stay within the <span class="in">`time domain`</span>. The autocovariance function in the time domain is analogous to the spectral density function in the frequency domain.</span>
-<span id="cb69-1366"><a href="#cb69-1366" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1367"><a href="#cb69-1367" aria-hidden="true" tabindex="-1"></a>Consider the model $$X_t=\alpha_1 X_{t-1}+ \alpha_2 X_{t-2}+ \dots + \alpha_p X_{t-p} + \epsilon_t$$</span>
-<span id="cb69-1368"><a href="#cb69-1368" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1369"><a href="#cb69-1369" aria-hidden="true" tabindex="-1"></a>This model is called the *auto-regressive model* of order $p$ and called the $AR(p)$ process. Under this model, we assume that the present value depends linearly on the immediate past values as well as a random error. Note that this model is very similar to the multiple regression model where the predictors are just the past values of the series. This $AR(p)$ series is stationary if the variance of the terms are finite. When $p = 1$ (the first-order process), the model is known as a Markov process. The EDA plots for random data from this process is shown in @fig-tsdispmk. @fig-tsdispp shows the $AR(3)$ process EDA plots. Note that the PACF shows a pattern matching the parameters set <span class="in">`ar= c(0.8, -0.7, .3)`</span>. The last PACF in an $AR(p)$ model accounts the excess autocorrelation at lag $p$ that is not accounted for by an $AR(p-1)$ model.</span>
-<span id="cb69-1370"><a href="#cb69-1370" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1373"><a href="#cb69-1373" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb69-1374"><a href="#cb69-1374" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
-<span id="cb69-1375"><a href="#cb69-1375" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-tsdispmk</span></span>
-<span id="cb69-1376"><a href="#cb69-1376" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "A typical Markov series EDA plots"</span></span>
-<span id="cb69-1377"><a href="#cb69-1377" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1378"><a href="#cb69-1378" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb69-1379"><a href="#cb69-1379" aria-hidden="true" tabindex="-1"></a>Xt <span class="ot">&lt;-</span> <span class="fu">arima.sim</span>(<span class="fu">list</span>(<span class="at">order=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="at">ar=</span>.<span class="dv">6</span>), <span class="at">n=</span><span class="dv">500</span>)</span>
-<span id="cb69-1380"><a href="#cb69-1380" aria-hidden="true" tabindex="-1"></a><span class="fu">ggtsdisplay</span>(Xt)</span>
-<span id="cb69-1381"><a href="#cb69-1381" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb69-1382"><a href="#cb69-1382" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1385"><a href="#cb69-1385" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb69-1386"><a href="#cb69-1386" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
-<span id="cb69-1387"><a href="#cb69-1387" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-tsdispp</span></span>
-<span id="cb69-1388"><a href="#cb69-1388" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "A typical AR(p=3)  series EDA plots"</span></span>
-<span id="cb69-1389"><a href="#cb69-1389" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1390"><a href="#cb69-1390" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb69-1391"><a href="#cb69-1391" aria-hidden="true" tabindex="-1"></a>Xt <span class="ot">&lt;-</span> <span class="fu">arima.sim</span>(<span class="fu">list</span>(<span class="at">order=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="at">ar=</span> <span class="fu">c</span>(<span class="fl">0.8</span>, <span class="sc">-</span><span class="fl">0.7</span>, .<span class="dv">3</span>)), <span class="at">n=</span><span class="dv">500</span>)</span>
-<span id="cb69-1392"><a href="#cb69-1392" aria-hidden="true" tabindex="-1"></a><span class="fu">ggtsdisplay</span>(Xt)</span>
-<span id="cb69-1393"><a href="#cb69-1393" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb69-1337"><a href="#cb69-1337" aria-hidden="true" tabindex="-1"></a><span class="fu">## Intro to Autoregressive Modelling</span></span>
+<span id="cb69-1338"><a href="#cb69-1338" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1339"><a href="#cb69-1339" aria-hidden="true" tabindex="-1"></a>The concept of **stationarity** plays in important role for building time series models. In crude terms, a time series is said to be **stationary** if the mean and variance do not change over time (alternatively the same probability law applies over time). In fact stationarity is defined in a pure mathematical way but we will not worry about this in this course.</span>
+<span id="cb69-1340"><a href="#cb69-1340" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1341"><a href="#cb69-1341" aria-hidden="true" tabindex="-1"></a>A white noise series is defined as a series with a constant mean and variance, and the true mean and variance remain the same for all $t$. Normal random data is an example of white noise but the normal assumption is not required for a series to be white noise. You can also intuitively guess that a white noise series is stationary.</span>
+<span id="cb69-1342"><a href="#cb69-1342" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1343"><a href="#cb69-1343" aria-hidden="true" tabindex="-1"></a>A quick collection of EDA displays can be obtained using a single function ggtsdisplay() or tsdisplay() in <span class="in">`R`</span>. This display is shown for the white noise series in @fig-tsdispwn.</span>
+<span id="cb69-1344"><a href="#cb69-1344" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1347"><a href="#cb69-1347" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb69-1348"><a href="#cb69-1348" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb69-1349"><a href="#cb69-1349" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-tsdispwn</span></span>
+<span id="cb69-1350"><a href="#cb69-1350" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "A summary plots for white noise"</span></span>
+<span id="cb69-1351"><a href="#cb69-1351" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1352"><a href="#cb69-1352" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb69-1353"><a href="#cb69-1353" aria-hidden="true" tabindex="-1"></a>wht.noise <span class="ot">&lt;-</span> <span class="fu">arima.sim</span>(<span class="fu">list</span>(<span class="at">order=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>)),<span class="dv">500</span>)</span>
+<span id="cb69-1354"><a href="#cb69-1354" aria-hidden="true" tabindex="-1"></a><span class="fu">ggtsdisplay</span>(wht.noise)</span>
+<span id="cb69-1355"><a href="#cb69-1355" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb69-1356"><a href="#cb69-1356" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1357"><a href="#cb69-1357" aria-hidden="true" tabindex="-1"></a>Time series modelling is not needed for a series such as this one. The above random series must be distinguished from a series whose autocorrelations are not decaying to zero or becoming significant frequently.</span>
+<span id="cb69-1358"><a href="#cb69-1358" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1359"><a href="#cb69-1359" aria-hidden="true" tabindex="-1"></a>A drifting random walk series is defined as $$X_t = \delta + X_{t-1} + W_t $$</span>
+<span id="cb69-1360"><a href="#cb69-1360" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1361"><a href="#cb69-1361" aria-hidden="true" tabindex="-1"></a>where $\delta$ is the constant drift, and $W_t$ is white noise which induces the random walk for the series. The mean function depends on $t$ for this series and hence not stationary. This is not of concern because we can model the drift and make the residuals stationary. The trick is to model the difference $X_{t} - X_{t-1}$ or just use the first lag $X_{t-1}$ as a predictor in the usual regression.</span>
+<span id="cb69-1362"><a href="#cb69-1362" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1365"><a href="#cb69-1365" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb69-1366"><a href="#cb69-1366" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb69-1367"><a href="#cb69-1367" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-tsdisprw</span></span>
+<span id="cb69-1368"><a href="#cb69-1368" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "A summary plots for drifting random walk series"</span></span>
+<span id="cb69-1369"><a href="#cb69-1369" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1370"><a href="#cb69-1370" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb69-1371"><a href="#cb69-1371" aria-hidden="true" tabindex="-1"></a>rwd <span class="ot">&lt;-</span> <span class="fu">arima.sim</span>(<span class="fu">list</span>(<span class="at">order=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>)),<span class="dv">500</span>)</span>
+<span id="cb69-1372"><a href="#cb69-1372" aria-hidden="true" tabindex="-1"></a><span class="fu">ggtsdisplay</span>(rwd)</span>
+<span id="cb69-1373"><a href="#cb69-1373" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb69-1374"><a href="#cb69-1374" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1375"><a href="#cb69-1375" aria-hidden="true" tabindex="-1"></a>In @fig-tsdisprw, it should also be noted that the ACFs decay to zero which is a good thing when compared to the case where ACFs are not decaying to zero.</span>
+<span id="cb69-1376"><a href="#cb69-1376" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1377"><a href="#cb69-1377" aria-hidden="true" tabindex="-1"></a>$$X_t=\beta_0+\beta_1(\sin(\frac {2\pi}{12} t)+\beta_1(\cos(\frac {2\pi}{12} t)+\epsilon_t$$ The above model introduces a 12-period seasonal pattern using $\sin$ and $\cos$ functions (which are periodic). The time series EDA plots for this function is obtained below:</span>
+<span id="cb69-1378"><a href="#cb69-1378" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1381"><a href="#cb69-1381" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb69-1382"><a href="#cb69-1382" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb69-1383"><a href="#cb69-1383" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-tsdisptrig</span></span>
+<span id="cb69-1384"><a href="#cb69-1384" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Seasonal series EDA plots"</span></span>
+<span id="cb69-1385"><a href="#cb69-1385" aria-hidden="true" tabindex="-1"></a>t<span class="ot">=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">500</span></span>
+<span id="cb69-1386"><a href="#cb69-1386" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb69-1387"><a href="#cb69-1387" aria-hidden="true" tabindex="-1"></a>Xt<span class="ot">=</span><span class="fu">sin</span>(t<span class="sc">*</span><span class="dv">2</span><span class="sc">*</span>pi<span class="sc">/</span><span class="dv">12</span>)<span class="sc">+</span><span class="fu">cos</span>(t<span class="sc">*</span><span class="dv">2</span><span class="sc">*</span>pi<span class="sc">/</span><span class="dv">12</span>)<span class="sc">+</span><span class="fu">rnorm</span>(<span class="dv">500</span>)</span>
+<span id="cb69-1388"><a href="#cb69-1388" aria-hidden="true" tabindex="-1"></a><span class="fu">ggtsdisplay</span>(Xt)</span>
+<span id="cb69-1389"><a href="#cb69-1389" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb69-1390"><a href="#cb69-1390" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1391"><a href="#cb69-1391" aria-hidden="true" tabindex="-1"></a>Note the periodical patterns in the EDA plots shown in @fig-tsdisptrig. Analysis of a time series using sine and cosine functions is known as <span class="in">`frequency domain`</span> approach and is popular in meteorology, chemistry and geophysics. Instead of using trigonometric functions, say if indicator variables are used to model seasonality, we stay within the <span class="in">`time domain`</span>. The autocovariance function in the time domain is analogous to the spectral density function in the frequency domain.</span>
+<span id="cb69-1392"><a href="#cb69-1392" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1393"><a href="#cb69-1393" aria-hidden="true" tabindex="-1"></a>Consider the model $$X_t=\alpha_1 X_{t-1}+ \alpha_2 X_{t-2}+ \dots + \alpha_p X_{t-p} + \epsilon_t$$</span>
 <span id="cb69-1394"><a href="#cb69-1394" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1395"><a href="#cb69-1395" aria-hidden="true" tabindex="-1"></a>The *moving average process* for <span class="in">`errors`</span> is defined by the following equation. $$X_t=\beta_0 z_{t}+ \beta_1 z_{t-1}+ \dots + \beta_q z_{t-q}$$ Note that $X_t$ is modelled with errors $z_1$, $z_2$,..., whose means are assumed to be zero and constant variance. The $\beta$s are coefficients of the model and $q$ is the order. The mean of this $MA(q)$ process is zero but we can always add some mean $\mu$ which will not affect the properties such as ACFs. The basic idea behind the $MA(q)$ process is that the current value of the response is due to variety of current and past unpredictable random events. It is proved that the moving average process is a stationary process and that the ACFs at lags greater than $q$ are zero. @fig-tsdispma1 and @fig-tsdispma3 show the basic EDA plots for the $MA(1)$ and $MA(3)$ processes.</span>
+<span id="cb69-1395"><a href="#cb69-1395" aria-hidden="true" tabindex="-1"></a>This model is called the *auto-regressive model* of order $p$ and called the $AR(p)$ process. Under this model, we assume that the present value depends linearly on the immediate past values as well as a random error. Note that this model is very similar to the multiple regression model where the predictors are just the past values of the series. This $AR(p)$ series is stationary if the variance of the terms are finite. When $p = 1$ (the first-order process), the model is known as a Markov process. The EDA plots for random data from this process is shown in @fig-tsdispmk. @fig-tsdispp shows the $AR(3)$ process EDA plots. Note that the PACF shows a pattern matching the parameters set <span class="in">`ar= c(0.8, -0.7, .3)`</span>. The last PACF in an $AR(p)$ model accounts the excess autocorrelation at lag $p$ that is not accounted for by an $AR(p-1)$ model.</span>
 <span id="cb69-1396"><a href="#cb69-1396" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb69-1399"><a href="#cb69-1399" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb69-1400"><a href="#cb69-1400" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
-<span id="cb69-1401"><a href="#cb69-1401" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-tsdispma1</span></span>
-<span id="cb69-1402"><a href="#cb69-1402" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "EDA plots of a typical MA(1) process"</span></span>
+<span id="cb69-1401"><a href="#cb69-1401" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-tsdispmk</span></span>
+<span id="cb69-1402"><a href="#cb69-1402" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "A typical Markov series EDA plots"</span></span>
 <span id="cb69-1403"><a href="#cb69-1403" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb69-1404"><a href="#cb69-1404" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb69-1405"><a href="#cb69-1405" aria-hidden="true" tabindex="-1"></a>Xt <span class="ot">&lt;-</span> <span class="fu">arima.sim</span>(<span class="fu">list</span>(<span class="at">order=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">ma=</span>.<span class="dv">6</span>), <span class="at">n=</span><span class="dv">500</span>)</span>
+<span id="cb69-1405"><a href="#cb69-1405" aria-hidden="true" tabindex="-1"></a>Xt <span class="ot">&lt;-</span> <span class="fu">arima.sim</span>(<span class="fu">list</span>(<span class="at">order=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="at">ar=</span>.<span class="dv">6</span>), <span class="at">n=</span><span class="dv">500</span>)</span>
 <span id="cb69-1406"><a href="#cb69-1406" aria-hidden="true" tabindex="-1"></a><span class="fu">ggtsdisplay</span>(Xt)</span>
 <span id="cb69-1407"><a href="#cb69-1407" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb69-1408"><a href="#cb69-1408" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb69-1411"><a href="#cb69-1411" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb69-1412"><a href="#cb69-1412" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
-<span id="cb69-1413"><a href="#cb69-1413" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-tsdispma3</span></span>
-<span id="cb69-1414"><a href="#cb69-1414" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "EDA plots of a typical MA(3) process"</span></span>
+<span id="cb69-1413"><a href="#cb69-1413" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-tsdispp</span></span>
+<span id="cb69-1414"><a href="#cb69-1414" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "A typical AR(p=3)  series EDA plots"</span></span>
 <span id="cb69-1415"><a href="#cb69-1415" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb69-1416"><a href="#cb69-1416" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb69-1417"><a href="#cb69-1417" aria-hidden="true" tabindex="-1"></a>Xt <span class="ot">&lt;-</span> <span class="fu">arima.sim</span>(<span class="fu">list</span>(<span class="at">order=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">3</span>), <span class="at">ma=</span><span class="fu">c</span>(.<span class="dv">3</span>, .<span class="dv">1</span>, <span class="sc">-</span>.<span class="dv">4</span>)), <span class="at">n=</span><span class="dv">500</span>)</span>
+<span id="cb69-1417"><a href="#cb69-1417" aria-hidden="true" tabindex="-1"></a>Xt <span class="ot">&lt;-</span> <span class="fu">arima.sim</span>(<span class="fu">list</span>(<span class="at">order=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="at">ar=</span> <span class="fu">c</span>(<span class="fl">0.8</span>, <span class="sc">-</span><span class="fl">0.7</span>, .<span class="dv">3</span>)), <span class="at">n=</span><span class="dv">500</span>)</span>
 <span id="cb69-1418"><a href="#cb69-1418" aria-hidden="true" tabindex="-1"></a><span class="fu">ggtsdisplay</span>(Xt)</span>
 <span id="cb69-1419"><a href="#cb69-1419" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb69-1420"><a href="#cb69-1420" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1421"><a href="#cb69-1421" aria-hidden="true" tabindex="-1"></a>**ARMA Model**</span>
+<span id="cb69-1421"><a href="#cb69-1421" aria-hidden="true" tabindex="-1"></a>The *moving average process* for <span class="in">`errors`</span> is defined by the following equation. $$X_t=\beta_0 z_{t}+ \beta_1 z_{t-1}+ \dots + \beta_q z_{t-q}$$ Note that $X_t$ is modelled with errors $z_1$, $z_2$,..., whose means are assumed to be zero and constant variance. The $\beta$s are coefficients of the model and $q$ is the order. The mean of this $MA(q)$ process is zero but we can always add some mean $\mu$ which will not affect the properties such as ACFs. The basic idea behind the $MA(q)$ process is that the current value of the response is due to variety of current and past unpredictable random events. It is proved that the moving average process is a stationary process and that the ACFs at lags greater than $q$ are zero. @fig-tsdispma1 and @fig-tsdispma3 show the basic EDA plots for the $MA(1)$ and $MA(3)$ processes.</span>
 <span id="cb69-1422"><a href="#cb69-1422" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1423"><a href="#cb69-1423" aria-hidden="true" tabindex="-1"></a>The term $ARMA(p, q)$ model refers to the following equation that combines both the $AR(p)$ and $MA(q)$ models.</span>
-<span id="cb69-1424"><a href="#cb69-1424" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1425"><a href="#cb69-1425" aria-hidden="true" tabindex="-1"></a>$$X_t=\alpha_1 X_{t-1}+ \alpha_2 X_{t-2}+ \dots + \alpha_p X_{t-p} + \beta_o z_{t}+ \beta_1 z_{t-1}+ \dots + \beta_q z_{t-q}$$ It is easy to see that the term $\epsilon_t$ in the $AR(p)$ model is replaced or expanded with the $MA(q)$ model. You may wonder why to have such a complicated model. In fact the ARMA model requires fewer parameters than using just $MA(q)$ or $AR(p)$ model. $ARMA(p, q)$ model is a stationary model. @fig-tsdisparima shows the EDA plots for the simulated series from the $ARMA(2,2)$ process; note the constants fixed under the <span class="in">`ar`</span> and <span class="in">`ma`</span> parts of the <span class="in">`arima.sim`</span> function and compare the ACF and PACF plots.</span>
-<span id="cb69-1426"><a href="#cb69-1426" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1429"><a href="#cb69-1429" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb69-1430"><a href="#cb69-1430" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
-<span id="cb69-1431"><a href="#cb69-1431" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-tsdisparima</span></span>
-<span id="cb69-1432"><a href="#cb69-1432" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "EDA plots of a typical MA(3) process"</span></span>
-<span id="cb69-1433"><a href="#cb69-1433" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1434"><a href="#cb69-1434" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb69-1435"><a href="#cb69-1435" aria-hidden="true" tabindex="-1"></a>Xt <span class="ot">&lt;-</span> <span class="fu">arima.sim</span>(<span class="fu">list</span>(<span class="at">order=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">2</span>), <span class="at">ar=</span><span class="fu">c</span>(.<span class="dv">5</span>, <span class="sc">-</span>.<span class="dv">3</span>), <span class="at">ma=</span><span class="fu">c</span>(.<span class="dv">3</span>, .<span class="dv">1</span>)), <span class="at">n=</span><span class="dv">500</span>)</span>
-<span id="cb69-1436"><a href="#cb69-1436" aria-hidden="true" tabindex="-1"></a><span class="fu">ggtsdisplay</span>(Xt)</span>
-<span id="cb69-1437"><a href="#cb69-1437" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb69-1438"><a href="#cb69-1438" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1439"><a href="#cb69-1439" aria-hidden="true" tabindex="-1"></a>**Fitting ARMA model** Fitting an AR model can be done approximately using the multiple regression approach. If we use the sample mean $\bar{X}$ to estimate the mean $\mu$ of the process, the AR model becomes the multiple regression model with lags as predictors. However we cannot take the same approach to fitting ARMA models and we need to employ nonlinear optimisation methods.</span>
-<span id="cb69-1440"><a href="#cb69-1440" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1441"><a href="#cb69-1441" aria-hidden="true" tabindex="-1"></a>After fitting the ARMA model, we perform diagnostics of the fitted model. Here we explore the residuals of the fitted model for randomness and periodicity. In order to avoid *over fitting*, we will also examine the standard errors of the fitted coefficients. The need for transformations such the logarithm or the square root will also be indicated by the residuals.</span>
-<span id="cb69-1442"><a href="#cb69-1442" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1443"><a href="#cb69-1443" aria-hidden="true" tabindex="-1"></a>If the residuals are found to be nonstationary (often the case), we opt for differencing of the series. We have briefly seen that differencing can bring stationarity to a drifting process. Formally, the first difference $X_t-X_{t-1}$ is denoted as $\bigtriangledown X_t$. If we perform the differencing of the differences, we obtain $\bigtriangledown^2 X_t$ and so on. In order to bring stationarity to residuals, we may do differencing $d$ times. We then fit the model to $\bigtriangledown^2 X_t$ instead of $X_t$. This model is known as an autoregressive integrated moving average (ARIMA) model and denoted as $ARIMA(p, d, q)$. The term "integrated" means that the stationary model that was fitted based on the differenced data has to be summed (or "integrated") to provide a model for the original data.</span>
-<span id="cb69-1444"><a href="#cb69-1444" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1445"><a href="#cb69-1445" aria-hidden="true" tabindex="-1"></a>The ARIMA model is further generalised to seasonal ARIMA (SARIMA) model. The AR part for seasons (parameter P), differencing part (D) and the MA part (Q) form part of the $SARIMA(p,d,q ,P, D, Q)$. This topic is covered in higher level courses.</span>
+<span id="cb69-1425"><a href="#cb69-1425" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb69-1426"><a href="#cb69-1426" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb69-1427"><a href="#cb69-1427" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-tsdispma1</span></span>
+<span id="cb69-1428"><a href="#cb69-1428" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "EDA plots of a typical MA(1) process"</span></span>
+<span id="cb69-1429"><a href="#cb69-1429" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1430"><a href="#cb69-1430" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb69-1431"><a href="#cb69-1431" aria-hidden="true" tabindex="-1"></a>Xt <span class="ot">&lt;-</span> <span class="fu">arima.sim</span>(<span class="fu">list</span>(<span class="at">order=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">ma=</span>.<span class="dv">6</span>), <span class="at">n=</span><span class="dv">500</span>)</span>
+<span id="cb69-1432"><a href="#cb69-1432" aria-hidden="true" tabindex="-1"></a><span class="fu">ggtsdisplay</span>(Xt)</span>
+<span id="cb69-1433"><a href="#cb69-1433" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb69-1434"><a href="#cb69-1434" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1437"><a href="#cb69-1437" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb69-1438"><a href="#cb69-1438" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb69-1439"><a href="#cb69-1439" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-tsdispma3</span></span>
+<span id="cb69-1440"><a href="#cb69-1440" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "EDA plots of a typical MA(3) process"</span></span>
+<span id="cb69-1441"><a href="#cb69-1441" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1442"><a href="#cb69-1442" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb69-1443"><a href="#cb69-1443" aria-hidden="true" tabindex="-1"></a>Xt <span class="ot">&lt;-</span> <span class="fu">arima.sim</span>(<span class="fu">list</span>(<span class="at">order=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">3</span>), <span class="at">ma=</span><span class="fu">c</span>(.<span class="dv">3</span>, .<span class="dv">1</span>, <span class="sc">-</span>.<span class="dv">4</span>)), <span class="at">n=</span><span class="dv">500</span>)</span>
+<span id="cb69-1444"><a href="#cb69-1444" aria-hidden="true" tabindex="-1"></a><span class="fu">ggtsdisplay</span>(Xt)</span>
+<span id="cb69-1445"><a href="#cb69-1445" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb69-1446"><a href="#cb69-1446" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1447"><a href="#cb69-1447" aria-hidden="true" tabindex="-1"></a>Building good ARIMA models of @boxgenkins generally requires a reasonable amount of experience compared to building models to cross-section data. **In this course you are expected not to build ARIMA models** (no exam questions). But it should not be too hard to recognise the situations such as seasonality in the data series using EDA tools.</span>
+<span id="cb69-1447"><a href="#cb69-1447" aria-hidden="true" tabindex="-1"></a>**ARMA Model**</span>
 <span id="cb69-1448"><a href="#cb69-1448" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1449"><a href="#cb69-1449" aria-hidden="true" tabindex="-1"></a>The <span class="in">`R`</span> package *forecast* has a convenient function called <span class="in">`auto.arima`</span> which can quickly fit an ARIMA model. This is just an initial model which must be improved further. For the credit balance data, we obtain the following output:</span>
+<span id="cb69-1449"><a href="#cb69-1449" aria-hidden="true" tabindex="-1"></a>The term $ARMA(p, q)$ model refers to the following equation that combines both the $AR(p)$ and $MA(q)$ models.</span>
 <span id="cb69-1450"><a href="#cb69-1450" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1453"><a href="#cb69-1453" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb69-1454"><a href="#cb69-1454" aria-hidden="true" tabindex="-1"></a><span class="fu">auto.arima</span>(credit.balance)</span>
-<span id="cb69-1455"><a href="#cb69-1455" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb69-1456"><a href="#cb69-1456" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1457"><a href="#cb69-1457" aria-hidden="true" tabindex="-1"></a>This package can also generate forecasts easily, see @fig-creditfcast. This plot also shows the confidence bands for the forecasts.</span>
-<span id="cb69-1458"><a href="#cb69-1458" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1461"><a href="#cb69-1461" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb69-1462"><a href="#cb69-1462" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
-<span id="cb69-1463"><a href="#cb69-1463" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-creditfcast</span></span>
-<span id="cb69-1464"><a href="#cb69-1464" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Forecasts for credit balance series"</span></span>
-<span id="cb69-1465"><a href="#cb69-1465" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1466"><a href="#cb69-1466" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">auto.arima</span>(credit.balance)</span>
-<span id="cb69-1467"><a href="#cb69-1467" aria-hidden="true" tabindex="-1"></a>forecast<span class="sc">::</span><span class="fu">autoplot</span>(<span class="fu">forecast</span>(fit,<span class="at">h=</span><span class="dv">24</span>))</span>
-<span id="cb69-1468"><a href="#cb69-1468" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb69-1469"><a href="#cb69-1469" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1470"><a href="#cb69-1470" aria-hidden="true" tabindex="-1"></a><span class="fu"># Summary</span></span>
-<span id="cb69-1471"><a href="#cb69-1471" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1472"><a href="#cb69-1472" aria-hidden="true" tabindex="-1"></a>Regression methods are the most commonly used of statistics techniques. The main aim is to fit a model by least squares to explain the variation in the response variable $Y$ by using one or more explanatory variables $X_1$, $X_2$, ... , $X_k$. The correlation coefficient $r_{xy}$ measures the strength of the linear relationship between $Y$ and $X$; $R^{2}$ measures the strength of the linear relationship between $Y$ and $X_1$, $X_2$, ... , $X_k$. When $k$=1, then $r_{xy}^{2} =R^{2}$. Scatter plots and correlation coefficients provide important clues to the inter-relationships between the variables.</span>
-<span id="cb69-1473"><a href="#cb69-1473" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1474"><a href="#cb69-1474" aria-hidden="true" tabindex="-1"></a>In building up a model by adding new variables, the correlation (or overlap) with $y$ is important but the correlations between a new explanatory variable and each of the existing explanatory variables also determine how effective the addition of the variable will be.</span>
-<span id="cb69-1475"><a href="#cb69-1475" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1476"><a href="#cb69-1476" aria-hidden="true" tabindex="-1"></a>Stepwise regression procedures identify potentially good regression models by repeatedly comparing an existing model with other models in which an explanatory variable has been either deleted or added, using some criterion such as significance of the deleted or added term (as measured by the $p$-value of the relevant $t$ or $F$ statistic) or the AIC of the model. Polynomial regression models employ the square, cube etc terms of the original variables as additional predictors.</span>
-<span id="cb69-1477"><a href="#cb69-1477" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1478"><a href="#cb69-1478" aria-hidden="true" tabindex="-1"></a>When at least two explanatory variables are highly correlated, we have multicollinear data. The effect is that the variance of least square estimators will be inflated rendering the coefficients insignificant and hence we may need to discard one or more of the highly correlated variables.</span>
-<span id="cb69-1479"><a href="#cb69-1479" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-1480"><a href="#cb69-1480" aria-hidden="true" tabindex="-1"></a>EDA plots of residuals help to answer the question as to whether the fit is good or whether a transformation may help or whether other variables (including square, cubic etc) should be added. If residuals are plotted against fitted $Y$ or $X$ variables no discernible pattern should be observed. Estimated regression coefficients may be affected by leverage points, and hence influence diagnostics are performed.</span>
+<span id="cb69-1451"><a href="#cb69-1451" aria-hidden="true" tabindex="-1"></a>$$X_t=\alpha_1 X_{t-1}+ \alpha_2 X_{t-2}+ \dots + \alpha_p X_{t-p} + \beta_o z_{t}+ \beta_1 z_{t-1}+ \dots + \beta_q z_{t-q}$$ It is easy to see that the term $\epsilon_t$ in the $AR(p)$ model is replaced or expanded with the $MA(q)$ model. You may wonder why to have such a complicated model. In fact the ARMA model requires fewer parameters than using just $MA(q)$ or $AR(p)$ model. $ARMA(p, q)$ model is a stationary model. @fig-tsdisparima shows the EDA plots for the simulated series from the $ARMA(2,2)$ process; note the constants fixed under the <span class="in">`ar`</span> and <span class="in">`ma`</span> parts of the <span class="in">`arima.sim`</span> function and compare the ACF and PACF plots.</span>
+<span id="cb69-1452"><a href="#cb69-1452" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1455"><a href="#cb69-1455" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb69-1456"><a href="#cb69-1456" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb69-1457"><a href="#cb69-1457" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-tsdisparima</span></span>
+<span id="cb69-1458"><a href="#cb69-1458" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "EDA plots of a typical MA(3) process"</span></span>
+<span id="cb69-1459"><a href="#cb69-1459" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1460"><a href="#cb69-1460" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb69-1461"><a href="#cb69-1461" aria-hidden="true" tabindex="-1"></a>Xt <span class="ot">&lt;-</span> <span class="fu">arima.sim</span>(<span class="fu">list</span>(<span class="at">order=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">2</span>), <span class="at">ar=</span><span class="fu">c</span>(.<span class="dv">5</span>, <span class="sc">-</span>.<span class="dv">3</span>), <span class="at">ma=</span><span class="fu">c</span>(.<span class="dv">3</span>, .<span class="dv">1</span>)), <span class="at">n=</span><span class="dv">500</span>)</span>
+<span id="cb69-1462"><a href="#cb69-1462" aria-hidden="true" tabindex="-1"></a><span class="fu">ggtsdisplay</span>(Xt)</span>
+<span id="cb69-1463"><a href="#cb69-1463" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb69-1464"><a href="#cb69-1464" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1465"><a href="#cb69-1465" aria-hidden="true" tabindex="-1"></a>**Fitting ARMA model** Fitting an AR model can be done approximately using the multiple regression approach. If we use the sample mean $\bar{X}$ to estimate the mean $\mu$ of the process, the AR model becomes the multiple regression model with lags as predictors. However we cannot take the same approach to fitting ARMA models and we need to employ nonlinear optimisation methods.</span>
+<span id="cb69-1466"><a href="#cb69-1466" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1467"><a href="#cb69-1467" aria-hidden="true" tabindex="-1"></a>After fitting the ARMA model, we perform diagnostics of the fitted model. Here we explore the residuals of the fitted model for randomness and periodicity. In order to avoid *over fitting*, we will also examine the standard errors of the fitted coefficients. The need for transformations such the logarithm or the square root will also be indicated by the residuals.</span>
+<span id="cb69-1468"><a href="#cb69-1468" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1469"><a href="#cb69-1469" aria-hidden="true" tabindex="-1"></a>If the residuals are found to be nonstationary (often the case), we opt for differencing of the series. We have briefly seen that differencing can bring stationarity to a drifting process. Formally, the first difference $X_t-X_{t-1}$ is denoted as $\bigtriangledown X_t$. If we perform the differencing of the differences, we obtain $\bigtriangledown^2 X_t$ and so on. In order to bring stationarity to residuals, we may do differencing $d$ times. We then fit the model to $\bigtriangledown^2 X_t$ instead of $X_t$. This model is known as an autoregressive integrated moving average (ARIMA) model and denoted as $ARIMA(p, d, q)$. The term "integrated" means that the stationary model that was fitted based on the differenced data has to be summed (or "integrated") to provide a model for the original data.</span>
+<span id="cb69-1470"><a href="#cb69-1470" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1471"><a href="#cb69-1471" aria-hidden="true" tabindex="-1"></a>The ARIMA model is further generalised to seasonal ARIMA (SARIMA) model. The AR part for seasons (parameter P), differencing part (D) and the MA part (Q) form part of the $SARIMA(p,d,q ,P, D, Q)$. This topic is covered in higher level courses.</span>
+<span id="cb69-1472"><a href="#cb69-1472" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1473"><a href="#cb69-1473" aria-hidden="true" tabindex="-1"></a>Building good ARIMA models of @boxgenkins generally requires a reasonable amount of experience compared to building models to cross-section data. **In this course you are expected not to build ARIMA models** (no exam questions). But it should not be too hard to recognise the situations such as seasonality in the data series using EDA tools.</span>
+<span id="cb69-1474"><a href="#cb69-1474" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1475"><a href="#cb69-1475" aria-hidden="true" tabindex="-1"></a>The <span class="in">`R`</span> package *forecast* has a convenient function called <span class="in">`auto.arima`</span> which can quickly fit an ARIMA model. This is just an initial model which must be improved further. For the credit balance data, we obtain the following output:</span>
+<span id="cb69-1476"><a href="#cb69-1476" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1479"><a href="#cb69-1479" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb69-1480"><a href="#cb69-1480" aria-hidden="true" tabindex="-1"></a><span class="fu">auto.arima</span>(credit.balance)</span>
+<span id="cb69-1481"><a href="#cb69-1481" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb69-1482"><a href="#cb69-1482" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1483"><a href="#cb69-1483" aria-hidden="true" tabindex="-1"></a>This package can also generate forecasts easily, see @fig-creditfcast. This plot also shows the confidence bands for the forecasts.</span>
+<span id="cb69-1484"><a href="#cb69-1484" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1487"><a href="#cb69-1487" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb69-1488"><a href="#cb69-1488" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb69-1489"><a href="#cb69-1489" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-creditfcast</span></span>
+<span id="cb69-1490"><a href="#cb69-1490" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Forecasts for credit balance series"</span></span>
+<span id="cb69-1491"><a href="#cb69-1491" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-1492"><a href="#cb69-1492" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">auto.arima</span>(credit.balance)</span>
+<span id="cb69-1493"><a href="#cb69-1493" aria-hidden="true" tabindex="-1"></a>forecast<span class="sc">::</span><span class="fu">autoplot</span>(<span class="fu">forecast</span>(fit,<span class="at">h=</span><span class="dv">24</span>))</span>
+<span id="cb69-1494"><a href="#cb69-1494" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb69-1495"><a href="#cb69-1495" aria-hidden="true" tabindex="-1"></a></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
