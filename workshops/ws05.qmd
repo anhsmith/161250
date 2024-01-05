@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE, comment=NA, fig
 
 This dataset is from the `vcdExtra` package. Two signs of *toxaemia*, an abnormal condition during pregnancy characterized by high blood pressure (hypertension) and high levels of protein in the urine. If untreated, both the mother and baby are at risk of complications or death. The dataset `Toxaemia` represents 13384 expectant mothers in Bradford, England in their first pregnancy, who were also classified according to social class and the number of cigarettes smoked per day.
 
-The dataset is a a 5 x 3 x 2 x 2 contingency table, with 60 observations on the following 5 variables:
+The dataset is a 5 x 3 x 2 x 2 contingency table, with 60 observations on the following 5 variables:
 
 `class` - Social class of mother, a factor with levels: 1, 2, 3, 4, 5
 
@@ -28,7 +28,7 @@ Obtain relevant graphical displays for this dataset.
 
 Bar charts-
 
-```{r, fig.show='hide', results='hide'}
+```{r}
 library(tidyverse)
 
 library(vcdExtra)
@@ -38,7 +38,9 @@ Toxaemia |>
   ggplot() + 
   aes(x=smoke, y=Freq, fill=hyper) + 
   geom_bar(stat='identity')
+```
 
+```{r}
 Toxaemia |> 
   ggplot() + 
   aes(x=smoke, y=Freq, fill=hyper) + 
@@ -46,6 +48,9 @@ Toxaemia |>
            position = "dodge"
            )
 
+
+```
+```{r}
 Toxaemia |> 
   ggplot() + 
   aes(x=smoke, y=Freq, fill=hyper) + 
@@ -70,9 +75,58 @@ strucplot(tab.data)
 sieve(tab.data)
 ```
 
+The full dataset is a 5 x 3 x 2 x 2 contingency table, with 60 observations on the following 5 variables.
+For this question we will focus on two categorical variables from this dataset, `hyper` and `urea`. This forms a 2 x 2 contingency table since these variables each have two levels. 
+
+```{r}
+# subset the data
+tox_2 <- Toxaemia |> 
+  dplyr::select(hyper, urea, Freq)
+```
+
+
+```{r}
+# the tidyverse way
+tox_display <- tox_2 |> 
+  pivot_wider(names_from = urea, 
+              values_from = Freq,
+              values_fn = sum) |>
+  column_to_rownames( var = "hyper") # make values of hyper column row names
+
+tox_display
+
+# xtabs() 
+```
+
+Two signs of *toxaemia*, are high blood pressure (hypertension) and high levels of protein in the urine. We want to ask if in our sample of expectant mothers in Bradford, England, is high blood pressure related to high protein levels? If these two variables are associated this may indicate the presence of toxaemia in the sample, if they are independent toxaemia may not be present. 
+
+We can test this question using a Chi-squared test.
+
+The null hypothesis of the chi-squared these is that the two variables are independent and the alternative hypothesis is that the two variables are not independent.
+
+Our null hypothesis is that Hypertension level and the Protein urea level in expectant mothers in Bradford, England are independent. 
+
+Our alternative hypothesis that Hypertension level and the Protein urea level in expectant mothers in Bradford, England are *not* independent. 
+
+Set our alpha = 0.05
+```{r}
+chisq.test(tox_display)
+```
+Since our p-value is less than our alpha level we reject the null hypothesis and conclude that the two variables (hyper & urea) are not independent. We found evidence of an association between hypertension levels and protein in urine levels in our sample of expectant mothers in in Bradford, England.
+
+We can see the expected counts
+```{r}
+chisq.test(tox_display)$expected
+
+# compared to our observed
+tox_display
+
+# total counts 13384
+```
+
 # Exercise 5.2 {-}
 
-The genetic information of an organism is stored in its Deoxyribonucleic acid (DNA). DNA is a double stranded helix made up of four different nucleotides. These nucleotides differ in which of the four bases Adenine (A), Guanine (G), Cytosine (C), or Thymine (T) they contain. A simple pattern that we may want to detect in a DNA sequence is that of the nucleotide at position `i+1` based on the nucleotide at position `i`. The nucleotide positional data collected by a researcher in a particular case is given in the following table:
+The genetic information of an organism is stored in its Deoxyribonucleic acid (DNA). DNA is a double stranded helix made up of four different nucleotides. These nucleotides differ in which of the four bases Adenine (A), Guanine (G), Cytosine (C), or Thymine (T) they contain. Nucleotides combine to form amino acids which are the building blocks of proteins. Simply put, three nucleotides form an amino acid and the specific order of a combination dictates what amino acid is formed. A simple pattern that we may want to detect in a DNA sequence is that of the nucleotide at position `i+1` based on the nucleotide at position `i`. The nucleotide positional data collected by a researcher in a particular case is given in the following table:
 
 | `i\(i+1)` | A   | C   | G   | T   |
 |-----------|-----|-----|-----|-----|
@@ -93,20 +147,29 @@ tabledata <- data.frame(
   )
 ```
 
-```{r, fig.show='hide', results='hide'}
+```{r}
 chisq.test(tabledata)$exp
 chisq.test(tabledata)
 chisq.test(tabledata, simulate.p.value = T)
 
+```
+
+```{r}
+# if there is an association we can examine patterns 
 library(MASS)
 corresp(tabledata)
+
+```
+```{r}
 plot(corresp(tabledata, nf=2))
 abline(v=0)
 abline(h=0)
+```
+
+```{r}
 #or
 library(FactoMineR)
 CA(tabledata)
-
 ```
 
 

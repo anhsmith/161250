@@ -11,8 +11,7 @@ ggplot(diamonds, aes(color))+geom_bar(aes(fill=cut))+ facet_wrap(~clarity)
 
 # EDA
 
-attach(diamonds)
-tab.data <- xtabs( ~ cut+color)
+tab.data <- xtabs( ~ cut+color, data = diamonds)
 
 plot(tab.data)
 
@@ -24,6 +23,7 @@ strucplot(tab.data, core = struc_assoc)
 
 sieve(tab.data)
 
+library(gplots)
 gplots::balloonplot(tab.data, main ="Balloon Plot", xlab ="", ylab="",
                     label = FALSE, show.margins = FALSE)
 
