@@ -61,6 +61,14 @@ ch |>
 
 Well… it’s sort-of linear… ish… not really.
 
+```{r}
+ch |> 
+  ggplot() + 
+  aes(degC, chirps) +
+  geom_point() +
+  geom_smooth(method = 'lm')
+
+```
 ## Linear model
 
 Now let’s fit a linear model and print it. (Just typing an object’s name is the same as applying the function `print`.)
@@ -102,7 +110,7 @@ chm$coefficients
 
 # or 
 
-coef(chm)
+# coef(chm)
 ```
 
 This shows us $a$ and $b$, the sample estimates of the population parameters, $\alpha$ and $\beta$. The model we have fit to this dataset is thus $Y = 6.47 + 0.38X$. 
@@ -114,8 +122,9 @@ chm$fitted.values
 
 # or
 
-fitted(chm)
+# fitted(chm)
 ```
+
 ```{r}
 resid(chm)
 ```
@@ -340,7 +349,7 @@ rlmp <- rlm(prestige ~ education, data = Prestige)
 
 Plot using the `visreg` package.
 
-```{r, fig.show='hide',results='hide'}
+```{r}
 visreg(rlmp)
 ```
 
