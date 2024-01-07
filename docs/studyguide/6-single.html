@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.3.353">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -109,8 +109,7 @@ div.csl-indent {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-submit-button-title": "Submit"
   }
 }</script>
 
@@ -297,9 +296,12 @@ div.csl-indent {
   <li><a href="#robust-model-fitting" id="toc-robust-model-fitting" class="nav-link" data-scroll-target="#robust-model-fitting">Robust Model Fitting</a>
   <ul class="collapse">
   <li><a href="#cross-validation-cv" id="toc-cross-validation-cv" class="nav-link" data-scroll-target="#cross-validation-cv">Cross Validation (CV)</a></li>
+  </ul></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a>
+  <ul class="collapse">
+  <li><a href="#main-points" id="toc-main-points" class="nav-link" data-scroll-target="#main-points">Main points</a></li>
   <li><a href="#models-related-to-simple-regression-model" id="toc-models-related-to-simple-regression-model" class="nav-link" data-scroll-target="#models-related-to-simple-regression-model">Models Related to Simple Regression Model</a></li>
   </ul></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="6-single.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
@@ -654,7 +656,7 @@ R_{adj}^{2}
 </details>
 <div class="cell-output cell-output-stderr">
 <pre><code>
-lessR 4.2.9                         feedback: gerbing@pdx.edu 
+lessR 4.3.0                         feedback: gerbing@pdx.edu 
 --------------------------------------------------------------
 &gt; d &lt;- Read("")   Read text, Excel, SPSS, SAS, or R data file
   d is default data frame, data= in analysis routines optional
@@ -1329,6 +1331,26 @@ seed : int(0) </code></pre>
 </div>
 </div>
 </section>
+</section>
+<section id="summary" class="level1">
+<h1>Summary</h1>
+<p>Once a model is fitted to data, the question must be asked as to whether the fit is a good one. Perhaps it would be more in keeping with the spirit of statistical tests to ask if the fit is bad. The fitted model is of the general form</p>
+<p><span class="math display">\[ \text{observation = fit+ residual}\]</span></p>
+<p>Model improvement will take place to capture all the systematic variation in the data. This chapter considered only straight line models with a single predictor variable. If the fit is poor, a transformation could be tried by stretching or shrinking <span class="math inline">\(Y\)</span> by a power transformation.</p>
+<p>Scatterplots and correlation coefficients provide important clues to the inter-relationships between the variables and hence form the first step in building a regression model. The simple regression model is one of the most commonly used tools. Here the main aim is to fit a model (slope and <span class="math inline">\(y\)</span>-intercept) by the least squares method to explain the variation in <span class="math inline">\(Y\)</span>, the response variable, by fitting the explanatory (<span class="math inline">\(X\)</span>) variable. Regression models are often improved in several ways after residual analysis.</p>
+<p><strong>What is THE best model for this data?</strong> If there is an answer to this question, it should not be determined solely on statistical grounds. Statistics as a tool (often a very powerful tool) can only suggest the best model given that a number of assumptions have been agreed on. Ideally, one would not have to make a decision on the basis of a single sample as we have here. We should examine the literature to discover similar examples and see how they were tackled or, even better, one could discuss the matter with a researcher who has worked on similar data sets. If the aim is to estimate the coefficients or to predict the weight of the heart of another living horse from ultrasound measurements, we tend to select the simplest, feasible model. In this case, we could choose a model with ONE predictor variable (say <em>innerdia</em>). And a cube root or logarithm transformation might be applied. With more than one explanatory variable, the number of possibilities increases for relationships between these variables and between the response variable <span class="math inline">\(Y\)</span>. These possibilities will be discussed further in the next chapter.</p>
+<section id="main-points" class="level2">
+<h2 class="anchored" data-anchor-id="main-points">Main points</h2>
+<p>Concepts and practical skills you should have at the end of this chapter:</p>
+<ul>
+<li>Understand and be able to perform a simple linear regression on bivariate related data sets</li>
+<li>Use scatter plots or other appropriate plots to visualize the data and regression line</li>
+<li>Summarize regression results and appropriate tests of significance. Interpret these results in context of your data</li>
+<li>Examine residual diagnostic plots and test assumptions, then perform appropriate transformations as necessary</li>
+<li>Use a regression line to predict new data and explain confidence and prediction intervals</li>
+<li>Understand and explain the concepts of robust regression modeling, Tukey Line, and cross-validation.</li>
+</ul>
+</section>
 <section id="models-related-to-simple-regression-model" class="level2">
 <h2 class="anchored" data-anchor-id="models-related-to-simple-regression-model">Models Related to Simple Regression Model</h2>
 <p>For some applications, the true <span class="math inline">\(y\)</span>-intercept <span class="math inline">\(\alpha\)</span> is <em>known</em> to be zero. An example is when a model is fitted with compositional characteristics as predictors such as percentage fat, protein, moisture in milk powder. The sum of these compositional characteristics is always 100% and this constraint removes the intercept due to theoretical reasons. In such cases, we will be fitting only the slope(s). When the model without the <span class="math inline">\(y\)</span>-intercept is the true or correct model, both the fitted models (with and without the <span class="math inline">\(y\)</span>-intercept) provide unbiased estimates of the true parameters. However the model without the intercept will provide precise estimates. This regression model without the intercept must be used with caution because a very strong assumption is made on the true <span class="math inline">\(y\)</span>-intercept. The first differences of certain time series data may be analysed with a model having no intercept term.</p>
@@ -1359,20 +1381,12 @@ seed : int(0) </code></pre>
 </div>
 </div>
 <p>A number of relationships between variables can be linearised by transformations. For example, the relationship <span class="math inline">\(y=\alpha x^{\beta }\)</span> is linearised by taking <span class="math inline">\(\log\)</span> on both sides as <span class="math display">\[\log (y)=\log (\alpha )+\beta \log (x).\]</span> The methods discussed in this chapter will equally apply for models which can be rewritten as a straight line equation.</p>
-</section>
-</section>
-<section id="summary" class="level1">
-<h1>Summary</h1>
-<p>Once a model is fitted to data, the question must be asked as to whether the fit is a good one. Perhaps it would be more in keeping with the spirit of statistical tests to ask if the fit is bad. The fitted model is of the general form</p>
-<p><span class="math display">\[ \text{observation = fit+ residual}\]</span></p>
-<p>Model improvement will take place to capture all the systematic variation in the data. This chapter considered only straight line models. If the fit is poor, a transformation could be tried by stretching or shrinking <span class="math inline">\(Y\)</span> by a power transformation.</p>
-<p>Scatterplots and correlation coefficients provide important clues to the inter-relationships between the variables and hence form the first step in building a regression model. The simple regression model is one of the most commonly used tools. Here the main aim is to fit a model (slope and <span class="math inline">\(y\)</span>-intercept) by the least squares method to explain the variation in <span class="math inline">\(Y\)</span>, the response variable, by fitting the explanatory (<span class="math inline">\(X\)</span>) variable. Regression models are often improved in several ways after residual analysis.</p>
-<p><strong>What is THE best model for this data?</strong> If there is an answer to this question, it should not be determined solely on statistical grounds. Statistics as a tool (often a very powerful tool) can only suggest the best model given that a number of assumptions have been agreed on. Ideally, one would not have to make a decision on the basis of a single sample as we have here. We should examine the literature to discover similar examples and see how they were tackled or, even better, one could discuss the matter with a researcher who has worked on similar data sets. If the aim is to estimate the coefficients or to predict the weight of the heart of another living horse from ultrasound measurements, we tend to select the simplest, feasible model. In this case, we could choose a model with ONE predictor variable (say <em>innerdia</em>). And a cube root or logarithm transformation might be applied. With more than one explanatory variable, the number of possibilities increases for relationships between these variables and between the response variable <span class="math inline">\(Y\)</span>. These possibilities will be discussed further in the next chapter.</p>
 
 
 <!-- -->
 
 
+</section>
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
@@ -2708,44 +2722,55 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb49-1104"><a href="#cb49-1104" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb49-1105"><a href="#cb49-1105" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb49-1106"><a href="#cb49-1106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-1107"><a href="#cb49-1107" aria-hidden="true" tabindex="-1"></a><span class="fu">## Models Related to Simple Regression Model</span></span>
-<span id="cb49-1108"><a href="#cb49-1108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-1109"><a href="#cb49-1109" aria-hidden="true" tabindex="-1"></a>For some applications, the true $y$-intercept $\alpha$ is *known* to be zero. An example is when a model is fitted with compositional characteristics as predictors such as percentage fat, protein, moisture in milk powder. The sum of these compositional characteristics is always 100% and this constraint removes the intercept due to theoretical reasons. In such cases, we will be fitting only the slope(s). When the model without the $y$-intercept is the true or correct model, both the fitted models (with and without the $y$-intercept) provide unbiased estimates of the true parameters. However the model without the intercept will provide precise estimates. This regression model without the intercept must be used with caution because a very strong assumption is made on the true $y$-intercept. The first differences of certain time series data may be analysed with a model having no intercept term.</span>
-<span id="cb49-1110"><a href="#cb49-1110" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-1111"><a href="#cb49-1111" aria-hidden="true" tabindex="-1"></a>For some applications such as measurement system analysis in metrology **orthogonal regression** models are fitted because both X and Y variables are subject to measurement errors. In the least squares method, we minimise the sum of the squared vertical distances between the actual Y and fitted Y values. For orthogonal regression, we consider the perpendicular distances instead. This approach is a subset of a theory known as **principal components**. The orthogonal regression approach was popularised by Deming for industrial applications and hence this fit is also known as **Deming regression**. `R` software packages (such as `MethComp`, `deming` and `mcr`) will fit orthogonal regression models. @fig-dmng shows the Deming regression model to **testmarks** data but you do not have to perform this regression for this course.</span>
-<span id="cb49-1112"><a href="#cb49-1112" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-1115"><a href="#cb49-1115" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb49-1116"><a href="#cb49-1116" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
-<span id="cb49-1117"><a href="#cb49-1117" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-dmng</span></span>
-<span id="cb49-1118"><a href="#cb49-1118" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: 'Orthogonal regression'</span></span>
+<span id="cb49-1107"><a href="#cb49-1107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-1108"><a href="#cb49-1108" aria-hidden="true" tabindex="-1"></a><span class="fu"># Summary</span></span>
+<span id="cb49-1109"><a href="#cb49-1109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-1110"><a href="#cb49-1110" aria-hidden="true" tabindex="-1"></a>Once a model is fitted to data, the question must be asked as to whether the fit is a good one. Perhaps it would be more in keeping with the spirit of statistical tests to ask if the fit is bad. The fitted model is of the general form</span>
+<span id="cb49-1111"><a href="#cb49-1111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-1112"><a href="#cb49-1112" aria-hidden="true" tabindex="-1"></a>$$ \text{observation = fit+ residual}$$</span>
+<span id="cb49-1113"><a href="#cb49-1113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-1114"><a href="#cb49-1114" aria-hidden="true" tabindex="-1"></a>Model improvement will take place to capture all the systematic variation in the data. This chapter considered only straight line models with a single predictor variable. If the fit is poor, a transformation could be tried by stretching or shrinking $Y$ by a power transformation.</span>
+<span id="cb49-1115"><a href="#cb49-1115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-1116"><a href="#cb49-1116" aria-hidden="true" tabindex="-1"></a>Scatterplots and correlation coefficients provide important clues to the inter-relationships between the variables and hence form the first step in building a regression model. The simple regression model is one of the most commonly used tools. Here the main aim is to fit a model (slope and $y$-intercept) by the least squares method to explain the variation in $Y$, the response variable, by fitting the explanatory ($X$) variable. Regression models are often improved in several ways after residual analysis.</span>
+<span id="cb49-1117"><a href="#cb49-1117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-1118"><a href="#cb49-1118" aria-hidden="true" tabindex="-1"></a>**What is THE best model for this data?** If there is an answer to this question, it should not be determined solely on statistical grounds. Statistics as a tool (often a very powerful tool) can only suggest the best model given that a number of assumptions have been agreed on. Ideally, one would not have to make a decision on the basis of a single sample as we have here. We should examine the literature to discover similar examples and see how they were tackled or, even better, one could discuss the matter with a researcher who has worked on similar data sets. If the aim is to estimate the coefficients or to predict the weight of the heart of another living horse from ultrasound measurements, we tend to select the simplest, feasible model. In this case, we could choose a model with ONE predictor variable (say *innerdia*). And a cube root or logarithm transformation might be applied. With more than one explanatory variable, the number of possibilities increases for relationships between these variables and between the response variable $Y$. These possibilities will be discussed further in the next chapter.</span>
 <span id="cb49-1119"><a href="#cb49-1119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-1120"><a href="#cb49-1120" aria-hidden="true" tabindex="-1"></a>my.pca <span class="ot">&lt;-</span> <span class="fu">prcomp</span>( <span class="sc">~</span> Maths<span class="sc">+</span>English, <span class="at">data=</span>testmarks)</span>
-<span id="cb49-1121"><a href="#cb49-1121" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-1122"><a href="#cb49-1122" aria-hidden="true" tabindex="-1"></a>slp <span class="ot">&lt;-</span> my.pca<span class="sc">$</span>rotation[<span class="dv">2</span>,<span class="dv">1</span>] <span class="sc">/</span> my.pca<span class="sc">$</span>rotation[<span class="dv">1</span>,<span class="dv">1</span>]</span>
-<span id="cb49-1123"><a href="#cb49-1123" aria-hidden="true" tabindex="-1"></a>intr <span class="ot">&lt;-</span> my.pca<span class="sc">$</span>center[<span class="dv">2</span>] <span class="sc">-</span> slp<span class="sc">*</span>my.pca<span class="sc">$</span>center[<span class="dv">1</span>]</span>
-<span id="cb49-1124"><a href="#cb49-1124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-1125"><a href="#cb49-1125" aria-hidden="true" tabindex="-1"></a>my.caption <span class="ot">=</span> <span class="fu">paste</span>(<span class="st">"Slope="</span>, <span class="fu">round</span>(slp, <span class="dv">2</span>), <span class="st">"  "</span>, <span class="st">"Intercept"</span>, <span class="fu">round</span>(intr, <span class="dv">2</span>))</span>
-<span id="cb49-1126"><a href="#cb49-1126" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-1127"><a href="#cb49-1127" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(testmarks) <span class="sc">+</span> </span>
-<span id="cb49-1128"><a href="#cb49-1128" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>Maths,<span class="at">y=</span>English)) <span class="sc">+</span> </span>
-<span id="cb49-1129"><a href="#cb49-1129" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> intr, <span class="at">slope =</span> slp) <span class="sc">+</span> </span>
-<span id="cb49-1130"><a href="#cb49-1130" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Orthogonal Regression"</span>) <span class="sc">+</span> </span>
-<span id="cb49-1131"><a href="#cb49-1131" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">caption =</span> my.caption)</span>
-<span id="cb49-1132"><a href="#cb49-1132" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb49-1120"><a href="#cb49-1120" aria-hidden="true" tabindex="-1"></a><span class="fu">## Main points</span></span>
+<span id="cb49-1121"><a href="#cb49-1121" aria-hidden="true" tabindex="-1"></a>Concepts and practical skills you should have at the end of this chapter:</span>
+<span id="cb49-1122"><a href="#cb49-1122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-1123"><a href="#cb49-1123" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Understand and be able to perform a simple linear regression on bivariate related data sets</span>
+<span id="cb49-1124"><a href="#cb49-1124" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Use scatter plots or other appropriate plots to visualize the data and regression line</span>
+<span id="cb49-1125"><a href="#cb49-1125" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Summarize regression results and appropriate tests of significance. Interpret these results in context of your data</span>
+<span id="cb49-1126"><a href="#cb49-1126" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Examine residual diagnostic plots and test assumptions, then perform appropriate transformations as necessary</span>
+<span id="cb49-1127"><a href="#cb49-1127" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Use a regression line to predict new data and explain confidence and prediction intervals</span>
+<span id="cb49-1128"><a href="#cb49-1128" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Understand and explain the concepts of robust regression modeling, Tukey Line, and cross-validation.</span>
+<span id="cb49-1129"><a href="#cb49-1129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-1130"><a href="#cb49-1130" aria-hidden="true" tabindex="-1"></a><span class="fu">## Models Related to Simple Regression Model</span></span>
+<span id="cb49-1131"><a href="#cb49-1131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-1132"><a href="#cb49-1132" aria-hidden="true" tabindex="-1"></a>For some applications, the true $y$-intercept $\alpha$ is *known* to be zero. An example is when a model is fitted with compositional characteristics as predictors such as percentage fat, protein, moisture in milk powder. The sum of these compositional characteristics is always 100% and this constraint removes the intercept due to theoretical reasons. In such cases, we will be fitting only the slope(s). When the model without the $y$-intercept is the true or correct model, both the fitted models (with and without the $y$-intercept) provide unbiased estimates of the true parameters. However the model without the intercept will provide precise estimates. This regression model without the intercept must be used with caution because a very strong assumption is made on the true $y$-intercept. The first differences of certain time series data may be analysed with a model having no intercept term.</span>
 <span id="cb49-1133"><a href="#cb49-1133" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-1134"><a href="#cb49-1134" aria-hidden="true" tabindex="-1"></a>A number of relationships between variables can be linearised by transformations. For example, the relationship $y=\alpha x^{\beta }$ is linearised by taking $\log$ on both sides as $$\log (y)=\log (\alpha )+\beta \log (x).$$ The methods discussed in this chapter will equally apply for models which can be rewritten as a straight line equation.</span>
+<span id="cb49-1134"><a href="#cb49-1134" aria-hidden="true" tabindex="-1"></a>For some applications such as measurement system analysis in metrology **orthogonal regression** models are fitted because both X and Y variables are subject to measurement errors. In the least squares method, we minimise the sum of the squared vertical distances between the actual Y and fitted Y values. For orthogonal regression, we consider the perpendicular distances instead. This approach is a subset of a theory known as **principal components**. The orthogonal regression approach was popularised by Deming for industrial applications and hence this fit is also known as **Deming regression**. `R` software packages (such as `MethComp`, `deming` and `mcr`) will fit orthogonal regression models. @fig-dmng shows the Deming regression model to **testmarks** data but you do not have to perform this regression for this course.</span>
 <span id="cb49-1135"><a href="#cb49-1135" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-1136"><a href="#cb49-1136" aria-hidden="true" tabindex="-1"></a><span class="fu"># Summary</span></span>
-<span id="cb49-1137"><a href="#cb49-1137" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-1138"><a href="#cb49-1138" aria-hidden="true" tabindex="-1"></a>Once a model is fitted to data, the question must be asked as to whether the fit is a good one. Perhaps it would be more in keeping with the spirit of statistical tests to ask if the fit is bad. The fitted model is of the general form</span>
-<span id="cb49-1139"><a href="#cb49-1139" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-1140"><a href="#cb49-1140" aria-hidden="true" tabindex="-1"></a>$$ \text{observation = fit+ residual}$$</span>
-<span id="cb49-1141"><a href="#cb49-1141" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-1142"><a href="#cb49-1142" aria-hidden="true" tabindex="-1"></a>Model improvement will take place to capture all the systematic variation in the data. This chapter considered only straight line models. If the fit is poor, a transformation could be tried by stretching or shrinking $Y$ by a power transformation.</span>
-<span id="cb49-1143"><a href="#cb49-1143" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-1144"><a href="#cb49-1144" aria-hidden="true" tabindex="-1"></a>Scatterplots and correlation coefficients provide important clues to the inter-relationships between the variables and hence form the first step in building a regression model. The simple regression model is one of the most commonly used tools. Here the main aim is to fit a model (slope and $y$-intercept) by the least squares method to explain the variation in $Y$, the response variable, by fitting the explanatory ($X$) variable. Regression models are often improved in several ways after residual analysis.</span>
-<span id="cb49-1145"><a href="#cb49-1145" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-1146"><a href="#cb49-1146" aria-hidden="true" tabindex="-1"></a>**What is THE best model for this data?** If there is an answer to this question, it should not be determined solely on statistical grounds. Statistics as a tool (often a very powerful tool) can only suggest the best model given that a number of assumptions have been agreed on. Ideally, one would not have to make a decision on the basis of a single sample as we have here. We should examine the literature to discover similar examples and see how they were tackled or, even better, one could discuss the matter with a researcher who has worked on similar data sets. If the aim is to estimate the coefficients or to predict the weight of the heart of another living horse from ultrasound measurements, we tend to select the simplest, feasible model. In this case, we could choose a model with ONE predictor variable (say *innerdia*). And a cube root or logarithm transformation might be applied. With more than one explanatory variable, the number of possibilities increases for relationships between these variables and between the response variable $Y$. These possibilities will be discussed further in the next chapter.</span>
+<span id="cb49-1138"><a href="#cb49-1138" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb49-1139"><a href="#cb49-1139" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb49-1140"><a href="#cb49-1140" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-dmng</span></span>
+<span id="cb49-1141"><a href="#cb49-1141" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: 'Orthogonal regression'</span></span>
+<span id="cb49-1142"><a href="#cb49-1142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-1143"><a href="#cb49-1143" aria-hidden="true" tabindex="-1"></a>my.pca <span class="ot">&lt;-</span> <span class="fu">prcomp</span>( <span class="sc">~</span> Maths<span class="sc">+</span>English, <span class="at">data=</span>testmarks)</span>
+<span id="cb49-1144"><a href="#cb49-1144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-1145"><a href="#cb49-1145" aria-hidden="true" tabindex="-1"></a>slp <span class="ot">&lt;-</span> my.pca<span class="sc">$</span>rotation[<span class="dv">2</span>,<span class="dv">1</span>] <span class="sc">/</span> my.pca<span class="sc">$</span>rotation[<span class="dv">1</span>,<span class="dv">1</span>]</span>
+<span id="cb49-1146"><a href="#cb49-1146" aria-hidden="true" tabindex="-1"></a>intr <span class="ot">&lt;-</span> my.pca<span class="sc">$</span>center[<span class="dv">2</span>] <span class="sc">-</span> slp<span class="sc">*</span>my.pca<span class="sc">$</span>center[<span class="dv">1</span>]</span>
+<span id="cb49-1147"><a href="#cb49-1147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-1148"><a href="#cb49-1148" aria-hidden="true" tabindex="-1"></a>my.caption <span class="ot">=</span> <span class="fu">paste</span>(<span class="st">"Slope="</span>, <span class="fu">round</span>(slp, <span class="dv">2</span>), <span class="st">"  "</span>, <span class="st">"Intercept"</span>, <span class="fu">round</span>(intr, <span class="dv">2</span>))</span>
+<span id="cb49-1149"><a href="#cb49-1149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-1150"><a href="#cb49-1150" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(testmarks) <span class="sc">+</span> </span>
+<span id="cb49-1151"><a href="#cb49-1151" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>Maths,<span class="at">y=</span>English)) <span class="sc">+</span> </span>
+<span id="cb49-1152"><a href="#cb49-1152" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> intr, <span class="at">slope =</span> slp) <span class="sc">+</span> </span>
+<span id="cb49-1153"><a href="#cb49-1153" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Orthogonal Regression"</span>) <span class="sc">+</span> </span>
+<span id="cb49-1154"><a href="#cb49-1154" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">caption =</span> my.caption)</span>
+<span id="cb49-1155"><a href="#cb49-1155" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb49-1156"><a href="#cb49-1156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-1157"><a href="#cb49-1157" aria-hidden="true" tabindex="-1"></a>A number of relationships between variables can be linearised by transformations. For example, the relationship $y=\alpha x^{\beta }$ is linearised by taking $\log$ on both sides as $$\log (y)=\log (\alpha )+\beta \log (x).$$ The methods discussed in this chapter will equally apply for models which can be rewritten as a straight line equation.</span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

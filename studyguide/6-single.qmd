@@ -1030,6 +1030,29 @@ ggplot(dfm) +
 
 ```
 
+
+# Summary
+
+Once a model is fitted to data, the question must be asked as to whether the fit is a good one. Perhaps it would be more in keeping with the spirit of statistical tests to ask if the fit is bad. The fitted model is of the general form
+
+$$ \text{observation = fit+ residual}$$
+
+Model improvement will take place to capture all the systematic variation in the data. This chapter considered only straight line models with a single predictor variable. If the fit is poor, a transformation could be tried by stretching or shrinking $Y$ by a power transformation.
+
+Scatterplots and correlation coefficients provide important clues to the inter-relationships between the variables and hence form the first step in building a regression model. The simple regression model is one of the most commonly used tools. Here the main aim is to fit a model (slope and $y$-intercept) by the least squares method to explain the variation in $Y$, the response variable, by fitting the explanatory ($X$) variable. Regression models are often improved in several ways after residual analysis.
+
+**What is THE best model for this data?** If there is an answer to this question, it should not be determined solely on statistical grounds. Statistics as a tool (often a very powerful tool) can only suggest the best model given that a number of assumptions have been agreed on. Ideally, one would not have to make a decision on the basis of a single sample as we have here. We should examine the literature to discover similar examples and see how they were tackled or, even better, one could discuss the matter with a researcher who has worked on similar data sets. If the aim is to estimate the coefficients or to predict the weight of the heart of another living horse from ultrasound measurements, we tend to select the simplest, feasible model. In this case, we could choose a model with ONE predictor variable (say *innerdia*). And a cube root or logarithm transformation might be applied. With more than one explanatory variable, the number of possibilities increases for relationships between these variables and between the response variable $Y$. These possibilities will be discussed further in the next chapter.
+
+## Main points
+Concepts and practical skills you should have at the end of this chapter:
+
+-   Understand and be able to perform a simple linear regression on bivariate related data sets
+-   Use scatter plots or other appropriate plots to visualize the data and regression line
+-   Summarize regression results and appropriate tests of significance. Interpret these results in context of your data
+-   Examine residual diagnostic plots and test assumptions, then perform appropriate transformations as necessary
+-   Use a regression line to predict new data and explain confidence and prediction intervals
+-   Understand and explain the concepts of robust regression modeling, Tukey Line, and cross-validation.
+
 ## Models Related to Simple Regression Model
 
 For some applications, the true $y$-intercept $\alpha$ is *known* to be zero. An example is when a model is fitted with compositional characteristics as predictors such as percentage fat, protein, moisture in milk powder. The sum of these compositional characteristics is always 100% and this constraint removes the intercept due to theoretical reasons. In such cases, we will be fitting only the slope(s). When the model without the $y$-intercept is the true or correct model, both the fitted models (with and without the $y$-intercept) provide unbiased estimates of the true parameters. However the model without the intercept will provide precise estimates. This regression model without the intercept must be used with caution because a very strong assumption is made on the true $y$-intercept. The first differences of certain time series data may be analysed with a model having no intercept term.
@@ -1056,16 +1079,3 @@ ggplot(testmarks) +
 ```
 
 A number of relationships between variables can be linearised by transformations. For example, the relationship $y=\alpha x^{\beta }$ is linearised by taking $\log$ on both sides as $$\log (y)=\log (\alpha )+\beta \log (x).$$ The methods discussed in this chapter will equally apply for models which can be rewritten as a straight line equation.
-
-# Summary
-
-Once a model is fitted to data, the question must be asked as to whether the fit is a good one. Perhaps it would be more in keeping with the spirit of statistical tests to ask if the fit is bad. The fitted model is of the general form
-
-$$ \text{observation = fit+ residual}$$
-
-Model improvement will take place to capture all the systematic variation in the data. This chapter considered only straight line models. If the fit is poor, a transformation could be tried by stretching or shrinking $Y$ by a power transformation.
-
-Scatterplots and correlation coefficients provide important clues to the inter-relationships between the variables and hence form the first step in building a regression model. The simple regression model is one of the most commonly used tools. Here the main aim is to fit a model (slope and $y$-intercept) by the least squares method to explain the variation in $Y$, the response variable, by fitting the explanatory ($X$) variable. Regression models are often improved in several ways after residual analysis.
-
-**What is THE best model for this data?** If there is an answer to this question, it should not be determined solely on statistical grounds. Statistics as a tool (often a very powerful tool) can only suggest the best model given that a number of assumptions have been agreed on. Ideally, one would not have to make a decision on the basis of a single sample as we have here. We should examine the literature to discover similar examples and see how they were tackled or, even better, one could discuss the matter with a researcher who has worked on similar data sets. If the aim is to estimate the coefficients or to predict the weight of the heart of another living horse from ultrasound measurements, we tend to select the simplest, feasible model. In this case, we could choose a model with ONE predictor variable (say *innerdia*). And a cube root or logarithm transformation might be applied. With more than one explanatory variable, the number of possibilities increases for relationships between these variables and between the response variable $Y$. These possibilities will be discussed further in the next chapter.
-
