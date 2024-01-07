@@ -808,6 +808,17 @@ qplot(data=dfm,  rlm.rmses,  geom="boxplot")
 -   Examine the literature to discover similar examples, see how they
     are tackled, discuss the matter with the researcher etc.
 
+## Main points
+
+Concepts and practical skills you should have at the end of this chapter:
+
+-   Understand and be able to perform a simple linear regression on bivariate related data sets
+-   Use scatter plots or other appropriate plots to visualize the data and regression line
+-   Summarize regression results and appropriate tests of significance. Interpret these results in context of your data
+-   Examine residual diagnostic plots and test assumptions, then perform appropriate transformations as necessary
+-   Use a regression line to predict new data and explain confidence and prediction intervals
+-   Understand and explain the concepts of robust regression modeling, Tukey Line, and cross-validation.
+
 <!-- ## Exercises -->
 
 <!-- download.file("<https://www.massey.ac.nz/~kgovinda/220exer/Chap4moreexamples.R>", destfile="Chap4moreexamples.R") -->
