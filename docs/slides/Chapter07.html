@@ -8,7 +8,7 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.450">
+  <meta name="generator" content="quarto-1.3.353">
 
   <title>161250 Data Analysis - Chapter 7:Models with Multiple Predictors</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -399,10 +399,39 @@
 </div>
 
 </section>
+<section id="learning-objectives" class="slide level2">
+<h2>Learning Objectives:</h2>
+<ul>
+<li>Understand and describe a multiple linear regression, the difference from a simple linear regression, and when each are appropriate</li>
+<li>Fit and display a multiple regression</li>
+<li>Understand and interpret different types of Sums of Squares</li>
+<li>Understand and test for multicollinearity and other assumptions</li>
+</ul>
+</section>
+<section id="what-is-a-multiple-regression" class="slide level2">
+<h2>What is a multiple Regression?</h2>
+<ul>
+<li>In a simple regression, there is only one predictor.</li>
+</ul>
+<p>Multiple regression modelling involves many predictors.</p>
+</section>
+<section id="when-to-use-multiple-predictors" class="slide level2">
+<h2>When to use multiple predictors</h2>
+<ul>
+<li><p><em>Statistical control of a confound</em>: controlling treatment for some unwanted variability</p></li>
+<li><p><em>Multiple causation</em>: multiple things are thought to cause changes in the outcome variable</p></li>
+<li><p><em>Interactions</em>: we are interested in how two variables may combine to change our outcome (will cover this in the next chapter)</p></li>
+</ul>
+</section>
 <section id="multiple-regression" class="slide level2">
 <h2>Multiple Regression</h2>
+<p>Where to start:</p>
 <ul>
-<li><p>In a simple regression, there is only one predictor. Multiple regression modelling involves many predictors.</p></li>
+<li><p>Question and hypothesis + domain knowledge</p>
+<ul>
+<li>What are we interested in testing?</li>
+<li>What data is collected? do those variables make sense?</li>
+</ul></li>
 <li><p>Perform EDA first</p>
 <ul>
 <li>A scatter plot matrix can show nonlinear relationships</li>
@@ -410,37 +439,158 @@
 </ul></li>
 <li><p>Look for the predictors having the largest correlation with response</p>
 <ul>
-<li><p>Look for inter-correlations between the predictors and choose the one with high correlation with response variable but uncorrelated with the rest.</p></li>
-<li><p>Try <a href="https://shiny.massey.ac.nz/anhsmith/demos/explore.multiple.numerical.variables/" class="uri">https://shiny.massey.ac.nz/anhsmith/demos/explore.multiple.numerical.variables/</a></p></li>
+<li>Look for inter-correlations between the predictors and choose the one with high correlation with response variable but uncorrelated with the rest.</li>
 </ul></li>
 </ul>
 </section>
-<section id="pinetree-data-example" class="slide level2">
-<h2>Pinetree data example</h2>
+<section id="data-example" class="slide level2">
+<h2>Data example</h2>
+<p>Basketball team summary for 2020 regular season<br>
+</p>
+<p>We have 2118 data points which equates to 1059 games (2 teams per game), 2020 was a short season</p>
+<p>Each team in a standard season plays 82 games. That means in total, an NBA season is comprised of 1,230 games.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output cell-output-stdout">
-<pre><code>         Top Third Second First
-Top    1.000 0.917  0.955 0.972
-Third  0.917 1.000  0.947 0.908
-Second 0.955 0.947  1.000 0.967
-First  0.972 0.908  0.967 1.000</code></pre>
+<pre><code>  Team     Game Spread Outcome MIN PTS       P2p       P3p       FTp OREB DREB
+1  ATL 21900014     17       W  48 117 0.6000000 0.3548387 0.8571429    8   34
+2  ATL 21900028      4       W  48 103 0.6296296 0.3000000 0.5333333    9   43
+3  ATL 21900043     -2       L  48 103 0.4736842 0.3333333 0.6875000    8   37
+4  ATL 21900052    -15       L  48  97 0.5454545 0.2820513 0.6666667    9   24
+5  ATL 21900066     -9       L  48  97 0.5370370 0.2058824 0.6923077   16   34
+6  ATL 21900099      8       W  48 108 0.5333333 0.3666667 0.6875000    9   39
+  AST TOV STL BLK PF
+1  27  13   9   2 15
+2  22  18   5   9 26
+3  23  21  12   3 25
+4  28  20  14   7 29
+5  20  16   5   5 15
+6  22  18   9   5 20</code></pre>
+</div>
+</div>
+<p><code>Spread</code>: Point difference between winning and losing team<br>
+<code>PTS</code>: Total points scored by a team in a game<br>
+<code>P2p</code>: Percent of 2-pointers made<br>
+<code>P3p</code>: Percent of 3-pointers made<br>
+<code>FTp</code>: Percent of free-throws made<br>
+<code>OREB</code>: Offensive rebounds<br>
+<code>DREB</code>: Defensive rebounds<br>
+<code>AST</code>: Assists<br>
+<code>STL</code>: Steals<br>
+<code>BLK</code>: Blocks<br>
+</p>
+</section>
+<section id="data-example-1" class="slide level2">
+<h2>Data example</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">options</span>(<span class="at">digits=</span><span class="dv">3</span>)</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">cor</span>(teams[,<span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">6</span><span class="sc">:</span><span class="dv">12</span>, <span class="dv">14</span><span class="sc">:</span><span class="dv">15</span>)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        Spread     PTS      P2p      P3p     FTp     OREB     DREB     AST
+Spread  1.0000  0.5730  0.36338  0.42719  0.1063 -0.00240  0.46470  0.3477
+PTS     0.5730  1.0000  0.48713  0.55094  0.1897 -0.01487  0.14131  0.5103
+P2p     0.3634  0.4871  1.00000 -0.00601 -0.0105 -0.28585  0.02484  0.3633
+P3p     0.4272  0.5509 -0.00601  1.00000  0.0297 -0.18736  0.00164  0.4054
+FTp     0.1063  0.1897 -0.01053  0.02967  1.0000 -0.08960 -0.01724 -0.0297
+OREB   -0.0024 -0.0149 -0.28585 -0.18736 -0.0896  1.00000  0.03882 -0.0996
+DREB    0.4647  0.1413  0.02484  0.00164 -0.0172  0.03882  1.00000  0.0468
+AST     0.3477  0.5103  0.36333  0.40540 -0.0297 -0.09960  0.04681  1.0000
+STL     0.1246  0.0352  0.01897 -0.04479  0.0115 -0.00389 -0.18027  0.0518
+BLK     0.1837  0.0623  0.03757  0.00540 -0.0185  0.00311  0.20700  0.0411
+            STL      BLK
+Spread  0.12460  0.18367
+PTS     0.03525  0.06234
+P2p     0.01897  0.03757
+P3p    -0.04479  0.00540
+FTp     0.01153 -0.01849
+OREB   -0.00389  0.00311
+DREB   -0.18027  0.20700
+AST     0.05178  0.04112
+STL     1.00000  0.03267
+BLK     0.03267  1.00000</code></pre>
 </div>
 </div>
 </section>
 <section id="inter-relationships" class="slide level2">
 <h2>Inter-relationships</h2>
-<ul>
-<li>Strong relationships revealed
-<ul>
-<li>We may not need all predictors</li>
-<li>Area effect also revealed below</li>
-</ul></li>
-</ul>
 
 <img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="full-regression" class="slide level2">
 <h2>Full regression</h2>
 <p>Places all of the predictors in the model</p>
+<p>Equivalent of throwing everything in and hoping something sticks</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Spread ~ ., data = teams_forlm)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-32.29  -5.72  -0.15   5.66  30.36 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -142.4223     2.8728  -49.58  &lt; 2e-16 ***
+PTS            0.0624     0.0269    2.32     0.02 *  
+P2p           74.1170     3.8391   19.31  &lt; 2e-16 ***
+P3p           74.0109     3.3449   22.13  &lt; 2e-16 ***
+FTp           15.4686     2.0265    7.63  3.4e-14 ***
+OREB           0.7191     0.0623   11.54  &lt; 2e-16 ***
+DREB           1.2033     0.0367   32.81  &lt; 2e-16 ***
+AST           -0.0350     0.0479   -0.73     0.47    
+STL            1.0685     0.0677   15.79  &lt; 2e-16 ***
+BLK            0.3503     0.0784    4.47  8.2e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 8.79 on 2108 degrees of freedom
+Multiple R-squared:  0.622, Adjusted R-squared:  0.62 
+F-statistic:  385 on 9 and 2108 DF,  p-value: &lt;2e-16</code></pre>
+</div>
+</div>
+</section>
+<section id="residuals" class="slide level2">
+<h2>Residuals</h2>
+<p>Just like with a simple regression we examine residuals to look for patterns</p>
+
+<img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch quarto-figure-center"><p>These look great, probably because we have a ton of data in this example.</p>
+</section>
+<section id="multicollinearity" class="slide level2 increment">
+<h2>Multicollinearity</h2>
+<ul>
+<li><p><em>Multicollinearity</em> is where at least two predictor variables are highly correlated.</p></li>
+<li><p>Multicollinearity does <em>not</em> affect the residual SD very much, and doesn’t pose a major problem for prediction.</p></li>
+<li><p>The major effects of multicollinearity are:</p>
+<ul>
+<li>It changes the estimates of the coefficients.</li>
+<li>It inflates the variance of the estimates of the coefficients. That is, it increases the uncertainty about what the slope parameters are.</li>
+<li>Therefore, it matters when testing hypotheses about the effects of specific predictors.</li>
+</ul></li>
+</ul>
+</section>
+<section id="multicollinearity-1" class="slide level2">
+<h2>Multicollinearity</h2>
+<ul>
+<li><p>The impact of multicollinearity on the variance of the estimates can be quantified using the Variance Inflation Factor (VIF &lt; 5 is considered ok).</p></li>
+<li><p>There are several ways to deal with multicollinarity, depending on context. We can discard one of highly correlated variable, perform ridge regression, or think more carefully about how the variables relate to each other.</p></li>
+</ul>
+</section>
+<section id="multicollinearity-2" class="slide level2">
+<h2>Multicollinearity</h2>
+<p>In R we can examine Multicollinearity using the function <code>vif()</code></p>
+<p>Remember our basketball regression:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">vif</span>(full_reg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> PTS  P2p  P3p  FTp OREB DREB  AST  STL  BLK 
+3.07 2.14 2.24 1.14 1.37 1.14 1.50 1.06 1.05 </code></pre>
+</div>
+</div>
+<p>These values are all small (VIF &lt; 5) so we can continue on in interpreting the regression.</p>
+</section>
+<section id="tidy-summary" class="slide level2">
+<h2>Tidy summary</h2>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <table class="lightable-classic" data-quarto-postprocess="true" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
@@ -457,30 +607,72 @@ First  0.972 0.908  0.967 1.000</code></pre>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">-6.043</td>
-<td style="text-align: right;">0.799</td>
-<td style="text-align: right;">-7.56</td>
+<td style="text-align: right;">-142.422</td>
+<td style="text-align: right;">2.873</td>
+<td style="text-align: right;">-49.575</td>
 <td style="text-align: right;">0.000</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Third</td>
-<td style="text-align: right;">0.160</td>
-<td style="text-align: right;">0.085</td>
-<td style="text-align: right;">1.88</td>
-<td style="text-align: right;">0.066</td>
+<td style="text-align: left;">PTS</td>
+<td style="text-align: right;">0.062</td>
+<td style="text-align: right;">0.027</td>
+<td style="text-align: right;">2.320</td>
+<td style="text-align: right;">0.020</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Second</td>
-<td style="text-align: right;">0.044</td>
-<td style="text-align: right;">0.137</td>
-<td style="text-align: right;">0.32</td>
-<td style="text-align: right;">0.750</td>
+<td style="text-align: left;">P2p</td>
+<td style="text-align: right;">74.117</td>
+<td style="text-align: right;">3.839</td>
+<td style="text-align: right;">19.306</td>
+<td style="text-align: right;">0.000</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">First</td>
-<td style="text-align: right;">0.605</td>
-<td style="text-align: right;">0.090</td>
-<td style="text-align: right;">6.69</td>
+<td style="text-align: left;">P3p</td>
+<td style="text-align: right;">74.011</td>
+<td style="text-align: right;">3.345</td>
+<td style="text-align: right;">22.126</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">FTp</td>
+<td style="text-align: right;">15.469</td>
+<td style="text-align: right;">2.027</td>
+<td style="text-align: right;">7.633</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">OREB</td>
+<td style="text-align: right;">0.719</td>
+<td style="text-align: right;">0.062</td>
+<td style="text-align: right;">11.538</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">DREB</td>
+<td style="text-align: right;">1.203</td>
+<td style="text-align: right;">0.037</td>
+<td style="text-align: right;">32.809</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">AST</td>
+<td style="text-align: right;">-0.035</td>
+<td style="text-align: right;">0.048</td>
+<td style="text-align: right;">-0.729</td>
+<td style="text-align: right;">0.466</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STL</td>
+<td style="text-align: right;">1.069</td>
+<td style="text-align: right;">0.068</td>
+<td style="text-align: right;">15.785</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BLK</td>
+<td style="text-align: right;">0.350</td>
+<td style="text-align: right;">0.078</td>
+<td style="text-align: right;">4.470</td>
 <td style="text-align: right;">0.000</td>
 </tr>
 </tbody>
@@ -489,6 +681,9 @@ First  0.972 0.908  0.967 1.000</code></pre>
 
 </div>
 </div>
+</section>
+<section id="model-summary-measures" class="slide level2">
+<h2>Model Summary Measures</h2>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <table class="lightable-classic" data-quarto-postprocess="true" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
@@ -496,15 +691,15 @@ First  0.972 0.908  0.967 1.000</code></pre>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">r.squared</td>
-<td style="text-align: right;">0.95</td>
+<td style="text-align: right;">0.62</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">sigma</td>
-<td style="text-align: right;">1.23</td>
+<td style="text-align: right;">8.79</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">statistic</td>
-<td style="text-align: right;">370.85</td>
+<td style="text-align: right;">384.83</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">p.value</td>
@@ -512,11 +707,11 @@ First  0.972 0.908  0.967 1.000</code></pre>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">AIC</td>
-<td style="text-align: right;">201.34</td>
+<td style="text-align: right;">15227.82</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">BIC</td>
-<td style="text-align: right;">211.81</td>
+<td style="text-align: right;">15290.06</td>
 </tr>
 </tbody>
 </table>
@@ -524,59 +719,69 @@ First  0.972 0.908  0.967 1.000</code></pre>
 
 </div>
 </div>
-<ul>
-<li>Old summary</li>
-</ul>
+</section>
+<section id="variance-explained" class="slide level2">
+<h2>Variance Explained</h2>
+<p><span class="math inline">\(R^2\)</span> is the proportion of variance in <span class="math inline">\(y\)</span> explained by <span class="math inline">\(x\)</span> .</p>
 <div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">summary</span>(full_reg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
-lm(formula = Top ~ ., data = pinetree[, -1])
+lm(formula = Spread ~ ., data = teams_forlm)
 
 Residuals:
    Min     1Q Median     3Q    Max 
--2.041 -0.928 -0.297  0.656  3.320 
+-32.29  -5.72  -0.15   5.66  30.36 
 
 Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  -6.0430     0.7989   -7.56  4.0e-10 ***
-Third         0.1595     0.0851    1.88    0.066 .  
-Second        0.0437     0.1365    0.32    0.750    
-First         0.6047     0.0904    6.69  1.1e-08 ***
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -142.4223     2.8728  -49.58  &lt; 2e-16 ***
+PTS            0.0624     0.0269    2.32     0.02 *  
+P2p           74.1170     3.8391   19.31  &lt; 2e-16 ***
+P3p           74.0109     3.3449   22.13  &lt; 2e-16 ***
+FTp           15.4686     2.0265    7.63  3.4e-14 ***
+OREB           0.7191     0.0623   11.54  &lt; 2e-16 ***
+DREB           1.2033     0.0367   32.81  &lt; 2e-16 ***
+AST           -0.0350     0.0479   -0.73     0.47    
+STL            1.0685     0.0677   15.79  &lt; 2e-16 ***
+BLK            0.3503     0.0784    4.47  8.2e-06 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 1.23 on 56 degrees of freedom
-Multiple R-squared:  0.952, Adjusted R-squared:  0.95 
-F-statistic:  371 on 3 and 56 DF,  p-value: &lt;2e-16</code></pre>
+Residual standard error: 8.79 on 2108 degrees of freedom
+Multiple R-squared:  0.622, Adjusted R-squared:  0.62 
+F-statistic:  385 on 9 and 2108 DF,  p-value: &lt;2e-16</code></pre>
 </div>
 </div>
-<ul>
-<li>Also try the app - <a href="https://shiny.massey.ac.nz/anhsmith/demos/fit.multiple.regression/" class="uri">https://shiny.massey.ac.nz/anhsmith/demos/fit.multiple.regression/</a></li>
-</ul>
 </section>
-<section id="multicollinearity" class="slide level2 increment">
-<h2>Multicollinearity</h2>
-<ul>
-<li><p><em>Multicollinearity</em> is where at least two predictor variables are highly correlated.</p></li>
-<li><p>Multicollinearity does <em>not</em> affect the residual SD very much, and doesn’t pose a major problem for prediction.</p></li>
-<li><p>The major effects of multicolinearity are:</p>
-<ul>
-<li>It changes the estimates of the coefficients.</li>
-<li>It inflates the variance of the estimates of the coefficients. That is, it increases the uncertainty about what the slope parameters are.</li>
-<li>Therefore, it matters when testing hypotheses about the effects of specific predictors.</li>
-</ul></li>
-<li><p>The impact of multicollinearity on the variance of the estimates can be quantified using the Variance Inflation Factor (VIF &lt; 5 is considered ok).</p></li>
-<li><p>There are several ways to deal with multicollinarity, depending on context. We can discard one of highly correlated variable, perform ridge regression, or think more carefully about how the variables relate to each other.</p></li>
-</ul>
+<section id="variance-explained-1" class="slide level2">
+<h2>Variance Explained</h2>
+<p><span class="math inline">\(R^2=\frac{SS~regression}{SS~Total}\)</span></p>
 <div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>SS <span class="ot">&lt;-</span> <span class="fu">anova</span>(full_reg) <span class="sc">|&gt;</span> </span>
+<span id="cb9-2"><a href="#cb9-2"></a>   <span class="fu">tidy</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb9-3"><a href="#cb9-3"></a>  <span class="fu">select</span>(term<span class="sc">:</span>sumsq) <span class="sc">|&gt;</span> </span>
+<span id="cb9-4"><a href="#cb9-4"></a>  janitor<span class="sc">::</span><span class="fu">adorn_totals</span>()</span>
+<span id="cb9-5"><a href="#cb9-5"></a>SS</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> Third Second  First 
-  9.73  26.18  15.51 </code></pre>
+<pre><code>      term   df    sumsq
+       PTS    1 141194.6
+       P2p    1   4001.7
+       P3p    1  14465.4
+       FTp    1    583.8
+      OREB    1   7082.2
+      DREB    1  78359.3
+       AST    1     10.1
+       STL    1  20082.0
+       BLK    1   1542.2
+ Residuals 2108 162702.8
+     Total 2117 430024.0</code></pre>
 </div>
 </div>
 <ul>
-<li>Try <a href="https://shiny.massey.ac.nz/anhsmith/demos/explore.collinearity/" class="uri">https://shiny.massey.ac.nz/anhsmith/demos/explore.collinearity/</a></li>
+<li><p><span class="math inline">\(R^2_{adj}\)</span> is adjusted to remove the variation that is explained by chance alone</p></li>
+<li><p><span class="math inline">\(R^2_{adj}=1-\frac{MS~Error}{MS~Total}\)</span></p></li>
 </ul>
 </section>
 <section id="additional-variation-explained" class="slide level2">
@@ -605,31 +810,18 @@ F-statistic:  371 on 3 and 56 DF,  p-value: &lt;2e-16</code></pre>
 <section id="significance-of-type-i-or-seq.ss" class="slide level2">
 <h2>Significance of Type I or Seq.SS</h2>
 <ul>
-<li><p>The Type I SS is the SS of a predictor after adjusting for the effects of the <em>preceding</em> predictors in the model.</p></li>
-<li><p>F test for the significance of the additional variation explained</p></li>
-</ul>
-
-<img data-src="img/type1.png" class="r-stretch"><ul>
-<li>For pinetree data, Second (middle circumference) does not explain significant additional variation after First (bottom circumference)</li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="cell-output cell-output-stdout">
-<pre><code>Analysis of Variance Table
-
-Model 1: Top ~ First
-Model 2: Top ~ First + Second
-  Res.Df  RSS Df Sum of Sq    F Pr(&gt;F)  
-1     58 96.6                           
-2     57 90.6  1      6.01 3.78  0.057 .
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-</div>
-</div>
-</section>
-<section id="type-ii-and-or-type-iii-ss" class="slide level2">
-<h2>Type II and or Type III SS</h2>
+<li><p>The Type I SS is the SS of a predictor after adjusting for the effects of the <em>preceding</em> predictors in the model.</p>
 <ul>
+<li>Sometimes order matters, particularly with unequal sample sizes</li>
+</ul></li>
+<li><p>F test for the significance of the additional variation explained</p></li>
 <li><p>R function <code>anova()</code> calculates sequential or Type-I SS</p></li>
+</ul>
+
+<img data-src="img/type1.png" class="r-stretch"></section>
+<section id="type-ii" class="slide level2">
+<h2>Type II</h2>
+<ul>
 <li><p>Type II SS is based on the principle of marginality.</p>
 <ul>
 <li>Each variable effect is adjusted for all other appropriate effects.
@@ -640,97 +832,221 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </ul></li>
 </ul>
 
-<img data-src="img/type2.png" class="r-stretch"><ul>
+<img data-src="img/type2.png" class="r-stretch"></section>
+<section id="type-iii-ss" class="slide level2">
+<h2>Type III SS</h2>
+<ul>
 <li><p>Type III SS is the SS added to the regression SS after <em>ALL</em> other predictors including an intercept term.</p>
 <ul>
 <li>Violates the marginality principle and so avoided for hypothesis tests</li>
 </ul></li>
+<li><p>SS explained is not always a good criterion for selection of variables</p></li>
 </ul>
+</section>
+<section id="ss-types-in-action" class="slide level2">
+<h2>SS types in action</h2>
 <div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">anova</span>(full_reg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Variance Table
 
-Response: Top
-          Df Sum Sq Mean Sq F value  Pr(&gt;F)    
-Third      1   1494    1494   981.7 &lt; 2e-16 ***
-Second     1    131     131    86.1 6.4e-13 ***
-First      1     68      68    44.8 1.1e-08 ***
-Residuals 56     85       2                    
+Response: Spread
+            Df Sum Sq Mean Sq F value  Pr(&gt;F)    
+PTS          1 141195  141195 1829.34 &lt; 2e-16 ***
+P2p          1   4002    4002   51.85 8.3e-13 ***
+P3p          1  14465   14465  187.42 &lt; 2e-16 ***
+FTp          1    584     584    7.56   0.006 ** 
+OREB         1   7082    7082   91.76 &lt; 2e-16 ***
+DREB         1  78359   78359 1015.23 &lt; 2e-16 ***
+AST          1     10      10    0.13   0.718    
+STL          1  20082   20082  260.18 &lt; 2e-16 ***
+BLK          1   1542    1542   19.98 8.2e-06 ***
+Residuals 2108 162703      77                    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="fu">Anova</span>(full_reg,  <span class="at">type=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Anova Table (Type II tests)
 
-Response: Top
-          Sum Sq Df F value  Pr(&gt;F)    
-Third        5.4  1    3.52   0.066 .  
-Second       0.2  1    0.10   0.750    
-First       68.1  1   44.76 1.1e-08 ***
-Residuals   85.2 56                    
+Response: Spread
+          Sum Sq   Df F value  Pr(&gt;F)    
+PTS          416    1    5.38    0.02 *  
+P2p        28767    1  372.71 &lt; 2e-16 ***
+P3p        37787    1  489.57 &lt; 2e-16 ***
+FTp         4497    1   58.26 3.4e-14 ***
+OREB       10276    1  133.13 &lt; 2e-16 ***
+DREB       83083    1 1076.43 &lt; 2e-16 ***
+AST           41    1    0.53    0.47    
+STL        19232    1  249.17 &lt; 2e-16 ***
+BLK         1542    1   19.98 8.2e-06 ***
+Residuals 162703 2108                    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">Anova</span>(full_reg,  <span class="at">type=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Anova Table (Type III tests)
 
-Response: Top
-            Sum Sq Df F value  Pr(&gt;F)    
-(Intercept)   87.1  1   57.22 4.0e-10 ***
-Third          5.4  1    3.52   0.066 .  
-Second         0.2  1    0.10   0.750    
-First         68.1  1   44.76 1.1e-08 ***
-Residuals     85.2 56                    
+Response: Spread
+            Sum Sq   Df F value  Pr(&gt;F)    
+(Intercept) 189696    1 2457.72 &lt; 2e-16 ***
+PTS            416    1    5.38    0.02 *  
+P2p          28767    1  372.71 &lt; 2e-16 ***
+P3p          37787    1  489.57 &lt; 2e-16 ***
+FTp           4497    1   58.26 3.4e-14 ***
+OREB         10276    1  133.13 &lt; 2e-16 ***
+DREB         83083    1 1076.43 &lt; 2e-16 ***
+AST             41    1    0.53    0.47    
+STL          19232    1  249.17 &lt; 2e-16 ***
+BLK           1542    1   19.98 8.2e-06 ***
+Residuals   162703 2108                    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
+</section>
+<section id="summary-so-far" class="slide level2">
+<h2>Summary so far</h2>
 <ul>
-<li>SS explained is not always a good criterion for selection of variables</li>
+<li>Defined multiple regression</li>
+<li>Why we might run a multiple regression</li>
+<li>How to perform a multiple regression, examine residuals, multicollinearity</li>
+<li>Variation and R squared</li>
+<li>Sums of Squares types</li>
+</ul>
+</section>
+<section id="learning-objectives-1" class="slide level2">
+<h2>Learning Objectives:</h2>
+<ul>
+<li>Cautionary tales: when correlation misleads us</li>
+<li>How to make models</li>
+<li>Comparing models</li>
+<li>Principles of model selection</li>
+</ul>
+</section>
+<section id="does-waffle-houses-cause-divorce" class="slide level2">
+<h2>Does Waffle Houses cause divorce??</h2>
+
+<img data-src="img/waffleH2divorce.png" class="r-stretch"></section>
+<section id="or-is-it-butter" class="slide level2">
+<h2>Or is it butter?</h2>
+
+<img data-src="img/Divorce_margarine.png" class="r-stretch"><p>And if you want more to impress your friends at a BBQ, the source is: http://www.tylervigen.com/spurious-correlations</p>
+</section>
+<section id="spurious-association" class="slide level2">
+<h2>Spurious association</h2>
+<ul>
+<li>You’ve heard that before: correlation does not imply causation. BUT it doesn’t discard it either</li>
+<li>Hope you are seated: causation does not imply correlation.</li>
+<li>Causation implies conditional correlation (up to linearity issues).</li>
+<li>We need more than just statistical models to answer causal questions.</li>
+</ul>
+</section>
+<section id="how-do-we-deal-with-spurious-associations" class="slide level2">
+<h2>How do we deal with spurious associations?</h2>
+<ul>
+<li><p>Domain knowledge: you know that waffles and butter don’t <em>cause</em> divorce so why might they be correlated?</p>
+<ul>
+<li>Is there another predictor that would be better?</li>
+</ul></li>
+<li><p>Multiple regressions can disentangle the association between two predictors and an outcome</p>
+<ul>
+<li>Statistical control of a confound</li>
+</ul></li>
+</ul>
+
+<img data-src="img/waffleH2divorce.png" class="r-stretch"></section>
+<section id="masked-associations" class="slide level2">
+<h2>Masked associations</h2>
+<ul>
+<li>Association between a predictor variable and an outcome can be masked.</li>
+<li>You need to observe both to see the “true” influence of either on the outcome.</li>
+<li>How do we account for the masking variable (seen as a nuisance)?</li>
+</ul>
+</section>
+<section id="masking-situations-tend-to-arise-when" class="slide level2">
+<h2>Masking situations tend to arise when:</h2>
+<ul>
+<li>Both predictors are associated with one another.</li>
+<li>Have opposite relationships with the outcome</li>
+</ul>
+
+<img data-src="img/venetian-mask.jpg" class="r-stretch"></section>
+<section id="milk-and-brain-data-example" class="slide level2">
+<h2>Milk and brain data example</h2>
+
+<img data-src="img/milk_brain_pic.png" class="r-stretch"></section>
+<section id="primate-milk-data" class="slide level2">
+<h2>Primate milk data</h2>
+
+<img data-src="Chapter07_files/figure-revealjs/primate milk data-1.png" style="width:95.0%" class="r-stretch quarto-figure-center"></section>
+<section id="first-we-will-consider-simple-regressions" class="slide level2">
+<h2>First we will consider simple regressions</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-16-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-17-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="multiple-regression-1" class="slide level2">
+<h2>Multiple regression</h2>
+
+<img data-src="img/milk_bivar_vs_multivar.png" class="r-stretch"></section>
+<section id="masking-situation" class="slide level2">
+<h2>Masking situation</h2>
+<p>Tend to arise when</p>
+<ul>
+<li>Both predictors are associated with one another.</li>
+<li>Have opposite relationships with the outcome</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Chapter07_files/figure-revealjs/milk pairs-1.png" style="width:95.0%;height:50.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="how-do-we-deal-with-this" class="slide level2">
+<h2>How do we deal with this?</h2>
+<ul>
+<li>Statistically there is not really an answer</li>
+<li>The answer lies in the causes and the causes are not in the data</li>
+<li>Remember that interpreting the (regression) parameter estimates always depends upon what you believe the causal model</li>
 </ul>
 </section>
 <section id="model-selection" class="slide level2">
-<h2>Model selection</h2>
+<h2>Model Selection</h2>
 <ul>
-<li><p><span class="math inline">\(R^2\)</span> (the proportion of variance explained by the model) should not be used to select among candidate models. Adding another predictor variable always increases the <span class="math inline">\(R^2\)</span>, even if the new variable is unrelated in the population.</p></li>
-<li><p><span class="math inline">\(R^2_{adj}\)</span> is adjusted to remove the variation that is explained by chance alone</p></li>
-<li><p><span class="math inline">\(R^2_{adj}=1-\frac{MS~Error}{MS~Total}\)</span></p>
-<ul>
-<li>Try <a href="https://shiny.massey.ac.nz/anhsmith/demos/demo.RSq.and.adjusted.RSq/" class="uri">https://shiny.massey.ac.nz/anhsmith/demos/demo.RSq.and.adjusted.RSq/</a></li>
-</ul></li>
-<li><p>Residual SD depends on its degrees of freedom</p>
-<ul>
-<li>So comparison of models based on Residual SD is not fully fair</li>
-</ul></li>
-<li><p>Other summaries similar to residual SD include</p></li>
-<li><p>Mean Squared Deviation (MSD)</p></li>
+<li>The first step before selection of the best subset of predictors is to study the correlation matrix</li>
+<li>We then perform stepwise additions (forward) or subtractions (backward) from the model and compare them</li>
 </ul>
-<p><span class="math display">\[\frac{\sum \left({\rm observation-fit}\right)^{{\rm 2}} }{{\rm number~of~ observations}}\]</span></p>
+<p>BUT…</p>
 <ul>
-<li>Mean Absolute Deviation (MAD)</li>
+<li>We saw with the illustration of SS how the significance or otherwise of a variable in a multiple regression model depends on the other variables in the model</li>
+<li>Therefore, we cannot fully rely on the t-test and discard a variable because its coefficient is insignificant</li>
 </ul>
-<p><span class="math display">\[\frac{\sum \left|{\rm observation-fit}\right| }{{\rm number~of~observations}}\]</span></p>
-<ul>
-<li>Mean Absolute Percentage Error (MAPE)</li>
-</ul>
-<p><span class="math display">\[\frac{\sum \frac{\left|{\rm observation-fit}\right|}{{\rm observation}} }{{\rm number~of~observations}} {\times100}\]</span></p>
-</section>
-<section id="model-selection-continued" class="slide level2">
-<h2>Model selection (continued)</h2>
-<ul>
-<li><p>Avoid over-fitting.</p>
-<ul>
-<li>Try <a href="https://shiny.massey.ac.nz/anhsmith/demos/demo.over-fitting.model/" class="uri">https://shiny.massey.ac.nz/anhsmith/demos/demo.over-fitting.model/</a></li>
-</ul></li>
-<li><p>So place a penalty for excessive model parameters</p></li>
-<li><p>Akaike Information Criterion (AIC; <em>smaller is better</em>)</p></li>
-</ul>
-<p><span class="math display">\[AIC  =  n\log \left(\frac{SSE}{n} \right) + 2p\]</span></p>
-<ul>
-<li><p>We can also benchmark a small model with the full regression</p></li>
-<li><p>Mallow’s <span class="math inline">\(C_p\)</span> (look for <span class="math inline">\(C_p\)</span> just less than <span class="math inline">\(p\)</span> or equal)</p></li>
-</ul>
-<p><span class="math display">\[C_{p} =\; \frac{{\rm SS\; Error\; for\; Smaller\; Model}}{{\rm Mean\; Square\; Error\; for\; full\; regression}} -(n-2p)\]</span></p>
 </section>
 <section id="selection-of-predictors" class="slide level2">
 <h2>Selection of predictors</h2>
@@ -745,17 +1061,175 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <ul>
 <li><p>If difference between two variables is significant but not the variables themselves, forward regression would obtain the wrong model since both may not enter the model.</p>
 <ul>
-<li>Known as <em>suppressor</em> variables case</li>
+<li>Known as <em>suppressor</em> variables case (like masking variables discussed earlier)</li>
 </ul></li>
 </ul></li>
 </ul></li>
 </ul>
 <p>Example: (try)</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = y ~ x1, data = suppressor)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.1691 -0.6791 -0.0033  0.6441  1.1299 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 11.98876    1.26689    9.46  3.4e-07 ***
+x1           0.00375    0.41608    0.01     0.99    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.832 on 13 degrees of freedom
+Multiple R-squared:  6.24e-06,  Adjusted R-squared:  -0.0769 
+F-statistic: 8.11e-05 on 1 and 13 DF,  p-value: 0.993</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = y ~ x2, data = suppressor)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.0900 -0.6334  0.0002  0.6146  1.0403 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   10.632      0.811   13.11  7.2e-09 ***
+x2             0.195      0.113    1.74     0.11    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.75 on 13 degrees of freedom
+Multiple R-squared:  0.188, Adjusted R-squared:  0.126 
+F-statistic: 3.02 on 1 and 13 DF,  p-value: 0.106</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = y ~ x1 + x2, data = suppressor)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.01363 -0.00945 -0.00228  0.00863  0.01632 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -4.51541    0.06114   -73.8   &lt;2e-16 ***
+x1           3.09701    0.01227   252.3   &lt;2e-16 ***
+x2           1.03186    0.00368   280.1   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.0107 on 12 degrees of freedom
+Multiple R-squared:     1,  Adjusted R-squared:     1 
+F-statistic: 3.92e+04 on 2 and 12 DF,  p-value: &lt;2e-16</code></pre>
+</div>
+</div>
+</section>
+<section id="ockhams-razor" class="slide level2">
+<h2>Ockham’s razor</h2>
+<p><em>Nunca ponenda est pluralitas sine necesitate</em><br>
+(Plurality should never be posited without necessity)</p>
 <ul>
-<li><code>Best Subsets</code>: Stop at each step and check whether predictors, in the model or outside, are the best combination for that step.
+<li>Problem: fit to sample always (*multi-level models can be counter-examples) improves as we add parameters.</li>
+<li>Dangers of “stargazing”: selecting variables with low p-values (aka ‘lots of stars’). P-values are not designed to cope with over-/under-fitting.</li>
+</ul>
+</section>
+<section id="overfitting" class="slide level2">
+<h2>Overfitting</h2>
+<ul>
+<li>Overfitting learning too much from the data, where you are almost just connecting the points rather than estimating.</li>
+<li>Underfitting is the opposite, i.e.&nbsp;being insensitive to the data.</li>
+<li>aka Models with fewer assumptions are to be preferred.</li>
+<li>In practice, we have to choose between models that differ both in accuracy and simplicity. The razor is not really a useful guidance for this trade off.</li>
+</ul>
+<p>We need tools</p>
+</section>
+<section id="all-possible-models" class="slide level2">
+<h2>All possible models:</h2>
+<p>An exhaustive screening of all possible regression models can also be done using software</p>
+<ul>
+<li><code>Best Subsets</code>: Stop at each step and check whether predictors, in the model or outside, are the best combination for that step.<br>
+
 <ul>
 <li>time consuming to perform when the predictor set is large</li>
 </ul></li>
+</ul>
+<p>Remember permutations</p>
+<p>For example:</p>
+<p>If we fix the number of predictors as 3, then 20 regression models are possible<br>
+</p>
+</section>
+<section id="what-criteria-do-we-use" class="slide level2">
+<h2>What criteria do we use?</h2>
+<p>Multiple options<br>
+- R squared<br>
+- Sums of squared (different types, for testing predictor significance)<br>
+- Information criteria (AIC, BIC etc)<br>
+- For prediction: MSD/MSE, MAD, MAPE<br>
+- <span class="math inline">\(C_p\)</span><br>
+</p>
+<p>Remember its about balance and what you are looking for (fit vs prediction, complexity vs generality)<br>
+</p>
+<ul>
+<li><p><strong><code>Note</code></strong></p>
+<ul>
+<li>If a model stands out, it will perform well in terms of all summary measures.</li>
+<li>If a model does not stand out, summary measures will contradict.</li>
+</ul></li>
+</ul>
+</section>
+<section id="when-r2-becomes-absurd" class="slide level2">
+<h2>When <span class="math inline">\(R^2\)</span> becomes absurd</h2>
+
+<img data-src="img/brain_homin_R2ter.png" class="r-stretch"></section>
+<section id="model-selection-1" class="slide level2">
+<h2>Model selection</h2>
+<ul>
+<li><p>Residual SD depends on its degrees of freedom</p>
+<ul>
+<li>So comparison of models based on Residual SD is not fully fair</li>
+</ul></li>
+<li><p>The following three measures are popular prediction modelling and similar to residual SD</p></li>
+<li><p>Mean Squared Deviation (MSD): mean of the squared errors (i.e., deviations) (also called MSE)</p></li>
+</ul>
+<p><span class="math display">\[\frac{\sum \left({\rm observation-fit}\right)^{{\rm 2}} }{{\rm number~of~ observations}}\]</span></p>
+<ul>
+<li>Mean Absolute Deviation (MAD)</li>
+</ul>
+<p><span class="math display">\[\frac{\sum \left|{\rm observation-fit}\right| }{{\rm number~of~observations}}\]</span></p>
+<ul>
+<li>Mean Absolute Percentage Error (MAPE)</li>
+</ul>
+<p><span class="math display">\[\frac{\sum \frac{\left|{\rm observation-fit}\right|}{{\rm observation}} }{{\rm number~of~observations}} {\times100}\]</span></p>
+</section>
+<section id="model-selection-continued" class="slide level2">
+<h2>Model selection (continued)</h2>
+<ul>
+<li><p>Avoid over-fitting.</p></li>
+<li><p>So place a penalty for excessive model parameters</p></li>
+<li><p>Akaike Information Criterion (AIC; <em>smaller is better</em>)</p></li>
+</ul>
+<p><span class="math display">\[AIC  =  n\log \left(\frac{SSE}{n} \right) + 2p\]</span> - Bayesian Information Criterion (BIC) places a higher penalty that depends on, the number of observations.</p>
+<ul>
+<li><p>As a result BIC fares well for selecting a model that explains the relationships well while AIC fares well when selecting a model for prediction purposes.</p></li>
+<li><p>Other variations: WAIC, AICc, etc (we will not cover them)</p></li>
+</ul>
+</section>
+<section id="model-selection-continued-1" class="slide level2">
+<h2>Model selection (continued)</h2>
+<ul>
+<li><p>We can also benchmark a small model with the full regression</p></li>
+<li><p>Mallow’s <span class="math inline">\(C_p\)</span> (look for <span class="math inline">\(C_p\)</span> just less than <span class="math inline">\(p\)</span> or equal)</p></li>
+</ul>
+<p><span class="math display">\[C_{p} =\; \frac{{\rm SS\; Error\; for\; Smaller\; Model}}{{\rm Mean\; Square\; Error\; for\; full\; regression}} -(n-2p)\]</span> - If unimportant variables are added to the model, then the variance of the fitted values will increase. Similarly if important variables are added, then the bias of the fitted values will decrease</p>
+<ul>
+<li>The <span class="math inline">\(C_{p}\)</span> index, balances the variance and bias</li>
 </ul>
 </section>
 <section id="software" class="slide level2">
@@ -764,27 +1238,43 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <li><p>In <span class="math inline">\(R\)</span>, <code>lm()</code> and <code>step()</code> function will perform the tasks</p>
 <ul>
 <li><code>leaps()</code> and <code>HH</code> packages contain additional functions</li>
+<li><code>dredge()</code> in <code>MuMIn</code> will produce all the subset models given a full model</li>
 <li>Also <code>MASS</code>, <code>car</code>, <code>caret</code>, and <code>SignifReg</code> R packages</li>
 </ul></li>
 <li><p>R base package step-wise selection is based on <span class="math inline">\(AIC\)</span> only.</p></li>
-<li><p><strong><code>Note</code></strong></p>
-<ul>
-<li>If a model stands out, it will perform well in terms of all summary measures.</li>
-<li>If a model does not stand out, summary measures will contradict.</li>
-</ul></li>
 </ul>
-<p>Examples:</p>
-<p><a href="https://shiny.massey.ac.nz/anhsmith/demos/explore.multiple.regression/" class="uri">https://shiny.massey.ac.nz/anhsmith/demos/explore.multiple.regression/</a></p>
 </section>
+<section id="cross-validation" class="slide level2">
+<h2>Cross validation</h2>
+<p>In sample error vs prediction error</p>
+<ul>
+<li>For simpler models, increasing the number of parameters improves the fit to the sample.</li>
+<li>But it seems to reduce the accuracy of the out-of-sample predictions.</li>
+<li>Most accurate models trade off flexibility (complexity) and overfitting</li>
+</ul>
+<p>General idea: - Leave out some observations. - Train the model on the remaining samples; score on those left out. - Average over many left-out sets to get the out-of-sample (future) accuracy.</p>
+</section>
+<section id="cross-validated-selection-data-example" class="slide level2">
+<h2>Cross validated selection: Data example</h2>
+<p>Consider the pinetree data set which contains the circumference measurements of pine trees at four positions (First is bottom)</p>
+
+<img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-19-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="cross-validated-selection" class="slide level2">
 <h2>Cross validated selection</h2>
 <ul>
-<li>Model selection can be done focussing on prediction
+<li>Model selection can be done focusing on prediction
 <ul>
 <li>method = “leapForward” &amp; method = “leapBackward” options</li>
 </ul></li>
 </ul>
 <div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">library</span>(caret);  <span class="fu">library</span>(leaps)</span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb20-3"><a href="#cb20-3"></a>fitControl  <span class="ot">&lt;-</span>  <span class="fu">trainControl</span>(<span class="at">method  =</span>  <span class="st">"repeatedcv"</span>,</span>
+<span id="cb20-4"><a href="#cb20-4"></a>                             <span class="at">number  =</span>  <span class="dv">5</span>,  <span class="at">repeats  =</span>  <span class="dv">100</span>)</span>
+<span id="cb20-5"><a href="#cb20-5"></a>leapBackwardfit  <span class="ot">&lt;-</span>  <span class="fu">train</span>(Top  <span class="sc">~</span>  .,  <span class="at">data  =</span>  pinetree[, <span class="sc">-</span><span class="dv">1</span>],</span>
+<span id="cb20-6"><a href="#cb20-6"></a><span class="at">trControl  =</span>  fitControl,  <span class="at">method  =</span>  <span class="st">"leapBackward"</span>)</span>
+<span id="cb20-7"><a href="#cb20-7"></a><span class="fu">summary</span>(leapBackwardfit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Subset selection object
 3 Variables  (and intercept)
@@ -804,8 +1294,45 @@ Selection Algorithm: backward
 <h2>Polynomial models</h2>
 <ul>
 <li>A polynomial model includes the square, cube of predictor variables as additional variables.</li>
-<li>High correlation (multicollinearity) between the predictor variables may be a problem in polynomial models.</li>
+<li>High correlation (multicollinearity) between the predictor variables may be a problem in polynomial models, but not always.</li>
 </ul>
+</section>
+<section id="polynomial-models-data-example" class="slide level2">
+<h2>Polynomial models: Data example</h2>
+<p>We can fit a simple linear regression using the Pine tree data</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>pine1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Top <span class="sc">~</span> First, <span class="at">data =</span> pinetree) </span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="fu">summary</span>(pine1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Top ~ First, data = pinetree)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-2.854 -0.881 -0.195  0.630  3.176 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   -6.334      0.765   -8.28  2.1e-11 ***
+First          0.763      0.024   31.78  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.29 on 58 degrees of freedom
+Multiple R-squared:  0.946, Adjusted R-squared:  0.945 
+F-statistic: 1.01e+03 on 1 and 58 DF,  p-value: &lt;2e-16</code></pre>
+</div>
+</div>
+
+<img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-22-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<section id="look-closer" class="slide level2">
+<h2>Look closer</h2>
+
+<img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-23-1.png" width="960" class="r-stretch quarto-figure-center"><p>Looks non-linear</p>
+</section>
+<section id="polynomial-models-data-example-1" class="slide level2">
+<h2>Polynomial models: Data example</h2>
 <div class="cell" data-layout-align="center">
 <div class="cell-output cell-output-stdout">
 <pre><code>                                  Estimate Std. Error t value Pr(&gt;|t|)
@@ -815,11 +1342,10 @@ poly(First, degree = 3, raw = T)2    0.142      0.022    6.39        0
 poly(First, degree = 3, raw = T)3   -0.001      0.000   -5.95        0</code></pre>
 </div>
 </div>
-<ul>
-<li><p>Multicollinearity can occur with polynomial modelling but not always</p>
-<pre><code>- For the pinetree example, all the slope coefficients are highly significant for the cubic regression
-- Not so for the quadratic regression</code></pre></li>
-</ul>
+<pre><code>```         
+- For the pinetree example, all the slope coefficients are highly significant for the cubic regression
+- Not so for the quadratic regression
+```</code></pre>
 <div class="cell" data-layout-align="center">
 <div class="cell-output cell-output-stdout">
 <pre><code>                                  Estimate Std. Error t value Pr(&gt;|t|)
@@ -856,53 +1382,7 @@ poly(First, degree = 3)3    -5.31      0.892   -5.95        0</code></pre>
 <li><p>Quadratic regression for pinetree data is not satisfactory based on the residual plots shown below:</p></li>
 </ul>
 
-<img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-16-1.png" width="960" class="r-stretch quarto-figure-center"></section>
-<section id="local-polynomial-ﬁtting-or-spline-smoothing." class="slide level2">
-<h2>Local polynomial ﬁtting or spline smoothing.</h2>
-<ul>
-<li><p>Instead of a single polynomial for all the data, local polynomials or splines can also be fitted.</p></li>
-<li><p>For pinetree data, compare the cubic fit with the fifth degree spline fit</p>
-<ul>
-<li>very similar fits</li>
-</ul></li>
-</ul>
-
-<img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-17-1.png" width="960" class="r-stretch quarto-figure-center"></section>
-<section id="robust-modelling" class="slide level2">
-<h2>Robust modelling</h2>
-<ul>
-<li>Instead of the regression fit using the <code>lm()</code> function, we can also fit robust models
-<ul>
-<li>We covered <code>MASS::rlm()</code> &amp; <code>robustbase::lmrob()</code> functions in the last chapter</li>
-<li>Robust modelling syntax is similar for employing many predictors.</li>
-<li>Pinetree example</li>
-</ul></li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="cell-output cell-output-stdout">
-<pre><code>                         Value Std. Error t value
-(Intercept)              17.40      0.125  139.54
-poly(First, degree = 3)1 40.93      0.966   42.37
-poly(First, degree = 3)2  4.76      0.966    4.93
-poly(First, degree = 3)3 -5.17      0.966   -5.36</code></pre>
-</div>
-</div>
-</section>
-<section id="comparison-of-regression-and-robust-fits" class="slide level2">
-<h2>Comparison of regression and robust fits</h2>
-
-<img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-19-1.png" width="960" class="r-stretch quarto-figure-center"><ul>
-<li>other summaries such as MAPE, MAD can also be obtained</li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.0629 0.0598 0.0602</code></pre>
-</div>
-</div>
-<ul>
-<li>Try for the polynomial fit <code>Top~poly(First,degree=3)</code> which is a better model structure for the pinetree data.</li>
-</ul>
-</section>
+<img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-27-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="categorical-predictors" class="slide level2">
 <h2>Categorical predictors</h2>
 <ul>
@@ -911,7 +1391,7 @@ poly(First, degree = 3)3 -5.17      0.966   -5.36</code></pre>
 <li><p>Area effect on Top circumference is clear from the following plot</p></li>
 </ul>
 
-<img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-21-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-28-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="indicator-variables" class="slide level2">
 <h2>Indicator variables</h2>
 <ul>
@@ -984,385 +1464,14 @@ poly(First, degree = 3)3 -5.17      0.966   -5.36</code></pre>
 <li>We specifically include the interaction between them</li>
 </ul>
 </section>
-<section id="permutation-tests" class="slide level2">
-<h2>Permutation tests</h2>
-<p>R package <em>lmPerm</em> function <code>lmp()</code> will obtain the P values by permuting the predictor data.</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">library</span>(lmPerm)</span>
-<span id="cb17-2"><a href="#cb17-2"></a>mdl  <span class="ot">&lt;-</span>  <span class="fu">lmp</span>(Top<span class="sc">~</span>I2<span class="sc">+</span>I3,  <span class="at">data=</span>pinetree1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Settings:  unique SS : numeric variables centered"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">summary</span>(mdl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lmp(formula = Top ~ I2 + I3, data = pinetree1)
-
-Residuals:
-   Min     1Q Median     3Q    Max 
- -8.92  -3.10  -1.01   3.68  11.93 
-
-Coefficients:
-   Estimate Iter Pr(Prob)   
-I2    -1.96  110   0.4818   
-I3    -5.93 5000   0.0048 **
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 4.98 on 57 degrees of freedom
-Multiple R-Squared: 0.205,  Adjusted R-squared: 0.177 
-F-statistic: 7.35 on 2 and 57 DF,  p-value: 0.00145 </code></pre>
-</div>
-</div>
-<p>Also try all other cases covered just replacing the <code>lm()</code> command with <code>lmp()</code> command.</p>
-</section>
-<section id="time-series-smoothing" class="slide level2">
-<h2>Time series smoothing</h2>
-<ul>
-<li>This is a technique to remove the random variation but retain any trend and cyclic type of variations in a time series.
-<ul>
-<li><code>Moving Average Smoothing</code><br>
-</li>
-<li><code>Exponential (Average) Smoothing</code></li>
-</ul></li>
-<li>Moving average smoothing
-<ul>
-<li>Compute the mean of successive smaller periods of past data (moving window).</li>
-</ul></li>
-</ul>
-<p><span class="math display">\[M_t = (x_t + x_{t-1} + ... + x_{t-N+1}) / N\]</span> where - <span class="math inline">\(x_t\)</span>- the observation at time <span class="math inline">\(t\)</span> &amp; <span class="math inline">\(N\)</span> - the moving average length/span</p>
-<ul>
-<li>Longer the span <span class="math inline">\(N\)</span>, greater the smoothing</li>
-</ul>
-</section>
-<section id="ma-smoothing-for-20-bills-data" class="slide level2">
-<h2>MA smoothing for $20 bills data</h2>
-
-<img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-24-1.png" width="960" class="r-stretch quarto-figure-center"></section>
-<section id="ma-centering" class="slide level2">
-<h2>MA Centering</h2>
-<ul>
-<li><p>We need to place moving averages in the middle time period.</p>
-<pre><code>- moving average must fall at t = 1.5 2.5, 3.5 etc when the MA length is an even number.  </code></pre></li>
-<li><p>So, smooth again (in pairs) to place the moving averages at t = 2, 3, 4 etc.</p></li>
-</ul>
-
-<img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-25-1.png" width="960" class="r-stretch quarto-figure-center"></section>
-<section id="exponential-average-smoothing" class="slide level2">
-<h2>Exponential (Average) Smoothing</h2>
-<ul>
-<li><p>In exponential average smoothing, past observations are given exponentially decreasing weights.</p></li>
-<li><p>The average computed using exponentially decreasing weights is known as the Exponentially Weighted Moving average (EWMA).</p></li>
-</ul>
-<p>EWMA definition: <span class="math display">\[S_t = \alpha x_t + (1-\alpha) S_{t-1}\]</span> where <span class="math inline">\(S_t\)</span> = EWMA at time <span class="math inline">\(t\)</span>, <span class="math inline">\(x_t\)</span> = value of time series at time <span class="math inline">\(t\)</span> &amp; <span class="math inline">\(\alpha\)</span> = weighting factor <span class="math inline">\((0 &lt; \alpha &lt; 1)\)</span></p>
-<h3 id="ewma-for-20-bills-data">EWMA for $20 bills data</h3>
-
-<img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-26-1.png" width="960" class="r-stretch quarto-figure-center"></section>
-<section id="double-triple-exponential-smoothing" class="slide level2">
-<h2>Double &amp; triple exponential smoothing</h2>
-<p><br></p>
-<h3 id="double-smoothing-includes-trend">Double Smoothing (includes trend)</h3>
-<p><span class="math inline">\(S_t = \alpha X_t+(1-\alpha)[S_{t-1} + T_{t-1}]\)</span> (level equation)</p>
-<p><span class="math inline">\(T_t = \gamma [S_t - S_{t-1}] + (1 - \gamma)T_{t-1}\)</span> (trend equation)</p>
-<p><span class="math inline">\(\hat{Y}= S_{t-1}+T_{t-1}\)</span></p>
-<p><br></p>
-<h3 id="triple-smoothing-includes-trend-seasonal">Triple Smoothing (includes trend, seasonal)</h3>
-<p>Also called <code>Holt and Winter</code> method</p>
-<p><span class="math inline">\(S_t = \alpha(X_t-P_{t-p}) + (1-\alpha)[S_{t-1}+T_{t-1}]\)</span> (level equation)</p>
-<p><span class="math inline">\(T_t = \gamma[S_t-S_{t-1}]+ (1-\gamma)T_{t-1}\)</span> (trend equation)</p>
-<p><span class="math inline">\(P_t = \delta (X_t-S_t)+(1-\delta)P_{t-p}\)</span> (seasonal equation at period <span class="math inline">\(p\)</span>)</p>
-<p><span class="math inline">\(\hat{Y}= S_{t-1}+T_{t-1}+P_{t-p}\)</span></p>
-</section>
-<section id="double-triple-exponential-smoothing-1" class="slide level2">
-<h2>Double &amp; triple exponential smoothing</h2>
-
-<img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-27-1.png" width="960" class="r-stretch quarto-figure-center"></section>
-<section id="forecasting" class="slide level2">
-<h2>Forecasting</h2>
-<ul>
-<li>Projecting the present time series for future time points (Prediction)</li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-28-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-29-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-<ul>
-<li><p>Assessment of fit | Forecast accuracy using</p>
-<ul>
-<li>Mean Squared Deviation (MSD)</li>
-<li>Mean Absolute Deviation (MAD)</li>
-<li>Mean Absolute Percentage Error (MAPE)</li>
-</ul></li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="cell-output cell-output-stdout">
-<pre><code>RMSE  MAE MAPE 
-81.1 59.2 14.2 </code></pre>
-</div>
-</div>
-<div class="cell" data-layout-align="center">
-<div class="cell-output cell-output-stdout">
-<pre><code>RMSE  MAE MAPE 
-64.9 48.7 10.1 </code></pre>
-</div>
-</div>
-</section>
-<section id="time-series-modelling" class="slide level2">
-<h2>Time series modelling</h2>
-<ul>
-<li><p>We can fit linear models to time series data including trend and seasonality components.</p></li>
-<li><p>Indicator variables to capture seasonality</p></li>
-</ul>
-<p>Examples:</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-32-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-33-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="box-jenkins-modelling" class="slide level2">
-<h2>Box-Jenkins modelling</h2>
-<ul>
-<li><p>A Box-Jenkins model is an improvement over the regression approach - combines regression and moving average approaches - suitable when data collected at equally spread time intervals</p></li>
-<li><p>Box-Jenkins approach consists of the following three stages:</p>
-<ul>
-<li>Identification</li>
-<li>Estimation</li>
-<li>Diagnostics</li>
-</ul></li>
-<li><p>Past data or lagged data (or simply <code>lags</code>) play an important role</p></li>
-</ul>
-</section>
-<section id="identification-stage-of-modelling" class="slide level2">
-<h2>Identification stage of modelling</h2>
-<ul>
-<li><p>A time series is <code>stationary</code> if the mean and variance do not change over time.</p>
-<ul>
-<li>Alternatively the same probability law applies over time</li>
-<li>For a <em>white noise</em> series has a constant mean and variance for all time <span class="math inline">\(t\)</span>.</li>
-</ul></li>
-<li><p>Stationarity is investigated using the sample autocorrelation function (ACF) (covered in Chapter 2)</p></li>
-<li><p>Using ACFs, a tentative assessment of the terms or order of the model is made.</p></li>
-</ul>
-
-<img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-34-1.png" width="960" class="r-stretch quarto-figure-center"></section>
-<section id="common-patterns" class="slide level2">
-<h2>Common patterns</h2>
-<ul>
-<li>Drifting random walk series (non-stationary)</li>
-</ul>
-<p><span class="math display">\[X_t = \delta + X_{t-1} + W_t \]</span></p>
-
-<img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-35-1.png" width="960" class="r-stretch quarto-figure-center"><ul>
-<li><p>Model the difference <span class="math inline">\(X_{t} - X_{t-1}\)</span> or just use the first lag <span class="math inline">\(X_{t-1}\)</span> as a predictor in the usual regression</p></li>
-<li><p>The process of differencing can be done on the differences too. This process brings stationarity to a series</p></li>
-</ul>
-</section>
-<section id="auto-regressive-ar-model" class="slide level2">
-<h2>Auto-regressive (AR) model</h2>
-<p><span class="math display">\[X_t=\alpha_1 X_{t-1}+ \alpha_2 X_{t-2}+ \dots + \alpha_p X_{t-p} + \epsilon_t\]</span></p>
-<ul>
-<li><p>Also called the <span class="math inline">\(AR(p)\)</span> process.</p></li>
-<li><p>An AR model is approximately the same as the multiple regression fit.</p>
-<ul>
-<li>If sample mean replaces the true mean <span class="math inline">\(\mu\)</span> of the process, the AR model becomes the multiple regression model with lags as predictors.</li>
-</ul></li>
-<li><p><strong>moving average process</strong> for <code>errors</code></p></li>
-</ul>
-<p><span class="math display">\[X_t=\beta_0 z_{t}+ \beta_1 z_{t-1}+ \dots + \beta_q z_{t-q}\]</span></p>
-<ul>
-<li><span class="math inline">\(X_t\)</span> is modelled with errors <span class="math inline">\(z_1\)</span>, <span class="math inline">\(z_2\)</span>,…, whose means are assumed to be zero and constant variance.</li>
-</ul>
-</section>
-<section id="autoregressive-moving-average-arma-model" class="slide level2">
-<h2>Autoregressive moving average (ARMA) model</h2>
-<ul>
-<li><span class="math inline">\(ARMA(p, q)\)</span> model combines both the <span class="math inline">\(AR(p)\)</span> and <span class="math inline">\(MA(q)\)</span> models.</li>
-</ul>
-<p><span class="math display">\[X_t=\alpha_1 X_{t-1}+ \alpha_2 X_{t-2}+ \dots + \alpha_p X_{t-p} + \beta_o z_{t}+ \beta_1 z_{t-1}+ \dots + \beta_q z_{t-q}\]</span></p>
-<ul>
-<li><p>Estimation of parameters</p>
-<ul>
-<li>done using advanced (non-linear) iterative methods</li>
-</ul></li>
-<li><p>Usual Diagnostics guidelines apply</p>
-<ul>
-<li>examine residuals for randomness</li>
-<li>may indicate transformation</li>
-</ul></li>
-<li><p>For nonstationary series, we perform differencing and then do the modelling</p></li>
-<li><p>ARIMA (p,d,q) (P,D,Q) Models</p>
-<ul>
-<li>includes ARMA (Stationary) Models
-<ul>
-<li><span class="math inline">\(p\)</span>, number of lag terms</li>
-<li><span class="math inline">\(q\)</span>, number of successive error terms (moving average part)</li>
-<li><span class="math inline">\(d\)</span>, number of differences in model (to deal with non-stationarity)</li>
-<li><span class="math inline">\(P\)</span>,<span class="math inline">\(D\)</span>,<span class="math inline">\(Q\)</span> - corresponding parameters for the seasonal part</li>
-</ul></li>
-</ul></li>
-</ul>
-<p>(will not be examined)</p>
-</section>
-<section id="automated-arima-modelling" class="slide level2">
-<h2>Automated ARIMA modelling</h2>
-<div class="left-narrow">
-<ul>
-<li><code>forecast</code> R package has functions such as <code>auto.arima</code> for speedy ARIMA modelling
-<ul>
-<li>milk data example</li>
-</ul></li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="cell-output cell-output-stdout">
-<pre><code>Series: Y 
-ARIMA(1,1,4) 
-
-Coefficients:
-         ar1    ma1    ma2     ma3     ma4
-      -0.305  0.246  0.150  -0.426  -0.649
-s.e.   0.116  0.082  0.055   0.049   0.061
-
-sigma^2 = 1380:  log likelihood = -840
-AIC=1692   AICc=1692   BIC=1710</code></pre>
-</div>
-</div>
-<ul>
-<li>Residual diagnostics</li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Ljung-Box test
-
-data:  Residuals from ARIMA(1,1,4)
-Q* = 47, df = 5, p-value = 5e-09
-
-Model df: 5.   Total lags used: 10</code></pre>
-</div>
-</div>
-</div>
-<div class="right-wide">
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-38-1.png" width="576"></p>
-</figure>
-</div>
-</div>
-</div>
-<ul>
-<li>Residuals are unsatisfactory - the 12-month lag shows that seasonality is not captured.</li>
-</ul>
-</div>
-</section>
-<section id="improved-model" class="slide level2">
-<h2>Improved model</h2>
-<div class="left-narrow">
-<ul>
-<li>auto-ARIMA with 12-month seasonality</li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="cell-output cell-output-stdout">
-<pre><code>Series: Y 
-ARIMA(0,1,1)(0,1,1)[12] 
-
-Coefficients:
-         ma1    sma1
-      -0.220  -0.621
-s.e.   0.075   0.063
-
-sigma^2 = 53.4:  log likelihood = -530
-AIC=1066   AICc=1066   BIC=1075</code></pre>
-</div>
-</div>
-<ul>
-<li>Residual diagnosis</li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Ljung-Box test
-
-data:  Residuals from ARIMA(0,1,1)(0,1,1)[12]
-Q* = 17, df = 22, p-value = 0.7
-
-Model df: 2.   Total lags used: 24</code></pre>
-</div>
-</div>
-</div>
-<div class="right-wide">
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-41-1.png" width="576"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Residuals are better now!</p>
-</div>
-</section>
-<section id="improved-model-1" class="slide level2">
-<h2>Improved model</h2>
-
-<img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-42-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="summary" class="slide level2">
 <h2>Summary</h2>
 <ul>
-<li>Regression methods aim to fit a model by least squares to explain the variation in the dependent variable <span class="math inline">\(Y\)</span> by fitting explanatory <span class="math inline">\(X\)</span> variables.</li>
-<li>Matrix plots and correlation coefficients provide important clues to the interrelationships.</li>
-<li>For building a model, the additional variation explained is important. Summary criterion such as <span class="math inline">\(AIC\)</span> is also useful.</li>
-<li>ANCOVA employs both numerical variables (covariates) and qualitative factors for modelling.</li>
-<li>A time series data involve trend and seasonal variations.</li>
-<li>Simple smoothing methods are intended to dampen the effect of random errors
-<ul>
-<li>Double and triple exponential smoothing deal trends and seasonality</li>
-</ul></li>
-<li>Simple AR models can be built as multiple regression models employing lags as predictors.
-<ul>
-<li>Building ARIMA models are more involved and will not be examined in depth.</li>
-</ul></li>
-<li>A model is not judged as the <strong>best</strong> purely on statistical grounds.</li>
+<li><p>Regression methods aim to fit a model by least squares to explain the variation in the dependent variable <span class="math inline">\(Y\)</span> by fitting explanatory <span class="math inline">\(X\)</span> variables.</p></li>
+<li><p>Matrix plots (EDA) and correlation coefficients provide important clues to the interrelationships.</p></li>
+<li><p>For building a model, the additional variation explained is important. Summary criterion such as <span class="math inline">\(AIC\)</span> is also useful.</p></li>
+<li><p>A model is not judged as the <strong>best</strong> purely on statistical grounds.</p></li>
 </ul>
-</section>
-<section id="shiny-apps" class="slide level2">
-<h2>Shiny apps</h2>
-<p><a href="http://shiny.massey.ac.nz/anhsmith/demos/explore.multiple.regression/" class="uri">http://shiny.massey.ac.nz/anhsmith/demos/explore.multiple.regression/</a></p>
-<p><a href="http://shiny.massey.ac.nz/anhsmith/demos/fit.multiple.regression/" class="uri">http://shiny.massey.ac.nz/anhsmith/demos/fit.multiple.regression/</a></p>
-<p><a href="http://shiny.massey.ac.nz/anhsmith/demos/explore.collinearity/" class="uri">http://shiny.massey.ac.nz/anhsmith/demos/explore.collinearity/</a></p>
-<p><a href="http://shiny.massey.ac.nz/anhsmith/demos/explore.Cooks.distances.and.leverages/" class="uri">http://shiny.massey.ac.nz/anhsmith/demos/explore.Cooks.distances.and.leverages/</a></p>
-<p><a href="http://shiny.massey.ac.nz/anhsmith/demos/demo.RSq.and.adjusted.RSq/" class="uri">http://shiny.massey.ac.nz/anhsmith/demos/demo.RSq.and.adjusted.RSq/</a></p>
 <!-- download.file("http://www.massey.ac.nz/~kgovinda/220exer/Chap5moreexamples.R", destfile="Chap5moreexamples.R") -->
 <!-- download.file("https://www.massey.ac.nz/~kgovinda/220exer/chapter-5-exercises.html", destfile="chapter-5-exercises.html") -->
 <!-- install.packages("remotes") -->

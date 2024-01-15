@@ -35,11 +35,37 @@ knitr::opts_chunk$set(warning = FALSE,
                       fig.align="center")
 ```
 
+
+## Learning Objectives:
+
+-   Understand and describe a multiple linear regression, the difference from a simple linear regression, and when each are appropriate
+-   Fit and display a multiple regression
+-   Understand and interpret different types of Sums of Squares
+-   Understand and test for multicollinearity and other assumptions
+
+
+## What is a multiple Regression?
+-   In a simple regression, there is only one predictor. 
+
+
+Multiple regression modelling involves many predictors.
+
+## When to use multiple predictors
+
+-   *Statistical control of a confound*: controlling treatment for some unwanted variability
+
+-   *Multiple causation*: multiple things are thought to cause changes in the outcome variable
+
+-   *Interactions*: we are interested in how two variables may combine to change our outcome (will cover this in the next chapter)
+
 ## Multiple Regression
+Where to start:
 
--   In a simple regression, there is only one predictor. Multiple
-    regression modelling involves many predictors.
+-   Question and hypothesis + domain knowledge
 
+    -   What are we interested in testing?
+    -   What data is collected? do those variables make sense?
+    
 -   Perform EDA first
 
     -   A scatter plot matrix can show nonlinear relationships
@@ -52,42 +78,121 @@ knitr::opts_chunk$set(warning = FALSE,
         the one with high correlation with response variable but
         uncorrelated with the rest.
 
-    -   Try
-        <https://shiny.massey.ac.nz/anhsmith/demos/explore.multiple.numerical.variables/>
 
-## Pinetree data example
+## Data example
+Basketball team summary for 2020 regular season\
+
+We have 2118 data points which equates to 1059 games (2 teams per game), 2020 was a short season
+
+
+Each team in a standard season plays 82 games. That means in total, an NBA season is comprised of 1,230 games. 
+
 
 \small
-
 ```{r}
-# url1 <- "http://www.massey.ac.nz/~anhsmith/data/pinetree.RData"
-# download.file(url = url1, destfile = "pinetree.RData")
-load("../data/pinetree.RData")
+teams <- read.csv("teamsNBA2020.csv", row.names = 1)
+head(teams)
+teams_forlm <- teams |> 
+  dplyr::select(-Team, -Game, -Outcome, -TOV, -PF, - MIN)
+
 ```
 
-```{r}
+`Spread`: Point difference between winning and losing team\
+`PTS`: Total points scored by a team in a game\
+`P2p`: Percent of 2-pointers made\
+`P3p`: Percent of 3-pointers made\
+`FTp`: Percent of free-throws made\
+`OREB`: Offensive rebounds\
+`DREB`: Defensive rebounds\
+`AST`: Assists\
+`STL`: Steals\
+`BLK`: Blocks\
+
+
+
+
+## Data example
+```{r, echo = TRUE}
 options(digits=3)
-cor(pinetree[,-1])
+cor(teams[,c(3, 6:12, 14:15)])
 ```
 
 ## Inter-relationships
 
--   Strong relationships revealed
-    -   We may not need all predictors
-    -   Area effect also revealed below
-
-```{r, fig.height=4}
+```{r, fig.height=8}
 library(GGally)
-ggpairs(pinetree, columns =2:5, aes(colour=Area))
+ggpairs(teams, columns = c(3, 6:12, 14:15))
 ```
 
 ## Full regression
 
 Places all of the predictors in the model
 
+Equivalent of throwing everything in and hoping something sticks
+
+
 ```{r}
-full_reg <- lm(Top~., data=pinetree[,-1])
+full_reg <- lm(Spread~., data=teams_forlm)
 ```
+
+
+```{r}
+summary(full_reg)
+```
+
+
+
+## Residuals
+Just like with a simple regression we examine residuals to look for patterns
+```{r}
+par(mfrow=c(2,2))
+plot(full_reg)
+```
+These look great, probably because we have a ton of data in this example. 
+
+
+## Multicollinearity {.increment}
+
+-   *Multicollinearity* is where at least two predictor variables are
+    highly correlated.
+
+-   Multicollinearity does *not* affect the residual SD very much, and
+    doesn't pose a major problem for prediction.
+
+-   The major effects of multicollinearity are:
+
+    -   It changes the estimates of the coefficients.
+    -   It inflates the variance of the estimates of the coefficients.
+        That is, it increases the uncertainty about what the slope
+        parameters are.
+    -   Therefore, it matters when testing hypotheses about the effects
+        of specific predictors.
+
+## Multicollinearity
+
+-   The impact of multicollinearity on the variance of the estimates can
+    be quantified using the Variance Inflation Factor (VIF \< 5 is
+    considered ok).
+
+-   There are several ways to deal with multicollinarity, depending on
+    context. We can discard one of highly correlated variable, perform
+    ridge regression, or think more carefully about how the variables
+    relate to each other.
+
+## Multicollinearity 
+
+In R we can examine Multicollinearity using the function `vif()`
+
+Remember our basketball regression:
+
+```{r, echo=TRUE}
+library(car)
+vif(full_reg)
+```
+
+These values are all small (VIF \< 5) so we can continue on in interpreting the regression.
+
+## Tidy summary
 
 ```{r}
 library(tidyverse)
@@ -99,6 +204,8 @@ kable(out1, caption = "t-tests for model parameters") |>
   kable_classic(full_width = F)
 ```
 
+## Model Summary Measures
+
 ```{r}
 out1 <- glance(full_reg) |> 
   select(r.squared, sigma, statistic, p.value, AIC, BIC) |> 
@@ -108,48 +215,29 @@ kable(t(out1), caption = "Model summary measures") |>
   kable_classic(full_width = F) 
 ```
 
--   Old summary
+## Variance Explained 
+$R^2$ is the proportion of variance in $y$ explained by $x$ .
 
-```{r}
+```{r, echo=TRUE}
 summary(full_reg)
 ```
+## Variance Explained 
 
--   Also try the app -
-    <https://shiny.massey.ac.nz/anhsmith/demos/fit.multiple.regression/>
+$R^2=\frac{SS~regression}{SS~Total}$
 
-## Multicollinearity {.increment}
 
--   *Multicollinearity* is where at least two predictor variables are
-    highly correlated.
-
--   Multicollinearity does *not* affect the residual SD very much, and
-    doesn't pose a major problem for prediction.
-
--   The major effects of multicolinearity are:
-
-    -   It changes the estimates of the coefficients.
-    -   It inflates the variance of the estimates of the coefficients.
-        That is, it increases the uncertainty about what the slope
-        parameters are.
-    -   Therefore, it matters when testing hypotheses about the effects
-        of specific predictors.
-
--   The impact of multicollinearity on the variance of the estimates can
-    be quantified using the Variance Inflation Factor (VIF \< 5 is
-    considered ok).
-
--   There are several ways to deal with multicollinarity, depending on
-    context. We can discard one of highly correlated variable, perform
-    ridge regression, or think more carefully about how the variables
-    relate to each other.
-
-```{r}
-library(car)
-vif(full_reg)
+```{r, echo = TRUE}
+SS <- anova(full_reg) |> 
+   tidy() |> 
+  select(term:sumsq) |> 
+  janitor::adorn_totals()
+SS
 ```
 
--   Try
-    <https://shiny.massey.ac.nz/anhsmith/demos/explore.collinearity/>
+-   $R^2_{adj}$ is adjusted to remove the variation that is explained by
+    chance alone
+
+-   $R^2_{adj}=1-\frac{MS~Error}{MS~Total}$
 
 ## Additional variation explained
 
@@ -165,6 +253,8 @@ vif(full_reg)
 
     ![](img/5_5.png)
 
+
+
 ## Sequential addition of predictors
 
 -   Addition of variables decreases SSE and increases SSR and $R^2$.
@@ -176,26 +266,18 @@ vif(full_reg)
 ## Significance of Type I or Seq.SS
 
 -   The Type I SS is the SS of a predictor after adjusting for the
-    effects of the *preceding* predictors in the model.
+    effects of the *preceding* predictors in the model. 
+    
+    -   Sometimes order matters, particularly with unequal sample sizes
 
 -   F test for the significance of the additional variation explained
+-   R function `anova()` calculates sequential or Type-I SS
 
 ![](img/type1.png)
 
--   For pinetree data, Second (middle circumference) does not explain
-    significant additional variation after First (bottom circumference)
 
-\scriptsize
 
-```{r}
-model1 = lm(Top~First, data=pinetree)
-model2 = lm(Top~First+Second, data=pinetree)
-anova(model1, model2)
-```
-
-## Type II and or Type III SS
-
--   R function `anova()` calculates sequential or Type-I SS
+## Type II 
 
 -   Type II SS is based on the principle of marginality.
 
@@ -207,73 +289,162 @@ anova(model1, model2)
 
 ![](img/type2.png)
 
+## Type III SS
 -   Type III SS is the SS added to the regression SS after *ALL* other
     predictors including an intercept term.
 
     -   Violates the marginality principle and so avoided for hypothesis
         tests
 
-```{r}
+-   SS explained is not always a good criterion for selection of
+    variables
+    
+## SS types in action
+
+```{r, echo = TRUE}
 anova(full_reg)
+```
+
+```{r, echo = TRUE}
 library(car)
 Anova(full_reg,  type=2)
+```
+
+```{r, echo = TRUE}
 Anova(full_reg,  type=3)
 ```
 
--   SS explained is not always a good criterion for selection of
-    variables
+## Summary so far
+-   Defined multiple regression
+-   Why we might run a multiple regression
+-   How to perform a multiple regression, examine residuals, multicollinearity
+-   Variation and R squared
+-   Sums of Squares types
 
-## Model selection
+    
+## Learning Objectives:
 
--   $R^2$ (the proportion of variance explained by the model) should not
-    be used to select among candidate models. Adding another predictor
-    variable always increases the $R^2$, even if the new variable is
-    unrelated in the population.
+-   Cautionary tales: when correlation misleads us 
+-   How to make models
+-   Comparing models
+-   Principles of model selection
 
--   $R^2_{adj}$ is adjusted to remove the variation that is explained by
-    chance alone
 
--   $R^2_{adj}=1-\frac{MS~Error}{MS~Total}$
 
-    -   Try
-        <https://shiny.massey.ac.nz/anhsmith/demos/demo.RSq.and.adjusted.RSq/>
+## Does Waffle Houses cause divorce??
 
--   Residual SD depends on its degrees of freedom
+![](img/waffleH2divorce.png)
 
-    -   So comparison of models based on Residual SD is not fully fair
+## Or is it butter?
 
--   Other summaries similar to residual SD include
+![](img/Divorce_margarine.png)
 
--   Mean Squared Deviation (MSD)
+And if you want more to impress your friends at a BBQ, the source is: http://www.tylervigen.com/spurious-correlations
 
-$$\frac{\sum \left({\rm observation-fit}\right)^{{\rm 2}} }{{\rm number~of~ observations}}$$
+## Spurious association
+-   You've heard that before: correlation does not imply causation. BUT it doesn't discard it either
+-   Hope you are seated: causation does not imply correlation.
+-   Causation implies conditional correlation (up to linearity issues).
+-   We need more than just statistical models to answer causal questions.
 
--   Mean Absolute Deviation (MAD)
+## How do we deal with spurious associations?
+-   Domain knowledge: you know that waffles and butter don't *cause* divorce so why might they be correlated?
 
-$$\frac{\sum \left|{\rm observation-fit}\right| }{{\rm number~of~observations}}$$
+    -   Is there another predictor that would be better?
+-   Multiple regressions can disentangle the association between two predictors and an outcome 
 
--   Mean Absolute Percentage Error (MAPE)
+    -   Statistical control of a confound
+  
+![](img/waffleH2divorce.png)
 
-$$\frac{\sum \frac{\left|{\rm observation-fit}\right|}{{\rm observation}} }{{\rm number~of~observations}} {\times100}$$
+## Masked associations
 
-## Model selection (continued)
+-   Association between a predictor variable and an outcome can be
+masked.
+-   You need to observe both to see the “true” influence of either on the
+outcome.
+-   How do we account for the masking variable (seen as a nuisance)?
 
--   Avoid over-fitting.
+## Masking situations tend to arise when:
 
-    -   Try
-        <https://shiny.massey.ac.nz/anhsmith/demos/demo.over-fitting.model/>
+- Both predictors are associated with one another.
+- Have opposite relationships with the outcome
 
--   So place a penalty for excessive model parameters
+![](img/venetian-mask.jpg)
 
--   Akaike Information Criterion (AIC; *smaller is better*)
+## Milk and brain data example
+![](img/milk_brain_pic.png)
 
-$$AIC  =  n\log \left(\frac{SSE}{n} \right) + 2p$$
+## Primate milk data
+```{r primate milk data, out.width="95%", echo=FALSE}
+library(rethinking)
+data(milk)
+d<-milk
+pairs(~kcal.per.g + 
+  log(mass) + 
+  neocortex.perc, 
+  data = d)
+```
 
--   We can also benchmark a small model with the full regression
+## First we will consider simple regressions 
 
--   Mallow's $C_p$ (look for $C_p$ just less than $p$ or equal)
+```{r, echo=FALSE}
+d$K <- standardize( d$kcal.per.g ) 
+d$N <- standardize( d$neocortex.perc )
+d$M <- standardize( log(d$mass) )
+dcc <- d[ complete.cases(d$K,d$N,d$M) , ]
+```
 
-$$C_{p} =\; \frac{{\rm SS\; Error\; for\; Smaller\; Model}}{{\rm Mean\; Square\; Error\; for\; full\; regression}} -(n-2p)$$
+```{r, fig.height=4}
+dcc |> ggplot(aes(x=M, y = K))+
+  geom_point()+
+  geom_smooth(method = 'lm')+
+   labs(y="Kcal per gram",
+       x= "log(Mass)")
+```
+
+```{r, fig.height=4}
+dcc |> ggplot(aes(x=N, y = K))+
+  geom_point()+
+  geom_smooth(method = 'lm')+
+  labs(y="Kcal per gram",
+       x= "Neocortex Per")
+```
+
+## Multiple regression
+![](img/milk_bivar_vs_multivar.png)
+
+## Masking situation
+
+Tend to arise when 
+
+- Both predictors are associated with one another.
+- Have opposite relationships with the outcome
+
+```{r milk pairs, out.width="95%", out.height="50%",echo=FALSE}
+pairs(~kcal.per.g + 
+  log(mass) + 
+  neocortex.perc, 
+  data = d)
+```
+
+## How do we deal with this?
+
+-   Statistically there is not really an answer
+-   The answer lies in the causes and the causes are not in the data
+-   Remember that interpreting the (regression) parameter estimates
+always depends upon what you believe the causal model
+
+
+## Model Selection 
+
+- The first step before selection of the best subset of predictors is to study the correlation matrix
+- We then perform stepwise additions (forward) or subtractions (backward) from the model and compare them
+
+BUT...
+
+- We saw with the illustration of SS how the significance or otherwise of a variable in a multiple regression model depends on the other variables in the model
+- Therefore, we cannot fully rely on the t-test and discard a variable because its coefficient is insignificant
 
 ## Selection of predictors
 
@@ -289,11 +460,11 @@ $$C_{p} =\; \frac{{\rm SS\; Error\; for\; Smaller\; Model}}{{\rm Mean\; Square\;
             the variables themselves, forward regression would obtain
             the wrong model since both may not enter the model.
 
-            -   Known as *suppressor* variables case
+            -   Known as *suppressor* variables case (like masking variables discussed earlier)
 
 Example: (try)
 
-```{r, results='hide'}
+```{r}
 # url1 <- "http://www.massey.ac.nz/~anhsmith/data/suppressor.RData"
 # download.file(url = url1, destfile = "suppressor.RData")
 load("../data/suppressor.RData")
@@ -302,18 +473,47 @@ summary(lm(y~x2, data=suppressor))
 summary(lm(y~x1+x2, data=suppressor))
 ```
 
+## Ockham's razor
+*Nunca ponenda est pluralitas sine necesitate* \
+(Plurality should never be posited without necessity)
+
+-   Problem: fit to sample always (*multi-level models can be counter-examples) improves as we add parameters.
+-   Dangers of "stargazing": selecting variables with low p-values (aka 'lots of stars'). P-values are not designed to cope with over-/under-fitting.
+
+
+## Overfitting
+-   Overfitting learning too much from the data, where you are almost just connecting the points rather than estimating.
+-   Underfitting is the opposite, i.e. being insensitive to the data.
+-   aka Models with fewer assumptions are to be preferred.
+-   In practice, we have to choose between models that differ both in
+accuracy and simplicity. The razor is not really a useful guidance for
+this trade off. 
+
+We need tools
+
+## All possible models:
+An exhaustive screening of all possible regression models can also be done using software
+
 -   `Best Subsets`: Stop at each step and check whether predictors, in
-    the model or outside, are the best combination for that step.
+    the model or outside, are the best combination for that step.\
     -   time consuming to perform when the predictor set is large
+    
+Remember permutations
 
-## Software
+For example:
 
--   In $R$, `lm()` and `step()` function will perform the tasks
+If we fix the number of predictors as 3, then 20 regression models are possible\
 
-    -   `leaps()` and `HH` packages contain additional functions
-    -   Also `MASS`, `car`, `caret`, and `SignifReg` R packages
 
--   R base package step-wise selection is based on $AIC$ only.
+## What criteria do we use?
+Multiple options\
+- R squared\
+- Sums of squared (different types, for testing predictor significance)\
+- Information criteria (AIC, BIC etc)\
+- For prediction: MSD/MSE, MAD, MAPE\
+- $C_p$\
+
+Remember its about balance and what you are looking for (fit vs prediction, complexity vs generality)\
 
 -   **`Note`**
 
@@ -321,19 +521,97 @@ summary(lm(y~x1+x2, data=suppressor))
         summary measures.
     -   If a model does not stand out, summary measures will contradict.
 
-Examples:
 
-<https://shiny.massey.ac.nz/anhsmith/demos/explore.multiple.regression/>
+## When $R^2$ becomes absurd
 
-## Cross validated selection
+![](img/brain_homin_R2ter.png)
 
--   Model selection can be done focussing on prediction
-    -   method = "leapForward" & method = "leapBackward" options
+## Model selection
+
+-   Residual SD depends on its degrees of freedom
+
+    -   So comparison of models based on Residual SD is not fully fair
+
+-  The following three measures are popular prediction modelling and similar to residual SD 
+
+-   Mean Squared Deviation (MSD): mean of the squared errors (i.e., deviations) (also called MSE)
+
+$$\frac{\sum \left({\rm observation-fit}\right)^{{\rm 2}} }{{\rm number~of~ observations}}$$
+
+-   Mean Absolute Deviation (MAD)
+
+$$\frac{\sum \left|{\rm observation-fit}\right| }{{\rm number~of~observations}}$$
+
+-   Mean Absolute Percentage Error (MAPE)
+
+$$\frac{\sum \frac{\left|{\rm observation-fit}\right|}{{\rm observation}} }{{\rm number~of~observations}} {\times100}$$
+
+## Model selection (continued)
+
+-   Avoid over-fitting.
+
+-   So place a penalty for excessive model parameters
+
+-   Akaike Information Criterion (AIC; *smaller is better*)
+
+$$AIC  =  n\log \left(\frac{SSE}{n} \right) + 2p$$
+-   Bayesian Information Criterion (BIC) places a higher penalty that depends on, the number of observations. 
+
+-   As a result BIC fares well for selecting a model that explains the relationships well while AIC fares well when selecting a model for prediction purposes.
+
+- Other variations: WAIC, AICc, etc (we will not cover them)
+
+## Model selection (continued)
+-   We can also benchmark a small model with the full regression
+
+-   Mallow's $C_p$ (look for $C_p$ just less than $p$ or equal)
+
+$$C_{p} =\; \frac{{\rm SS\; Error\; for\; Smaller\; Model}}{{\rm Mean\; Square\; Error\; for\; full\; regression}} -(n-2p)$$
+- If unimportant variables are added to the model, then the variance of the fitted values will increase. Similarly if important variables are added, then the bias of the fitted values will decrease
+
+- The $C_{p}$ index, balances the variance and bias
+
+
+## Software
+
+-   In $R$, `lm()` and `step()` function will perform the tasks
+
+    -   `leaps()` and `HH` packages contain additional functions
+    -   `dredge()` in `MuMIn` will produce all the subset models given a full model
+    -   Also `MASS`, `car`, `caret`, and `SignifReg` R packages
+
+-   R base package step-wise selection is based on $AIC$ only.
+
+
+
+
+## Cross validation
+In sample error vs prediction error
+
+-   For simpler models, increasing the number of parameters improves the fit to the sample.
+-   But it seems to reduce the accuracy of the out-of-sample predictions.
+-   Most accurate models trade off flexibility (complexity) and overfitting
+
+General idea:
+-   Leave out some observations.
+-   Train the model on the remaining samples; score on those left out.
+-   Average over many left-out sets to get the out-of-sample (future) accuracy.
+
+## Cross validated selection: Data example
+Consider the pinetree data set which contains the circumference measurements of pine trees at four positions (First is bottom)
 
 ```{r}
+load("pinetree.RData")
+ggpairs(pinetree, columns = 2:5, aes(fill=Area))
+```
+
+## Cross validated selection
+-   Model selection can be done focusing on prediction
+    -   method = "leapForward" & method = "leapBackward" options
+```{r, echo = TRUE}
 library(caret);  library(leaps)
 set.seed(123)
-fitControl  <-  trainControl(method  =  "repeatedcv",  
+fitControl  <-  trainControl(method  =  "repeatedcv",
                              number  =  5,  repeats  =  100)
 leapBackwardfit  <-  train(Top  ~  .,  data  =  pinetree[, -1],
 trControl  =  fitControl,  method  =  "leapBackward")
@@ -345,16 +623,38 @@ summary(leapBackwardfit)
 -   A polynomial model includes the square, cube of predictor variables
     as additional variables.
 -   High correlation (multicollinearity) between the predictor variables
-    may be a problem in polynomial models.
+    may be a problem in polynomial models, but not always.
 
-\tiny
+## Polynomial models: Data example
+
+We can fit a simple linear regression using the Pine tree data
+
+```{r, echo=TRUE}
+pine1 <- lm(Top ~ First, data = pinetree) 
+summary(pine1)
+```
+
+```{r, fig.height=4}
+par(mfrow=c(2,2))
+plot(pine1)
+```
+
+## Look closer 
+```{r}
+library(ggfortify)
+autoplot(pine1, which=1, ncol=1)
+```
+
+Looks non-linear
+
+
+## Polynomial models: Data example
 
 ```{r}
 poly.model = lm(Top~poly(First,degree=3, raw=T), data=pinetree)
 round(summary(poly.model)$coefficients,3)
 ```
 
--   Multicollinearity can occur with polynomial modelling but not always
 
     ```         
     - For the pinetree example, all the slope coefficients are highly significant for the cubic regression
@@ -397,70 +697,6 @@ library(ggfortify)
 autoplot(poly.model)
 ```
 
-## Local polynomial ﬁtting or spline smoothing.
-
--   Instead of a single polynomial for all the data, local polynomials
-    or splines can also be fitted.
-
--   For pinetree data, compare the cubic fit with the fifth degree
-    spline fit
-
-    -   very similar fits
-
-```{r}
-pinetree |> 
-  ggplot(aes(First,  Top))+ 
-  geom_point() + 
-  geom_smooth(method  =  lm,  
-              formula  =  y  ~  splines::bs(x,  5),  se  =  FALSE, col="red") + geom_smooth(method  =  lm,  
-              formula  =  y  ~  poly(x, 3),  se  =  FALSE, col="blue")
-   
-```
-
-## Robust modelling
-
--   Instead of the regression fit using the `lm()` function, we can also
-    fit robust models
-    -   We covered `MASS::rlm()` & `robustbase::lmrob()` functions in
-        the last chapter
-    -   Robust modelling syntax is similar for employing many
-        predictors.
-    -   Pinetree example
-
-```{r}
-poly.model = MASS::rlm(Top~poly(First,degree=3), data=pinetree)
-# poly.model = robustbase::lmrob(Top~poly(First,degree=3), data=pinetree)
-round(summary(poly.model)$coefficients,3)
-```
-
-## Comparison of regression and robust fits
-
-```{r}
-m1  <-  lm(Top  ~  First + Third,  data=pinetree)
-library(MASS, exclude="select")
-m2<-  rlm(Top  ~  First + Third,  data=pinetree)
-library(robustbase)
-m3  <-  lmrob(Top  ~  First + Third,  data=pinetree)
-library(modelr)
-library(tidyverse)
-pinetree  |>
-  gather_predictions(m1,  m2,  m3)  |>
-  ggplot(aes(x=Top,  y=pred,  colour=model))  +
-  geom_point()  +
-  geom_abline(slope=1,  intercept  =  0)  +
-  ylab("Predicted  Top")  +  theme_minimal()  +
-  ggtitle("Comparison  of  model  predictions")
-```
-
--   other summaries such as MAPE, MAD can also be obtained
-
-```{r}
-library(modelr)
-c(mape(m1,pinetree),  mape(m2,pinetree),  mape(m3,pinetree))
-```
-
--   Try for the polynomial fit `Top~poly(First,degree=3)` which is a
-    better model structure for the pinetree data.
 
 ## Categorical predictors
 
@@ -473,12 +709,12 @@ c(mape(m1,pinetree),  mape(m2,pinetree),  mape(m3,pinetree))
 -   Area effect on Top circumference is clear from the following plot
 
 ```{r }
-ggplot(pinetree, 
-       aes(x = factor(Area), y = Top, color = factor(Area))) + 
-  geom_jitter(pch = 1, width = 0.15, height = 0) + 
-  stat_summary(fun = "mean", geom = "point", 
-               size = 2, position = position_nudge(x = 0.3)) + stat_summary(fun.data = "mean_cl_normal", geom = "errorbar", 
-               size = 0.75, width = 0.075, position = position_nudge(x = 0.3)) 
+ggplot(pinetree,
+       aes(x = factor(Area), y = Top, color = factor(Area))) +
+  geom_jitter(pch = 1, width = 0.15, height = 0) +
+  stat_summary(fun = "mean", geom = "point",
+               size = 2, position = position_nudge(x = 0.3)) + stat_summary(fun.data = "mean_cl_normal", geom = "errorbar",
+               size = 0.75, width = 0.075, position = position_nudge(x = 0.3))
 ```
 
 ## Indicator variables
@@ -504,14 +740,14 @@ ggplot(pinetree,
 ## Regression output
 
 ```{r}
-pinetree  |>  
-  dplyr::select(Area,  Top)  |> 
-  mutate(I1  =  as.numeric(Area=="1"), 
+pinetree  |>
+  dplyr::select(Area,  Top)  |>
+  mutate(I1  =  as.numeric(Area=="1"),
          I2  =  as.numeric(Area=="2"),
          I3=as.numeric(Area=="3")  )  ->  pinetree1
 mdl  <-  lm(Top~I2+I3,  data=pinetree1)
 cap <- "Regression of Top Circumference on Area Indicator Variables"
-kable(tidy(mdl), caption=cap) |>   
+kable(tidy(mdl), caption=cap) |>
   kable_styling(bootstrap_options = "striped", full_width = F)
 ```
 
@@ -528,407 +764,19 @@ predictors (covered later on).
 
 -   We specifically include the interaction between them
 
-## Permutation tests
-
-R package *lmPerm* function `lmp()` will obtain the P values by
-permuting the predictor data.
-
-```{r, echo=TRUE}
-library(lmPerm)
-mdl  <-  lmp(Top~I2+I3,  data=pinetree1)
-summary(mdl)
-```
-
-Also try all other cases covered just replacing the `lm()` command with
-`lmp()` command.
-
-## Time series smoothing
-
--   This is a technique to remove the random variation but retain any
-    trend and cyclic type of variations in a time series.
-    -   `Moving Average Smoothing`\
-    -   `Exponential (Average) Smoothing`
--   Moving average smoothing
-    -   Compute the mean of successive smaller periods of past data
-        (moving window).
-
-$$M_t = (x_t + x_{t-1} + ... + x_{t-N+1}) / N$$ where - $x_t$- the
-observation at time $t$ & $N$ - the moving average length/span
-
--   Longer the span $N$, greater the smoothing
-
-## MA smoothing for \$20 bills data
-
-```{r}
-notes <- read.table("../data/20dollar.txt", header=TRUE, sep="")
-library(tidyverse)
-library(forecast)
-NZnotes20 <-notes$value%/%1000  #setting in millions
-NZnotes20 <- ts(NZnotes20,start=1968, frequency=1)
-p1 <- forecast::autoplot(NZnotes20)
-MA.centred <- ma(NZnotes20, 2, centre = FALSE)
-MA.uncentred <- ma(NZnotes20, 3, centre = FALSE)
-p1 <- p1 + autolayer(MA.centred, series = "2 year MA uncentered")
-p1 <- p1 + autolayer(MA.uncentred, series = "3 year MA uncentered", linetype=2)
-p1 +ggtitle("Moving Average Smoothing")
-```
-
-## MA Centering
-
--   We need to place moving averages in the middle time period.
-
-    ```         
-    - moving average must fall at t = 1.5 2.5, 3.5 etc when the MA length is an even number.  
-    ```
-
--   So, smooth again (in pairs) to place the moving averages at t = 2,
-    3, 4 etc.
-
-```{r}
-p1 <- forecast::autoplot(NZnotes20)
-MA.centred <- ma(NZnotes20, 4, centre = FALSE)
-MA.uncentred <- ma(NZnotes20, 4, centre = TRUE)
-p1 <- p1 + autolayer(MA.centred, series = "4 year MA uncentered")
-p1 <- p1 + autolayer(MA.uncentred, series = "4 year MA centered", linetype=2)
-p1 +ggtitle("Moving Average Smoothing")
-```
-
-## Exponential (Average) Smoothing
-
--   In exponential average smoothing, past observations are given
-    exponentially decreasing weights.
-
--   The average computed using exponentially decreasing weights is known
-    as the Exponentially Weighted Moving average (EWMA).
-
-EWMA definition: $$S_t = \alpha x_t + (1-\alpha) S_{t-1}$$ where $S_t$ =
-EWMA at time $t$, $x_t$ = value of time series at time $t$ & $\alpha$ =
-weighting factor $(0 < \alpha < 1)$
-
-### EWMA for \$20 bills data
-
-```{r}
-# Single exponential
-single.exp <- fitted(ses(NZnotes20, alpha=0.5))
-p1 <- forecast::autoplot(NZnotes20)
-p1 <- p1 + autolayer(single.exp, series ="alpha=0.5")
-single.exp1 <- fitted(ses(NZnotes20))
-p11 <- forecast::autoplot(NZnotes20)
-p11 <- p11 + autolayer(single.exp1, series = "optimised alpha")
-library(patchwork)
-p1/p11
-
-```
-
-## Double & triple exponential smoothing
-
-<br>
-
-### Double Smoothing (includes trend)
-
-$S_t = \alpha X_t+(1-\alpha)[S_{t-1} + T_{t-1}]$ (level equation)
-
-$T_t = \gamma [S_t - S_{t-1}] + (1 - \gamma)T_{t-1}$ (trend equation)
-
-$\hat{Y}= S_{t-1}+T_{t-1}$
-
-<br>
-
-### Triple Smoothing (includes trend, seasonal)
-
-Also called `Holt and Winter` method
-
-$S_t = \alpha(X_t-P_{t-p}) + (1-\alpha)[S_{t-1}+T_{t-1}]$ (level
-equation)
-
-$T_t = \gamma[S_t-S_{t-1}]+ (1-\gamma)T_{t-1}$ (trend equation)
-
-$P_t = \delta (X_t-S_t)+(1-\delta)P_{t-p}$ (seasonal equation at period
-$p$)
-
-$\hat{Y}= S_{t-1}+T_{t-1}+P_{t-p}$
-
-## Double & triple exponential smoothing
-
-```{r}
-uv <- read.table("../data/uv.txt", header=TRUE, sep="")
-uv <- ts(uv$erythemal.uv, start=c(1990,1), frequency=12)
-
-# Double exponential
-library(fpp2)
-double.exp <- fitted(holt(uv))
-p1 <- forecast::autoplot(uv)
-p1 <- p1 + autolayer(double.exp, series = "DEWMA- optimised")
-
-# Triple exponential
-trp.exp <- fitted(hw(uv))
-p2 <- forecast::autoplot(trp.exp)
-p2 <- p2 + forecast::autolayer(uv, series = "Holt-Winter- optimised")
-p1/p2 + plot_annotation("UV data")
-```
-
-## Forecasting
-
--   Projecting the present time series for future time points
-    (Prediction)
-
-```{r}
-single.exp1 <- fitted(ses(NZnotes20))
-autoplot(forecast(single.exp1, 5)) +ggtitle(" Single exponential smoothing forecasts")
-```
-
-```{r}
-trp.exp <- fitted(hw(uv))
-autoplot(forecast(trp.exp, 12))
-```
-
--   Assessment of fit \| Forecast accuracy using
-
-    -   Mean Squared Deviation (MSD)
-    -   Mean Absolute Deviation (MAD)
-    -   Mean Absolute Percentage Error (MAPE)
-
-```{r}
-accuracy(ses(NZnotes20, alpha=0.5))[,c(2,3,5)] 
-```
-
-```{r}
-# optimised alpha
-accuracy(ses(NZnotes20))[,c(2,3,5)]
-```
-
-## Time series modelling
-
--   We can fit linear models to time series data including trend and
-    seasonality components.
-
--   Indicator variables to capture seasonality
-
-Examples:
-
-```{r}
-library(forecast)
-fit <- tslm(NZnotes20 ~ trend )
-plot(forecast(fit, h=20))
-```
-
-```{r}
-milkdata <- read.table("../data/milk.txt", header=TRUE, sep="")
-attach(milkdata)
-Y <- ts(milk, frequency = 12)
-fit <- tslm(Y ~ trend + season)
-plot(forecast(fit, h=20))
-```
-
-## Box-Jenkins modelling
-
--   A Box-Jenkins model is an improvement over the regression approach -
-    combines regression and moving average approaches - suitable when
-    data collected at equally spread time intervals
-
--   Box-Jenkins approach consists of the following three stages:
-
-    -   Identification
-    -   Estimation
-    -   Diagnostics
-
--   Past data or lagged data (or simply `lags`) play an important role
-
-## Identification stage of modelling
-
--   A time series is `stationary` if the mean and variance do not change
-    over time.
-
-    -   Alternatively the same probability law applies over time
-    -   For a *white noise* series has a constant mean and variance for
-        all time $t$.
-
--   Stationarity is investigated using the sample autocorrelation
-    function (ACF) (covered in Chapter 2)
-
--   Using ACFs, a tentative assessment of the terms or order of the
-    model is made.
-
-```{r}
-set.seed(123)
-wht.noise <- arima.sim(list(order=c(0,0,0)),500)
-ggtsdisplay(wht.noise)
-```
-
-## Common patterns
-
--   Drifting random walk series (non-stationary)
-
-$$X_t = \delta + X_{t-1} + W_t $$
-
-```{r}
-set.seed(123)
-rwd <- arima.sim(list(order=c(0,1,0)),500)
-ggtsdisplay(rwd)
-```
-
--   Model the difference $X_{t} - X_{t-1}$ or just use the first lag
-    $X_{t-1}$ as a predictor in the usual regression
-
--   The process of differencing can be done on the differences too. This
-    process brings stationarity to a series
-
-## Auto-regressive (AR) model
-
-$$X_t=\alpha_1 X_{t-1}+ \alpha_2 X_{t-2}+ \dots + \alpha_p X_{t-p} + \epsilon_t$$
-
--   Also called the $AR(p)$ process.
-
--   An AR model is approximately the same as the multiple regression
-    fit.
-
-    -   If sample mean replaces the true mean $\mu$ of the process, the
-        AR model becomes the multiple regression model with lags as
-        predictors.
-
--   **moving average process** for `errors`
-
-$$X_t=\beta_0 z_{t}+ \beta_1 z_{t-1}+ \dots + \beta_q z_{t-q}$$
-
--   $X_t$ is modelled with errors $z_1$, $z_2$,..., whose means are
-    assumed to be zero and constant variance.
-
-## Autoregressive moving average (ARMA) model
-
--   $ARMA(p, q)$ model combines both the $AR(p)$ and $MA(q)$ models.
-
-$$X_t=\alpha_1 X_{t-1}+ \alpha_2 X_{t-2}+ \dots + \alpha_p X_{t-p} + \beta_o z_{t}+ \beta_1 z_{t-1}+ \dots + \beta_q z_{t-q}$$
-
--   Estimation of parameters
-
-    -   done using advanced (non-linear) iterative methods
-
--   Usual Diagnostics guidelines apply
-
-    -   examine residuals for randomness
-    -   may indicate transformation
-
--   For nonstationary series, we perform differencing and then do the
-    modelling
-
--   ARIMA (p,d,q) (P,D,Q) Models
-
-    -   includes ARMA (Stationary) Models
-        -   $p$, number of lag terms
-        -   $q$, number of successive error terms (moving average part)
-        -   $d$, number of differences in model (to deal with
-            non-stationarity)
-        -   $P$,$D$,$Q$ - corresponding parameters for the seasonal part
-
-(will not be examined)
-
-## Automated ARIMA modelling
-
-::: left-narrow
--   `forecast` R package has functions such as `auto.arima` for speedy
-    ARIMA modelling
-    -   milk data example
-
-```{r, comment=""}
-milkdata <- read.table("../data/milk.txt", header=TRUE, sep="")
-attach(milkdata)
-Y <- ts(milk)
-library(ggplot2)
-library(forecast)
-model1 <- auto.arima(Y)
-model1
-```
-
--   Residual diagnostics
-
-```{r}
-library(forecast)
-checkresiduals(model1, plot=F)
-```
-:::
-
-::: right-wide
-```{r}
-#| fig-height: 5
-#| fig-width: 6
-checkresiduals(model1, plot=T, test=F)
-```
-
--   Residuals are unsatisfactory - the 12-month lag shows that
-    seasonality is not captured.
-:::
-
-## Improved model
-
-::: left-narrow
--   auto-ARIMA with 12-month seasonality
-
-```{r, comment=""}
-attach(milkdata)
-Y <- ts(milk, frequency = 12)
-library(ggplot2)
-library(forecast)
-model1 <- auto.arima(Y)
-model1
-```
-
--   Residual diagnosis
-
-```{r}
-library(forecast)
-checkresiduals(model1, plot=F)
-```
-:::
-
-::: right-wide
-```{r}
-#| fig-height: 5
-#| fig-width: 6
-checkresiduals(model1, plot=T, test=F)
-```
-
-Residuals are better now!
-:::
-
-## Improved model
-
-```{r}
-plot(forecast(model1,h=20))
-```
 
 ## Summary
 
 -   Regression methods aim to fit a model by least squares to explain
     the variation in the dependent variable $Y$ by fitting explanatory
     $X$ variables.
--   Matrix plots and correlation coefficients provide important clues to
+-   Matrix plots (EDA) and correlation coefficients provide important clues to
     the interrelationships.
 -   For building a model, the additional variation explained is
     important. Summary criterion such as $AIC$ is also useful.
--   ANCOVA employs both numerical variables (covariates) and qualitative
-    factors for modelling.
--   A time series data involve trend and seasonal variations.
--   Simple smoothing methods are intended to dampen the effect of random
-    errors
-    -   Double and triple exponential smoothing deal trends and
-        seasonality
--   Simple AR models can be built as multiple regression models
-    employing lags as predictors.
-    -   Building ARIMA models are more involved and will not be examined
-        in depth.
+
 -   A model is not judged as the **best** purely on statistical grounds.
 
-## Shiny apps
-
-<http://shiny.massey.ac.nz/anhsmith/demos/explore.multiple.regression/>
-
-<http://shiny.massey.ac.nz/anhsmith/demos/fit.multiple.regression/>
-
-<http://shiny.massey.ac.nz/anhsmith/demos/explore.collinearity/>
-
-<http://shiny.massey.ac.nz/anhsmith/demos/explore.Cooks.distances.and.leverages/>
-
-<http://shiny.massey.ac.nz/anhsmith/demos/demo.RSq.and.adjusted.RSq/>
 
 <!-- download.file("http://www.massey.ac.nz/~kgovinda/220exer/Chap5moreexamples.R", destfile="Chap5moreexamples.R") -->
 
