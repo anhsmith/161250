@@ -2076,7 +2076,7 @@
     "href": "slides/Chapter07.html#multiple-regression",
     "title": "Chapter 7:Models with Multiple Predictors",
     "section": "Multiple Regression",
-    "text": "Multiple Regression\n\nIn a simple regression, there is only one predictor. Multiple regression modelling involves many predictors.\nPerform EDA first\n\nA scatter plot matrix can show nonlinear relationships\nA correlation matrix will only show the strength of pairwise linear relationships\n\nLook for the predictors having the largest correlation with response\n\nLook for inter-correlations between the predictors and choose the one with high correlation with response variable but uncorrelated with the rest.\nTry https://shiny.massey.ac.nz/anhsmith/demos/explore.multiple.numerical.variables/"
+    "text": "Multiple Regression\nWhere to start:\n\nQuestion and hypothesis + domain knowledge\n\nWhat are we interested in testing?\nWhat data is collected? do those variables make sense?\n\nPerform EDA first\n\nA scatter plot matrix can show nonlinear relationships\nA correlation matrix will only show the strength of pairwise linear relationships\n\nLook for the predictors having the largest correlation with response\n\nLook for inter-correlations between the predictors and choose the one with high correlation with response variable but uncorrelated with the rest."
   },
   {
     "objectID": "slides/Chapter07.html#pinetree-data-example",
@@ -2090,21 +2090,21 @@
     "href": "slides/Chapter07.html#inter-relationships",
     "title": "Chapter 7:Models with Multiple Predictors",
     "section": "Inter-relationships",
-    "text": "Inter-relationships\n\nStrong relationships revealed\n\nWe may not need all predictors\nArea effect also revealed below"
+    "text": "Inter-relationships"
   },
   {
     "objectID": "slides/Chapter07.html#full-regression",
     "href": "slides/Chapter07.html#full-regression",
     "title": "Chapter 7:Models with Multiple Predictors",
     "section": "Full regression",
-    "text": "Full regression\nPlaces all of the predictors in the model\n\n\n\nt-tests for model parameters\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n-6.043\n0.799\n-7.56\n0.000\n\n\nThird\n0.160\n0.085\n1.88\n0.066\n\n\nSecond\n0.044\n0.137\n0.32\n0.750\n\n\nFirst\n0.605\n0.090\n6.69\n0.000\n\n\n\n\n\n\n\n\n\n\nModel summary measures\n\n\nr.squared\n0.95\n\n\nsigma\n1.23\n\n\nstatistic\n370.85\n\n\np.value\n0.00\n\n\nAIC\n201.34\n\n\nBIC\n211.81\n\n\n\n\n\n\n\n\nOld summary\n\n\n\n\nCall:\nlm(formula = Top ~ ., data = pinetree[, -1])\n\nResiduals:\n   Min     1Q Median     3Q    Max \n-2.041 -0.928 -0.297  0.656  3.320 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  -6.0430     0.7989   -7.56  4.0e-10 ***\nThird         0.1595     0.0851    1.88    0.066 .  \nSecond        0.0437     0.1365    0.32    0.750    \nFirst         0.6047     0.0904    6.69  1.1e-08 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.23 on 56 degrees of freedom\nMultiple R-squared:  0.952, Adjusted R-squared:  0.95 \nF-statistic:  371 on 3 and 56 DF,  p-value: &lt;2e-16\n\n\n\nAlso try the app - https://shiny.massey.ac.nz/anhsmith/demos/fit.multiple.regression/"
+    "text": "Full regression\nPlaces all of the predictors in the model\nEquivalent of throwing everything in and hoping something sticks\n\n\n\nCall:\nlm(formula = Spread ~ ., data = teams_forlm)\n\nResiduals:\n   Min     1Q Median     3Q    Max \n-32.29  -5.72  -0.15   5.66  30.36 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) -142.4223     2.8728  -49.58  &lt; 2e-16 ***\nPTS            0.0624     0.0269    2.32     0.02 *  \nP2p           74.1170     3.8391   19.31  &lt; 2e-16 ***\nP3p           74.0109     3.3449   22.13  &lt; 2e-16 ***\nFTp           15.4686     2.0265    7.63  3.4e-14 ***\nOREB           0.7191     0.0623   11.54  &lt; 2e-16 ***\nDREB           1.2033     0.0367   32.81  &lt; 2e-16 ***\nAST           -0.0350     0.0479   -0.73     0.47    \nSTL            1.0685     0.0677   15.79  &lt; 2e-16 ***\nBLK            0.3503     0.0784    4.47  8.2e-06 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 8.79 on 2108 degrees of freedom\nMultiple R-squared:  0.622, Adjusted R-squared:  0.62 \nF-statistic:  385 on 9 and 2108 DF,  p-value: &lt;2e-16"
   },
   {
     "objectID": "slides/Chapter07.html#multicollinearity",
     "href": "slides/Chapter07.html#multicollinearity",
     "title": "Chapter 7:Models with Multiple Predictors",
     "section": "Multicollinearity",
-    "text": "Multicollinearity\n\nMulticollinearity is where at least two predictor variables are highly correlated.\nMulticollinearity does not affect the residual SD very much, and doesn’t pose a major problem for prediction.\nThe major effects of multicolinearity are:\n\nIt changes the estimates of the coefficients.\nIt inflates the variance of the estimates of the coefficients. That is, it increases the uncertainty about what the slope parameters are.\nTherefore, it matters when testing hypotheses about the effects of specific predictors.\n\nThe impact of multicollinearity on the variance of the estimates can be quantified using the Variance Inflation Factor (VIF &lt; 5 is considered ok).\nThere are several ways to deal with multicollinarity, depending on context. We can discard one of highly correlated variable, perform ridge regression, or think more carefully about how the variables relate to each other.\n\n\n\n Third Second  First \n  9.73  26.18  15.51 \n\n\n\nTry https://shiny.massey.ac.nz/anhsmith/demos/explore.collinearity/"
+    "text": "Multicollinearity\n\nMulticollinearity is where at least two predictor variables are highly correlated.\nMulticollinearity does not affect the residual SD very much, and doesn’t pose a major problem for prediction.\nThe major effects of multicollinearity are:\n\nIt changes the estimates of the coefficients.\nIt inflates the variance of the estimates of the coefficients. That is, it increases the uncertainty about what the slope parameters are.\nTherefore, it matters when testing hypotheses about the effects of specific predictors."
   },
   {
     "objectID": "slides/Chapter07.html#additional-variation-explained",
@@ -2125,56 +2125,56 @@
     "href": "slides/Chapter07.html#significance-of-type-i-or-seq.ss",
     "title": "Chapter 7:Models with Multiple Predictors",
     "section": "Significance of Type I or Seq.SS",
-    "text": "Significance of Type I or Seq.SS\n\nThe Type I SS is the SS of a predictor after adjusting for the effects of the preceding predictors in the model.\nF test for the significance of the additional variation explained\n\n\n\nFor pinetree data, Second (middle circumference) does not explain significant additional variation after First (bottom circumference)\n\n\n\nAnalysis of Variance Table\n\nModel 1: Top ~ First\nModel 2: Top ~ First + Second\n  Res.Df  RSS Df Sum of Sq    F Pr(&gt;F)  \n1     58 96.6                           \n2     57 90.6  1      6.01 3.78  0.057 .\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
+    "text": "Significance of Type I or Seq.SS\n\nThe Type I SS is the SS of a predictor after adjusting for the effects of the preceding predictors in the model.\n\nSometimes order matters, particularly with unequal sample sizes\n\nF test for the significance of the additional variation explained\nR function anova() calculates sequential or Type-I SS"
   },
   {
     "objectID": "slides/Chapter07.html#type-ii-and-or-type-iii-ss",
     "href": "slides/Chapter07.html#type-ii-and-or-type-iii-ss",
     "title": "Chapter 7:Models with Multiple Predictors",
     "section": "Type II and or Type III SS",
-    "text": "Type II and or Type III SS\n\nR function anova() calculates sequential or Type-I SS\nType II SS is based on the principle of marginality.\n\nEach variable effect is adjusted for all other appropriate effects.\n\nequivalent to the Type I SS when the variable is the last predictor entered the model.\n\nOrder matters for Type I SS but not for Type II SS\n\n\n\n\nType III SS is the SS added to the regression SS after ALL other predictors including an intercept term.\n\nViolates the marginality principle and so avoided for hypothesis tests\n\n\n\n\nAnalysis of Variance Table\n\nResponse: Top\n          Df Sum Sq Mean Sq F value  Pr(&gt;F)    \nThird      1   1494    1494   981.7 &lt; 2e-16 ***\nSecond     1    131     131    86.1 6.4e-13 ***\nFirst      1     68      68    44.8 1.1e-08 ***\nResiduals 56     85       2                    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nAnova Table (Type II tests)\n\nResponse: Top\n          Sum Sq Df F value  Pr(&gt;F)    \nThird        5.4  1    3.52   0.066 .  \nSecond       0.2  1    0.10   0.750    \nFirst       68.1  1   44.76 1.1e-08 ***\nResiduals   85.2 56                    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nAnova Table (Type III tests)\n\nResponse: Top\n            Sum Sq Df F value  Pr(&gt;F)    \n(Intercept)   87.1  1   57.22 4.0e-10 ***\nThird          5.4  1    3.52   0.066 .  \nSecond         0.2  1    0.10   0.750    \nFirst         68.1  1   44.76 1.1e-08 ***\nResiduals     85.2 56                    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\nSS explained is not always a good criterion for selection of variables"
+    "text": "Type II and or Type III SS\n\nR function anova() calculates sequential or Type-I SS\nType II SS is based on the principle of marginality.\n\nEach variable effect is adjusted for all other appropriate effects.\n\nequivalent to the Type I SS when the variable is the last predictor entered the model.\n\nOrder matters for Type I SS but not for Type II SS\n\n\n\n\nType III SS is the SS added to the regression SS after ALL other predictors including an intercept term.\n\nViolates the marginality principle and so avoided for hypothesis tests\n\nSS explained is not always a good criterion for selection of variables"
   },
   {
     "objectID": "slides/Chapter07.html#model-selection",
     "href": "slides/Chapter07.html#model-selection",
     "title": "Chapter 7:Models with Multiple Predictors",
-    "section": "Model selection",
-    "text": "Model selection\n\n\\(R^2\\) (the proportion of variance explained by the model) should not be used to select among candidate models. Adding another predictor variable always increases the \\(R^2\\), even if the new variable is unrelated in the population.\n\\(R^2_{adj}\\) is adjusted to remove the variation that is explained by chance alone\n\\(R^2_{adj}=1-\\frac{MS~Error}{MS~Total}\\)\n\nTry https://shiny.massey.ac.nz/anhsmith/demos/demo.RSq.and.adjusted.RSq/\n\nResidual SD depends on its degrees of freedom\n\nSo comparison of models based on Residual SD is not fully fair\n\nOther summaries similar to residual SD include\nMean Squared Deviation (MSD)\n\n\\[\\frac{\\sum \\left({\\rm observation-fit}\\right)^{{\\rm 2}} }{{\\rm number~of~ observations}}\\]\n\nMean Absolute Deviation (MAD)\n\n\\[\\frac{\\sum \\left|{\\rm observation-fit}\\right| }{{\\rm number~of~observations}}\\]\n\nMean Absolute Percentage Error (MAPE)\n\n\\[\\frac{\\sum \\frac{\\left|{\\rm observation-fit}\\right|}{{\\rm observation}} }{{\\rm number~of~observations}} {\\times100}\\]"
+    "section": "Model Selection",
+    "text": "Model Selection\n\nThe first step before selection of the best subset of predictors is to study the correlation matrix\nWe then perform stepwise additions (forward) or subtractions (backward) from the model and compare them\n\nBUT…\n\nWe saw with the illustration of SS how the significance or otherwise of a variable in a multiple regression model depends on the other variables in the model\nTherefore, we cannot fully rely on the t-test and discard a variable because its coefficient is insignificant"
   },
   {
     "objectID": "slides/Chapter07.html#model-selection-continued",
     "href": "slides/Chapter07.html#model-selection-continued",
     "title": "Chapter 7:Models with Multiple Predictors",
     "section": "Model selection (continued)",
-    "text": "Model selection (continued)\n\nAvoid over-fitting.\n\nTry https://shiny.massey.ac.nz/anhsmith/demos/demo.over-fitting.model/\n\nSo place a penalty for excessive model parameters\nAkaike Information Criterion (AIC; smaller is better)\n\n\\[AIC  =  n\\log \\left(\\frac{SSE}{n} \\right) + 2p\\]\n\nWe can also benchmark a small model with the full regression\nMallow’s \\(C_p\\) (look for \\(C_p\\) just less than \\(p\\) or equal)\n\n\\[C_{p} =\\; \\frac{{\\rm SS\\; Error\\; for\\; Smaller\\; Model}}{{\\rm Mean\\; Square\\; Error\\; for\\; full\\; regression}} -(n-2p)\\]"
+    "text": "Model selection (continued)\n\nAvoid over-fitting.\nSo place a penalty for excessive model parameters\nAkaike Information Criterion (AIC; smaller is better)\n\n\\[AIC  =  n\\log \\left(\\frac{SSE}{n} \\right) + 2p\\] - Bayesian Information Criterion (BIC) places a higher penalty that depends on, the number of observations.\n\nAs a result BIC fares well for selecting a model that explains the relationships well while AIC fares well when selecting a model for prediction purposes.\nOther variations: WAIC, AICc, etc (we will not cover them)"
   },
   {
     "objectID": "slides/Chapter07.html#selection-of-predictors",
     "href": "slides/Chapter07.html#selection-of-predictors",
     "title": "Chapter 7:Models with Multiple Predictors",
     "section": "Selection of predictors",
-    "text": "Selection of predictors\n\nHeuristic (short-cut) procedures based on criteria such as \\(F\\), \\(R^2_{adj}\\), \\(AIC\\), \\(C_p\\) etc\n\nForward Selection: Add variables sequentially\n\nconvenient to obtain the simplest feasible model\n\nBackward Elimination: Drop variables sequentially\n\nIf difference between two variables is significant but not the variables themselves, forward regression would obtain the wrong model since both may not enter the model.\n\nKnown as suppressor variables case\n\n\n\n\nExample: (try)\n\nBest Subsets: Stop at each step and check whether predictors, in the model or outside, are the best combination for that step.\n\ntime consuming to perform when the predictor set is large"
+    "text": "Selection of predictors\n\nHeuristic (short-cut) procedures based on criteria such as \\(F\\), \\(R^2_{adj}\\), \\(AIC\\), \\(C_p\\) etc\n\nForward Selection: Add variables sequentially\n\nconvenient to obtain the simplest feasible model\n\nBackward Elimination: Drop variables sequentially\n\nIf difference between two variables is significant but not the variables themselves, forward regression would obtain the wrong model since both may not enter the model.\n\nKnown as suppressor variables case (like masking variables discussed earlier)\n\n\n\n\nExample: (try)\n\n\n\nCall:\nlm(formula = y ~ x1, data = suppressor)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-1.1691 -0.6791 -0.0033  0.6441  1.1299 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) 11.98876    1.26689    9.46  3.4e-07 ***\nx1           0.00375    0.41608    0.01     0.99    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.832 on 13 degrees of freedom\nMultiple R-squared:  6.24e-06,  Adjusted R-squared:  -0.0769 \nF-statistic: 8.11e-05 on 1 and 13 DF,  p-value: 0.993\n\n\n\nCall:\nlm(formula = y ~ x2, data = suppressor)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-1.0900 -0.6334  0.0002  0.6146  1.0403 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)   10.632      0.811   13.11  7.2e-09 ***\nx2             0.195      0.113    1.74     0.11    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.75 on 13 degrees of freedom\nMultiple R-squared:  0.188, Adjusted R-squared:  0.126 \nF-statistic: 3.02 on 1 and 13 DF,  p-value: 0.106\n\n\n\nCall:\nlm(formula = y ~ x1 + x2, data = suppressor)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-0.01363 -0.00945 -0.00228  0.00863  0.01632 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) -4.51541    0.06114   -73.8   &lt;2e-16 ***\nx1           3.09701    0.01227   252.3   &lt;2e-16 ***\nx2           1.03186    0.00368   280.1   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.0107 on 12 degrees of freedom\nMultiple R-squared:     1,  Adjusted R-squared:     1 \nF-statistic: 3.92e+04 on 2 and 12 DF,  p-value: &lt;2e-16"
   },
   {
     "objectID": "slides/Chapter07.html#software",
     "href": "slides/Chapter07.html#software",
     "title": "Chapter 7:Models with Multiple Predictors",
     "section": "Software",
-    "text": "Software\n\nIn \\(R\\), lm() and step() function will perform the tasks\n\nleaps() and HH packages contain additional functions\nAlso MASS, car, caret, and SignifReg R packages\n\nR base package step-wise selection is based on \\(AIC\\) only.\nNote\n\nIf a model stands out, it will perform well in terms of all summary measures.\nIf a model does not stand out, summary measures will contradict.\n\n\nExamples:\nhttps://shiny.massey.ac.nz/anhsmith/demos/explore.multiple.regression/"
+    "text": "Software\n\nIn \\(R\\), lm() and step() function will perform the tasks\n\nleaps() and HH packages contain additional functions\ndredge() in MuMIn will produce all the subset models given a full model\nAlso MASS, car, caret, and SignifReg R packages\n\nR base package step-wise selection is based on \\(AIC\\) only."
   },
   {
     "objectID": "slides/Chapter07.html#cross-validated-selection",
     "href": "slides/Chapter07.html#cross-validated-selection",
     "title": "Chapter 7:Models with Multiple Predictors",
     "section": "Cross validated selection",
-    "text": "Cross validated selection\n\nModel selection can be done focussing on prediction\n\nmethod = “leapForward” & method = “leapBackward” options\n\n\n\n\nSubset selection object\n3 Variables  (and intercept)\n       Forced in Forced out\nThird      FALSE      FALSE\nSecond     FALSE      FALSE\nFirst      FALSE      FALSE\n1 subsets of each size up to 2\nSelection Algorithm: backward\n         Third Second First\n1  ( 1 ) \" \"   \" \"    \"*\"  \n2  ( 1 ) \"*\"   \" \"    \"*\""
+    "text": "Cross validated selection\n\nModel selection can be done focusing on prediction\n\nmethod = “leapForward” & method = “leapBackward” options\n\n\n\nlibrary(caret);  library(leaps)\nset.seed(123)\nfitControl  &lt;-  trainControl(method  =  \"repeatedcv\",\n                             number  =  5,  repeats  =  100)\nleapBackwardfit  &lt;-  train(Top  ~  .,  data  =  pinetree[, -1],\ntrControl  =  fitControl,  method  =  \"leapBackward\")\nsummary(leapBackwardfit)\n\nSubset selection object\n3 Variables  (and intercept)\n       Forced in Forced out\nThird      FALSE      FALSE\nSecond     FALSE      FALSE\nFirst      FALSE      FALSE\n1 subsets of each size up to 2\nSelection Algorithm: backward\n         Third Second First\n1  ( 1 ) \" \"   \" \"    \"*\"  \n2  ( 1 ) \"*\"   \" \"    \"*\""
   },
   {
     "objectID": "slides/Chapter07.html#polynomial-models",
     "href": "slides/Chapter07.html#polynomial-models",
     "title": "Chapter 7:Models with Multiple Predictors",
     "section": "Polynomial models",
-    "text": "Polynomial models\n\nA polynomial model includes the square, cube of predictor variables as additional variables.\nHigh correlation (multicollinearity) between the predictor variables may be a problem in polynomial models.\n\n\n\n                                  Estimate Std. Error t value Pr(&gt;|t|)\n(Intercept)                         44.121      7.039    6.27        0\npoly(First, degree = 3, raw = T)1   -3.972      0.695   -5.71        0\npoly(First, degree = 3, raw = T)2    0.142      0.022    6.39        0\npoly(First, degree = 3, raw = T)3   -0.001      0.000   -5.95        0\n\n\n\nMulticollinearity can occur with polynomial modelling but not always\n- For the pinetree example, all the slope coefficients are highly significant for the cubic regression\n- Not so for the quadratic regression\n\n\n\n                                  Estimate Std. Error t value Pr(&gt;|t|)\n(Intercept)                           3.85      2.450   1.569    0.122\npoly(First, degree = 2, raw = T)1     0.10      0.155   0.646    0.521\npoly(First, degree = 2, raw = T)2     0.01      0.002   4.319    0.000\n\n\n\nRaw polynomials do not preserve the coefficient estimates but orthogonal polynomials do.\n\n\n\n                         Estimate Std. Error t value Pr(&gt;|t|)\n(Intercept)                 17.40      0.146  119.26        0\npoly(First, degree = 2)1    41.01      1.130   36.29        0\npoly(First, degree = 2)2     4.88      1.130    4.32        0\n\n\n                         Estimate Std. Error t value Pr(&gt;|t|)\n(Intercept)                 17.40      0.115  151.03        0\npoly(First, degree = 3)1    41.01      0.892   45.96        0\npoly(First, degree = 3)2     4.88      0.892    5.47        0\npoly(First, degree = 3)3    -5.31      0.892   -5.95        0"
+    "text": "Polynomial models\n\nA polynomial model includes the square, cube of predictor variables as additional variables.\nHigh correlation (multicollinearity) between the predictor variables may be a problem in polynomial models, but not always."
   },
   {
     "objectID": "slides/Chapter07.html#residual-diagnostics",
@@ -2230,7 +2230,7 @@
     "href": "slides/Chapter07.html#permutation-tests",
     "title": "Chapter 7:Models with Multiple Predictors",
     "section": "Permutation tests",
-    "text": "Permutation tests\nR package lmPerm function lmp() will obtain the P values by permuting the predictor data.\n\nlibrary(lmPerm)\nmdl  &lt;-  lmp(Top~I2+I3,  data=pinetree1)\n\n[1] \"Settings:  unique SS : numeric variables centered\"\n\nsummary(mdl)\n\n\nCall:\nlmp(formula = Top ~ I2 + I3, data = pinetree1)\n\nResiduals:\n   Min     1Q Median     3Q    Max \n -8.92  -3.10  -1.01   3.68  11.93 \n\nCoefficients:\n   Estimate Iter Pr(Prob)   \nI2    -1.96  110   0.4818   \nI3    -5.93 5000   0.0048 **\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 4.98 on 57 degrees of freedom\nMultiple R-Squared: 0.205,  Adjusted R-squared: 0.177 \nF-statistic: 7.35 on 2 and 57 DF,  p-value: 0.00145 \n\n\nAlso try all other cases covered just replacing the lm() command with lmp() command."
+    "text": "Permutation tests\nR package lmPerm function lmp() will obtain the P values by permuting the predictor data.\n\n# library(lmPerm)\n# mdl  &lt;-  lmp(Top~I2+I3,  data=pinetree1)\n# summary(mdl)\n\nAlso try all other cases covered just replacing the lm() command with lmp() command."
   },
   {
     "objectID": "slides/Chapter07.html#time-series-smoothing",
@@ -2349,7 +2349,7 @@
     "href": "slides/Chapter07.html#summary",
     "title": "Chapter 7:Models with Multiple Predictors",
     "section": "Summary",
-    "text": "Summary\n\nRegression methods aim to fit a model by least squares to explain the variation in the dependent variable \\(Y\\) by fitting explanatory \\(X\\) variables.\nMatrix plots and correlation coefficients provide important clues to the interrelationships.\nFor building a model, the additional variation explained is important. Summary criterion such as \\(AIC\\) is also useful.\nANCOVA employs both numerical variables (covariates) and qualitative factors for modelling.\nA time series data involve trend and seasonal variations.\nSimple smoothing methods are intended to dampen the effect of random errors\n\nDouble and triple exponential smoothing deal trends and seasonality\n\nSimple AR models can be built as multiple regression models employing lags as predictors.\n\nBuilding ARIMA models are more involved and will not be examined in depth.\n\nA model is not judged as the best purely on statistical grounds."
+    "text": "Summary\n\nRegression methods aim to fit a model by least squares to explain the variation in the dependent variable \\(Y\\) by fitting explanatory \\(X\\) variables.\nMatrix plots (EDA) and correlation coefficients provide important clues to the interrelationships.\nFor building a model, the additional variation explained is important. Summary criterion such as \\(AIC\\) is also useful.\nA model is not judged as the best purely on statistical grounds.\n\n\n\n\n\n\n\n\n\n161250 Data Analysis"
   },
   {
     "objectID": "slides/Chapter07.html#shiny-apps",
@@ -3960,5 +3960,320 @@
     "title": "Chapter 6: Models with a Single Continuous Predictor",
     "section": "Main points",
     "text": "Main points\nConcepts and practical skills you should have at the end of this chapter:\n\nUnderstand and be able to perform a simple linear regression on bivariate related data sets\nUse scatter plots or other appropriate plots to visualize the data and regression line\nSummarize regression results and appropriate tests of significance. Interpret these results in context of your data\nExamine residual diagnostic plots and test assumptions, then perform appropriate transformations as necessary\nUse a regression line to predict new data and explain confidence and prediction intervals\nUnderstand and explain the concepts of robust regression modeling, Tukey Line, and cross-validation."
+  },
+  {
+    "objectID": "slides/Chapter07.html#learning-objectives",
+    "href": "slides/Chapter07.html#learning-objectives",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "Learning Objectives:",
+    "text": "Learning Objectives:\n\nUnderstand and describe a multiple linear regression, the difference from a simple linear regression, and when each are appropriate\nFit and display a multiple regression\nUnderstand and interpret different types of Sums of Squares\nUnderstand and test for multicollinearity and other assumptions"
+  },
+  {
+    "objectID": "slides/Chapter07.html#what-is-a-multiple-regression",
+    "href": "slides/Chapter07.html#what-is-a-multiple-regression",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "What is a multiple Regression?",
+    "text": "What is a multiple Regression?\n\nIn a simple regression, there is only one predictor.\n\nMultiple regression modelling involves many predictors."
+  },
+  {
+    "objectID": "slides/Chapter07.html#how-do-we-know-when-to-test-multiple-predictors",
+    "href": "slides/Chapter07.html#how-do-we-know-when-to-test-multiple-predictors",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "How do we know when to test multiple predictors?",
+    "text": "How do we know when to test multiple predictors?\n\nAs a controlling treatment for some unwanted variability (statistical control of a confound)\nMultiple causation: multiple things are thought to cause changes in the outcome variable\nInteractions: we are interested in how two variables may combine to change our outcome"
+  },
+  {
+    "objectID": "slides/Chapter07.html#data-example",
+    "href": "slides/Chapter07.html#data-example",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "Data example",
+    "text": "Data example\nBasketball team summary for 2020 regular season\n\nWe have 2118 data points which equates to 1059 games (2 teams per game), 2020 was a short season\nEach team in a standard season plays 82 games. That means in total, an NBA season is comprised of 1,230 games.\n\n\n  Team     Game Spread Outcome MIN PTS       P2p       P3p       FTp OREB DREB\n1  ATL 21900014     17       W  48 117 0.6000000 0.3548387 0.8571429    8   34\n2  ATL 21900028      4       W  48 103 0.6296296 0.3000000 0.5333333    9   43\n3  ATL 21900043     -2       L  48 103 0.4736842 0.3333333 0.6875000    8   37\n4  ATL 21900052    -15       L  48  97 0.5454545 0.2820513 0.6666667    9   24\n5  ATL 21900066     -9       L  48  97 0.5370370 0.2058824 0.6923077   16   34\n6  ATL 21900099      8       W  48 108 0.5333333 0.3666667 0.6875000    9   39\n  AST TOV STL BLK PF\n1  27  13   9   2 15\n2  22  18   5   9 26\n3  23  21  12   3 25\n4  28  20  14   7 29\n5  20  16   5   5 15\n6  22  18   9   5 20\n\n\nSpread: Point difference between winning and losing team\nPTS: Total points scored by a team in a game\nP2p: Percent of 2-pointers made\nP3p: Percent of 3-pointers made\nFTp: Percent of free-throws made\nOREB: Offensive rebounds\nDREB: Defensive rebounds\nAST: Assists\nSTL: Steals\nBLK: Blocks"
+  },
+  {
+    "objectID": "slides/Chapter07.html#data-example-1",
+    "href": "slides/Chapter07.html#data-example-1",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "Data example",
+    "text": "Data example\n\noptions(digits=3)\ncor(teams[,c(3, 6:12, 14:15)])\n\n        Spread     PTS      P2p      P3p     FTp     OREB     DREB     AST\nSpread  1.0000  0.5730  0.36338  0.42719  0.1063 -0.00240  0.46470  0.3477\nPTS     0.5730  1.0000  0.48713  0.55094  0.1897 -0.01487  0.14131  0.5103\nP2p     0.3634  0.4871  1.00000 -0.00601 -0.0105 -0.28585  0.02484  0.3633\nP3p     0.4272  0.5509 -0.00601  1.00000  0.0297 -0.18736  0.00164  0.4054\nFTp     0.1063  0.1897 -0.01053  0.02967  1.0000 -0.08960 -0.01724 -0.0297\nOREB   -0.0024 -0.0149 -0.28585 -0.18736 -0.0896  1.00000  0.03882 -0.0996\nDREB    0.4647  0.1413  0.02484  0.00164 -0.0172  0.03882  1.00000  0.0468\nAST     0.3477  0.5103  0.36333  0.40540 -0.0297 -0.09960  0.04681  1.0000\nSTL     0.1246  0.0352  0.01897 -0.04479  0.0115 -0.00389 -0.18027  0.0518\nBLK     0.1837  0.0623  0.03757  0.00540 -0.0185  0.00311  0.20700  0.0411\n            STL      BLK\nSpread  0.12460  0.18367\nPTS     0.03525  0.06234\nP2p     0.01897  0.03757\nP3p    -0.04479  0.00540\nFTp     0.01153 -0.01849\nOREB   -0.00389  0.00311\nDREB   -0.18027  0.20700\nAST     0.05178  0.04112\nSTL     1.00000  0.03267\nBLK     0.03267  1.00000"
+  },
+  {
+    "objectID": "slides/Chapter07.html#model-summary-measures",
+    "href": "slides/Chapter07.html#model-summary-measures",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "Model Summary Measures",
+    "text": "Model Summary Measures\n\n\n\nModel summary measures\n\n\nr.squared\n0.62\n\n\nsigma\n8.79\n\n\nstatistic\n384.83\n\n\np.value\n0.00\n\n\nAIC\n15227.82\n\n\nBIC\n15290.06"
+  },
+  {
+    "objectID": "slides/Chapter07.html#base-r-summary",
+    "href": "slides/Chapter07.html#base-r-summary",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "Base R summary",
+    "text": "Base R summary\n\n\n\nCall:\nlm(formula = Spread ~ ., data = teams_forlm)\n\nResiduals:\n   Min     1Q Median     3Q    Max \n-34.72  -5.28  -0.06   5.40  29.02 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) -110.7157     7.2653  -15.24  &lt; 2e-16 ***\nMIN           -0.6004     0.1426   -4.21  2.7e-05 ***\nPTS           -0.0423     0.0306   -1.38    0.167    \nP2p           88.3518     4.0784   21.66  &lt; 2e-16 ***\nP3p           86.0245     3.5553   24.20  &lt; 2e-16 ***\nFTp           17.8171     1.9300    9.23  &lt; 2e-16 ***\nOREB           0.8664     0.0604   14.35  &lt; 2e-16 ***\nDREB           1.3558     0.0357   37.97  &lt; 2e-16 ***\nAST           -0.0754     0.0451   -1.67    0.094 .  \nTOV           -0.7662     0.0511  -14.98  &lt; 2e-16 ***\nSTL            1.3174     0.0652   20.20  &lt; 2e-16 ***\nBLK            0.3661     0.0733    5.00  6.3e-07 ***\nPF            -0.0577     0.0446   -1.29    0.196    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 8.21 on 2105 degrees of freedom\nMultiple R-squared:  0.67,  Adjusted R-squared:  0.668 \nF-statistic:  357 on 12 and 2105 DF,  p-value: &lt;2e-16"
+  },
+  {
+    "objectID": "slides/Chapter07.html#does-waffle-houses-cause-divorce",
+    "href": "slides/Chapter07.html#does-waffle-houses-cause-divorce",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "Does Waffle Houses cause divorce??",
+    "text": "Does Waffle Houses cause divorce??"
+  },
+  {
+    "objectID": "slides/Chapter07.html#or-is-it-butter",
+    "href": "slides/Chapter07.html#or-is-it-butter",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "Or is it butter?",
+    "text": "Or is it butter?\n\nAnd if you want more to impress your friends at a BBQ, the source is: http://www.tylervigen.com/spurious-correlations"
+  },
+  {
+    "objectID": "slides/Chapter07.html#spurious-association",
+    "href": "slides/Chapter07.html#spurious-association",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "Spurious association",
+    "text": "Spurious association\n\nYou’ve heard that before: correlation does not imply causation. BUT it doesn’t discard it either\nHope you are seated: causation does not imply correlation.\nCausation implies conditional correlation (up to linearity issues).\nWe need more than just statistical models to answer causal questions."
+  },
+  {
+    "objectID": "slides/Chapter07.html#how-do-we-deal-with-spurious-associations",
+    "href": "slides/Chapter07.html#how-do-we-deal-with-spurious-associations",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "How do we deal with spurious associations?",
+    "text": "How do we deal with spurious associations?\n\nDomain knowledge: you know that waffles and butter don’t cause divorce so why might they be correlated?\n\nIs there another predictor that would be better?\n\nMultiple regressions can disentangle the association between two predictors and an outcome\n\nStatistical control of a confound"
+  },
+  {
+    "objectID": "slides/Chapter07.html#masked-associations",
+    "href": "slides/Chapter07.html#masked-associations",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "Masked associations",
+    "text": "Masked associations\n\nAssociation between a predictor variable and an outcome can be masked.\nYou need to observe both to see the “true” influence of either on the outcome.\nHow do we account for the masking variable (seen as a nuisance)?"
+  },
+  {
+    "objectID": "slides/Chapter07.html#multicollinearity-1",
+    "href": "slides/Chapter07.html#multicollinearity-1",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "Multicollinearity",
+    "text": "Multicollinearity\n\nThe impact of multicollinearity on the variance of the estimates can be quantified using the Variance Inflation Factor (VIF &lt; 5 is considered ok).\nThere are several ways to deal with multicollinarity, depending on context. We can discard one of highly correlated variable, perform ridge regression, or think more carefully about how the variables relate to each other."
+  },
+  {
+    "objectID": "slides/Chapter07.html#overfitting",
+    "href": "slides/Chapter07.html#overfitting",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "Overfitting",
+    "text": "Overfitting\n\nOverfitting learning too much from the data, where you are almost just connecting the points rather than estimating.\nUnderfitting is the opposite, i.e. being insensitive to the data.\naka Models with fewer assumptions are to be preferred.\nIn practice, we have to choose between models that differ both in accuracy and simplicity. The razor is not really a useful guidance for this trade off.\n\nWe need tools"
+  },
+  {
+    "objectID": "slides/Chapter07.html#fit-to-the-data",
+    "href": "slides/Chapter07.html#fit-to-the-data",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "Fit to the data",
+    "text": "Fit to the data\nAn example of fit: the \\(R^2\\) defined as: \\[ R^2 = \\frac{\\mathrm{var}(\\text{outcome}) - \\mathrm{var}(\\text{residuals})}{\\mathrm{var}(\\text{outcome})} = 1-\\frac{\\mathrm{var}(\\text{residuals})}{\\mathrm{var}(\\text{outcome})} \\] The proportion of variance explained.\n\n\\(R^2_{adj}\\) is adjusted to remove the variation that is explained by chance alone\n\\(R^2_{adj}=1-\\frac{MS~Error}{MS~Total}\\)"
+  },
+  {
+    "objectID": "slides/Chapter07.html#when-r2-becomes-absurd",
+    "href": "slides/Chapter07.html#when-r2-becomes-absurd",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "When \\(R^2\\) becomes absurd",
+    "text": "When \\(R^2\\) becomes absurd"
+  },
+  {
+    "objectID": "slides/Chapter07.html#when-to-use-multiple-predictors",
+    "href": "slides/Chapter07.html#when-to-use-multiple-predictors",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "When to use multiple predictors",
+    "text": "When to use multiple predictors\n\nStatistical control of a confound: controlling treatment for some unwanted variability\nMultiple causation: multiple things are thought to cause changes in the outcome variable\nInteractions: we are interested in how two variables may combine to change our outcome (will cover this in the next chapter)"
+  },
+  {
+    "objectID": "slides/Chapter07.html#tidy-summary",
+    "href": "slides/Chapter07.html#tidy-summary",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "Tidy summary",
+    "text": "Tidy summary\n\n\n\nt-tests for model parameters\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n-142.422\n2.873\n-49.575\n0.000\n\n\nPTS\n0.062\n0.027\n2.320\n0.020\n\n\nP2p\n74.117\n3.839\n19.306\n0.000\n\n\nP3p\n74.011\n3.345\n22.126\n0.000\n\n\nFTp\n15.469\n2.027\n7.633\n0.000\n\n\nOREB\n0.719\n0.062\n11.538\n0.000\n\n\nDREB\n1.203\n0.037\n32.809\n0.000\n\n\nAST\n-0.035\n0.048\n-0.729\n0.466\n\n\nSTL\n1.069\n0.068\n15.785\n0.000\n\n\nBLK\n0.350\n0.078\n4.470\n0.000"
+  },
+  {
+    "objectID": "slides/Chapter07.html#residuals",
+    "href": "slides/Chapter07.html#residuals",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "Residuals",
+    "text": "Residuals\nJust like with a simple regression we examine residuals to look for patterns\n\nThese look great, probably because we have a ton of data in this example."
+  },
+  {
+    "objectID": "slides/Chapter07.html#masking-situations-tend-to-arise-when",
+    "href": "slides/Chapter07.html#masking-situations-tend-to-arise-when",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "Masking situations tend to arise when:",
+    "text": "Masking situations tend to arise when:\n\nBoth predictors are associated with one another.\nHave opposite relationships with the outcome"
+  },
+  {
+    "objectID": "slides/Chapter07.html#milk-and-brain-data-example",
+    "href": "slides/Chapter07.html#milk-and-brain-data-example",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "Milk and brain data example",
+    "text": "Milk and brain data example"
+  },
+  {
+    "objectID": "slides/Chapter07.html#primate-milk-data",
+    "href": "slides/Chapter07.html#primate-milk-data",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "Primate milk data",
+    "text": "Primate milk data"
+  },
+  {
+    "objectID": "slides/Chapter07.html#first-we-will-consider-simple-regressions",
+    "href": "slides/Chapter07.html#first-we-will-consider-simple-regressions",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "First we will consider simple regressions",
+    "text": "First we will consider simple regressions"
+  },
+  {
+    "objectID": "slides/Chapter07.html#multiple-regression-1",
+    "href": "slides/Chapter07.html#multiple-regression-1",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "Multiple regression",
+    "text": "Multiple regression"
+  },
+  {
+    "objectID": "slides/Chapter07.html#masking-situation",
+    "href": "slides/Chapter07.html#masking-situation",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "Masking situation",
+    "text": "Masking situation\nTend to arise when\n\nBoth predictors are associated with one another.\nHave opposite relationships with the outcome"
+  },
+  {
+    "objectID": "slides/Chapter07.html#ss-types-in-action",
+    "href": "slides/Chapter07.html#ss-types-in-action",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "SS types in action",
+    "text": "SS types in action\n\nanova(full_reg)\n\nAnalysis of Variance Table\n\nResponse: Spread\n            Df Sum Sq Mean Sq F value  Pr(&gt;F)    \nPTS          1 141195  141195 1829.34 &lt; 2e-16 ***\nP2p          1   4002    4002   51.85 8.3e-13 ***\nP3p          1  14465   14465  187.42 &lt; 2e-16 ***\nFTp          1    584     584    7.56   0.006 ** \nOREB         1   7082    7082   91.76 &lt; 2e-16 ***\nDREB         1  78359   78359 1015.23 &lt; 2e-16 ***\nAST          1     10      10    0.13   0.718    \nSTL          1  20082   20082  260.18 &lt; 2e-16 ***\nBLK          1   1542    1542   19.98 8.2e-06 ***\nResiduals 2108 162703      77                    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\nlibrary(car)\nAnova(full_reg,  type=2)\n\nAnova Table (Type II tests)\n\nResponse: Spread\n          Sum Sq   Df F value  Pr(&gt;F)    \nPTS          416    1    5.38    0.02 *  \nP2p        28767    1  372.71 &lt; 2e-16 ***\nP3p        37787    1  489.57 &lt; 2e-16 ***\nFTp         4497    1   58.26 3.4e-14 ***\nOREB       10276    1  133.13 &lt; 2e-16 ***\nDREB       83083    1 1076.43 &lt; 2e-16 ***\nAST           41    1    0.53    0.47    \nSTL        19232    1  249.17 &lt; 2e-16 ***\nBLK         1542    1   19.98 8.2e-06 ***\nResiduals 162703 2108                    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\nAnova(full_reg,  type=3)\n\nAnova Table (Type III tests)\n\nResponse: Spread\n            Sum Sq   Df F value  Pr(&gt;F)    \n(Intercept) 189696    1 2457.72 &lt; 2e-16 ***\nPTS            416    1    5.38    0.02 *  \nP2p          28767    1  372.71 &lt; 2e-16 ***\nP3p          37787    1  489.57 &lt; 2e-16 ***\nFTp           4497    1   58.26 3.4e-14 ***\nOREB         10276    1  133.13 &lt; 2e-16 ***\nDREB         83083    1 1076.43 &lt; 2e-16 ***\nAST             41    1    0.53    0.47    \nSTL          19232    1  249.17 &lt; 2e-16 ***\nBLK           1542    1   19.98 8.2e-06 ***\nResiduals   162703 2108                    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
+  },
+  {
+    "objectID": "slides/Chapter07.html#summary-so-far",
+    "href": "slides/Chapter07.html#summary-so-far",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "Summary so far",
+    "text": "Summary so far\n\nDefined multiple regression\nWhy we might run a multiple regression\nHow to perform a multiple regression, examine residuals, multicollinearity\nVariation and R squared\nSums of Squares types"
+  },
+  {
+    "objectID": "slides/Chapter07.html#how-do-we-deal-with-this",
+    "href": "slides/Chapter07.html#how-do-we-deal-with-this",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "How do we deal with this?",
+    "text": "How do we deal with this?\n\nStatistically there is not really an answer\nThe answer lies in the causes and the causes are not in the data\nRemember that interpreting the (regression) parameter estimates always depends upon what you believe the causal model"
+  },
+  {
+    "objectID": "slides/Chapter07.html#ockhams-razor",
+    "href": "slides/Chapter07.html#ockhams-razor",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "Ockham’s razor",
+    "text": "Ockham’s razor\nNunca ponenda est pluralitas sine necesitate\n(Plurality should never be posited without necessity)\n\nProblem: fit to sample always (*multi-level models can be counter-examples) improves as we add parameters.\nDangers of “stargazing”: selecting variables with low p-values (aka ‘lots of stars’). P-values are not designed to cope with over-/under-fitting."
+  },
+  {
+    "objectID": "slides/Chapter07.html#r-squared",
+    "href": "slides/Chapter07.html#r-squared",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "R squared",
+    "text": "R squared\nAn example of fit: the \\(R^2\\) defined as: \\[ R^2 = \\frac{\\mathrm{var}(\\text{outcome}) - \\mathrm{var}(\\text{residuals})}{\\mathrm{var}(\\text{outcome})} = 1-\\frac{\\mathrm{var}(\\text{residuals})}{\\mathrm{var}(\\text{outcome})} \\] The proportion of variance explained.\n\\(R^2\\) (the proportion of variance explained by the model) should not be used to select among candidate models. Adding another predictor variable always increases the \\(R^2\\), even if the new variable is unrelated in the population."
+  },
+  {
+    "objectID": "slides/Chapter07.html#multicollinearity-2",
+    "href": "slides/Chapter07.html#multicollinearity-2",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "Multicollinearity",
+    "text": "Multicollinearity\nIn R we can examine Multicollinearity using the function vif()\nRemember our basketball regression:\n\nlibrary(car)\nvif(full_reg)\n\n PTS  P2p  P3p  FTp OREB DREB  AST  STL  BLK \n3.07 2.14 2.24 1.14 1.37 1.14 1.50 1.06 1.05 \n\n\nThese values are all small (VIF &lt; 5) so we can continue on in interpreting the regression."
+  },
+  {
+    "objectID": "slides/Chapter07.html#model-selection-continued-1",
+    "href": "slides/Chapter07.html#model-selection-continued-1",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "Model selection (continued)",
+    "text": "Model selection (continued)\n\nWe can also benchmark a small model with the full regression\nMallow’s \\(C_p\\) (look for \\(C_p\\) just less than \\(p\\) or equal)\n\n\\[C_{p} =\\; \\frac{{\\rm SS\\; Error\\; for\\; Smaller\\; Model}}{{\\rm Mean\\; Square\\; Error\\; for\\; full\\; regression}} -(n-2p)\\] - If unimportant variables are added to the model, then the variance of the fitted values will increase. Similarly if important variables are added, then the bias of the fitted values will decrease\n\nThe \\(C_{p}\\) index, balances the variance and bias"
+  },
+  {
+    "objectID": "slides/Chapter07.html#cross-validated-selection-data-example",
+    "href": "slides/Chapter07.html#cross-validated-selection-data-example",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "Cross validated selection: Data example",
+    "text": "Cross validated selection: Data example\nConsider the pinetree data set which contains the circumference measurements of pine trees at four positions (First is bottom)"
+  },
+  {
+    "objectID": "slides/Chapter07.html#polynomial-models-data-example",
+    "href": "slides/Chapter07.html#polynomial-models-data-example",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "Polynomial models: Data example",
+    "text": "Polynomial models: Data example\nWe can fit a simple linear regression using the Pine tree data\n\npine1 &lt;- lm(Top ~ First, data = pinetree) \nsummary(pine1)\n\n\nCall:\nlm(formula = Top ~ First, data = pinetree)\n\nResiduals:\n   Min     1Q Median     3Q    Max \n-2.854 -0.881 -0.195  0.630  3.176 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)   -6.334      0.765   -8.28  2.1e-11 ***\nFirst          0.763      0.024   31.78  &lt; 2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.29 on 58 degrees of freedom\nMultiple R-squared:  0.946, Adjusted R-squared:  0.945 \nF-statistic: 1.01e+03 on 1 and 58 DF,  p-value: &lt;2e-16"
+  },
+  {
+    "objectID": "slides/Chapter07.html#look-closer",
+    "href": "slides/Chapter07.html#look-closer",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "Look closer",
+    "text": "Look closer\n\nLooks non-linear"
+  },
+  {
+    "objectID": "slides/Chapter07.html#polynomial-models-data-example-1",
+    "href": "slides/Chapter07.html#polynomial-models-data-example-1",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "Polynomial models: Data example",
+    "text": "Polynomial models: Data example\n\n\n                                  Estimate Std. Error t value Pr(&gt;|t|)\n(Intercept)                         44.121      7.039    6.27        0\npoly(First, degree = 3, raw = T)1   -3.972      0.695   -5.71        0\npoly(First, degree = 3, raw = T)2    0.142      0.022    6.39        0\npoly(First, degree = 3, raw = T)3   -0.001      0.000   -5.95        0\n\n\n```         \n- For the pinetree example, all the slope coefficients are highly significant for the cubic regression\n- Not so for the quadratic regression\n```\n\n\n                                  Estimate Std. Error t value Pr(&gt;|t|)\n(Intercept)                           3.85      2.450   1.569    0.122\npoly(First, degree = 2, raw = T)1     0.10      0.155   0.646    0.521\npoly(First, degree = 2, raw = T)2     0.01      0.002   4.319    0.000\n\n\n\nRaw polynomials do not preserve the coefficient estimates but orthogonal polynomials do.\n\n\n\n                         Estimate Std. Error t value Pr(&gt;|t|)\n(Intercept)                 17.40      0.146  119.26        0\npoly(First, degree = 2)1    41.01      1.130   36.29        0\npoly(First, degree = 2)2     4.88      1.130    4.32        0\n\n\n                         Estimate Std. Error t value Pr(&gt;|t|)\n(Intercept)                 17.40      0.115  151.03        0\npoly(First, degree = 3)1    41.01      0.892   45.96        0\npoly(First, degree = 3)2     4.88      0.892    5.47        0\npoly(First, degree = 3)3    -5.31      0.892   -5.95        0"
+  },
+  {
+    "objectID": "slides/Chapter07.html#variance-explained",
+    "href": "slides/Chapter07.html#variance-explained",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "Variance Explained",
+    "text": "Variance Explained\n\\(R^2\\) is the proportion of variance in \\(y\\) explained by \\(x\\) .\n\nsummary(full_reg)\n\n\nCall:\nlm(formula = Spread ~ ., data = teams_forlm)\n\nResiduals:\n   Min     1Q Median     3Q    Max \n-32.29  -5.72  -0.15   5.66  30.36 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) -142.4223     2.8728  -49.58  &lt; 2e-16 ***\nPTS            0.0624     0.0269    2.32     0.02 *  \nP2p           74.1170     3.8391   19.31  &lt; 2e-16 ***\nP3p           74.0109     3.3449   22.13  &lt; 2e-16 ***\nFTp           15.4686     2.0265    7.63  3.4e-14 ***\nOREB           0.7191     0.0623   11.54  &lt; 2e-16 ***\nDREB           1.2033     0.0367   32.81  &lt; 2e-16 ***\nAST           -0.0350     0.0479   -0.73     0.47    \nSTL            1.0685     0.0677   15.79  &lt; 2e-16 ***\nBLK            0.3503     0.0784    4.47  8.2e-06 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 8.79 on 2108 degrees of freedom\nMultiple R-squared:  0.622, Adjusted R-squared:  0.62 \nF-statistic:  385 on 9 and 2108 DF,  p-value: &lt;2e-16"
+  },
+  {
+    "objectID": "slides/Chapter07.html#variance-explained-1",
+    "href": "slides/Chapter07.html#variance-explained-1",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "Variance Explained",
+    "text": "Variance Explained\n\\(R^2=\\frac{SS~regression}{SS~Total}\\)\n\nSS &lt;- anova(full_reg) |&gt; \n   tidy() |&gt; \n  select(term:sumsq) |&gt; \n  janitor::adorn_totals()\nSS\n\n      term   df    sumsq\n       PTS    1 141194.6\n       P2p    1   4001.7\n       P3p    1  14465.4\n       FTp    1    583.8\n      OREB    1   7082.2\n      DREB    1  78359.3\n       AST    1     10.1\n       STL    1  20082.0\n       BLK    1   1542.2\n Residuals 2108 162702.8\n     Total 2117 430024.0\n\n\n\n\\(R^2_{adj}\\) is adjusted to remove the variation that is explained by chance alone\n\\(R^2_{adj}=1-\\frac{MS~Error}{MS~Total}\\)"
+  },
+  {
+    "objectID": "slides/Chapter07.html#type-ii",
+    "href": "slides/Chapter07.html#type-ii",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "Type II",
+    "text": "Type II\n\nType II SS is based on the principle of marginality.\n\nEach variable effect is adjusted for all other appropriate effects.\n\nequivalent to the Type I SS when the variable is the last predictor entered the model.\n\nOrder matters for Type I SS but not for Type II SS"
+  },
+  {
+    "objectID": "slides/Chapter07.html#type-iii-ss",
+    "href": "slides/Chapter07.html#type-iii-ss",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "Type III SS",
+    "text": "Type III SS\n\nType III SS is the SS added to the regression SS after ALL other predictors including an intercept term.\n\nViolates the marginality principle and so avoided for hypothesis tests\n\nSS explained is not always a good criterion for selection of variables"
+  },
+  {
+    "objectID": "slides/Chapter07.html#learning-objectives-1",
+    "href": "slides/Chapter07.html#learning-objectives-1",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "Learning Objectives:",
+    "text": "Learning Objectives:\n\nCautionary tales: when correlation misleads us\nHow to make models\nComparing models\nPrinciples of model selection"
+  },
+  {
+    "objectID": "slides/Chapter07.html#all-possible-models",
+    "href": "slides/Chapter07.html#all-possible-models",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "All possible models:",
+    "text": "All possible models:\nAn exhaustive screening of all possible regression models can also be done using software\n\nBest Subsets: Stop at each step and check whether predictors, in the model or outside, are the best combination for that step.\n\n\ntime consuming to perform when the predictor set is large\n\n\nRemember permutations\nFor example:\nIf we fix the number of predictors as 3, then 20 regression models are possible"
+  },
+  {
+    "objectID": "slides/Chapter07.html#what-criteria-do-we-use",
+    "href": "slides/Chapter07.html#what-criteria-do-we-use",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "What criteria do we use?",
+    "text": "What criteria do we use?\nMultiple options\n- R squared\n- Sums of squared (different types, for testing predictor significance)\n- Information criteria (AIC, BIC etc)\n- For prediction: MSD/MSE, MAD, MAPE\n- \\(C_p\\)\n\nRemember its about balance and what you are looking for (fit vs prediction, complexity vs generality)\n\n\nNote\n\nIf a model stands out, it will perform well in terms of all summary measures.\nIf a model does not stand out, summary measures will contradict."
+  },
+  {
+    "objectID": "slides/Chapter07.html#model-selection-1",
+    "href": "slides/Chapter07.html#model-selection-1",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "Model selection",
+    "text": "Model selection\n\nResidual SD depends on its degrees of freedom\n\nSo comparison of models based on Residual SD is not fully fair\n\nThe following three measures are popular prediction modelling and similar to residual SD\nMean Squared Deviation (MSD): mean of the squared errors (i.e., deviations) (also called MSE)\n\n\\[\\frac{\\sum \\left({\\rm observation-fit}\\right)^{{\\rm 2}} }{{\\rm number~of~ observations}}\\]\n\nMean Absolute Deviation (MAD)\n\n\\[\\frac{\\sum \\left|{\\rm observation-fit}\\right| }{{\\rm number~of~observations}}\\]\n\nMean Absolute Percentage Error (MAPE)\n\n\\[\\frac{\\sum \\frac{\\left|{\\rm observation-fit}\\right|}{{\\rm observation}} }{{\\rm number~of~observations}} {\\times100}\\]"
+  },
+  {
+    "objectID": "slides/Chapter07.html#cross-validation",
+    "href": "slides/Chapter07.html#cross-validation",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "Cross validation",
+    "text": "Cross validation\nIn sample error vs prediction error\n\nFor simpler models, increasing the number of parameters improves the fit to the sample.\nBut it seems to reduce the accuracy of the out-of-sample predictions.\nMost accurate models trade off flexibility (complexity) and overfitting\n\nGeneral idea: - Leave out some observations. - Train the model on the remaining samples; score on those left out. - Average over many left-out sets to get the out-of-sample (future) accuracy."
   }
 ]
