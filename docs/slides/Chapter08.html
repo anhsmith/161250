@@ -8,7 +8,7 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.450">
+  <meta name="generator" content="quarto-1.3.353">
 
   <title>161250 Data Analysis - Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -396,6 +396,25 @@
 </div>
 
 </section>
+<section id="learning-objectives" class="slide level2">
+<h2>Learning Objectives</h2>
+<ul>
+<li>Define and understand an ANOVA</li>
+<li>Use a one-way ANOVA on example data</li>
+<li>Understand and calculate an ANOVA table</li>
+<li>Describe Tukey’s post hoc tests and assumptions of ANOVAs</li>
+<li>Understand the difference between one-way and two-way ANOVAs</li>
+</ul>
+</section>
+<section id="anova" class="slide level2">
+<h2>ANOVA</h2>
+<ul>
+<li><p>Analysis of variance, or ANOVA, is an approach to comparing data with multiple means across different groups, and allows us to see patterns and trends within complex and varied data.</p></li>
+<li><p>Used for categorical or grouped data.</p></li>
+<li><p>Often data from experiments (treatments make good factors).</p></li>
+<li><p>EDA bar, points, or box plots are options to show differences between groups.</p></li>
+</ul>
+</section>
 <section id="one-way-anova" class="slide level2">
 <h2>One-way ANOVA</h2>
 <ul>
@@ -453,10 +472,39 @@
 </section>
 <section id="one-way-single-factor-anova-model" class="slide level2">
 <h2>One-way (single factor) ANOVA model</h2>
+<p>Start with hypotheses and EDA to visualize groups</p>
 <ul>
 <li><span class="math inline">\(H_0\)</span>: The mean burn times are equal for the four fabrics</li>
 <li><span class="math inline">\(H_a\)</span>: The mean burn time of at least one fabric is different.</li>
 </ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>fabric<span class="ot">=</span><span class="fu">read.table</span>(<span class="st">"../data/fabric.txt"</span>, <span class="at">header=</span><span class="cn">TRUE</span>, <span class="at">sep=</span><span class="st">"</span><span class="sc">\t</span><span class="st">"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a>fabric <span class="sc">|&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">factor</span>(fabric), <span class="at">y=</span>burntime))<span class="sc">+</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> <span class="st">"mean_cl_boot"</span>, <span class="at">colour =</span> <span class="st">"blue"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>, <span class="at">size =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Chapter08_files/figure-revealjs/unnamed-chunk-1-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>fabric <span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">factor</span>(fabric), <span class="at">y=</span>burntime))<span class="sc">+</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>  <span class="fu">stat_summary_bin</span>(<span class="at">fun =</span> <span class="st">"mean"</span>, <span class="at">geom =</span> <span class="st">"bar"</span>, <span class="at">orientation =</span> <span class="st">'x'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Chapter08_files/figure-revealjs/unnamed-chunk-1-2.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="one-way-single-factor-anova-model-1" class="slide level2">
+<h2>One-way (single factor) ANOVA model</h2>
 
 <img data-src="img/oneway.png" class="r-stretch"></section>
 <section id="anova-table" class="slide level2">
@@ -468,6 +516,7 @@
 <p>SS Total = SS Factor + SS Error</p>
 </blockquote>
 <div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">summary</span>(<span class="fu">aov</span>(burntime <span class="sc">~</span> fabric, <span class="at">data =</span> fabric))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            Df Sum Sq Mean Sq F value   Pr(&gt;F)    
 fabric       3 120.50   40.17   13.89 0.000102 ***
@@ -486,6 +535,187 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </ul></li>
 </ul>
 </section>
+<section id="anova-table-1" class="slide level2">
+<h2>ANOVA table</h2>
+<p>How are these values calculated?</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>            Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+fabric       3 120.50   40.17   13.89 0.000102 ***
+Residuals   16  46.26    2.89                     
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">SS</th>
+<th style="text-align: left;">df</th>
+<th style="text-align: center;">MeanSq</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">FACTOR</td>
+<td style="text-align: left;">k-1</td>
+<td style="text-align: center;">FACTOR SS/(k-1)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ERROR</td>
+<td style="text-align: left;">n-k</td>
+<td style="text-align: center;">ERROR SS/(n-k)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">TOTAL</td>
+<td style="text-align: left;">n-1</td>
+<td style="text-align: center;">TOTAL SS/(n-1)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="anova-table-2" class="slide level2">
+<h2>ANOVA table</h2>
+<p>Calculating F values of a factor:</p>
+<p><span class="math inline">\(F = \frac{MS_{Factor}}{MS_{Error}}\)</span></p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">SS</th>
+<th style="text-align: left;">df</th>
+<th style="text-align: center;">MeanSq</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">FACTOR</td>
+<td style="text-align: left;">k-1</td>
+<td style="text-align: center;">FACTOR SS/(k-1)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ERROR</td>
+<td style="text-align: left;">n-k</td>
+<td style="text-align: center;">ERROR SS/(n-k)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">TOTAL</td>
+<td style="text-align: left;">n-1</td>
+<td style="text-align: center;">TOTAL SS/(n-1)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="anova-table-practice" class="slide level2">
+<h2>ANOVA table practice</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">SS</th>
+<th style="text-align: left;">df</th>
+<th style="text-align: left;">MeanSq</th>
+<th style="text-align: left;">F- value</th>
+<th style="text-align: center;">P-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">FACTOR</td>
+<td style="text-align: left;">k-1</td>
+<td style="text-align: left;">FACTOR SS/(k-1)</td>
+<td style="text-align: left;">MSF/MSE</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ERROR</td>
+<td style="text-align: left;">n-k</td>
+<td style="text-align: left;">ERROR SS/(n-k)</td>
+<td style="text-align: left;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">TOTAL</td>
+<td style="text-align: left;">n-1</td>
+<td style="text-align: left;">TOTAL SS/(n-1)</td>
+<td style="text-align: left;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">SS</th>
+<th style="text-align: left;">df</th>
+<th style="text-align: left;">MeanSq</th>
+<th style="text-align: left;">F- value</th>
+<th style="text-align: center;">P-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">fabric</td>
+<td style="text-align: left;">120.5</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Residuals</td>
+<td style="text-align: left;">46.3</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">TOTAL</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="reminder-on-p-values" class="slide level2">
+<h2>Reminder on P values</h2>
+<p>In null-hypothesis significance testing, the p-value is the probability of obtaining test results at least as extreme as the result actually observed, under the assumption that the null hypothesis is correct.</p>
+<p>A very small p-value means that such an extreme observed outcome would be very unlikely under the null hypothesis.</p>
+<p>We calculate them based on our theoretical sampling distributions (normal, <span class="math inline">\(t\)</span>, <span class="math inline">\(F\)</span>, <span class="math inline">\(\chi^2\)</span>)</p>
+</section>
+<section id="reminder-of-sampling-distributions" class="slide level2">
+<h2>Reminder of Sampling Distributions</h2>
+<p>A sampling distribution is a probabilistic model of sampling variation–it describes the behaviour of some sample statistic</p>
+<p>For a normal population, when the population parameters and are known, we can easily derive the sampling distributions of the sample mean or sample variance.</p>
+<p>When the population parameters are unknown, we have to estimate them from data.</p>
+</section>
+<section id="reminder-of-sampling-distributions-1" class="slide level2">
+<h2>Reminder of Sampling Distributions</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Chapter08_files/figure-revealjs/unnamed-chunk-4-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Chapter08_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="reminder-of-sampling-distributions-2" class="slide level2">
+<h2>Reminder of Sampling Distributions</h2>
+</section>
 <section id="graphical-comparison-of-means" class="slide level2">
 <h2>Graphical comparison of means</h2>
 <ul>
@@ -495,15 +725,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </ul></li>
 </ul>
 
-<img data-src="Chapter08_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch quarto-figure-center"></section>
-<section id="tukey-hsd-interval-plot" class="slide level2">
-<h2>Tukey HSD (Interval Plot)</h2>
-<ul>
-<li>The ANOVA model assumes equal SD for the treatments.</li>
-<li>Tukey HSD (Honest Significant Differences) plot allows pairwise comparison of treatment means</li>
-</ul>
-
-<img data-src="Chapter08_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="Chapter08_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="one-way-anova-model-assumptions" class="slide level2">
 <h2>One-way ANOVA model Assumptions</h2>
 <ul>
@@ -512,16 +734,143 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <ul>
 <li>If SD increases with mean, try square root or logarithmic transformation.</li>
 </ul></li>
+<li>The ANOVA model assumes equal SD for the treatments.</li>
 <li>If experimental errors are more in some subgroups, divide the problem into separate ones.</li>
 <li>Positive correlation among residuals leads to under estimation of error variance; negative correlation leads to overestimation.<br>
 </li>
 </ul>
 <p><em>These assumptions are harder to validate to small experimental design data</em></p>
 </section>
+<section id="visualize-assumptions" class="slide level2">
+<h2>Visualize assumptions</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">plot</span>(<span class="fu">aov</span>(burntime <span class="sc">~</span> fabric, <span class="at">data =</span> fabric))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Chapter08_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Chapter08_files/figure-revealjs/unnamed-chunk-7-2.png" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Chapter08_files/figure-revealjs/unnamed-chunk-7-3.png" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Chapter08_files/figure-revealjs/unnamed-chunk-7-4.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="visualize-assumptions-1" class="slide level2">
+<h2>Visualize assumptions</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>fabric <span class="sc">|&gt;</span> </span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">group_by</span>(fabric) <span class="sc">|&gt;</span> </span>
+<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb7-4"><a href="#cb7-4"></a>    <span class="at">mean =</span> <span class="fu">mean</span>(burntime),</span>
+<span id="cb7-5"><a href="#cb7-5"></a>    <span class="at">sd =</span> <span class="fu">sd</span>(burntime)</span>
+<span id="cb7-6"><a href="#cb7-6"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb7-7"><a href="#cb7-7"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a>  <span class="fu">aes</span>(<span class="at">x =</span> mean, <span class="at">y =</span> sd, <span class="at">group =</span> <span class="fu">factor</span>(<span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a>  <span class="fu">geom_point</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="Chapter08_files/figure-revealjs/fig-meansd-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;1: SD vs mean for four fabrics</p><p>With only four fabrics in the sample, it is difficult to make any definitive claim.</p>
+<p>If the assumptions were valid, we would expect the four points to fall approximately along a horizontal band indicating constant standard deviations, and hence variances, regardless of the means of the groups.</p>
+<p>This figure suggests that this is the case, so the assumption of equal variances appears to be valid.</p>
+</section>
+<section id="equal-variance" class="slide level2">
+<h2>Equal variance</h2>
+<p><strong>Bartlett’s test</strong>: - null hypothesis: equal variances - but it has an assumption of its own (response variable must be normally distributed)</p>
+<p><strong>Levene’s test</strong> - null hypothesis: equal variances - is applicable for any continuous distribution</p>
+<div class="cell" data-layout-align="center" data-warnings="false">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">bartlett.test</span>(burntime <span class="sc">~</span> fabric, <span class="at">data =</span> fabric)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Bartlett test of homogeneity of variances
+
+data:  burntime by fabric
+Bartlett's K-squared = 2.6606, df = 3, p-value = 0.447</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>car<span class="sc">::</span><span class="fu">leveneTest</span>(burntime <span class="sc">~</span> fabric, <span class="at">data =</span> fabric)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Levene's Test for Homogeneity of Variance (center = median)
+      Df F value Pr(&gt;F)
+group  3  0.1788 0.9092
+      16               </code></pre>
+</div>
+</div>
+</section>
+<section id="normality" class="slide level2">
+<h2>Normality</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>aov_fabric <span class="ot">&lt;-</span> <span class="fu">aov</span>(burntime <span class="sc">~</span> fabric, <span class="at">data =</span> fabric)</span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="fu">shapiro.test</span>(aov_fabric<span class="sc">$</span>residuals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  aov_fabric$residuals
+W = 0.88926, p-value = 0.02606</code></pre>
+</div>
+</div>
+<p>ANOVAs are robust to mild issues of non-normality</p>
+<p>But if have issues with normality and unequal variance try transformations</p>
+</section>
+<section id="tukey-hsd" class="slide level2">
+<h2>Tukey HSD</h2>
+<ul>
+<li>Tukey HSD (Honest Significant Differences) plot allows pairwise comparison of treatment means.</li>
+<li>Which fabric types have different burn times? (remember the alternative hypothesis of a one-way ANOVA is <em>at least</em> one of the means are different)</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = burntime ~ fabric, data = fabric)
+
+$fabric
+                   diff      lwr      upr     p adj
+Fabric 2-Fabric 1 -5.02 -8.09676 -1.94324 0.0013227
+Fabric 3-Fabric 1 -6.54 -9.61676 -3.46324 0.0000851
+Fabric 4-Fabric 1 -4.80 -7.87676 -1.72324 0.0019981
+Fabric 3-Fabric 2 -1.52 -4.59676  1.55676 0.5094118
+Fabric 4-Fabric 2  0.22 -2.85676  3.29676 0.9968426
+Fabric 4-Fabric 3  1.74 -1.33676  4.81676 0.3968476</code></pre>
+</div>
+</div>
+</section>
+<section id="tukey-hsd-interval-plot" class="slide level2">
+<h2>Tukey HSD (Interval Plot)</h2>
+
+<img data-src="Chapter08_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="two-way-two-factor-anova" class="slide level2">
 <h2>Two way (two factor) ANOVA</h2>
 <ul>
-<li>Two factors are present.</li>
+<li><p>Two factors are present.</p></li>
+<li><p>A two-way ANOVA is used to estimate how the mean of a continuous variable changes according to the levels of two categorical variables.</p></li>
+<li><p>Use a two-way ANOVA when you want to know how two independent variables, in combination, affect a dependent variable.</p></li>
+<li><p>Very similar to multiple regression but with categorical variables.</p></li>
+</ul>
+</section>
+<section id="two-way-two-factor-anova-example" class="slide level2">
+<h2>Two way (two factor) ANOVA example</h2>
+<ul>
 <li>Example: Twelve tanks, six each with water from one of the two lakes were set up. Three nutrient supplements were added to each tank. The count of zooplankton in a unit volume of water was then noted.</li>
 </ul>
 <div class="cell" data-layout-align="center">
@@ -542,21 +891,33 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 </section>
-<section id="main-effect-plots" class="slide level2">
-<h2>Main effect plots</h2>
+<section id="run-a-two-way-anova" class="slide level2">
+<h2>Run a Two-way ANOVA</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">summary</span>(<span class="fu">aov</span>(Zooplankton<span class="sc">~</span><span class="fu">factor</span>(Supplement)<span class="sc">+</span>Lake, <span class="at">data=</span>zooplankton))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   Df Sum Sq Mean Sq F value Pr(&gt;F)  
+factor(Supplement)  2 1918.5   959.2   6.486 0.0212 *
+Lake                1   21.3    21.3   0.144 0.7140  
+Residuals           8 1183.2   147.9                 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>A two-way ANOVA tests two null hypotheses at the same time:</p>
 <ul>
-<li>Simply plot of response means for factor levels</li>
+<li>All group means are equal at each level of the first variable</li>
+<li>All group means are equal at each level of the second variable</li>
 </ul>
-
-<img data-src="Chapter08_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+</section>
 <section id="two-way-model-fit" class="slide level2">
 <h2>Two-way model fit</h2>
 <blockquote>
 <p>Model:<br>
-Observation = Overall Mean + Row Effect + Column Effect + Error</p>
+Observation = Overall Mean + Factor 1 Effect + Factor 2 Effect + Error</p>
 </blockquote>
 <ul>
-<li><span class="math inline">\(H_0\)</span>: Row means are equal; Column means are equal</li>
+<li><span class="math inline">\(H_0\)</span>: factor 1 means are equal; factor 2 means are equal</li>
 </ul>
 <div class="cell" data-layout-align="center">
 <div class="cell-output cell-output-stdout">
@@ -570,10 +931,59 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 <p>Supplement effect is significant at 5% level but not the Lake effect</p>
 </section>
+<section id="main-effect-plots" class="slide level2">
+<h2>Main effect plots</h2>
+<ul>
+<li>Simply plot of response means for factor levels</li>
+</ul>
+
+<img data-src="Chapter08_files/figure-revealjs/unnamed-chunk-16-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<section id="tukey-hsd-1" class="slide level2">
+<h2>Tukey HSD</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>zoo <span class="ot">&lt;-</span> <span class="fu">aov</span>(Zooplankton<span class="sc">~</span><span class="fu">factor</span>(Supplement)<span class="sc">+</span>Lake, <span class="at">data=</span>zooplankton)</span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="fu">TukeyHSD</span>(zoo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = Zooplankton ~ factor(Supplement) + Lake, data = zooplankton)
+
+$`factor(Supplement)`
+      diff         lwr       upr     p adj
+2-1  24.75   0.1779866 49.322013 0.0485023
+3-1  -3.75 -28.3220134 20.822013 0.9017260
+3-2 -28.50 -53.0720134 -3.927987 0.0256900
+
+$Lake
+                   diff       lwr      upr     p adj
+Rose-Dennison -2.666667 -18.85781 13.52447 0.7139803</code></pre>
+</div>
+</div>
+</section>
+<section id="summary-so-far" class="slide level2">
+<h2>Summary so far</h2>
+<ul>
+<li>ANOVA: 1 and 2 factor</li>
+<li>ANOVA table</li>
+<li>Assumptions</li>
+<li>Tukey’s HSD</li>
+</ul>
+</section>
+<section id="learning-objectives-part-2" class="slide level2">
+<h2>Learning Objectives: Part 2</h2>
+<ul>
+<li>Understand the use of interactions in linear models</li>
+<li>Use a two-way ANOVA with interactions on example data</li>
+<li>Understand and calculate an ANOVA table when interactions are present</li>
+<li>Describe Tukey’s post hoc tests and assumptions of ANOVAs with interactions</li>
+<li>Understand the difference and similarities between this chapter and previous linear models covered</li>
+</ul>
+</section>
 <section id="interaction-effect" class="slide level2">
 <h2>Interaction effect</h2>
 <ul>
-<li>Whether Factor A (row) effects are constant over Factor B (column) effects or Factor B effects are constant over Factor A effects?
+<li>Whether Factor A effects are constant over Factor B effects or Factor B effects are constant over Factor A effects?
 <ul>
 <li>If the answer is no, then there is an interaction between A &amp; B.</li>
 </ul></li>
@@ -585,10 +995,19 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </ul>
 <p><code>Interaction</code> may or may not have physical meaning.</p>
 </section>
+<section id="two-way-anova-and-interaction-effects" class="slide level2">
+<h2>Two-way ANOVA and Interaction effects</h2>
+<p>A two-way ANOVA with interaction tests three null hypotheses at the same time:</p>
+<ul>
+<li>All group means are equal at each level of the first variable</li>
+<li>All group means are equal at each level of the second variable</li>
+<li>There is no interaction effect between the two variables</li>
+</ul>
+</section>
 <section id="interaction-plots" class="slide level2">
 <h2>Interaction Plots</h2>
 <ul>
-<li>In the absence of interaction, the plotted means of factor crossings will be roughly parallel
+<li>In the absence of interaction, the plotted means of factor will be roughly parallel
 <ul>
 <li>see Plot 1. A &amp; B do not interact.</li>
 </ul></li>
@@ -602,36 +1021,43 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <section id="interaction-plot-for-zooplankton-data" class="slide level2">
 <h2>Interaction Plot for Zooplankton data</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">attach</span>(zooplankton)</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb4-3"><a href="#cb4-3"></a>p1<span class="ot">=</span> <span class="fu">ggplot</span>(<span class="at">data =</span> zooplankton, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(Supplement), <span class="at">y =</span> Zooplankton, <span class="at">group=</span>Lake, <span class="at">colour=</span>Lake)) <span class="sc">+</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a>  <span class="fu">stat_summary</span>(<span class="at">fun=</span>mean, <span class="at">geom=</span><span class="st">"point"</span>)<span class="sc">+</span></span>
-<span id="cb4-5"><a href="#cb4-5"></a>  <span class="fu">stat_summary</span>(<span class="at">fun=</span>mean, <span class="at">geom=</span><span class="st">"line"</span>)<span class="sc">+</span></span>
-<span id="cb4-6"><a href="#cb4-6"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="fu">mean</span>(Zooplankton), <span class="at">slope=</span><span class="dv">0</span>)<span class="sc">+</span> </span>
-<span id="cb4-7"><a href="#cb4-7"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span><span class="fu">ggtitle</span>(<span class="st">"Lake*Supplement Interaction effect"</span>)</span>
-<span id="cb4-8"><a href="#cb4-8"></a>p2<span class="ot">=</span> <span class="fu">ggplot</span>(<span class="at">data =</span> zooplankton, <span class="fu">aes</span>(<span class="at">x =</span> Lake, <span class="at">y =</span> Zooplankton, <span class="at">group=</span><span class="fu">factor</span>(Supplement), <span class="at">colour=</span><span class="fu">factor</span>(Supplement))) <span class="sc">+</span><span class="fu">stat_summary</span>(<span class="at">fun=</span>mean, <span class="at">geom=</span><span class="st">"point"</span>)<span class="sc">+</span></span>
-<span id="cb4-9"><a href="#cb4-9"></a>  <span class="fu">stat_summary</span>(<span class="at">fun=</span>mean, <span class="at">geom=</span><span class="st">"line"</span>)<span class="sc">+</span></span>
-<span id="cb4-10"><a href="#cb4-10"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="fu">mean</span>(Zooplankton), <span class="at">slope=</span><span class="dv">0</span>)<span class="sc">+</span> </span>
-<span id="cb4-11"><a href="#cb4-11"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span><span class="fu">ggtitle</span>(<span class="st">"Lake*Supplement Interaction effect"</span>)</span>
-<span id="cb4-12"><a href="#cb4-12"></a><span class="fu">library</span>(patchwork)</span>
-<span id="cb4-13"><a href="#cb4-13"></a>p1<span class="sc">+</span>p2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">attach</span>(zooplankton)</span>
+<span id="cb21-2"><a href="#cb21-2"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb21-3"><a href="#cb21-3"></a>p1<span class="ot">=</span> <span class="fu">ggplot</span>(<span class="at">data =</span> zooplankton, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(Supplement), <span class="at">y =</span> Zooplankton, <span class="at">group=</span>Lake, <span class="at">colour=</span>Lake)) <span class="sc">+</span></span>
+<span id="cb21-4"><a href="#cb21-4"></a>  <span class="fu">stat_summary</span>(<span class="at">fun=</span>mean, <span class="at">geom=</span><span class="st">"point"</span>)<span class="sc">+</span></span>
+<span id="cb21-5"><a href="#cb21-5"></a>  <span class="fu">stat_summary</span>(<span class="at">fun=</span>mean, <span class="at">geom=</span><span class="st">"line"</span>)<span class="sc">+</span></span>
+<span id="cb21-6"><a href="#cb21-6"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="fu">mean</span>(Zooplankton), <span class="at">slope=</span><span class="dv">0</span>)<span class="sc">+</span> </span>
+<span id="cb21-7"><a href="#cb21-7"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span><span class="fu">ggtitle</span>(<span class="st">"Lake*Supplement Interaction effect"</span>)</span>
+<span id="cb21-8"><a href="#cb21-8"></a>p2<span class="ot">=</span> <span class="fu">ggplot</span>(<span class="at">data =</span> zooplankton, <span class="fu">aes</span>(<span class="at">x =</span> Lake, <span class="at">y =</span> Zooplankton, <span class="at">group=</span><span class="fu">factor</span>(Supplement), <span class="at">colour=</span><span class="fu">factor</span>(Supplement))) <span class="sc">+</span><span class="fu">stat_summary</span>(<span class="at">fun=</span>mean, <span class="at">geom=</span><span class="st">"point"</span>)<span class="sc">+</span></span>
+<span id="cb21-9"><a href="#cb21-9"></a>  <span class="fu">stat_summary</span>(<span class="at">fun=</span>mean, <span class="at">geom=</span><span class="st">"line"</span>)<span class="sc">+</span></span>
+<span id="cb21-10"><a href="#cb21-10"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="fu">mean</span>(Zooplankton), <span class="at">slope=</span><span class="dv">0</span>)<span class="sc">+</span> </span>
+<span id="cb21-11"><a href="#cb21-11"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span><span class="fu">ggtitle</span>(<span class="st">"Lake*Supplement Interaction effect"</span>)</span>
+<span id="cb21-12"><a href="#cb21-12"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb21-13"><a href="#cb21-13"></a>p1<span class="sc">+</span>p2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="Chapter08_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch quarto-figure-center"><ul>
+<img data-src="Chapter08_files/figure-revealjs/unnamed-chunk-18-1.png" width="960" class="r-stretch quarto-figure-center"><ul>
 <li>Interaction effect may be present</li>
 </ul>
 </section>
 <section id="two-way-model-fit-1" class="slide level2">
 <h2>Two-way model fit</h2>
 <blockquote>
-<p>observation = mean + row effect + column effect +interaction effect + error</p>
+<p>observation = mean + Factor A + Factor B + interaction effect + error</p>
 </blockquote>
 <ul>
 <li><p>The above model is known as <code>multiplicative</code> model</p></li>
 <li><p>If interaction effect is ignored, we deal with an <code>additive</code> model</p></li>
 </ul>
 <p>Example: zooplankton data</p>
+</section>
+<section id="two-way-model-fit-2" class="slide level2">
+<h2>Two-way model fit</h2>
 <div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>zooplankton <span class="sc">|&gt;</span> </span>
+<span id="cb22-2"><a href="#cb22-2"></a>  <span class="fu">mutate</span>(<span class="at">Supplement =</span> <span class="fu">factor</span>(Supplement)) <span class="sc">|&gt;</span> </span>
+<span id="cb22-3"><a href="#cb22-3"></a>  <span class="fu">aov</span>(<span class="at">formula =</span> Zooplankton <span class="sc">~</span> Supplement <span class="sc">*</span> Lake) <span class="sc">|&gt;</span> </span>
+<span id="cb22-4"><a href="#cb22-4"></a>  <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                Df Sum Sq Mean Sq F value Pr(&gt;F)  
 Supplement       2 1918.5   959.2   9.253 0.0147 *
@@ -646,7 +1072,51 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <section id="residual-diagnostics" class="slide level2">
 <h2>Residual diagnostics</h2>
 
-<img data-src="Chapter08_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="Chapter08_files/figure-revealjs/unnamed-chunk-20-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<section id="interpreting-interactions" class="slide level2">
+<h2>Interpreting interactions</h2>
+<ul>
+<li><p>If an interaction term is significant, the effect of Factor A <strong>depends</strong> on Factor B (and vice versa)</p></li>
+<li><p>Use interaction plots to visualize</p></li>
+<li><p>Posthoc tests to examine different level combinations</p></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">TukeyHSD</span>(modl)<span class="sc">$</span><span class="st">`</span><span class="at">Supplement:Lake</span><span class="st">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                       diff        lwr       upr      p adj
+2:Dennison-1:Dennison  11.5 -29.021538 52.021538 0.85366635
+3:Dennison-1:Dennison  -1.5 -42.021538 39.021538 0.99998404
+1:Rose-1:Dennison     -10.0 -50.521538 30.521538 0.90834374
+2:Rose-1:Dennison      28.0 -12.521538 68.521538 0.19396469
+3:Rose-1:Dennison     -16.0 -56.521538 24.521538 0.64065141
+3:Dennison-2:Dennison -13.0 -53.521538 27.521538 0.78826884
+1:Rose-2:Dennison     -21.5 -62.021538 19.021538 0.38790493
+2:Rose-2:Dennison      16.5 -24.021538 57.021538 0.61553864
+3:Rose-2:Dennison     -27.5 -68.021538 13.021538 0.20490820
+1:Rose-3:Dennison      -8.5 -49.021538 32.021538 0.94964396
+2:Rose-3:Dennison      29.5 -11.021538 70.021538 0.16443780
+3:Rose-3:Dennison     -14.5 -55.021538 26.021538 0.71593144
+2:Rose-1:Rose          38.0  -2.521538 78.521538 0.06517642
+3:Rose-1:Rose          -6.0 -46.521538 34.521538 0.98804470
+3:Rose-2:Rose         -44.0 -84.521538 -3.478462 0.03503205</code></pre>
+</div>
+</div>
+</section>
+<section id="importance-of-interactions" class="slide level2">
+<h2>Importance of interactions</h2>
+<ul>
+<li><p>When you have statistically significant interaction effects, you can’t interpret the main effects without considering the interactions</p></li>
+<li><p>Interactions can be used to control for unhelpful variation (blocking effect in experiments)</p></li>
+<li><p>Interactions can be mechanistically meaningful</p></li>
+</ul>
+</section>
+<section id="anova-extensions-and-inference" class="slide level2">
+<h2>ANOVA extensions and inference</h2>
+<p>Linear models can theoretically be performed with an infinite amount of predictors</p>
+<p>The more predictors the more samples needed, your effect sample number is no longer your total sample size but the lowest treatment</p>
+<p>Interaction effects with more than 3 (sometimes even more than 2) become very difficult to interpret and visualize</p>
+<p>Good experimental design and causal thinking can aid in analysis design, design test then collect data, it is much harder the other way around</p>
+</section>
 <section id="indicator-variables" class="slide level2">
 <h2>Indicator variables</h2>
 <ul>
@@ -686,8 +1156,36 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <section id="regression-summary" class="slide level2">
 <h2>Regression summary</h2>
 <ul>
-<li>Regress the burn-time response on the indicator variables <span class="math inline">\(I_1\)</span>, <span class="math inline">\(I_2\)</span> &amp; <span class="math inline">\(I_3\)</span></li>
+<li>Regress the burn-time response on the indicator variables <span class="math inline">\(I_1\)</span>,<span class="math inline">\(I_2\)</span>, <span class="math inline">\(I_3\)</span> &amp; <span class="math inline">\(I_4\)</span></li>
 </ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>   burntime   fabric I1 I2 I3 I4
+1      17.8 Fabric 1  1  0  0  0
+2      16.2 Fabric 1  1  0  0  0
+3      17.5 Fabric 1  1  0  0  0
+4      17.4 Fabric 1  1  0  0  0
+5      15.0 Fabric 1  1  0  0  0
+6      11.2 Fabric 2  0  1  0  0
+7      11.4 Fabric 2  0  1  0  0
+8      15.8 Fabric 2  0  1  0  0
+9      10.0 Fabric 2  0  1  0  0
+10     10.4 Fabric 2  0  1  0  0
+11     11.8 Fabric 3  0  0  1  0
+12     11.0 Fabric 3  0  0  1  0
+13     10.0 Fabric 3  0  0  1  0
+14      9.2 Fabric 3  0  0  1  0
+15      9.2 Fabric 3  0  0  1  0
+16     14.9 Fabric 4  0  0  0  1
+17     10.8 Fabric 4  0  0  0  1
+18     12.8 Fabric 4  0  0  0  1
+19     10.7 Fabric 4  0  0  0  1
+20     10.7 Fabric 4  0  0  0  1</code></pre>
+</div>
+</div>
+</section>
+<section id="regression-and-anova" class="slide level2">
+<h2>Regression and ANOVA</h2>
 <div class="cell" data-layout-align="center">
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -725,7 +1223,49 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 </section>
+<section id="regression-and-anova-1" class="slide level2">
+<h2>Regression and ANOVA</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>fabric <span class="sc">|&gt;</span> <span class="fu">lm</span>(<span class="at">formula =</span> burntime<span class="sc">~</span>I1<span class="sc">+</span>I2<span class="sc">+</span>I3) <span class="sc">|&gt;</span> <span class="fu">anova</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Response: burntime
+          Df  Sum Sq Mean Sq F value    Pr(&gt;F)    
+I1         1 111.521 111.521 38.5718 1.248e-05 ***
+I2         1   1.408   1.408  0.4871    0.4952    
+I3         1   7.569   7.569  2.6179    0.1252    
+Residuals 16  46.260   2.891                      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<ul>
+<li>Compare with the one-way output</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = burntime ~ fabric, data = fabric)
+
+$fabric
+                   diff      lwr      upr     p adj
+Fabric 2-Fabric 1 -5.02 -8.09676 -1.94324 0.0013227
+Fabric 3-Fabric 1 -6.54 -9.61676 -3.46324 0.0000851
+Fabric 4-Fabric 1 -4.80 -7.87676 -1.72324 0.0019981
+Fabric 3-Fabric 2 -1.52 -4.59676  1.55676 0.5094118
+Fabric 4-Fabric 2  0.22 -2.85676  3.29676 0.9968426
+Fabric 4-Fabric 3  1.74 -1.33676  4.81676 0.3968476</code></pre>
+</div>
+</div>
+</section>
 <section id="analysis-of-covariance-ancova" class="slide level2">
+<h2>Analysis of Covariance (ANCOVA)</h2>
+<p>Analysis of covariance (ANCOVA) is a statistical method that combines linear regression and analysis of variance (ANOVA) to evaluate the relationship between a response variable and various independent variables while controlling for covariates.</p>
+</section>
+<section id="analysis-of-covariance-ancova-1" class="slide level2">
 <h2>Analysis of Covariance (ANCOVA)</h2>
 <ul>
 <li>Indicator variables are used as additional regressors along with a quantitative predictor (covariate).</li>
@@ -755,10 +1295,13 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <li>Plot of data. Do we need three separate models?</li>
 </ul>
 
-<img data-src="Chapter08_files/figure-revealjs/unnamed-chunk-13-1.png" width="960" class="r-stretch quarto-figure-center"><ul>
-<li>ANCOVA fit</li>
-</ul>
+<img data-src="Chapter08_files/figure-revealjs/unnamed-chunk-28-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<section id="ancova-fit" class="slide level2">
+<h2>ANCOVA fit</h2>
 <div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>restaurant <span class="sc">|&gt;</span> </span>
+<span id="cb33-2"><a href="#cb33-2"></a>  <span class="fu">lm</span>(<span class="at">formula =</span> Sales<span class="sc">~</span>Households<span class="sc">*</span>Location) <span class="sc">|&gt;</span> </span>
+<span id="cb33-3"><a href="#cb33-3"></a>  <span class="fu">summary</span>() <span class="sc">|&gt;</span> <span class="fu">coef</span>() <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="at">digits=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                          Estimate Std. Error t value Pr(&gt;|t|)
 (Intercept)                 -6.203     11.818  -0.525    0.611
@@ -770,11 +1313,16 @@ Households:LocationStreet   -0.012      0.101  -0.120    0.907</code></pre>
 </div>
 </div>
 </section>
+<section id="ancova-fit-1" class="slide level2">
+<h2>ANCOVA fit</h2>
+
+<img data-src="Chapter08_files/figure-revealjs/unnamed-chunk-30-1.png" width="960" class="r-stretch quarto-figure-center"><ul>
+<li><p>In order to allow for different slopes for each location, we define the product (or interaction) variables <span class="math inline">\(I_1*X\)</span>, and <span class="math inline">\(I_2*X\)</span> (<span class="math inline">\(X\)</span> being the covariate, Households)</p></li>
+<li><p>Location is categorical with levels Mall, Street, and Highway</p></li>
+</ul>
+</section>
 <section id="explanation-of-fit" class="slide level2">
 <h2>Explanation of fit</h2>
-<ul>
-<li>In order to allow for different slopes for each location, we define the product (or interaction) variables <span class="math inline">\(I_1*X\)</span>, and <span class="math inline">\(I_2*X\)</span> (<span class="math inline">\(X\)</span> being the covariate, Households)</li>
-</ul>
 <div class="cell" data-layout-align="center">
 <div class="cell-output cell-output-stdout">
 <pre><code>            Estimate Std. Error t value Pr(&gt;|t|)
@@ -798,20 +1346,152 @@ X:I2          -0.012      0.101  -0.120    0.907</code></pre>
 <section id="graphing-the-model" class="slide level2">
 <h2>Graphing the model</h2>
 
-<img data-src="Chapter08_files/figure-revealjs/unnamed-chunk-16-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="Chapter08_files/figure-revealjs/unnamed-chunk-32-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="summary" class="slide level2">
 <h2>Summary</h2>
-<p>ANOVA models study categorical predictors (factors). - Interaction between factors is important. - ANOVA models and regression models are related and fall under a general family of linear models.</p>
+<p>ANOVA models study categorical predictors (factors).</p>
+<pre><code>-   Interaction between factors is important. 
+-   ANOVA models and regression models are related and fall under a general family of linear models.</code></pre>
 <p>ANCOVA models employs both numerical variables (covariates) and qualitative factors for modelling.</p>
+<pre><code>-   Interaction between factors and covariates is important.</code></pre>
+</section>
+<section id="linear-models" class="slide level2">
+<h2>Linear models</h2>
+<p>Family tree</p>
+<p>T-tests, regressions, ANOVAs, and ANCOVAs are related</p>
+<p>Similarities:</p>
+<pre><code>-   1 continuous response variable
+-   Assumptions: normality, equal variance, and independence of residuals</code></pre>
+<p>Differences:</p>
+<pre><code>- EDA
+- test statistics
+- number and type of predictors</code></pre>
+</section>
+<section id="whats-the-difference-between-a-t.test-and-an-anova" class="slide level2">
+<h2>What’s the difference between a t.test and an ANOVA?</h2>
+<p>A t-test is used to determine whether or not there is a statistically significant difference between the means of two groups</p>
 <ul>
-<li>Interaction between factors and covariates is important.</li>
+<li>sample group vs hypothetical population <strong>One-sample t-test</strong></li>
+<li>two independent samples <strong>Two-sample t-test</strong>
+<ul>
+<li>also called independent t-test because the two samples are considered independent</li>
+</ul></li>
+<li>samples linked in some why, not independent <strong>Paired t-test</strong></li>
+</ul>
+<p>An ANOVA is used to determine whether or not there is a statistically significant difference between the means of three or more groups, <strong>but not which group</strong></p>
+<ul>
+<li>one factor split into 3 or more groups (levels) <strong>One-way ANOVA</strong></li>
+<li>two factors split into 3 or more groups (levels) <strong>Two-way ANOVA</strong></li>
+<li>more than two factors <strong>Three factor ANOVA</strong> etc…</li>
 </ul>
 </section>
-<section id="shiny-apps" class="slide level2">
-<h2>Shiny apps</h2>
-<p>https://shiny.massey.ac.nz/anhsmith/demos/explore.simple.experimental.ANOVA.models/</p>
-<p>https://shiny.massey.ac.nz/anhsmith/demos/fit.multiple.regression/</p>
-<!-- ## Exercises -->
+<section id="whats-the-difference-between-a-t.test-and-an-anova-1" class="slide level2">
+<h2>What’s the difference between a t.test and an ANOVA?</h2>
+<p>The main difference between a t-test and an ANOVA is in how the two tests calculate their test statistic to determine if there is a statistically significant difference between groups.</p>
+<p>T-test:</p>
+<ul>
+<li>T statistic: ratio of the mean difference between two groups relative to overal standard deviation of the differences</li>
+<li>One-sample t-test: <span class="math inline">\(t = \frac{x-\mu}{s/\sqrt n}\)</span></li>
+<li>Two-sample t-test: <span class="math inline">\(t = \frac{(\bar{x_{1}}-\bar{x_{2}})-d}{\frac{s_1}{\sqrt n} + \frac{s_2}{\sqrt n}}\)</span><br>
+</li>
+<li>Paired t-test: <span class="math inline">\(t=\frac{\bar{d}}{\frac{S_{d}}{\sqrt n}}\)</span></li>
+</ul>
+<p><span class="math inline">\(s =\)</span> sample standard deviation <span class="math inline">\(d =\)</span> difference</p>
+<p>ANOVA:</p>
+<ul>
+<li><p>F statistic: ratio of the variance between the groups relative to the variance within the groups<br>
+</p></li>
+<li><p><span class="math inline">\(F = \frac{s_b^2}{s_w^2}\)</span> Where <span class="math inline">\(s_b^2\)</span> is the between sample variance, and <span class="math inline">\(s_w^2\)</span> is the within sample variance.</p></li>
+<li><p>MSF/MSE</p></li>
+</ul>
+</section>
+<section id="when-to-use-a-t.test-or-an-anova" class="slide level2">
+<h2>When to use a t.test or an ANOVA?</h2>
+<p>In practice, when we want to compare the means of two groups, we use a t-test. When we want to compare the means of three or more groups, we use an ANOVA.</p>
+<p>Suppose we have three groups we wish to compare the means between: group A, group B, and group C.</p>
+<p>If you did the following t-tests:</p>
+<ul>
+<li><p>A t-test to compare the difference in means between group A and group B</p></li>
+<li><p>A t-test to compare the difference in means between group A and group C</p></li>
+<li><p>A t-test to compare the difference in means between group B and group C</p></li>
+</ul>
+</section>
+<section id="what-if-we-just-did-many-t-tests" class="slide level2">
+<h2>What if we just did many t-tests?</h2>
+<p>For each t-test there is a chance that we will commit a type I error, which is the probability that we reject the null hypothesis when it is actually true. Let’s say we set this to 0.05 (<span class="math inline">\(\alpha = 0.05\)</span>). This means that when we perform multiple t-tests, this error rate increases.</p>
+<ul>
+<li>The probability that we commit a type I error with one t-test is 1 – 0.95 = 0.05.</li>
+<li>The probability that we commit a type I error with two t-tests is 1 – (0.95^2) = 0.0975.</li>
+<li>The probability that we commit a type I error with three t-tests is 1 – (0.95^3) = 0.1427.</li>
+</ul>
+<p>The type I error just increases!</p>
+<p>We use a post-hoc (after) test to see which group is driving differences, these pairwise comparisons have a correction factor to adjust our Type I error</p>
+</section>
+<section id="whats-the-difference-between-a-regression-and-an-anova" class="slide level2">
+<h2>What’s the difference between a regression and an ANOVA?</h2>
+<p>A regression is used to understand the relationship between predictor variable(s) and a response variable</p>
+<ul>
+<li>one predictor <strong>Simple Regression</strong></li>
+<li>two or more predictors <strong>Multiple Regression</strong></li>
+</ul>
+<p>An ANOVA is used to determine whether or not there is a statistically significant difference between the means of three or more groups, <strong>but not which group</strong></p>
+<ul>
+<li>one factor split into 3 or more groups (levels) <strong>One-way ANOVA</strong></li>
+<li>two factors split into 3 or more groups (levels) <strong>Two-way ANOVA</strong></li>
+<li>more than two factors <strong>Three factor ANOVA</strong> etc…</li>
+</ul>
+<p>Not too much difference there</p>
+</section>
+<section id="whats-the-difference-between-a-regression-and-an-anova-1" class="slide level2">
+<h2>What’s the difference between a regression and an ANOVA?</h2>
+<p>Regression:</p>
+<ul>
+<li>T statistic: test if each predictor’s estimate is different from 0</li>
+<li><span class="math inline">\(R^2\)</span>: proportion of variance explained <span class="math inline">\(\frac{SSR}{SST}\)</span></li>
+<li>F statistic: overall F statistic for the regression model, <span class="math inline">\(\frac{MS_{reg}}{MS_{error}}\)</span> where <span class="math inline">\(MS = \frac{SS}{df}\)</span></li>
+</ul>
+<p>ANOVA:</p>
+<ul>
+<li>F statistic: ratio of the variance between the groups relative to the variance within the groups<br>
+</li>
+<li><span class="math inline">\(F = \frac{s_b^2}{s_w^2}\)</span></li>
+</ul>
+<p>where <span class="math inline">\(s_b^2\)</span> is the between sample variance, and <span class="math inline">\(s_w^2\)</span> is the within sample variance.</p>
+<ul>
+<li>MSF/MSE</li>
+</ul>
+<p>The F statistic is the same, thats why you can produce an ANOVA table from your regression</p>
+</section>
+<section id="when-to-use-a-regression-or-an-anova" class="slide level2">
+<h2>When to use a regression or an ANOVA?</h2>
+<p>Conventionally, a regression refers to continuous predictors and ANOVAs are used for discrete variables.</p>
+<p>BUT …</p>
+<p>You can code discrete variable as indicator variables and then treat them as continuous and run a regression!</p>
+<p>Generally, if you have 1 continuous and 1 discrete variable you should generate indicator variables and run a multiple regression</p>
+<p>If you are using the continuous predictor as a covariate it would be called an <strong>ANCOVA</strong>.</p>
+<p>You can code a discrete variable into continuous but if you do the reverse you lose statistical inference.</p>
+</section>
+<section id="reminder-on-hypotheses" class="slide level2">
+<h2>Reminder on Hypotheses</h2>
+<p>T-Test: difference between the means of two groups</p>
+<ul>
+<li>Null: <span class="math inline">\(\mu_{1} - \mu_{2}\)</span> is equal to <span class="math inline">\(0\)</span> Can be <span class="math inline">\(=\)</span>, <span class="math inline">\(\le\)</span>, or <span class="math inline">\(\ge\)</span></li>
+<li>Alt: <span class="math inline">\(\mu_{1} - \mu_{2}\)</span> is not equal to <span class="math inline">\(0\)</span> Can be <span class="math inline">\(\ne\)</span>, <span class="math inline">\(&lt;\)</span>, or <span class="math inline">\(&gt;\)</span></li>
+</ul>
+<p>Regressions: understand the relationship between predictor variable(s) and a response variable</p>
+<ul>
+<li>Null: true slope coefficient is <span class="math inline">\(= 0\)</span> (i.e.&nbsp;no relationship)</li>
+<li>Alt: true slope coefficient <span class="math inline">\(\ne 0\)</span> (i.e.&nbsp;relationship)</li>
+</ul>
+<p>ANOVA: difference between the means of three or more groups</p>
+<ul>
+<li>Null: group means are equal</li>
+<li>Alt: At least one mean is different</li>
+</ul>
+</section>
+<section id="where-to-go-from-here" class="slide level2">
+<h2>Where to go from here?</h2>
+<p>Linear models form the basis of a lot more statistics tests. <!-- ## Exercises --></p>
 <!-- download.file("https://www.massey.ac.nz/~kgovinda/220exer/Chap6moreexamples.R", destfile="Chap6moreexamples.R") -->
 <!-- download.file("https://www.massey.ac.nz/~kgovinda/220exer/chapter-6-exercises.html", destfile="chapter-6-exercises.html") -->
 <!-- install.packages("remotes") -->
