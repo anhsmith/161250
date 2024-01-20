@@ -13,7 +13,7 @@ library(tidyverse)
 
 # Horse hearts
 
-We will use again the *horses’ hearts* datasetThere are seven variables represented as columns. They comprise six ultrasound measurements and the weights of 46 horses’ hearts, specifically:
+We will use the *horses’ hearts* dataset. There are seven variables represented as columns. They comprise six ultrasound measurements and the weights of 46 horses’ hearts, specifically:
 
 
 1.	`INNERSYS` : Inner-wall ultrasound measurement in systole phase.
@@ -50,7 +50,7 @@ This plot reveals some very high correlation amongst predictors, particularly (n
 
 Let’s start by fitting the full model with all of the available predictor variables. 
 
-The forumula `WEIGHT ~ .` fits a model with `WEIGHT` as the response variable and all other variables in the data frame as predictor variables.
+The formula `WEIGHT ~ .` fits a model with `WEIGHT` as the response variable and all other variables in the data frame as predictor variables.
 
 ```{r}
 mf <- lm(WEIGHT ~ . , data = hh)
@@ -71,6 +71,7 @@ There is a lot of information in the above summary output to process. Let’s br
 3.	The `Coefficients` table provides the estimates of the model parameters. Specifically, the `Estimate` column gives us the estimates of the $\beta$-coefficients, which can be used to reconstruct the predictive formula. Here, that formula is: 
 
     $$\hat y = -1.6311 + 0.2321 × INNERSYS + 0.5195 × INNERDIA + ... + 0.3387 × EXTDIA$$
+    
     The `Std. Error` column gives the standard error for the estimates of the coefficients. That is, the expected average deviation of the estimator of the coefficient ($b$ or $\hat \beta$) from the true population parameter ($\beta$). If we were to take many samples (of size $n$) from this population, a coefficient’s standard error represents how much the estimate is expected to vary (due to sampling variation). 
 
     The `t value` is the estimate divided by its standard error, which can be used to test whether the effect of that variable is statistically different from zero. The p-value for this test is provided in the next column, headed `Pr(>|t|)`. If the p-value is low, the observed coefficient estimate is unlikely to have resulted by chance due to sampling variation if the null hypothesis ($H_0 : \beta = 0$) is true. Asterisks indicate significant results, as coded by the `Signif. codes`:  given below the table.
@@ -137,7 +138,7 @@ m3 <- update(m2, ~ . - OUTERDIA)
 drop1(m3)
 ```
 
-This time, the best model is that with none removed, so the model selection process stops there. Note that this whole process could have been done in a single line. 
+This time, the best model is that with none removed, so the model selection process stops there. Note that this whole process could have been done in a single line of code. 
 
 ```{r}
 mstep <- step(mf)
@@ -194,10 +195,10 @@ To summarise, let’s see the AIC scores for all the models we’ve made so far.
 AIC(mf, m2, m3, mstep, mstep2, mstep3)
 ```
 
-All of these models have very similar AIC. Statisticians say that AIC scores within, say, 3 points can be considered equivalent, and so often we take the approach of choosing the simplest model (i.e. that with the fewest predictors) of all those within 3 AIC points of the lowest score. So, while the `mstep3` model isn’t the absolute lowest, it is the simplest model from a bunch of models with roughly equivalent AIC scores. Also, it is a good choice because it doesn’t have the problems with severe multicollinearity found in the other models.
+All of these models have very similar AIC. Statisticians say that AIC scores within, say, 3 points can be considered equivalent, and so often we take the approach of choosing the simplest model (i.e. that with the fewest predictors) of all those within 3 AIC points of the lowest score. In some fields it is common to report all models within 10 AIC points or produce an ensemble model bases on AIC weight (not covered in this course). So, while the `mstep3` model isn’t the absolute lowest, it is the simplest model from a bunch of models with roughly equivalent AIC scores. Also, it is a good choice because it doesn’t have the problems with severe multicollinearity found in the other models.
 
 
-Don’t worry about the fact that the two functions `drop1()` and `AIC()` give different scores. Remember the AIC is a tool for comparing models—the actual scores don’t matter. If you look at the difference in AIC scores between two models from the two functions, they are the same.
+Don’t worry about the fact that the two functions `drop1()` and `AIC()` give different scores. Remember the AIC is a tool for comparing models—the actual scores don’t matter.  If you look at the difference in AIC scores between two models from the two functions, they are the same. It also should not be compared on models that have different data sources because it is unit less and only acts to compare the models in a specific set.
 
 Difference between AIC scores for `mstep2` and `mstep3` from the `drop1(mstep2)` output:
 
@@ -214,7 +215,7 @@ And from the `AIC(mf, m2, m3, mstep, mstep2, mstep3)` output:
 So now we can choose `mstep3` and clean up.
 
 ```{r}
-rm(mf, m2, m3, mstep, mstep2)
+rm(mf, m2, m3, mstep, mstep2) # this code removes these variables
 ```
 
 Let’s examine the summary for our chosen model. 
@@ -280,6 +281,14 @@ plot_ly(
   add_markers()
 ```
 
+I do not recommend 3-D plots for print reports/publications. They are often best viewed interactively. Instead try using colors or bubbles for continuous third variables and shapes or facets for discrete third variables.
+
+For example:
+
+```{r}
+hh |> ggplot(aes(y=OUTERDIA, x=INNERDIA, color=WEIGHT))+
+  geom_point()
+```
 
 # Dataset **`Prestige`**
 
@@ -289,12 +298,6 @@ We will continue to use dataset `Prestige` from the `car`	R package.
 ## Exercise 7.1 {-}
 
 Obtain the matrix plot of the numerical variables `education`, `income`, `women`, and `prestige`.
-
-Obtain their correlation matrix.
-
-Fit a (full) multiple regression of  `prestige` on `education`, `income`, & `women`. 
-
-Obtain the plots for residual diagnostics.
 
 ```{r, fig.show='hide'}
 library(car)
@@ -311,6 +314,7 @@ Prestige |>
 ```
 
 
+Obtain their correlation matrix.
 
 ```{r, fig.show='hide', results='hide'}
 # Old style pairs plot
@@ -323,19 +327,15 @@ Prestige |>
   cor()
 ```
 
-Regression outputs
+Fit a (full) multiple regression of  `prestige` on `education`, `income`, & `women`. 
 
 ```{r, results='hide'}
 full.reg <- lm(prestige ~ education + income + women,
                data = Prestige)
 
-summary(full.reg)
-
-anova(full.reg)
-
-extractAIC(full.reg)
 ```
 
+Obtain the plots for residual diagnostics.
 Residual plots
 
 ```{r, fig.show='hide'}
@@ -355,8 +355,15 @@ par(mfrow=c(2,2))
 plot(full.reg)
 ```
 
+Regression outputs
 
+```{r}
+summary(full.reg)
 
+anova(full.reg)
+
+extractAIC(full.reg)
+```
 
 ## Exercise 7.2 {-}
 

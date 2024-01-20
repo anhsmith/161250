@@ -237,7 +237,11 @@ SS
 -   $R^2_{adj}$ is adjusted to remove the variation that is explained by
     chance alone
 
--   $R^2_{adj}=1-\frac{MS~Error}{MS~Total}$
+-   $R^2_{adj}=1-\frac{MS~Error}{MS~Total}$\
+where:\
+$MS~Error$ = $frac{SSE}{n-k-1}$\
+$MS~Total$ = $frac{SST}{n-1}$\
+therefore $R^2_{adj}$ can also be written as: $R^2_{adj}=1-\frac{(1-R^2)*(n-1)}{(n-k-1)}$
 
 ## Additional variation explained
 
