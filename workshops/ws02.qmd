@@ -4,21 +4,21 @@ title: "Chapter 2 Workshop"
 
 # Dataset **`Prestige`**
 
-We will be using a well-known dataset called `Prestige` from the `car`	R package.  This dataset deals with prestige ratings of Canadian Occupations. The `Prestige` dataset has 102 rows and 6 columns. The observations are occupations.
+We will be using a well-known dataset called `Prestige` from the `car`	R package.  This dataset deals with prestige ratings of Canadian occupations. The `Prestige` dataset has 102 rows and 6 columns. Each row (or 'observation') is an occupation.
 
 This data frame contains the following columns:
 
-* **education** - Average education of occupational incumbents, years, in 1971.
+* `education` - Average education of occupational incumbents, years, in 1971.
 
-* **income** - Average income of incumbents, dollars, in 1971.
+* `income` - Average income of incumbents, dollars, in 1971.
 
-* **women** - Percentage of incumbents who are women.
+* `women` - Percentage of incumbents who are women.
 
-*  **prestige** - Pineo-Porter prestige score for occupation, from a social survey conducted in the mid-1960s.
+*  `prestige` - Pineo-Porter prestige score for occupation, from a social survey conducted in the mid-1960s.
 
-* **census** - Canadian Census occupational code.
+* `census` - Canadian Census occupational code.
 
-*  **type** - Type of occupation. A factor with levels: bc, Blue Collar; prof, Professional, Managerial, and Technical; wc, White Collar. (includes four missing values).
+*  `type` - Type of occupation. A factor with levels: bc, Blue Collar; prof, Professional, Managerial, and Technical; wc, White Collar. (includes four missing values).
 
 ```{r, echo=FALSE}
 options(warn=-1) 
@@ -29,7 +29,7 @@ options(warn=-1)
 knitr::opts_chunk$set(warning=FALSE, message=FALSE, comment=NA, fig.show = "hide")
 ```
 
-Load the data:
+First we'll load the data. The dataset sits in the `car` package, so you need to load the `car` package first.
 
 ```{r}
 #| message: false
@@ -40,7 +40,7 @@ data(Prestige)
 
 # Exercise 2.1 {-}
 
-Draw a bar chart for **type**:
+Draw a bar chart for `type`:
 
 ```{r}
 library(tidyverse)
@@ -72,15 +72,23 @@ barplot(table(Prestige$type))
 
 # Exercise 2.2 {-}
 
-Draw a histogram of **prestige**. 
+Draw a histogram of `prestige`. 
 
-Below demonstrates the flexibility of `ggplot` code. You can specify the `data` argument by piping it into `ggplot`, or by putting it as an argument to `ggplot` or a `geom_`. Likewise, the `aes` information, which determines which variables are used where, can be added as an extra line or specified inside the `ggplot` or `geom_` function.
+Below demonstrates the flexibility of `ggplot` code. You can specify the `data` argument by piping it into `ggplot`, or by putting it as an argument to `ggplot` or a `geom_`. Likewise, the `mapping` or `aes` information, which determines which variables are used where, can be added as an extra line or specified inside the `ggplot` or `geom_` function.
+
+All of these methods give the same result.
 
 ```{r, fig.show="hide"}
 
 Prestige |> 
   ggplot() +
   aes(x = prestige) +
+  geom_histogram(bins=10)
+
+ggplot(
+  data = Prestige,
+  mapping = aes(x = prestige)
+  ) +
   geom_histogram(bins=10)
 
 ggplot(Prestige) +
@@ -107,6 +115,8 @@ ggplot() +
 # hist(Prestige$prestige)
 ```
 
+We can display this information as a dot plot.
+
 ```{r}
 #| fig-height: 12
 #| output: true
@@ -122,7 +132,7 @@ Prestige |>
 
 What a mess! 
 
-We can tidy it up by ordering the professions according to prestige. First, we move the professions from rownames to a variable. Then, we `fct_reorder` the professions using `prestige`. 
+We can tidy it up by ordering the professions on the plot according to `prestige`. First, we move the professions from rownames to a variable. Then, we `fct_reorder` the professions using `prestige`. Then, the resulting data gets piped into `ggplot`.
 
 ```{r}
 #| fig-height: 12
@@ -143,7 +153,7 @@ Prestige |>
 
 # Exercise 2.3 {-}
 
-Obtain the summary statistics for **prestige**:
+Obtain some summary statistics for `prestige`. There are a few options for this.
 
 ```{r, results='hide'}
 summary(Prestige)
@@ -159,7 +169,7 @@ describeBy(education + income + women + prestige ~ type,
 
 # Exercise 2.4 {-}
 
-Obtain the boxplot of `prestige ~ type`:
+Make a boxplot of `prestige ~ type`:
 
 ```{r, fig.show="hide"}
 Prestige |> 
@@ -196,7 +206,7 @@ Prestige |>
 
 # Exercise 2.5 {-}
 
-Obtain the Empirical Cumulative Distribution Function (ECDF) graphs of **prestige ~ type**:
+Obtain the Empirical Cumulative Distribution Function (ECDF) graphs of `prestige ~ type`:
 
 ```{r, fig.show="hide"}
 Prestige |> 
@@ -260,7 +270,7 @@ library(ggExtra)
 
 p1 <- Prestige |> 
   ggplot() + 
-  aes(x=education, y=prestige) +
+  aes(x = education, y = prestige) +
   geom_point() + 
   geom_smooth(col = 2) + 
   geom_smooth(method = "lm", se = FALSE)

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.353">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -109,7 +109,8 @@ div.csl-indent {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
@@ -1657,7 +1658,7 @@ Replications: 10000
 
 Summary Statistics:
      Observed       SE     Mean      Bias
-mean 1729.283 82.79376 1728.265 -1.017522</code></pre>
+mean 1729.283 82.68481 1729.437 0.1542674</code></pre>
 </div>
 </div>
 <p>This output shows the observed sample mean 1729.283 and the mean of all bootstrap means which is 1729.114. The bias is the difference, which is -0.168. The main advantage of the bootstrap method is that it can quantify the bias that can occur due to sampling. <a href="#fig-bootc">Figure&nbsp;18</a> and <a href="#fig-bootqq">Figure&nbsp;19</a>, respectively, show the histogram and the normal quantile plots for the bootstrap means. Obviously the bootstrap means follow normal (due to CLT).</p>
@@ -1697,7 +1698,7 @@ mean 1729.283 82.79376 1728.265 -1.017522</code></pre>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>         2.5%    97.5%
-mean 1560.537 1898.028</code></pre>
+mean 1560.759 1897.806</code></pre>
 </div>
 </div>
 <p>This interval compares well with the confidence interval using t-distribution found earlier namely (1560.633, 1897.932). The same approach can be taken to construct a confidence interval for the mean of the paired differences and thereby perform a test analogous to paired t-test. See the <em>testsmarks</em> data example given below:</p>
@@ -1710,7 +1711,7 @@ mean 1560.537 1898.028</code></pre>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>          2.5%    97.5%
-mean -4.191825 4.941825</code></pre>
+mean -4.154133 4.904133</code></pre>
 </div>
 </div>
 <p>The parametric (i.e.&nbsp;t-test based) and bootstrap results are very similar. The bootstrap method can obtain better confidence intervals for the mean when the population is skewed because resampling tends to adjust for the skew in the population when captured by the sample well. The bootstrap approach will work well only when reasonably large sample sizes are available because of the inherent uncertainty in the tails of the underlying distribution. Small samples are not sufficient to identify capture the tails of the distribution and hence certain types of inferences involving tail part of distribution will not work well. Parametric assumptions can be made to improve the bootstrap method and this approach is known as parametric bootstrapping. We will not study such methods in this course.</p>
@@ -1723,7 +1724,7 @@ mean -4.191825 4.941825</code></pre>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>               2.5%    97.5%
-mean: 1-2 -474.8867 230.7998</code></pre>
+mean: 1-2 -472.3922 228.3053</code></pre>
 </div>
 </div>
 <p>The bootstrap test conclusion again agrees with the Welch two-sample t-test conclusion.</p>

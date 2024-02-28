@@ -14,65 +14,35 @@ colorize <- function(x, color) {
   } else x
 }
 
-
 ```
 
-::: {.callout-tip}
 
-You are NOT expected to become an expert in R programming or required to be one for doing this course.
+In this course, we will be using R <https://www.r-project.org/>, an open-source (i.e., free) software package for data analysis. This software is available for essentially all computing platforms (e.g. Windows, Linux, Unix, Mac) is maintained and developed by a huge community of users including many of the world's foremost statisticians.
 
-Feel free to post your queries regarding R and RStudio on the class discussion forum on Stream.
-
-:::
-
-
-R <https://www.r-project.org/> is an open-source (i.e., free) software
-package. This software is available for essentially all computing
-platforms (e.g. Windows, Linux, Unix, Mac) is maintained and developed
-by an energetic community of users including many of the world's
-foremost statisticians.
-
-R is also a programming language but you may not be required to do a lot
-of programming for your course work. R includes functions which enables
-us to perform a full range of statistical analyses.
+R is a programming language but you may not be required to do a lot of programming for your course work. R includes functions which enables us to perform a full range of statistical analyses.
 
 **For installing R software, please visit
 <https://cran.stat.auckland.ac.nz/> and follow the instructions.**
 
-Note that the R software will be sitting in the background in RStudio
-and you will not be using it directly for this course.
+Note that the R software will be sitting in the background in RStudio and you will not be using the standalone version of R in this course. 
 
-RStudio <https://www.rstudio.com/products/rstudio/> is an integrated
-development environment (IDE) for R. It includes a console,
-syntax-highlighting editor (as well as to quickly jump to R function
-definitions) that supports direct R code execution. It also contains
-tools for plotting, history, debugging, workspace and project
-management. RStudio has many other features such as authoring HTML, PDF,
-Word Documents, and slide shows. In order to download RStudio (Desktop
-edition, open source), go to
+RStudio <https://www.rstudio.com/products/rstudio/> is an integrated development environment (IDE) for R. It includes a console and a sophisticated code editor. It also contains tools for plotting, history, debugging, and management of workspaces and projects. RStudio has many other features such as authoring HTML, PDF, Word Documents, and slide shows. In order to download RStudio (Desktop edition, open source), go to
 
 <https://www.rstudio.com/products/rstudio/download/>
 
-Download the installation file and run it. **Note that RStudio must be
-installed after installing R.**
+Download the installation file and run it. **Note that RStudio must be installed after installing R.**
 
 R/RStudio can also be used using the cloud platform at
 <https://rstudio.cloud/> after creating a *free* account but
-occasionally some of the packages covered in this course may fail to
-work in the cloud platform.
+occasionally some of the packages covered in this course may fail to work in the cloud platform.
 
-If you open RStudio, you will see something similar to the screen shot
-shown in @fig-rstud:
+If you open RStudio, you will see something similar to the screen shot shown in @fig-rstud:
 
 ![An RStudio window](img/Rstudio.png){#fig-rstud}
 
-RStudio has many options, such as uploading files to a server, creating
-documents etc. You will be using only a few of the options. You will
-*not* be using the menus such as *Build*, *Debug*, *Profile* at all in
-this course.
+RStudio has many options, such as uploading files to a server, creating documents, etc. You will be using only a few of the options. You will *not* be using the menus such as *Build*, *Debug*, *Profile* at all in this course.
 
-You can either type or copy and paste the R codes appearing in this
-section on to the R Script window and run them.
+You can either type or copy and paste the R codes appearing in this section on to the R Script window and run them.
 
 # Some `R` basics {.unnumbered}
 
@@ -92,15 +62,11 @@ section on to the R Script window and run them.
 
 *Working directory*
 
-In RStudio, set the working directory under the *Session* menu. It is a
-good idea to start your analysis as a new project in the File menu so
-that the entire work and data files can be saved and re-opened easily
-later on.
+In RStudio, set the working directory under the *Session* menu. It is a good idea to start your analysis as a new project in the File menu so that the entire work and data files can be saved and re-opened easily later on.
 
 *R/RStudio as a calculator*
 
-*In RStudio, use the File \>\> New File \>\> R Script menu to type or
-copy and paste the commands and execute them*
+*In RStudio, use the File \>\> New File \>\> R Script menu to type or copy and paste the commands and execute them*
 
 Type `1+1` to see `2` on the console (or `->Run` the code in RStudio).
 
@@ -114,8 +80,7 @@ Type `a=1;b=2;a/b` to see `0.5`.
 a=1;b=2;a/b
 ```
 
-Note that semicolon separates various commands. It is optional to use
-them as long as you type the commands one by one as follows:
+Note that semicolon separates various commands. It is optional to use them as long as you type the commands one by one as follows:
 
 ```{r}
 a=1
@@ -128,33 +93,23 @@ There are many built-in functions. Try the following.
 `27^3` `sqrt(10)` `round(sqrt(10),2)` `abs(-4)` `log(10)` `exp(10)`
 `rnorm(100)` `mean(rnorm(100))` `sd(rnorm(100))`
 
-You may wonder what was the base used for `log(10)`. A help on this can
-be obtained by placing a question mark (`?`) before log as `?log` or by
+You may wonder what was the base used for `log(10)`. A help on this can be obtained by placing a question mark (`?`) before log as `?log` or by `help(log)`
 
-**help(log)**
+There are a few exceptions. The command `?if` wont work but `?"if"` will. In other words, `?"log"` or `help("log")` are safer ways of getting help on "built-in" functions.
 
-There are a few exceptions. The command `?if` wont work but `?"if"`
-will. In other words, `?"log"` or `help("log")` are safer ways of
-getting help on "built-in" functions.
-
-`r colorize("In RStudio, use the R Editor (menu *File > New Script*) to type the commands and submit them (shortcut: *CNTRL+R*). ", "red")`
+In RStudio, use the R Editor (menu *File > New Script*) to type the commands and submit them (shortcut: *CNTRL+R*).`
 
 *Default examples*
 
-The command `example()` will produce the available HELP examples, and
-will work for most functions. For example, try `example(boxplot)`. You
-will see many boxplot examples such as the following:
+The command `example()` will produce the available HELP examples, and will work for most functions. For example, try `example(boxplot)`. You will see many boxplot examples such as the following:
 
 ```{r}
 boxplot(count ~ spray, data = InsectSprays, col = "lightgray")
 ```
 
-There are also demos available, explore using the command `demo()`. The
-basic R system produces somewhat old style graphs.
+There are also demos available, explore using the command `demo()`. The basic R system produces somewhat old style graphs.
 
-[So we will be largely using the newer plotting system **ggplot** which
-is part of the `tidyverse` suite of packages; see
-<https://www.tidyverse.org/>.]{style="color: red;"} 
+So we will be largely using the newer plotting system **ggplot** which is part of the `tidyverse` suite of packages; see <https://www.tidyverse.org/>.
 
 Let's load that package now:
 
@@ -163,11 +118,7 @@ Let's load that package now:
 library(tidyverse)
 ```
 
-A huge number of other dedicated packages are available to improve the
-power of R. Many R packages are hosted at a repository called CRAN
-(*C*omprehensive *R* *A*rchive *N*etwork). The package install option
-within RStudio can download and install these optional packages under
-the menu `Packages >> Install`. You can also do this using the command
+A huge number of other dedicated packages are available to improve the power of R. Many R packages are hosted at a repository called CRAN (*C*omprehensive *R* *A*rchive *N*etwork). The package install option within RStudio can download and install these optional packages under the menu `Packages >> Install`. You can also do this using the command
 `install.packages`. For example
 
 `install.packages(c("tidyverse", "car"), dependencies = TRUE)`
@@ -175,14 +126,13 @@ the menu `Packages >> Install`. You can also do this using the command
 This command installs two packages `tidyverse` and `car` in one go.
 
 Contributed R packages are grouped in various headings at
-<https://cran.r-project.org/web/views/>. They can be installed in bulk
-using the `ctv` package command `install.views()`.
+<https://cran.r-project.org/web/views/>. They can be installed in bulk using the `ctv` package command `install.views()`.
 
 You might have to install quite a few packages as you work through this course.
 
 # Quarto {.unnumbered}
 
-I encourage you to get into the habit of using [Quarto](https://quarto.org/) `*.qmd` files rather than raw `*.R` files. If you've heard of Rmarkdown, Quarto is the successor to Rmarkdown. So, if you're just starting to use R, then you should begin with Quarto rather than Rmarkdown, because most/all new development will be going into Quarto.
+I encourage you to get into the habit of using [Quarto](https://quarto.org/) `*.qmd` files rather than raw `*.R` files. Heard of Rmarkdown? Well, Quarto is the successor to Rmarkdown. So, if you're just starting to use R, then you should begin with Quarto rather than Rmarkdown, because most/all new development will be going into Quarto.
 
 Quarto files contain text and code, and can be 'knitted' to produce a nicely formatted document, usually in HTML or PDF format, containing sections, text, code, plots, and output. Quarto can also be used to make websites; in fact, the website for this course was made using Quarto.
 
@@ -203,10 +153,7 @@ If you're using R projects and GitHub, this online book is a great place to star
 
 # Loading/Importing Data {.unnumbered}
 
-Most data sets we shall consider in this course are in a tabular form.
-This means that each variable is a column, each row is an observation,
-columns are separated by white space (or comma), and each column or row
-may have a name. 
+Most data sets we shall consider in this course are in a tabular form. This means that each variable is a column, each row is an observation, columns are separated by white space (or comma), and each column or row may have a name. 
 
 If the data file is stored locally, you should put the data into the same directory as your Quarto or R markdown script. That way, you can (usually) load it easily without having to type the full pathway (e.g., `mydata.csv` rather than `C:/Users/anhsmith/Work/Project1/data/mydata.csv`). Better yet, [Projects](https://r4ds.hadley.nz/workflow-scripts#projects) make this much easier.
 
@@ -241,9 +188,7 @@ available at
 
 <https://rs.figshare.com/ndownloader/files/22850096>
 
-Note that Excel files usually contain blanks for missing or unreported
-data or allocate many rows for variable description, which can cause
-issues while importing them.
+Note that Excel files usually contain blanks for missing or unreported data or allocate many rows for variable description, which can cause issues while importing them.
 
 Native R data, stored as `*.RData` or `*.rds` files, can be loaded using the `load()` or `readRDS()` functions, respectively.
 
@@ -253,9 +198,7 @@ SQLite is a public-domain, light-weight database engine (https://sqlite.org/abou
 # Graphing with `ggplot2` {.unnumbered}
 
 The R library `ggplot2` is very powerful for plotting but
-`r colorize("you may find the syntax little strange.", "red")` There are
-plenty of examples at the [`ggplot2` online help
-website](https://ggplot2.tidyverse.org/reference/). The `ggplot2` package is loaded as part of the `tidyverse` set of packages.
+you may find the syntax little strange. There are plenty of examples at the [`ggplot2` online help website](https://ggplot2.tidyverse.org/reference/). The `ggplot2` package is loaded as part of the `tidyverse` set of packages.
 
 Advantages of `ggplot2` are the following:
 
@@ -961,26 +904,32 @@ abline(st.line.model)
 
 ## Data Quality Checks {.unnumbered}
 
-It is a good idea to check the quality of secondary data sourced from
-elsewhere. For example, there could be missing values in the dataset.
-Consider the Telomeres data downloaded from
+It is a good idea to check the quality of secondary data sourced from elsewhere. For example, there could be missing values in the dataset. Consider the Telomeres data downloaded from
 <http://www.massey.ac.nz/~anhsmith/data/rsos192136_si_001.xlsx>
 
 ```{r}
-#| eval: false
+# #| eval: false
+# url <- "http://www.massey.ac.nz/~anhsmith/data/rsos192136_si_001.xlsx"
+# destfile <- "rsos192136_si_001.xlsx"
+# # 
+# download.file(url, destfile)
+
+```
+
+```{r}
 url <- "http://www.massey.ac.nz/~anhsmith/data/rsos192136_si_001.xlsx"
 destfile <- "rsos192136_si_001.xlsx"
 
-download.file(url, destfile)
+curl::curl_download(url, destfile)
 ```
+
 
 ```{r}
 library(readxl)
 rsos192136_si_001 <- read_excel("rsos192136_si_001.xlsx")
 ```
 
-The missingness of data can be quickly explored using many R packages.
-The downloaded Telomeres dataset contain many missing values.
+The missingness of data can be quickly explored using many R packages. The downloaded Telomeres dataset contain many missing values.
 
 ```{r, results='hide'}
 library(VIM)
