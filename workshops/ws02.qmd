@@ -7,22 +7,27 @@ title: "Chapter 2 Workshop"
 It is a good idea to get into the habit of using Quarto projects, rather than just R scripts. Here is a step-by-step guide to creating a project for your workshops. You don't have to use projects, but they are very useful. 
 
 1. Open RStudio. (Optional: click on the little window symbol at the top and select "Console on Right")
+
 ![](img/console_right.png)
 
 2. If you haven't already, make a directory on your computer where you want to keep your code for this course. 
 
-3. Make a new project. Select the "Project" button at the top-right of Rstudio, and select "New Project...". \\
+3. Make a new project. Select the "Project" button at the top-right of Rstudio, and select "New Project...".
+
 ![](img/open_project.png)
 
 4. In the pop-up window:
 
 - Select "New Directory"
+
 ![](img/new_direct.png)
 
 - Select "Quarto Project"
+
 ![](img/quarto_proj.png)
 
 - Choose your directory via the "Browse", and then give the project a name like "161250_workshops"
+
 ![](img/dir_name.png)
 
 - Finish by clicking on "Create Project". 
@@ -41,19 +46,7 @@ Now you have a document for your Workshop 2 work. You can:
 
 Like so:
 
-    `````{verbatim}
-  
-    # Heading 
-  
-    normal text
-  
-    ```{r}
-  
-    # this is a code chunk -- R code goes here
-
-    ```
-  
-    `````
+![](img/chunk.png)
 
 There are lots of tutorials online covering the basics of Quarto, and we'll discuss them during our own workshops. Here are a couple for starters:
 
