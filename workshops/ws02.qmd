@@ -2,9 +2,75 @@
 title: "Chapter 2 Workshop"
 ---
 
+# Setting up a Quarto project
+
+It is a good idea to get into the habit of using Quarto projects, rather than just R scripts. Here is a step-by-step guide to creating a project for your workshops. You don't have to use projects, but they are very useful. 
+
+1. Open RStudio. (Optional: click on the little window symbol at the top and select "Console on Right")
+![](img/console_right.png)
+
+2. If you haven't already, make a directory on your computer where you want to keep your code for this course. 
+
+3. Make a new project. Select the "Project" button at the top-right of Rstudio, and select "New Project...". \\
+![](img/open_project.png)
+
+4. In the pop-up window:
+
+- Select "New Directory"
+![](img/new_direct.png)
+
+- Select "Quarto Project"
+![](img/quarto_proj.png)
+
+- Choose your directory via the "Browse", and then give the project a name like "161250_workshops"
+![](img/dir_name.png)
+
+- Finish by clicking on "Create Project". 
+
+The project should now be created, and you'll likely have an open \*.qmd file (something like "161250_workshops.qmd") in the top-right window of Rstudio. We want to make a \*.qmd file for this workshop. 
+
+5. Right-click on the qmd tab and select "Rename", and rename it "workshop2.qmd" or something similar. (Alternatively, just make a new file via the menus: *File > New File > Quarto Document*.)
+
+![](img/rename_qmd.png)
+
+Now you have a document for your Workshop 2 work. You can:
+
+- Write headings with lines beginning with "#". 
+- Write text in the main part of the document.
+- Make a code chunk for your R code using *Ctrl-Alt-i*. Write R code in the code chunks.
+
+Like so:
+
+    `````{verbatim}
+  
+    # Heading 
+  
+    normal text
+  
+    ```{r}
+  
+    # this is a code chunk -- R code goes here
+
+    ```
+  
+    `````
+
+There are lots of tutorials online covering the basics of Quarto, and we'll discuss them during our own workshops. Here are a couple for starters:
+
+<https://quarto.org/docs/get-started/hello/rstudio.html>
+
+<https://www.youtube.com/watch?v=c654j7aQjcg>
+
+There are many advantages of Quarto projects. One is that you can put datasets into the project folder, and they'll be easily accessible within your project, without having to worry about file paths. 
+
+You can easily open a recent past projects via the "Projects" button on the top-right of Rstudio. 
+
+
 # Dataset **`Prestige`**
 
-We will be using a well-known dataset called `Prestige` from the `car`	R package.  This dataset deals with prestige ratings of Canadian occupations. The `Prestige` dataset has 102 rows and 6 columns. Each row (or 'observation') is an occupation.
+As you work through this workshop, you can copy the code and paste it into a code chunk. Write notes and observations to your self as you go. 
+
+We will be using a well-known dataset called `Prestige` from the `car`	R package. This dataset deals with prestige ratings of Canadian occupations. The `Prestige` dataset has 102 rows and 6 columns. Each row (or 'observation') is an occupation.
 
 This data frame contains the following columns:
 
@@ -40,7 +106,7 @@ data(Prestige)
 
 # Exercise 2.1 {-}
 
-Draw a bar chart for `type`:
+Draw a bar chart for `type`. These plots show the count or relative frequency of blue collar (`bc`), professional (`prof`), and white collar (`wc`) professions in the dataset. 
 
 ```{r}
 library(tidyverse)
@@ -68,6 +134,7 @@ Or with old-style R plot
 library(car)
 barplot(table(Prestige$type))
 ```
+
 
 
 # Exercise 2.2 {-}
