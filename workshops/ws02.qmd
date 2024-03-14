@@ -136,9 +136,26 @@ Draw a histogram of `prestige`.
 
 Below demonstrates the flexibility of `ggplot` code. You can specify the `data` argument by piping it into `ggplot`, or by putting it as an argument to `ggplot` or a `geom_`. Likewise, the `mapping` or `aes` information, which determines which variables are used where, can be added as an extra line or specified inside the `ggplot` or `geom_` function.
 
-All of these methods give the same result.
 
-```{r, fig.show="hide"}
+```{r}
+Prestige |> 
+  ggplot() +
+  aes(x = prestige) +
+  geom_histogram()
+```
+
+Now, this histogram, where the number of bins has been chosen for us, looks a bit "spiky" to my eye. You can control the number of bins by adding an argument `bins = 10`. 
+
+```{r}
+Prestige |> 
+  ggplot() +
+  aes(x = prestige) +
+  geom_histogram(bins=10)
+```
+
+`ggplot` is very flexible as to where you put the data and the `aes` information; all of these methods give the same result.
+
+```{r}
 
 Prestige |> 
   ggplot() +
@@ -162,6 +179,7 @@ ggplot() +
     bins = 10
     )
 
+
 # or
 # library(plotly)
 # p <- Prestige |> 
@@ -175,7 +193,9 @@ ggplot() +
 # hist(Prestige$prestige)
 ```
 
-We can display this information as a dot plot.
+Now let's display the prestige scores for each profession as a dot plot.
+
+Note that I'm including the code-chunk option `#| fig-height: 12` at the beginning of my code chunk so that the plot is big enough to show all the professions without overlap. 
 
 ```{r}
 #| fig-height: 12
@@ -192,7 +212,8 @@ Prestige |>
 
 What a mess! 
 
-We can tidy it up by ordering the professions on the plot according to `prestige`. First, we move the professions from rownames to a variable. Then, we `fct_reorder` the professions using `prestige`. Then, the resulting data gets piped into `ggplot`.
+We can tidy it up by ordering the professions on the plot according to `prestige`. First, we move the professions from rownames to a variable. Then, we `fct_reorder` the professions using the `prestige` scores. Then, the resulting data gets piped into `ggplot`.
+
 
 ```{r}
 #| fig-height: 12
@@ -215,7 +236,7 @@ Prestige |>
 
 Obtain some summary statistics for `prestige`. There are a few options for this.
 
-```{r, results='hide'}
+```{r}
 summary(Prestige)
 
 library(psych)
@@ -231,7 +252,7 @@ describeBy(education + income + women + prestige ~ type,
 
 Make a boxplot of `prestige ~ type`:
 
-```{r, fig.show="hide"}
+```{r}
 Prestige |> 
   ggplot() +
   aes(y=prestige, x=type) +
@@ -268,7 +289,7 @@ Prestige |>
 
 Obtain the Empirical Cumulative Distribution Function (ECDF) graphs of `prestige ~ type`:
 
-```{r, fig.show="hide"}
+```{r}
 Prestige |> 
   ggplot() + 
   aes(prestige, colour=type) +
@@ -280,9 +301,6 @@ Prestige |>
   stat_ecdf() + 
   facet_wrap(~type)
 
-# or
-library(latticeExtra)
-ecdfplot(~ prestige | type, data = Prestige)
 ```
 
 
@@ -301,6 +319,7 @@ Prestige |>
 
 ```
 
+With which plot – the ECDF or the density plot – is it easier to compare the distributions of prestige scores among these groups?
 
 # Exercise 2.6 {-}
 
@@ -325,7 +344,7 @@ quantile(Prestige$prestige, pr)
 Obtain the scatter plot (with and without marginal boxplots) **prestige vs. education **:
 
 
-```{r, fig.show="hide"}
+```{r}
 library(ggExtra)
 
 p1 <- Prestige |> 
@@ -339,7 +358,7 @@ ggMarginal(p1, type="boxplot")
 ```
 
 
-```{r, fig.show="hide"}
+```{r}
 library(car)
 
 scatterplot(education ~ prestige, data = Prestige)
@@ -351,7 +370,7 @@ The later plot will show prediction interval ribbon while the first plot will sh
 
 Obtain the bubble or balloon plot  **prestige vs. education vs. income** (income forming the bubble size):
 
-```{r, fig.show="hide"}
+```{r}
 library(ggplot2)
 
 Prestige |> 
@@ -392,7 +411,6 @@ To add axes labels and titles, try-
 
 ```{r}
 #| results: hide
-library(plotly)
 
 plot_ly(
   Prestige,
@@ -469,14 +487,17 @@ cloud(`predicted prestige` ~ income * education,
 
 # Exercise 2.10 {-}
 
-Obtain the 3-D plot  **prestige vs. education vs. income** :
+Obtain an interactive 3-D plot of **prestige vs. education vs. income** using `plotly`.
 
 
-```{r, fig.show="hide"}
-library(car)
+```{r}
+plot_ly(
+  data = Prestige,
+  x = ~education, 
+  y = ~income, 
+  z = ~prestige) |> 
+  add_markers() 
 
-scatter3d(prestige ~ education + income, 
-          data = Prestige)
 ```
 
 # Exercise 2.11 {-}
@@ -484,10 +505,10 @@ scatter3d(prestige ~ education + income,
 Create `prestige ~ education | type` graphs.  That is, `prestige ~ education` grouped by `type` as colours and/or panels.
 
 
-```{r, fig.show="hide"}
+```{r}
 Prestige |> 
   ggplot() + 
-  aes(x = education, y = prestige, color = type) +
+  aes(x = education, y = prestige, colour = type) +
   geom_point() + 
   facet_wrap(~ type)
 
@@ -504,7 +525,7 @@ Prestige |>
 ```
 
 
-```{r, fig.show="hide"}
+```{r}
 p <- Prestige |> 
   ggplot() + 
   aes(x = education, y = prestige, color = type) +
@@ -516,124 +537,6 @@ p
 #
 # library(plotly)
 # ggplotly(p)
-```
-
-
-```{r, fig.show="hide"}
-scatterplot(prestige ~ education | type, 
-            data=Prestige)
-```
-
-
-```{r, fig.show="hide"}
-xyplot(prestige ~ education | type, 
-       auto.key = TRUE, 
-       data = Prestige)
-```
-
-```{r, fig.show="hide"}
-xyplot(prestige ~ education, 
-       group = type,
-       auto.key = TRUE, 
-       data = Prestige)
-```
-
-
-<!-- ## Exercise 2.12 {-} -->
-
-<!-- Obtain the letter values and mids. vs spreads plot for `prestige`. -->
-
-
-<!-- You will need the Internet connection to source R code file. -->
-
-<!-- ```{r, echo=FALSE fig.show="hide", results="hide"} -->
-<!-- library(car) -->
-<!-- attach(Prestige) -->
-<!-- source("https://www.massey.ac.nz/~kgovinda/eda/lva.R") -->
-<!-- lva(prestige) -->
-<!-- source("https://www.massey.ac.nz/~kgovinda/eda/lval.R") -->
-<!-- lval(prestige) -->
-<!-- ``` -->
-
-<!-- Plots of letter values grouped by *type* -->
-
-<!-- ```{r, fig.show="hide", results="hide"} -->
-<!-- library(lvplot) -->
-<!-- LVboxplot(prestige~type) -->
-<!-- ``` -->
-
-
-# Exercise 2.12 {-}
-
-Time-series data EDA based on RBNZ house sales data.
-
-```{r}
-url1 <- "https://www.massey.ac.nz/~anhsmith/data/housesales.RData"
-download.file(url = url1, destfile = "housesales.RData")
-load("housesales.RData")
-```
-
-```{r}
-library(forecast)
-autoplot(housesales)
-```
-
-```{r}
-#| results: hide
-# Dynamic graphing
-# https://rstudio.github.io/dygraphs/index.html
-
-library(dygraphs)
-
-dygraph(housesales) |> 
-  dyOptions(drawPoints = TRUE)
-  
-dygraph(housesales) |> 
-  dyOptions(fillGraph=TRUE)
-```
-
-```{r}
-ggseasonplot(housesales)
-ggsubseriesplot(housesales)
-```
-
-Series Decomposition
-
-```{r}
-library(tidyverse)
-
-housesales |> 
-  decompose(type="additive")  |>   
-  forecast::autoplot() + 
-  ggtitle("")
-
-housesales |> 
-  decompose(type="multiplicative") |>   
-  forecast::autoplot() + 
-  ggtitle("")
-```
-
-
-lag & ACF plots
-
-```{r}
-gglagplot(housesales)
-gglagplot(housesales, seasonal=FALSE, lag=1)
-```
-
-```{r}
-ggAcf(housesales)
-ggPacf(housesales)
-```
-
-```{r}
-ggtsdisplay(housesales)
-```
-
-
-
-```{r, echo=FALSE}
-options(warn=0) 
 ```
 
 

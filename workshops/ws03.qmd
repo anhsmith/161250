@@ -247,39 +247,6 @@ shapiro.test(sqrt(Prestige$prestige))
 No significant departure from normality for the sqrt-transformed data.
 
 
-## Exercise 3.4 {-}
-
-Examine the fit of non-normal distributions for `prestige` scores data.
-
-## Log-normal
-
-```{r}
-library(fitdistrplus)
-
-m1 <- fitdist(Prestige$prestige, "lnorm")
-
-plot(m1)
-```
-## Gamma
-
-```{r}
-library(fitdistrplus)
-
-m2 <- fitdist(Prestige$prestige, "gamma")
-
-plot(m2)
-```
-
-
-## Weibull
-
-```{r}
-library(fitdistrplus)
-
-m3 <- fitdist(Prestige$prestige, "weibull")
-
-plot(m3)
-```
 # Answers to Exercise 3.1
 
 $X \sim \text{N}(10,4)$
