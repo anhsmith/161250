@@ -31,18 +31,24 @@ Let's consider `pnorm()`. For this function, you provide a value of `q`, along w
 
 For example, `pnorm(q = 7, mean = 5, sd = 2)` calculates the probability that a normal random variable (with mean 5 and standard deviation 2) has a value less than 7. In short, it answers the question "what is $\text{P}(X < 7)$ when $X \sim \text{N}(\mu=5, \sigma=2)$?" 
 
-Here's the distribution:
+Here's a plot of the distribution:
 
 ```{r}
+
+# create a tibble (data frame) of x values and corresponding density values
 dfs <- tibble(
-  x=seq(-2, 12, length=500), 
+  # make x a sequence of numbers going from # -2 to 12 of length 500
+  x = seq(-2, 12, length=500), 
+  # calculate the corresponding densities (height of the normal curve) for each x                               
   `f(x)` = dnorm(x, mean=5, sd=2)
   )
 
+# make an area plot of x vs f(x)
 ps <- ggplot(dfs) + 
   aes(x = x, y = `f(x)`) + 
   geom_area(alpha = 0.4) 
 
+# show the plot
 ps
 ```
 
