@@ -301,10 +301,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell" data-layout-align="center">
 <details open="">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>ele <span class="ot">&lt;-</span> <span class="fu">read_table</span>(<span class="st">"https://www.massey.ac.nz/~anhsmith/data/elephant.txt"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">"Height"</span> <span class="ot">=</span> <span class="st">`</span><span class="at">Shoulder.height</span><span class="st">`</span>) <span class="co"># renames the variable</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(ele)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>ele <span class="ot">&lt;-</span> <span class="fu">read_table</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://www.massey.ac.nz/~anhsmith/data/elephant.txt"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">"Height"</span> <span class="ot">=</span> <span class="st">`</span><span class="at">Shoulder.height</span><span class="st">`</span>) <span class="co"># renames the variable</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(ele)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>spc_tbl_ [312 × 3] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
@@ -512,7 +514,8 @@ attr(,"conf.level")
 <p>Once you have estimated the standard error, a confidence interval for a sample mean <span class="math inline">\(\bar x\)</span> is simply</p>
 <p><span class="math display">\[
 \bar x \pm t \times \text{se}
-\]</span> The <span class="math inline">\(t\)</span> value is the 0.975 quantile of the <span class="math inline">\(t\)</span> distribution with the degrees of freedom given by <span class="math inline">\(n-1\)</span>.</p>
+\]</span></p>
+<p>The <span class="math inline">\(t\)</span> value is the 0.975 quantile of the <span class="math inline">\(t\)</span> distribution with the degrees of freedom given by <span class="math inline">\(n-1\)</span>.</p>
 <div class="cell" data-layout-align="center">
 <details open="">
 <summary>Code</summary>
@@ -1018,270 +1021,280 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a><span class="co">#| message : false</span></span>
 <span id="cb41-18"><a href="#cb41-18" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb41-19"><a href="#cb41-19" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb41-20"><a href="#cb41-20" aria-hidden="true" tabindex="-1"></a><span class="fu"># Elephants</span></span>
-<span id="cb41-21"><a href="#cb41-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-22"><a href="#cb41-22" aria-hidden="true" tabindex="-1"></a><span class="fu">## Load the data</span></span>
-<span id="cb41-23"><a href="#cb41-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-24"><a href="#cb41-24" aria-hidden="true" tabindex="-1"></a>Load a dataset on elephants.</span>
-<span id="cb41-25"><a href="#cb41-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-28"><a href="#cb41-28" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb41-29"><a href="#cb41-29" aria-hidden="true" tabindex="-1"></a>ele <span class="ot">&lt;-</span> <span class="fu">read_table</span>(<span class="st">"https://www.massey.ac.nz/~anhsmith/data/elephant.txt"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb41-30"><a href="#cb41-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">"Height"</span> <span class="ot">=</span> <span class="st">`</span><span class="at">Shoulder.height</span><span class="st">`</span>) <span class="co"># renames the variable</span></span>
-<span id="cb41-31"><a href="#cb41-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-32"><a href="#cb41-32" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(ele)</span>
-<span id="cb41-33"><a href="#cb41-33" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-20"><a href="#cb41-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-21"><a href="#cb41-21" aria-hidden="true" tabindex="-1"></a><span class="fu"># Elephants</span></span>
+<span id="cb41-22"><a href="#cb41-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-23"><a href="#cb41-23" aria-hidden="true" tabindex="-1"></a><span class="fu">## Load the data</span></span>
+<span id="cb41-24"><a href="#cb41-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-25"><a href="#cb41-25" aria-hidden="true" tabindex="-1"></a>Load a dataset on elephants.</span>
+<span id="cb41-26"><a href="#cb41-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-29"><a href="#cb41-29" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-30"><a href="#cb41-30" aria-hidden="true" tabindex="-1"></a>ele <span class="ot">&lt;-</span> <span class="fu">read_table</span>(</span>
+<span id="cb41-31"><a href="#cb41-31" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://www.massey.ac.nz/~anhsmith/data/elephant.txt"</span></span>
+<span id="cb41-32"><a href="#cb41-32" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb41-33"><a href="#cb41-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">"Height"</span> <span class="ot">=</span> <span class="st">`</span><span class="at">Shoulder.height</span><span class="st">`</span>) <span class="co"># renames the variable</span></span>
 <span id="cb41-34"><a href="#cb41-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-35"><a href="#cb41-35" aria-hidden="true" tabindex="-1"></a>There are three variables: </span>
-<span id="cb41-36"><a href="#cb41-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-37"><a href="#cb41-37" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`Sex`</span>: M or F</span>
-<span id="cb41-38"><a href="#cb41-38" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`Age`</span>: in years</span>
-<span id="cb41-39"><a href="#cb41-39" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`Height`</span>: shoulder height in cm</span>
-<span id="cb41-40"><a href="#cb41-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-41"><a href="#cb41-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-42"><a href="#cb41-42" aria-hidden="true" tabindex="-1"></a><span class="fu">## Explore the distribution of heights</span></span>
+<span id="cb41-35"><a href="#cb41-35" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(ele)</span>
+<span id="cb41-36"><a href="#cb41-36" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-37"><a href="#cb41-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-38"><a href="#cb41-38" aria-hidden="true" tabindex="-1"></a>There are three variables: </span>
+<span id="cb41-39"><a href="#cb41-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-40"><a href="#cb41-40" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`Sex`</span>: M or F</span>
+<span id="cb41-41"><a href="#cb41-41" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`Age`</span>: in years</span>
+<span id="cb41-42"><a href="#cb41-42" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`Height`</span>: shoulder height in cm</span>
 <span id="cb41-43"><a href="#cb41-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-44"><a href="#cb41-44" aria-hidden="true" tabindex="-1"></a>Examine the distribution of the heights.</span>
-<span id="cb41-45"><a href="#cb41-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-48"><a href="#cb41-48" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb41-49"><a href="#cb41-49" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ele) <span class="sc">+</span> </span>
-<span id="cb41-50"><a href="#cb41-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> Height) <span class="sc">+</span></span>
-<span id="cb41-51"><a href="#cb41-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(</span>
-<span id="cb41-52"><a href="#cb41-52" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(density)) <span class="co"># this aes goes here because </span></span>
-<span id="cb41-53"><a href="#cb41-53" aria-hidden="true" tabindex="-1"></a>                                 <span class="co"># it only applies to geom_histogram</span></span>
-<span id="cb41-54"><a href="#cb41-54" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span> </span>
-<span id="cb41-55"><a href="#cb41-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>()</span>
-<span id="cb41-56"><a href="#cb41-56" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb41-57"><a href="#cb41-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-58"><a href="#cb41-58" aria-hidden="true" tabindex="-1"></a>Does that look normally distributed to you? Is it symmetrical and bell-shaped?</span>
-<span id="cb41-59"><a href="#cb41-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-60"><a href="#cb41-60" aria-hidden="true" tabindex="-1"></a>We can test whether these data conform to a normal distribution model with a Shipiro-Wilk test for normality. The null hypothesis is that the data came from a population that is normal. </span>
-<span id="cb41-61"><a href="#cb41-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-64"><a href="#cb41-64" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb41-65"><a href="#cb41-65" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(ele<span class="sc">$</span>Height)</span>
-<span id="cb41-66"><a href="#cb41-66" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb41-67"><a href="#cb41-67" aria-hidden="true" tabindex="-1"></a>The very low p-value says that we can reject the null hypothesis, and conclude that these data are very unlikely to have come from a normal distribution. </span>
-<span id="cb41-68"><a href="#cb41-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-69"><a href="#cb41-69" aria-hidden="true" tabindex="-1"></a>The data have both male and female elephants, so we should probably look at the sexes separately. </span>
+<span id="cb41-44"><a href="#cb41-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-45"><a href="#cb41-45" aria-hidden="true" tabindex="-1"></a><span class="fu">## Explore the distribution of heights</span></span>
+<span id="cb41-46"><a href="#cb41-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-47"><a href="#cb41-47" aria-hidden="true" tabindex="-1"></a>Examine the distribution of the heights.</span>
+<span id="cb41-48"><a href="#cb41-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-51"><a href="#cb41-51" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-52"><a href="#cb41-52" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ele) <span class="sc">+</span> </span>
+<span id="cb41-53"><a href="#cb41-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> Height) <span class="sc">+</span></span>
+<span id="cb41-54"><a href="#cb41-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(</span>
+<span id="cb41-55"><a href="#cb41-55" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(density)) <span class="co"># this aes goes here because </span></span>
+<span id="cb41-56"><a href="#cb41-56" aria-hidden="true" tabindex="-1"></a>                                 <span class="co"># it only applies to geom_histogram</span></span>
+<span id="cb41-57"><a href="#cb41-57" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span> </span>
+<span id="cb41-58"><a href="#cb41-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>()</span>
+<span id="cb41-59"><a href="#cb41-59" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-60"><a href="#cb41-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-61"><a href="#cb41-61" aria-hidden="true" tabindex="-1"></a>Does that look normally distributed to you? Is it symmetrical and bell-shaped?</span>
+<span id="cb41-62"><a href="#cb41-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-63"><a href="#cb41-63" aria-hidden="true" tabindex="-1"></a>We can test whether these data conform to a normal distribution model with a Shipiro-Wilk test for normality. The null hypothesis is that the data came from a population that is normal. </span>
+<span id="cb41-64"><a href="#cb41-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-67"><a href="#cb41-67" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-68"><a href="#cb41-68" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(ele<span class="sc">$</span>Height)</span>
+<span id="cb41-69"><a href="#cb41-69" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb41-70"><a href="#cb41-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-73"><a href="#cb41-73" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb41-74"><a href="#cb41-74" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ele) <span class="sc">+</span> </span>
-<span id="cb41-75"><a href="#cb41-75" aria-hidden="true" tabindex="-1"></a>   <span class="fu">aes</span>(<span class="at">x =</span> Height) <span class="sc">+</span></span>
-<span id="cb41-76"><a href="#cb41-76" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_histogram</span>(</span>
-<span id="cb41-77"><a href="#cb41-77" aria-hidden="true" tabindex="-1"></a>     <span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(density)) <span class="co"># this aes goes here because </span></span>
-<span id="cb41-78"><a href="#cb41-78" aria-hidden="true" tabindex="-1"></a>                                  <span class="co"># it only applies to geom_histogram</span></span>
-<span id="cb41-79"><a href="#cb41-79" aria-hidden="true" tabindex="-1"></a>     ) <span class="sc">+</span> </span>
-<span id="cb41-80"><a href="#cb41-80" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_density</span>() <span class="sc">+</span> </span>
-<span id="cb41-81"><a href="#cb41-81" aria-hidden="true" tabindex="-1"></a>   <span class="fu">facet_grid</span>( <span class="sc">~</span> Sex)</span>
-<span id="cb41-82"><a href="#cb41-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-83"><a href="#cb41-83" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ele) <span class="sc">+</span> </span>
-<span id="cb41-84"><a href="#cb41-84" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> Height, <span class="at">fill =</span> Sex, <span class="at">colour =</span> Sex) <span class="sc">+</span></span>
-<span id="cb41-85"><a href="#cb41-85" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> .<span class="dv">3</span>)</span>
+<span id="cb41-71"><a href="#cb41-71" aria-hidden="true" tabindex="-1"></a>The very low p-value says that we can reject the null hypothesis, and conclude that these data are very unlikely to have come from a normal distribution. </span>
+<span id="cb41-72"><a href="#cb41-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-73"><a href="#cb41-73" aria-hidden="true" tabindex="-1"></a>The data have both male and female elephants, so we should probably look at the sexes separately. </span>
+<span id="cb41-74"><a href="#cb41-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-77"><a href="#cb41-77" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-78"><a href="#cb41-78" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ele) <span class="sc">+</span> </span>
+<span id="cb41-79"><a href="#cb41-79" aria-hidden="true" tabindex="-1"></a>   <span class="fu">aes</span>(<span class="at">x =</span> Height) <span class="sc">+</span></span>
+<span id="cb41-80"><a href="#cb41-80" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_histogram</span>(</span>
+<span id="cb41-81"><a href="#cb41-81" aria-hidden="true" tabindex="-1"></a>     <span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(density)) <span class="co"># this aes goes here because </span></span>
+<span id="cb41-82"><a href="#cb41-82" aria-hidden="true" tabindex="-1"></a>                                  <span class="co"># it only applies to geom_histogram</span></span>
+<span id="cb41-83"><a href="#cb41-83" aria-hidden="true" tabindex="-1"></a>     ) <span class="sc">+</span> </span>
+<span id="cb41-84"><a href="#cb41-84" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_density</span>() <span class="sc">+</span> </span>
+<span id="cb41-85"><a href="#cb41-85" aria-hidden="true" tabindex="-1"></a>   <span class="fu">facet_grid</span>( <span class="sc">~</span> Sex)</span>
 <span id="cb41-86"><a href="#cb41-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-87"><a href="#cb41-87" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb41-88"><a href="#cb41-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-89"><a href="#cb41-89" aria-hidden="true" tabindex="-1"></a>It doesn't look like there's a major difference between the sexes in terms of the distribution of heights. Males might be a bit more variable than females (seeing the thicker tails).</span>
+<span id="cb41-87"><a href="#cb41-87" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ele) <span class="sc">+</span> </span>
+<span id="cb41-88"><a href="#cb41-88" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> Height, <span class="at">fill =</span> Sex, <span class="at">colour =</span> Sex) <span class="sc">+</span></span>
+<span id="cb41-89"><a href="#cb41-89" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> .<span class="dv">3</span>)</span>
 <span id="cb41-90"><a href="#cb41-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-91"><a href="#cb41-91" aria-hidden="true" tabindex="-1"></a>Have a look at the values of age.</span>
+<span id="cb41-91"><a href="#cb41-91" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb41-92"><a href="#cb41-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-95"><a href="#cb41-95" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb41-96"><a href="#cb41-96" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ele) <span class="sc">+</span> <span class="fu">aes</span>(Age) <span class="sc">+</span> <span class="fu">geom_bar</span>()</span>
-<span id="cb41-97"><a href="#cb41-97" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb41-98"><a href="#cb41-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-99"><a href="#cb41-99" aria-hidden="true" tabindex="-1"></a>There is a wide range of ages, from 0 to 15 years old. Many elephants (49, to be exact) are 0 or 1 year old. Are the data normal if we remove these? We'll first make a new copy of the data with the baby elephants removed and then repeat our tests for normality.</span>
-<span id="cb41-100"><a href="#cb41-100" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-103"><a href="#cb41-103" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb41-104"><a href="#cb41-104" aria-hidden="true" tabindex="-1"></a>ele2 <span class="ot">&lt;-</span> ele <span class="sc">|&gt;</span> <span class="fu">filter</span>(Age <span class="sc">&gt;</span> <span class="dv">1</span>) <span class="co"># make new dataset with babies removed</span></span>
-<span id="cb41-105"><a href="#cb41-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-106"><a href="#cb41-106" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ele2) <span class="sc">+</span></span>
-<span id="cb41-107"><a href="#cb41-107" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> Height) <span class="sc">+</span></span>
-<span id="cb41-108"><a href="#cb41-108" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_histogram</span>(</span>
-<span id="cb41-109"><a href="#cb41-109" aria-hidden="true" tabindex="-1"></a>     <span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(density)) </span>
-<span id="cb41-110"><a href="#cb41-110" aria-hidden="true" tabindex="-1"></a>                                  </span>
-<span id="cb41-111"><a href="#cb41-111" aria-hidden="true" tabindex="-1"></a>     ) <span class="sc">+</span> </span>
-<span id="cb41-112"><a href="#cb41-112" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_density</span>() </span>
-<span id="cb41-113"><a href="#cb41-113" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb41-114"><a href="#cb41-114" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-115"><a href="#cb41-115" aria-hidden="true" tabindex="-1"></a>That looks a bit more normal. </span>
-<span id="cb41-116"><a href="#cb41-116" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-119"><a href="#cb41-119" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb41-120"><a href="#cb41-120" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(ele2<span class="sc">$</span>Height)</span>
-<span id="cb41-121"><a href="#cb41-121" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb41-122"><a href="#cb41-122" aria-hidden="true" tabindex="-1"></a>Of elephants 2 years or older, there is no evidence that the heights do not come from a normal distribution (W = 1.0, p = 0.37). So, the heights of non-baby elephants appear approximately normally distributed.</span>
-<span id="cb41-123"><a href="#cb41-123" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-124"><a href="#cb41-124" aria-hidden="true" tabindex="-1"></a><span class="fu">## Confidence interval for the sample</span></span>
-<span id="cb41-125"><a href="#cb41-125" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-126"><a href="#cb41-126" aria-hidden="true" tabindex="-1"></a>Let's now estimate the population mean (with a 95% confidence interval) of <span class="in">`Heights`</span> in the dataset with the baby elephants removed.</span>
-<span id="cb41-127"><a href="#cb41-127" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-130"><a href="#cb41-130" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb41-131"><a href="#cb41-131" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(ele2<span class="sc">$</span>Height)</span>
-<span id="cb41-132"><a href="#cb41-132" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb41-133"><a href="#cb41-133" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-134"><a href="#cb41-134" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-135"><a href="#cb41-135" aria-hidden="true" tabindex="-1"></a>The <span class="in">`t.test()`</span> function is very flexible. When given a single sample, it will provide the mean and 95% confidence interval. How would you interpret this confidence interval? </span>
-<span id="cb41-136"><a href="#cb41-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-137"><a href="#cb41-137" aria-hidden="true" tabindex="-1"></a>It also provides a test of whether the mean of the sample is significantly different from zero. If the *p*-value is less than 0.05, then we can say that there is evidence against the null hypothesis of a mean of zero. Now, in this case, of course this isn't useful. Elephants can never have zero or negative height, so a mean height of zero is nonsensical. </span>
+<span id="cb41-93"><a href="#cb41-93" aria-hidden="true" tabindex="-1"></a>It doesn't look like there's a major difference between the sexes in terms of the distribution of heights. Males might be a bit more variable than females (seeing the thicker tails).</span>
+<span id="cb41-94"><a href="#cb41-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-95"><a href="#cb41-95" aria-hidden="true" tabindex="-1"></a>Have a look at the values of age.</span>
+<span id="cb41-96"><a href="#cb41-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-99"><a href="#cb41-99" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-100"><a href="#cb41-100" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ele) <span class="sc">+</span> <span class="fu">aes</span>(Age) <span class="sc">+</span> <span class="fu">geom_bar</span>()</span>
+<span id="cb41-101"><a href="#cb41-101" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-102"><a href="#cb41-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-103"><a href="#cb41-103" aria-hidden="true" tabindex="-1"></a>There is a wide range of ages, from 0 to 15 years old. Many elephants (49, to be exact) are 0 or 1 year old. Are the data normal if we remove these? We'll first make a new copy of the data with the baby elephants removed and then repeat our tests for normality.</span>
+<span id="cb41-104"><a href="#cb41-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-107"><a href="#cb41-107" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-108"><a href="#cb41-108" aria-hidden="true" tabindex="-1"></a>ele2 <span class="ot">&lt;-</span> ele <span class="sc">|&gt;</span> <span class="fu">filter</span>(Age <span class="sc">&gt;</span> <span class="dv">1</span>) <span class="co"># make new dataset with babies removed</span></span>
+<span id="cb41-109"><a href="#cb41-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-110"><a href="#cb41-110" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ele2) <span class="sc">+</span></span>
+<span id="cb41-111"><a href="#cb41-111" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> Height) <span class="sc">+</span></span>
+<span id="cb41-112"><a href="#cb41-112" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_histogram</span>(</span>
+<span id="cb41-113"><a href="#cb41-113" aria-hidden="true" tabindex="-1"></a>     <span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(density)) </span>
+<span id="cb41-114"><a href="#cb41-114" aria-hidden="true" tabindex="-1"></a>                                  </span>
+<span id="cb41-115"><a href="#cb41-115" aria-hidden="true" tabindex="-1"></a>     ) <span class="sc">+</span> </span>
+<span id="cb41-116"><a href="#cb41-116" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_density</span>() </span>
+<span id="cb41-117"><a href="#cb41-117" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-118"><a href="#cb41-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-119"><a href="#cb41-119" aria-hidden="true" tabindex="-1"></a>That looks a bit more normal. </span>
+<span id="cb41-120"><a href="#cb41-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-123"><a href="#cb41-123" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-124"><a href="#cb41-124" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(ele2<span class="sc">$</span>Height)</span>
+<span id="cb41-125"><a href="#cb41-125" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-126"><a href="#cb41-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-127"><a href="#cb41-127" aria-hidden="true" tabindex="-1"></a>Of elephants 2 years or older, there is no evidence that the heights do not come from a normal distribution (W = 1.0, p = 0.37). So, the heights of non-baby elephants appear approximately normally distributed.</span>
+<span id="cb41-128"><a href="#cb41-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-129"><a href="#cb41-129" aria-hidden="true" tabindex="-1"></a><span class="fu">## Confidence interval for the sample</span></span>
+<span id="cb41-130"><a href="#cb41-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-131"><a href="#cb41-131" aria-hidden="true" tabindex="-1"></a>Let's now estimate the population mean (with a 95% confidence interval) of <span class="in">`Heights`</span> in the dataset with the baby elephants removed.</span>
+<span id="cb41-132"><a href="#cb41-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-135"><a href="#cb41-135" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-136"><a href="#cb41-136" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(ele2<span class="sc">$</span>Height)</span>
+<span id="cb41-137"><a href="#cb41-137" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb41-138"><a href="#cb41-138" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-139"><a href="#cb41-139" aria-hidden="true" tabindex="-1"></a>Note that we can extract the estimate of the population mean and its confidence interval in the following way.</span>
-<span id="cb41-140"><a href="#cb41-140" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-143"><a href="#cb41-143" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb41-144"><a href="#cb41-144" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(ele2<span class="sc">$</span>Height)<span class="sc">$</span>estimate</span>
-<span id="cb41-145"><a href="#cb41-145" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(ele2<span class="sc">$</span>Height)<span class="sc">$</span>conf.int</span>
-<span id="cb41-146"><a href="#cb41-146" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb41-147"><a href="#cb41-147" aria-hidden="true" tabindex="-1"></a>How was this confidence interval calculated? </span>
-<span id="cb41-148"><a href="#cb41-148" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-149"><a href="#cb41-149" aria-hidden="true" tabindex="-1"></a>The standard error (the standard deviation over multiple samples) for a sample mean can be estimated by $s / \sqrt n$, where $s$ is the sample standard deviation and $n$ is the sample size.</span>
-<span id="cb41-150"><a href="#cb41-150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-153"><a href="#cb41-153" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb41-154"><a href="#cb41-154" aria-hidden="true" tabindex="-1"></a>n <span class="ot">=</span> <span class="fu">length</span>(ele2<span class="sc">$</span>Height)</span>
-<span id="cb41-155"><a href="#cb41-155" aria-hidden="true" tabindex="-1"></a>s <span class="ot">=</span> <span class="fu">sd</span>(ele2<span class="sc">$</span>Height)</span>
-<span id="cb41-156"><a href="#cb41-156" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-157"><a href="#cb41-157" aria-hidden="true" tabindex="-1"></a>( <span class="at">se =</span> s <span class="sc">/</span> <span class="fu">sqrt</span>(n) )</span>
-<span id="cb41-158"><a href="#cb41-158" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb41-159"><a href="#cb41-159" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-160"><a href="#cb41-160" aria-hidden="true" tabindex="-1"></a>Once you have estimated the standard error, a confidence interval for a sample mean $\bar x$ is simply</span>
+<span id="cb41-139"><a href="#cb41-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-140"><a href="#cb41-140" aria-hidden="true" tabindex="-1"></a>The <span class="in">`t.test()`</span> function is very flexible. When given a single sample, it will provide the mean and 95% confidence interval. How would you interpret this confidence interval? </span>
+<span id="cb41-141"><a href="#cb41-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-142"><a href="#cb41-142" aria-hidden="true" tabindex="-1"></a>It also provides a test of whether the mean of the sample is significantly different from zero. If the *p*-value is less than 0.05, then we can say that there is evidence against the null hypothesis of a mean of zero. Now, in this case, of course this isn't useful. Elephants can never have zero or negative height, so a mean height of zero is nonsensical. </span>
+<span id="cb41-143"><a href="#cb41-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-144"><a href="#cb41-144" aria-hidden="true" tabindex="-1"></a>Note that we can extract the estimate of the population mean and its confidence interval in the following way.</span>
+<span id="cb41-145"><a href="#cb41-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-148"><a href="#cb41-148" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-149"><a href="#cb41-149" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(ele2<span class="sc">$</span>Height)<span class="sc">$</span>estimate</span>
+<span id="cb41-150"><a href="#cb41-150" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(ele2<span class="sc">$</span>Height)<span class="sc">$</span>conf.int</span>
+<span id="cb41-151"><a href="#cb41-151" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-152"><a href="#cb41-152" aria-hidden="true" tabindex="-1"></a>How was this confidence interval calculated? </span>
+<span id="cb41-153"><a href="#cb41-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-154"><a href="#cb41-154" aria-hidden="true" tabindex="-1"></a>The standard error (the standard deviation over multiple samples) for a sample mean can be estimated by $s / \sqrt n$, where $s$ is the sample standard deviation and $n$ is the sample size.</span>
+<span id="cb41-155"><a href="#cb41-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-158"><a href="#cb41-158" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-159"><a href="#cb41-159" aria-hidden="true" tabindex="-1"></a>n <span class="ot">=</span> <span class="fu">length</span>(ele2<span class="sc">$</span>Height)</span>
+<span id="cb41-160"><a href="#cb41-160" aria-hidden="true" tabindex="-1"></a>s <span class="ot">=</span> <span class="fu">sd</span>(ele2<span class="sc">$</span>Height)</span>
 <span id="cb41-161"><a href="#cb41-161" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-162"><a href="#cb41-162" aria-hidden="true" tabindex="-1"></a>$$ </span>
-<span id="cb41-163"><a href="#cb41-163" aria-hidden="true" tabindex="-1"></a>\bar x \pm t \times \text{se}</span>
-<span id="cb41-164"><a href="#cb41-164" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb41-165"><a href="#cb41-165" aria-hidden="true" tabindex="-1"></a>The $t$ value is the 0.975 quantile of the $t$ distribution with the degrees of freedom given by $n-1$. </span>
+<span id="cb41-162"><a href="#cb41-162" aria-hidden="true" tabindex="-1"></a>( <span class="at">se =</span> s <span class="sc">/</span> <span class="fu">sqrt</span>(n) )</span>
+<span id="cb41-163"><a href="#cb41-163" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-164"><a href="#cb41-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-165"><a href="#cb41-165" aria-hidden="true" tabindex="-1"></a>Once you have estimated the standard error, a confidence interval for a sample mean $\bar x$ is simply</span>
 <span id="cb41-166"><a href="#cb41-166" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-169"><a href="#cb41-169" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb41-170"><a href="#cb41-170" aria-hidden="true" tabindex="-1"></a><span class="fu">qt</span>(<span class="at">p =</span> <span class="fl">0.975</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>)</span>
-<span id="cb41-171"><a href="#cb41-171" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb41-172"><a href="#cb41-172" aria-hidden="true" tabindex="-1"></a>So, the sample mean and confidence interval is:</span>
-<span id="cb41-173"><a href="#cb41-173" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-176"><a href="#cb41-176" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb41-177"><a href="#cb41-177" aria-hidden="true" tabindex="-1"></a>( xbar <span class="ot">&lt;-</span> <span class="fu">mean</span>(ele2<span class="sc">$</span>Height) )</span>
-<span id="cb41-178"><a href="#cb41-178" aria-hidden="true" tabindex="-1"></a>( xbar <span class="sc">-</span> <span class="fu">qt</span>(<span class="at">p =</span> <span class="fl">0.975</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> se )</span>
-<span id="cb41-179"><a href="#cb41-179" aria-hidden="true" tabindex="-1"></a>( xbar <span class="sc">+</span> <span class="fu">qt</span>(<span class="at">p =</span> <span class="fl">0.975</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> se )</span>
-<span id="cb41-180"><a href="#cb41-180" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb41-181"><a href="#cb41-181" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-182"><a href="#cb41-182" aria-hidden="true" tabindex="-1"></a><span class="fu">## t-test for difference of two sample means</span></span>
-<span id="cb41-183"><a href="#cb41-183" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-184"><a href="#cb41-184" aria-hidden="true" tabindex="-1"></a>Let's say we are interested in testing whether the mean heights of male and female elephants are different. First, we can test for differences in the variances in the two sexes using Levene's test, which is an important assumption of the t-test. In other words, if the assumption is violated, the results of the test may be misleading.</span>
-<span id="cb41-185"><a href="#cb41-185" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-186"><a href="#cb41-186" aria-hidden="true" tabindex="-1"></a>Let's do the Levene's test.</span>
-<span id="cb41-187"><a href="#cb41-187" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-190"><a href="#cb41-190" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb41-191"><a href="#cb41-191" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">leveneTest</span>(Height <span class="sc">~</span> Sex, <span class="at">data =</span> ele2)</span>
-<span id="cb41-192"><a href="#cb41-192" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb41-193"><a href="#cb41-193" aria-hidden="true" tabindex="-1"></a>A p-value of 0.1 is not huge, but it's not enough evidence to reject the null hypothesis that the variance of male heights is equal to the variance of female heights (at the 5% level).</span>
+<span id="cb41-167"><a href="#cb41-167" aria-hidden="true" tabindex="-1"></a>$$ </span>
+<span id="cb41-168"><a href="#cb41-168" aria-hidden="true" tabindex="-1"></a>\bar x \pm t \times \text{se}</span>
+<span id="cb41-169"><a href="#cb41-169" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb41-170"><a href="#cb41-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-171"><a href="#cb41-171" aria-hidden="true" tabindex="-1"></a>The $t$ value is the 0.975 quantile of the $t$ distribution with the degrees of freedom given by $n-1$. </span>
+<span id="cb41-172"><a href="#cb41-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-175"><a href="#cb41-175" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-176"><a href="#cb41-176" aria-hidden="true" tabindex="-1"></a><span class="fu">qt</span>(<span class="at">p =</span> <span class="fl">0.975</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb41-177"><a href="#cb41-177" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-178"><a href="#cb41-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-179"><a href="#cb41-179" aria-hidden="true" tabindex="-1"></a>So, the sample mean and confidence interval is:</span>
+<span id="cb41-180"><a href="#cb41-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-183"><a href="#cb41-183" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-184"><a href="#cb41-184" aria-hidden="true" tabindex="-1"></a>( xbar <span class="ot">&lt;-</span> <span class="fu">mean</span>(ele2<span class="sc">$</span>Height) )</span>
+<span id="cb41-185"><a href="#cb41-185" aria-hidden="true" tabindex="-1"></a>( xbar <span class="sc">-</span> <span class="fu">qt</span>(<span class="at">p =</span> <span class="fl">0.975</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> se )</span>
+<span id="cb41-186"><a href="#cb41-186" aria-hidden="true" tabindex="-1"></a>( xbar <span class="sc">+</span> <span class="fu">qt</span>(<span class="at">p =</span> <span class="fl">0.975</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> se )</span>
+<span id="cb41-187"><a href="#cb41-187" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-188"><a href="#cb41-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-189"><a href="#cb41-189" aria-hidden="true" tabindex="-1"></a><span class="fu">## t-test for difference of two sample means</span></span>
+<span id="cb41-190"><a href="#cb41-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-191"><a href="#cb41-191" aria-hidden="true" tabindex="-1"></a>Let's say we are interested in testing whether the mean heights of male and female elephants are different. First, we can test for differences in the variances in the two sexes using Levene's test, which is an important assumption of the t-test. In other words, if the assumption is violated, the results of the test may be misleading.</span>
+<span id="cb41-192"><a href="#cb41-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-193"><a href="#cb41-193" aria-hidden="true" tabindex="-1"></a>Let's do the Levene's test.</span>
 <span id="cb41-194"><a href="#cb41-194" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-195"><a href="#cb41-195" aria-hidden="true" tabindex="-1"></a>The default option for a t-test using the <span class="in">`t.test()`</span> function is not *not* assume equal variances. </span>
-<span id="cb41-196"><a href="#cb41-196" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-199"><a href="#cb41-199" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb41-200"><a href="#cb41-200" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(<span class="at">formula =</span> Height <span class="sc">~</span> Sex, <span class="at">data =</span> ele2) </span>
-<span id="cb41-201"><a href="#cb41-201" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb41-202"><a href="#cb41-202" aria-hidden="true" tabindex="-1"></a>By this test, there is no strong evidence against the null hypothesis that the mean heights of male and female elephants are equal. </span>
-<span id="cb41-203"><a href="#cb41-203" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-204"><a href="#cb41-204" aria-hidden="true" tabindex="-1"></a>Welch Test does not assume equal variances. If we wanted to make this assumption (and therefore get more power):</span>
-<span id="cb41-205"><a href="#cb41-205" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-208"><a href="#cb41-208" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb41-209"><a href="#cb41-209" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(<span class="at">formula =</span> Height <span class="sc">~</span> Sex, <span class="at">var.equal =</span> T,  <span class="at">data =</span> ele2) </span>
-<span id="cb41-210"><a href="#cb41-210" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb41-211"><a href="#cb41-211" aria-hidden="true" tabindex="-1"></a>The result is essentially the same in this case. </span>
+<span id="cb41-197"><a href="#cb41-197" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-198"><a href="#cb41-198" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">leveneTest</span>(Height <span class="sc">~</span> Sex, <span class="at">data =</span> ele2)</span>
+<span id="cb41-199"><a href="#cb41-199" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-200"><a href="#cb41-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-201"><a href="#cb41-201" aria-hidden="true" tabindex="-1"></a>A p-value of 0.1 is not huge, but it's not enough evidence to reject the null hypothesis that the variance of male heights is equal to the variance of female heights (at the 5% level).</span>
+<span id="cb41-202"><a href="#cb41-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-203"><a href="#cb41-203" aria-hidden="true" tabindex="-1"></a>The default option for a t-test using the <span class="in">`t.test()`</span> function is not *not* assume equal variances. </span>
+<span id="cb41-204"><a href="#cb41-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-207"><a href="#cb41-207" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-208"><a href="#cb41-208" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(<span class="at">formula =</span> Height <span class="sc">~</span> Sex, <span class="at">data =</span> ele2) </span>
+<span id="cb41-209"><a href="#cb41-209" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-210"><a href="#cb41-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-211"><a href="#cb41-211" aria-hidden="true" tabindex="-1"></a>By this test, there is no strong evidence against the null hypothesis that the mean heights of male and female elephants are equal. </span>
 <span id="cb41-212"><a href="#cb41-212" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-213"><a href="#cb41-213" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-214"><a href="#cb41-214" aria-hidden="true" tabindex="-1"></a><span class="fu"># Dataset **`Prestige`**</span></span>
-<span id="cb41-215"><a href="#cb41-215" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-216"><a href="#cb41-216" aria-hidden="true" tabindex="-1"></a>We will again be using a well-known dataset called <span class="in">`Prestige`</span> from the <span class="in">`car`</span>    R package.  This dataset deals with prestige ratings of Canadian Occupations. The <span class="in">`Prestige`</span> dataset has 102 rows and 6 columns. The observations are occupations.</span>
-<span id="cb41-217"><a href="#cb41-217" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-218"><a href="#cb41-218" aria-hidden="true" tabindex="-1"></a>This data frame contains the following columns:</span>
-<span id="cb41-219"><a href="#cb41-219" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-220"><a href="#cb41-220" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**`education`** - Average education of occupational incumbents, years, in 1971.</span>
-<span id="cb41-221"><a href="#cb41-221" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-222"><a href="#cb41-222" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**`income`** - Average income of incumbents, dollars, in 1971.</span>
+<span id="cb41-213"><a href="#cb41-213" aria-hidden="true" tabindex="-1"></a>Welch Test does not assume equal variances. If we wanted to make this assumption (and therefore get more power):</span>
+<span id="cb41-214"><a href="#cb41-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-217"><a href="#cb41-217" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-218"><a href="#cb41-218" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(<span class="at">formula =</span> Height <span class="sc">~</span> Sex, <span class="at">var.equal =</span> T,  <span class="at">data =</span> ele2) </span>
+<span id="cb41-219"><a href="#cb41-219" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-220"><a href="#cb41-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-221"><a href="#cb41-221" aria-hidden="true" tabindex="-1"></a>The result is essentially the same in this case. </span>
+<span id="cb41-222"><a href="#cb41-222" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb41-223"><a href="#cb41-223" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-224"><a href="#cb41-224" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**`women`** - Percentage of incumbents who are women.</span>
+<span id="cb41-224"><a href="#cb41-224" aria-hidden="true" tabindex="-1"></a><span class="fu"># Dataset **`Prestige`**</span></span>
 <span id="cb41-225"><a href="#cb41-225" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-226"><a href="#cb41-226" aria-hidden="true" tabindex="-1"></a><span class="ss">*  </span>**`prestige`** - Pineo-Porter prestige score for occupation, from a social survey conducted in the mid-1960s.</span>
+<span id="cb41-226"><a href="#cb41-226" aria-hidden="true" tabindex="-1"></a>We will again be using a well-known dataset called <span class="in">`Prestige`</span> from the <span class="in">`car`</span>    R package.  This dataset deals with prestige ratings of Canadian Occupations. The <span class="in">`Prestige`</span> dataset has 102 rows and 6 columns. The observations are occupations.</span>
 <span id="cb41-227"><a href="#cb41-227" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-228"><a href="#cb41-228" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**`census`** - Canadian Census occupational code.</span>
+<span id="cb41-228"><a href="#cb41-228" aria-hidden="true" tabindex="-1"></a>This data frame contains the following columns:</span>
 <span id="cb41-229"><a href="#cb41-229" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-230"><a href="#cb41-230" aria-hidden="true" tabindex="-1"></a><span class="ss">*  </span>**`type`** - Type of occupation. A factor with levels: <span class="in">`bc`</span>, Blue Collar; <span class="in">`prof`</span>, Professional, Managerial, and Technical; <span class="in">`wc`</span>, White Collar. (includes four missing values).</span>
+<span id="cb41-230"><a href="#cb41-230" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**`education`** - Average education of occupational incumbents, years, in 1971.</span>
 <span id="cb41-231"><a href="#cb41-231" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-232"><a href="#cb41-232" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-233"><a href="#cb41-233" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=FALSE}</span></span>
-<span id="cb41-234"><a href="#cb41-234" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">warn=</span><span class="sc">-</span><span class="dv">1</span>) </span>
-<span id="cb41-235"><a href="#cb41-235" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb41-236"><a href="#cb41-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-232"><a href="#cb41-232" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**`income`** - Average income of incumbents, dollars, in 1971.</span>
+<span id="cb41-233"><a href="#cb41-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-234"><a href="#cb41-234" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**`women`** - Percentage of incumbents who are women.</span>
+<span id="cb41-235"><a href="#cb41-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-236"><a href="#cb41-236" aria-hidden="true" tabindex="-1"></a><span class="ss">*  </span>**`prestige`** - Pineo-Porter prestige score for occupation, from a social survey conducted in the mid-1960s.</span>
 <span id="cb41-237"><a href="#cb41-237" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-238"><a href="#cb41-238" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=FALSE, message=FALSE}</span></span>
-<span id="cb41-239"><a href="#cb41-239" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">warning=</span><span class="cn">FALSE</span>, <span class="at">message=</span><span class="cn">FALSE</span>, <span class="at">comment=</span><span class="cn">NA</span>, <span class="at">fig.show =</span> <span class="st">"hide"</span>)</span>
-<span id="cb41-240"><a href="#cb41-240" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-238"><a href="#cb41-238" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**`census`** - Canadian Census occupational code.</span>
+<span id="cb41-239"><a href="#cb41-239" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-240"><a href="#cb41-240" aria-hidden="true" tabindex="-1"></a><span class="ss">*  </span>**`type`** - Type of occupation. A factor with levels: <span class="in">`bc`</span>, Blue Collar; <span class="in">`prof`</span>, Professional, Managerial, and Technical; <span class="in">`wc`</span>, White Collar. (includes four missing values).</span>
 <span id="cb41-241"><a href="#cb41-241" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb41-242"><a href="#cb41-242" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-243"><a href="#cb41-243" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-244"><a href="#cb41-244" aria-hidden="true" tabindex="-1"></a><span class="fu">## One-sample t-tests</span></span>
-<span id="cb41-245"><a href="#cb41-245" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-246"><a href="#cb41-246" aria-hidden="true" tabindex="-1"></a>Perform a one-sample t-test to test the hypothesis that the true mean <span class="in">`prestige`</span> is exactly 50.</span>
+<span id="cb41-243"><a href="#cb41-243" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=FALSE}</span></span>
+<span id="cb41-244"><a href="#cb41-244" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">warn=</span><span class="sc">-</span><span class="dv">1</span>) </span>
+<span id="cb41-245"><a href="#cb41-245" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-246"><a href="#cb41-246" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb41-247"><a href="#cb41-247" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-248"><a href="#cb41-248" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, results='hide'}</span></span>
-<span id="cb41-249"><a href="#cb41-249" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb41-250"><a href="#cb41-250" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
-<span id="cb41-251"><a href="#cb41-251" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(Prestige)</span>
+<span id="cb41-248"><a href="#cb41-248" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=FALSE, message=FALSE}</span></span>
+<span id="cb41-249"><a href="#cb41-249" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">warning=</span><span class="cn">FALSE</span>, <span class="at">message=</span><span class="cn">FALSE</span>, <span class="at">comment=</span><span class="cn">NA</span>, <span class="at">fig.show =</span> <span class="st">"hide"</span>)</span>
+<span id="cb41-250"><a href="#cb41-250" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-251"><a href="#cb41-251" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb41-252"><a href="#cb41-252" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-253"><a href="#cb41-253" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternative hyp: greater or less than 50</span></span>
-<span id="cb41-254"><a href="#cb41-254" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Prestige<span class="sc">$</span>prestige, <span class="at">mu=</span><span class="dv">50</span>)</span>
+<span id="cb41-253"><a href="#cb41-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-254"><a href="#cb41-254" aria-hidden="true" tabindex="-1"></a><span class="fu">## One-sample t-tests</span></span>
 <span id="cb41-255"><a href="#cb41-255" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-256"><a href="#cb41-256" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternative hyp: greater than 50</span></span>
-<span id="cb41-257"><a href="#cb41-257" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Prestige<span class="sc">$</span>prestige, <span class="at">mu=</span><span class="dv">50</span>, <span class="at">alternative=</span><span class="st">"greater"</span>)</span>
-<span id="cb41-258"><a href="#cb41-258" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb41-259"><a href="#cb41-259" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-260"><a href="#cb41-260" aria-hidden="true" tabindex="-1"></a>Test whether the true mean <span class="in">`prestige`</span> score for professionals is 50% more than the true mean <span class="in">`prestige`</span> score for white collar occupations. </span>
-<span id="cb41-261"><a href="#cb41-261" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-262"><a href="#cb41-262" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, results='hide'}</span></span>
-<span id="cb41-263"><a href="#cb41-263" aria-hidden="true" tabindex="-1"></a>prof.data <span class="ot">&lt;-</span> Prestige <span class="sc">|&gt;</span> </span>
-<span id="cb41-264"><a href="#cb41-264" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(type<span class="sc">==</span><span class="st">"prof"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb41-265"><a href="#cb41-265" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(prestige)</span>
-<span id="cb41-266"><a href="#cb41-266" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-267"><a href="#cb41-267" aria-hidden="true" tabindex="-1"></a>wc.data <span class="ot">&lt;-</span> Prestige <span class="sc">|&gt;</span> </span>
-<span id="cb41-268"><a href="#cb41-268" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(type<span class="sc">==</span><span class="st">"wc"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb41-269"><a href="#cb41-269" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(prestige) </span>
-<span id="cb41-270"><a href="#cb41-270" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-271"><a href="#cb41-271" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(prof.data, </span>
-<span id="cb41-272"><a href="#cb41-272" aria-hidden="true" tabindex="-1"></a>       wc.data, </span>
-<span id="cb41-273"><a href="#cb41-273" aria-hidden="true" tabindex="-1"></a>       <span class="at">mu =</span> <span class="fl">0.5</span> <span class="sc">*</span> <span class="fu">mean</span>(wc.data),</span>
-<span id="cb41-274"><a href="#cb41-274" aria-hidden="true" tabindex="-1"></a>       <span class="at">alternative =</span> <span class="st">'greater'</span>)</span>
-<span id="cb41-275"><a href="#cb41-275" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-256"><a href="#cb41-256" aria-hidden="true" tabindex="-1"></a>Perform a one-sample t-test to test the hypothesis that the true mean <span class="in">`prestige`</span> is exactly 50.</span>
+<span id="cb41-257"><a href="#cb41-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-258"><a href="#cb41-258" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, results='hide'}</span></span>
+<span id="cb41-259"><a href="#cb41-259" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb41-260"><a href="#cb41-260" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb41-261"><a href="#cb41-261" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(Prestige)</span>
+<span id="cb41-262"><a href="#cb41-262" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-263"><a href="#cb41-263" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternative hyp: greater or less than 50</span></span>
+<span id="cb41-264"><a href="#cb41-264" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Prestige<span class="sc">$</span>prestige, <span class="at">mu=</span><span class="dv">50</span>)</span>
+<span id="cb41-265"><a href="#cb41-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-266"><a href="#cb41-266" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternative hyp: greater than 50</span></span>
+<span id="cb41-267"><a href="#cb41-267" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Prestige<span class="sc">$</span>prestige, <span class="at">mu=</span><span class="dv">50</span>, <span class="at">alternative=</span><span class="st">"greater"</span>)</span>
+<span id="cb41-268"><a href="#cb41-268" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-269"><a href="#cb41-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-270"><a href="#cb41-270" aria-hidden="true" tabindex="-1"></a>Test whether the true mean <span class="in">`prestige`</span> score for professionals is 50% more than the true mean <span class="in">`prestige`</span> score for white collar occupations. </span>
+<span id="cb41-271"><a href="#cb41-271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-272"><a href="#cb41-272" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, results='hide'}</span></span>
+<span id="cb41-273"><a href="#cb41-273" aria-hidden="true" tabindex="-1"></a>prof.data <span class="ot">&lt;-</span> Prestige <span class="sc">|&gt;</span> </span>
+<span id="cb41-274"><a href="#cb41-274" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(type<span class="sc">==</span><span class="st">"prof"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb41-275"><a href="#cb41-275" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(prestige)</span>
 <span id="cb41-276"><a href="#cb41-276" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-277"><a href="#cb41-277" aria-hidden="true" tabindex="-1"></a><span class="fu">## Skewness</span></span>
-<span id="cb41-278"><a href="#cb41-278" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-279"><a href="#cb41-279" aria-hidden="true" tabindex="-1"></a>Explore the skewness in the <span class="in">`income`</span> variable using a boxplot. </span>
+<span id="cb41-277"><a href="#cb41-277" aria-hidden="true" tabindex="-1"></a>wc.data <span class="ot">&lt;-</span> Prestige <span class="sc">|&gt;</span> </span>
+<span id="cb41-278"><a href="#cb41-278" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(type<span class="sc">==</span><span class="st">"wc"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb41-279"><a href="#cb41-279" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(prestige) </span>
 <span id="cb41-280"><a href="#cb41-280" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-281"><a href="#cb41-281" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, fig.show="hide", results='hide'}</span></span>
-<span id="cb41-282"><a href="#cb41-282" aria-hidden="true" tabindex="-1"></a>Prestige <span class="sc">|&gt;</span> </span>
-<span id="cb41-283"><a href="#cb41-283" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb41-284"><a href="#cb41-284" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(income) <span class="sc">+</span> </span>
-<span id="cb41-285"><a href="#cb41-285" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() </span>
+<span id="cb41-281"><a href="#cb41-281" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(prof.data, </span>
+<span id="cb41-282"><a href="#cb41-282" aria-hidden="true" tabindex="-1"></a>       wc.data, </span>
+<span id="cb41-283"><a href="#cb41-283" aria-hidden="true" tabindex="-1"></a>       <span class="at">mu =</span> <span class="fl">0.5</span> <span class="sc">*</span> <span class="fu">mean</span>(wc.data),</span>
+<span id="cb41-284"><a href="#cb41-284" aria-hidden="true" tabindex="-1"></a>       <span class="at">alternative =</span> <span class="st">'greater'</span>)</span>
+<span id="cb41-285"><a href="#cb41-285" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb41-286"><a href="#cb41-286" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-287"><a href="#cb41-287" aria-hidden="true" tabindex="-1"></a><span class="co"># or</span></span>
-<span id="cb41-288"><a href="#cb41-288" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(Prestige<span class="sc">$</span>income, <span class="at">horizontal =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb41-289"><a href="#cb41-289" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-287"><a href="#cb41-287" aria-hidden="true" tabindex="-1"></a><span class="fu">## Skewness</span></span>
+<span id="cb41-288"><a href="#cb41-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-289"><a href="#cb41-289" aria-hidden="true" tabindex="-1"></a>Explore the skewness in the <span class="in">`income`</span> variable using a boxplot. </span>
 <span id="cb41-290"><a href="#cb41-290" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-291"><a href="#cb41-291" aria-hidden="true" tabindex="-1"></a><span class="fu">## Transformation</span></span>
-<span id="cb41-292"><a href="#cb41-292" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-293"><a href="#cb41-293" aria-hidden="true" tabindex="-1"></a>Find a suitable power transformation to correct the skewness. </span>
-<span id="cb41-294"><a href="#cb41-294" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-295"><a href="#cb41-295" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, fig.show='hide'}</span></span>
-<span id="cb41-296"><a href="#cb41-296" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lindia)</span>
-<span id="cb41-297"><a href="#cb41-297" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-298"><a href="#cb41-298" aria-hidden="true" tabindex="-1"></a><span class="fu">gg_boxcox</span>(<span class="fu">lm</span>(income <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> Prestige))</span>
-<span id="cb41-299"><a href="#cb41-299" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-300"><a href="#cb41-300" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb41-301"><a href="#cb41-301" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-302"><a href="#cb41-302" aria-hidden="true" tabindex="-1"></a><span class="fu">## Confidence interval</span></span>
-<span id="cb41-303"><a href="#cb41-303" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-304"><a href="#cb41-304" aria-hidden="true" tabindex="-1"></a>Compute the 95% confidence interval for the true mean income using the raw and log-transformed data.</span>
-<span id="cb41-305"><a href="#cb41-305" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-306"><a href="#cb41-306" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, results="hide"}</span></span>
-<span id="cb41-307"><a href="#cb41-307" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Prestige<span class="sc">$</span>income)</span>
-<span id="cb41-308"><a href="#cb41-308" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(<span class="fu">log</span>(Prestige<span class="sc">$</span>income))</span>
-<span id="cb41-309"><a href="#cb41-309" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb41-310"><a href="#cb41-310" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-291"><a href="#cb41-291" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, fig.show="hide", results='hide'}</span></span>
+<span id="cb41-292"><a href="#cb41-292" aria-hidden="true" tabindex="-1"></a>Prestige <span class="sc">|&gt;</span> </span>
+<span id="cb41-293"><a href="#cb41-293" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb41-294"><a href="#cb41-294" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(income) <span class="sc">+</span> </span>
+<span id="cb41-295"><a href="#cb41-295" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() </span>
+<span id="cb41-296"><a href="#cb41-296" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-297"><a href="#cb41-297" aria-hidden="true" tabindex="-1"></a><span class="co"># or</span></span>
+<span id="cb41-298"><a href="#cb41-298" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(Prestige<span class="sc">$</span>income, <span class="at">horizontal =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb41-299"><a href="#cb41-299" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-300"><a href="#cb41-300" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-301"><a href="#cb41-301" aria-hidden="true" tabindex="-1"></a><span class="fu">## Transformation</span></span>
+<span id="cb41-302"><a href="#cb41-302" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-303"><a href="#cb41-303" aria-hidden="true" tabindex="-1"></a>Find a suitable power transformation to correct the skewness. </span>
+<span id="cb41-304"><a href="#cb41-304" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-305"><a href="#cb41-305" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, fig.show='hide'}</span></span>
+<span id="cb41-306"><a href="#cb41-306" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lindia)</span>
+<span id="cb41-307"><a href="#cb41-307" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-308"><a href="#cb41-308" aria-hidden="true" tabindex="-1"></a><span class="fu">gg_boxcox</span>(<span class="fu">lm</span>(income <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> Prestige))</span>
+<span id="cb41-309"><a href="#cb41-309" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-310"><a href="#cb41-310" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb41-311"><a href="#cb41-311" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-312"><a href="#cb41-312" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-313"><a href="#cb41-313" aria-hidden="true" tabindex="-1"></a>More R code examples are  <span class="co">[</span><span class="ot">here</span><span class="co">](../exercises/Chap4more.R)</span></span>
+<span id="cb41-312"><a href="#cb41-312" aria-hidden="true" tabindex="-1"></a><span class="fu">## Confidence interval</span></span>
+<span id="cb41-313"><a href="#cb41-313" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-314"><a href="#cb41-314" aria-hidden="true" tabindex="-1"></a>Compute the 95% confidence interval for the true mean income using the raw and log-transformed data.</span>
+<span id="cb41-315"><a href="#cb41-315" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-316"><a href="#cb41-316" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, results="hide"}</span></span>
+<span id="cb41-317"><a href="#cb41-317" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Prestige<span class="sc">$</span>income)</span>
+<span id="cb41-318"><a href="#cb41-318" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(<span class="fu">log</span>(Prestige<span class="sc">$</span>income))</span>
+<span id="cb41-319"><a href="#cb41-319" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-320"><a href="#cb41-320" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-321"><a href="#cb41-321" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-322"><a href="#cb41-322" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-323"><a href="#cb41-323" aria-hidden="true" tabindex="-1"></a>More R code examples are  <span class="co">[</span><span class="ot">here</span><span class="co">](../exercises/Chap4more.R)</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

@@ -15,6 +15,7 @@ knitr::opts_chunk$set(echo = TRUE,
 #| message : false
 library(tidyverse)
 ```
+
 # Elephants
 
 ## Load the data
@@ -22,7 +23,9 @@ library(tidyverse)
 Load a dataset on elephants.
 
 ```{r}
-ele <- read_table("https://www.massey.ac.nz/~anhsmith/data/elephant.txt") |> 
+ele <- read_table(
+  "https://www.massey.ac.nz/~anhsmith/data/elephant.txt"
+  ) |> 
   rename("Height" = `Shoulder.height`) # renames the variable
 
 str(ele)
@@ -56,6 +59,7 @@ We can test whether these data conform to a normal distribution model with a Shi
 ```{r}
 shapiro.test(ele$Height)
 ```
+
 The very low p-value says that we can reject the null hypothesis, and conclude that these data are very unlikely to have come from a normal distribution. 
 
 The data have both male and female elephants, so we should probably look at the sexes separately. 
@@ -104,6 +108,7 @@ That looks a bit more normal.
 ```{r}
 shapiro.test(ele2$Height)
 ```
+
 Of elephants 2 years or older, there is no evidence that the heights do not come from a normal distribution (W = 1.0, p = 0.37). So, the heights of non-baby elephants appear approximately normally distributed.
 
 ## Confidence interval for the sample
@@ -141,11 +146,13 @@ Once you have estimated the standard error, a confidence interval for a sample m
 $$ 
 \bar x \pm t \times \text{se}
 $$
+
 The $t$ value is the 0.975 quantile of the $t$ distribution with the degrees of freedom given by $n-1$. 
 
 ```{r}
 qt(p = 0.975, df = n - 1)
 ```
+
 So, the sample mean and confidence interval is:
 
 ```{r}
@@ -163,6 +170,7 @@ Let's do the Levene's test.
 ```{r}
 car::leveneTest(Height ~ Sex, data = ele2)
 ```
+
 A p-value of 0.1 is not huge, but it's not enough evidence to reject the null hypothesis that the variance of male heights is equal to the variance of female heights (at the 5% level).
 
 The default option for a t-test using the `t.test()` function is not *not* assume equal variances. 
@@ -170,6 +178,7 @@ The default option for a t-test using the `t.test()` function is not *not* assum
 ```{r}
 t.test(formula = Height ~ Sex, data = ele2) 
 ```
+
 By this test, there is no strong evidence against the null hypothesis that the mean heights of male and female elephants are equal. 
 
 Welch Test does not assume equal variances. If we wanted to make this assumption (and therefore get more power):
@@ -177,6 +186,7 @@ Welch Test does not assume equal variances. If we wanted to make this assumption
 ```{r}
 t.test(formula = Height ~ Sex, var.equal = T,  data = ele2) 
 ```
+
 The result is essentially the same in this case. 
 
 

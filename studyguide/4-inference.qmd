@@ -712,57 +712,18 @@ gridExtra::grid.arrange(p1,p3,p2, p4, ncol=2)
 
 As an example, the boxplots in @fig-rangitransf represent the number of vehicles at the two Rangitikei river locations (from **rangitikei**). The first boxplot shows the square of the number of vehicle, which is highly right-skewed. The second boxplot shows the raw data (vehicle) which are still skewed towards the larger values. So to squash these to make the distribution more symmetric, the ladder of powers suggests we could try a square root transformation, or a stronger one such as the logarithm (or reciprocal root). These are shown in the third and fourth boxplots.
 
-## Checking the adequacy of a transformation
-
-Since the purpose of transforming the data is to make it more symmetric, we need to decide if we have achieved this goal. One approach which has been suggested is to consider the difference mean-median where the vertical lines stand for "the absolute value of" which means we ignore a negative sign if it occurs. If the batch is symmetric then the mean equals the median so that the difference mean - median= 0. We could design a measure, D, of symmetry by standardising it. That is, we divide this difference by a measure of spread - we could choose either the standard deviation or the F spread, whichever is at hand. These choices give the so-called **D-Statistics**:
-
-D1 = (mean - median)/ std.dev. or
-
-D2 = (mean - median)/F-spread.
-
-Instead of calculating the mean, we could use the mid-F to give
-
-D3 = (mid-F - median)/F-spread.
-
-We first choose one of these criteria, and then apply it to all the transformations in turn, choosing as 'best' that transformation which gives the smallest absolute value of D (provided that other considerations do not disqualify it). Note that, in practice it is useful *not* to take absolute values when calculating the D-statistics, since a change of sign helps us to locate the zero of D, i.e. the direction of skewness of the data.
-
-The following table gives the values of D1, D2, and D3 (with sign retained) for the four transformations.
-
-| D-statistic | vehicle | vehicle$^2$ | $\sqrt{vehicle}$ | loge(vehicle) |
-|:------------|:--------|:------------|:-----------------|:--------------|
-| D$_{1}$     | 0.2724  | 0.2831      | 0.1308           | -0.0945       |
-| D$_{2}$     | 0.2973  | 1.0615      | 0.0978           | -0.0611       |
-| D$_{3}$     | 0.0714  | 0.2273      | -0.0183          | -0.1092       |
-
-```{r}
-#| echo: true
-#| label: "fig-rangilval"
-#| fig-cap: "Letter values of Vechicle data"
-
-source("http://www.massey.ac.nz/~anhsmith/161250/eda/lval.R")
-lval(log(rangitikei$vehicle))
-
-```
-
-The D-statistics D1 and D2 presented above suggest that the natural log would be the best transformation. But D3 values suggest in favour of the square root transformation. Note that D3 is sensitive only to skewness in the middle 50% of the data, whereas D1 and D2 are sensitive to skewness in the whole data set. The boxplots of @fig-rangitransf would tend to confirm these observations on the D-statistics. Note also that $\text {vehicle} ^2$, $\text {vehicle}$ and $\sqrt{\text {vehicle}}$ have produced positive values for the D-statistics indicating that these variables are skewed to the right (i.e. positive skewness) while $\text {loge(vehicle)}$ data are mildly negatively skewed.
-
-Having chosen the transformation it is a good idea to check it graphically using a **mids vs. spreads plot**. The plot in @fig-rangilval shows a consistent upward trend in the untransformed (raw) data (right-skewed). Again a general upward trend is seen for squared data indicating that the skewness is not fully corrected. The square root data still shows the positive trend, which means that the transformation has failed to correct the skew in the non-middle 50% of the data. For logged data, the mids vs. spread plot shows a random scatter of points. This confirms the conclusion from the D statistic that the log transformation works well to correct the skew in the non-middle part of the data. Note that we may also compute the D-Statistics using the IQR in place of F-spread and the results will often be similar.
 
 ## Some Words of Caution About Transformations
 
-1.  The D values can be compared for the same data set but we should be wary of comparing the D value from one data set with that of another (possibly transformed) data set.
+1.  If the data set is small, transformations should be approached with some scepticism, for if more data were available the shape of the distribution may change.
 
-2.  Any one statistic can never capture all the peculiarities of a data set so that the D values should be used in conjunction with other measures and/or graphs.
+2.  It should be kept in mind that there are different levels at which data can be considered such as (a) just a collection of numbers (any reasonable transformation would suffice); (b) referring to physical quantities (certain transformations may make physical sense and allow meaningful interpretations to be made) and (c) outcomes from a certain process (for example, frequencies or counts may often suggest a Poisson distribution for which a square root transformation is suitable). The choice of a transformation may depend on the additional information that is known about the batch of data.
 
-3.  If the data set is small, transformations should be approached with some scepticism, for if more data were available the shape of the distribution may change.
+3.  Common sense should prevail in this area as a transformation which brings only marginal improvement to symmetry, for example, should be balanced against other drawbacks such as the difficulty of interpreting the results. For example, the logarithm function turns multiplications to additions and powers to multiplications. Hence it turns divisions to subtractions and roots to divisions. Thus the geometric mean becomes the arithmetic mean and the ratio of geometric means becomes the difference between arithmetic means. Therefore reversing the transformation implies that a confidence interval for the difference between the means of the transformed data becomes a confidence interval for the ratio of the geometric means of the two groups of raw data.
 
-4.  It should be kept in mind that there are different levels at which data can be considered such as (a) just a collection of numbers (any reasonable transformation would suffice); (b) referring to physical quantities (certain transformations may make physical sense and allow meaningful interpretations to be made) and (c) outcomes from a certain process (for example, frequencies or counts may often suggest a Poisson distribution for which a square root transformation is suitable). The choice of a transformation may depend on the additional information that is known about the batch of data.
+4.  Although a transformation may lead to symmetry it may be better to consider other approaches. For example, plotting the data may show that there are at least two subgroups in the data. Transformations do not really solve the problem and we may have to subdivide the data into groups.
 
-5.  Common sense should prevail in this area as a transformation which brings only marginal improvement to symmetry, for example, should be balanced against other drawbacks such as the difficulty of interpreting the results. For example, the logarithm function turns multiplications to additions and powers to multiplications. Hence it turns divisions to subtractions and roots to divisions. Thus the geometric mean becomes the arithmetic mean and the ratio of geometric means becomes the difference between arithmetic means. Therefore reversing the transformation implies that a confidence interval for the difference between the means of the transformed data becomes a confidence interval for the ratio of the geometric means of the two groups of raw data.
-
-6.  Although a transformation may lead to symmetry it may be better to consider other approaches. For example, the stem-and-leaf or dotplot display may show that there are at least two subgroups in the data. Transformations do not really solve the problem and we may have to subdivide the data into groups.
-
-7.  Note that there are several other transformation functions available. For example, transformations such as arcsine are useful for proportion data.
+5.  Note that there are several other transformation functions available. For example, transformations such as arcsine are useful for proportion data.
 
 ## Box-Cox Normalising transformations
 
