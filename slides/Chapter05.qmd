@@ -35,6 +35,31 @@ knitr::opts_chunk$set(warning = FALSE,
                       fig.align="center")
 ```
 
+## Analysing frequencies
+
+- This chapter focuses on data that consist of frequencies or counts of occurrences of some events
+
+- Wish to compare *observed* with what we would have *expected*
+
+- We will cover the $\chi ^ 2$ distribution, "Goodness-of-fit" tests, and test of independence
+
+## Chi squared distribution
+::: left-narrow
+- Continuous 0 to infinity; starts at 0 because it is a square (a square number can't be negative)
+
+- The mean of this distribution is its degrees of freedom (k)
+
+- It is right skewed, mean greater than median and mode; variance is $2k$
+
+- Shape of the $\chi ^ 2$ distribution is determined by the degrees of freedom (k), at very high k (90 or greater) $\chi ^ 2$ distribution resembles the normal distribution
+
+- Main purpose is hypothesis testing, not describing real-world distributions
+:::
+
+::: right-wide
+![](img/chi-square-distribution-k-example.png)
+:::
+
 ## Tables and frequencies
 
 -   We often have hypotheses regarding the frequencies of levels of a factor or group of factors.
@@ -47,7 +72,9 @@ knitr::opts_chunk$set(warning = FALSE,
 
 - To do so, compare *observed* counts with *expected* counts, where the *expected* counts are derived from our null model about the population.
 
-## Examples with one factor 
+- We are employing the Chi-squared statistic with data which consists of integers. That is, the data are discrete rather than continuous. 
+
+## Examples of data with one factor 
 
 #### Example 1
 
@@ -80,9 +107,7 @@ knitr::opts_chunk$set(warning = FALSE,
 :::
 ::::
 
-## Goodness of fit test
-
-Hypotheses of this sort can be tested using the **Chi-squared test statistic** ($\chi ^ 2$ = Ki Sq.)
+## Chi-squared test statistic
 
 $$
 \chi ^{2} =\sum _{1}^{c}\frac{\left({\rm Observed-Expected}\right)^{{\rm 2}} }{{\rm Expected}}  =\sum _{1}^{c}\frac{\left( O-E\right)^{2}}{E}
@@ -90,16 +115,63 @@ $$
 
 If the number of categories is $c$, then the degrees of freedom is $c-1$. 
 
-$\chi ^ 2$ distribution is a continuous distribution. When used for
-    discrete data, Chi-squared approximation is very good for $E>5$ and
-    often good if some expected values are as small as 1.
+## Chi-squared test statistic
+
+If the null hypothesis were true, then the value of $\chi ^{2}$ calculated from our data is a random value from a Chi-squared distribuion: 
+$$
+\chi_{0} ^{2} = \chi_{c-1} ^{2}
+$$
+Once we calculate the test statistic, we can compare our observed value with its distribution under $H_{0}$ to calculate a p-value.
+
+## Assumptions
+
+-   The classification of observations into groups must be independent
+
+-   No more than 20% of categories should have expected counts less than 5
+
+## Warnings
+
+-   Use only frequency counts. Use of percentages in place of counts may
+    lead to incorrect conclusions.
+
+-   Check for small expected values. An expected value of less than 5
+    may lead to concern and a very small value of less than 1 is a
+    warning. Sometimes, you can merge/combine categories in case of small
+    expected counts.
+
+-   If the chi-squared statistic is small enough to be not significant,
+    there is no problem.
+
+-   If chi-squared statistic is significant, check the contributions to
+    each cell. If cells with large expected value (\>5) contribute a
+    large amount to chi-squared statistic, again there is no problem.
+
+-   If cells with expected values less than 5 lead large contributions
+    to chi-squared statistic, the significance of the chi-squared
+    statistic should be treated with caution.
+
+## Goodness of fit test
+
+- Compare *observed* frequencies with *expected* frequencies under some specified null hypothesis.
+
+- Make a hypothesis about the population, what would we expect the frequency to be under that hypothesis?
+
+- For example:
+
+    - Wish to compare the frequency of occurence of different phenotypes in an organism with the frequencies we would expect under Mendel's laws of inheritance.
+    - Wish to compare the distribution of a observation with expected count we would obtain from a Poisson distribution. 
     
-Sometimes, one can merge/combine categories in case of small expected counts.
+Hypotheses of this sort can be tested using the **Chi-squared test statistic** ($\chi ^ 2$ = Ki Sq.)
+
 
 ## Example
 
 A survey of voters included 550 males and 450 females. Will you call
 this survey as a biased one?
+
+Here the null hypothesis is that the ratio of males to females is 1:1.
+
+Equivalent: the proportion of males is equal to the proportion of female in the population
 
 | Gender | $O$  | $E$  | $(O-E)^2/E$          |
 |--------|------|------|----------------------|
@@ -107,9 +179,15 @@ this survey as a biased one?
 | female | 450  | 500  | $(450-500)^2/ 500=5$ |
 | sum    | 1000 | 1000 | 10                   |
 
+$$
+\chi ^{2} = \sum _{1}^{c}\frac{\left( O-E\right)^{2}}{E} = 
+\frac{(550-500)^2}{500} + \frac{(450-500)^2}{500} = 10
+$$
+## Example
+![](img/chisq_ex.png)
+
 -   df= (2-1)=1
--   At 5% level, the critical value is only 3.84. So the sample is a
-    biased one.
+-   At 5% level ($\alpha =0.05$), the critical value is only 3.84. So the sample is a biased one.
 
 ## Mendel's experiment (see Study Guide)
 
@@ -140,10 +218,45 @@ this survey as a biased one?
         for normal distribution, which has 2 parameters.\
     -   So the df for this test will be 10-1-2=7.
 
+## Goodness of fit for distributions example
+A safety inspector monitors car accidents at a bustling intersection. The inspector enters the counts of monthly accidents.
+
+Null: The sample data follow the Poisson distribution.
+Alternative: The sample data do not follow the Poisson distribution.
+
+
+*Note* The Poisson distribution is a discrete probability distribution (integers) that can model counts of events or attributes in a fixed observation space. Many but not all count processes follow this distribution. 
+## Goodness of fit for distributions example
+
+| Accidents| $O$ | $E$  | $(O-E)^2/E$         |
+|---------|-----|------|----------------------|
+| 0       | 7   |      |                      |
+| 1       | 8   |      |                      |
+| 2       | 13  |      |                      |
+| 3       | 10  |      |                      |
+| >=4     | 12  |      |                      |
+|---------|-----|------|----------------------|
+| Sum     | 40  |      |                      |
+
+Conclusion:
+
+## Tests of Independence
+
+- In some cases, we have counts of observations cross-classified in terms of two factors.
+
+- We are generally interested in determining whether or not the two factors are independent.
+
+- If we consider the observations falling into each category for factor 1, is this distribution consistent across all levels of factor 2? (or vice versa)
+
 ## Contingency table
 
 -   Given a two way table of frequency counts, **we test whether the row
     and column variables are independent**
+
+-   Hypotheses:
+
+    - Null: the two factors are independent
+    - written another way: the row (or column) distributions are the same
 
 -   The expected count for cell $(i,j)$ is given by $E_{ij}$ =
     $(T_i \times T_j)/n$ where\
@@ -221,25 +334,6 @@ chisq.test(dt)
 -   So $2^2 = 4$ is treated as a significant contribution to the
     $\chi ^{2}$ statistic.
 
-## Warnings
-
--   Use only frequency counts. Use of percentages in place of counts may
-    lead to incorrect conclusions.
-
--   Check for small expected values. An expected value of less than 5
-    may lead to concern and a very small value of less than 1 is a
-    warning.
-
--   If the chi-squared statistic is small enough to be not significant,
-    there is no problem.
-
--   If chi-squared statistic is significant, check the contributions to
-    each cell. If cells with large expected value (\>5) contribute a
-    large amount to chi-squared statistic, again there is no problem.
-
--   If cells with expected values less than 5 lead large contributions
-    to chi-squared statistic, the significance of the chi-squared
-    statistic should be treated with caution.
 
 ## Simpson's paradox
 
@@ -307,45 +401,10 @@ Regular Chi-square test
 chisq.test(tabledata)
 ```
 
-## Log-linear model
 
-This model is built based on the assumption that the log of the count,
-which is predicted or modelled by categorical factors, is normally
-distributed.
+## Correspondence Analysis 
+Correspondence Analysis is an exploratory statistical technique for assessing the interdependence of categorical variables whose data are presented primarily in the form of a two-way table of frequencies
 
-Easy to fit using the MASS package but the data must be in the tall
-format.
-
-```{r, echo=FALSE}
-data.frame(tabledata) %>%
-  pivot_longer(cols = 1:3, 
-               values_to = "Counts",
-               names_to = "Smoke_status") ->smk
-smk %>% 
-  mutate(Employ=rep(row.lbl,each=3)) %>% 
-  relocate(Smoke_status,Employ, Counts)->smk
-glimpse(smk)
-```
-
-```{r, echo=TRUE}
-library(MASS)
-MASS::loglm(Counts~ Smoke_status+Employ, smk)
-```
-
--   In addition to the usual Pearson Chi-square statistic, a different
-    test statistic based on the likelihood principle is also given.
-
--   Useful to model multi-way tables with more than two factors.
-
--   Generalised linear models are preferred to log-linear models where
-    the count response can be assumed to follow Poisson. Logistic models
-    can be built to binomial counts. These models are covered in the
-    *applied linear models* course.
-
-## Correspondence Analysis \| (not examined in depth)
-
--   CA is for assessing interdependence of categorical variables
-    presented in the form of a contingency table
 
     Data: Smoking Status vs. Staff Groupings
 

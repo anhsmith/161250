@@ -8,7 +8,7 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.450">
+  <meta name="generator" content="quarto-1.3.353">
 
   <title>161250 Data Analysis - Chapter 5:Tabulated Counts</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -399,6 +399,29 @@
 </div>
 
 </section>
+<section id="analysing-frequencies" class="slide level2">
+<h2>Analysing frequencies</h2>
+<ul>
+<li><p>This chapter focuses on data that consist of frequencies or counts of occurrences of some events</p></li>
+<li><p>Wish to compare <em>observed</em> with what we would have <em>expected</em></p></li>
+<li><p>We will cover the <span class="math inline">\(\chi ^ 2\)</span> distribution, “Goodness-of-fit” tests, and test of independence</p></li>
+</ul>
+</section>
+<section id="chi-squared-distribution" class="slide level2">
+<h2>Chi squared distribution</h2>
+<div class="left-narrow">
+<ul>
+<li><p>Continuous 0 to infinity; starts at 0 because it is a square (a square number can’t be negative)</p></li>
+<li><p>The mean of this distribution is its degrees of freedom (k)</p></li>
+<li><p>It is right skewed, mean greater than median and mode; variance is <span class="math inline">\(2k\)</span></p></li>
+<li><p>Shape of the <span class="math inline">\(\chi ^ 2\)</span> distribution is determined by the degrees of freedom (k), at very high k (90 or greater) <span class="math inline">\(\chi ^ 2\)</span> distribution resembles the normal distribution</p></li>
+<li><p>Main purpose is hypothesis testing, not describing real-world distributions</p></li>
+</ul>
+</div>
+<div class="right-wide">
+<p><img data-src="img/chi-square-distribution-k-example.png"></p>
+</div>
+</section>
 <section id="tables-and-frequencies" class="slide level2">
 <h2>Tables and frequencies</h2>
 <ul>
@@ -409,10 +432,11 @@
 </ul></li>
 <li><p>In either case, we can specify a null hypothesis and test it using data.</p></li>
 <li><p>To do so, compare <em>observed</em> counts with <em>expected</em> counts, where the <em>expected</em> counts are derived from our null model about the population.</p></li>
+<li><p>We are employing the Chi-squared statistic with data which consists of integers. That is, the data are discrete rather than continuous.</p></li>
 </ul>
 </section>
-<section id="examples-with-one-factor" class="slide level2">
-<h2>Examples with one factor</h2>
+<section id="examples-of-data-with-one-factor" class="slide level2">
+<h2>Examples of data with one factor</h2>
 <h4 id="example-1">Example 1</h4>
 <ul>
 <li>A dataset contains 40 males and 50 females.</li>
@@ -477,19 +501,54 @@
 </div>
 </div>
 </section>
-<section id="goodness-of-fit-test" class="slide level2">
-<h2>Goodness of fit test</h2>
-<p>Hypotheses of this sort can be tested using the <strong>Chi-squared test statistic</strong> (<span class="math inline">\(\chi ^ 2\)</span> = Ki Sq.)</p>
+<section id="chi-squared-test-statistic" class="slide level2">
+<h2>Chi-squared test statistic</h2>
 <p><span class="math display">\[
 \chi ^{2} =\sum _{1}^{c}\frac{\left({\rm Observed-Expected}\right)^{{\rm 2}} }{{\rm Expected}}  =\sum _{1}^{c}\frac{\left( O-E\right)^{2}}{E}
 \]</span></p>
 <p>If the number of categories is <span class="math inline">\(c\)</span>, then the degrees of freedom is <span class="math inline">\(c-1\)</span>.</p>
-<p><span class="math inline">\(\chi ^ 2\)</span> distribution is a continuous distribution. When used for discrete data, Chi-squared approximation is very good for <span class="math inline">\(E&gt;5\)</span> and often good if some expected values are as small as 1.</p>
-<p>Sometimes, one can merge/combine categories in case of small expected counts.</p>
+</section>
+<section id="chi-squared-test-statistic-1" class="slide level2">
+<h2>Chi-squared test statistic</h2>
+<p>If the null hypothesis were true, then the value of <span class="math inline">\(\chi ^{2}\)</span> calculated from our data is a random value from a Chi-squared distribuion: <span class="math display">\[
+\chi_{0} ^{2} = \chi_{c-1} ^{2}
+\]</span> Once we calculate the test statistic, we can compare our observed value with its distribution under <span class="math inline">\(H_{0}\)</span> to calculate a p-value.</p>
+</section>
+<section id="assumptions" class="slide level2">
+<h2>Assumptions</h2>
+<ul>
+<li><p>The classification of observations into groups must be independent</p></li>
+<li><p>No more than 20% of categories should have expected counts less than 5</p></li>
+</ul>
+</section>
+<section id="warnings" class="slide level2">
+<h2>Warnings</h2>
+<ul>
+<li><p>Use only frequency counts. Use of percentages in place of counts may lead to incorrect conclusions.</p></li>
+<li><p>Check for small expected values. An expected value of less than 5 may lead to concern and a very small value of less than 1 is a warning. Sometimes, you can merge/combine categories in case of small expected counts.</p></li>
+<li><p>If the chi-squared statistic is small enough to be not significant, there is no problem.</p></li>
+<li><p>If chi-squared statistic is significant, check the contributions to each cell. If cells with large expected value (&gt;5) contribute a large amount to chi-squared statistic, again there is no problem.</p></li>
+<li><p>If cells with expected values less than 5 lead large contributions to chi-squared statistic, the significance of the chi-squared statistic should be treated with caution.</p></li>
+</ul>
+</section>
+<section id="goodness-of-fit-test" class="slide level2">
+<h2>Goodness of fit test</h2>
+<ul>
+<li><p>Compare <em>observed</em> frequencies with <em>expected</em> frequencies under some specified null hypothesis.</p></li>
+<li><p>Make a hypothesis about the population, what would we expect the frequency to be under that hypothesis?</p></li>
+<li><p>For example:</p>
+<ul>
+<li>Wish to compare the frequency of occurence of different phenotypes in an organism with the frequencies we would expect under Mendel’s laws of inheritance.</li>
+<li>Wish to compare the distribution of a observation with expected count we would obtain from a Poisson distribution.</li>
+</ul></li>
+</ul>
+<p>Hypotheses of this sort can be tested using the <strong>Chi-squared test statistic</strong> (<span class="math inline">\(\chi ^ 2\)</span> = Ki Sq.)</p>
 </section>
 <section id="example" class="slide level2">
 <h2>Example</h2>
 <p>A survey of voters included 550 males and 450 females. Will you call this survey as a biased one?</p>
+<p>Here the null hypothesis is that the ratio of males to females is 1:1.</p>
+<p>Equivalent: the proportion of males is equal to the proportion of female in the population</p>
 <table>
 <thead>
 <tr class="header">
@@ -520,9 +579,13 @@
 </tr>
 </tbody>
 </table>
+<p><span class="math display">\[
+\chi ^{2} = \sum _{1}^{c}\frac{\left( O-E\right)^{2}}{E} =
+\frac{(550-500)^2}{500} + \frac{(450-500)^2}{500} = 10
+\]</span> ## Example <img data-src="img/chisq_ex.png"></p>
 <ul>
 <li>df= (2-1)=1</li>
-<li>At 5% level, the critical value is only 3.84. So the sample is a biased one.</li>
+<li>At 5% level (<span class="math inline">\(\alpha =0.05\)</span>), the critical value is only 3.84. So the sample is a biased one.</li>
 </ul>
 </section>
 <section id="mendels-experiment-see-study-guide" class="slide level2">
@@ -554,10 +617,84 @@
 </ul></li>
 </ul>
 </section>
+<section id="goodness-of-fit-for-distributions-example" class="slide level2">
+<h2>Goodness of fit for distributions example</h2>
+<p>A safety inspector monitors car accidents at a bustling intersection. The inspector enters the counts of monthly accidents.</p>
+<p>Null: The sample data follow the Poisson distribution. Alternative: The sample data do not follow the Poisson distribution.</p>
+<p><em>Note</em> The Poisson distribution is a discrete probability distribution (integers) that can model counts of events or attributes in a fixed observation space. Many but not all count processes follow this distribution. ## Goodness of fit for distributions example</p>
+<table>
+<thead>
+<tr class="header">
+<th>Accidents</th>
+<th><span class="math inline">\(O\)</span></th>
+<th><span class="math inline">\(E\)</span></th>
+<th><span class="math inline">\((O-E)^2/E\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>7</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>8</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>13</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>10</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>&gt;=4</td>
+<td>12</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>———</td>
+<td>—–</td>
+<td>——</td>
+<td>———————-</td>
+</tr>
+<tr class="odd">
+<td>Sum</td>
+<td>40</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Conclusion:</p>
+</section>
+<section id="tests-of-independence" class="slide level2">
+<h2>Tests of Independence</h2>
+<ul>
+<li><p>In some cases, we have counts of observations cross-classified in terms of two factors.</p></li>
+<li><p>We are generally interested in determining whether or not the two factors are independent.</p></li>
+<li><p>If we consider the observations falling into each category for factor 1, is this distribution consistent across all levels of factor 2? (or vice versa)</p></li>
+</ul>
+</section>
 <section id="contingency-table" class="slide level2">
 <h2>Contingency table</h2>
 <ul>
 <li><p>Given a two way table of frequency counts, <strong>we test whether the row and column variables are independent</strong></p></li>
+<li><p>Hypotheses:</p>
+<ul>
+<li>Null: the two factors are independent</li>
+<li>written another way: the row (or column) distributions are the same</li>
+</ul></li>
 <li><p>The expected count for cell <span class="math inline">\((i,j)\)</span> is given by <span class="math inline">\(E_{ij}\)</span> = <span class="math inline">\((T_i \times T_j)/n\)</span> where<br>
 <span class="math inline">\(~~~~~T_i\)</span>, the total for row <span class="math inline">\(i\)</span>;<br>
 <span class="math inline">\(~~~~~T_j\)</span>, the total for column <span class="math inline">\(j\)</span><br>
@@ -662,16 +799,6 @@ X-squared = 16.433, df = 8, p-value = 0.03659</code></pre>
 <li><p>Hence [^{2} = =( )^{2}. ]</p></li>
 <li><p>Individual cell contribution is similar to standardized residual. Any standardized residual greater than 2 is regarded as significant.</p></li>
 <li><p>So <span class="math inline">\(2^2 = 4\)</span> is treated as a significant contribution to the <span class="math inline">\(\chi ^{2}\)</span> statistic.</p></li>
-</ul>
-</section>
-<section id="warnings" class="slide level2">
-<h2>Warnings</h2>
-<ul>
-<li><p>Use only frequency counts. Use of percentages in place of counts may lead to incorrect conclusions.</p></li>
-<li><p>Check for small expected values. An expected value of less than 5 may lead to concern and a very small value of less than 1 is a warning.</p></li>
-<li><p>If the chi-squared statistic is small enough to be not significant, there is no problem.</p></li>
-<li><p>If chi-squared statistic is significant, check the contributions to each cell. If cells with large expected value (&gt;5) contribute a large amount to chi-squared statistic, again there is no problem.</p></li>
-<li><p>If cells with expected values less than 5 lead large contributions to chi-squared statistic, the significance of the chi-squared statistic should be treated with caution.</p></li>
 </ul>
 </section>
 <section id="simpsons-paradox" class="slide level2">
@@ -813,44 +940,10 @@ X-squared = 15.672, df = 8, p-value = 0.04733</code></pre>
 </div>
 </div>
 </section>
-<section id="log-linear-model" class="slide level2">
-<h2>Log-linear model</h2>
-<p>This model is built based on the assumption that the log of the count, which is predicted or modelled by categorical factors, is normally distributed.</p>
-<p>Easy to fit using the MASS package but the data must be in the tall format.</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output cell-output-stdout">
-<pre><code>Rows: 15
-Columns: 3
-$ Smoke_status &lt;chr&gt; "None", "Moderate", "Heavy", "None", "Moderate", "Heavy",…
-$ Employ       &lt;chr&gt; "Junior employees", "Junior employees", "Junior employees…
-$ Counts       &lt;dbl&gt; 18, 57, 13, 4, 10, 4, 10, 13, 2, 25, 22, 4, 4, 5, 2</code></pre>
-</div>
-</div>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">library</span>(MASS)</span>
-<span id="cb15-2"><a href="#cb15-2"></a>MASS<span class="sc">::</span><span class="fu">loglm</span>(Counts<span class="sc">~</span> Smoke_status<span class="sc">+</span>Employ, smk)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Call:
-MASS::loglm(formula = Counts ~ Smoke_status + Employ, data = smk)
-
-Statistics:
-                      X^2 df   P(&gt; X^2)
-Likelihood Ratio 15.52691  8 0.04967430
-Pearson          15.67163  8 0.04732869</code></pre>
-</div>
-</div>
-<ul>
-<li><p>In addition to the usual Pearson Chi-square statistic, a different test statistic based on the likelihood principle is also given.</p></li>
-<li><p>Useful to model multi-way tables with more than two factors.</p></li>
-<li><p>Generalised linear models are preferred to log-linear models where the count response can be assumed to follow Poisson. Logistic models can be built to binomial counts. These models are covered in the <em>applied linear models</em> course.</p></li>
-</ul>
-</section>
-<section id="correspondence-analysis-not-examined-in-depth" class="slide level2">
-<h2>Correspondence Analysis | (not examined in depth)</h2>
-<ul>
-<li><p>CA is for assessing interdependence of categorical variables presented in the form of a contingency table</p>
-<p>Data: Smoking Status vs.&nbsp;Staff Groupings</p></li>
-</ul>
+<section id="correspondence-analysis" class="slide level2">
+<h2>Correspondence Analysis</h2>
+<p>Correspondence Analysis is an exploratory statistical technique for assessing the interdependence of categorical variables whose data are presented primarily in the form of a two-way table of frequencies</p>
+<pre><code>Data: Smoking Status vs. Staff Groupings</code></pre>
 <div class="cell" data-layout-align="center">
 <div class="cell-output cell-output-stdout">
 <pre><code>                 None Moderate Heavy
@@ -893,15 +986,15 @@ rowmass          0.316    0.554 0.1295</code></pre>
 <section id="graphical-display-of-row-profiles" class="slide level2">
 <h2>Graphical display of row profiles</h2>
 
-<img data-src="Chapter05_files/figure-revealjs/unnamed-chunk-13-1.png" width="768" class="r-stretch quarto-figure-center"><ul>
+<img data-src="Chapter05_files/figure-revealjs/unnamed-chunk-11-1.png" width="768" class="r-stretch quarto-figure-center"><ul>
 <li>No clear patterns seen</li>
 </ul>
 </section>
 <section id="symmetric-plots-to-find-subgrouping" class="slide level2 scrollable">
 <h2>Symmetric plots to find subgrouping</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">library</span>(<span class="st">"FactoMineR"</span>)</span>
-<span id="cb20-2"><a href="#cb20-2"></a><span class="fu">CA</span>(tabledata) <span class="sc">|&gt;</span> <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">library</span>(<span class="st">"FactoMineR"</span>)</span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="fu">CA</span>(tabledata) <span class="sc">|&gt;</span> <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -931,7 +1024,7 @@ Moderate         |    15.679 | -0.157 18.619  0.873 | -0.060 25.941  0.127 |
 Heavy            |    16.335 | -0.289 14.676  0.661 |  0.207 72.371  0.339 |</code></pre>
 </div>
 </div>
-<img data-src="Chapter05_files/figure-revealjs/unnamed-chunk-14-1.png" width="672" class="r-stretch quarto-figure-center"></section>
+<img data-src="Chapter05_files/figure-revealjs/unnamed-chunk-12-1.png" width="672" class="r-stretch quarto-figure-center"></section>
 <section id="symmetric-plots-to-find-subgrouping-1" class="slide level2">
 <h2>Symmetric plots to find subgrouping</h2>
 
