@@ -82,6 +82,7 @@ knitr::opts_chunk$set(warning = FALSE,
 - How plausible is the null model of these counts coming from a population with 50% males and 50% females?
 - The expected counts in this case would be 45 males and 45 females.
 
+## Examples of data with one factor 
 #### Example 2
 
 ::::{.columns}
@@ -123,32 +124,15 @@ $$
 $$
 Once we calculate the test statistic, we can compare our observed value with its distribution under $H_{0}$ to calculate a p-value.
 
+![](img/chisq_ex.png)
+
+
 ## Assumptions
 
 -   The classification of observations into groups must be independent
 
 -   No more than 20% of categories should have expected counts less than 5
 
-## Warnings
-
--   Use only frequency counts. Use of percentages in place of counts may
-    lead to incorrect conclusions.
-
--   Check for small expected values. An expected value of less than 5
-    may lead to concern and a very small value of less than 1 is a
-    warning. Sometimes, you can merge/combine categories in case of small
-    expected counts.
-
--   If the chi-squared statistic is small enough to be not significant,
-    there is no problem.
-
--   If chi-squared statistic is significant, check the contributions to
-    each cell. If cells with large expected value (\>5) contribute a
-    large amount to chi-squared statistic, again there is no problem.
-
--   If cells with expected values less than 5 lead large contributions
-    to chi-squared statistic, the significance of the chi-squared
-    statistic should be treated with caution.
 
 ## Goodness of fit test
 
@@ -179,11 +163,15 @@ Equivalent: the proportion of males is equal to the proportion of female in the 
 | female | 450  | 500  | $(450-500)^2/ 500=5$ |
 | sum    | 1000 | 1000 | 10                   |
 
+
 $$
 \chi ^{2} = \sum _{1}^{c}\frac{\left( O-E\right)^{2}}{E} = 
 \frac{(550-500)^2}{500} + \frac{(450-500)^2}{500} = 10
 $$
+
+
 ## Example
+
 ![](img/chisq_ex.png)
 
 -   df= (2-1)=1
@@ -207,8 +195,7 @@ $$
 
 ## Goodness of fit for distributions
 
--   Treat class intervals as *categories* and obtain the actual counts
-    (O) 
+-   Treat class intervals as *categories* and obtain the actual counts (O) 
 -   The assumed distribution gives the expected counts (E)
 -   Perform a goodness of fit and validate the assumed theoretical
     distribution
@@ -226,16 +213,15 @@ Alternative: The sample data do not follow the Poisson distribution.
 
 
 *Note* The Poisson distribution is a discrete probability distribution (integers) that can model counts of events or attributes in a fixed observation space. Many but not all count processes follow this distribution. 
-## Goodness of fit for distributions example
 
-| Accidents| $O$ | $E$  | $(O-E)^2/E$         |
-|---------|-----|------|----------------------|
+## Goodness of fit for distributions example
+| Accidents| $O$ | $E$         | $(O-E)^2/E$         |
+|---------|-----|--------------|----------------------|
 | 0       | 7   |      |                      |
 | 1       | 8   |      |                      |
 | 2       | 13  |      |                      |
 | 3       | 10  |      |                      |
 | >=4     | 12  |      |                      |
-|---------|-----|------|----------------------|
 | Sum     | 40  |      |                      |
 
 Conclusion:
@@ -294,13 +280,27 @@ kable(dt, caption="Porcine Stress Syndrome (PSS) data") %>%
   kable_styling(bootstrap_options = "striped", full_width = F)
 ```
 
+## Example
+```{r}
+kable(dt, caption="Porcine Stress Syndrome (PSS) data") %>%
+  kable_styling(bootstrap_options = "striped", full_width = F)
+```
+
 ```{r, echo=TRUE}
 chisq.test(dt)
 ```
 
 ## Computations
+::: left
+```{r}
+kable(dt, caption="Porcine Stress Syndrome (PSS) data") %>%
+  kable_styling(bootstrap_options = "striped", full_width = F)
+```
+:::
 
+::: right
 ![](img/halothane1.png)
+:::
 
 ## Inference
 
@@ -324,9 +324,7 @@ chisq.test(dt)
 
 -   Counts follow Poisson distribution for which *mean = variance*
 
--   Hence \[\chi \^{2}
-    =\sum \frac{\left({\rm residual}\right)^{{\rm 2}} }{{\rm variance}}
-    =\sum \left(\frac{{\rm residual}}{{\rm std\; dev}} \right)\^{2}. \]
+-   Hence $\chi^{2}=\sum \frac{\left({\rm residual}\right)^{{\rm 2}} }{{\rm variance}} =\sum \left(\frac{{\rm residual}}{{\rm std\; dev}} \right)^{2}.$
 
 -   Individual cell contribution is similar to standardized residual.
     Any standardized residual greater than 2 is regarded as significant.
@@ -334,6 +332,26 @@ chisq.test(dt)
 -   So $2^2 = 4$ is treated as a significant contribution to the
     $\chi ^{2}$ statistic.
 
+## Warnings
+
+-   Use only frequency counts. Use of percentages in place of counts may
+    lead to incorrect conclusions.
+
+-   Check for small expected values. An expected value of less than 5
+    may lead to concern and a very small value of less than 1 is a
+    warning. Sometimes, you can merge/combine categories in case of small
+    expected counts.
+
+-   If the chi-squared statistic is small enough to be not significant,
+    there is no problem.
+
+-   If chi-squared statistic is significant, check the contributions to
+    each cell. If cells with large expected value (\>5) contribute a
+    large amount to chi-squared statistic, again there is no problem.
+
+-   If cells with expected values less than 5 lead large contributions
+    to chi-squared statistic, the significance of the chi-squared
+    statistic should be treated with caution.
 
 ## Simpson's paradox
 
@@ -485,8 +503,6 @@ CA(tabledata) |> summary()
     independence.
 
     -   For $r\times c$ cells the test involves $(r-1)(c-1)$ df
-    -   shiny app
-        <http://shiny.massey.ac.nz/anhsmith/demos/explore.counts.of.factors/>
 
 -   $\chi ^{2}$ test works well if $E> 5$. Some could be as low as 1.
 

@@ -2608,7 +2608,7 @@
     "href": "slides/Chapter05.html#example",
     "title": "Chapter 5:Tabulated Counts",
     "section": "Example",
-    "text": "Example\nA survey of voters included 550 males and 450 females. Will you call this survey as a biased one?\nHere the null hypothesis is that the ratio of males to females is 1:1.\nEquivalent: the proportion of males is equal to the proportion of female in the population\n\n\n\nGender\n\\(O\\)\n\\(E\\)\n\\((O-E)^2/E\\)\n\n\n\n\nmale\n550\n500\n\\((550-500)^2/ 500=5\\)\n\n\nfemale\n450\n500\n\\((450-500)^2/ 500=5\\)\n\n\nsum\n1000\n1000\n10\n\n\n\n\\[\n\\chi ^{2} = \\sum _{1}^{c}\\frac{\\left( O-E\\right)^{2}}{E} =\n\\frac{(550-500)^2}{500} + \\frac{(450-500)^2}{500} = 10\n\\] ## Example \n\ndf= (2-1)=1\nAt 5% level (\\(\\alpha =0.05\\)), the critical value is only 3.84. So the sample is a biased one."
+    "text": "Example\nA survey of voters included 550 males and 450 females. Will you call this survey as a biased one?\nHere the null hypothesis is that the ratio of males to females is 1:1.\nEquivalent: the proportion of males is equal to the proportion of female in the population\n\n\n\nGender\n\\(O\\)\n\\(E\\)\n\\((O-E)^2/E\\)\n\n\n\n\nmale\n550\n500\n\\((550-500)^2/ 500=5\\)\n\n\nfemale\n450\n500\n\\((450-500)^2/ 500=5\\)\n\n\nsum\n1000\n1000\n10\n\n\n\n\\[\n\\chi ^{2} = \\sum _{1}^{c}\\frac{\\left( O-E\\right)^{2}}{E} =\n\\frac{(550-500)^2}{500} + \\frac{(450-500)^2}{500} = 10\n\\]"
   },
   {
     "objectID": "slides/Chapter05.html#mendels-experiment-see-study-guide",
@@ -2622,7 +2622,7 @@
     "href": "slides/Chapter05.html#goodness-of-fit-for-distributions",
     "title": "Chapter 5:Tabulated Counts",
     "section": "Goodness of fit for distributions",
-    "text": "Goodness of fit for distributions\n\nTreat class intervals as categories and obtain the actual counts\n\n\n\nThe assumed distribution gives the expected counts (E)\nPerform a goodness of fit and validate the assumed theoretical distribution\nAdjust the degrees of freedom (df) for the number of estimated parameters of the theoretical distribution\n\nFor example, assume that you have 10 class intervals and test for normal distribution, which has 2 parameters.\n\nSo the df for this test will be 10-1-2=7."
+    "text": "Goodness of fit for distributions\n\nTreat class intervals as categories and obtain the actual counts (O)\nThe assumed distribution gives the expected counts (E)\nPerform a goodness of fit and validate the assumed theoretical distribution\nAdjust the degrees of freedom (df) for the number of estimated parameters of the theoretical distribution\n\nFor example, assume that you have 10 class intervals and test for normal distribution, which has 2 parameters.\n\nSo the df for this test will be 10-1-2=7."
   },
   {
     "objectID": "slides/Chapter05.html#contingency-table",
@@ -2636,14 +2636,14 @@
     "href": "slides/Chapter05.html#example-3",
     "title": "Chapter 5:Tabulated Counts",
     "section": "Example",
-    "text": "Example\nContext: Porcine Stress Syndrome (PSS) result in pale, soft meat in pigs and under conditions of stress- death.\n\nPresence of PPS is a positive reaction to breathing halothane.\n\nSelective breeding for reducing incidence of PSS\n\n\n\n\n\nPorcine Stress Syndrome (PSS) data\n\n\n\nHalothane.positive\nHalothane.negative\nTotals\n\n\n\n\nLarge White\n2\n76\n78\n\n\nHampshire\n3\n86\n89\n\n\nLandrace(B)\n11\n73\n84\n\n\nLandrace(S)\n16\n76\n92\n\n\nTotals\n32\n311\n343\n\n\n\n\n\n\n\n\nchisq.test(dt)\n\n\n    Pearson's Chi-squared test\n\ndata:  dt\nX-squared = 16.433, df = 8, p-value = 0.03659"
+    "text": "Example\n\n\ndf= (2-1)=1\nAt 5% level (\\(\\alpha =0.05\\)), the critical value is only 3.84. So the sample is a biased one."
   },
   {
     "objectID": "slides/Chapter05.html#computations",
     "href": "slides/Chapter05.html#computations",
     "title": "Chapter 5:Tabulated Counts",
     "section": "Computations",
-    "text": "Computations"
+    "text": "Computations\n\n\n\n\nPorcine Stress Syndrome (PSS) data\n\n\n\nHalothane.positive\nHalothane.negative\nTotals\n\n\n\n\nLarge White\n2\n76\n78\n\n\nHampshire\n3\n86\n89\n\n\nLandrace(B)\n11\n73\n84\n\n\nLandrace(S)\n16\n76\n92\n\n\nTotals\n32\n311\n343"
   },
   {
     "objectID": "slides/Chapter05.html#inference",
@@ -2657,7 +2657,7 @@
     "href": "slides/Chapter05.html#significant-cell-contribution",
     "title": "Chapter 5:Tabulated Counts",
     "section": "Significant cell contribution",
-    "text": "Significant cell contribution\n\nCounts follow Poisson distribution for which mean = variance\nHence [^{2} = =( )^{2}. ]\nIndividual cell contribution is similar to standardized residual. Any standardized residual greater than 2 is regarded as significant.\nSo \\(2^2 = 4\\) is treated as a significant contribution to the \\(\\chi ^{2}\\) statistic."
+    "text": "Significant cell contribution\n\nCounts follow Poisson distribution for which mean = variance\nHence \\(\\chi^{2}=\\sum \\frac{\\left({\\rm residual}\\right)^{{\\rm 2}} }{{\\rm variance}} =\\sum \\left(\\frac{{\\rm residual}}{{\\rm std\\; dev}} \\right)^{2}.\\)\nIndividual cell contribution is similar to standardized residual. Any standardized residual greater than 2 is regarded as significant.\nSo \\(2^2 = 4\\) is treated as a significant contribution to the \\(\\chi ^{2}\\) statistic."
   },
   {
     "objectID": "slides/Chapter05.html#warnings",
@@ -2727,7 +2727,7 @@
     "href": "slides/Chapter05.html#summary",
     "title": "Chapter 5:Tabulated Counts",
     "section": "Summary",
-    "text": "Summary\n\nGoodness of fit is for testing whether the observed counts are from the hypothesised population groups.\n\nFor \\(c\\) categories (groups), the test involves \\(c-1\\) df.\n\nContingency Table (\\(r\\) rows and \\(c\\) columns) data are tested for the independence.\n\nFor \\(r\\times c\\) cells the test involves \\((r-1)(c-1)\\) df\nshiny app http://shiny.massey.ac.nz/anhsmith/demos/explore.counts.of.factors/\n\n\\(\\chi ^{2}\\) test works well if \\(E&gt; 5\\). Some could be as low as 1.\nDo correspondence analysis (symmetric plots) when independence is rejected.\n\n\n\n\n\n\n\n\n\n\n161250 Data Analysis"
+    "text": "Summary\n\nGoodness of fit is for testing whether the observed counts are from the hypothesised population groups.\n\nFor \\(c\\) categories (groups), the test involves \\(c-1\\) df.\n\nContingency Table (\\(r\\) rows and \\(c\\) columns) data are tested for the independence.\n\nFor \\(r\\times c\\) cells the test involves \\((r-1)(c-1)\\) df\n\n\\(\\chi ^{2}\\) test works well if \\(E&gt; 5\\). Some could be as low as 1.\nDo correspondence analysis (symmetric plots) when independence is rejected.\n\n\n\n\n\n\n\n\n\n\n161250 Data Analysis"
   },
   {
     "objectID": "slides/Chapter07.html#learning-objectives",
@@ -3679,7 +3679,7 @@
     "href": "slides/Chapter05.html#examples-of-data-with-one-factor",
     "title": "Chapter 5:Tabulated Counts",
     "section": "Examples of data with one factor",
-    "text": "Examples of data with one factor\nExample 1\n\nA dataset contains 40 males and 50 females.\nHow plausible is the null model of these counts coming from a population with 50% males and 50% females?\nThe expected counts in this case would be 45 males and 45 females.\n\nExample 2\n\n\n\nDoes the distribution of rejects of metal castings by causes in a particular week vary from the long-term average counts?\nTreat the long-term average counts as the expected counts.\nCompare observed counts with expected counts.\n\n\n\n\n\nCauses of rejection\nRejects during the week\nLong-term average\n\n\n\n\nsand\n90\n82\n\n\nmisrun\n8\n4\n\n\nshift\n16\n10\n\n\ndrop-\n8\n6\n\n\ncorebreak\n23\n21\n\n\nbroken\n21\n20\n\n\nother\n5\n8"
+    "text": "Examples of data with one factor\nExample 1\n\nA dataset contains 40 males and 50 females.\nHow plausible is the null model of these counts coming from a population with 50% males and 50% females?\nThe expected counts in this case would be 45 males and 45 females."
   },
   {
     "objectID": "slides/Chapter05.html#chi-squared-test-statistic",
@@ -3707,7 +3707,7 @@
     "href": "slides/Chapter05.html#goodness-of-fit-for-distributions-example",
     "title": "Chapter 5:Tabulated Counts",
     "section": "Goodness of fit for distributions example",
-    "text": "Goodness of fit for distributions example\nA safety inspector monitors car accidents at a bustling intersection. The inspector enters the counts of monthly accidents.\nNull: The sample data follow the Poisson distribution. Alternative: The sample data do not follow the Poisson distribution.\nNote The Poisson distribution is a discrete probability distribution (integers) that can model counts of events or attributes in a fixed observation space. Many but not all count processes follow this distribution. ## Goodness of fit for distributions example\n\n\n\nAccidents\n\\(O\\)\n\\(E\\)\n\\((O-E)^2/E\\)\n\n\n\n\n0\n7\n\n\n\n\n1\n8\n\n\n\n\n2\n13\n\n\n\n\n3\n10\n\n\n\n\n&gt;=4\n12\n\n\n\n\n———\n—–\n——\n———————-\n\n\nSum\n40\n\n\n\n\n\nConclusion:"
+    "text": "Goodness of fit for distributions example\nA safety inspector monitors car accidents at a bustling intersection. The inspector enters the counts of monthly accidents.\nNull: The sample data follow the Poisson distribution. Alternative: The sample data do not follow the Poisson distribution.\nNote The Poisson distribution is a discrete probability distribution (integers) that can model counts of events or attributes in a fixed observation space. Many but not all count processes follow this distribution."
   },
   {
     "objectID": "slides/Chapter05.html#tests-of-independence",
@@ -3722,5 +3722,33 @@
     "title": "Chapter 5:Tabulated Counts",
     "section": "Correspondence Analysis",
     "text": "Correspondence Analysis\nCorrespondence Analysis is an exploratory statistical technique for assessing the interdependence of categorical variables whose data are presented primarily in the form of a two-way table of frequencies\nData: Smoking Status vs. Staff Groupings\n\n\n                 None Moderate Heavy\nJunior employees   18       57    13\nJunior managers     4       10     4\nSecretaries        10       13     2\nSenior employees   25       22     4\nSenior managers     4        5     2\n\n\n\n    Pearson's Chi-squared test\n\ndata:  tabledata\nX-squared = 15.672, df = 8, p-value = 0.04733"
+  },
+  {
+    "objectID": "slides/Chapter05.html#examples-of-data-with-one-factor-1",
+    "href": "slides/Chapter05.html#examples-of-data-with-one-factor-1",
+    "title": "Chapter 5:Tabulated Counts",
+    "section": "Examples of data with one factor",
+    "text": "Examples of data with one factor\nExample 2\n\n\n\nDoes the distribution of rejects of metal castings by causes in a particular week vary from the long-term average counts?\nTreat the long-term average counts as the expected counts.\nCompare observed counts with expected counts.\n\n\n\n\n\nCauses of rejection\nRejects during the week\nLong-term average\n\n\n\n\nsand\n90\n82\n\n\nmisrun\n8\n4\n\n\nshift\n16\n10\n\n\ndrop-\n8\n6\n\n\ncorebreak\n23\n21\n\n\nbroken\n21\n20\n\n\nother\n5\n8"
+  },
+  {
+    "objectID": "slides/Chapter05.html#goodness-of-fit-for-distributions-example-1",
+    "href": "slides/Chapter05.html#goodness-of-fit-for-distributions-example-1",
+    "title": "Chapter 5:Tabulated Counts",
+    "section": "Goodness of fit for distributions example",
+    "text": "Goodness of fit for distributions example\n\n\n\nAccidents\n\\(O\\)\n\\(E\\)\n\\((O-E)^2/E\\)\n\n\n\n\n0\n7\n\n\n\n\n1\n8\n\n\n\n\n2\n13\n\n\n\n\n3\n10\n\n\n\n\n&gt;=4\n12\n\n\n\n\nSum\n40\n\n\n\n\n\nConclusion:"
+  },
+  {
+    "objectID": "slides/Chapter05.html#example-4",
+    "href": "slides/Chapter05.html#example-4",
+    "title": "Chapter 5:Tabulated Counts",
+    "section": "Example",
+    "text": "Example\nContext: Porcine Stress Syndrome (PSS) result in pale, soft meat in pigs and under conditions of stress- death.\n\nPresence of PPS is a positive reaction to breathing halothane.\n\nSelective breeding for reducing incidence of PSS\n\n\n\n\n\nPorcine Stress Syndrome (PSS) data\n\n\n\nHalothane.positive\nHalothane.negative\nTotals\n\n\n\n\nLarge White\n2\n76\n78\n\n\nHampshire\n3\n86\n89\n\n\nLandrace(B)\n11\n73\n84\n\n\nLandrace(S)\n16\n76\n92\n\n\nTotals\n32\n311\n343"
+  },
+  {
+    "objectID": "slides/Chapter05.html#example-5",
+    "href": "slides/Chapter05.html#example-5",
+    "title": "Chapter 5:Tabulated Counts",
+    "section": "Example",
+    "text": "Example\n\n\n\nPorcine Stress Syndrome (PSS) data\n\n\n\nHalothane.positive\nHalothane.negative\nTotals\n\n\n\n\nLarge White\n2\n76\n78\n\n\nHampshire\n3\n86\n89\n\n\nLandrace(B)\n11\n73\n84\n\n\nLandrace(S)\n16\n76\n92\n\n\nTotals\n32\n311\n343\n\n\n\n\n\n\n\n\nchisq.test(dt)\n\n\n    Pearson's Chi-squared test\n\ndata:  dt\nX-squared = 16.433, df = 8, p-value = 0.03659"
   }
 ]

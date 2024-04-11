@@ -443,6 +443,9 @@
 <li>How plausible is the null model of these counts coming from a population with 50% males and 50% females?</li>
 <li>The expected counts in this case would be 45 males and 45 females.</li>
 </ul>
+</section>
+<section id="examples-of-data-with-one-factor-1" class="slide level2">
+<h2>Examples of data with one factor</h2>
 <h4 id="example-2">Example 2</h4>
 <div class="columns">
 <div class="column">
@@ -513,22 +516,13 @@
 <p>If the null hypothesis were true, then the value of <span class="math inline">\(\chi ^{2}\)</span> calculated from our data is a random value from a Chi-squared distribuion: <span class="math display">\[
 \chi_{0} ^{2} = \chi_{c-1} ^{2}
 \]</span> Once we calculate the test statistic, we can compare our observed value with its distribution under <span class="math inline">\(H_{0}\)</span> to calculate a p-value.</p>
-</section>
+
+<img data-src="img/chisq_ex.png" class="r-stretch"></section>
 <section id="assumptions" class="slide level2">
 <h2>Assumptions</h2>
 <ul>
 <li><p>The classification of observations into groups must be independent</p></li>
 <li><p>No more than 20% of categories should have expected counts less than 5</p></li>
-</ul>
-</section>
-<section id="warnings" class="slide level2">
-<h2>Warnings</h2>
-<ul>
-<li><p>Use only frequency counts. Use of percentages in place of counts may lead to incorrect conclusions.</p></li>
-<li><p>Check for small expected values. An expected value of less than 5 may lead to concern and a very small value of less than 1 is a warning. Sometimes, you can merge/combine categories in case of small expected counts.</p></li>
-<li><p>If the chi-squared statistic is small enough to be not significant, there is no problem.</p></li>
-<li><p>If chi-squared statistic is significant, check the contributions to each cell. If cells with large expected value (&gt;5) contribute a large amount to chi-squared statistic, again there is no problem.</p></li>
-<li><p>If cells with expected values less than 5 lead large contributions to chi-squared statistic, the significance of the chi-squared statistic should be treated with caution.</p></li>
 </ul>
 </section>
 <section id="goodness-of-fit-test" class="slide level2">
@@ -582,8 +576,12 @@
 <p><span class="math display">\[
 \chi ^{2} = \sum _{1}^{c}\frac{\left( O-E\right)^{2}}{E} =
 \frac{(550-500)^2}{500} + \frac{(450-500)^2}{500} = 10
-\]</span> ## Example <img data-src="img/chisq_ex.png"></p>
-<ul>
+\]</span></p>
+</section>
+<section id="example-3" class="slide level2">
+<h2>Example</h2>
+
+<img data-src="img/chisq_ex.png" class="r-stretch"><ul>
 <li>df= (2-1)=1</li>
 <li>At 5% level (<span class="math inline">\(\alpha =0.05\)</span>), the critical value is only 3.84. So the sample is a biased one.</li>
 </ul>
@@ -603,10 +601,7 @@
 <section id="goodness-of-fit-for-distributions" class="slide level2">
 <h2>Goodness of fit for distributions</h2>
 <ul>
-<li>Treat class intervals as <em>categories</em> and obtain the actual counts
-<ol start="15" type="A">
-<li></li>
-</ol></li>
+<li>Treat class intervals as <em>categories</em> and obtain the actual counts (O)</li>
 <li>The assumed distribution gives the expected counts (E)</li>
 <li>Perform a goodness of fit and validate the assumed theoretical distribution</li>
 <li>Adjust the degrees of freedom (df) for the number of estimated parameters of the theoretical distribution
@@ -621,7 +616,10 @@
 <h2>Goodness of fit for distributions example</h2>
 <p>A safety inspector monitors car accidents at a bustling intersection. The inspector enters the counts of monthly accidents.</p>
 <p>Null: The sample data follow the Poisson distribution. Alternative: The sample data do not follow the Poisson distribution.</p>
-<p><em>Note</em> The Poisson distribution is a discrete probability distribution (integers) that can model counts of events or attributes in a fixed observation space. Many but not all count processes follow this distribution. ## Goodness of fit for distributions example</p>
+<p><em>Note</em> The Poisson distribution is a discrete probability distribution (integers) that can model counts of events or attributes in a fixed observation space. Many but not all count processes follow this distribution.</p>
+</section>
+<section id="goodness-of-fit-for-distributions-example-1" class="slide level2">
+<h2>Goodness of fit for distributions example</h2>
 <table>
 <thead>
 <tr class="header">
@@ -663,12 +661,6 @@
 <td></td>
 </tr>
 <tr class="even">
-<td>———</td>
-<td>—–</td>
-<td>——</td>
-<td>———————-</td>
-</tr>
-<tr class="odd">
 <td>Sum</td>
 <td>40</td>
 <td></td>
@@ -703,7 +695,7 @@
 <li><p>degrees of freedom: <span class="math inline">\((r-1)(c-1)\)</span></p></li>
 </ul>
 </section>
-<section id="example-3" class="slide level2">
+<section id="example-4" class="slide level2">
 <h2>Example</h2>
 <p><code>Context</code>: Porcine Stress Syndrome (PSS) result in pale, soft meat in pigs and under conditions of stress- death.</p>
 <ul>
@@ -712,6 +704,58 @@
 <li>Selective breeding for reducing incidence of PSS</li>
 </ul></li>
 </ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table class="table table-striped" data-quarto-postprocess="true" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>Porcine Stress Syndrome (PSS) data</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Halothane.positive</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Halothane.negative</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Totals</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Large White</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">76</td>
+<td style="text-align: right;">78</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hampshire</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">86</td>
+<td style="text-align: right;">89</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Landrace(B)</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">73</td>
+<td style="text-align: right;">84</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Landrace(S)</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">76</td>
+<td style="text-align: right;">92</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Totals</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">311</td>
+<td style="text-align: right;">343</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</section>
+<section id="example-5" class="slide level2">
+<h2>Example</h2>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <table class="table table-striped" data-quarto-postprocess="true" style="width: auto !important; margin-left: auto; margin-right: auto;">
@@ -774,8 +818,61 @@ X-squared = 16.433, df = 8, p-value = 0.03659</code></pre>
 </section>
 <section id="computations" class="slide level2">
 <h2>Computations</h2>
+<div class="left">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table class="table table-striped" data-quarto-postprocess="true" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>Porcine Stress Syndrome (PSS) data</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Halothane.positive</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Halothane.negative</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Totals</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Large White</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">76</td>
+<td style="text-align: right;">78</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hampshire</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">86</td>
+<td style="text-align: right;">89</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Landrace(B)</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">73</td>
+<td style="text-align: right;">84</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Landrace(S)</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">76</td>
+<td style="text-align: right;">92</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Totals</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">311</td>
+<td style="text-align: right;">343</td>
+</tr>
+</tbody>
+</table>
 
-<img data-src="img/halothane1.png" class="r-stretch"></section>
+
+</div>
+</div>
+</div>
+<div class="right">
+<p><img data-src="img/halothane1.png"></p>
+</div>
+</section>
 <section id="inference" class="slide level2">
 <h2>Inference</h2>
 <ul>
@@ -796,9 +893,19 @@ X-squared = 16.433, df = 8, p-value = 0.03659</code></pre>
 <h2>Significant cell contribution</h2>
 <ul>
 <li><p>Counts follow Poisson distribution for which <em>mean = variance</em></p></li>
-<li><p>Hence [^{2} = =( )^{2}. ]</p></li>
+<li><p>Hence <span class="math inline">\(\chi^{2}=\sum \frac{\left({\rm residual}\right)^{{\rm 2}} }{{\rm variance}} =\sum \left(\frac{{\rm residual}}{{\rm std\; dev}} \right)^{2}.\)</span></p></li>
 <li><p>Individual cell contribution is similar to standardized residual. Any standardized residual greater than 2 is regarded as significant.</p></li>
 <li><p>So <span class="math inline">\(2^2 = 4\)</span> is treated as a significant contribution to the <span class="math inline">\(\chi ^{2}\)</span> statistic.</p></li>
+</ul>
+</section>
+<section id="warnings" class="slide level2">
+<h2>Warnings</h2>
+<ul>
+<li><p>Use only frequency counts. Use of percentages in place of counts may lead to incorrect conclusions.</p></li>
+<li><p>Check for small expected values. An expected value of less than 5 may lead to concern and a very small value of less than 1 is a warning. Sometimes, you can merge/combine categories in case of small expected counts.</p></li>
+<li><p>If the chi-squared statistic is small enough to be not significant, there is no problem.</p></li>
+<li><p>If chi-squared statistic is significant, check the contributions to each cell. If cells with large expected value (&gt;5) contribute a large amount to chi-squared statistic, again there is no problem.</p></li>
+<li><p>If cells with expected values less than 5 lead large contributions to chi-squared statistic, the significance of the chi-squared statistic should be treated with caution.</p></li>
 </ul>
 </section>
 <section id="simpsons-paradox" class="slide level2">
@@ -986,7 +1093,7 @@ rowmass          0.316    0.554 0.1295</code></pre>
 <section id="graphical-display-of-row-profiles" class="slide level2">
 <h2>Graphical display of row profiles</h2>
 
-<img data-src="Chapter05_files/figure-revealjs/unnamed-chunk-11-1.png" width="768" class="r-stretch quarto-figure-center"><ul>
+<img data-src="Chapter05_files/figure-revealjs/unnamed-chunk-13-1.png" width="768" class="r-stretch quarto-figure-center"><ul>
 <li>No clear patterns seen</li>
 </ul>
 </section>
@@ -1024,7 +1131,7 @@ Moderate         |    15.679 | -0.157 18.619  0.873 | -0.060 25.941  0.127 |
 Heavy            |    16.335 | -0.289 14.676  0.661 |  0.207 72.371  0.339 |</code></pre>
 </div>
 </div>
-<img data-src="Chapter05_files/figure-revealjs/unnamed-chunk-12-1.png" width="672" class="r-stretch quarto-figure-center"></section>
+<img data-src="Chapter05_files/figure-revealjs/unnamed-chunk-14-1.png" width="672" class="r-stretch quarto-figure-center"></section>
 <section id="symmetric-plots-to-find-subgrouping-1" class="slide level2">
 <h2>Symmetric plots to find subgrouping</h2>
 
@@ -1039,7 +1146,6 @@ Heavy            |    16.335 | -0.289 14.676  0.661 |  0.207 72.371  0.339 |</co
 <li><p>Contingency Table (<span class="math inline">\(r\)</span> rows and <span class="math inline">\(c\)</span> columns) data are tested for the independence.</p>
 <ul>
 <li>For <span class="math inline">\(r\times c\)</span> cells the test involves <span class="math inline">\((r-1)(c-1)\)</span> df</li>
-<li>shiny app <a href="http://shiny.massey.ac.nz/anhsmith/demos/explore.counts.of.factors/" class="uri">http://shiny.massey.ac.nz/anhsmith/demos/explore.counts.of.factors/</a></li>
 </ul></li>
 <li><p><span class="math inline">\(\chi ^{2}\)</span> test works well if <span class="math inline">\(E&gt; 5\)</span>. Some could be as low as 1.</p></li>
 <li><p>Do correspondence analysis (symmetric plots) when independence is rejected.</p></li>
