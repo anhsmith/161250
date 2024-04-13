@@ -555,6 +555,7 @@ out1 |> t() |>
   kable_classic(full_width = T) 
 ```
 
+
 ## ANOVA $F$-test
 ```{r}
 #| echo: true
@@ -671,32 +672,7 @@ par(mfrow=(c(2,2)))
 plot(mod1)
 ```
 
-## Tukey Line
 
-Also called Median-median line, Resistant line or Rline
-
-Advantages:
-
-```         
-- Easy to fit
-- Outlier or peculiar values do not affect Rline to the extent they influence a regression line
-```
-
-Rline fitting
-
-1.  Sort the values of X first and copy the corresponding Y values
-2.  Divide the X values equally into three groups with corresponding Y
-    values
-3.  Compute the medians of the X values from the lowest and the
-    uppermost subgroups, and the corresponding medians of Y values
-4.  The resistant line is then fitted with these two median points (x median and y median)
-
-## Example (Alcohol consumption data)
-
--   Obtain the estimated slope using low and upper group median pairs as
-    $b = (18.9-3.7)/(12.3-4.2) = 1.88$.
--   Obtain the y-intercept using either the low or upper group median
-    points $a = Y-bX = 3.7-1.88*4.2 = -4.2$.
 
 <!-- ```{r, fig.height=3.5} -->
 
