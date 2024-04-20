@@ -45,37 +45,24 @@ knitr::opts_chunk$set(warning = FALSE,
 
 **RESIDUAL** - to explain random variation in the data
 
-## What is a statistical model?
-
-::: {align="center"}
-**OBSERVATION = FIT + RESIDUAL**
-:::
+## Analysis of two quantitiative variables
 
 -   With paired (related) data (X,Y)
 -   Two variables: one (Y) is random (response) and the other (X) is considered fixed (predictor)
--   Interested in the functional relationship between these two variables
-    - $Y=f(X)$
-    - predict Y, given X
+-   Interested in the functional relationship between these two variables $Y=f(X)$ to predict Y, given X 
+-   Interested in estimates of coefficients 
     
       
-## What is a statistical model?
+## Regression
 
-::: {align="center"}
-**OBSERVATION = FIT + RESIDUAL**
-:::
--   With paired (related) data (X,Y)
+-   Statistical Model
     -   Fitted Model: $\hat{Y}=a+bX$ (True Model:
         $Y=\alpha+\beta X+\epsilon$)
     -   residual error: $e= Y-\hat{Y}$ ($\epsilon$ is not the same as
         $e$)
--   While fitting models to data
-    -   it is required fit the model to the data as closely as possible
-        (e.g. using least squares technique)
-    -   we need to make residuals free of patterns or trends.
-    -   we assume a probability distribution of residuals for
-        statistical inference.
+
         
-## Predict Y, given X
+## Regression
 ```{r, echo=FALSE}
 cirrhosis <- read.table("../data/cirrhosis.txt", header=TRUE)
 
@@ -99,17 +86,22 @@ ggplot(cirrhosis, aes(y=Death, x=Alcohol)) +
 
 -   The fitted model remains as: $\hat{Y}=a+bX_{i}$\
 
+    - $\hat{Y}$ is the predicted value of $y_{i}$ given $x_{i}$. Also called 'fitted' values, they are the linear funtion of X.
+    - $a$ the intercept on the y-axis; value of $\hat{Y}$ when $x_{i}=0$.
+    - $b$ the slope of the line; the change in $\hat{Y}$ with a 1-unit increase in $x_{i}$.
+
+
+## Fitting a regression
+
+-   Want a line that is as 'close' as possible to the existing data points we have
+
+
 -   The method of least squares is employed to obtain the estimates $a$
     and $b$
 
     -   The sum of squared residuals is minimized in the least squares
         method.
-
--   `R` regression outputs are bulky
-
-::: {align="center"}
-LEARN HOW TO INTERPRET THE REGRESSION OUTPUTS
-:::
+  
 
 ## Example (Alcohol consumption data)
 
@@ -120,21 +112,22 @@ print(cirrhosis, row.names=FALSE)
 ## Plot of Alcohol consumption data
 
 ```{r}
-library(tidyverse)
 ggplot(cirrhosis, aes(y=Death, x=Alcohol)) + 
   geom_point() + 
   geom_smooth(method = lm, se = FALSE)
 ```
+
 ## Plot of Alcohol consumption data
 
 ```{r}
-library(tidyverse)
 ggplot(cirrhosis, aes(y=Death, x=Alcohol)) + 
   geom_point() + 
   geom_smooth(method = lm, se = FALSE)
 ```
 
+
 $min \left( \sum_{i=1}(y_{i}-\hat{y_{i}})^2 \right)$
+
 -   $i$ number of observations
 -   $y_{i}$ observed value of y
 -   $\hat{y_{i}}$ predicted value of y
@@ -142,14 +135,8 @@ $min \left( \sum_{i=1}(y_{i}-\hat{y_{i}})^2 \right)$
 
 ## R Base Output 
 
-```{r}
-library(tidyverse)
-ggplot(cirrhosis, aes(y=Death, x=Alcohol)) + 
-  geom_point() + 
-  geom_smooth(method = lm, se = FALSE)
-```
 
-```{r}
+```{r, echo=TRUE}
 mod1 <- lm(Death ~ Alcohol, data=cirrhosis)
 summary(mod1)
 ```
@@ -170,7 +157,46 @@ kable(out1, caption = "t-tests for model parameters") %>%
 
 -   Focus on the model, its coefficients
 
-    -   Are these coefficient estimates meaningful in the context?
+    -   What is the scale of these variables? Are these coefficient estimates meaningful in the context?
+    -   What is the error around these estimates?
+
+
+## Assumptions
+
+Model forming assumptions
+
+1.  $X$ is known without error
+2.  $Y$ is linearly related to $X$ 
+3.  There is a random variability of $Y$ about this line
+
+```{r}
+library(tidyverse)
+ggplot(cirrhosis, aes(y=Death, x=Alcohol)) + 
+  geom_point() + 
+  geom_smooth(method = lm, se = FALSE)
+```
+## Assumptions
+**More** assumptions to form $t$ and $F$ statistics:
+
+1.  Variability in $Y$ about the line is constant and independent of $X$ variable.
+2.  The variability of $Y$ about the line follows normal distribution.
+3.  The distribution of $Y$ given $X = X_i$ is independent of $Y$ given
+    $X = X_j$.
+
+## Residuals and assumptions
+-   Most assumptions are on the errors (residuals)
+    -   independent
+    -   normal
+    -   random
+-   Is there a pattern in my residuals? 
+-   Do they suggest what to do?
+
+## Residuals
+```{r}
+ggplot(cirrhosis, aes(y=Death, x=Alcohol)) + 
+  geom_point() + 
+  geom_smooth(method = lm, se = FALSE)
+```
 
 ## Types of residuals
 
@@ -191,7 +217,6 @@ kable(out1, caption = "t-tests for model parameters") %>%
         omitting the particular observation).
 
 ```{r}
-library(ggplot2)
 dfm <- cbind.data.frame(Residuals=residuals(mod1), 
                         Std.residuals=rstandard(mod1), 
                         Student.Residuals=rstudent(mod1), 
@@ -203,37 +228,6 @@ p3 <- ggplot(dfm, aes(x=Fitted.values, y=Student.Residuals))+geom_point()
 library(patchwork)
 p1+p2+p3 & theme_minimal()
 ```
-
-## Assumptions
-
-Model forming assumptions
-
-1.  $X$ is known without error
-2.  $Y$ is linearly related to $X$ 
-3.  There is a random variability of $Y$ about this line
-
-```{r}
-library(tidyverse)
-ggplot(cirrhosis, aes(y=Death, x=Alcohol)) + 
-  geom_point() + 
-  geom_smooth(method = lm, se = FALSE)
-```
-## Assumptions
-**More** assumptions to form $t$ and $F$ statistics:
-
-1.  Variability in $Y$ about the line is constant and independent of $X$
-    variable.
-2.  The variability of $Y$ about the line follows normal distribution.
-3.  The distribution of $Y$ given $X = X_i$ is independent of $Y$ given
-    $X = X_j$.
-
-## Residuals and assumptions
--   Most assumptions are on the errors (residuals)
-    -   independent
-    -   normal
-    -   random
--   Is there a pattern in my residuals? 
--   Do they suggest what to do?
 
 ## Residual plot for `Alcohol~deaths` model
 
@@ -257,6 +251,7 @@ p4 <- p4+labs(title = "Residuals Vs Obs. Order")
 library(patchwork)
 p1+p2+p3+p4 & theme_minimal()
 ```
+
 ## Residual plot for `Alcohol~deaths` model
 
 ```{r, echo=TRUE}
@@ -506,6 +501,7 @@ p1+p2
 
 
 ## Tests of significance
+
 ```{r}
 #| echo: true
 #| output-location: column
@@ -516,12 +512,14 @@ kable(out1, caption = "t-tests for model parameters") %>%
   kable_classic(full_width = F)
 ```
 
+
     -   $t$ tests of intercept and slope
 
     -   $H_0=true~slope=0$; $H_0=true~intercept=0$
 
         -   For `Alcohol~deaths` model, the slope is significant
             but not the intercept
+
 
 ## Model quality measures
 
@@ -555,13 +553,43 @@ out1 |> t() |>
   kable_classic(full_width = T) 
 ```
 
+## Variance Explained 
+$R^2$ is the proportion of variance in $y$ explained by $x$ .
+```{r, echo =FALSE}
+ols <- lm(Death~Alcohol, data=cirrhosis)
+```
+
+
+```{r, echo=TRUE}
+summary(ols)
+```
+
+## Variance Explained 
+
+$R^2=\frac{SS~regression}{SS~Total}$
+
+
+```{r, echo = TRUE}
+SS <- anova(ols) |> 
+   tidy() |> 
+  select(term:sumsq) |> 
+  janitor::adorn_totals()
+SS
+```
+
+-   $R^2_{adj}$ is adjusted to remove the variation that is explained by
+    chance alone
+
+-   $R^2_{adj}=1-\frac{MS~Error}{MS~Total}$\
+where:\
+$MS~Error$ = $frac{SSE}{n-k-1}$\
+$MS~Total$ = $frac{SST}{n-1}$\
+therefore $R^2_{adj}$ can also be written as: $R^2_{adj}=1-\frac{(1-R^2)*(n-1)}{(n-k-1)}$
 
 ## ANOVA $F$-test
 ```{r}
 #| echo: true
 #| output-location: column
-
-
 mod1  <-  lm(Death ~ Alcohol, data=cirrhosis)
 summary(mod1) 
 ```
@@ -672,42 +700,15 @@ par(mfrow=(c(2,2)))
 plot(mod1)
 ```
 
+## Robust regression models
 
+Robust regression methods are designed to limit the effect that violations of assumptions by the underlying data-generating process have on regression estimates.
 
-<!-- ```{r, fig.height=3.5} -->
+For example, least squares estimates for regression models are highly sensitive to outliers: an outlier with twice the error magnitude of a typical observation contributes four (two squared) times as much to the squared error loss, and therefore has more leverage over the regression estimates.
 
-<!-- y= cirrhosis$Death -->
+## Robust models
 
-<!-- x= cirrhosis$Alcohol -->
-
-<!-- source("https://www.massey.ac.nz/~kgovinda/eda/rline.R") -->
-
-<!-- rline(y,x) -->
-
-<!-- ``` -->
-
-![](img/rline_ch6.png)
-
-## R function
-
-```{r, echo=TRUE}
-line(cirrhosis$Death,cirrhosis$Alcohol) 
-```
-
-```{r}
-lc <- line(cirrhosis$Death,cirrhosis$Alcohol)
-
-ggplot(cirrhosis) + 
-  aes(x=Death,y=Alcohol) + 
-  geom_point() +
-  geom_abline(coef = coef(lc))
-```
-
-The line() function gives a slightly different slope & intercept.
-
-## Two more Robust models
-
-We can also fit a robust linear model using the functions `MASS::rlm()`
+We can fit a robust linear model using the functions `MASS::rlm()`
 `robustbase::lmrob()`.
 
 ```{r}
@@ -739,25 +740,61 @@ p1+p2
 <!-- summary(lmrob(y~x)) -->
 
 <!-- ``` -->
+## Robust Models
+
+To determine if a robust regression model offers a better fit to the data compared to the OLS model, we can calculate the residual standard error of each model.
+
+The residual standard error (RSE) is a way to measure the standard deviation of the residuals in a regression model. The lower the value for RSE, the more closely a model is able to fit the data.
+
+## Robust Models
+```{r, echo = TRUE}
+#fit least squares regression model
+ols <- lm(Death~Alcohol, data=cirrhosis)
+#find residual standard error of ols model
+summary(ols)$sigma
+
+
+#fit robust regression model
+robust <- rlm(Death~Alcohol, data=cirrhosis)
+#find residual standard error of robust model
+summary(robust)$sigma
+```
+
+
+## Cross Validation (CV) 
+
+-   A tool to avoid overfitting (more important with multiple predictors)
+-   Evaluate performance of model
 
 ## Cross Validation (CV)
-
--   Split the sample data randomly into k (equal) folds (parts) by
+-   Split the sample data randomly into (equal) k subsets (parts) by
     resampling.
 
--   Fit the model for $(k − 1$) folds of the data
+-   Fit the model for $(k − 1$) subsets of the data
 
--   Predict for the omitted fold
+-   Predict for the omitted subsets
 
 -   Compare prediction errors
 
--   Root mean square error (RMSE) is often used
+-   Repeat for each subsets of the data
+
+## Cross Validation Types
+
+-   K-fold
+-   Stratified K-fold 
+
+    - Same as K-fold but splitting data governed by criteria so that each subset has the same proportion of obervations of a given categorical value
+    
+-   Leave One Out (LOO)
+
+    - Leaves out a single data point, then uses the same process as K-fold CV
 
 -   R has many packages for cross validation
 
 ## Example (Alcohol consumption data)
 
 ```{r, echo=TRUE}
+# CV using Root Mean Sq Error as measure of prediction error
 library(caret);  library(MASS,  exclude  =  "select")
 set.seed(123)
 
@@ -790,10 +827,10 @@ Concepts and practical skills you should have at the end of this chapter:
 
 -   Understand and be able to perform a simple linear regression on bivariate related data sets
 -   Use scatter plots or other appropriate plots to visualize the data and regression line
--   Summarize regression results and appropriate tests of significance. Interpret these results in context of your data
 -   Examine residual diagnostic plots and test assumptions, then perform appropriate transformations as necessary
+-   Summarize regression results and appropriate tests of significance. Interpret these results in context of your data
 -   Use a regression line to predict new data and explain confidence and prediction intervals
--   Understand and explain the concepts of robust regression modeling, Tukey Line, and cross-validation.
+-   Understand and explain the concepts of robust regression modeling, and cross-validation.
 
 <!-- ## Exercises -->
 
