@@ -2965,21 +2965,21 @@
     "href": "slides/Chapter07.html#multiple-regression-1",
     "title": "Chapter 7:Models with Multiple Predictors",
     "section": "Multiple regression",
-    "text": "Multiple regression"
+    "text": "Multiple regression\n\n\n\nTemperature Only\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n0.00\n0.064\n0\n1\n\n\ntemp\n0.77\n0.064\n12\n0\n\n\n\n\n\n\n\n\nShark Only\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n0.000\n0.083\n0.00\n1\n\n\nshark\n0.557\n0.084\n6.64\n0\n\n\n\n\n\n\n\n\nTemperature and Sharks\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n0.000\n0.064\n0.000\n1.000\n\n\ntemp\n0.776\n0.094\n8.217\n0.000\n\n\nshark\n-0.008\n0.094\n-0.084\n0.933"
   },
   {
     "objectID": "slides/Chapter07.html#masking-situation",
     "href": "slides/Chapter07.html#masking-situation",
     "title": "Chapter 7:Models with Multiple Predictors",
     "section": "Masking situation",
-    "text": "Masking situation\nTend to arise when\n\nBoth predictors are associated with one another.\nHave opposite relationships with the outcome"
+    "text": "Masking situation\nTend to arise when\n\nBoth predictors are associated with one another.\nHave different relationships with the outcome"
   },
   {
     "objectID": "slides/Chapter07.html#how-do-we-deal-with-this",
     "href": "slides/Chapter07.html#how-do-we-deal-with-this",
     "title": "Chapter 7:Models with Multiple Predictors",
     "section": "How do we deal with this?",
-    "text": "How do we deal with this?\n\nStatistically there is not really an answer\nThe answer lies in the causes and the causes are not in the data\nRemember that interpreting the (regression) parameter estimates always depends upon what you believe the causal model"
+    "text": "How do we deal with this?\n\nStatistically there is not really an answer\nThe answer lies in the causes and the causes are not in the data; Shark attacks dont cause ice cream sales or vice versa\nRemember that interpreting the (regression) parameter estimates always depends upon what you believe the causal model"
   },
   {
     "objectID": "slides/Chapter07.html#model-selection",
@@ -3841,5 +3841,33 @@
     "title": "Chapter 6:Models with a Single Predictor",
     "section": "Residuals",
     "text": "Residuals"
+  },
+  {
+    "objectID": "slides/Chapter07.html#full-regression-in-r",
+    "href": "slides/Chapter07.html#full-regression-in-r",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "Full regression in R",
+    "text": "Full regression in R\nPlaces all of the predictors in the model\nEquivalent of throwing everything in and hoping something sticks\n\n\n\nCall:\nlm(formula = Spread ~ ., data = teams_forlm)\n\nResiduals:\n   Min     1Q Median     3Q    Max \n-32.29  -5.72  -0.15   5.66  30.36 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) -142.4223     2.8728  -49.58  &lt; 2e-16 ***\nPTS            0.0624     0.0269    2.32     0.02 *  \nP2p           74.1170     3.8391   19.31  &lt; 2e-16 ***\nP3p           74.0109     3.3449   22.13  &lt; 2e-16 ***\nFTp           15.4686     2.0265    7.63  3.4e-14 ***\nOREB           0.7191     0.0623   11.54  &lt; 2e-16 ***\nDREB           1.2033     0.0367   32.81  &lt; 2e-16 ***\nAST           -0.0350     0.0479   -0.73     0.47    \nSTL            1.0685     0.0677   15.79  &lt; 2e-16 ***\nBLK            0.3503     0.0784    4.47  8.2e-06 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 8.79 on 2108 degrees of freedom\nMultiple R-squared:  0.622, Adjusted R-squared:  0.62 \nF-statistic:  385 on 9 and 2108 DF,  p-value: &lt;2e-16"
+  },
+  {
+    "objectID": "slides/Chapter07.html#variance-explained-review-from-chapter-6",
+    "href": "slides/Chapter07.html#variance-explained-review-from-chapter-6",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "Variance Explained (Review from Chapter 6)",
+    "text": "Variance Explained (Review from Chapter 6)\n\\(R^2\\) is the proportion of variance in \\(y\\) explained by \\(x\\) .\n\\(R^2=\\frac{SS~regression}{SS~Total}\\)\n\nSS &lt;- anova(full_reg) |&gt; \n   tidy() |&gt; \n  select(term:sumsq) |&gt; \n  janitor::adorn_totals()\nSS\n\n      term   df    sumsq\n       PTS    1 141194.6\n       P2p    1   4001.7\n       P3p    1  14465.4\n       FTp    1    583.8\n      OREB    1   7082.2\n      DREB    1  78359.3\n       AST    1     10.1\n       STL    1  20082.0\n       BLK    1   1542.2\n Residuals 2108 162702.8\n     Total 2117 430024.0\n\n\n\n\\(R^2_{adj}\\) is adjusted to remove the variation that is explained by chance alone\n\\(R^2_{adj}=1-\\frac{MS~Error}{MS~Total}\\)\nwhere:\n\n\n\\(MS~Error\\) = \\(\\frac{SSE}{n-k-1}\\)\n\n\\(MS~Total\\) = \\(\\frac{SST}{n-1}\\)\n\ntherefore \\(R^2_{adj}\\) can also be written as: \\(R^2_{adj}=1-\\frac{(1-R^2)*(n-1)}{(n-k-1)}\\)"
+  },
+  {
+    "objectID": "slides/Chapter07.html#headline-higher-ice-cream-sales-increase-shark-attacks",
+    "href": "slides/Chapter07.html#headline-higher-ice-cream-sales-increase-shark-attacks",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "Headline: Higher ice cream sales increase shark attacks!",
+    "text": "Headline: Higher ice cream sales increase shark attacks!\nWe’ll predict ice cream sales from the temperature and the number of shark attacks"
+  },
+  {
+    "objectID": "slides/Chapter07.html#cross-validation-review-from-chapter-6",
+    "href": "slides/Chapter07.html#cross-validation-review-from-chapter-6",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "Cross validation (review from Chapter 6)",
+    "text": "Cross validation (review from Chapter 6)\nIn sample error vs prediction error\n\nFor simpler models, increasing the number of parameters improves the fit to the sample.\nBut it seems to reduce the accuracy of the out-of-sample predictions.\nMost accurate models trade off flexibility (complexity) and overfitting\n\nGeneral idea: - Leave out some observations. - Train the model on the remaining samples; score on those left out. - Average over many left-out sets to get the out-of-sample (future) accuracy."
   }
 ]

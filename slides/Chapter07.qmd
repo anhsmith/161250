@@ -124,7 +124,7 @@ library(GGally)
 ggpairs(teams, columns = c(3, 6:12, 14:15))
 ```
 
-## Full regression
+## Full regression in R
 
 Places all of the predictors in the model
 
@@ -204,27 +204,11 @@ kable(out1, caption = "t-tests for model parameters") |>
   kable_classic(full_width = F)
 ```
 
-## Model Summary Measures
 
-```{r}
-out1 <- glance(full_reg) |> 
-  select(r.squared, sigma, statistic, p.value, AIC, BIC) |> 
-  mutate_if(is.numeric, round, 2)
-
-kable(t(out1), caption = "Model summary measures") |> 
-  kable_classic(full_width = F) 
-```
-
-## Variance Explained 
+## Variance Explained (Review from Chapter 6)
 $R^2$ is the proportion of variance in $y$ explained by $x$ .
 
-```{r, echo=TRUE}
-summary(full_reg)
-```
-## Variance Explained 
-
 $R^2=\frac{SS~regression}{SS~Total}$
-
 
 ```{r, echo = TRUE}
 SS <- anova(full_reg) |> 
@@ -239,8 +223,11 @@ SS
 
 -   $R^2_{adj}=1-\frac{MS~Error}{MS~Total}$\
 where:\
-$MS~Error$ = $frac{SSE}{n-k-1}$\
-$MS~Total$ = $frac{SST}{n-1}$\
+
+$MS~Error$ = $\frac{SSE}{n-k-1}$\
+
+$MS~Total$ = $\frac{SST}{n-1}$\
+
 therefore $R^2_{adj}$ can also be written as: $R^2_{adj}=1-\frac{(1-R^2)*(n-1)}{(n-k-1)}$
 
 ## Additional variation explained
@@ -376,66 +363,80 @@ outcome.
 
 ![](img/venetian-mask.jpg)
 
-## Milk and brain data example
-![](img/milk_brain_pic.png)
 
-## Primate milk data
-```{r primate milk data, out.width="95%", echo=FALSE}
+## Headline: Higher ice cream sales increase shark attacks!
+
+We’ll predict ice cream sales from the temperature and the number of shark attacks
+
+![](img/ice-cream-shark.jpeg)
+```{r}
 library(rethinking)
-data(milk)
-d<-milk
-pairs(~kcal.per.g + 
-  log(mass) + 
-  neocortex.perc, 
-  data = d)
+library(brms)
+set.seed(2022)
+n <- 100
+temp <- rnorm(n)
+shark <- rnorm(n, temp)
+ice_cream <- rnorm(n, temp)
+
+spur_exp <- tibble(ice_cream, temp, shark) %>%
+  mutate(across(everything(), standardize))
+
 ```
 
 ## First we will consider simple regressions 
 
-```{r, echo=FALSE}
-d$K <- standardize( d$kcal.per.g ) 
-d$N <- standardize( d$neocortex.perc )
-d$M <- standardize( log(d$mass) )
-dcc <- d[ complete.cases(d$K,d$N,d$M) , ]
+```{r, fig.height=4}
+spur_exp |> ggplot(aes(x=shark, y = ice_cream))+
+  geom_point()+
+  geom_smooth(method = 'lm')+
+   labs(y="Ice Cream",
+       x= "Shark Attacks")
 ```
 
 ```{r, fig.height=4}
-dcc |> ggplot(aes(x=M, y = K))+
+spur_exp |> ggplot(aes(x=temp, y = ice_cream))+
   geom_point()+
   geom_smooth(method = 'lm')+
-   labs(y="Kcal per gram",
-       x= "log(Mass)")
-```
-
-```{r, fig.height=4}
-dcc |> ggplot(aes(x=N, y = K))+
-  geom_point()+
-  geom_smooth(method = 'lm')+
-  labs(y="Kcal per gram",
-       x= "Neocortex Per")
+   labs(y="Ice Cream",
+       x= "Temperature")
 ```
 
 ## Multiple regression
-![](img/milk_bivar_vs_multivar.png)
+```{r}
+mod_t <- lm(ice_cream ~ temp, data = spur_exp)
+mod_s <- lm(ice_cream ~ shark, data = spur_exp)
+mod_ts <- lm(ice_cream ~ temp + shark, data = spur_exp)
+
+outt <- tidy(mod_t) |> mutate_if(is.numeric, round, 3)
+outs <- tidy(mod_s) |> mutate_if(is.numeric, round, 3)
+outts <- tidy(mod_ts) |> mutate_if(is.numeric, round, 3)
+
+kable(outt, caption = "Temperature Only") |> 
+  kable_classic(full_width = F)
+kable(outs, caption = "Shark Only") |> 
+  kable_classic(full_width = F)
+kable(outts, caption = "Temperature and Sharks") |> 
+  kable_classic(full_width = F)
+```
 
 ## Masking situation
 
 Tend to arise when 
 
 - Both predictors are associated with one another.
-- Have opposite relationships with the outcome
+- Have different relationships with the outcome
 
-```{r milk pairs, out.width="95%", out.height="50%",echo=FALSE}
-pairs(~kcal.per.g + 
-  log(mass) + 
-  neocortex.perc, 
-  data = d)
+```{r icecream pairs, out.width="95%", out.height="50%",echo=FALSE}
+pairs(~ice_cream + 
+  temp + 
+  shark, 
+  data = spur_exp)
 ```
 
 ## How do we deal with this?
 
 -   Statistically there is not really an answer
--   The answer lies in the causes and the causes are not in the data
+-   The answer lies in the causes and the causes are not in the data; Shark attacks dont cause ice cream sales or vice versa
 -   Remember that interpreting the (regression) parameter estimates
 always depends upon what you believe the causal model
 
@@ -565,16 +566,6 @@ $$AIC  =  n\log \left(\frac{SSE}{n} \right) + 2p$$
 
 - Other variations: WAIC, AICc, etc (we will not cover them)
 
-## Model selection (continued)
--   We can also benchmark a small model with the full regression
-
--   Mallow's $C_p$ (look for $C_p$ just less than $p$ or equal)
-
-$$C_{p} =\; \frac{{\rm SS\; Error\; for\; Smaller\; Model}}{{\rm Mean\; Square\; Error\; for\; full\; regression}} -(n-2p)$$
-- If unimportant variables are added to the model, then the variance of the fitted values will increase. Similarly if important variables are added, then the bias of the fitted values will decrease
-
-- The $C_{p}$ index, balances the variance and bias
-
 
 ## Software
 
@@ -589,7 +580,7 @@ $$C_{p} =\; \frac{{\rm SS\; Error\; for\; Smaller\; Model}}{{\rm Mean\; Square\;
 
 
 
-## Cross validation
+## Cross validation (review from Chapter 6)
 In sample error vs prediction error
 
 -   For simpler models, increasing the number of parameters improves the fit to the sample.

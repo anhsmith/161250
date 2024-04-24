@@ -8,7 +8,7 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.450">
+  <meta name="generator" content="quarto-1.3.353">
 
   <title>161250 Data Analysis - Chapter 7:Models with Multiple Predictors</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -514,8 +514,8 @@ BLK     0.03267  1.00000</code></pre>
 <h2>Inter-relationships</h2>
 
 <img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch quarto-figure-center"></section>
-<section id="full-regression" class="slide level2">
-<h2>Full regression</h2>
+<section id="full-regression-in-r" class="slide level2">
+<h2>Full regression in R</h2>
 <p>Places all of the predictors in the model</p>
 <p>Equivalent of throwing everything in and hoping something sticks</p>
 <div class="cell" data-layout-align="center">
@@ -682,88 +682,16 @@ F-statistic:  385 on 9 and 2108 DF,  p-value: &lt;2e-16</code></pre>
 </div>
 </div>
 </section>
-<section id="model-summary-measures" class="slide level2">
-<h2>Model Summary Measures</h2>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<table class="lightable-classic" data-quarto-postprocess="true" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
-<caption>Model summary measures</caption>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">r.squared</td>
-<td style="text-align: right;">0.62</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">sigma</td>
-<td style="text-align: right;">8.79</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">statistic</td>
-<td style="text-align: right;">384.83</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">p.value</td>
-<td style="text-align: right;">0.00</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">AIC</td>
-<td style="text-align: right;">15227.82</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">BIC</td>
-<td style="text-align: right;">15290.06</td>
-</tr>
-</tbody>
-</table>
-
-
-</div>
-</div>
-</section>
-<section id="variance-explained" class="slide level2">
-<h2>Variance Explained</h2>
+<section id="variance-explained-review-from-chapter-6" class="slide level2">
+<h2>Variance Explained (Review from Chapter 6)</h2>
 <p><span class="math inline">\(R^2\)</span> is the proportion of variance in <span class="math inline">\(y\)</span> explained by <span class="math inline">\(x\)</span> .</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">summary</span>(full_reg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = Spread ~ ., data = teams_forlm)
-
-Residuals:
-   Min     1Q Median     3Q    Max 
--32.29  -5.72  -0.15   5.66  30.36 
-
-Coefficients:
-             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) -142.4223     2.8728  -49.58  &lt; 2e-16 ***
-PTS            0.0624     0.0269    2.32     0.02 *  
-P2p           74.1170     3.8391   19.31  &lt; 2e-16 ***
-P3p           74.0109     3.3449   22.13  &lt; 2e-16 ***
-FTp           15.4686     2.0265    7.63  3.4e-14 ***
-OREB           0.7191     0.0623   11.54  &lt; 2e-16 ***
-DREB           1.2033     0.0367   32.81  &lt; 2e-16 ***
-AST           -0.0350     0.0479   -0.73     0.47    
-STL            1.0685     0.0677   15.79  &lt; 2e-16 ***
-BLK            0.3503     0.0784    4.47  8.2e-06 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 8.79 on 2108 degrees of freedom
-Multiple R-squared:  0.622, Adjusted R-squared:  0.62 
-F-statistic:  385 on 9 and 2108 DF,  p-value: &lt;2e-16</code></pre>
-</div>
-</div>
-</section>
-<section id="variance-explained-1" class="slide level2">
-<h2>Variance Explained</h2>
 <p><span class="math inline">\(R^2=\frac{SS~regression}{SS~Total}\)</span></p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>SS <span class="ot">&lt;-</span> <span class="fu">anova</span>(full_reg) <span class="sc">|&gt;</span> </span>
-<span id="cb9-2"><a href="#cb9-2"></a>   <span class="fu">tidy</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb9-3"><a href="#cb9-3"></a>  <span class="fu">select</span>(term<span class="sc">:</span>sumsq) <span class="sc">|&gt;</span> </span>
-<span id="cb9-4"><a href="#cb9-4"></a>  janitor<span class="sc">::</span><span class="fu">adorn_totals</span>()</span>
-<span id="cb9-5"><a href="#cb9-5"></a>SS</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>SS <span class="ot">&lt;-</span> <span class="fu">anova</span>(full_reg) <span class="sc">|&gt;</span> </span>
+<span id="cb7-2"><a href="#cb7-2"></a>   <span class="fu">tidy</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">select</span>(term<span class="sc">:</span>sumsq) <span class="sc">|&gt;</span> </span>
+<span id="cb7-4"><a href="#cb7-4"></a>  janitor<span class="sc">::</span><span class="fu">adorn_totals</span>()</span>
+<span id="cb7-5"><a href="#cb7-5"></a>SS</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      term   df    sumsq
        PTS    1 141194.6
@@ -783,10 +711,13 @@ F-statistic:  385 on 9 and 2108 DF,  p-value: &lt;2e-16</code></pre>
 <li><p><span class="math inline">\(R^2_{adj}\)</span> is adjusted to remove the variation that is explained by chance alone</p></li>
 <li><p><span class="math inline">\(R^2_{adj}=1-\frac{MS~Error}{MS~Total}\)</span><br>
 where:<br>
-<span class="math inline">\(MS~Error\)</span> = <span class="math inline">\(frac{SSE}{n-k-1}\)</span><br>
-<span class="math inline">\(MS~Total\)</span> = <span class="math inline">\(frac{SST}{n-1}\)</span><br>
-therefore <span class="math inline">\(R^2_{adj}\)</span> can also be written as: <span class="math inline">\(R^2_{adj}=1-\frac{(1-R^2)*(n-1)}{(n-k-1)}\)</span></p></li>
+</p></li>
 </ul>
+<p><span class="math inline">\(MS~Error\)</span> = <span class="math inline">\(\frac{SSE}{n-k-1}\)</span><br>
+</p>
+<p><span class="math inline">\(MS~Total\)</span> = <span class="math inline">\(\frac{SST}{n-1}\)</span><br>
+</p>
+<p>therefore <span class="math inline">\(R^2_{adj}\)</span> can also be written as: <span class="math inline">\(R^2_{adj}=1-\frac{(1-R^2)*(n-1)}{(n-k-1)}\)</span></p>
 </section>
 <section id="additional-variation-explained" class="slide level2">
 <h2>Additional variation explained</h2>
@@ -850,7 +781,7 @@ therefore <span class="math inline">\(R^2_{adj}\)</span> can also be written as:
 <section id="ss-types-in-action" class="slide level2">
 <h2>SS types in action</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">anova</span>(full_reg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">anova</span>(full_reg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Variance Table
 
@@ -871,8 +802,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">library</span>(car)</span>
-<span id="cb13-2"><a href="#cb13-2"></a><span class="fu">Anova</span>(full_reg,  <span class="at">type=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="fu">Anova</span>(full_reg,  <span class="at">type=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Anova Table (Type II tests)
 
@@ -893,7 +824,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">Anova</span>(full_reg,  <span class="at">type=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">Anova</span>(full_reg,  <span class="at">type=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Anova Table (Type III tests)
 
@@ -982,21 +913,18 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </ul>
 
 <img data-src="img/venetian-mask.jpg" class="r-stretch"></section>
-<section id="milk-and-brain-data-example" class="slide level2">
-<h2>Milk and brain data example</h2>
+<section id="headline-higher-ice-cream-sales-increase-shark-attacks" class="slide level2">
+<h2>Headline: Higher ice cream sales increase shark attacks!</h2>
+<p>We’ll predict ice cream sales from the temperature and the number of shark attacks</p>
 
-<img data-src="img/milk_brain_pic.png" class="r-stretch"></section>
-<section id="primate-milk-data" class="slide level2">
-<h2>Primate milk data</h2>
-
-<img data-src="Chapter07_files/figure-revealjs/primate milk data-1.png" style="width:95.0%" class="r-stretch quarto-figure-center"></section>
+<img data-src="img/ice-cream-shark.jpeg" class="r-stretch"></section>
 <section id="first-we-will-consider-simple-regressions" class="slide level2">
 <h2>First we will consider simple regressions</h2>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-16-1.png" width="960"></p>
+<p><img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-14-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1005,7 +933,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-17-1.png" width="960"></p>
+<p><img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-15-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1013,20 +941,124 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </section>
 <section id="multiple-regression-1" class="slide level2">
 <h2>Multiple regression</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table class="lightable-classic" data-quarto-postprocess="true" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>Temperature Only</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">term</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">estimate</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">std.error</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">statistic</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.064</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">temp</td>
+<td style="text-align: right;">0.77</td>
+<td style="text-align: right;">0.064</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
 
-<img data-src="img/milk_bivar_vs_multivar.png" class="r-stretch"></section>
+
+</div>
+<div class="cell-output-display">
+<table class="lightable-classic" data-quarto-postprocess="true" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>Shark Only</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">term</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">estimate</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">std.error</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">statistic</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.083</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">shark</td>
+<td style="text-align: right;">0.557</td>
+<td style="text-align: right;">0.084</td>
+<td style="text-align: right;">6.64</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+<div class="cell-output-display">
+<table class="lightable-classic" data-quarto-postprocess="true" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>Temperature and Sharks</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">term</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">estimate</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">std.error</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">statistic</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.064</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">1.000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">temp</td>
+<td style="text-align: right;">0.776</td>
+<td style="text-align: right;">0.094</td>
+<td style="text-align: right;">8.217</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">shark</td>
+<td style="text-align: right;">-0.008</td>
+<td style="text-align: right;">0.094</td>
+<td style="text-align: right;">-0.084</td>
+<td style="text-align: right;">0.933</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</section>
 <section id="masking-situation" class="slide level2">
 <h2>Masking situation</h2>
 <p>Tend to arise when</p>
 <ul>
 <li>Both predictors are associated with one another.</li>
-<li>Have opposite relationships with the outcome</li>
+<li>Have different relationships with the outcome</li>
 </ul>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="Chapter07_files/figure-revealjs/milk pairs-1.png" style="width:95.0%;height:50.0%"></p>
+<p><img data-src="Chapter07_files/figure-revealjs/icecream pairs-1.png" style="width:95.0%;height:50.0%"></p>
 </figure>
 </div>
 </div>
@@ -1036,7 +1068,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <h2>How do we deal with this?</h2>
 <ul>
 <li>Statistically there is not really an answer</li>
-<li>The answer lies in the causes and the causes are not in the data</li>
+<li>The answer lies in the causes and the causes are not in the data; Shark attacks dont cause ice cream sales or vice versa</li>
 <li>Remember that interpreting the (regression) parameter estimates always depends upon what you believe the causal model</li>
 </ul>
 </section>
@@ -1225,17 +1257,6 @@ F-statistic: 3.92e+04 on 2 and 12 DF,  p-value: &lt;2e-16</code></pre>
 <li><p>Other variations: WAIC, AICc, etc (we will not cover them)</p></li>
 </ul>
 </section>
-<section id="model-selection-continued-1" class="slide level2">
-<h2>Model selection (continued)</h2>
-<ul>
-<li><p>We can also benchmark a small model with the full regression</p></li>
-<li><p>Mallow’s <span class="math inline">\(C_p\)</span> (look for <span class="math inline">\(C_p\)</span> just less than <span class="math inline">\(p\)</span> or equal)</p></li>
-</ul>
-<p><span class="math display">\[C_{p} =\; \frac{{\rm SS\; Error\; for\; Smaller\; Model}}{{\rm Mean\; Square\; Error\; for\; full\; regression}} -(n-2p)\]</span> - If unimportant variables are added to the model, then the variance of the fitted values will increase. Similarly if important variables are added, then the bias of the fitted values will decrease</p>
-<ul>
-<li>The <span class="math inline">\(C_{p}\)</span> index, balances the variance and bias</li>
-</ul>
-</section>
 <section id="software" class="slide level2">
 <h2>Software</h2>
 <ul>
@@ -1248,8 +1269,8 @@ F-statistic: 3.92e+04 on 2 and 12 DF,  p-value: &lt;2e-16</code></pre>
 <li><p>R base package step-wise selection is based on <span class="math inline">\(AIC\)</span> only.</p></li>
 </ul>
 </section>
-<section id="cross-validation" class="slide level2">
-<h2>Cross validation</h2>
+<section id="cross-validation-review-from-chapter-6" class="slide level2">
+<h2>Cross validation (review from Chapter 6)</h2>
 <p>In sample error vs prediction error</p>
 <ul>
 <li>For simpler models, increasing the number of parameters improves the fit to the sample.</li>
@@ -1262,7 +1283,7 @@ F-statistic: 3.92e+04 on 2 and 12 DF,  p-value: &lt;2e-16</code></pre>
 <h2>Cross validated selection: Data example</h2>
 <p>Consider the pinetree data set which contains the circumference measurements of pine trees at four positions (First is bottom)</p>
 
-<img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-19-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-18-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="cross-validated-selection" class="slide level2">
 <h2>Cross validated selection</h2>
 <ul>
@@ -1272,13 +1293,13 @@ F-statistic: 3.92e+04 on 2 and 12 DF,  p-value: &lt;2e-16</code></pre>
 </ul></li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">library</span>(caret);  <span class="fu">library</span>(leaps)</span>
-<span id="cb20-2"><a href="#cb20-2"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb20-3"><a href="#cb20-3"></a>fitControl  <span class="ot">&lt;-</span>  <span class="fu">trainControl</span>(<span class="at">method  =</span>  <span class="st">"repeatedcv"</span>,</span>
-<span id="cb20-4"><a href="#cb20-4"></a>                             <span class="at">number  =</span>  <span class="dv">5</span>,  <span class="at">repeats  =</span>  <span class="dv">100</span>)</span>
-<span id="cb20-5"><a href="#cb20-5"></a>leapBackwardfit  <span class="ot">&lt;-</span>  <span class="fu">train</span>(Top  <span class="sc">~</span>  .,  <span class="at">data  =</span>  pinetree[, <span class="sc">-</span><span class="dv">1</span>],</span>
-<span id="cb20-6"><a href="#cb20-6"></a><span class="at">trControl  =</span>  fitControl,  <span class="at">method  =</span>  <span class="st">"leapBackward"</span>)</span>
-<span id="cb20-7"><a href="#cb20-7"></a><span class="fu">summary</span>(leapBackwardfit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">library</span>(caret);  <span class="fu">library</span>(leaps)</span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb18-3"><a href="#cb18-3"></a>fitControl  <span class="ot">&lt;-</span>  <span class="fu">trainControl</span>(<span class="at">method  =</span>  <span class="st">"repeatedcv"</span>,</span>
+<span id="cb18-4"><a href="#cb18-4"></a>                             <span class="at">number  =</span>  <span class="dv">5</span>,  <span class="at">repeats  =</span>  <span class="dv">100</span>)</span>
+<span id="cb18-5"><a href="#cb18-5"></a>leapBackwardfit  <span class="ot">&lt;-</span>  <span class="fu">train</span>(Top  <span class="sc">~</span>  .,  <span class="at">data  =</span>  pinetree[, <span class="sc">-</span><span class="dv">1</span>],</span>
+<span id="cb18-6"><a href="#cb18-6"></a><span class="at">trControl  =</span>  fitControl,  <span class="at">method  =</span>  <span class="st">"leapBackward"</span>)</span>
+<span id="cb18-7"><a href="#cb18-7"></a><span class="fu">summary</span>(leapBackwardfit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Subset selection object
 3 Variables  (and intercept)
@@ -1305,8 +1326,8 @@ Selection Algorithm: backward
 <h2>Polynomial models: Data example</h2>
 <p>We can fit a simple linear regression using the Pine tree data</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>pine1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Top <span class="sc">~</span> First, <span class="at">data =</span> pinetree) </span>
-<span id="cb22-2"><a href="#cb22-2"></a><span class="fu">summary</span>(pine1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>pine1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Top <span class="sc">~</span> First, <span class="at">data =</span> pinetree) </span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="fu">summary</span>(pine1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1329,11 +1350,11 @@ F-statistic: 1.01e+03 on 1 and 58 DF,  p-value: &lt;2e-16</code></pre>
 </div>
 </div>
 
-<img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-22-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-21-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="look-closer" class="slide level2">
 <h2>Look closer</h2>
 
-<img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-23-1.png" width="960" class="r-stretch quarto-figure-center"><p>Looks non-linear</p>
+<img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-22-1.png" width="960" class="r-stretch quarto-figure-center"><p>Looks non-linear</p>
 </section>
 <section id="polynomial-models-data-example-1" class="slide level2">
 <h2>Polynomial models: Data example</h2>
@@ -1386,7 +1407,7 @@ poly(First, degree = 3)3    -5.31      0.892   -5.95        0</code></pre>
 <li><p>Quadratic regression for pinetree data is not satisfactory based on the residual plots shown below:</p></li>
 </ul>
 
-<img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-27-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-26-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="categorical-predictors" class="slide level2">
 <h2>Categorical predictors</h2>
 <ul>
@@ -1395,7 +1416,7 @@ poly(First, degree = 3)3    -5.31      0.892   -5.95        0</code></pre>
 <li><p>Area effect on Top circumference is clear from the following plot</p></li>
 </ul>
 
-<img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-28-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-27-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="indicator-variables" class="slide level2">
 <h2>Indicator variables</h2>
 <ul>
