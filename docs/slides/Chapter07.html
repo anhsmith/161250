@@ -412,8 +412,8 @@
 <h2>What is a multiple Regression?</h2>
 <ul>
 <li>In a simple regression, there is only one predictor.</li>
+<li>Multiple regression modelling involves many predictors.</li>
 </ul>
-<p>Multiple regression modelling involves many predictors.</p>
 </section>
 <section id="when-to-use-multiple-predictors" class="slide level2">
 <h2>When to use multiple predictors</h2>
@@ -431,6 +431,7 @@
 <ul>
 <li>What are we interested in testing?</li>
 <li>What data is collected? do those variables make sense?</li>
+<li>What kind of data are my response and predictor variables?</li>
 </ul></li>
 <li><p>Perform EDA first</p>
 <ul>
@@ -686,6 +687,12 @@ F-statistic:  385 on 9 and 2108 DF,  p-value: &lt;2e-16</code></pre>
 <h2>Variance Explained (Review from Chapter 6)</h2>
 <p><span class="math inline">\(R^2\)</span> is the proportion of variance in <span class="math inline">\(y\)</span> explained by <span class="math inline">\(x\)</span> .</p>
 <p><span class="math inline">\(R^2=\frac{SS~regression}{SS~Total}\)</span></p>
+<ul>
+<li><p><span class="math inline">\(R^2_{adj}\)</span> is adjusted to remove the variation that is explained by chance alone</p></li>
+<li><p><span class="math inline">\(R^2_{adj}=1-\frac{MS~Error}{MS~Total}\)</span><br>
+<span class="math inline">\(R^2_{adj}\)</span> can also be written as: <span class="math inline">\(R^2_{adj}=1-\frac{(1-R^2)*(n-1)}{(n-k-1)}\)</span></p></li>
+<li><p>Now we have more sums of square to add in to our regression</p></li>
+</ul>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>SS <span class="ot">&lt;-</span> <span class="fu">anova</span>(full_reg) <span class="sc">|&gt;</span> </span>
 <span id="cb7-2"><a href="#cb7-2"></a>   <span class="fu">tidy</span>() <span class="sc">|&gt;</span> </span>
@@ -707,17 +714,6 @@ F-statistic:  385 on 9 and 2108 DF,  p-value: &lt;2e-16</code></pre>
      Total 2117 430024.0</code></pre>
 </div>
 </div>
-<ul>
-<li><p><span class="math inline">\(R^2_{adj}\)</span> is adjusted to remove the variation that is explained by chance alone</p></li>
-<li><p><span class="math inline">\(R^2_{adj}=1-\frac{MS~Error}{MS~Total}\)</span><br>
-where:<br>
-</p></li>
-</ul>
-<p><span class="math inline">\(MS~Error\)</span> = <span class="math inline">\(\frac{SSE}{n-k-1}\)</span><br>
-</p>
-<p><span class="math inline">\(MS~Total\)</span> = <span class="math inline">\(\frac{SST}{n-1}\)</span><br>
-</p>
-<p>therefore <span class="math inline">\(R^2_{adj}\)</span> can also be written as: <span class="math inline">\(R^2_{adj}=1-\frac{(1-R^2)*(n-1)}{(n-k-1)}\)</span></p>
 </section>
 <section id="additional-variation-explained" class="slide level2">
 <h2>Additional variation explained</h2>
@@ -749,6 +745,7 @@ where:<br>
 <ul>
 <li>Sometimes order matters, particularly with unequal sample sizes</li>
 </ul></li>
+<li><p>For unbalanced data, this approach tests for a difference in the weighted marginal means. In practical terms, this means that the results are dependent on the realized sample sizes. In other words, it is testing the first factor without controlling for the other factor, which may not be the hypothesis of interest.</p></li>
 <li><p>F test for the significance of the additional variation explained</p></li>
 <li><p>R function <code>anova()</code> calculates sequential or Type-I SS</p></li>
 </ul>
@@ -771,14 +768,29 @@ where:<br>
 <section id="type-iii-ss" class="slide level2">
 <h2>Type III SS</h2>
 <ul>
-<li><p>Type III SS is the SS added to the regression SS after <em>ALL</em> other predictors including an intercept term.</p>
-<ul>
-<li>Violates the marginality principle and so avoided for hypothesis tests</li>
-</ul></li>
-<li><p>SS explained is not always a good criterion for selection of variables</p></li>
+<li><p>Type III SS is the SS added to the regression SS after <em>ALL</em> other predictors including an interaction term.</p></li>
+<li><p>This type tests for the presence of a main effect after other main effects and interaction. This approach is therefore valid in the presence of significant interactions.</p></li>
+<li><p>If the interaction is significant SS for main effects should not be interpreted</p></li>
 </ul>
 </section>
 <section id="ss-types-in-action" class="slide level2">
+<h2>SS types in action</h2>
+<p>Consider a model with terms A and B:</p>
+<p>Type 1 SS:<br>
+SS(A) for factor A.<br>
+SS(B | A) for factor B.</p>
+<p>Type 2 SS:<br>
+SS(A | B) for factor A.<br>
+SS(B | A) for factor B.</p>
+<p>Type 3 SS:<br>
+SS(A | B, AB) for factor A.<br>
+SS(B | A, AB) for factor B.</p>
+<ul>
+<li><p>When data are balanced and the design is simple, types I, II, and III will give the same results.</p></li>
+<li><p>SS explained is not always a good criterion for selection of variables</p></li>
+</ul>
+</section>
+<section id="ss-types-in-action-1" class="slide level2">
 <h2>SS types in action</h2>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">anova</span>(full_reg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -900,8 +912,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <section id="masked-associations" class="slide level2">
 <h2>Masked associations</h2>
 <ul>
-<li>Association between a predictor variable and an outcome can be masked.</li>
-<li>You need to observe both to see the “true” influence of either on the outcome.</li>
+<li>Association between a predictor variable and an outcome can be masked by another variable.</li>
+<li>You need to observe both variables to see the “true” influence of either on the outcome.</li>
 <li>How do we account for the masking variable (seen as a nuisance)?</li>
 </ul>
 </section>
@@ -909,7 +921,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <h2>Masking situations tend to arise when:</h2>
 <ul>
 <li>Both predictors are associated with one another.</li>
-<li>Have opposite relationships with the outcome</li>
+<li>Have opposite relationships with the outcome.</li>
 </ul>
 
 <img data-src="img/venetian-mask.jpg" class="r-stretch"></section>
@@ -936,6 +948,75 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p><img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-15-1.png" width="960"></p>
 </figure>
 </div>
+</div>
+</div>
+</section>
+<section id="single-regression" class="slide level2">
+<h2>Single regression</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table class="lightable-classic" data-quarto-postprocess="true" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>Temperature Only</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">term</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">estimate</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">std.error</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">statistic</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.064</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">temp</td>
+<td style="text-align: right;">0.77</td>
+<td style="text-align: right;">0.064</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+<div class="cell-output-display">
+<table class="lightable-classic" data-quarto-postprocess="true" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>Shark Only</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">term</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">estimate</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">std.error</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">statistic</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.083</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">shark</td>
+<td style="text-align: right;">0.557</td>
+<td style="text-align: right;">0.084</td>
+<td style="text-align: right;">6.64</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+
+
 </div>
 </div>
 </section>
@@ -1283,7 +1364,7 @@ F-statistic: 3.92e+04 on 2 and 12 DF,  p-value: &lt;2e-16</code></pre>
 <h2>Cross validated selection: Data example</h2>
 <p>Consider the pinetree data set which contains the circumference measurements of pine trees at four positions (First is bottom)</p>
 
-<img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-18-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-19-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="cross-validated-selection" class="slide level2">
 <h2>Cross validated selection</h2>
 <ul>
@@ -1350,11 +1431,11 @@ F-statistic: 1.01e+03 on 1 and 58 DF,  p-value: &lt;2e-16</code></pre>
 </div>
 </div>
 
-<img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-21-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-22-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="look-closer" class="slide level2">
 <h2>Look closer</h2>
 
-<img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-22-1.png" width="960" class="r-stretch quarto-figure-center"><p>Looks non-linear</p>
+<img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-23-1.png" width="960" class="r-stretch quarto-figure-center"><p>Looks non-linear</p>
 </section>
 <section id="polynomial-models-data-example-1" class="slide level2">
 <h2>Polynomial models: Data example</h2>
@@ -1407,7 +1488,7 @@ poly(First, degree = 3)3    -5.31      0.892   -5.95        0</code></pre>
 <li><p>Quadratic regression for pinetree data is not satisfactory based on the residual plots shown below:</p></li>
 </ul>
 
-<img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-26-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-27-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="categorical-predictors" class="slide level2">
 <h2>Categorical predictors</h2>
 <ul>
@@ -1416,7 +1497,7 @@ poly(First, degree = 3)3    -5.31      0.892   -5.95        0</code></pre>
 <li><p>Area effect on Top circumference is clear from the following plot</p></li>
 </ul>
 
-<img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-27-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="Chapter07_files/figure-revealjs/unnamed-chunk-28-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="indicator-variables" class="slide level2">
 <h2>Indicator variables</h2>
 <ul>

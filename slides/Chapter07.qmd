@@ -45,10 +45,10 @@ knitr::opts_chunk$set(warning = FALSE,
 
 
 ## What is a multiple Regression?
--   In a simple regression, there is only one predictor. 
+-   In a simple regression, there is only one predictor.
+-   Multiple regression modelling involves many predictors.
 
 
-Multiple regression modelling involves many predictors.
 
 ## When to use multiple predictors
 
@@ -65,6 +65,7 @@ Where to start:
 
     -   What are we interested in testing?
     -   What data is collected? do those variables make sense?
+    -   What kind of data are my response and predictor variables?
     
 -   Perform EDA first
 
@@ -210,6 +211,14 @@ $R^2$ is the proportion of variance in $y$ explained by $x$ .
 
 $R^2=\frac{SS~regression}{SS~Total}$
 
+-   $R^2_{adj}$ is adjusted to remove the variation that is explained by
+    chance alone
+
+-   $R^2_{adj}=1-\frac{MS~Error}{MS~Total}$\
+$R^2_{adj}$ can also be written as: $R^2_{adj}=1-\frac{(1-R^2)*(n-1)}{(n-k-1)}$
+
+-   Now we have more sums of square to add in to our regression
+
 ```{r, echo = TRUE}
 SS <- anova(full_reg) |> 
    tidy() |> 
@@ -217,18 +226,6 @@ SS <- anova(full_reg) |>
   janitor::adorn_totals()
 SS
 ```
-
--   $R^2_{adj}$ is adjusted to remove the variation that is explained by
-    chance alone
-
--   $R^2_{adj}=1-\frac{MS~Error}{MS~Total}$\
-where:\
-
-$MS~Error$ = $\frac{SSE}{n-k-1}$\
-
-$MS~Total$ = $\frac{SST}{n-1}$\
-
-therefore $R^2_{adj}$ can also be written as: $R^2_{adj}=1-\frac{(1-R^2)*(n-1)}{(n-k-1)}$
 
 ## Additional variation explained
 
@@ -260,13 +257,12 @@ therefore $R^2_{adj}$ can also be written as: $R^2_{adj}=1-\frac{(1-R^2)*(n-1)}{
     effects of the *preceding* predictors in the model. 
     
     -   Sometimes order matters, particularly with unequal sample sizes
+- For unbalanced data, this approach tests for a difference in the weighted marginal means. In practical terms, this means that the results are dependent on the realized sample sizes. In other words, it is testing the first factor without controlling for the other factor, which may not be the hypothesis of interest. 
 
 -   F test for the significance of the additional variation explained
 -   R function `anova()` calculates sequential or Type-I SS
 
 ![](img/type1.png)
-
-
 
 ## Type II 
 
@@ -282,14 +278,32 @@ therefore $R^2_{adj}$ can also be written as: $R^2_{adj}=1-\frac{(1-R^2)*(n-1)}{
 
 ## Type III SS
 -   Type III SS is the SS added to the regression SS after *ALL* other
-    predictors including an intercept term.
-
-    -   Violates the marginality principle and so avoided for hypothesis
-        tests
-
--   SS explained is not always a good criterion for selection of
-    variables
+    predictors including an interaction term.
     
+-   This type tests for the presence of a main effect after other main effects and interaction. This approach is therefore valid in the presence of significant interactions.
+
+-   If the interaction is significant SS for main effects should not be interpreted
+    
+## SS types in action
+
+Consider a model with terms A and B:
+
+Type 1 SS:\
+SS(A) for factor A.\
+SS(B | A) for factor B.
+
+Type 2 SS:\
+SS(A | B) for factor A.\
+SS(B | A) for factor B.
+
+Type 3 SS:\
+SS(A | B, AB) for factor A.\
+SS(B | A, AB) for factor B.
+
+-   When data are balanced and the design is simple, types I, II, and III will give the same results.  
+
+-   SS explained is not always a good criterion for selection of variables
+
 ## SS types in action
 
 ```{r, echo = TRUE}
@@ -351,15 +365,15 @@ And if you want more to impress your friends at a BBQ, the source is: http://www
 ## Masked associations
 
 -   Association between a predictor variable and an outcome can be
-masked.
--   You need to observe both to see the “true” influence of either on the
+masked by another variable.
+-   You need to observe both variables to see the “true” influence of either on the
 outcome.
 -   How do we account for the masking variable (seen as a nuisance)?
 
 ## Masking situations tend to arise when:
 
 - Both predictors are associated with one another.
-- Have opposite relationships with the outcome
+- Have opposite relationships with the outcome.
 
 ![](img/venetian-mask.jpg)
 
@@ -401,7 +415,7 @@ spur_exp |> ggplot(aes(x=temp, y = ice_cream))+
        x= "Temperature")
 ```
 
-## Multiple regression
+## Single regression
 ```{r}
 mod_t <- lm(ice_cream ~ temp, data = spur_exp)
 mod_s <- lm(ice_cream ~ shark, data = spur_exp)
@@ -415,9 +429,20 @@ kable(outt, caption = "Temperature Only") |>
   kable_classic(full_width = F)
 kable(outs, caption = "Shark Only") |> 
   kable_classic(full_width = F)
+
+```
+
+## Multiple regression
+```{r}
+kable(outt, caption = "Temperature Only") |> 
+  kable_classic(full_width = F)
+kable(outs, caption = "Shark Only") |> 
+  kable_classic(full_width = F)
 kable(outts, caption = "Temperature and Sharks") |> 
   kable_classic(full_width = F)
 ```
+
+
 
 ## Masking situation
 

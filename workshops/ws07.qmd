@@ -414,7 +414,6 @@ plot(summaryHH(model))
 
 Perform a polynomial regression of `prestige` on `income`. 
 
-
 ```{r, results='hide', fig.show='hide'}
 # Cubic fit
 p.model <- lm(prestige ~ poly(income,3),
@@ -429,6 +428,32 @@ plot(p.model)
 autoplot(p.model)
 ```
 
+## Try it yourself
+Use the river data from Assignment 1: 
+```{r}
+riv <- read_csv("riverdat.csv")
+```
+
+## Exercise 7.4 {-}
+Make a scatterplot of all the raw values of `Temperature` (x-axis) and `CHLA Mean` (y-axis) for the Canterbury region only, with the points coloured by `Catchment name`. Fit a linear regression to the plot using `geom_smooth`. 
+
+```{r}
+# your code goes here
+```
+
+## Exercise 7.5 {-}
+Fit a multiple linear regression for the Canterbury region only with the raw values of `CHLA Mean` as the response variable, `Temperature` and `Dissolved oxygen` as predictor variables. Produce a summary table and ANOVA table of your results. 
+
+```{r}
+# your code goes here
+```
+
+## Exercise 7.6 {-}
+Make an indicator variable for the `Waimakariri River` catchment in Canterbury (0 = not in that catchment, 1 = in that catchment). Add this to your regression from exercise 7.5. Produce new tables and discuss your results. 
+
+```{r}
+# your code goes here
+```
 
 + More R code examples are [here](../exercises/Chap7more.R)
 
