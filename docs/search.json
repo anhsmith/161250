@@ -2741,7 +2741,7 @@
     "href": "slides/Chapter07.html#what-is-a-multiple-regression",
     "title": "Chapter 7:Models with Multiple Predictors",
     "section": "What is a multiple Regression?",
-    "text": "What is a multiple Regression?\n\nIn a simple regression, there is only one predictor.\n\nMultiple regression modelling involves many predictors."
+    "text": "What is a multiple Regression?\n\nIn a simple regression, there is only one predictor.\nMultiple regression modelling involves many predictors."
   },
   {
     "objectID": "slides/Chapter07.html#when-to-use-multiple-predictors",
@@ -2755,7 +2755,7 @@
     "href": "slides/Chapter07.html#multiple-regression",
     "title": "Chapter 7:Models with Multiple Predictors",
     "section": "Multiple Regression",
-    "text": "Multiple Regression\nWhere to start:\n\nQuestion and hypothesis + domain knowledge\n\nWhat are we interested in testing?\nWhat data is collected? do those variables make sense?\n\nPerform EDA first\n\nA scatter plot matrix can show nonlinear relationships\nA correlation matrix will only show the strength of pairwise linear relationships\n\nLook for the predictors having the largest correlation with response\n\nLook for inter-correlations between the predictors and choose the one with high correlation with response variable but uncorrelated with the rest."
+    "text": "Multiple Regression\nWhere to start:\n\nQuestion and hypothesis + domain knowledge\n\nWhat are we interested in testing?\nWhat data is collected? do those variables make sense?\nWhat kind of data are my response and predictor variables?\n\nPerform EDA first\n\nA scatter plot matrix can show nonlinear relationships\nA correlation matrix will only show the strength of pairwise linear relationships\n\nLook for the predictors having the largest correlation with response\n\nLook for inter-correlations between the predictors and choose the one with high correlation with response variable but uncorrelated with the rest."
   },
   {
     "objectID": "slides/Chapter07.html#data-example",
@@ -2860,7 +2860,7 @@
     "href": "slides/Chapter07.html#significance-of-type-i-or-seq.ss",
     "title": "Chapter 7:Models with Multiple Predictors",
     "section": "Significance of Type I or Seq.SS",
-    "text": "Significance of Type I or Seq.SS\n\nThe Type I SS is the SS of a predictor after adjusting for the effects of the preceding predictors in the model.\n\nSometimes order matters, particularly with unequal sample sizes\n\nF test for the significance of the additional variation explained\nR function anova() calculates sequential or Type-I SS"
+    "text": "Significance of Type I or Seq.SS\n\nThe Type I SS is the SS of a predictor after adjusting for the effects of the preceding predictors in the model.\n\nSometimes order matters, particularly with unequal sample sizes\n\nFor unbalanced data, this approach tests for a difference in the weighted marginal means. In practical terms, this means that the results are dependent on the realized sample sizes. In other words, it is testing the first factor without controlling for the other factor, which may not be the hypothesis of interest.\nF test for the significance of the additional variation explained\nR function anova() calculates sequential or Type-I SS"
   },
   {
     "objectID": "slides/Chapter07.html#type-ii",
@@ -2874,14 +2874,14 @@
     "href": "slides/Chapter07.html#type-iii-ss",
     "title": "Chapter 7:Models with Multiple Predictors",
     "section": "Type III SS",
-    "text": "Type III SS\n\nType III SS is the SS added to the regression SS after ALL other predictors including an intercept term.\n\nViolates the marginality principle and so avoided for hypothesis tests\n\nSS explained is not always a good criterion for selection of variables"
+    "text": "Type III SS\n\nType III SS is the SS added to the regression SS after ALL other predictors including an interaction term.\nThis type tests for the presence of a main effect after other main effects and interaction. This approach is therefore valid in the presence of significant interactions.\nIf the interaction is significant SS for main effects should not be interpreted"
   },
   {
     "objectID": "slides/Chapter07.html#ss-types-in-action",
     "href": "slides/Chapter07.html#ss-types-in-action",
     "title": "Chapter 7:Models with Multiple Predictors",
     "section": "SS types in action",
-    "text": "SS types in action\n\nanova(full_reg)\n\nAnalysis of Variance Table\n\nResponse: Spread\n            Df Sum Sq Mean Sq F value  Pr(&gt;F)    \nPTS          1 141195  141195 1829.34 &lt; 2e-16 ***\nP2p          1   4002    4002   51.85 8.3e-13 ***\nP3p          1  14465   14465  187.42 &lt; 2e-16 ***\nFTp          1    584     584    7.56   0.006 ** \nOREB         1   7082    7082   91.76 &lt; 2e-16 ***\nDREB         1  78359   78359 1015.23 &lt; 2e-16 ***\nAST          1     10      10    0.13   0.718    \nSTL          1  20082   20082  260.18 &lt; 2e-16 ***\nBLK          1   1542    1542   19.98 8.2e-06 ***\nResiduals 2108 162703      77                    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\nlibrary(car)\nAnova(full_reg,  type=2)\n\nAnova Table (Type II tests)\n\nResponse: Spread\n          Sum Sq   Df F value  Pr(&gt;F)    \nPTS          416    1    5.38    0.02 *  \nP2p        28767    1  372.71 &lt; 2e-16 ***\nP3p        37787    1  489.57 &lt; 2e-16 ***\nFTp         4497    1   58.26 3.4e-14 ***\nOREB       10276    1  133.13 &lt; 2e-16 ***\nDREB       83083    1 1076.43 &lt; 2e-16 ***\nAST           41    1    0.53    0.47    \nSTL        19232    1  249.17 &lt; 2e-16 ***\nBLK         1542    1   19.98 8.2e-06 ***\nResiduals 162703 2108                    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\nAnova(full_reg,  type=3)\n\nAnova Table (Type III tests)\n\nResponse: Spread\n            Sum Sq   Df F value  Pr(&gt;F)    \n(Intercept) 189696    1 2457.72 &lt; 2e-16 ***\nPTS            416    1    5.38    0.02 *  \nP2p          28767    1  372.71 &lt; 2e-16 ***\nP3p          37787    1  489.57 &lt; 2e-16 ***\nFTp           4497    1   58.26 3.4e-14 ***\nOREB         10276    1  133.13 &lt; 2e-16 ***\nDREB         83083    1 1076.43 &lt; 2e-16 ***\nAST             41    1    0.53    0.47    \nSTL          19232    1  249.17 &lt; 2e-16 ***\nBLK           1542    1   19.98 8.2e-06 ***\nResiduals   162703 2108                    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
+    "text": "SS types in action\nConsider a model with terms A and B:\nType 1 SS:\nSS(A) for factor A.\nSS(B | A) for factor B.\nType 2 SS:\nSS(A | B) for factor A.\nSS(B | A) for factor B.\nType 3 SS:\nSS(A | B, AB) for factor A.\nSS(B | A, AB) for factor B.\n\nWhen data are balanced and the design is simple, types I, II, and III will give the same results.\nSS explained is not always a good criterion for selection of variables"
   },
   {
     "objectID": "slides/Chapter07.html#summary-so-far",
@@ -2930,14 +2930,14 @@
     "href": "slides/Chapter07.html#masked-associations",
     "title": "Chapter 7:Models with Multiple Predictors",
     "section": "Masked associations",
-    "text": "Masked associations\n\nAssociation between a predictor variable and an outcome can be masked.\nYou need to observe both to see the “true” influence of either on the outcome.\nHow do we account for the masking variable (seen as a nuisance)?"
+    "text": "Masked associations\n\nAssociation between a predictor variable and an outcome can be masked by another variable.\nYou need to observe both variables to see the “true” influence of either on the outcome.\nHow do we account for the masking variable (seen as a nuisance)?"
   },
   {
     "objectID": "slides/Chapter07.html#masking-situations-tend-to-arise-when",
     "href": "slides/Chapter07.html#masking-situations-tend-to-arise-when",
     "title": "Chapter 7:Models with Multiple Predictors",
     "section": "Masking situations tend to arise when:",
-    "text": "Masking situations tend to arise when:\n\nBoth predictors are associated with one another.\nHave opposite relationships with the outcome"
+    "text": "Masking situations tend to arise when:\n\nBoth predictors are associated with one another.\nHave opposite relationships with the outcome."
   },
   {
     "objectID": "slides/Chapter07.html#milk-and-brain-data-example",
@@ -2965,21 +2965,21 @@
     "href": "slides/Chapter07.html#multiple-regression-1",
     "title": "Chapter 7:Models with Multiple Predictors",
     "section": "Multiple regression",
-    "text": "Multiple regression"
+    "text": "Multiple regression\n\n\n\nTemperature Only\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n0.00\n0.064\n0\n1\n\n\ntemp\n0.77\n0.064\n12\n0\n\n\n\n\n\n\n\n\nShark Only\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n0.000\n0.083\n0.00\n1\n\n\nshark\n0.557\n0.084\n6.64\n0\n\n\n\n\n\n\n\n\nTemperature and Sharks\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n0.000\n0.064\n0.000\n1.000\n\n\ntemp\n0.776\n0.094\n8.217\n0.000\n\n\nshark\n-0.008\n0.094\n-0.084\n0.933"
   },
   {
     "objectID": "slides/Chapter07.html#masking-situation",
     "href": "slides/Chapter07.html#masking-situation",
     "title": "Chapter 7:Models with Multiple Predictors",
     "section": "Masking situation",
-    "text": "Masking situation\nTend to arise when\n\nBoth predictors are associated with one another.\nHave opposite relationships with the outcome"
+    "text": "Masking situation\nTend to arise when\n\nBoth predictors are associated with one another.\nHave different relationships with the outcome"
   },
   {
     "objectID": "slides/Chapter07.html#how-do-we-deal-with-this",
     "href": "slides/Chapter07.html#how-do-we-deal-with-this",
     "title": "Chapter 7:Models with Multiple Predictors",
     "section": "How do we deal with this?",
-    "text": "How do we deal with this?\n\nStatistically there is not really an answer\nThe answer lies in the causes and the causes are not in the data\nRemember that interpreting the (regression) parameter estimates always depends upon what you believe the causal model"
+    "text": "How do we deal with this?\n\nStatistically there is not really an answer\nThe answer lies in the causes and the causes are not in the data; Shark attacks dont cause ice cream sales or vice versa\nRemember that interpreting the (regression) parameter estimates always depends upon what you believe the causal model"
   },
   {
     "objectID": "slides/Chapter07.html#model-selection",
@@ -3841,5 +3841,47 @@
     "title": "Chapter 6:Models with a Single Predictor",
     "section": "Residuals",
     "text": "Residuals"
+  },
+  {
+    "objectID": "slides/Chapter07.html#full-regression-in-r",
+    "href": "slides/Chapter07.html#full-regression-in-r",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "Full regression in R",
+    "text": "Full regression in R\nPlaces all of the predictors in the model\nEquivalent of throwing everything in and hoping something sticks\n\n\n\nCall:\nlm(formula = Spread ~ ., data = teams_forlm)\n\nResiduals:\n   Min     1Q Median     3Q    Max \n-32.29  -5.72  -0.15   5.66  30.36 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) -142.4223     2.8728  -49.58  &lt; 2e-16 ***\nPTS            0.0624     0.0269    2.32     0.02 *  \nP2p           74.1170     3.8391   19.31  &lt; 2e-16 ***\nP3p           74.0109     3.3449   22.13  &lt; 2e-16 ***\nFTp           15.4686     2.0265    7.63  3.4e-14 ***\nOREB           0.7191     0.0623   11.54  &lt; 2e-16 ***\nDREB           1.2033     0.0367   32.81  &lt; 2e-16 ***\nAST           -0.0350     0.0479   -0.73     0.47    \nSTL            1.0685     0.0677   15.79  &lt; 2e-16 ***\nBLK            0.3503     0.0784    4.47  8.2e-06 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 8.79 on 2108 degrees of freedom\nMultiple R-squared:  0.622, Adjusted R-squared:  0.62 \nF-statistic:  385 on 9 and 2108 DF,  p-value: &lt;2e-16"
+  },
+  {
+    "objectID": "slides/Chapter07.html#variance-explained-review-from-chapter-6",
+    "href": "slides/Chapter07.html#variance-explained-review-from-chapter-6",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "Variance Explained (Review from Chapter 6)",
+    "text": "Variance Explained (Review from Chapter 6)\n\\(R^2\\) is the proportion of variance in \\(y\\) explained by \\(x\\) .\n\\(R^2=\\frac{SS~regression}{SS~Total}\\)\n\n\\(R^2_{adj}\\) is adjusted to remove the variation that is explained by chance alone\n\\(R^2_{adj}=1-\\frac{MS~Error}{MS~Total}\\)\n\\(R^2_{adj}\\) can also be written as: \\(R^2_{adj}=1-\\frac{(1-R^2)*(n-1)}{(n-k-1)}\\)\nNow we have more sums of square to add in to our regression\n\n\nSS &lt;- anova(full_reg) |&gt; \n   tidy() |&gt; \n  select(term:sumsq) |&gt; \n  janitor::adorn_totals()\nSS\n\n      term   df    sumsq\n       PTS    1 141194.6\n       P2p    1   4001.7\n       P3p    1  14465.4\n       FTp    1    583.8\n      OREB    1   7082.2\n      DREB    1  78359.3\n       AST    1     10.1\n       STL    1  20082.0\n       BLK    1   1542.2\n Residuals 2108 162702.8\n     Total 2117 430024.0"
+  },
+  {
+    "objectID": "slides/Chapter07.html#headline-higher-ice-cream-sales-increase-shark-attacks",
+    "href": "slides/Chapter07.html#headline-higher-ice-cream-sales-increase-shark-attacks",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "Headline: Higher ice cream sales increase shark attacks!",
+    "text": "Headline: Higher ice cream sales increase shark attacks!\nWe’ll predict ice cream sales from the temperature and the number of shark attacks"
+  },
+  {
+    "objectID": "slides/Chapter07.html#cross-validation-review-from-chapter-6",
+    "href": "slides/Chapter07.html#cross-validation-review-from-chapter-6",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "Cross validation (review from Chapter 6)",
+    "text": "Cross validation (review from Chapter 6)\nIn sample error vs prediction error\n\nFor simpler models, increasing the number of parameters improves the fit to the sample.\nBut it seems to reduce the accuracy of the out-of-sample predictions.\nMost accurate models trade off flexibility (complexity) and overfitting\n\nGeneral idea: - Leave out some observations. - Train the model on the remaining samples; score on those left out. - Average over many left-out sets to get the out-of-sample (future) accuracy."
+  },
+  {
+    "objectID": "slides/Chapter07.html#single-regression",
+    "href": "slides/Chapter07.html#single-regression",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "Single regression",
+    "text": "Single regression\n\n\n\nTemperature Only\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n0.00\n0.064\n0\n1\n\n\ntemp\n0.77\n0.064\n12\n0\n\n\n\n\n\n\n\n\nShark Only\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n0.000\n0.083\n0.00\n1\n\n\nshark\n0.557\n0.084\n6.64\n0"
+  },
+  {
+    "objectID": "slides/Chapter07.html#ss-types-in-action-1",
+    "href": "slides/Chapter07.html#ss-types-in-action-1",
+    "title": "Chapter 7:Models with Multiple Predictors",
+    "section": "SS types in action",
+    "text": "SS types in action\n\nanova(full_reg)\n\nAnalysis of Variance Table\n\nResponse: Spread\n            Df Sum Sq Mean Sq F value  Pr(&gt;F)    \nPTS          1 141195  141195 1829.34 &lt; 2e-16 ***\nP2p          1   4002    4002   51.85 8.3e-13 ***\nP3p          1  14465   14465  187.42 &lt; 2e-16 ***\nFTp          1    584     584    7.56   0.006 ** \nOREB         1   7082    7082   91.76 &lt; 2e-16 ***\nDREB         1  78359   78359 1015.23 &lt; 2e-16 ***\nAST          1     10      10    0.13   0.718    \nSTL          1  20082   20082  260.18 &lt; 2e-16 ***\nBLK          1   1542    1542   19.98 8.2e-06 ***\nResiduals 2108 162703      77                    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\nlibrary(car)\nAnova(full_reg,  type=2)\n\nAnova Table (Type II tests)\n\nResponse: Spread\n          Sum Sq   Df F value  Pr(&gt;F)    \nPTS          416    1    5.38    0.02 *  \nP2p        28767    1  372.71 &lt; 2e-16 ***\nP3p        37787    1  489.57 &lt; 2e-16 ***\nFTp         4497    1   58.26 3.4e-14 ***\nOREB       10276    1  133.13 &lt; 2e-16 ***\nDREB       83083    1 1076.43 &lt; 2e-16 ***\nAST           41    1    0.53    0.47    \nSTL        19232    1  249.17 &lt; 2e-16 ***\nBLK         1542    1   19.98 8.2e-06 ***\nResiduals 162703 2108                    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\nAnova(full_reg,  type=3)\n\nAnova Table (Type III tests)\n\nResponse: Spread\n            Sum Sq   Df F value  Pr(&gt;F)    \n(Intercept) 189696    1 2457.72 &lt; 2e-16 ***\nPTS            416    1    5.38    0.02 *  \nP2p          28767    1  372.71 &lt; 2e-16 ***\nP3p          37787    1  489.57 &lt; 2e-16 ***\nFTp           4497    1   58.26 3.4e-14 ***\nOREB         10276    1  133.13 &lt; 2e-16 ***\nDREB         83083    1 1076.43 &lt; 2e-16 ***\nAST             41    1    0.53    0.47    \nSTL          19232    1  249.17 &lt; 2e-16 ***\nBLK           1542    1   19.98 8.2e-06 ***\nResiduals   162703 2108                    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
   }
 ]
