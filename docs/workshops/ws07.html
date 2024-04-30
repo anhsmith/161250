@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.353">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -90,7 +90,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <script src="../site_libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
@@ -272,10 +273,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#exercise-7.1" id="toc-exercise-7.1" class="nav-link" data-scroll-target="#exercise-7.1">Exercise 7.1</a></li>
   <li><a href="#exercise-7.2" id="toc-exercise-7.2" class="nav-link" data-scroll-target="#exercise-7.2">Exercise 7.2</a></li>
   <li><a href="#exercise-7.3" id="toc-exercise-7.3" class="nav-link" data-scroll-target="#exercise-7.3">Exercise 7.3</a></li>
-  <li><a href="#try-it-yourself" id="toc-try-it-yourself" class="nav-link" data-scroll-target="#try-it-yourself">Try it yourself</a></li>
-  <li><a href="#exercise-7.4" id="toc-exercise-7.4" class="nav-link" data-scroll-target="#exercise-7.4">Exercise 7.4</a></li>
-  <li><a href="#exercise-7.5" id="toc-exercise-7.5" class="nav-link" data-scroll-target="#exercise-7.5">Exercise 7.5</a></li>
-  <li><a href="#exercise-7.6" id="toc-exercise-7.6" class="nav-link" data-scroll-target="#exercise-7.6">Exercise 7.6</a></li>
   </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="ws07.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
@@ -800,8 +797,8 @@ F-statistic: 54.07 on 2 and 43 DF,  p-value: 1.833e-12</code></pre>
 <span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_markers</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-6bcbbf048b3731fe3fc0" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-6bcbbf048b3731fe3fc0">{"x":{"visdat":{"156c91c8c1163":["function () ","plotlyVisDat"]},"cur_data":"156c91c8c1163","attrs":{"156c91c8c1163":{"x":{},"y":{},"z":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d","mode":"markers","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":"INNERDIA"},"yaxis":{"title":"OUTERDIA"},"zaxis":{"title":"WEIGHT"}},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[1.8999999999999999,1.7,1.8999999999999999,2,2.7999999999999998,2.2999999999999998,2.5,2.7000000000000002,2.2000000000000002,2.6000000000000001,2.2999999999999998,2.8999999999999999,2.2999999999999998,2.5,2.6000000000000001,1.3999999999999999,2,3.7999999999999998,2.2999999999999998,2.3999999999999999,2.1000000000000001,1.8999999999999999,2.2999999999999998,1.8,1.7,2.3999999999999999,1.3,1.8999999999999999,2,1.3999999999999999,2.2000000000000002,2.2000000000000002,2.2999999999999998,1.3,3.7000000000000002,2.2000000000000002,3.7999999999999998,3.2000000000000002,3.2000000000000002,3.1000000000000001,4,3.2999999999999998,2.5,2.2000000000000002,2.1000000000000001,3.2999999999999998],"y":[1.5,1.7,1.7,1.7,2,1.7,2,2.5,1.8,2,2.2000000000000002,2.6000000000000001,2.1000000000000001,1.5,2.6000000000000001,1.3,1.8,2.2000000000000002,2,1.6000000000000001,1.7,1.7,2.2000000000000002,1.3,1.2,1.6000000000000001,1.2,1.5,1.6000000000000001,1.3999999999999999,1.3999999999999999,1.3999999999999999,2.1000000000000001,1,2.3999999999999999,1.5,3,2.2999999999999998,2.1000000000000001,2.6000000000000001,2.1000000000000001,2.2000000000000002,2.2000000000000002,2.2999999999999998,3,3.2999999999999998],"z":[1.4319999999999999,1.226,1.46,1.3540000000000001,2.2109999999999999,1.212,1.8,1.758,1.7010000000000001,1.51,1.9139999999999999,2.9980000000000002,2.2610000000000001,2.2400000000000002,1.8,1.276,1.5169999999999999,3.2959999999999998,1.8779999999999999,1.7509999999999999,1.3959999999999999,1.772,2.9980000000000002,1.2050000000000001,1.637,1.3109999999999999,1.091,1.155,1.0349999999999999,0.999,1.5589999999999999,1.4810000000000001,1.6579999999999999,1.5,4.6829999999999998,1.6619999999999999,4.2409999999999997,4.5720000000000001,4.0999999999999996,3.7200000000000002,4.3150000000000004,4.3200000000000003,3.3900000000000001,4.0099999999999998,2.9700000000000002,3.431],"type":"scatter3d","mode":"markers","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-5f12da4d620053eaab0c" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-5f12da4d620053eaab0c">{"x":{"visdat":{"2a486adb1ada":["function () ","plotlyVisDat"]},"cur_data":"2a486adb1ada","attrs":{"2a486adb1ada":{"x":{},"y":{},"z":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d","mode":"markers","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":"INNERDIA"},"yaxis":{"title":"OUTERDIA"},"zaxis":{"title":"WEIGHT"}},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[1.8999999999999999,1.7,1.8999999999999999,2,2.7999999999999998,2.2999999999999998,2.5,2.7000000000000002,2.2000000000000002,2.6000000000000001,2.2999999999999998,2.8999999999999999,2.2999999999999998,2.5,2.6000000000000001,1.3999999999999999,2,3.7999999999999998,2.2999999999999998,2.3999999999999999,2.1000000000000001,1.8999999999999999,2.2999999999999998,1.8,1.7,2.3999999999999999,1.3,1.8999999999999999,2,1.3999999999999999,2.2000000000000002,2.2000000000000002,2.2999999999999998,1.3,3.7000000000000002,2.2000000000000002,3.7999999999999998,3.2000000000000002,3.2000000000000002,3.1000000000000001,4,3.2999999999999998,2.5,2.2000000000000002,2.1000000000000001,3.2999999999999998],"y":[1.5,1.7,1.7,1.7,2,1.7,2,2.5,1.8,2,2.2000000000000002,2.6000000000000001,2.1000000000000001,1.5,2.6000000000000001,1.3,1.8,2.2000000000000002,2,1.6000000000000001,1.7,1.7,2.2000000000000002,1.3,1.2,1.6000000000000001,1.2,1.5,1.6000000000000001,1.3999999999999999,1.3999999999999999,1.3999999999999999,2.1000000000000001,1,2.3999999999999999,1.5,3,2.2999999999999998,2.1000000000000001,2.6000000000000001,2.1000000000000001,2.2000000000000002,2.2000000000000002,2.2999999999999998,3,3.2999999999999998],"z":[1.4319999999999999,1.226,1.46,1.3540000000000001,2.2109999999999999,1.212,1.8,1.758,1.7010000000000001,1.51,1.9139999999999999,2.9980000000000002,2.2610000000000001,2.2400000000000002,1.8,1.276,1.5169999999999999,3.2959999999999998,1.8779999999999999,1.7509999999999999,1.3959999999999999,1.772,2.9980000000000002,1.2050000000000001,1.637,1.3109999999999999,1.091,1.155,1.0349999999999999,0.999,1.5589999999999999,1.4810000000000001,1.6579999999999999,1.5,4.6829999999999998,1.6619999999999999,4.2409999999999997,4.5720000000000001,4.0999999999999996,3.7200000000000002,4.3150000000000004,4.3200000000000003,3.3900000000000001,4.0099999999999998,2.9700000000000002,3.431],"type":"scatter3d","mode":"markers","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p>I do not recommend 3-D plots for print reports/publications. They are often best viewed interactively. Instead try using colors or bubbles for continuous third variables and shapes or facets for discrete third variables.</p>
@@ -1002,46 +999,6 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <details open="">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(p.model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-</section>
-<section id="try-it-yourself" class="level2">
-<h2 class="anchored" data-anchor-id="try-it-yourself">Try it yourself</h2>
-<p>Use the river data from Assignment 1:</p>
-<div class="cell">
-<details open="">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>riv <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"riverdat.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-</section>
-<section id="exercise-7.4" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="exercise-7.4">Exercise 7.4</h2>
-<p>Make a scatterplot of all the raw values of <code>Temperature</code> (x-axis) and <code>CHLA Mean</code> (y-axis) for the Canterbury region only, with the points coloured by <code>Catchment name</code>. Fit a linear regression to the plot using <code>geom_smooth</code>.</p>
-<div class="cell">
-<details open="">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># your code goes here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-</section>
-<section id="exercise-7.5" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="exercise-7.5">Exercise 7.5</h2>
-<p>Fit a multiple linear regression for the Canterbury region only with the raw values of <code>CHLA Mean</code> as the response variable, <code>Temperature</code> and <code>Dissolved oxygen</code> as predictor variables. Produce a summary table and ANOVA table of your results.</p>
-<div class="cell">
-<details open="">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co"># your code goes here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-</section>
-<section id="exercise-7.6" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="exercise-7.6">Exercise 7.6</h2>
-<p>Make an indicator variable for the <code>Waimakariri River</code> catchment in Canterbury (0 = not in that catchment, 1 = in that catchment). Add this to your regression from exercise 7.5. Produce new tables and discuss your results.</p>
-<div class="cell">
-<details open="">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># your code goes here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <ul>
@@ -1358,464 +1315,439 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb67" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Chapter 7 Workshop"</span></span>
-<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=FALSE, message=FALSE}</span></span>
-<span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo =</span> <span class="cn">TRUE</span>, <span class="at">warning=</span><span class="cn">FALSE</span>, <span class="at">message=</span><span class="cn">FALSE</span>, <span class="at">comment=</span><span class="cn">NA</span>)</span>
-<span id="cb67-7"><a href="#cb67-7" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb67-8"><a href="#cb67-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-11"><a href="#cb67-11" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb67-12"><a href="#cb67-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb67-13"><a href="#cb67-13" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb67-14"><a href="#cb67-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-15"><a href="#cb67-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-16"><a href="#cb67-16" aria-hidden="true" tabindex="-1"></a><span class="fu"># Horse hearts</span></span>
-<span id="cb67-17"><a href="#cb67-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-18"><a href="#cb67-18" aria-hidden="true" tabindex="-1"></a>We will use the *horses’ hearts* dataset. There are seven variables represented as columns. They comprise six ultrasound measurements and the weights of 46 horses’ hearts, specifically:</span>
-<span id="cb67-19"><a href="#cb67-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-20"><a href="#cb67-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-21"><a href="#cb67-21" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span><span class="in">`INNERSYS`</span> : Inner-wall ultrasound measurement in systole phase.</span>
-<span id="cb67-22"><a href="#cb67-22" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span><span class="in">`INNERDIA`</span> : Inner-wall ultrasound measurement in diastole phase.</span>
-<span id="cb67-23"><a href="#cb67-23" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span><span class="in">`OUTERSYS`</span> : Outer-wall ultrasound measurement in systole phase.</span>
-<span id="cb67-24"><a href="#cb67-24" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span><span class="in">`OUTERDIA`</span> : Outer-wall ultrasound measurement in diastole phase.</span>
-<span id="cb67-25"><a href="#cb67-25" aria-hidden="true" tabindex="-1"></a><span class="ss">5.  </span><span class="in">`EXTSYS`</span>   : Exterior ultrasound measurement in systole phase.</span>
-<span id="cb67-26"><a href="#cb67-26" aria-hidden="true" tabindex="-1"></a><span class="ss">6.  </span><span class="in">`EXTDIA`</span>   : Exterior ultrasound measurement in diastole phase.</span>
-<span id="cb67-27"><a href="#cb67-27" aria-hidden="true" tabindex="-1"></a><span class="ss">7.  </span><span class="in">`WEIGHT`</span>   : Weight in kilograms.       </span>
-<span id="cb67-28"><a href="#cb67-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-29"><a href="#cb67-29" aria-hidden="true" tabindex="-1"></a>We will build a multiple regression model to predict the weights of hearts using the six ultrasound measurements. </span>
-<span id="cb67-30"><a href="#cb67-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-31"><a href="#cb67-31" aria-hidden="true" tabindex="-1"></a><span class="fu">## Load data</span></span>
-<span id="cb67-32"><a href="#cb67-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-35"><a href="#cb67-35" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb67-36"><a href="#cb67-36" aria-hidden="true" tabindex="-1"></a>hh <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://www.massey.ac.nz/~anhsmith/data/horsehearts.csv"</span>)</span>
-<span id="cb67-37"><a href="#cb67-37" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb67-38"><a href="#cb67-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-39"><a href="#cb67-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-40"><a href="#cb67-40" aria-hidden="true" tabindex="-1"></a><span class="fu">## Pairs plot</span></span>
-<span id="cb67-41"><a href="#cb67-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-44"><a href="#cb67-44" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb67-45"><a href="#cb67-45" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GGally)</span>
-<span id="cb67-46"><a href="#cb67-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-47"><a href="#cb67-47" aria-hidden="true" tabindex="-1"></a><span class="fu">ggpairs</span>(hh)</span>
-<span id="cb67-48"><a href="#cb67-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-49"><a href="#cb67-49" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb67-50"><a href="#cb67-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-51"><a href="#cb67-51" aria-hidden="true" tabindex="-1"></a>This plot reveals some very high correlation amongst predictors, particularly (not surprisingly) between the same measurements taken in the different phases (diastolic and systolic). Thus, multicollinearity is likely to be a problem when fitting a multiple regression model. The challenge will be choose the subset of variables that provides the best model fit. </span>
-<span id="cb67-52"><a href="#cb67-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-53"><a href="#cb67-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-54"><a href="#cb67-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-55"><a href="#cb67-55" aria-hidden="true" tabindex="-1"></a><span class="fu">## `lm` output</span></span>
-<span id="cb67-56"><a href="#cb67-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-57"><a href="#cb67-57" aria-hidden="true" tabindex="-1"></a>Let’s start by fitting the full model with all of the available predictor variables. </span>
-<span id="cb67-58"><a href="#cb67-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-59"><a href="#cb67-59" aria-hidden="true" tabindex="-1"></a>The formula <span class="in">`WEIGHT ~ .`</span> fits a model with <span class="in">`WEIGHT`</span> as the response variable and all other variables in the data frame as predictor variables.</span>
-<span id="cb67-60"><a href="#cb67-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-63"><a href="#cb67-63" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb67-64"><a href="#cb67-64" aria-hidden="true" tabindex="-1"></a>mf <span class="ot">&lt;-</span> <span class="fu">lm</span>(WEIGHT <span class="sc">~</span> . , <span class="at">data =</span> hh)</span>
-<span id="cb67-65"><a href="#cb67-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-66"><a href="#cb67-66" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mf)</span>
-<span id="cb67-67"><a href="#cb67-67" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb67-68"><a href="#cb67-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-69"><a href="#cb67-69" aria-hidden="true" tabindex="-1"></a>:::{.callout-tip}</span>
-<span id="cb67-70"><a href="#cb67-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-71"><a href="#cb67-71" aria-hidden="true" tabindex="-1"></a><span class="fu">### Interpreting `summary.lm` output</span></span>
-<span id="cb67-72"><a href="#cb67-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-73"><a href="#cb67-73" aria-hidden="true" tabindex="-1"></a>There is a lot of information in the above summary output to process. Let’s break it down.</span>
-<span id="cb67-74"><a href="#cb67-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-75"><a href="#cb67-75" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>The <span class="in">`Call`</span> part shows us the command we used to produce the model. </span>
-<span id="cb67-76"><a href="#cb67-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-77"><a href="#cb67-77" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>The <span class="in">`Residuals`</span> part gives us a five-number summary of the residuals. </span>
-<span id="cb67-78"><a href="#cb67-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-79"><a href="#cb67-79" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>The <span class="in">`Coefficients`</span> table provides the estimates of the model parameters. Specifically, the <span class="in">`Estimate`</span> column gives us the estimates of the $\beta$-coefficients, which can be used to reconstruct the predictive formula. Here, that formula is: </span>
-<span id="cb67-80"><a href="#cb67-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-81"><a href="#cb67-81" aria-hidden="true" tabindex="-1"></a>    $$\hat y = -1.6311 + 0.2321 × INNERSYS + 0.5195 × INNERDIA + ... + 0.3387 × EXTDIA$$</span>
-<span id="cb67-82"><a href="#cb67-82" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb67-83"><a href="#cb67-83" aria-hidden="true" tabindex="-1"></a>    The <span class="in">`Std. Error`</span> column gives the standard error for the estimates of the coefficients. That is, the expected average deviation of the estimator of the coefficient ($b$ or $\hat \beta$) from the true population parameter ($\beta$). If we were to take many samples (of size $n$) from this population, a coefficient’s standard error represents how much the estimate is expected to vary (due to sampling variation). </span>
-<span id="cb67-84"><a href="#cb67-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-85"><a href="#cb67-85" aria-hidden="true" tabindex="-1"></a>    The <span class="in">`t value`</span> is the estimate divided by its standard error, which can be used to test whether the effect of that variable is statistically different from zero. The p-value for this test is provided in the next column, headed <span class="in">`Pr(&gt;|t|)`</span>. If the p-value is low, the observed coefficient estimate is unlikely to have resulted by chance due to sampling variation if the null hypothesis ($H_0 : \beta = 0$) is true. Asterisks indicate significant results, as coded by the <span class="in">`Signif. codes`</span>:  given below the table.</span>
-<span id="cb67-86"><a href="#cb67-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-87"><a href="#cb67-87" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>The final three lines give results for the entire model.</span>
-<span id="cb67-88"><a href="#cb67-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-89"><a href="#cb67-89" aria-hidden="true" tabindex="-1"></a>    The final three lines give results for the entire model.</span>
-<span id="cb67-90"><a href="#cb67-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-91"><a href="#cb67-91" aria-hidden="true" tabindex="-1"></a>    The <span class="in">`Residual standard error`</span> is an estimate of the standard deviation of the residuals, i.e. the average absolute difference between the predicted values and the actual values. When estimating the weight of horse’s hearts using this model, we would expect to, on average, be wrong by 0.6 kg. The <span class="in">`degrees of freedom`</span> here are the residual degrees of freedom—the number of independent pieces of information with which the residual standard error was estimated.</span>
-<span id="cb67-92"><a href="#cb67-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-93"><a href="#cb67-93" aria-hidden="true" tabindex="-1"></a>    Next, we have the <span class="in">`Multiple R-squared`</span>, which is the proportion of the total variation in y that is explained by the model. Here, 75% of the variation is explained. The <span class="in">`Adjusted R-squared`</span> is adjusted for the number of variables included in the model (see lecture slides). It cannot be interpreted in same way as the unadjusted $R^2$ can, but it can be used to compare models.</span>
-<span id="cb67-94"><a href="#cb67-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-95"><a href="#cb67-95" aria-hidden="true" tabindex="-1"></a>    Finally, an <span class="in">`F-statistic`</span>, associated degrees of freedom (<span class="in">`DF`</span>) , and <span class="in">`p-value`</span> are provided. This tests whether the model explains a significant proportion of the total variation in y. This can be thought of as testing whether any of the $\beta$ coefficients in model are non-zero. Here, the p-value is very small so we reject the null hypothesis that all of the $\beta$ coefficients in model are zero.</span>
-<span id="cb67-96"><a href="#cb67-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-97"><a href="#cb67-97" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb67-98"><a href="#cb67-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-99"><a href="#cb67-99" aria-hidden="true" tabindex="-1"></a><span class="fu">## Variance Inflation Factor</span></span>
-<span id="cb67-100"><a href="#cb67-100" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-101"><a href="#cb67-101" aria-hidden="true" tabindex="-1"></a>We mentioned earlier that we were concerned with multicollinearity—correlation among the predictors. A consequence of multicollinearity is that it increases the uncertainty in the estimates of the coefficients—the standard errors of the coefficients are inflated. We can quantify this effect, for each coefficient, with the Variance Inflation Factor (VIF). This is given by the function <span class="in">`car::vif()`</span><span class="ot">[^1]</span>. </span>
-<span id="cb67-102"><a href="#cb67-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-103"><a href="#cb67-103" aria-hidden="true" tabindex="-1"></a><span class="ot">[^1]: </span>The <span class="in">`car::vif()`</span> notation calls the function <span class="in">`vif()`</span> from within the package <span class="in">`car`</span>. Alternatively, you can load the package into R with the command <span class="in">`library(car)`</span>. After doing this, all functions in the car package become available, so you can call the function directly as <span class="in">`vif()`</span>, omitting the <span class="in">`car::`</span>. Either way, you must have the package installed, of course!</span>
-<span id="cb67-104"><a href="#cb67-104" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-105"><a href="#cb67-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-108"><a href="#cb67-108" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb67-109"><a href="#cb67-109" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">vif</span>(mf)</span>
-<span id="cb67-110"><a href="#cb67-110" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb67-111"><a href="#cb67-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-112"><a href="#cb67-112" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-113"><a href="#cb67-113" aria-hidden="true" tabindex="-1"></a>According to a rule of thumb, a VIF &gt; 5 is cause for some concern. A VIF &gt; 10 is definitely problematic. So, we have a problem here. </span>
-<span id="cb67-114"><a href="#cb67-114" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-115"><a href="#cb67-115" aria-hidden="true" tabindex="-1"></a>The above VIF values pertain to variances. I find it more intuitive to discuss the square root of the VIF because they relate to the standard errors.</span>
-<span id="cb67-116"><a href="#cb67-116" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-119"><a href="#cb67-119" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb67-120"><a href="#cb67-120" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(car<span class="sc">::</span><span class="fu">vif</span>(mf))</span>
-<span id="cb67-121"><a href="#cb67-121" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb67-122"><a href="#cb67-122" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-123"><a href="#cb67-123" aria-hidden="true" tabindex="-1"></a>These $\sqrt{}$VIF values can be interpreted in the following way: the standard error for the effect of <span class="in">`INNERSYS`</span> is around three times larger because of the presence of the other (correlated) variables in the model. The VIF is greatest for <span class="in">`EXTDIA`</span>, which is consistent with this variable seeming to have the highest correlations with the other predictors.  </span>
-<span id="cb67-124"><a href="#cb67-124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-125"><a href="#cb67-125" aria-hidden="true" tabindex="-1"></a><span class="fu">## Model selection</span></span>
-<span id="cb67-126"><a href="#cb67-126" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-127"><a href="#cb67-127" aria-hidden="true" tabindex="-1"></a>Statisticians use the term "parsimonious" to describe a model that contains no more predictors than necessary to adequately model the data—a model that has the right balance of complexity. </span>
-<span id="cb67-128"><a href="#cb67-128" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-129"><a href="#cb67-129" aria-hidden="true" tabindex="-1"></a>Let’s run a stepwise model selection process to try to find a more parsimonious model than the full model created above. The criterion we will use to assess the quality of the models is Akaike Information Criterion (AIC). Lower AIC values (i.e. closer to $-\infty$) are better.</span>
-<span id="cb67-130"><a href="#cb67-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-131"><a href="#cb67-131" aria-hidden="true" tabindex="-1"></a>We will undertake a stepwise process in individual steps, using the <span class="in">`drop1()`</span> function.</span>
-<span id="cb67-132"><a href="#cb67-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-135"><a href="#cb67-135" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb67-136"><a href="#cb67-136" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(mf)</span>
-<span id="cb67-137"><a href="#cb67-137" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb67-138"><a href="#cb67-138" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-139"><a href="#cb67-139" aria-hidden="true" tabindex="-1"></a>We have taken the full model (all predictors included) and asked what the AIC values<span class="ot">[^2]</span> would be obtained if we dropped each one of the predictors (or none). The lowest AIC score is for the model with <span class="in">`INNERSYS`</span> removed... so let’s remove it and then use <span class="in">`drop1()`</span> again. </span>
-<span id="cb67-140"><a href="#cb67-140" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-141"><a href="#cb67-141" aria-hidden="true" tabindex="-1"></a><span class="ot">[^2]: </span>Negative values of AIC, as seen here, are uncommon but are nothing to worry about. This occurs when the values of the response variable are small.</span>
-<span id="cb67-142"><a href="#cb67-142" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-145"><a href="#cb67-145" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb67-146"><a href="#cb67-146" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">update</span>(mf, <span class="sc">~</span> . <span class="sc">-</span> INNERSYS)</span>
-<span id="cb67-147"><a href="#cb67-147" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(m2)</span>
-<span id="cb67-148"><a href="#cb67-148" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb67-149"><a href="#cb67-149" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-150"><a href="#cb67-150" aria-hidden="true" tabindex="-1"></a>Now we remove <span class="in">`OUTERDIA`</span> and repeat.</span>
-<span id="cb67-151"><a href="#cb67-151" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-154"><a href="#cb67-154" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb67-155"><a href="#cb67-155" aria-hidden="true" tabindex="-1"></a>m3 <span class="ot">&lt;-</span> <span class="fu">update</span>(m2, <span class="sc">~</span> . <span class="sc">-</span> OUTERDIA)</span>
-<span id="cb67-156"><a href="#cb67-156" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(m3)</span>
-<span id="cb67-157"><a href="#cb67-157" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb67-158"><a href="#cb67-158" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-159"><a href="#cb67-159" aria-hidden="true" tabindex="-1"></a>This time, the best model is that with none removed, so the model selection process stops there. Note that this whole process could have been done in a single line of code. </span>
-<span id="cb67-160"><a href="#cb67-160" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-163"><a href="#cb67-163" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb67-164"><a href="#cb67-164" aria-hidden="true" tabindex="-1"></a>mstep <span class="ot">&lt;-</span> <span class="fu">step</span>(mf)</span>
-<span id="cb67-165"><a href="#cb67-165" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb67-166"><a href="#cb67-166" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-167"><a href="#cb67-167" aria-hidden="true" tabindex="-1"></a>When you run this, the whole three-step process we executed above will print onscreen and the object <span class="in">`mstep`</span> represents the stepwise-selected model.</span>
-<span id="cb67-168"><a href="#cb67-168" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-169"><a href="#cb67-169" aria-hidden="true" tabindex="-1"></a>Let’s examine the stepwise model.</span>
-<span id="cb67-170"><a href="#cb67-170" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-173"><a href="#cb67-173" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb67-174"><a href="#cb67-174" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mstep)</span>
-<span id="cb67-175"><a href="#cb67-175" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb67-176"><a href="#cb67-176" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-177"><a href="#cb67-177" aria-hidden="true" tabindex="-1"></a>We still have two variables that are very highly correlated: <span class="in">`EXTSYS`</span> and <span class="in">`EXTDIA`</span>. Let’s see if this correlation is problematic, according to the VIF criterion.</span>
-<span id="cb67-178"><a href="#cb67-178" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-181"><a href="#cb67-181" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb67-182"><a href="#cb67-182" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">vif</span>(mstep)</span>
-<span id="cb67-183"><a href="#cb67-183" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb67-184"><a href="#cb67-184" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-185"><a href="#cb67-185" aria-hidden="true" tabindex="-1"></a>With VIF scores for these two variables still well above 5, this is certainly a problem. This illustrates an important point: you must not naively accept a model which results from a stepwise selection process. Always scrutinise a model before accepting it.</span>
-<span id="cb67-186"><a href="#cb67-186" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-187"><a href="#cb67-187" aria-hidden="true" tabindex="-1"></a>We will force a step where we drop either <span class="in">`EXTSYS`</span> or <span class="in">`EXTDIA`</span>.</span>
-<span id="cb67-188"><a href="#cb67-188" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-191"><a href="#cb67-191" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb67-192"><a href="#cb67-192" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(mstep)</span>
-<span id="cb67-193"><a href="#cb67-193" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb67-194"><a href="#cb67-194" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-197"><a href="#cb67-197" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb67-198"><a href="#cb67-198" aria-hidden="true" tabindex="-1"></a>mstep2 <span class="ot">&lt;-</span> <span class="fu">update</span>(mstep,  <span class="sc">~</span> . <span class="sc">-</span> EXTDIA)</span>
-<span id="cb67-199"><a href="#cb67-199" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb67-200"><a href="#cb67-200" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-201"><a href="#cb67-201" aria-hidden="true" tabindex="-1"></a>Now, let’s try another step.</span>
-<span id="cb67-202"><a href="#cb67-202" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-205"><a href="#cb67-205" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb67-206"><a href="#cb67-206" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(mstep2)</span>
-<span id="cb67-207"><a href="#cb67-207" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb67-208"><a href="#cb67-208" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-209"><a href="#cb67-209" aria-hidden="true" tabindex="-1"></a>It seems that the model with <span class="in">`EXTSYS`</span> removed, leaving only <span class="in">`INNERDIA`</span> and <span class="in">`OUTERSYS`</span>, is actually preferable. Once the latter two variables are included, <span class="in">`EXTSYS`</span> does not add any strength to the model. Let’s make this model and check for further removals, and our VIFs.</span>
-<span id="cb67-210"><a href="#cb67-210" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-213"><a href="#cb67-213" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb67-214"><a href="#cb67-214" aria-hidden="true" tabindex="-1"></a>mstep3 <span class="ot">&lt;-</span> <span class="fu">update</span>(mstep2, <span class="sc">~</span> . <span class="sc">-</span> EXTSYS)</span>
-<span id="cb67-215"><a href="#cb67-215" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(mstep3)</span>
-<span id="cb67-216"><a href="#cb67-216" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb67-217"><a href="#cb67-217" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-220"><a href="#cb67-220" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb67-221"><a href="#cb67-221" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">vif</span>(mstep3)</span>
-<span id="cb67-222"><a href="#cb67-222" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb67-223"><a href="#cb67-223" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-224"><a href="#cb67-224" aria-hidden="true" tabindex="-1"></a>It seems that this model cannot be improved by dropping any further variables. The variables <span class="in">`INNERDIA`</span> and <span class="in">`OUTERSYS`</span>, though correlated (r = 0.77), do not exert undue influence on each other in the model. </span>
-<span id="cb67-225"><a href="#cb67-225" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-226"><a href="#cb67-226" aria-hidden="true" tabindex="-1"></a>To summarise, let’s see the AIC scores for all the models we’ve made so far.</span>
-<span id="cb67-227"><a href="#cb67-227" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-230"><a href="#cb67-230" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb67-231"><a href="#cb67-231" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(mf, m2, m3, mstep, mstep2, mstep3)</span>
-<span id="cb67-232"><a href="#cb67-232" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb67-233"><a href="#cb67-233" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-234"><a href="#cb67-234" aria-hidden="true" tabindex="-1"></a>All of these models have very similar AIC. Statisticians say that AIC scores within, say, 3 points can be considered equivalent, and so often we take the approach of choosing the simplest model (i.e. that with the fewest predictors) of all those within 3 AIC points of the lowest score. In some fields it is common to report all models within 10 AIC points or produce an ensemble model bases on AIC weight (not covered in this course). So, while the <span class="in">`mstep3`</span> model isn’t the absolute lowest, it is the simplest model from a bunch of models with roughly equivalent AIC scores. Also, it is a good choice because it doesn’t have the problems with severe multicollinearity found in the other models.</span>
-<span id="cb67-235"><a href="#cb67-235" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-236"><a href="#cb67-236" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-237"><a href="#cb67-237" aria-hidden="true" tabindex="-1"></a>Don’t worry about the fact that the two functions <span class="in">`drop1()`</span> and <span class="in">`AIC()`</span> give different scores. Remember the AIC is a tool for comparing models—the actual scores don’t matter.  If you look at the difference in AIC scores between two models from the two functions, they are the same. It also should not be compared on models that have different data sources because it is unit less and only acts to compare the models in a specific set.</span>
-<span id="cb67-238"><a href="#cb67-238" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-239"><a href="#cb67-239" aria-hidden="true" tabindex="-1"></a>Difference between AIC scores for <span class="in">`mstep2`</span> and <span class="in">`mstep3`</span> from the <span class="in">`drop1(mstep2)`</span> output:</span>
-<span id="cb67-240"><a href="#cb67-240" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-243"><a href="#cb67-243" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb67-244"><a href="#cb67-244" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span><span class="fl">40.395</span> <span class="sc">-</span> (<span class="sc">-</span><span class="fl">42.083</span>)</span>
-<span id="cb67-245"><a href="#cb67-245" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb67-246"><a href="#cb67-246" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-247"><a href="#cb67-247" aria-hidden="true" tabindex="-1"></a>And from the <span class="in">`AIC(mf, m2, m3, mstep, mstep2, mstep3)`</span> output:</span>
-<span id="cb67-248"><a href="#cb67-248" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-251"><a href="#cb67-251" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb67-252"><a href="#cb67-252" aria-hidden="true" tabindex="-1"></a><span class="fl">92.14759</span> <span class="sc">-</span> <span class="fl">90.45888</span></span>
-<span id="cb67-253"><a href="#cb67-253" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb67-254"><a href="#cb67-254" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-255"><a href="#cb67-255" aria-hidden="true" tabindex="-1"></a>So now we can choose <span class="in">`mstep3`</span> and clean up.</span>
-<span id="cb67-256"><a href="#cb67-256" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-259"><a href="#cb67-259" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb67-260"><a href="#cb67-260" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(mf, m2, m3, mstep, mstep2) <span class="co"># this code removes these variables</span></span>
-<span id="cb67-261"><a href="#cb67-261" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb67-262"><a href="#cb67-262" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-263"><a href="#cb67-263" aria-hidden="true" tabindex="-1"></a>Let’s examine the summary for our chosen model. </span>
-<span id="cb67-264"><a href="#cb67-264" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-267"><a href="#cb67-267" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb67-268"><a href="#cb67-268" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mstep3)</span>
-<span id="cb67-269"><a href="#cb67-269" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb67-270"><a href="#cb67-270" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-271"><a href="#cb67-271" aria-hidden="true" tabindex="-1"></a>We are now explaining 72% of the variation in heart weights with two variables, as opposed to 75% of the variation with six variables in the original full model. Note also that, in the full model, <span class="in">`INNERDIA`</span> was not significant and <span class="in">`OUTERSYS`</span> was only weakly significant. In the smaller model, both these predictors were highly significant. Personally, I would definitely prefer the more parsimonious two-variable model, especially if it meant that I had only to take two, rather than six, ultrasound measurements on a thousand horses! </span>
-<span id="cb67-272"><a href="#cb67-272" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-273"><a href="#cb67-273" aria-hidden="true" tabindex="-1"></a>But we’re not done yet. We must use some diagnostic tools to examine whether our model meets the assumptions of linear regression before we can accept it.</span>
-<span id="cb67-274"><a href="#cb67-274" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-275"><a href="#cb67-275" aria-hidden="true" tabindex="-1"></a><span class="fu">## Model diagnostics</span></span>
-<span id="cb67-276"><a href="#cb67-276" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-277"><a href="#cb67-277" aria-hidden="true" tabindex="-1"></a>Examine the usual four diagnostic plots.</span>
-<span id="cb67-278"><a href="#cb67-278" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-281"><a href="#cb67-281" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb67-282"><a href="#cb67-282" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mstep3)</span>
-<span id="cb67-283"><a href="#cb67-283" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb67-284"><a href="#cb67-284" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-285"><a href="#cb67-285" aria-hidden="true" tabindex="-1"></a>The Residuals-vs-Fitted plot shows a slight decreasing trend in the residuals at low fitted values, but it is only a few points. It might pay, though, to bear in mind that the model is likely to overestimate lower heart weights.</span>
-<span id="cb67-286"><a href="#cb67-286" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-287"><a href="#cb67-287" aria-hidden="true" tabindex="-1"></a>The normal Q-Q plot is not too worrying, although there are a few higher-than-expected residuals. </span>
-<span id="cb67-288"><a href="#cb67-288" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-289"><a href="#cb67-289" aria-hidden="true" tabindex="-1"></a>The Scale-Location plot shows no strong evidence of heteroscedasticity—the variance appears fairly constant across fitted values. </span>
-<span id="cb67-290"><a href="#cb67-290" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-291"><a href="#cb67-291" aria-hidden="true" tabindex="-1"></a>And, finally, there are no very large values of Cook’s distance or leverage.</span>
-<span id="cb67-292"><a href="#cb67-292" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-293"><a href="#cb67-293" aria-hidden="true" tabindex="-1"></a>There are many other diagnostic tools and graphs available, many in the <span class="in">`car`</span> library, which we do not have time to go into here. If you’re interested, this website is a good place to start: <span class="ot">&lt;http://www.statmethods.net/stats/rdiagnostics.html&gt;</span>.</span>
-<span id="cb67-294"><a href="#cb67-294" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-295"><a href="#cb67-295" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-296"><a href="#cb67-296" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3D plots</span></span>
-<span id="cb67-297"><a href="#cb67-297" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-298"><a href="#cb67-298" aria-hidden="true" tabindex="-1"></a>Since there are three variables involved in this model, it might be useful to examine their relationship using 3D plots. We can include the 2D plane that represents our regression model on the plot, using the following code.</span>
-<span id="cb67-299"><a href="#cb67-299" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-302"><a href="#cb67-302" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb67-303"><a href="#cb67-303" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scatterplot3d)</span>
-<span id="cb67-304"><a href="#cb67-304" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-305"><a href="#cb67-305" aria-hidden="true" tabindex="-1"></a>hh3d <span class="ot">&lt;-</span> <span class="fu">scatterplot3d</span>(</span>
-<span id="cb67-306"><a href="#cb67-306" aria-hidden="true" tabindex="-1"></a>  hh<span class="sc">$</span>INNERDIA, </span>
-<span id="cb67-307"><a href="#cb67-307" aria-hidden="true" tabindex="-1"></a>  hh<span class="sc">$</span>OUTERSYS, </span>
-<span id="cb67-308"><a href="#cb67-308" aria-hidden="true" tabindex="-1"></a>  hh<span class="sc">$</span>WEIGHT,</span>
-<span id="cb67-309"><a href="#cb67-309" aria-hidden="true" tabindex="-1"></a>  <span class="at">type=</span><span class="st">"h"</span>, </span>
-<span id="cb67-310"><a href="#cb67-310" aria-hidden="true" tabindex="-1"></a>  <span class="at">highlight.3d=</span>T,</span>
-<span id="cb67-311"><a href="#cb67-311" aria-hidden="true" tabindex="-1"></a>  <span class="at">pch=</span><span class="dv">16</span></span>
-<span id="cb67-312"><a href="#cb67-312" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb67-313"><a href="#cb67-313" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-314"><a href="#cb67-314" aria-hidden="true" tabindex="-1"></a>hh3d<span class="sc">$</span><span class="fu">plane3d</span>(mstep3)</span>
-<span id="cb67-315"><a href="#cb67-315" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-316"><a href="#cb67-316" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb67-317"><a href="#cb67-317" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-318"><a href="#cb67-318" aria-hidden="true" tabindex="-1"></a>Finally, use <span class="in">`plotly`</span> to create a dynamic 3D plot which you can rotate using your mouse. Don’t say I never treat you!</span>
-<span id="cb67-319"><a href="#cb67-319" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-322"><a href="#cb67-322" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb67-323"><a href="#cb67-323" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
-<span id="cb67-324"><a href="#cb67-324" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-325"><a href="#cb67-325" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_ly</span>(</span>
-<span id="cb67-326"><a href="#cb67-326" aria-hidden="true" tabindex="-1"></a>  hh, </span>
-<span id="cb67-327"><a href="#cb67-327" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="sc">~</span>INNERDIA, </span>
-<span id="cb67-328"><a href="#cb67-328" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="sc">~</span>OUTERDIA, </span>
-<span id="cb67-329"><a href="#cb67-329" aria-hidden="true" tabindex="-1"></a>  <span class="at">z =</span> <span class="sc">~</span>WEIGHT</span>
-<span id="cb67-330"><a href="#cb67-330" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb67-331"><a href="#cb67-331" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_markers</span>()</span>
-<span id="cb67-332"><a href="#cb67-332" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb67-333"><a href="#cb67-333" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-334"><a href="#cb67-334" aria-hidden="true" tabindex="-1"></a>I do not recommend 3-D plots for print reports/publications. They are often best viewed interactively. Instead try using colors or bubbles for continuous third variables and shapes or facets for discrete third variables.</span>
-<span id="cb67-335"><a href="#cb67-335" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-336"><a href="#cb67-336" aria-hidden="true" tabindex="-1"></a>For example:</span>
-<span id="cb67-337"><a href="#cb67-337" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-340"><a href="#cb67-340" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb67-341"><a href="#cb67-341" aria-hidden="true" tabindex="-1"></a>hh <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span>OUTERDIA, <span class="at">x=</span>INNERDIA, <span class="at">color=</span>WEIGHT))<span class="sc">+</span></span>
-<span id="cb67-342"><a href="#cb67-342" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span>
-<span id="cb67-343"><a href="#cb67-343" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb67-344"><a href="#cb67-344" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-345"><a href="#cb67-345" aria-hidden="true" tabindex="-1"></a><span class="fu"># Dataset **`Prestige`**</span></span>
-<span id="cb67-346"><a href="#cb67-346" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-347"><a href="#cb67-347" aria-hidden="true" tabindex="-1"></a>We will continue to use dataset <span class="in">`Prestige`</span> from the <span class="in">`car`</span>   R package. </span>
-<span id="cb67-348"><a href="#cb67-348" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-349"><a href="#cb67-349" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-350"><a href="#cb67-350" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exercise 7.1 {-}</span></span>
-<span id="cb67-351"><a href="#cb67-351" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-352"><a href="#cb67-352" aria-hidden="true" tabindex="-1"></a>Obtain the matrix plot of the numerical variables <span class="in">`education`</span>, <span class="in">`income`</span>, <span class="in">`women`</span>, and <span class="in">`prestige`</span>.</span>
-<span id="cb67-353"><a href="#cb67-353" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-354"><a href="#cb67-354" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, fig.show='hide'}</span></span>
-<span id="cb67-355"><a href="#cb67-355" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
-<span id="cb67-356"><a href="#cb67-356" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GGally)</span>
-<span id="cb67-357"><a href="#cb67-357" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb67-358"><a href="#cb67-358" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-359"><a href="#cb67-359" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb67-360"><a href="#cb67-360" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-361"><a href="#cb67-361" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-362"><a href="#cb67-362" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, fig.show='hide'}</span></span>
-<span id="cb67-363"><a href="#cb67-363" aria-hidden="true" tabindex="-1"></a>Prestige <span class="sc">|&gt;</span> </span>
-<span id="cb67-364"><a href="#cb67-364" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(prestige, education, income, women) <span class="sc">|&gt;</span> </span>
-<span id="cb67-365"><a href="#cb67-365" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggpairs</span>(<span class="fu">aes</span>(<span class="at">colour=</span>Prestige<span class="sc">$</span>type))</span>
-<span id="cb67-366"><a href="#cb67-366" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb67-367"><a href="#cb67-367" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-368"><a href="#cb67-368" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-369"><a href="#cb67-369" aria-hidden="true" tabindex="-1"></a>Obtain their correlation matrix.</span>
-<span id="cb67-370"><a href="#cb67-370" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-371"><a href="#cb67-371" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, fig.show='hide', results='hide'}</span></span>
-<span id="cb67-372"><a href="#cb67-372" aria-hidden="true" tabindex="-1"></a><span class="co"># Old style pairs plot</span></span>
-<span id="cb67-373"><a href="#cb67-373" aria-hidden="true" tabindex="-1"></a>Prestige <span class="sc">|&gt;</span> </span>
-<span id="cb67-374"><a href="#cb67-374" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(prestige, education, income, women) <span class="sc">|&gt;</span></span>
-<span id="cb67-375"><a href="#cb67-375" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pairs</span>()</span>
-<span id="cb67-376"><a href="#cb67-376" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-377"><a href="#cb67-377" aria-hidden="true" tabindex="-1"></a>Prestige <span class="sc">|&gt;</span> </span>
-<span id="cb67-378"><a href="#cb67-378" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(prestige, education, income, women) <span class="sc">|&gt;</span></span>
-<span id="cb67-379"><a href="#cb67-379" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>()</span>
-<span id="cb67-380"><a href="#cb67-380" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb67-381"><a href="#cb67-381" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-382"><a href="#cb67-382" aria-hidden="true" tabindex="-1"></a>Fit a (full) multiple regression of  <span class="in">`prestige`</span> on <span class="in">`education`</span>, <span class="in">`income`</span>, &amp; <span class="in">`women`</span>. </span>
-<span id="cb67-383"><a href="#cb67-383" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-384"><a href="#cb67-384" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, results='hide'}</span></span>
-<span id="cb67-385"><a href="#cb67-385" aria-hidden="true" tabindex="-1"></a>full.reg <span class="ot">&lt;-</span> <span class="fu">lm</span>(prestige <span class="sc">~</span> education <span class="sc">+</span> income <span class="sc">+</span> women,</span>
-<span id="cb67-386"><a href="#cb67-386" aria-hidden="true" tabindex="-1"></a>               <span class="at">data =</span> Prestige)</span>
-<span id="cb67-387"><a href="#cb67-387" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-388"><a href="#cb67-388" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb67-389"><a href="#cb67-389" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-390"><a href="#cb67-390" aria-hidden="true" tabindex="-1"></a>Obtain the plots for residual diagnostics.</span>
-<span id="cb67-391"><a href="#cb67-391" aria-hidden="true" tabindex="-1"></a>Residual plots</span>
-<span id="cb67-392"><a href="#cb67-392" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-393"><a href="#cb67-393" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, fig.show='hide'}</span></span>
-<span id="cb67-394"><a href="#cb67-394" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggfortify)</span>
-<span id="cb67-395"><a href="#cb67-395" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-396"><a href="#cb67-396" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(full.reg, <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>)</span>
-<span id="cb67-397"><a href="#cb67-397" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb67-398"><a href="#cb67-398" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-399"><a href="#cb67-399" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-400"><a href="#cb67-400" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-401"><a href="#cb67-401" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, fig.show='hide'}</span></span>
-<span id="cb67-402"><a href="#cb67-402" aria-hidden="true" tabindex="-1"></a><span class="co"># Old style plots</span></span>
-<span id="cb67-403"><a href="#cb67-403" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(full.reg, <span class="dv">1</span>) <span class="co"># the argument 1 can be changed up to 6</span></span>
-<span id="cb67-404"><a href="#cb67-404" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-405"><a href="#cb67-405" aria-hidden="true" tabindex="-1"></a><span class="co"># or just use</span></span>
-<span id="cb67-406"><a href="#cb67-406" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb67-407"><a href="#cb67-407" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(full.reg)</span>
-<span id="cb67-408"><a href="#cb67-408" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb67-409"><a href="#cb67-409" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-410"><a href="#cb67-410" aria-hidden="true" tabindex="-1"></a>Regression outputs</span>
-<span id="cb67-411"><a href="#cb67-411" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-414"><a href="#cb67-414" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb67-415"><a href="#cb67-415" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(full.reg)</span>
-<span id="cb67-416"><a href="#cb67-416" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-417"><a href="#cb67-417" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(full.reg)</span>
-<span id="cb67-418"><a href="#cb67-418" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-419"><a href="#cb67-419" aria-hidden="true" tabindex="-1"></a><span class="fu">extractAIC</span>(full.reg)</span>
-<span id="cb67-420"><a href="#cb67-420" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb67-421"><a href="#cb67-421" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-422"><a href="#cb67-422" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exercise 7.2 {-}</span></span>
-<span id="cb67-423"><a href="#cb67-423" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-424"><a href="#cb67-424" aria-hidden="true" tabindex="-1"></a>Perform stepwise regression analysis of <span class="in">`prestige`</span> on <span class="in">`education`</span>, <span class="in">`income`</span>, &amp; <span class="in">`women`</span>. </span>
-<span id="cb67-425"><a href="#cb67-425" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-426"><a href="#cb67-426" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, results='hide'}</span></span>
-<span id="cb67-427"><a href="#cb67-427" aria-hidden="true" tabindex="-1"></a>full.reg <span class="ot">=</span> <span class="fu">lm</span>(prestige <span class="sc">~</span> education <span class="sc">+</span> income <span class="sc">+</span> women,</span>
-<span id="cb67-428"><a href="#cb67-428" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> Prestige)</span>
-<span id="cb67-429"><a href="#cb67-429" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-430"><a href="#cb67-430" aria-hidden="true" tabindex="-1"></a><span class="fu">step</span>(full.reg)</span>
-<span id="cb67-431"><a href="#cb67-431" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-432"><a href="#cb67-432" aria-hidden="true" tabindex="-1"></a><span class="fu">step</span>(full.reg, <span class="at">direction=</span><span class="st">"backward"</span>)</span>
-<span id="cb67-433"><a href="#cb67-433" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-434"><a href="#cb67-434" aria-hidden="true" tabindex="-1"></a><span class="fu">step</span>(full.reg, <span class="at">direction=</span><span class="st">"both"</span>)</span>
-<span id="cb67-435"><a href="#cb67-435" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb67-436"><a href="#cb67-436" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-437"><a href="#cb67-437" aria-hidden="true" tabindex="-1"></a>The function <span class="in">`update()`</span> is handy for making adjustments to a model. For example, see try the following codes:</span>
-<span id="cb67-438"><a href="#cb67-438" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-439"><a href="#cb67-439" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, results='hide'}</span></span>
-<span id="cb67-440"><a href="#cb67-440" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">=</span> <span class="fu">update</span>(full.reg,  . <span class="sc">~</span> . <span class="sc">-</span> women)</span>
-<span id="cb67-441"><a href="#cb67-441" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-442"><a href="#cb67-442" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m1)</span>
-<span id="cb67-443"><a href="#cb67-443" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb67-444"><a href="#cb67-444" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-445"><a href="#cb67-445" aria-hidden="true" tabindex="-1"></a>Note that <span class="in">` . ~ . - women`</span> means that the model is fitted without the <span class="in">`women`</span> variable.</span>
-<span id="cb67-446"><a href="#cb67-446" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-447"><a href="#cb67-447" aria-hidden="true" tabindex="-1"></a>Further options are available in <span class="in">`leaps`</span> and <span class="in">`HH`</span> packages </span>
-<span id="cb67-448"><a href="#cb67-448" aria-hidden="true" tabindex="-1"></a>(installation commands are given below).</span>
-<span id="cb67-449"><a href="#cb67-449" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-450"><a href="#cb67-450" aria-hidden="true" tabindex="-1"></a><span class="in">`install.packages("leaps", repos = "https://cran.r-project.org")`</span></span>
-<span id="cb67-451"><a href="#cb67-451" aria-hidden="true" tabindex="-1"></a><span class="in">`install.packages("HH", repos = "https://cran.r-project.org")`</span></span>
-<span id="cb67-452"><a href="#cb67-452" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-453"><a href="#cb67-453" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, results='hide', fig.show='hide'}</span></span>
-<span id="cb67-454"><a href="#cb67-454" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaps)</span>
-<span id="cb67-455"><a href="#cb67-455" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-456"><a href="#cb67-456" aria-hidden="true" tabindex="-1"></a>model <span class="ot">=</span> <span class="fu">regsubsets</span>(prestige <span class="sc">~</span> education <span class="sc">+</span> income <span class="sc">+</span> women, </span>
-<span id="cb67-457"><a href="#cb67-457" aria-hidden="true" tabindex="-1"></a>                   <span class="at">data =</span> Prestige)</span>
-<span id="cb67-458"><a href="#cb67-458" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-459"><a href="#cb67-459" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(HH)</span>
-<span id="cb67-460"><a href="#cb67-460" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-461"><a href="#cb67-461" aria-hidden="true" tabindex="-1"></a><span class="fu">summaryHH</span>(model)</span>
-<span id="cb67-462"><a href="#cb67-462" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-463"><a href="#cb67-463" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">summaryHH</span>(model))</span>
-<span id="cb67-464"><a href="#cb67-464" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb67-465"><a href="#cb67-465" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-466"><a href="#cb67-466" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-467"><a href="#cb67-467" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exercise 7.3 {-}</span></span>
-<span id="cb67-468"><a href="#cb67-468" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-469"><a href="#cb67-469" aria-hidden="true" tabindex="-1"></a>Perform a polynomial regression of <span class="in">`prestige`</span> on <span class="in">`income`</span>. </span>
-<span id="cb67-470"><a href="#cb67-470" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-471"><a href="#cb67-471" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, results='hide', fig.show='hide'}</span></span>
-<span id="cb67-472"><a href="#cb67-472" aria-hidden="true" tabindex="-1"></a><span class="co"># Cubic fit</span></span>
-<span id="cb67-473"><a href="#cb67-473" aria-hidden="true" tabindex="-1"></a>p.model <span class="ot">&lt;-</span> <span class="fu">lm</span>(prestige <span class="sc">~</span> <span class="fu">poly</span>(income,<span class="dv">3</span>),</span>
-<span id="cb67-474"><a href="#cb67-474" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> Prestige)</span>
-<span id="cb67-475"><a href="#cb67-475" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-476"><a href="#cb67-476" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(p.model)</span>
-<span id="cb67-477"><a href="#cb67-477" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-478"><a href="#cb67-478" aria-hidden="true" tabindex="-1"></a><span class="fu">extractAIC</span>(p.model)</span>
-<span id="cb67-479"><a href="#cb67-479" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-480"><a href="#cb67-480" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(p.model)</span>
-<span id="cb67-481"><a href="#cb67-481" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-482"><a href="#cb67-482" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(p.model)</span>
-<span id="cb67-483"><a href="#cb67-483" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb67-484"><a href="#cb67-484" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-485"><a href="#cb67-485" aria-hidden="true" tabindex="-1"></a><span class="fu">## Try it yourself</span></span>
-<span id="cb67-486"><a href="#cb67-486" aria-hidden="true" tabindex="-1"></a>Use the river data from Assignment 1: </span>
-<span id="cb67-489"><a href="#cb67-489" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb67-490"><a href="#cb67-490" aria-hidden="true" tabindex="-1"></a>riv <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"riverdat.csv"</span>)</span>
-<span id="cb67-491"><a href="#cb67-491" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb67-492"><a href="#cb67-492" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-493"><a href="#cb67-493" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exercise 7.4 {-}</span></span>
-<span id="cb67-494"><a href="#cb67-494" aria-hidden="true" tabindex="-1"></a>Make a scatterplot of all the raw values of <span class="in">`Temperature`</span> (x-axis) and <span class="in">`CHLA Mean`</span> (y-axis) for the Canterbury region only, with the points coloured by <span class="in">`Catchment name`</span>. Fit a linear regression to the plot using <span class="in">`geom_smooth`</span>. </span>
-<span id="cb67-495"><a href="#cb67-495" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-498"><a href="#cb67-498" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb67-499"><a href="#cb67-499" aria-hidden="true" tabindex="-1"></a><span class="co"># your code goes here</span></span>
-<span id="cb67-500"><a href="#cb67-500" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb67-501"><a href="#cb67-501" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-502"><a href="#cb67-502" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exercise 7.5 {-}</span></span>
-<span id="cb67-503"><a href="#cb67-503" aria-hidden="true" tabindex="-1"></a>Fit a multiple linear regression for the Canterbury region only with the raw values of <span class="in">`CHLA Mean`</span> as the response variable, <span class="in">`Temperature`</span> and <span class="in">`Dissolved oxygen`</span> as predictor variables. Produce a summary table and ANOVA table of your results. </span>
-<span id="cb67-504"><a href="#cb67-504" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-507"><a href="#cb67-507" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb67-508"><a href="#cb67-508" aria-hidden="true" tabindex="-1"></a><span class="co"># your code goes here</span></span>
-<span id="cb67-509"><a href="#cb67-509" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb67-510"><a href="#cb67-510" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-511"><a href="#cb67-511" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exercise 7.6 {-}</span></span>
-<span id="cb67-512"><a href="#cb67-512" aria-hidden="true" tabindex="-1"></a>Make an indicator variable for the <span class="in">`Waimakariri River`</span> catchment in Canterbury (0 = not in that catchment, 1 = in that catchment). Add this to your regression from exercise 7.5. Produce new tables and discuss your results. </span>
-<span id="cb67-513"><a href="#cb67-513" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-516"><a href="#cb67-516" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb67-517"><a href="#cb67-517" aria-hidden="true" tabindex="-1"></a><span class="co"># your code goes here</span></span>
-<span id="cb67-518"><a href="#cb67-518" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb67-519"><a href="#cb67-519" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-520"><a href="#cb67-520" aria-hidden="true" tabindex="-1"></a><span class="ss">+ </span>More R code examples are <span class="co">[</span><span class="ot">here</span><span class="co">](../exercises/Chap7more.R)</span></span>
+<div class="sourceCode" id="cb63" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Chapter 7 Workshop"</span></span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=FALSE, message=FALSE}</span></span>
+<span id="cb63-6"><a href="#cb63-6" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo =</span> <span class="cn">TRUE</span>, <span class="at">warning=</span><span class="cn">FALSE</span>, <span class="at">message=</span><span class="cn">FALSE</span>, <span class="at">comment=</span><span class="cn">NA</span>)</span>
+<span id="cb63-7"><a href="#cb63-7" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb63-8"><a href="#cb63-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-11"><a href="#cb63-11" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb63-12"><a href="#cb63-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb63-13"><a href="#cb63-13" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb63-14"><a href="#cb63-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-15"><a href="#cb63-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-16"><a href="#cb63-16" aria-hidden="true" tabindex="-1"></a><span class="fu"># Horse hearts</span></span>
+<span id="cb63-17"><a href="#cb63-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-18"><a href="#cb63-18" aria-hidden="true" tabindex="-1"></a>We will use the *horses’ hearts* dataset. There are seven variables represented as columns. They comprise six ultrasound measurements and the weights of 46 horses’ hearts, specifically:</span>
+<span id="cb63-19"><a href="#cb63-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-20"><a href="#cb63-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-21"><a href="#cb63-21" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span><span class="in">`INNERSYS`</span> : Inner-wall ultrasound measurement in systole phase.</span>
+<span id="cb63-22"><a href="#cb63-22" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span><span class="in">`INNERDIA`</span> : Inner-wall ultrasound measurement in diastole phase.</span>
+<span id="cb63-23"><a href="#cb63-23" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span><span class="in">`OUTERSYS`</span> : Outer-wall ultrasound measurement in systole phase.</span>
+<span id="cb63-24"><a href="#cb63-24" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span><span class="in">`OUTERDIA`</span> : Outer-wall ultrasound measurement in diastole phase.</span>
+<span id="cb63-25"><a href="#cb63-25" aria-hidden="true" tabindex="-1"></a><span class="ss">5.  </span><span class="in">`EXTSYS`</span>   : Exterior ultrasound measurement in systole phase.</span>
+<span id="cb63-26"><a href="#cb63-26" aria-hidden="true" tabindex="-1"></a><span class="ss">6.  </span><span class="in">`EXTDIA`</span>   : Exterior ultrasound measurement in diastole phase.</span>
+<span id="cb63-27"><a href="#cb63-27" aria-hidden="true" tabindex="-1"></a><span class="ss">7.  </span><span class="in">`WEIGHT`</span>   : Weight in kilograms.       </span>
+<span id="cb63-28"><a href="#cb63-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-29"><a href="#cb63-29" aria-hidden="true" tabindex="-1"></a>We will build a multiple regression model to predict the weights of hearts using the six ultrasound measurements. </span>
+<span id="cb63-30"><a href="#cb63-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-31"><a href="#cb63-31" aria-hidden="true" tabindex="-1"></a><span class="fu">## Load data</span></span>
+<span id="cb63-32"><a href="#cb63-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-35"><a href="#cb63-35" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb63-36"><a href="#cb63-36" aria-hidden="true" tabindex="-1"></a>hh <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://www.massey.ac.nz/~anhsmith/data/horsehearts.csv"</span>)</span>
+<span id="cb63-37"><a href="#cb63-37" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb63-38"><a href="#cb63-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-39"><a href="#cb63-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-40"><a href="#cb63-40" aria-hidden="true" tabindex="-1"></a><span class="fu">## Pairs plot</span></span>
+<span id="cb63-41"><a href="#cb63-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-44"><a href="#cb63-44" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb63-45"><a href="#cb63-45" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GGally)</span>
+<span id="cb63-46"><a href="#cb63-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-47"><a href="#cb63-47" aria-hidden="true" tabindex="-1"></a><span class="fu">ggpairs</span>(hh)</span>
+<span id="cb63-48"><a href="#cb63-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-49"><a href="#cb63-49" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb63-50"><a href="#cb63-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-51"><a href="#cb63-51" aria-hidden="true" tabindex="-1"></a>This plot reveals some very high correlation amongst predictors, particularly (not surprisingly) between the same measurements taken in the different phases (diastolic and systolic). Thus, multicollinearity is likely to be a problem when fitting a multiple regression model. The challenge will be choose the subset of variables that provides the best model fit. </span>
+<span id="cb63-52"><a href="#cb63-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-53"><a href="#cb63-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-54"><a href="#cb63-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-55"><a href="#cb63-55" aria-hidden="true" tabindex="-1"></a><span class="fu">## `lm` output</span></span>
+<span id="cb63-56"><a href="#cb63-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-57"><a href="#cb63-57" aria-hidden="true" tabindex="-1"></a>Let’s start by fitting the full model with all of the available predictor variables. </span>
+<span id="cb63-58"><a href="#cb63-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-59"><a href="#cb63-59" aria-hidden="true" tabindex="-1"></a>The formula <span class="in">`WEIGHT ~ .`</span> fits a model with <span class="in">`WEIGHT`</span> as the response variable and all other variables in the data frame as predictor variables.</span>
+<span id="cb63-60"><a href="#cb63-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-63"><a href="#cb63-63" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb63-64"><a href="#cb63-64" aria-hidden="true" tabindex="-1"></a>mf <span class="ot">&lt;-</span> <span class="fu">lm</span>(WEIGHT <span class="sc">~</span> . , <span class="at">data =</span> hh)</span>
+<span id="cb63-65"><a href="#cb63-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-66"><a href="#cb63-66" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mf)</span>
+<span id="cb63-67"><a href="#cb63-67" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb63-68"><a href="#cb63-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-69"><a href="#cb63-69" aria-hidden="true" tabindex="-1"></a>:::{.callout-tip}</span>
+<span id="cb63-70"><a href="#cb63-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-71"><a href="#cb63-71" aria-hidden="true" tabindex="-1"></a><span class="fu">### Interpreting `summary.lm` output</span></span>
+<span id="cb63-72"><a href="#cb63-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-73"><a href="#cb63-73" aria-hidden="true" tabindex="-1"></a>There is a lot of information in the above summary output to process. Let’s break it down.</span>
+<span id="cb63-74"><a href="#cb63-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-75"><a href="#cb63-75" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>The <span class="in">`Call`</span> part shows us the command we used to produce the model. </span>
+<span id="cb63-76"><a href="#cb63-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-77"><a href="#cb63-77" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>The <span class="in">`Residuals`</span> part gives us a five-number summary of the residuals. </span>
+<span id="cb63-78"><a href="#cb63-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-79"><a href="#cb63-79" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>The <span class="in">`Coefficients`</span> table provides the estimates of the model parameters. Specifically, the <span class="in">`Estimate`</span> column gives us the estimates of the $\beta$-coefficients, which can be used to reconstruct the predictive formula. Here, that formula is: </span>
+<span id="cb63-80"><a href="#cb63-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-81"><a href="#cb63-81" aria-hidden="true" tabindex="-1"></a>    $$\hat y = -1.6311 + 0.2321 × INNERSYS + 0.5195 × INNERDIA + ... + 0.3387 × EXTDIA$$</span>
+<span id="cb63-82"><a href="#cb63-82" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb63-83"><a href="#cb63-83" aria-hidden="true" tabindex="-1"></a>    The <span class="in">`Std. Error`</span> column gives the standard error for the estimates of the coefficients. That is, the expected average deviation of the estimator of the coefficient ($b$ or $\hat \beta$) from the true population parameter ($\beta$). If we were to take many samples (of size $n$) from this population, a coefficient’s standard error represents how much the estimate is expected to vary (due to sampling variation). </span>
+<span id="cb63-84"><a href="#cb63-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-85"><a href="#cb63-85" aria-hidden="true" tabindex="-1"></a>    The <span class="in">`t value`</span> is the estimate divided by its standard error, which can be used to test whether the effect of that variable is statistically different from zero. The p-value for this test is provided in the next column, headed <span class="in">`Pr(&gt;|t|)`</span>. If the p-value is low, the observed coefficient estimate is unlikely to have resulted by chance due to sampling variation if the null hypothesis ($H_0 : \beta = 0$) is true. Asterisks indicate significant results, as coded by the <span class="in">`Signif. codes`</span>:  given below the table.</span>
+<span id="cb63-86"><a href="#cb63-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-87"><a href="#cb63-87" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>The final three lines give results for the entire model.</span>
+<span id="cb63-88"><a href="#cb63-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-89"><a href="#cb63-89" aria-hidden="true" tabindex="-1"></a>    The final three lines give results for the entire model.</span>
+<span id="cb63-90"><a href="#cb63-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-91"><a href="#cb63-91" aria-hidden="true" tabindex="-1"></a>    The <span class="in">`Residual standard error`</span> is an estimate of the standard deviation of the residuals, i.e. the average absolute difference between the predicted values and the actual values. When estimating the weight of horse’s hearts using this model, we would expect to, on average, be wrong by 0.6 kg. The <span class="in">`degrees of freedom`</span> here are the residual degrees of freedom—the number of independent pieces of information with which the residual standard error was estimated.</span>
+<span id="cb63-92"><a href="#cb63-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-93"><a href="#cb63-93" aria-hidden="true" tabindex="-1"></a>    Next, we have the <span class="in">`Multiple R-squared`</span>, which is the proportion of the total variation in y that is explained by the model. Here, 75% of the variation is explained. The <span class="in">`Adjusted R-squared`</span> is adjusted for the number of variables included in the model (see lecture slides). It cannot be interpreted in same way as the unadjusted $R^2$ can, but it can be used to compare models.</span>
+<span id="cb63-94"><a href="#cb63-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-95"><a href="#cb63-95" aria-hidden="true" tabindex="-1"></a>    Finally, an <span class="in">`F-statistic`</span>, associated degrees of freedom (<span class="in">`DF`</span>) , and <span class="in">`p-value`</span> are provided. This tests whether the model explains a significant proportion of the total variation in y. This can be thought of as testing whether any of the $\beta$ coefficients in model are non-zero. Here, the p-value is very small so we reject the null hypothesis that all of the $\beta$ coefficients in model are zero.</span>
+<span id="cb63-96"><a href="#cb63-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-97"><a href="#cb63-97" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb63-98"><a href="#cb63-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-99"><a href="#cb63-99" aria-hidden="true" tabindex="-1"></a><span class="fu">## Variance Inflation Factor</span></span>
+<span id="cb63-100"><a href="#cb63-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-101"><a href="#cb63-101" aria-hidden="true" tabindex="-1"></a>We mentioned earlier that we were concerned with multicollinearity—correlation among the predictors. A consequence of multicollinearity is that it increases the uncertainty in the estimates of the coefficients—the standard errors of the coefficients are inflated. We can quantify this effect, for each coefficient, with the Variance Inflation Factor (VIF). This is given by the function <span class="in">`car::vif()`</span><span class="ot">[^1]</span>. </span>
+<span id="cb63-102"><a href="#cb63-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-103"><a href="#cb63-103" aria-hidden="true" tabindex="-1"></a><span class="ot">[^1]: </span>The <span class="in">`car::vif()`</span> notation calls the function <span class="in">`vif()`</span> from within the package <span class="in">`car`</span>. Alternatively, you can load the package into R with the command <span class="in">`library(car)`</span>. After doing this, all functions in the car package become available, so you can call the function directly as <span class="in">`vif()`</span>, omitting the <span class="in">`car::`</span>. Either way, you must have the package installed, of course!</span>
+<span id="cb63-104"><a href="#cb63-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-105"><a href="#cb63-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-108"><a href="#cb63-108" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb63-109"><a href="#cb63-109" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">vif</span>(mf)</span>
+<span id="cb63-110"><a href="#cb63-110" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb63-111"><a href="#cb63-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-112"><a href="#cb63-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-113"><a href="#cb63-113" aria-hidden="true" tabindex="-1"></a>According to a rule of thumb, a VIF &gt; 5 is cause for some concern. A VIF &gt; 10 is definitely problematic. So, we have a problem here. </span>
+<span id="cb63-114"><a href="#cb63-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-115"><a href="#cb63-115" aria-hidden="true" tabindex="-1"></a>The above VIF values pertain to variances. I find it more intuitive to discuss the square root of the VIF because they relate to the standard errors.</span>
+<span id="cb63-116"><a href="#cb63-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-119"><a href="#cb63-119" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb63-120"><a href="#cb63-120" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(car<span class="sc">::</span><span class="fu">vif</span>(mf))</span>
+<span id="cb63-121"><a href="#cb63-121" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb63-122"><a href="#cb63-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-123"><a href="#cb63-123" aria-hidden="true" tabindex="-1"></a>These $\sqrt{}$VIF values can be interpreted in the following way: the standard error for the effect of <span class="in">`INNERSYS`</span> is around three times larger because of the presence of the other (correlated) variables in the model. The VIF is greatest for <span class="in">`EXTDIA`</span>, which is consistent with this variable seeming to have the highest correlations with the other predictors.  </span>
+<span id="cb63-124"><a href="#cb63-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-125"><a href="#cb63-125" aria-hidden="true" tabindex="-1"></a><span class="fu">## Model selection</span></span>
+<span id="cb63-126"><a href="#cb63-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-127"><a href="#cb63-127" aria-hidden="true" tabindex="-1"></a>Statisticians use the term "parsimonious" to describe a model that contains no more predictors than necessary to adequately model the data—a model that has the right balance of complexity. </span>
+<span id="cb63-128"><a href="#cb63-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-129"><a href="#cb63-129" aria-hidden="true" tabindex="-1"></a>Let’s run a stepwise model selection process to try to find a more parsimonious model than the full model created above. The criterion we will use to assess the quality of the models is Akaike Information Criterion (AIC). Lower AIC values (i.e. closer to $-\infty$) are better.</span>
+<span id="cb63-130"><a href="#cb63-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-131"><a href="#cb63-131" aria-hidden="true" tabindex="-1"></a>We will undertake a stepwise process in individual steps, using the <span class="in">`drop1()`</span> function.</span>
+<span id="cb63-132"><a href="#cb63-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-135"><a href="#cb63-135" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb63-136"><a href="#cb63-136" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(mf)</span>
+<span id="cb63-137"><a href="#cb63-137" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb63-138"><a href="#cb63-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-139"><a href="#cb63-139" aria-hidden="true" tabindex="-1"></a>We have taken the full model (all predictors included) and asked what the AIC values<span class="ot">[^2]</span> would be obtained if we dropped each one of the predictors (or none). The lowest AIC score is for the model with <span class="in">`INNERSYS`</span> removed... so let’s remove it and then use <span class="in">`drop1()`</span> again. </span>
+<span id="cb63-140"><a href="#cb63-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-141"><a href="#cb63-141" aria-hidden="true" tabindex="-1"></a><span class="ot">[^2]: </span>Negative values of AIC, as seen here, are uncommon but are nothing to worry about. This occurs when the values of the response variable are small.</span>
+<span id="cb63-142"><a href="#cb63-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-145"><a href="#cb63-145" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb63-146"><a href="#cb63-146" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">update</span>(mf, <span class="sc">~</span> . <span class="sc">-</span> INNERSYS)</span>
+<span id="cb63-147"><a href="#cb63-147" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(m2)</span>
+<span id="cb63-148"><a href="#cb63-148" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb63-149"><a href="#cb63-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-150"><a href="#cb63-150" aria-hidden="true" tabindex="-1"></a>Now we remove <span class="in">`OUTERDIA`</span> and repeat.</span>
+<span id="cb63-151"><a href="#cb63-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-154"><a href="#cb63-154" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb63-155"><a href="#cb63-155" aria-hidden="true" tabindex="-1"></a>m3 <span class="ot">&lt;-</span> <span class="fu">update</span>(m2, <span class="sc">~</span> . <span class="sc">-</span> OUTERDIA)</span>
+<span id="cb63-156"><a href="#cb63-156" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(m3)</span>
+<span id="cb63-157"><a href="#cb63-157" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb63-158"><a href="#cb63-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-159"><a href="#cb63-159" aria-hidden="true" tabindex="-1"></a>This time, the best model is that with none removed, so the model selection process stops there. Note that this whole process could have been done in a single line of code. </span>
+<span id="cb63-160"><a href="#cb63-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-163"><a href="#cb63-163" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb63-164"><a href="#cb63-164" aria-hidden="true" tabindex="-1"></a>mstep <span class="ot">&lt;-</span> <span class="fu">step</span>(mf)</span>
+<span id="cb63-165"><a href="#cb63-165" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb63-166"><a href="#cb63-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-167"><a href="#cb63-167" aria-hidden="true" tabindex="-1"></a>When you run this, the whole three-step process we executed above will print onscreen and the object <span class="in">`mstep`</span> represents the stepwise-selected model.</span>
+<span id="cb63-168"><a href="#cb63-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-169"><a href="#cb63-169" aria-hidden="true" tabindex="-1"></a>Let’s examine the stepwise model.</span>
+<span id="cb63-170"><a href="#cb63-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-173"><a href="#cb63-173" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb63-174"><a href="#cb63-174" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mstep)</span>
+<span id="cb63-175"><a href="#cb63-175" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb63-176"><a href="#cb63-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-177"><a href="#cb63-177" aria-hidden="true" tabindex="-1"></a>We still have two variables that are very highly correlated: <span class="in">`EXTSYS`</span> and <span class="in">`EXTDIA`</span>. Let’s see if this correlation is problematic, according to the VIF criterion.</span>
+<span id="cb63-178"><a href="#cb63-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-181"><a href="#cb63-181" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb63-182"><a href="#cb63-182" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">vif</span>(mstep)</span>
+<span id="cb63-183"><a href="#cb63-183" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb63-184"><a href="#cb63-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-185"><a href="#cb63-185" aria-hidden="true" tabindex="-1"></a>With VIF scores for these two variables still well above 5, this is certainly a problem. This illustrates an important point: you must not naively accept a model which results from a stepwise selection process. Always scrutinise a model before accepting it.</span>
+<span id="cb63-186"><a href="#cb63-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-187"><a href="#cb63-187" aria-hidden="true" tabindex="-1"></a>We will force a step where we drop either <span class="in">`EXTSYS`</span> or <span class="in">`EXTDIA`</span>.</span>
+<span id="cb63-188"><a href="#cb63-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-191"><a href="#cb63-191" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb63-192"><a href="#cb63-192" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(mstep)</span>
+<span id="cb63-193"><a href="#cb63-193" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb63-194"><a href="#cb63-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-197"><a href="#cb63-197" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb63-198"><a href="#cb63-198" aria-hidden="true" tabindex="-1"></a>mstep2 <span class="ot">&lt;-</span> <span class="fu">update</span>(mstep,  <span class="sc">~</span> . <span class="sc">-</span> EXTDIA)</span>
+<span id="cb63-199"><a href="#cb63-199" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb63-200"><a href="#cb63-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-201"><a href="#cb63-201" aria-hidden="true" tabindex="-1"></a>Now, let’s try another step.</span>
+<span id="cb63-202"><a href="#cb63-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-205"><a href="#cb63-205" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb63-206"><a href="#cb63-206" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(mstep2)</span>
+<span id="cb63-207"><a href="#cb63-207" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb63-208"><a href="#cb63-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-209"><a href="#cb63-209" aria-hidden="true" tabindex="-1"></a>It seems that the model with <span class="in">`EXTSYS`</span> removed, leaving only <span class="in">`INNERDIA`</span> and <span class="in">`OUTERSYS`</span>, is actually preferable. Once the latter two variables are included, <span class="in">`EXTSYS`</span> does not add any strength to the model. Let’s make this model and check for further removals, and our VIFs.</span>
+<span id="cb63-210"><a href="#cb63-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-213"><a href="#cb63-213" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb63-214"><a href="#cb63-214" aria-hidden="true" tabindex="-1"></a>mstep3 <span class="ot">&lt;-</span> <span class="fu">update</span>(mstep2, <span class="sc">~</span> . <span class="sc">-</span> EXTSYS)</span>
+<span id="cb63-215"><a href="#cb63-215" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(mstep3)</span>
+<span id="cb63-216"><a href="#cb63-216" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb63-217"><a href="#cb63-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-220"><a href="#cb63-220" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb63-221"><a href="#cb63-221" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">vif</span>(mstep3)</span>
+<span id="cb63-222"><a href="#cb63-222" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb63-223"><a href="#cb63-223" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-224"><a href="#cb63-224" aria-hidden="true" tabindex="-1"></a>It seems that this model cannot be improved by dropping any further variables. The variables <span class="in">`INNERDIA`</span> and <span class="in">`OUTERSYS`</span>, though correlated (r = 0.77), do not exert undue influence on each other in the model. </span>
+<span id="cb63-225"><a href="#cb63-225" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-226"><a href="#cb63-226" aria-hidden="true" tabindex="-1"></a>To summarise, let’s see the AIC scores for all the models we’ve made so far.</span>
+<span id="cb63-227"><a href="#cb63-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-230"><a href="#cb63-230" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb63-231"><a href="#cb63-231" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(mf, m2, m3, mstep, mstep2, mstep3)</span>
+<span id="cb63-232"><a href="#cb63-232" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb63-233"><a href="#cb63-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-234"><a href="#cb63-234" aria-hidden="true" tabindex="-1"></a>All of these models have very similar AIC. Statisticians say that AIC scores within, say, 3 points can be considered equivalent, and so often we take the approach of choosing the simplest model (i.e. that with the fewest predictors) of all those within 3 AIC points of the lowest score. In some fields it is common to report all models within 10 AIC points or produce an ensemble model bases on AIC weight (not covered in this course). So, while the <span class="in">`mstep3`</span> model isn’t the absolute lowest, it is the simplest model from a bunch of models with roughly equivalent AIC scores. Also, it is a good choice because it doesn’t have the problems with severe multicollinearity found in the other models.</span>
+<span id="cb63-235"><a href="#cb63-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-236"><a href="#cb63-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-237"><a href="#cb63-237" aria-hidden="true" tabindex="-1"></a>Don’t worry about the fact that the two functions <span class="in">`drop1()`</span> and <span class="in">`AIC()`</span> give different scores. Remember the AIC is a tool for comparing models—the actual scores don’t matter.  If you look at the difference in AIC scores between two models from the two functions, they are the same. It also should not be compared on models that have different data sources because it is unit less and only acts to compare the models in a specific set.</span>
+<span id="cb63-238"><a href="#cb63-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-239"><a href="#cb63-239" aria-hidden="true" tabindex="-1"></a>Difference between AIC scores for <span class="in">`mstep2`</span> and <span class="in">`mstep3`</span> from the <span class="in">`drop1(mstep2)`</span> output:</span>
+<span id="cb63-240"><a href="#cb63-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-243"><a href="#cb63-243" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb63-244"><a href="#cb63-244" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span><span class="fl">40.395</span> <span class="sc">-</span> (<span class="sc">-</span><span class="fl">42.083</span>)</span>
+<span id="cb63-245"><a href="#cb63-245" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb63-246"><a href="#cb63-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-247"><a href="#cb63-247" aria-hidden="true" tabindex="-1"></a>And from the <span class="in">`AIC(mf, m2, m3, mstep, mstep2, mstep3)`</span> output:</span>
+<span id="cb63-248"><a href="#cb63-248" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-251"><a href="#cb63-251" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb63-252"><a href="#cb63-252" aria-hidden="true" tabindex="-1"></a><span class="fl">92.14759</span> <span class="sc">-</span> <span class="fl">90.45888</span></span>
+<span id="cb63-253"><a href="#cb63-253" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb63-254"><a href="#cb63-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-255"><a href="#cb63-255" aria-hidden="true" tabindex="-1"></a>So now we can choose <span class="in">`mstep3`</span> and clean up.</span>
+<span id="cb63-256"><a href="#cb63-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-259"><a href="#cb63-259" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb63-260"><a href="#cb63-260" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(mf, m2, m3, mstep, mstep2) <span class="co"># this code removes these variables</span></span>
+<span id="cb63-261"><a href="#cb63-261" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb63-262"><a href="#cb63-262" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-263"><a href="#cb63-263" aria-hidden="true" tabindex="-1"></a>Let’s examine the summary for our chosen model. </span>
+<span id="cb63-264"><a href="#cb63-264" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-267"><a href="#cb63-267" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb63-268"><a href="#cb63-268" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mstep3)</span>
+<span id="cb63-269"><a href="#cb63-269" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb63-270"><a href="#cb63-270" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-271"><a href="#cb63-271" aria-hidden="true" tabindex="-1"></a>We are now explaining 72% of the variation in heart weights with two variables, as opposed to 75% of the variation with six variables in the original full model. Note also that, in the full model, <span class="in">`INNERDIA`</span> was not significant and <span class="in">`OUTERSYS`</span> was only weakly significant. In the smaller model, both these predictors were highly significant. Personally, I would definitely prefer the more parsimonious two-variable model, especially if it meant that I had only to take two, rather than six, ultrasound measurements on a thousand horses! </span>
+<span id="cb63-272"><a href="#cb63-272" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-273"><a href="#cb63-273" aria-hidden="true" tabindex="-1"></a>But we’re not done yet. We must use some diagnostic tools to examine whether our model meets the assumptions of linear regression before we can accept it.</span>
+<span id="cb63-274"><a href="#cb63-274" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-275"><a href="#cb63-275" aria-hidden="true" tabindex="-1"></a><span class="fu">## Model diagnostics</span></span>
+<span id="cb63-276"><a href="#cb63-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-277"><a href="#cb63-277" aria-hidden="true" tabindex="-1"></a>Examine the usual four diagnostic plots.</span>
+<span id="cb63-278"><a href="#cb63-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-281"><a href="#cb63-281" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb63-282"><a href="#cb63-282" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mstep3)</span>
+<span id="cb63-283"><a href="#cb63-283" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb63-284"><a href="#cb63-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-285"><a href="#cb63-285" aria-hidden="true" tabindex="-1"></a>The Residuals-vs-Fitted plot shows a slight decreasing trend in the residuals at low fitted values, but it is only a few points. It might pay, though, to bear in mind that the model is likely to overestimate lower heart weights.</span>
+<span id="cb63-286"><a href="#cb63-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-287"><a href="#cb63-287" aria-hidden="true" tabindex="-1"></a>The normal Q-Q plot is not too worrying, although there are a few higher-than-expected residuals. </span>
+<span id="cb63-288"><a href="#cb63-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-289"><a href="#cb63-289" aria-hidden="true" tabindex="-1"></a>The Scale-Location plot shows no strong evidence of heteroscedasticity—the variance appears fairly constant across fitted values. </span>
+<span id="cb63-290"><a href="#cb63-290" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-291"><a href="#cb63-291" aria-hidden="true" tabindex="-1"></a>And, finally, there are no very large values of Cook’s distance or leverage.</span>
+<span id="cb63-292"><a href="#cb63-292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-293"><a href="#cb63-293" aria-hidden="true" tabindex="-1"></a>There are many other diagnostic tools and graphs available, many in the <span class="in">`car`</span> library, which we do not have time to go into here. If you’re interested, this website is a good place to start: <span class="ot">&lt;http://www.statmethods.net/stats/rdiagnostics.html&gt;</span>.</span>
+<span id="cb63-294"><a href="#cb63-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-295"><a href="#cb63-295" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-296"><a href="#cb63-296" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3D plots</span></span>
+<span id="cb63-297"><a href="#cb63-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-298"><a href="#cb63-298" aria-hidden="true" tabindex="-1"></a>Since there are three variables involved in this model, it might be useful to examine their relationship using 3D plots. We can include the 2D plane that represents our regression model on the plot, using the following code.</span>
+<span id="cb63-299"><a href="#cb63-299" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-302"><a href="#cb63-302" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb63-303"><a href="#cb63-303" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scatterplot3d)</span>
+<span id="cb63-304"><a href="#cb63-304" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-305"><a href="#cb63-305" aria-hidden="true" tabindex="-1"></a>hh3d <span class="ot">&lt;-</span> <span class="fu">scatterplot3d</span>(</span>
+<span id="cb63-306"><a href="#cb63-306" aria-hidden="true" tabindex="-1"></a>  hh<span class="sc">$</span>INNERDIA, </span>
+<span id="cb63-307"><a href="#cb63-307" aria-hidden="true" tabindex="-1"></a>  hh<span class="sc">$</span>OUTERSYS, </span>
+<span id="cb63-308"><a href="#cb63-308" aria-hidden="true" tabindex="-1"></a>  hh<span class="sc">$</span>WEIGHT,</span>
+<span id="cb63-309"><a href="#cb63-309" aria-hidden="true" tabindex="-1"></a>  <span class="at">type=</span><span class="st">"h"</span>, </span>
+<span id="cb63-310"><a href="#cb63-310" aria-hidden="true" tabindex="-1"></a>  <span class="at">highlight.3d=</span>T,</span>
+<span id="cb63-311"><a href="#cb63-311" aria-hidden="true" tabindex="-1"></a>  <span class="at">pch=</span><span class="dv">16</span></span>
+<span id="cb63-312"><a href="#cb63-312" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb63-313"><a href="#cb63-313" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-314"><a href="#cb63-314" aria-hidden="true" tabindex="-1"></a>hh3d<span class="sc">$</span><span class="fu">plane3d</span>(mstep3)</span>
+<span id="cb63-315"><a href="#cb63-315" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-316"><a href="#cb63-316" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb63-317"><a href="#cb63-317" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-318"><a href="#cb63-318" aria-hidden="true" tabindex="-1"></a>Finally, use <span class="in">`plotly`</span> to create a dynamic 3D plot which you can rotate using your mouse. Don’t say I never treat you!</span>
+<span id="cb63-319"><a href="#cb63-319" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-322"><a href="#cb63-322" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb63-323"><a href="#cb63-323" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
+<span id="cb63-324"><a href="#cb63-324" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-325"><a href="#cb63-325" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_ly</span>(</span>
+<span id="cb63-326"><a href="#cb63-326" aria-hidden="true" tabindex="-1"></a>  hh, </span>
+<span id="cb63-327"><a href="#cb63-327" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="sc">~</span>INNERDIA, </span>
+<span id="cb63-328"><a href="#cb63-328" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="sc">~</span>OUTERDIA, </span>
+<span id="cb63-329"><a href="#cb63-329" aria-hidden="true" tabindex="-1"></a>  <span class="at">z =</span> <span class="sc">~</span>WEIGHT</span>
+<span id="cb63-330"><a href="#cb63-330" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb63-331"><a href="#cb63-331" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_markers</span>()</span>
+<span id="cb63-332"><a href="#cb63-332" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb63-333"><a href="#cb63-333" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-334"><a href="#cb63-334" aria-hidden="true" tabindex="-1"></a>I do not recommend 3-D plots for print reports/publications. They are often best viewed interactively. Instead try using colors or bubbles for continuous third variables and shapes or facets for discrete third variables.</span>
+<span id="cb63-335"><a href="#cb63-335" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-336"><a href="#cb63-336" aria-hidden="true" tabindex="-1"></a>For example:</span>
+<span id="cb63-337"><a href="#cb63-337" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-340"><a href="#cb63-340" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb63-341"><a href="#cb63-341" aria-hidden="true" tabindex="-1"></a>hh <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span>OUTERDIA, <span class="at">x=</span>INNERDIA, <span class="at">color=</span>WEIGHT))<span class="sc">+</span></span>
+<span id="cb63-342"><a href="#cb63-342" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span>
+<span id="cb63-343"><a href="#cb63-343" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb63-344"><a href="#cb63-344" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-345"><a href="#cb63-345" aria-hidden="true" tabindex="-1"></a><span class="fu"># Dataset **`Prestige`**</span></span>
+<span id="cb63-346"><a href="#cb63-346" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-347"><a href="#cb63-347" aria-hidden="true" tabindex="-1"></a>We will continue to use dataset <span class="in">`Prestige`</span> from the <span class="in">`car`</span>   R package. </span>
+<span id="cb63-348"><a href="#cb63-348" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-349"><a href="#cb63-349" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-350"><a href="#cb63-350" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exercise 7.1 {-}</span></span>
+<span id="cb63-351"><a href="#cb63-351" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-352"><a href="#cb63-352" aria-hidden="true" tabindex="-1"></a>Obtain the matrix plot of the numerical variables <span class="in">`education`</span>, <span class="in">`income`</span>, <span class="in">`women`</span>, and <span class="in">`prestige`</span>.</span>
+<span id="cb63-353"><a href="#cb63-353" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-354"><a href="#cb63-354" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, fig.show='hide'}</span></span>
+<span id="cb63-355"><a href="#cb63-355" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb63-356"><a href="#cb63-356" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GGally)</span>
+<span id="cb63-357"><a href="#cb63-357" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb63-358"><a href="#cb63-358" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-359"><a href="#cb63-359" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb63-360"><a href="#cb63-360" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-361"><a href="#cb63-361" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-362"><a href="#cb63-362" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, fig.show='hide'}</span></span>
+<span id="cb63-363"><a href="#cb63-363" aria-hidden="true" tabindex="-1"></a>Prestige <span class="sc">|&gt;</span> </span>
+<span id="cb63-364"><a href="#cb63-364" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(prestige, education, income, women) <span class="sc">|&gt;</span> </span>
+<span id="cb63-365"><a href="#cb63-365" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggpairs</span>(<span class="fu">aes</span>(<span class="at">colour=</span>Prestige<span class="sc">$</span>type))</span>
+<span id="cb63-366"><a href="#cb63-366" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb63-367"><a href="#cb63-367" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-368"><a href="#cb63-368" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-369"><a href="#cb63-369" aria-hidden="true" tabindex="-1"></a>Obtain their correlation matrix.</span>
+<span id="cb63-370"><a href="#cb63-370" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-371"><a href="#cb63-371" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, fig.show='hide', results='hide'}</span></span>
+<span id="cb63-372"><a href="#cb63-372" aria-hidden="true" tabindex="-1"></a><span class="co"># Old style pairs plot</span></span>
+<span id="cb63-373"><a href="#cb63-373" aria-hidden="true" tabindex="-1"></a>Prestige <span class="sc">|&gt;</span> </span>
+<span id="cb63-374"><a href="#cb63-374" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(prestige, education, income, women) <span class="sc">|&gt;</span></span>
+<span id="cb63-375"><a href="#cb63-375" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pairs</span>()</span>
+<span id="cb63-376"><a href="#cb63-376" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-377"><a href="#cb63-377" aria-hidden="true" tabindex="-1"></a>Prestige <span class="sc">|&gt;</span> </span>
+<span id="cb63-378"><a href="#cb63-378" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(prestige, education, income, women) <span class="sc">|&gt;</span></span>
+<span id="cb63-379"><a href="#cb63-379" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>()</span>
+<span id="cb63-380"><a href="#cb63-380" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb63-381"><a href="#cb63-381" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-382"><a href="#cb63-382" aria-hidden="true" tabindex="-1"></a>Fit a (full) multiple regression of  <span class="in">`prestige`</span> on <span class="in">`education`</span>, <span class="in">`income`</span>, &amp; <span class="in">`women`</span>. </span>
+<span id="cb63-383"><a href="#cb63-383" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-384"><a href="#cb63-384" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, results='hide'}</span></span>
+<span id="cb63-385"><a href="#cb63-385" aria-hidden="true" tabindex="-1"></a>full.reg <span class="ot">&lt;-</span> <span class="fu">lm</span>(prestige <span class="sc">~</span> education <span class="sc">+</span> income <span class="sc">+</span> women,</span>
+<span id="cb63-386"><a href="#cb63-386" aria-hidden="true" tabindex="-1"></a>               <span class="at">data =</span> Prestige)</span>
+<span id="cb63-387"><a href="#cb63-387" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-388"><a href="#cb63-388" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb63-389"><a href="#cb63-389" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-390"><a href="#cb63-390" aria-hidden="true" tabindex="-1"></a>Obtain the plots for residual diagnostics.</span>
+<span id="cb63-391"><a href="#cb63-391" aria-hidden="true" tabindex="-1"></a>Residual plots</span>
+<span id="cb63-392"><a href="#cb63-392" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-393"><a href="#cb63-393" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, fig.show='hide'}</span></span>
+<span id="cb63-394"><a href="#cb63-394" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggfortify)</span>
+<span id="cb63-395"><a href="#cb63-395" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-396"><a href="#cb63-396" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(full.reg, <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>)</span>
+<span id="cb63-397"><a href="#cb63-397" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb63-398"><a href="#cb63-398" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-399"><a href="#cb63-399" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-400"><a href="#cb63-400" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-401"><a href="#cb63-401" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, fig.show='hide'}</span></span>
+<span id="cb63-402"><a href="#cb63-402" aria-hidden="true" tabindex="-1"></a><span class="co"># Old style plots</span></span>
+<span id="cb63-403"><a href="#cb63-403" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(full.reg, <span class="dv">1</span>) <span class="co"># the argument 1 can be changed up to 6</span></span>
+<span id="cb63-404"><a href="#cb63-404" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-405"><a href="#cb63-405" aria-hidden="true" tabindex="-1"></a><span class="co"># or just use</span></span>
+<span id="cb63-406"><a href="#cb63-406" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb63-407"><a href="#cb63-407" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(full.reg)</span>
+<span id="cb63-408"><a href="#cb63-408" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb63-409"><a href="#cb63-409" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-410"><a href="#cb63-410" aria-hidden="true" tabindex="-1"></a>Regression outputs</span>
+<span id="cb63-411"><a href="#cb63-411" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-414"><a href="#cb63-414" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb63-415"><a href="#cb63-415" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(full.reg)</span>
+<span id="cb63-416"><a href="#cb63-416" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-417"><a href="#cb63-417" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(full.reg)</span>
+<span id="cb63-418"><a href="#cb63-418" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-419"><a href="#cb63-419" aria-hidden="true" tabindex="-1"></a><span class="fu">extractAIC</span>(full.reg)</span>
+<span id="cb63-420"><a href="#cb63-420" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb63-421"><a href="#cb63-421" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-422"><a href="#cb63-422" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exercise 7.2 {-}</span></span>
+<span id="cb63-423"><a href="#cb63-423" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-424"><a href="#cb63-424" aria-hidden="true" tabindex="-1"></a>Perform stepwise regression analysis of <span class="in">`prestige`</span> on <span class="in">`education`</span>, <span class="in">`income`</span>, &amp; <span class="in">`women`</span>. </span>
+<span id="cb63-425"><a href="#cb63-425" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-426"><a href="#cb63-426" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, results='hide'}</span></span>
+<span id="cb63-427"><a href="#cb63-427" aria-hidden="true" tabindex="-1"></a>full.reg <span class="ot">=</span> <span class="fu">lm</span>(prestige <span class="sc">~</span> education <span class="sc">+</span> income <span class="sc">+</span> women,</span>
+<span id="cb63-428"><a href="#cb63-428" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> Prestige)</span>
+<span id="cb63-429"><a href="#cb63-429" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-430"><a href="#cb63-430" aria-hidden="true" tabindex="-1"></a><span class="fu">step</span>(full.reg)</span>
+<span id="cb63-431"><a href="#cb63-431" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-432"><a href="#cb63-432" aria-hidden="true" tabindex="-1"></a><span class="fu">step</span>(full.reg, <span class="at">direction=</span><span class="st">"backward"</span>)</span>
+<span id="cb63-433"><a href="#cb63-433" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-434"><a href="#cb63-434" aria-hidden="true" tabindex="-1"></a><span class="fu">step</span>(full.reg, <span class="at">direction=</span><span class="st">"both"</span>)</span>
+<span id="cb63-435"><a href="#cb63-435" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb63-436"><a href="#cb63-436" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-437"><a href="#cb63-437" aria-hidden="true" tabindex="-1"></a>The function <span class="in">`update()`</span> is handy for making adjustments to a model. For example, see try the following codes:</span>
+<span id="cb63-438"><a href="#cb63-438" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-439"><a href="#cb63-439" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, results='hide'}</span></span>
+<span id="cb63-440"><a href="#cb63-440" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">=</span> <span class="fu">update</span>(full.reg,  . <span class="sc">~</span> . <span class="sc">-</span> women)</span>
+<span id="cb63-441"><a href="#cb63-441" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-442"><a href="#cb63-442" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m1)</span>
+<span id="cb63-443"><a href="#cb63-443" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb63-444"><a href="#cb63-444" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-445"><a href="#cb63-445" aria-hidden="true" tabindex="-1"></a>Note that <span class="in">` . ~ . - women`</span> means that the model is fitted without the <span class="in">`women`</span> variable.</span>
+<span id="cb63-446"><a href="#cb63-446" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-447"><a href="#cb63-447" aria-hidden="true" tabindex="-1"></a>Further options are available in <span class="in">`leaps`</span> and <span class="in">`HH`</span> packages </span>
+<span id="cb63-448"><a href="#cb63-448" aria-hidden="true" tabindex="-1"></a>(installation commands are given below).</span>
+<span id="cb63-449"><a href="#cb63-449" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-450"><a href="#cb63-450" aria-hidden="true" tabindex="-1"></a><span class="in">`install.packages("leaps", repos = "https://cran.r-project.org")`</span></span>
+<span id="cb63-451"><a href="#cb63-451" aria-hidden="true" tabindex="-1"></a><span class="in">`install.packages("HH", repos = "https://cran.r-project.org")`</span></span>
+<span id="cb63-452"><a href="#cb63-452" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-453"><a href="#cb63-453" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, results='hide', fig.show='hide'}</span></span>
+<span id="cb63-454"><a href="#cb63-454" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaps)</span>
+<span id="cb63-455"><a href="#cb63-455" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-456"><a href="#cb63-456" aria-hidden="true" tabindex="-1"></a>model <span class="ot">=</span> <span class="fu">regsubsets</span>(prestige <span class="sc">~</span> education <span class="sc">+</span> income <span class="sc">+</span> women, </span>
+<span id="cb63-457"><a href="#cb63-457" aria-hidden="true" tabindex="-1"></a>                   <span class="at">data =</span> Prestige)</span>
+<span id="cb63-458"><a href="#cb63-458" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-459"><a href="#cb63-459" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(HH)</span>
+<span id="cb63-460"><a href="#cb63-460" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-461"><a href="#cb63-461" aria-hidden="true" tabindex="-1"></a><span class="fu">summaryHH</span>(model)</span>
+<span id="cb63-462"><a href="#cb63-462" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-463"><a href="#cb63-463" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">summaryHH</span>(model))</span>
+<span id="cb63-464"><a href="#cb63-464" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb63-465"><a href="#cb63-465" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-466"><a href="#cb63-466" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-467"><a href="#cb63-467" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exercise 7.3 {-}</span></span>
+<span id="cb63-468"><a href="#cb63-468" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-469"><a href="#cb63-469" aria-hidden="true" tabindex="-1"></a>Perform a polynomial regression of <span class="in">`prestige`</span> on <span class="in">`income`</span>. </span>
+<span id="cb63-470"><a href="#cb63-470" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-471"><a href="#cb63-471" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-472"><a href="#cb63-472" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, results='hide', fig.show='hide'}</span></span>
+<span id="cb63-473"><a href="#cb63-473" aria-hidden="true" tabindex="-1"></a><span class="co"># Cubic fit</span></span>
+<span id="cb63-474"><a href="#cb63-474" aria-hidden="true" tabindex="-1"></a>p.model <span class="ot">&lt;-</span> <span class="fu">lm</span>(prestige <span class="sc">~</span> <span class="fu">poly</span>(income,<span class="dv">3</span>),</span>
+<span id="cb63-475"><a href="#cb63-475" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> Prestige)</span>
+<span id="cb63-476"><a href="#cb63-476" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-477"><a href="#cb63-477" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(p.model)</span>
+<span id="cb63-478"><a href="#cb63-478" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-479"><a href="#cb63-479" aria-hidden="true" tabindex="-1"></a><span class="fu">extractAIC</span>(p.model)</span>
+<span id="cb63-480"><a href="#cb63-480" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-481"><a href="#cb63-481" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(p.model)</span>
+<span id="cb63-482"><a href="#cb63-482" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-483"><a href="#cb63-483" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(p.model)</span>
+<span id="cb63-484"><a href="#cb63-484" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb63-485"><a href="#cb63-485" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-486"><a href="#cb63-486" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-487"><a href="#cb63-487" aria-hidden="true" tabindex="-1"></a><span class="ss">+ </span>More R code examples are <span class="co">[</span><span class="ot">here</span><span class="co">](../exercises/Chap7more.R)</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
