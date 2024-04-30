@@ -3651,7 +3651,7 @@
     "href": "workshops/ws07.html#exercise-7.3",
     "title": "Chapter 7 Workshop",
     "section": "Exercise 7.3",
-    "text": "Exercise 7.3\nPerform a polynomial regression of prestige on income.\n\n\nCode\n# Cubic fit\np.model &lt;- lm(prestige ~ poly(income,3),\n              data = Prestige)\n\nsummary(p.model)\n\nextractAIC(p.model)\n\nplot(p.model)\n\n\nCode\nautoplot(p.model)\n\n\n\nMore R code examples are here"
+    "text": "Exercise 7.3\nPerform a polynomial regression of prestige on income.\n\n\nCode\n# Cubic fit\np.model &lt;- lm(prestige ~ poly(income,3),\n              data = Prestige)\n\nsummary(p.model)\n\nextractAIC(p.model)\n\nplot(p.model)\n\n\nCode\nautoplot(p.model)"
   },
   {
     "objectID": "workshops/ws07.html#footnotes",
@@ -3883,5 +3883,33 @@
     "title": "Chapter 7:Models with Multiple Predictors",
     "section": "SS types in action",
     "text": "SS types in action\n\nanova(full_reg)\n\nAnalysis of Variance Table\n\nResponse: Spread\n            Df Sum Sq Mean Sq F value  Pr(&gt;F)    \nPTS          1 141195  141195 1829.34 &lt; 2e-16 ***\nP2p          1   4002    4002   51.85 8.3e-13 ***\nP3p          1  14465   14465  187.42 &lt; 2e-16 ***\nFTp          1    584     584    7.56   0.006 ** \nOREB         1   7082    7082   91.76 &lt; 2e-16 ***\nDREB         1  78359   78359 1015.23 &lt; 2e-16 ***\nAST          1     10      10    0.13   0.718    \nSTL          1  20082   20082  260.18 &lt; 2e-16 ***\nBLK          1   1542    1542   19.98 8.2e-06 ***\nResiduals 2108 162703      77                    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\nlibrary(car)\nAnova(full_reg,  type=2)\n\nAnova Table (Type II tests)\n\nResponse: Spread\n          Sum Sq   Df F value  Pr(&gt;F)    \nPTS          416    1    5.38    0.02 *  \nP2p        28767    1  372.71 &lt; 2e-16 ***\nP3p        37787    1  489.57 &lt; 2e-16 ***\nFTp         4497    1   58.26 3.4e-14 ***\nOREB       10276    1  133.13 &lt; 2e-16 ***\nDREB       83083    1 1076.43 &lt; 2e-16 ***\nAST           41    1    0.53    0.47    \nSTL        19232    1  249.17 &lt; 2e-16 ***\nBLK         1542    1   19.98 8.2e-06 ***\nResiduals 162703 2108                    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\nAnova(full_reg,  type=3)\n\nAnova Table (Type III tests)\n\nResponse: Spread\n            Sum Sq   Df F value  Pr(&gt;F)    \n(Intercept) 189696    1 2457.72 &lt; 2e-16 ***\nPTS            416    1    5.38    0.02 *  \nP2p          28767    1  372.71 &lt; 2e-16 ***\nP3p          37787    1  489.57 &lt; 2e-16 ***\nFTp           4497    1   58.26 3.4e-14 ***\nOREB         10276    1  133.13 &lt; 2e-16 ***\nDREB         83083    1 1076.43 &lt; 2e-16 ***\nAST             41    1    0.53    0.47    \nSTL          19232    1  249.17 &lt; 2e-16 ***\nBLK           1542    1   19.98 8.2e-06 ***\nResiduals   162703 2108                    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
+  },
+  {
+    "objectID": "workshops/ws07.html#try-it-yourself",
+    "href": "workshops/ws07.html#try-it-yourself",
+    "title": "Chapter 7 Workshop",
+    "section": "Try it yourself",
+    "text": "Try it yourself\nUse the river data from Assignment 1:\n\n\nCode\nriv &lt;- read_csv(\"riverdat.csv\")"
+  },
+  {
+    "objectID": "workshops/ws07.html#exercise-7.4",
+    "href": "workshops/ws07.html#exercise-7.4",
+    "title": "Chapter 7 Workshop",
+    "section": "Exercise 7.4",
+    "text": "Exercise 7.4\nMake a scatterplot of all the raw values of Temperature (x-axis) and CHLA Mean (y-axis) for the Canterbury region only, with the points coloured by Catchment name. Fit a linear regression to the plot using geom_smooth.\n\n\nCode\n# your code goes here"
+  },
+  {
+    "objectID": "workshops/ws07.html#exercise-7.5",
+    "href": "workshops/ws07.html#exercise-7.5",
+    "title": "Chapter 7 Workshop",
+    "section": "Exercise 7.5",
+    "text": "Exercise 7.5\nFit a multiple linear regression for the Canterbury region only with the raw values of CHLA Mean as the response variable, Temperature and Dissolved oxygen as predictor variables. Produce a summary table and ANOVA table of your results.\n\n\nCode\n# your code goes here"
+  },
+  {
+    "objectID": "workshops/ws07.html#exercise-7.6",
+    "href": "workshops/ws07.html#exercise-7.6",
+    "title": "Chapter 7 Workshop",
+    "section": "Exercise 7.6",
+    "text": "Exercise 7.6\nMake an indicator variable for the Waimakariri River catchment in Canterbury (0 = not in that catchment, 1 = in that catchment). Add this to your regression from exercise 7.5. Produce new tables and discuss your results.\n\n\nCode\n# your code goes here\n\n\n\nMore R code examples are here"
   }
 ]
