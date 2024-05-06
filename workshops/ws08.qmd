@@ -68,8 +68,8 @@ We can use a dotplot with violins.
 dvp <- IS |> 
   ggplot() +
   aes(x = count, y = spray) + 
-  geom_violin() +
-  geom_jitter(width = 0, height = 0.1, alpha = .5)
+  geom_violin() + # display the violins
+  geom_jitter(width = 0, height = 0.1, alpha = .5) # add the points, with a little jitter so they do not overlap 
 
 dvp
 ```
@@ -81,11 +81,10 @@ Analysis of variance compares the variation among groups (group means from the o
 
 
 ```{r}
-
 meanIS <- IS |> group_by(spray) |> summarise(count = mean(count))
 
 dvp + 
-  geom_point(
+  geom_point( # adds a line for the mean value
     data = meanIS,
     colour = "darkorange" ,
     shape = "|",
@@ -98,7 +97,7 @@ Though I do like boxplots, I think this is probably a more useful and revealing 
 
 ## Fitting an ANOVA model
 
-An ANOVA model is fit in R using the function `aov()`. There is a function `anova()`, but this instead can be used to produce an ANOVA table from an existing model.
+An ANOVA model is fit in R using the function `aov()`. There is a function `anova()`, but this instead can be used to produce an ANOVA table from an existing model (we saw use of this in Chapter 7).
 
 Let’s do it. 
 
@@ -333,16 +332,16 @@ ggplot(oys) +
 
 What are your first impressions of these data? Do you think that `Temperature` has an effect on the `Growth` of oysters here? Do you think an ANOVA is an appropriate analysis to use? Would you expect the assumptions of ANOVA to be upheld?
 
-Two things stand out. Firstly, it does not look like `Temperature` has a strong effect `Growth`—the variation within the groups looks to be much larger than the variation among groups. The one-way ANOVA agrees.
+Two things stand out. Firstly, it does not look like `Temperature` has a strong effect `Growth`—the variation within the groups looks to be much larger than the variation among groups. Run a one-way ANOVA to test this.
 
 ```{r}
-aov(Growth ~ Temperature, data=oys) |> summary()
+# your code goes here
 ```
 
-Secondly, the data seem to have different variances among the three groups. We can use a Levene’s test to confirm this.
+Secondly, the data seem to have different variances among the three groups. Use a Levene’s test to confirm this.
 
 ```{r}
-car::leveneTest(y = oys$Growth, group = oys$Temperature)
+# your code goes here
 ```
 Now make the same plots for `Salinity` and `Growth`.
 
@@ -492,16 +491,16 @@ goat |>
   geom_boxplot()
 ```
 
-There seems to be a reasonable effect of treatment. This is apparent in an ANOVA fitted without the covariate. 
+There seems to be a reasonable effect of treatment. Fit a one-way ANOVA showing this.
 
 ```{r}
-aov(WtGain ~ Tmt, data = goat) |> summary()
+# your code goes here
 ```
 
 Sure enough, effect of the treatment is significant, though it is marginally so. The effect size can be viewed in a linear model summary.
 
 ```{r}
-lm(WtGain ~ Tmt, data=goat) |> summary()
+# your code goes here
 ```
 
 From here, we can see that the estimated difference between the treatments is 1.3 kg—the mean for intensive is 6.85 kg and the mean for standard is 5.55 kg. 
@@ -753,22 +752,11 @@ plot4 / plot5 / plot6
 
 ## Exercise 8.2 {-}
 
-Fit one-way ANOVA models to this dataset.
+Fit one-way ANOVA models to this dataset. One model for each predictor variable. Examine the summary and Tukey results.
 
 
 ```{r, results='hide', fig.show='hide'}
-anova1 <- aov(yield ~ shade, data = alfalfa)
-summary(anova1)
-
-anova2 <- aov(yield ~ irrigation, data = alfalfa)
-summary(anova2)
-
-anova3 <- aov(yield ~ inoculum, data = alfalfa)
-summary(anova3)
-
-plot(TukeyHSD(anova1))
-plot(TukeyHSD(anova2))
-plot(TukeyHSD(anova3))
+# your code goes here
 ```
 
 
@@ -778,20 +766,14 @@ plot(TukeyHSD(anova3))
 Fit a three-factor (additive) ANOVA model without interactions.
 
 ```{r, results='hide', fig.show='hide'}
-anova1 <- aov(yield ~ shade + irrigation + inoculum,
-              data = alfalfa)
-
-summary(anova1)
-
-library(ggfortify)
-autoplot(anova1, 1)
+# your code goes here
 ```
 
-For the base R style four diagnostic plots, use `plot(anova1)` and set the `par`.
+Examine the residuals using base R style four diagnostic plots.  
 
 ```{r}
 par(mfrow=c(2,2))
-plot(anova1)
+# your code goes here
 ```
 
 
@@ -824,16 +806,14 @@ Note that this regression allows the treatments to be compared with the control.
 
 **R:**
 ```{r, results='hide', fig.show='hide'}
+# your code goes here
 
-ancova.model <- lm(yield ~ as.numeric(shade) * inoculum, 
-                   data = alfalfa)
-summary(ancova.model)
 ```
 
 
 ## Exercise 8.6 {-}
 
-In a two-factor experiment, one of the factors was assigned to main plot (main-plot factor), the second factor, called the subplot factor, was assigned into subplots.  The dataset `https://www.massey.ac.nz/~kgovinda/data/plots.RData` gives the experimental set up. Perform the ANOVA for this basic split-plot experiment.
+In a two-factor experiment, one of the factors was assigned to main plot (main-plot factor), the second factor, called the subplot factor, was assigned into subplots.  The dataset `https://www.massey.ac.nz/~kgovinda/data/plots.RData` gives the experimental set up. 
 
 **R:**
 
@@ -845,7 +825,7 @@ load("plots.RData")
 plots
 ```
 
-
+Perform the ANOVA for this basic split-plot experiment.
 ```{r, results='hide', fig.show='hide'}
 sp.model <- aov(yield ~ block + A*B + Error(block/A),
                 data=plots)
@@ -857,6 +837,38 @@ summary(sp.model)
 #Incorrect model
 summary(aov(yield ~ block + A*B ,
             data=plots))
+```
+
+## Non-parametric ANOVA
+
+Mann-Whitney test: allows to compare 2 groups under the non-normality assumption.
+
+Kruskal-Wallis test: allows to compare three or more groups
+
+
+## Return to the Insect Data
+
+```{r}
+aov(count ~ spray, data=IS)
+
+aov(count ~ spray, data=IS) |> TukeyHSD()
+```
+
+```{r}
+kruskal.test(IS$count~IS$spray)
+```
+## Return to the Oyster Data
+
+```{r}
+aov(Growth~Salinity, data = oys)
+```
+
+```{r}
+kruskal.test(oys$Growth~oys$Salinity)
+```
+
+```{r}
+wilcox.test(oys$Growth~oys$Salinity)
 ```
 
 + More R code examples are [here](../exercises/Chap8more.R)

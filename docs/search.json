@@ -690,14 +690,14 @@
     "href": "slides/Chapter08.html#one-way-anova",
     "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
     "section": "One-way ANOVA",
-    "text": "One-way ANOVA\n\nfabric burn-time data\n\n\n\n\nfabric 1\nfabric 2\nfabric 3\nfabric 4\n\n\n\n\n17.8\n11.2\n11.8\n14.9\n\n\n16.2\n11.4\n11\n10.8\n\n\n17.5\n15.8\n10\n12.8\n\n\n17.4\n10\n9.2\n10.7\n\n\n15\n10.4\n9.2\n10.7\n\n\n\n\nCan we regard the mean burn times of the four fabrics as equal?\n\n\nfabric 1 seems to take longer time to burn"
+    "text": "One-way ANOVA\n\nfabric=read.table(\"../data/fabric.txt\", header=TRUE, sep=\"\\t\")\nfabric |&gt;\n  ggplot(aes(x=factor(fabric), y=burntime))+\n  geom_point()+\n  stat_summary(fun.data = \"mean_cl_boot\", colour = \"blue\", linewidth = 2, size = 3)\n\n\n\n\n\n\n\nfabric |&gt;\n  ggplot(aes(x=factor(fabric), y=burntime))+\n  geom_point()+\n  stat_summary_bin(fun = \"mean\", geom = \"bar\", orientation = 'x')"
   },
   {
     "objectID": "slides/Chapter08.html#one-way-single-factor-anova-model",
     "href": "slides/Chapter08.html#one-way-single-factor-anova-model",
     "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
     "section": "One-way (single factor) ANOVA model",
-    "text": "One-way (single factor) ANOVA model\nStart with hypotheses and EDA to visualize groups\n\n\\(H_0\\): The mean burn times are equal for the four fabrics\n\\(H_a\\): The mean burn time of at least one fabric is different.\n\n\nfabric=read.table(\"../data/fabric.txt\", header=TRUE, sep=\"\\t\")\nfabric |&gt;\n  ggplot(aes(x=factor(fabric), y=burntime))+\n  geom_point()+\n  stat_summary(fun.data = \"mean_cl_boot\", colour = \"blue\", linewidth = 2, size = 3)\n\n\n\n\n\n\n\nfabric |&gt;\n  ggplot(aes(x=factor(fabric), y=burntime))+\n  geom_point()+\n  stat_summary_bin(fun = \"mean\", geom = \"bar\", orientation = 'x')"
+    "text": "One-way (single factor) ANOVA model\n\nfabric burn-time data\n\n\n\n\nfabric 1\nfabric 2\nfabric 3\nfabric 4\n\n\n\n\n17.8\n11.2\n11.8\n14.9\n\n\n16.2\n11.4\n11\n10.8\n\n\n17.5\n15.8\n10\n12.8\n\n\n17.4\n10\n9.2\n10.7\n\n\n15\n10.4\n9.2\n10.7\n\n\n\n\nCan we regard the mean burn times of the four fabrics as equal?\n\n\nfabric 1 seems to take longer time to burn\n\nStart with hypotheses and EDA to visualize groups"
   },
   {
     "objectID": "slides/Chapter08.html#one-way-single-factor-anova-model-1",
@@ -767,7 +767,7 @@
     "href": "slides/Chapter08.html#graphical-comparison-of-means",
     "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
     "section": "Graphical comparison of means",
-    "text": "Graphical comparison of means\n\nThe graph below shows individual 95% confidence intervals for the fabric means\n\nPooled SD (\\(\\sqrt{MSE}\\)) is NOT used"
+    "text": "Graphical comparison of means\n\nThe graph below shows individual 95% confidence intervals for the fabric means"
   },
   {
     "objectID": "slides/Chapter08.html#one-way-anova-model-assumptions",
@@ -788,7 +788,7 @@
     "href": "slides/Chapter08.html#visualize-assumptions-1",
     "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
     "section": "Visualize assumptions",
-    "text": "Visualize assumptions\n\nfabric |&gt; \n  group_by(fabric) |&gt; \n  summarise(\n    mean = mean(burntime),\n    sd = sd(burntime)\n  ) |&gt; \n  ggplot() +\n  aes(x = mean, y = sd, group = factor(1)) +\n  geom_point() \n\n\nFigure 1: SD vs mean for four fabricsWith only four fabrics in the sample, it is difficult to make any definitive claim.\nIf the assumptions were valid, we would expect the four points to fall approximately along a horizontal band indicating constant standard deviations, and hence variances, regardless of the means of the groups.\nThis figure suggests that this is the case, so the assumption of equal variances appears to be valid."
+    "text": "Visualize assumptions\n\nFigure 1: SD vs mean for four fabrics\nResiduals must be independent of means.\n\nIf SD increases with mean, try square root or logarithmic transformation.\n\n\nWith only four fabrics in the sample, it is difficult to make any definitive claim.\nIf the assumptions were valid, we would expect the four points to fall approximately along a horizontal band indicating constant standard deviations, and hence variances, regardless of the means of the groups.\nThis figure suggests that this is the case, so the assumption of equal variances appears to be valid."
   },
   {
     "objectID": "slides/Chapter08.html#equal-variance",
@@ -830,21 +830,21 @@
     "href": "slides/Chapter08.html#two-way-two-factor-anova-example",
     "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
     "section": "Two way (two factor) ANOVA example",
-    "text": "Two way (two factor) ANOVA example\n\nExample: Twelve tanks, six each with water from one of the two lakes were set up. Three nutrient supplements were added to each tank. The count of zooplankton in a unit volume of water was then noted.\n\n\n\n Zooplankton Supplement     Lake\n          34          1     Rose\n          43          1     Rose\n          57          1 Dennison\n          40          1 Dennison\n          85          2     Rose\n          68          2     Rose\n          67          2 Dennison\n          53          2 Dennison\n          41          3     Rose\n          24          3     Rose\n          42          3 Dennison\n          52          3 Dennison"
+    "text": "Two way (two factor) ANOVA example\n\nExample: We will use the built in data ToothGrowth. It contains data from a study evaluating the effect of vitamin C on tooth growth in Guinea pigs. The experiment has been performed on 60 pigs, where each animal received one of three dose levels of vitamin C (0.5, 1, and 2 mg/day) by one of two delivery methods, (orange juice or ascorbic acid (a form of vitamin C and coded as VC). Tooth length was measured and a sample of the data is shown below.\n\n\n\n   len supp dose\n1  4.2   VC  0.5\n2 11.5   VC  0.5\n3  7.3   VC  0.5\n4  5.8   VC  0.5\n5  6.4   VC  0.5\n6 10.0   VC  0.5"
   },
   {
     "objectID": "slides/Chapter08.html#run-a-two-way-anova",
     "href": "slides/Chapter08.html#run-a-two-way-anova",
     "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
     "section": "Run a Two-way ANOVA",
-    "text": "Run a Two-way ANOVA\n\nsummary(aov(Zooplankton~factor(Supplement)+Lake, data=zooplankton))\n\n                   Df Sum Sq Mean Sq F value Pr(&gt;F)  \nfactor(Supplement)  2 1918.5   959.2   6.486 0.0212 *\nLake                1   21.3    21.3   0.144 0.7140  \nResiduals           8 1183.2   147.9                 \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nA two-way ANOVA tests two null hypotheses at the same time:\n\nAll group means are equal at each level of the first variable\nAll group means are equal at each level of the second variable"
+    "text": "Run a Two-way ANOVA\n\nsummary(aov(len~dose+supp, data=ToothGrowth))\n\n            Df Sum Sq Mean Sq F value   Pr(&gt;F)    \ndose         2 2426.4  1213.2   82.81  &lt; 2e-16 ***\nsupp         1  205.3   205.3   14.02 0.000429 ***\nResiduals   56  820.4    14.7                     \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nA two-way ANOVA tests two null hypotheses at the same time:\n\nAll group means are equal at each level of the first variable\nAll group means are equal at each level of the second variable"
   },
   {
     "objectID": "slides/Chapter08.html#two-way-model-fit",
     "href": "slides/Chapter08.html#two-way-model-fit",
     "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
     "section": "Two-way model fit",
-    "text": "Two-way model fit\n\nModel:\nObservation = Overall Mean + Factor 1 Effect + Factor 2 Effect + Error\n\n\n\\(H_0\\): factor 1 means are equal; factor 2 means are equal\n\n\n\n                   Df Sum Sq Mean Sq F value Pr(&gt;F)  \nfactor(Supplement)  2 1918.5   959.2   6.486 0.0212 *\nLake                1   21.3    21.3   0.144 0.7140  \nResiduals           8 1183.2   147.9                 \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nSupplement effect is significant at 5% level but not the Lake effect"
+    "text": "Two-way model fit\n\nModel:\nObservation = Overall Mean + Factor 1 Effect + Factor 2 Effect + Error\n\n\n\\(H_0\\): factor 1 means are equal; factor 2 means are equal\n\n\n\n            Df Sum Sq Mean Sq F value   Pr(&gt;F)    \ndose         2 2426.4  1213.2   82.81  &lt; 2e-16 ***\nsupp         1  205.3   205.3   14.02 0.000429 ***\nResiduals   56  820.4    14.7                     \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nSupplement and dose effects are significant at 5% level."
   },
   {
     "objectID": "slides/Chapter08.html#main-effect-plots",
@@ -858,7 +858,7 @@
     "href": "slides/Chapter08.html#tukey-hsd-1",
     "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
     "section": "Tukey HSD",
-    "text": "Tukey HSD\n\nzoo &lt;- aov(Zooplankton~factor(Supplement)+Lake, data=zooplankton)\nTukeyHSD(zoo)\n\n  Tukey multiple comparisons of means\n    95% family-wise confidence level\n\nFit: aov(formula = Zooplankton ~ factor(Supplement) + Lake, data = zooplankton)\n\n$`factor(Supplement)`\n      diff         lwr       upr     p adj\n2-1  24.75   0.1779866 49.322013 0.0485023\n3-1  -3.75 -28.3220134 20.822013 0.9017260\n3-2 -28.50 -53.0720134 -3.927987 0.0256900\n\n$Lake\n                   diff       lwr      upr     p adj\nRose-Dennison -2.666667 -18.85781 13.52447 0.7139803"
+    "text": "Tukey HSD\n\nteeth &lt;- aov(len~supp+dose, data=ToothGrowth)\nTukeyHSD(teeth)\n\n  Tukey multiple comparisons of means\n    95% family-wise confidence level\n\nFit: aov(formula = len ~ supp + dose, data = ToothGrowth)\n\n$supp\n      diff       lwr       upr     p adj\nVC-OJ -3.7 -5.679762 -1.720238 0.0004293\n\n$dose\n          diff       lwr       upr p adj\nD1-D0.5  9.130  6.215909 12.044091 0e+00\nD2-D0.5 15.495 12.580909 18.409091 0e+00\nD2-D1    6.365  3.450909  9.279091 7e-06"
   },
   {
     "objectID": "slides/Chapter08.html#summary-so-far",
@@ -872,7 +872,7 @@
     "href": "slides/Chapter08.html#learning-objectives-part-2",
     "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
     "section": "Learning Objectives: Part 2",
-    "text": "Learning Objectives: Part 2\n\nUnderstand the use of interactions in linear models\nUse a two-way ANOVA with interactions on example data\nUnderstand and calculate an ANOVA table when interactions are present\nDescribe Tukey’s post hoc tests and assumptions of ANOVAs with interactions\nUnderstand the difference and similarities between this chapter and previous linear models covered"
+    "text": "Learning Objectives: Part 2\n\nUnderstand the use of interactions in linear models\nUse a two-way ANOVA with interactions on example data\nUnderstand and calculate an ANOVA table when interactions are present\nDescribe Tukey’s post hoc tests and assumptions of ANOVAs with interactions\nUnderstand the difference and similarities between this chapter and previous linear models covered\nReview non-parametric options"
   },
   {
     "objectID": "slides/Chapter08.html#interaction-effect",
@@ -900,21 +900,21 @@
     "href": "slides/Chapter08.html#interaction-plot-for-zooplankton-data",
     "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
     "section": "Interaction Plot for Zooplankton data",
-    "text": "Interaction Plot for Zooplankton data\n\nattach(zooplankton)\nlibrary(ggplot2)\np1= ggplot(data = zooplankton, aes(x = factor(Supplement), y = Zooplankton, group=Lake, colour=Lake)) +\n  stat_summary(fun=mean, geom=\"point\")+\n  stat_summary(fun=mean, geom=\"line\")+\n  geom_abline(intercept = mean(Zooplankton), slope=0)+ \n  theme_bw()+ggtitle(\"Lake*Supplement Interaction effect\")\np2= ggplot(data = zooplankton, aes(x = Lake, y = Zooplankton, group=factor(Supplement), colour=factor(Supplement))) +stat_summary(fun=mean, geom=\"point\")+\n  stat_summary(fun=mean, geom=\"line\")+\n  geom_abline(intercept = mean(Zooplankton), slope=0)+ \n  theme_bw()+ggtitle(\"Lake*Supplement Interaction effect\")\nlibrary(patchwork)\np1+p2\n\n\n\nInteraction effect may be present"
+    "text": "Interaction Plot for Zooplankton data\n\nlibrary(ggplot2)\np1= ggplot(data = ToothGrowth, aes(x = supp, y = len, group=dose, colour=dose)) +\n  stat_summary(fun=mean, geom=\"point\")+\n  stat_summary(fun=mean, geom=\"line\")+\n  geom_abline(intercept = mean(ToothGrowth$len), slope=0)+ \n  theme_bw()+ggtitle(\"Dose*Supplement Interaction effect\")\n\np2= ggplot(data = ToothGrowth, aes(x = dose, y = len, group=supp, colour=supp)) +stat_summary(fun=mean, geom=\"point\")+\n  stat_summary(fun=mean, geom=\"line\")+\n  geom_abline(intercept = mean(ToothGrowth$len), slope=0)+ \n  theme_bw()+ggtitle(\"Dose*Supplement Interaction effect\")\nlibrary(patchwork)\np1+p2\n\n\n\nInteraction effect may be present"
   },
   {
     "objectID": "slides/Chapter08.html#two-way-model-fit-1",
     "href": "slides/Chapter08.html#two-way-model-fit-1",
     "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
     "section": "Two-way model fit",
-    "text": "Two-way model fit\n\nobservation = mean + Factor A + Factor B + interaction effect + error\n\n\nThe above model is known as multiplicative model\nIf interaction effect is ignored, we deal with an additive model\n\nExample: zooplankton data"
+    "text": "Two-way model fit\n\nobservation = mean + Factor A + Factor B + interaction effect + error\n\n\nThe above model is known as multiplicative model\nIf interaction effect is ignored, we deal with an additive model"
   },
   {
     "objectID": "slides/Chapter08.html#two-way-model-fit-2",
     "href": "slides/Chapter08.html#two-way-model-fit-2",
     "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
     "section": "Two-way model fit",
-    "text": "Two-way model fit\n\nzooplankton |&gt; \n  mutate(Supplement = factor(Supplement)) |&gt; \n  aov(formula = Zooplankton ~ Supplement * Lake) |&gt; \n  summary()\n\n                Df Sum Sq Mean Sq F value Pr(&gt;F)  \nSupplement       2 1918.5   959.2   9.253 0.0147 *\nLake             1   21.3    21.3   0.206 0.6660  \nSupplement:Lake  2  561.2   280.6   2.707 0.1453  \nResiduals        6  622.0   103.7                 \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
+    "text": "Two-way model fit\n\nToothGrowth |&gt; \n  aov(formula = len ~ supp * dose) |&gt; \n  summary()\n\n            Df Sum Sq Mean Sq F value   Pr(&gt;F)    \nsupp         1  205.4   205.4  15.572 0.000231 ***\ndose         2 2426.4  1213.2  92.000  &lt; 2e-16 ***\nsupp:dose    2  108.3    54.2   4.107 0.021860 *  \nResiduals   54  712.1    13.2                     \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
   },
   {
     "objectID": "slides/Chapter08.html#residual-diagnostics",
@@ -928,7 +928,7 @@
     "href": "slides/Chapter08.html#interpreting-interactions",
     "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
     "section": "Interpreting interactions",
-    "text": "Interpreting interactions\n\nIf an interaction term is significant, the effect of Factor A depends on Factor B (and vice versa)\nUse interaction plots to visualize\nPosthoc tests to examine different level combinations\n\n\nTukeyHSD(modl)$`Supplement:Lake`\n\n                       diff        lwr       upr      p adj\n2:Dennison-1:Dennison  11.5 -29.021538 52.021538 0.85366635\n3:Dennison-1:Dennison  -1.5 -42.021538 39.021538 0.99998404\n1:Rose-1:Dennison     -10.0 -50.521538 30.521538 0.90834374\n2:Rose-1:Dennison      28.0 -12.521538 68.521538 0.19396469\n3:Rose-1:Dennison     -16.0 -56.521538 24.521538 0.64065141\n3:Dennison-2:Dennison -13.0 -53.521538 27.521538 0.78826884\n1:Rose-2:Dennison     -21.5 -62.021538 19.021538 0.38790493\n2:Rose-2:Dennison      16.5 -24.021538 57.021538 0.61553864\n3:Rose-2:Dennison     -27.5 -68.021538 13.021538 0.20490820\n1:Rose-3:Dennison      -8.5 -49.021538 32.021538 0.94964396\n2:Rose-3:Dennison      29.5 -11.021538 70.021538 0.16443780\n3:Rose-3:Dennison     -14.5 -55.021538 26.021538 0.71593144\n2:Rose-1:Rose          38.0  -2.521538 78.521538 0.06517642\n3:Rose-1:Rose          -6.0 -46.521538 34.521538 0.98804470\n3:Rose-2:Rose         -44.0 -84.521538 -3.478462 0.03503205"
+    "text": "Interpreting interactions\n\nIf an interaction term is significant, the effect of Factor A depends on Factor B (and vice versa)\nUse interaction plots to visualize\nPosthoc tests to examine different level combinations\n\n\nTukeyHSD(modl)$`supp:dose`\n\n                 diff        lwr        upr        p adj\nVC:D0.5-OJ:D0.5 -5.25 -10.048124 -0.4518762 2.425209e-02\nOJ:D1-OJ:D0.5    9.47   4.671876 14.2681238 4.612304e-06\nVC:D1-OJ:D0.5    3.54  -1.258124  8.3381238 2.640208e-01\nOJ:D2-OJ:D0.5   12.83   8.031876 17.6281238 2.125153e-09\nVC:D2-OJ:D0.5   12.91   8.111876 17.7081238 1.769939e-09\nOJ:D1-VC:D0.5   14.72   9.921876 19.5181238 2.985978e-11\nVC:D1-VC:D0.5    8.79   3.991876 13.5881238 2.100948e-05\nOJ:D2-VC:D0.5   18.08  13.281876 22.8781238 4.855005e-13\nVC:D2-VC:D0.5   18.16  13.361876 22.9581238 4.821699e-13\nVC:D1-OJ:D1     -5.93 -10.728124 -1.1318762 7.393032e-03\nOJ:D2-OJ:D1      3.36  -1.438124  8.1581238 3.187361e-01\nVC:D2-OJ:D1      3.44  -1.358124  8.2381238 2.936430e-01\nOJ:D2-VC:D1      9.29   4.491876 14.0881238 6.908163e-06\nVC:D2-VC:D1      9.37   4.571876 14.1681238 5.774013e-06\nVC:D2-OJ:D2      0.08  -4.718124  4.8781238 1.000000e+00"
   },
   {
     "objectID": "slides/Chapter08.html#importance-of-interactions",
@@ -998,7 +998,7 @@
     "href": "slides/Chapter08.html#ancova-fit",
     "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
     "section": "ANCOVA fit",
-    "text": "ANCOVA fit\n\nrestaurant |&gt; \n  lm(formula = Sales~Households*Location) |&gt; \n  summary() |&gt; coef() |&gt; round(digits=3)\n\n                          Estimate Std. Error t value Pr(&gt;|t|)\n(Intercept)                 -6.203     11.818  -0.525    0.611\nHouseholds                   0.909      0.083  10.906    0.000\nLocationMall                39.223     16.451   2.384    0.038\nLocationStreet               8.036     16.273   0.494    0.632\nHouseholds:LocationMall     -0.074      0.104  -0.710    0.494\nHouseholds:LocationStreet   -0.012      0.101  -0.120    0.907"
+    "text": "ANCOVA fit\n\n\nIn order to allow for different slopes for each location, we define the product (or interaction) variables \\(I_1*X\\), and \\(I_2*X\\) (\\(X\\) being the covariate, Households)\nLocation is categorical with levels Mall, Street, and Highway"
   },
   {
     "objectID": "slides/Chapter08.html#ancova-fit-1",
@@ -1096,7 +1096,7 @@
     "href": "slides/Chapter08.html#where-to-go-from-here",
     "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
     "section": "Where to go from here?",
-    "text": "Where to go from here?\nLinear models form the basis of a lot more statistics tests. \n\n\n\n\n\n\n\n\n161250 Data Analysis"
+    "text": "Where to go from here?\nLinear models form the basis of a lot more statistics tests."
   },
   {
     "objectID": "slides/Chapter06.html#what-is-a-statistical-model",
@@ -3911,5 +3911,89 @@
     "title": "Chapter 7 Workshop",
     "section": "Exercise 7.6",
     "text": "Exercise 7.6\nMake an indicator variable for the Waimakariri River catchment in Canterbury (0 = not in that catchment, 1 = in that catchment). Add this to your regression from exercise 7.5. Produce new tables and discuss your results.\n\n\nCode\n# your code goes here\n\n\n\nMore R code examples are here"
+  },
+  {
+    "objectID": "slides/Chapter08.html#review-of-non-parametric-tests",
+    "href": "slides/Chapter08.html#review-of-non-parametric-tests",
+    "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
+    "section": "Review of non-parametric tests",
+    "text": "Review of non-parametric tests\nNon-parametric tests are light on assumptions, and can be used for highly asymmetric data (as an alternative to using transformations).\nMany non-parametric methods rely on replacing the observed data by their ranks."
+  },
+  {
+    "objectID": "slides/Chapter08.html#spearmans-rank-correlation",
+    "href": "slides/Chapter08.html#spearmans-rank-correlation",
+    "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
+    "section": "Spearman’s Rank Correlation",
+    "text": "Spearman’s Rank Correlation\n\n\nRank the \\(X\\) and \\(Y\\) variables, and then obtain usual Pearson correlation coefficient.\nThe plot shows non-parametric Spearman in the the upper triangle and parametric Pearson in the bottom triangle.\n\nlibrary(GGally)\n\np &lt;- ggpairs(\n  trees, \n  upper = list(continuous = wrap('cor', method = \"spearman\")),\n  lower = list(continuous = 'cor') \n  )\n\n\n\n\n\n\n\nFigure 2: Comparison of Pearsonian and Spearman’s rank correlations"
+  },
+  {
+    "objectID": "slides/Chapter08.html#wilcoxon-signed-rank-test",
+    "href": "slides/Chapter08.html#wilcoxon-signed-rank-test",
+    "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
+    "section": "Wilcoxon signed rank test",
+    "text": "Wilcoxon signed rank test\nA non-parametric alternative to the one-sample t-test\n\\(H_0: \\eta=\\eta_0\\) where \\(\\eta\\) (Greek letter ‘eta’) is the population median\nBased on based on ranking \\((|Y-\\eta_0|)\\), where the ranks for data with \\(Y&lt;\\eta_0\\) are compared to the ranks for data with \\(Y&gt;\\eta_0\\)\n\n\n\nwilcox.test(tv$TELETIME, mu=1680, conf.int=T)\n\n\n    Wilcoxon signed rank exact test\n\ndata:  tv$TELETIME\nV = 588, p-value = 0.6108\nalternative hypothesis: true location is not equal to 1680\n95 percent confidence interval:\n 1557.5 1906.5\nsample estimates:\n(pseudo)median \n          1728 \n\n\n\n\nt.test(tv$TELETIME, mu=1680)\n\n\n    One Sample t-test\n\ndata:  tv$TELETIME\nt = 0.58856, df = 45, p-value = 0.5591\nalternative hypothesis: true mean is not equal to 1680\n95 percent confidence interval:\n 1560.633 1897.932\nsample estimates:\nmean of x \n 1729.283"
+  },
+  {
+    "objectID": "slides/Chapter08.html#non-parametric-anova",
+    "href": "slides/Chapter08.html#non-parametric-anova",
+    "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
+    "section": "Non-parametric ANOVA",
+    "text": "Non-parametric ANOVA\nKruskal-Wallis test: allows to compare three or more groups\nMann-Whitney test: allows to compare 2 groups under the non-normality assumption."
+  },
+  {
+    "objectID": "slides/Chapter08.html#kruskal-wallis-test",
+    "href": "slides/Chapter08.html#kruskal-wallis-test",
+    "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
+    "section": "Kruskal-Wallis test",
+    "text": "Kruskal-Wallis test\nThe null and alternative hypotheses of the Kruskal-Wallis test are:\nH0: The 3 groups are equal in terms of the variable H1: At least one group is different from the other 2 groups in terms of variable\nSimilar to an ANOVA the alternative hypothesis is not that all groups are different. The opposite of all groups being equal (H0) is that at least one group is different from the others (H1).\nIn this sense, if the null hypothesis is rejected, it means that at least one group is different from the other 2, but not necessarily that all 3 groups are different from each other. Post-hoc tests must be performed to test whether all 3 groups differ."
+  },
+  {
+    "objectID": "slides/Chapter08.html#mann-whitney-test",
+    "href": "slides/Chapter08.html#mann-whitney-test",
+    "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
+    "section": "Mann-Whitney test",
+    "text": "Mann-Whitney test\nFor two group comparison, pool the two group responses and then rank the pooled data\nRanks for the first group are compared to the ranks for the second group\nThe null hypothesis is that the two group medians are the same: \\(H_0: \\eta_1=\\eta_2\\).\n\n\n\nload(\"../data/rangitikei.Rdata\")\nwilcox.test(rangitikei$people~rangitikei$time, conf.int=T)\n\n\n    Wilcoxon rank sum test with continuity correction\n\ndata:  rangitikei$people by rangitikei$time\nW = 30, p-value = 0.007711\nalternative hypothesis: true location shift is not equal to 0\n95 percent confidence interval:\n -88.99996 -10.00005\nsample estimates:\ndifference in location \n             -36.46835 \n\n\n\n\nt.test(rangitikei$people~rangitikei$time)\n\n\n    Welch Two Sample t-test\n\ndata:  rangitikei$people by rangitikei$time\nt = -3.1677, df = 30.523, p-value = 0.003478\nalternative hypothesis: true difference in means between group 1 and group 2 is not equal to 0\n95 percent confidence interval:\n -102.28710  -22.13049\nsample estimates:\nmean in group 1 mean in group 2 \n       22.71429        84.92308"
+  },
+  {
+    "objectID": "slides/Chapter08.html#another-form-of-test",
+    "href": "slides/Chapter08.html#another-form-of-test",
+    "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
+    "section": "Another form of test",
+    "text": "Another form of test\n\n\n\nkruskal.test(rangitikei$people~rangitikei$time)\n\n\n    Kruskal-Wallis rank sum test\n\ndata:  rangitikei$people by rangitikei$time\nKruskal-Wallis chi-squared = 7.2171, df = 1, p-value = 0.007221\n\n\n\n\nwilcox.test(rangitikei$people~rangitikei$time)\n\n\n    Wilcoxon rank sum test with continuity correction\n\ndata:  rangitikei$people by rangitikei$time\nW = 30, p-value = 0.007711\nalternative hypothesis: true location shift is not equal to 0\n\n\n\n\n\n\n\n161250 Data Analysis"
+  },
+  {
+    "objectID": "slides/Chapter08.html#what-if-the-equal-variance-assumption-is-violated",
+    "href": "slides/Chapter08.html#what-if-the-equal-variance-assumption-is-violated",
+    "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
+    "section": "What if the equal variance assumption is violated?",
+    "text": "What if the equal variance assumption is violated?\nANOVA’s are considered to be fairly robust against violations of the equal variances assumption as long as each group has the same sample size.\nIf this assumption is violated, the most common way to deal with it is to transform the response variable using one of the three transformations:\n\nLog Transformation: Transform the response variable from y to log(y).\nSquare Root Transformation: Transform the response variable from y to √y.\nCube Root Transformation: Transform the response variable from y to y1/3.\n\nBy performing these transformations, the problem of heteroscedasticity typically goes away."
+  },
+  {
+    "objectID": "slides/Chapter08.html#when-transformations-do-not-work",
+    "href": "slides/Chapter08.html#when-transformations-do-not-work",
+    "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
+    "section": "When transformations do not work:",
+    "text": "When transformations do not work:\n\nweighted least squares regression: This type of regression assigns a weight to each data point based on the variance of its fitted value.\n\nEssentially, this gives small weights to data points that have higher variances, which shrinks their squared residuals. When the proper weights are used, this can eliminate the problem of heteroscedasticity.\n\nNon-parametric test:\n\nKruskal-Wallis Test is the non-parametric version of a one-way ANOVA"
+  },
+  {
+    "objectID": "slides/Chapter08.html#interpreting-interactions-1",
+    "href": "slides/Chapter08.html#interpreting-interactions-1",
+    "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
+    "section": "Interpreting interactions",
+    "text": "Interpreting interactions"
+  },
+  {
+    "objectID": "slides/Chapter08.html#one-way-anova-hypotheses",
+    "href": "slides/Chapter08.html#one-way-anova-hypotheses",
+    "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
+    "section": "One-way ANOVA Hypotheses",
+    "text": "One-way ANOVA Hypotheses\n\n\\(H_0\\): The mean burn times are equal for the four fabrics\n\\(H_a\\): The mean burn time of at least one fabric is different."
+  },
+  {
+    "objectID": "slides/Chapter08.html#when-transformations-do-not-help",
+    "href": "slides/Chapter08.html#when-transformations-do-not-help",
+    "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
+    "section": "When transformations do not help:",
+    "text": "When transformations do not help:\n\nWeighted least squares regression: This type of regression assigns a weight to each data point based on the variance of its fitted value.\n\nEssentially, this gives small weights to data points that have higher variances, which shrinks their squared residuals. When the proper weights are used, this can eliminate the problem of heteroscedasticity.\n\nNon-parametric test:\n\nKruskal-Wallis Test is the non-parametric version of a one-way ANOVA"
   }
 ]
