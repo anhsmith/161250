@@ -58,7 +58,7 @@ theme_set(theme_minimal())
 -   EDA bar, points, or box plots are options to show differences
     between groups.
 
-## One-way ANOVA
+## One-way (single factor) ANOVA model
 
 -   fabric burn-time data
 
@@ -73,12 +73,14 @@ theme_set(theme_minimal())
 -   Can we regard the mean burn times of the four fabrics as equal?\
     -   fabric 1 seems to take longer time to burn
 
-## One-way (single factor) ANOVA model
+- Start with hypotheses and EDA to visualize groups
 
-Start with hypotheses and EDA to visualize groups
+## One-way ANOVA Hypotheses 
 
 -   $H_0$: The mean burn times are equal for the four fabrics
 -   $H_a$: The mean burn time of at least one fabric is different.
+
+## One-way ANOVA 
 
 ```{r, echo = TRUE }
 fabric=read.table("../data/fabric.txt", header=TRUE, sep="\t")
@@ -178,14 +180,12 @@ curve(dt(x, df=10), from=-4, to=4)
 ```{r}
 curve(df(x, df1=3, df2=16), from=0, to=8)
 ```
-## Reminder of Sampling Distributions
-
 
 ## Graphical comparison of means
 
 -   The graph below shows individual 95% confidence intervals for the
     fabric means
-    -   Pooled SD ($\sqrt{MSE}$) is NOT used
+   
 
 ```{r}
 ggplot(fabric) +
@@ -202,6 +202,7 @@ ggplot(fabric) +
 
 -   Residuals are randomly and normally distributed
 -   Residuals must be independent of means.
+
     -   If SD increases with mean, try square root or logarithmic
         transformation.
 -   The ANOVA model assumes equal SD for the treatments.
@@ -220,7 +221,7 @@ plot(aov(burntime ~ fabric, data = fabric))
 
 ## Visualize assumptions
 ```{r}
-#| echo: true
+#| echo: FALSE
 #| label: fig-meansd
 #| fig-cap: 'SD vs mean for four fabrics'
 
@@ -232,9 +233,14 @@ fabric |>
   ) |> 
   ggplot() +
   aes(x = mean, y = sd, group = factor(1)) +
-  geom_point() 
+  geom_point(size = 3) +
+  scale_y_continuous(limits = c(0,4))
 ```
+-   Residuals must be independent of means.
 
+    -   If SD increases with mean, try square root or logarithmic
+        transformation.
+        
 With only four fabrics in the sample, it is difficult to make any definitive claim. 
 
 If the assumptions were valid, we would expect the four points to fall approximately along a horizontal band indicating constant standard deviations, and hence variances, regardless of the means of the groups. 
@@ -257,6 +263,20 @@ bartlett.test(burntime ~ fabric, data = fabric)
 car::leveneTest(burntime ~ fabric, data = fabric)
 ```
 
+## What if the equal variance assumption is violated?
+
+ANOVA’s are considered to be fairly robust against violations of the equal variances assumption as long as each group has the same sample size.
+
+If this assumption is violated, the most common way to deal with it is to transform the response variable using one of the three transformations:
+
+1. Log Transformation: Transform the response variable from y to log(y).
+
+2. Square Root Transformation: Transform the response variable from y to √y.
+
+3. Cube Root Transformation: Transform the response variable from y to y1/3.
+
+By performing these transformations, the problem of heteroscedasticity typically goes away.
+
 
 ## Normality
 
@@ -268,6 +288,16 @@ shapiro.test(aov_fabric$residuals)
 ANOVAs are robust to mild issues of non-normality 
 
 But if have issues with normality and unequal variance try transformations
+
+## When transformations do not help:
+
+- Weighted least squares regression: This type of regression assigns a weight to each data point based on the variance of its fitted value.
+
+    - Essentially, this gives small weights to data points that have higher variances, which shrinks their squared residuals. When the proper weights are used, this can eliminate the problem of heteroscedasticity.
+    
+- Non-parametric test: 
+
+    -  Kruskal-Wallis Test is the non-parametric version of a one-way ANOVA
 
 ## Tukey HSD
 
@@ -301,18 +331,22 @@ plot(TukeyHSD(aov(burntime~fabric, data=fabric)))
 
 ## Two way (two factor) ANOVA example
 
--   Example: Twelve tanks, six each with water from one of the two lakes
-    were set up. Three nutrient supplements were added to each tank. The
-    count of zooplankton in a unit volume of water was then noted.
+-   Example: We will use the built in data ToothGrowth. It contains data from a study evaluating the effect of vitamin C on tooth growth in Guinea pigs. The experiment has been performed on 60 pigs, where each animal received one of three dose levels of vitamin C (0.5, 1, and 2 mg/day) by one of two delivery methods, (orange juice or ascorbic acid (a form of vitamin C and coded as VC). Tooth length was measured and a sample of the data is shown below. 
 
 ```{r}
-zooplankton=read.table("../data/zooplankton.txt", header=TRUE, sep="\t")
-print(zooplankton, row.names=FALSE)
+data(ToothGrowth)
+head(ToothGrowth)
+
+# Convert dose as a factor and recode the levels
+# as "D0.5", "D1", "D2"
+ToothGrowth$dose <- factor(ToothGrowth$dose, 
+                  levels = c(0.5, 1, 2),
+                  labels = c("D0.5", "D1", "D2"))
 ```
 
 ## Run a Two-way ANOVA
 ```{r, echo=TRUE}
-summary(aov(Zooplankton~factor(Supplement)+Lake, data=zooplankton))
+summary(aov(len~dose+supp, data=ToothGrowth))
 ```
 
 A two-way ANOVA tests two null hypotheses at the same time:
@@ -332,10 +366,10 @@ A two-way ANOVA tests two null hypotheses at the same time:
 \scriptsize
 
 ```{r}
-summary(aov(Zooplankton~factor(Supplement)+Lake, data=zooplankton))
+summary(aov(len~dose+supp, data=ToothGrowth))
 ```
 
-Supplement effect is significant at 5% level but not the Lake effect
+Supplement and dose effects are significant at 5% level.
 
 ## Main effect plots
 
@@ -345,19 +379,19 @@ Supplement effect is significant at 5% level but not the Lake effect
 library(ggplot2)
 library(gridExtra)
 
-plot1 <- zooplankton |> ggplot() +
-  aes(x = factor(Supplement), y = Zooplankton) +
+plot1 <- ToothGrowth |> ggplot() +
+  aes(x = supp, y = len) +
   stat_summary(fun = mean, geom = "point", aes(group = 1)) +
   stat_summary(fun = mean, geom = "line", aes(group = 1))+
-  geom_abline(intercept = mean(zooplankton$Zooplankton), slope=0)+ 
+  geom_abline(intercept = mean(ToothGrowth$len), slope=0)+ 
   ggtitle("Main effect of Supplement")
 
-plot2 = zooplankton |> ggplot() +
-  aes(x = Lake, y = Zooplankton) +
+plot2 = ToothGrowth |> ggplot() +
+  aes(x = dose, y = len) +
   stat_summary(fun = mean, geom = "point", aes(group = 1)) +
   stat_summary(fun = mean, geom = "line", aes(group = 1))+
-  geom_abline(intercept = mean(zooplankton$Zooplankton), slope=0)+ 
-  theme_bw()+ggtitle("Main effect of Lake")
+  geom_abline(intercept = mean(ToothGrowth$len), slope=0)+ 
+  theme_bw()+ggtitle("Main effect of Dose")
 
 library(patchwork)
 plot1+plot2
@@ -365,8 +399,8 @@ plot1+plot2
 ## Tukey HSD
 
 ```{r, echo = TRUE}
-zoo <- aov(Zooplankton~factor(Supplement)+Lake, data=zooplankton)
-TukeyHSD(zoo)
+teeth <- aov(len~supp+dose, data=ToothGrowth)
+TukeyHSD(teeth)
 ```
 
 ## Summary so far
@@ -385,6 +419,7 @@ TukeyHSD(zoo)
     interactions
 -   Understand the difference and similarities between this chapter and
     previous linear models covered 
+-   Review non-parametric options
 
 ## Interaction effect
 
@@ -418,17 +453,17 @@ A two-way ANOVA with interaction tests three null hypotheses at the same time:
 ## Interaction Plot for Zooplankton data
 
 ```{r, echo=TRUE, warning=FALSE, comment=FALSE}
-attach(zooplankton)
 library(ggplot2)
-p1= ggplot(data = zooplankton, aes(x = factor(Supplement), y = Zooplankton, group=Lake, colour=Lake)) +
+p1= ggplot(data = ToothGrowth, aes(x = supp, y = len, group=dose, colour=dose)) +
   stat_summary(fun=mean, geom="point")+
   stat_summary(fun=mean, geom="line")+
-  geom_abline(intercept = mean(Zooplankton), slope=0)+ 
-  theme_bw()+ggtitle("Lake*Supplement Interaction effect")
-p2= ggplot(data = zooplankton, aes(x = Lake, y = Zooplankton, group=factor(Supplement), colour=factor(Supplement))) +stat_summary(fun=mean, geom="point")+
+  geom_abline(intercept = mean(ToothGrowth$len), slope=0)+ 
+  theme_bw()+ggtitle("Dose*Supplement Interaction effect")
+
+p2= ggplot(data = ToothGrowth, aes(x = dose, y = len, group=supp, colour=supp)) +stat_summary(fun=mean, geom="point")+
   stat_summary(fun=mean, geom="line")+
-  geom_abline(intercept = mean(Zooplankton), slope=0)+ 
-  theme_bw()+ggtitle("Lake*Supplement Interaction effect")
+  geom_abline(intercept = mean(ToothGrowth$len), slope=0)+ 
+  theme_bw()+ggtitle("Dose*Supplement Interaction effect")
 library(patchwork)
 p1+p2
 ```
@@ -443,49 +478,44 @@ p1+p2
 
 -   If interaction effect is ignored, we deal with an `additive` model
 
-Example: zooplankton data
-
-
 
 ## Two-way model fit
 
 ```{r, echo=TRUE}
-zooplankton |> 
-  mutate(Supplement = factor(Supplement)) |> 
-  aov(formula = Zooplankton ~ Supplement * Lake) |> 
+ToothGrowth |> 
+  aov(formula = len ~ supp * dose) |> 
   summary()
 ```
 
 ## Residual diagnostics
 
 ```{r}
-modl <- zooplankton |> 
-  mutate(Supplement = factor(Supplement)) |> 
-  aov(formula = Zooplankton ~ Supplement * Lake)
+modl <- ToothGrowth |> 
+  aov(formula = len ~ supp * dose) 
 
-zooplankton <- zooplankton |> 
+toothgrowth <- ToothGrowth |> 
   mutate(Fitted = fitted.values(modl), Residuals = residuals(modl))
 
-p1 <- ggplot(zooplankton, aes(sample=Residuals))+stat_qq()+stat_qq_line()+
+r1 <- ggplot(toothgrowth, aes(sample=Residuals))+stat_qq()+stat_qq_line()+
   labs(title = "Normal Probability Plot \nof the Residuals")
 
-p2 <- ggplot(zooplankton, aes(y=Residuals, x=Fitted))+geom_point() +
+r2 <- ggplot(toothgrowth, aes(y=Residuals, x=Fitted))+geom_point() +
   geom_hline(yintercept = 0) + 
   labs(title = "Residuals Vs \n Fitted Values")
 
-p3 <- ggplot(zooplankton) +
+r3 <- ggplot(toothgrowth) +
   aes(Residuals) + 
   geom_histogram(bins=4) +
   labs(title = "Histogram of the Residuals")
 
-p4 <- ggplot(zooplankton) + 
+r4 <- ggplot(toothgrowth) + 
   aes(y=Residuals, x=1:length(Residuals)) + 
   geom_point()+geom_line() +
   geom_hline(yintercept = 0) +
   labs(title = "Residuals Vs Obs. Order")
 
-library(patchwork)
-p1+p2+p3+p4 & theme_minimal()
+
+r1+r2+r3+r4 & theme_minimal()
 ```
 ## Interpreting interactions
 
@@ -496,8 +526,15 @@ p1+p2+p3+p4 & theme_minimal()
 -   Posthoc tests to examine different level combinations
 
 ```{r, echo=TRUE}
-TukeyHSD(modl)$`Supplement:Lake`
+TukeyHSD(modl)$`supp:dose`
 ```
+## Interpreting interactions
+
+```{r}
+p1+p2
+```
+
+
 ## Importance of interactions
 
 -   When you have statistically significant interaction effects, you can’t interpret the main effects without considering the interactions
@@ -604,15 +641,7 @@ restaurant |> ggplot() +
   geom_point() + geom_smooth(method = lm, se = FALSE)
 ```
 
-##  ANCOVA fit
 
-```{r, echo=TRUE}
-
-restaurant |> 
-  lm(formula = Sales~Households*Location) |> 
-  summary() |> coef() |> round(digits=3)
-
-```
 ##  ANCOVA fit
 
 ```{r}
@@ -838,14 +867,158 @@ ANOVA: difference between the means of three or more groups
 ## Where to go from here?
 
 Linear models form the basis of a lot more statistics tests. 
-<!-- ## Exercises -->
 
-<!-- download.file("https://www.massey.ac.nz/~kgovinda/220exer/Chap6moreexamples.R", destfile="Chap6moreexamples.R") -->
+## Review of non-parametric tests
+Non-parametric tests are light on assumptions, and can be used for highly asymmetric data (as an alternative to using transformations). 
 
-<!-- download.file("https://www.massey.ac.nz/~kgovinda/220exer/chapter-6-exercises.html", destfile="chapter-6-exercises.html") -->
+Many non-parametric methods rely on replacing the observed data by their *ranks*. 
 
-<!-- install.packages("remotes") -->
 
-<!-- remotes::install_github("ricompute/ricomisc") -->
+```{r}
+#| echo: false
+tv = read_csv("https://www.massey.ac.nz/~anhsmith/data/tv.csv")
+```
 
-<!-- ricomisc::rstudio_viewer("chapter-6-exercises.html", file_path = NULL) -->
+## Spearman's Rank Correlation
+
+
+::::{.columns}
+
+:::{.column}
+
+Rank the $X$ and $Y$ variables, and then obtain usual Pearson correlation coefficient.
+
+The plot shows non-parametric Spearman in the the upper triangle and parametric Pearson in the bottom triangle.
+
+```{r}
+#| echo: true
+library(GGally)
+
+p <- ggpairs(
+  trees, 
+  upper = list(continuous = wrap('cor', method = "spearman")),
+  lower = list(continuous = 'cor') 
+  )
+```
+
+:::
+
+:::{.column}
+
+```{r}
+#| label: fig-spear
+#| echo: false
+#| fig.cap: "Comparison of Pearsonian and Spearman's rank correlations"
+#| fig-width: 5
+#| fig-height: 5
+p
+```
+
+:::
+::::
+
+## Wilcoxon signed rank test
+
+A non-parametric alternative to the one-sample t-test
+
+$H_0: \eta=\eta_0$ where $\eta$ (Greek letter 'eta') is the population median
+
+Based on based on ranking $(|Y-\eta_0|)$, where the ranks for data with $Y<\eta_0$ are compared to the ranks for data with $Y>\eta_0$
+
+
+::::{.columns}
+
+:::{.column}
+
+```{r}
+#| echo: true
+wilcox.test(tv$TELETIME, mu=1680, conf.int=T)
+```
+
+:::
+
+:::{.column}
+
+```{r}
+#| echo: true
+t.test(tv$TELETIME, mu=1680)
+```
+
+:::
+::::
+
+
+## Non-parametric ANOVA
+
+Kruskal-Wallis test: allows to compare three or more groups
+
+Mann-Whitney test: allows to compare 2 groups under the non-normality assumption.
+
+
+## Kruskal-Wallis test
+The null and alternative hypotheses of the Kruskal-Wallis test are:
+
+H0: The 3 groups are equal in terms of the variable
+H1: At least one group is different from the other 2 groups in terms of variable
+
+Similar to an ANOVA the alternative hypothesis is not that all groups are different. The opposite of all groups being equal (H0) is that at least one group is different from the others (H1).
+
+In this sense, if the null hypothesis is rejected, it means that at least one group is different from the other 2, but not necessarily that all 3 groups are different from each other. Post-hoc tests must be performed to test whether all 3 groups differ.
+
+## Mann-Whitney test
+
+For two group comparison, pool the two group responses and then rank the
+pooled data
+
+Ranks for the first group are compared to the ranks for the second group
+
+The null hypothesis is that the two group medians are the same:     $H_0: \eta_1=\eta_2$.
+
+
+::::{.columns}
+
+:::{.column}
+
+
+```{r}
+#| echo: true
+load("../data/rangitikei.Rdata")
+wilcox.test(rangitikei$people~rangitikei$time, conf.int=T)
+```
+
+:::
+
+:::{.column}
+
+```{r}
+#| echo: true
+t.test(rangitikei$people~rangitikei$time)
+```
+
+:::
+::::
+
+## Another form of test
+
+
+::::{.columns}
+
+:::{.column}
+
+```{r}
+#| echo: true
+kruskal.test(rangitikei$people~rangitikei$time)
+```
+
+:::
+
+:::{.column}
+
+```{r}
+#| echo: true
+wilcox.test(rangitikei$people~rangitikei$time)
+```
+
+
+:::
+::::

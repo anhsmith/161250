@@ -8,7 +8,7 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.450">
+  <meta name="generator" content="quarto-1.3.353">
 
   <title>161250 Data Analysis - Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -415,8 +415,8 @@
 <li><p>EDA bar, points, or box plots are options to show differences between groups.</p></li>
 </ul>
 </section>
-<section id="one-way-anova" class="slide level2">
-<h2>One-way ANOVA</h2>
+<section id="one-way-single-factor-anova-model" class="slide level2">
+<h2>One-way (single factor) ANOVA model</h2>
 <ul>
 <li>fabric burn-time data</li>
 </ul>
@@ -468,15 +468,18 @@
 <ul>
 <li>fabric 1 seems to take longer time to burn</li>
 </ul></li>
+<li>Start with hypotheses and EDA to visualize groups</li>
 </ul>
 </section>
-<section id="one-way-single-factor-anova-model" class="slide level2">
-<h2>One-way (single factor) ANOVA model</h2>
-<p>Start with hypotheses and EDA to visualize groups</p>
+<section id="one-way-anova-hypotheses" class="slide level2">
+<h2>One-way ANOVA Hypotheses</h2>
 <ul>
 <li><span class="math inline">\(H_0\)</span>: The mean burn times are equal for the four fabrics</li>
 <li><span class="math inline">\(H_a\)</span>: The mean burn time of at least one fabric is different.</li>
 </ul>
+</section>
+<section id="one-way-anova" class="slide level2">
+<h2>One-way ANOVA</h2>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>fabric<span class="ot">=</span><span class="fu">read.table</span>(<span class="st">"../data/fabric.txt"</span>, <span class="at">header=</span><span class="cn">TRUE</span>, <span class="at">sep=</span><span class="st">"</span><span class="sc">\t</span><span class="st">"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2"></a>fabric <span class="sc">|&gt;</span></span>
@@ -713,31 +716,25 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 </section>
-<section id="reminder-of-sampling-distributions-2" class="slide level2">
-<h2>Reminder of Sampling Distributions</h2>
-</section>
 <section id="graphical-comparison-of-means" class="slide level2">
 <h2>Graphical comparison of means</h2>
 <ul>
-<li>The graph below shows individual 95% confidence intervals for the fabric means
-<ul>
-<li>Pooled SD (<span class="math inline">\(\sqrt{MSE}\)</span>) is NOT used</li>
-</ul></li>
+<li>The graph below shows individual 95% confidence intervals for the fabric means</li>
 </ul>
 
 <img data-src="Chapter08_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="one-way-anova-model-assumptions" class="slide level2">
 <h2>One-way ANOVA model Assumptions</h2>
 <ul>
-<li>Residuals are randomly and normally distributed</li>
-<li>Residuals must be independent of means.
+<li><p>Residuals are randomly and normally distributed</p></li>
+<li><p>Residuals must be independent of means.</p>
 <ul>
 <li>If SD increases with mean, try square root or logarithmic transformation.</li>
 </ul></li>
-<li>The ANOVA model assumes equal SD for the treatments.</li>
-<li>If experimental errors are more in some subgroups, divide the problem into separate ones.</li>
-<li>Positive correlation among residuals leads to under estimation of error variance; negative correlation leads to overestimation.<br>
-</li>
+<li><p>The ANOVA model assumes equal SD for the treatments.</p></li>
+<li><p>If experimental errors are more in some subgroups, divide the problem into separate ones.</p></li>
+<li><p>Positive correlation among residuals leads to under estimation of error variance; negative correlation leads to overestimation.<br>
+</p></li>
 </ul>
 <p><em>These assumptions are harder to validate to small experimental design data</em></p>
 </section>
@@ -777,19 +774,14 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </section>
 <section id="visualize-assumptions-1" class="slide level2">
 <h2>Visualize assumptions</h2>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>fabric <span class="sc">|&gt;</span> </span>
-<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">group_by</span>(fabric) <span class="sc">|&gt;</span> </span>
-<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb7-4"><a href="#cb7-4"></a>    <span class="at">mean =</span> <span class="fu">mean</span>(burntime),</span>
-<span id="cb7-5"><a href="#cb7-5"></a>    <span class="at">sd =</span> <span class="fu">sd</span>(burntime)</span>
-<span id="cb7-6"><a href="#cb7-6"></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb7-7"><a href="#cb7-7"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb7-8"><a href="#cb7-8"></a>  <span class="fu">aes</span>(<span class="at">x =</span> mean, <span class="at">y =</span> sd, <span class="at">group =</span> <span class="fu">factor</span>(<span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb7-9"><a href="#cb7-9"></a>  <span class="fu">geom_point</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
-</div>
-<img data-src="Chapter08_files/figure-revealjs/fig-meansd-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;1: SD vs mean for four fabrics</p><p>With only four fabrics in the sample, it is difficult to make any definitive claim.</p>
+<img data-src="Chapter08_files/figure-revealjs/fig-meansd-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;1: SD vs mean for four fabrics</p><ul>
+<li><p>Residuals must be independent of means.</p>
+<ul>
+<li>If SD increases with mean, try square root or logarithmic transformation.</li>
+</ul></li>
+</ul>
+<p>With only four fabrics in the sample, it is difficult to make any definitive claim.</p>
 <p>If the assumptions were valid, we would expect the four points to fall approximately along a horizontal band indicating constant standard deviations, and hence variances, regardless of the means of the groups.</p>
 <p>This figure suggests that this is the case, so the assumption of equal variances appears to be valid.</p>
 </section>
@@ -798,7 +790,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p><strong>Bartlett’s test</strong>: - null hypothesis: equal variances - but it has an assumption of its own (response variable must be normally distributed)</p>
 <p><strong>Levene’s test</strong> - null hypothesis: equal variances - is applicable for any continuous distribution</p>
 <div class="cell" data-layout-align="center" data-warnings="false">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">bartlett.test</span>(burntime <span class="sc">~</span> fabric, <span class="at">data =</span> fabric)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">bartlett.test</span>(burntime <span class="sc">~</span> fabric, <span class="at">data =</span> fabric)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Bartlett test of homogeneity of variances
@@ -806,7 +798,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 data:  burntime by fabric
 Bartlett's K-squared = 2.6606, df = 3, p-value = 0.447</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>car<span class="sc">::</span><span class="fu">leveneTest</span>(burntime <span class="sc">~</span> fabric, <span class="at">data =</span> fabric)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>car<span class="sc">::</span><span class="fu">leveneTest</span>(burntime <span class="sc">~</span> fabric, <span class="at">data =</span> fabric)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Levene's Test for Homogeneity of Variance (center = median)
       Df F value Pr(&gt;F)
@@ -815,11 +807,22 @@ group  3  0.1788 0.9092
 </div>
 </div>
 </section>
+<section id="what-if-the-equal-variance-assumption-is-violated" class="slide level2">
+<h2>What if the equal variance assumption is violated?</h2>
+<p>ANOVA’s are considered to be fairly robust against violations of the equal variances assumption as long as each group has the same sample size.</p>
+<p>If this assumption is violated, the most common way to deal with it is to transform the response variable using one of the three transformations:</p>
+<ol type="1">
+<li><p>Log Transformation: Transform the response variable from y to log(y).</p></li>
+<li><p>Square Root Transformation: Transform the response variable from y to √y.</p></li>
+<li><p>Cube Root Transformation: Transform the response variable from y to y1/3.</p></li>
+</ol>
+<p>By performing these transformations, the problem of heteroscedasticity typically goes away.</p>
+</section>
 <section id="normality" class="slide level2">
 <h2>Normality</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>aov_fabric <span class="ot">&lt;-</span> <span class="fu">aov</span>(burntime <span class="sc">~</span> fabric, <span class="at">data =</span> fabric)</span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="fu">shapiro.test</span>(aov_fabric<span class="sc">$</span>residuals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>aov_fabric <span class="ot">&lt;-</span> <span class="fu">aov</span>(burntime <span class="sc">~</span> fabric, <span class="at">data =</span> fabric)</span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="fu">shapiro.test</span>(aov_fabric<span class="sc">$</span>residuals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Shapiro-Wilk normality test
@@ -830,6 +833,19 @@ W = 0.88926, p-value = 0.02606</code></pre>
 </div>
 <p>ANOVAs are robust to mild issues of non-normality</p>
 <p>But if have issues with normality and unequal variance try transformations</p>
+</section>
+<section id="when-transformations-do-not-help" class="slide level2">
+<h2>When transformations do not help:</h2>
+<ul>
+<li><p>Weighted least squares regression: This type of regression assigns a weight to each data point based on the variance of its fitted value.</p>
+<ul>
+<li>Essentially, this gives small weights to data points that have higher variances, which shrinks their squared residuals. When the proper weights are used, this can eliminate the problem of heteroscedasticity.</li>
+</ul></li>
+<li><p>Non-parametric test:</p>
+<ul>
+<li>Kruskal-Wallis Test is the non-parametric version of a one-way ANOVA</li>
+</ul></li>
+</ul>
 </section>
 <section id="tukey-hsd" class="slide level2">
 <h2>Tukey HSD</h2>
@@ -871,35 +887,29 @@ Fabric 4-Fabric 3  1.74 -1.33676  4.81676 0.3968476</code></pre>
 <section id="two-way-two-factor-anova-example" class="slide level2">
 <h2>Two way (two factor) ANOVA example</h2>
 <ul>
-<li>Example: Twelve tanks, six each with water from one of the two lakes were set up. Three nutrient supplements were added to each tank. The count of zooplankton in a unit volume of water was then noted.</li>
+<li>Example: We will use the built in data ToothGrowth. It contains data from a study evaluating the effect of vitamin C on tooth growth in Guinea pigs. The experiment has been performed on 60 pigs, where each animal received one of three dose levels of vitamin C (0.5, 1, and 2 mg/day) by one of two delivery methods, (orange juice or ascorbic acid (a form of vitamin C and coded as VC). Tooth length was measured and a sample of the data is shown below.</li>
 </ul>
 <div class="cell" data-layout-align="center">
 <div class="cell-output cell-output-stdout">
-<pre><code> Zooplankton Supplement     Lake
-          34          1     Rose
-          43          1     Rose
-          57          1 Dennison
-          40          1 Dennison
-          85          2     Rose
-          68          2     Rose
-          67          2 Dennison
-          53          2 Dennison
-          41          3     Rose
-          24          3     Rose
-          42          3 Dennison
-          52          3 Dennison</code></pre>
+<pre><code>   len supp dose
+1  4.2   VC  0.5
+2 11.5   VC  0.5
+3  7.3   VC  0.5
+4  5.8   VC  0.5
+5  6.4   VC  0.5
+6 10.0   VC  0.5</code></pre>
 </div>
 </div>
 </section>
 <section id="run-a-two-way-anova" class="slide level2">
 <h2>Run a Two-way ANOVA</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">summary</span>(<span class="fu">aov</span>(Zooplankton<span class="sc">~</span><span class="fu">factor</span>(Supplement)<span class="sc">+</span>Lake, <span class="at">data=</span>zooplankton))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">summary</span>(<span class="fu">aov</span>(len<span class="sc">~</span>dose<span class="sc">+</span>supp, <span class="at">data=</span>ToothGrowth))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>                   Df Sum Sq Mean Sq F value Pr(&gt;F)  
-factor(Supplement)  2 1918.5   959.2   6.486 0.0212 *
-Lake                1   21.3    21.3   0.144 0.7140  
-Residuals           8 1183.2   147.9                 
+<pre><code>            Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+dose         2 2426.4  1213.2   82.81  &lt; 2e-16 ***
+supp         1  205.3   205.3   14.02 0.000429 ***
+Residuals   56  820.4    14.7                     
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
@@ -921,15 +931,15 @@ Observation = Overall Mean + Factor 1 Effect + Factor 2 Effect + Error</p>
 </ul>
 <div class="cell" data-layout-align="center">
 <div class="cell-output cell-output-stdout">
-<pre><code>                   Df Sum Sq Mean Sq F value Pr(&gt;F)  
-factor(Supplement)  2 1918.5   959.2   6.486 0.0212 *
-Lake                1   21.3    21.3   0.144 0.7140  
-Residuals           8 1183.2   147.9                 
+<pre><code>            Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+dose         2 2426.4  1213.2   82.81  &lt; 2e-16 ***
+supp         1  205.3   205.3   14.02 0.000429 ***
+Residuals   56  820.4    14.7                     
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
-<p>Supplement effect is significant at 5% level but not the Lake effect</p>
+<p>Supplement and dose effects are significant at 5% level.</p>
 </section>
 <section id="main-effect-plots" class="slide level2">
 <h2>Main effect plots</h2>
@@ -941,23 +951,23 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <section id="tukey-hsd-1" class="slide level2">
 <h2>Tukey HSD</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>zoo <span class="ot">&lt;-</span> <span class="fu">aov</span>(Zooplankton<span class="sc">~</span><span class="fu">factor</span>(Supplement)<span class="sc">+</span>Lake, <span class="at">data=</span>zooplankton)</span>
-<span id="cb19-2"><a href="#cb19-2"></a><span class="fu">TukeyHSD</span>(zoo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>teeth <span class="ot">&lt;-</span> <span class="fu">aov</span>(len<span class="sc">~</span>supp<span class="sc">+</span>dose, <span class="at">data=</span>ToothGrowth)</span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="fu">TukeyHSD</span>(teeth)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Tukey multiple comparisons of means
     95% family-wise confidence level
 
-Fit: aov(formula = Zooplankton ~ factor(Supplement) + Lake, data = zooplankton)
+Fit: aov(formula = len ~ supp + dose, data = ToothGrowth)
 
-$`factor(Supplement)`
-      diff         lwr       upr     p adj
-2-1  24.75   0.1779866 49.322013 0.0485023
-3-1  -3.75 -28.3220134 20.822013 0.9017260
-3-2 -28.50 -53.0720134 -3.927987 0.0256900
+$supp
+      diff       lwr       upr     p adj
+VC-OJ -3.7 -5.679762 -1.720238 0.0004293
 
-$Lake
-                   diff       lwr      upr     p adj
-Rose-Dennison -2.666667 -18.85781 13.52447 0.7139803</code></pre>
+$dose
+          diff       lwr       upr p adj
+D1-D0.5  9.130  6.215909 12.044091 0e+00
+D2-D0.5 15.495 12.580909 18.409091 0e+00
+D2-D1    6.365  3.450909  9.279091 7e-06</code></pre>
 </div>
 </div>
 </section>
@@ -978,6 +988,7 @@ Rose-Dennison -2.666667 -18.85781 13.52447 0.7139803</code></pre>
 <li>Understand and calculate an ANOVA table when interactions are present</li>
 <li>Describe Tukey’s post hoc tests and assumptions of ANOVAs with interactions</li>
 <li>Understand the difference and similarities between this chapter and previous linear models covered</li>
+<li>Review non-parametric options</li>
 </ul>
 </section>
 <section id="interaction-effect" class="slide level2">
@@ -1021,19 +1032,19 @@ Rose-Dennison -2.666667 -18.85781 13.52447 0.7139803</code></pre>
 <section id="interaction-plot-for-zooplankton-data" class="slide level2">
 <h2>Interaction Plot for Zooplankton data</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">attach</span>(zooplankton)</span>
-<span id="cb21-2"><a href="#cb21-2"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb21-3"><a href="#cb21-3"></a>p1<span class="ot">=</span> <span class="fu">ggplot</span>(<span class="at">data =</span> zooplankton, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(Supplement), <span class="at">y =</span> Zooplankton, <span class="at">group=</span>Lake, <span class="at">colour=</span>Lake)) <span class="sc">+</span></span>
-<span id="cb21-4"><a href="#cb21-4"></a>  <span class="fu">stat_summary</span>(<span class="at">fun=</span>mean, <span class="at">geom=</span><span class="st">"point"</span>)<span class="sc">+</span></span>
-<span id="cb21-5"><a href="#cb21-5"></a>  <span class="fu">stat_summary</span>(<span class="at">fun=</span>mean, <span class="at">geom=</span><span class="st">"line"</span>)<span class="sc">+</span></span>
-<span id="cb21-6"><a href="#cb21-6"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="fu">mean</span>(Zooplankton), <span class="at">slope=</span><span class="dv">0</span>)<span class="sc">+</span> </span>
-<span id="cb21-7"><a href="#cb21-7"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span><span class="fu">ggtitle</span>(<span class="st">"Lake*Supplement Interaction effect"</span>)</span>
-<span id="cb21-8"><a href="#cb21-8"></a>p2<span class="ot">=</span> <span class="fu">ggplot</span>(<span class="at">data =</span> zooplankton, <span class="fu">aes</span>(<span class="at">x =</span> Lake, <span class="at">y =</span> Zooplankton, <span class="at">group=</span><span class="fu">factor</span>(Supplement), <span class="at">colour=</span><span class="fu">factor</span>(Supplement))) <span class="sc">+</span><span class="fu">stat_summary</span>(<span class="at">fun=</span>mean, <span class="at">geom=</span><span class="st">"point"</span>)<span class="sc">+</span></span>
-<span id="cb21-9"><a href="#cb21-9"></a>  <span class="fu">stat_summary</span>(<span class="at">fun=</span>mean, <span class="at">geom=</span><span class="st">"line"</span>)<span class="sc">+</span></span>
-<span id="cb21-10"><a href="#cb21-10"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="fu">mean</span>(Zooplankton), <span class="at">slope=</span><span class="dv">0</span>)<span class="sc">+</span> </span>
-<span id="cb21-11"><a href="#cb21-11"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span><span class="fu">ggtitle</span>(<span class="st">"Lake*Supplement Interaction effect"</span>)</span>
-<span id="cb21-12"><a href="#cb21-12"></a><span class="fu">library</span>(patchwork)</span>
-<span id="cb21-13"><a href="#cb21-13"></a>p1<span class="sc">+</span>p2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb20-2"><a href="#cb20-2"></a>p1<span class="ot">=</span> <span class="fu">ggplot</span>(<span class="at">data =</span> ToothGrowth, <span class="fu">aes</span>(<span class="at">x =</span> supp, <span class="at">y =</span> len, <span class="at">group=</span>dose, <span class="at">colour=</span>dose)) <span class="sc">+</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a>  <span class="fu">stat_summary</span>(<span class="at">fun=</span>mean, <span class="at">geom=</span><span class="st">"point"</span>)<span class="sc">+</span></span>
+<span id="cb20-4"><a href="#cb20-4"></a>  <span class="fu">stat_summary</span>(<span class="at">fun=</span>mean, <span class="at">geom=</span><span class="st">"line"</span>)<span class="sc">+</span></span>
+<span id="cb20-5"><a href="#cb20-5"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="fu">mean</span>(ToothGrowth<span class="sc">$</span>len), <span class="at">slope=</span><span class="dv">0</span>)<span class="sc">+</span> </span>
+<span id="cb20-6"><a href="#cb20-6"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span><span class="fu">ggtitle</span>(<span class="st">"Dose*Supplement Interaction effect"</span>)</span>
+<span id="cb20-7"><a href="#cb20-7"></a></span>
+<span id="cb20-8"><a href="#cb20-8"></a>p2<span class="ot">=</span> <span class="fu">ggplot</span>(<span class="at">data =</span> ToothGrowth, <span class="fu">aes</span>(<span class="at">x =</span> dose, <span class="at">y =</span> len, <span class="at">group=</span>supp, <span class="at">colour=</span>supp)) <span class="sc">+</span><span class="fu">stat_summary</span>(<span class="at">fun=</span>mean, <span class="at">geom=</span><span class="st">"point"</span>)<span class="sc">+</span></span>
+<span id="cb20-9"><a href="#cb20-9"></a>  <span class="fu">stat_summary</span>(<span class="at">fun=</span>mean, <span class="at">geom=</span><span class="st">"line"</span>)<span class="sc">+</span></span>
+<span id="cb20-10"><a href="#cb20-10"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="fu">mean</span>(ToothGrowth<span class="sc">$</span>len), <span class="at">slope=</span><span class="dv">0</span>)<span class="sc">+</span> </span>
+<span id="cb20-11"><a href="#cb20-11"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span><span class="fu">ggtitle</span>(<span class="st">"Dose*Supplement Interaction effect"</span>)</span>
+<span id="cb20-12"><a href="#cb20-12"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb20-13"><a href="#cb20-13"></a>p1<span class="sc">+</span>p2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="Chapter08_files/figure-revealjs/unnamed-chunk-18-1.png" width="960" class="r-stretch quarto-figure-center"><ul>
@@ -1049,21 +1060,19 @@ Rose-Dennison -2.666667 -18.85781 13.52447 0.7139803</code></pre>
 <li><p>The above model is known as <code>multiplicative</code> model</p></li>
 <li><p>If interaction effect is ignored, we deal with an <code>additive</code> model</p></li>
 </ul>
-<p>Example: zooplankton data</p>
 </section>
 <section id="two-way-model-fit-2" class="slide level2">
 <h2>Two-way model fit</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>zooplankton <span class="sc">|&gt;</span> </span>
-<span id="cb22-2"><a href="#cb22-2"></a>  <span class="fu">mutate</span>(<span class="at">Supplement =</span> <span class="fu">factor</span>(Supplement)) <span class="sc">|&gt;</span> </span>
-<span id="cb22-3"><a href="#cb22-3"></a>  <span class="fu">aov</span>(<span class="at">formula =</span> Zooplankton <span class="sc">~</span> Supplement <span class="sc">*</span> Lake) <span class="sc">|&gt;</span> </span>
-<span id="cb22-4"><a href="#cb22-4"></a>  <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>ToothGrowth <span class="sc">|&gt;</span> </span>
+<span id="cb21-2"><a href="#cb21-2"></a>  <span class="fu">aov</span>(<span class="at">formula =</span> len <span class="sc">~</span> supp <span class="sc">*</span> dose) <span class="sc">|&gt;</span> </span>
+<span id="cb21-3"><a href="#cb21-3"></a>  <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>                Df Sum Sq Mean Sq F value Pr(&gt;F)  
-Supplement       2 1918.5   959.2   9.253 0.0147 *
-Lake             1   21.3    21.3   0.206 0.6660  
-Supplement:Lake  2  561.2   280.6   2.707 0.1453  
-Residuals        6  622.0   103.7                 
+<pre><code>            Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+supp         1  205.4   205.4  15.572 0.000231 ***
+dose         2 2426.4  1213.2  92.000  &lt; 2e-16 ***
+supp:dose    2  108.3    54.2   4.107 0.021860 *  
+Residuals   54  712.1    13.2                     
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
@@ -1081,27 +1090,31 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <li><p>Posthoc tests to examine different level combinations</p></li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">TukeyHSD</span>(modl)<span class="sc">$</span><span class="st">`</span><span class="at">Supplement:Lake</span><span class="st">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">TukeyHSD</span>(modl)<span class="sc">$</span><span class="st">`</span><span class="at">supp:dose</span><span class="st">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>                       diff        lwr       upr      p adj
-2:Dennison-1:Dennison  11.5 -29.021538 52.021538 0.85366635
-3:Dennison-1:Dennison  -1.5 -42.021538 39.021538 0.99998404
-1:Rose-1:Dennison     -10.0 -50.521538 30.521538 0.90834374
-2:Rose-1:Dennison      28.0 -12.521538 68.521538 0.19396469
-3:Rose-1:Dennison     -16.0 -56.521538 24.521538 0.64065141
-3:Dennison-2:Dennison -13.0 -53.521538 27.521538 0.78826884
-1:Rose-2:Dennison     -21.5 -62.021538 19.021538 0.38790493
-2:Rose-2:Dennison      16.5 -24.021538 57.021538 0.61553864
-3:Rose-2:Dennison     -27.5 -68.021538 13.021538 0.20490820
-1:Rose-3:Dennison      -8.5 -49.021538 32.021538 0.94964396
-2:Rose-3:Dennison      29.5 -11.021538 70.021538 0.16443780
-3:Rose-3:Dennison     -14.5 -55.021538 26.021538 0.71593144
-2:Rose-1:Rose          38.0  -2.521538 78.521538 0.06517642
-3:Rose-1:Rose          -6.0 -46.521538 34.521538 0.98804470
-3:Rose-2:Rose         -44.0 -84.521538 -3.478462 0.03503205</code></pre>
+<pre><code>                 diff        lwr        upr        p adj
+VC:D0.5-OJ:D0.5 -5.25 -10.048124 -0.4518762 2.425209e-02
+OJ:D1-OJ:D0.5    9.47   4.671876 14.2681238 4.612304e-06
+VC:D1-OJ:D0.5    3.54  -1.258124  8.3381238 2.640208e-01
+OJ:D2-OJ:D0.5   12.83   8.031876 17.6281238 2.125153e-09
+VC:D2-OJ:D0.5   12.91   8.111876 17.7081238 1.769939e-09
+OJ:D1-VC:D0.5   14.72   9.921876 19.5181238 2.985978e-11
+VC:D1-VC:D0.5    8.79   3.991876 13.5881238 2.100948e-05
+OJ:D2-VC:D0.5   18.08  13.281876 22.8781238 4.855005e-13
+VC:D2-VC:D0.5   18.16  13.361876 22.9581238 4.821699e-13
+VC:D1-OJ:D1     -5.93 -10.728124 -1.1318762 7.393032e-03
+OJ:D2-OJ:D1      3.36  -1.438124  8.1581238 3.187361e-01
+VC:D2-OJ:D1      3.44  -1.358124  8.2381238 2.936430e-01
+OJ:D2-VC:D1      9.29   4.491876 14.0881238 6.908163e-06
+VC:D2-VC:D1      9.37   4.571876 14.1681238 5.774013e-06
+VC:D2-OJ:D2      0.08  -4.718124  4.8781238 1.000000e+00</code></pre>
 </div>
 </div>
 </section>
+<section id="interpreting-interactions-1" class="slide level2">
+<h2>Interpreting interactions</h2>
+
+<img data-src="Chapter08_files/figure-revealjs/unnamed-chunk-22-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="importance-of-interactions" class="slide level2">
 <h2>Importance of interactions</h2>
 <ul>
@@ -1226,7 +1239,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <section id="regression-and-anova-1" class="slide level2">
 <h2>Regression and ANOVA</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>fabric <span class="sc">|&gt;</span> <span class="fu">lm</span>(<span class="at">formula =</span> burntime<span class="sc">~</span>I1<span class="sc">+</span>I2<span class="sc">+</span>I3) <span class="sc">|&gt;</span> <span class="fu">anova</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>fabric <span class="sc">|&gt;</span> <span class="fu">lm</span>(<span class="at">formula =</span> burntime<span class="sc">~</span>I1<span class="sc">+</span>I2<span class="sc">+</span>I3) <span class="sc">|&gt;</span> <span class="fu">anova</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Variance Table
 
@@ -1295,25 +1308,8 @@ Fabric 4-Fabric 3  1.74 -1.33676  4.81676 0.3968476</code></pre>
 <li>Plot of data. Do we need three separate models?</li>
 </ul>
 
-<img data-src="Chapter08_files/figure-revealjs/unnamed-chunk-28-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="Chapter08_files/figure-revealjs/unnamed-chunk-29-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="ancova-fit" class="slide level2">
-<h2>ANCOVA fit</h2>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>restaurant <span class="sc">|&gt;</span> </span>
-<span id="cb33-2"><a href="#cb33-2"></a>  <span class="fu">lm</span>(<span class="at">formula =</span> Sales<span class="sc">~</span>Households<span class="sc">*</span>Location) <span class="sc">|&gt;</span> </span>
-<span id="cb33-3"><a href="#cb33-3"></a>  <span class="fu">summary</span>() <span class="sc">|&gt;</span> <span class="fu">coef</span>() <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="at">digits=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>                          Estimate Std. Error t value Pr(&gt;|t|)
-(Intercept)                 -6.203     11.818  -0.525    0.611
-Households                   0.909      0.083  10.906    0.000
-LocationMall                39.223     16.451   2.384    0.038
-LocationStreet               8.036     16.273   0.494    0.632
-Households:LocationMall     -0.074      0.104  -0.710    0.494
-Households:LocationStreet   -0.012      0.101  -0.120    0.907</code></pre>
-</div>
-</div>
-</section>
-<section id="ancova-fit-1" class="slide level2">
 <h2>ANCOVA fit</h2>
 
 <img data-src="Chapter08_files/figure-revealjs/unnamed-chunk-30-1.png" width="960" class="r-stretch quarto-figure-center"><ul>
@@ -1491,12 +1487,169 @@ X:I2          -0.012      0.101  -0.120    0.907</code></pre>
 </section>
 <section id="where-to-go-from-here" class="slide level2">
 <h2>Where to go from here?</h2>
-<p>Linear models form the basis of a lot more statistics tests. <!-- ## Exercises --></p>
-<!-- download.file("https://www.massey.ac.nz/~kgovinda/220exer/Chap6moreexamples.R", destfile="Chap6moreexamples.R") -->
-<!-- download.file("https://www.massey.ac.nz/~kgovinda/220exer/chapter-6-exercises.html", destfile="chapter-6-exercises.html") -->
-<!-- install.packages("remotes") -->
-<!-- remotes::install_github("ricompute/ricomisc") -->
-<!-- ricomisc::rstudio_viewer("chapter-6-exercises.html", file_path = NULL) -->
+<p>Linear models form the basis of a lot more statistics tests.</p>
+</section>
+<section id="review-of-non-parametric-tests" class="slide level2">
+<h2>Review of non-parametric tests</h2>
+<p>Non-parametric tests are light on assumptions, and can be used for highly asymmetric data (as an alternative to using transformations).</p>
+<p>Many non-parametric methods rely on replacing the observed data by their <em>ranks</em>.</p>
+</section>
+<section id="spearmans-rank-correlation" class="slide level2">
+<h2>Spearman’s Rank Correlation</h2>
+<div class="columns">
+<div class="column">
+<p>Rank the <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> variables, and then obtain usual Pearson correlation coefficient.</p>
+<p>The plot shows non-parametric Spearman in the the upper triangle and parametric Pearson in the bottom triangle.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="fu">library</span>(GGally)</span>
+<span id="cb37-2"><a href="#cb37-2"></a></span>
+<span id="cb37-3"><a href="#cb37-3"></a>p <span class="ot">&lt;-</span> <span class="fu">ggpairs</span>(</span>
+<span id="cb37-4"><a href="#cb37-4"></a>  trees, </span>
+<span id="cb37-5"><a href="#cb37-5"></a>  <span class="at">upper =</span> <span class="fu">list</span>(<span class="at">continuous =</span> <span class="fu">wrap</span>(<span class="st">'cor'</span>, <span class="at">method =</span> <span class="st">"spearman"</span>)),</span>
+<span id="cb37-6"><a href="#cb37-6"></a>  <span class="at">lower =</span> <span class="fu">list</span>(<span class="at">continuous =</span> <span class="st">'cor'</span>) </span>
+<span id="cb37-7"><a href="#cb37-7"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-spear" class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Chapter08_files/figure-revealjs/fig-spear-1.png" width="480"></p>
+<figcaption>Figure&nbsp;2: Comparison of Pearsonian and Spearman’s rank correlations</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="wilcoxon-signed-rank-test" class="slide level2">
+<h2>Wilcoxon signed rank test</h2>
+<p>A non-parametric alternative to the one-sample t-test</p>
+<p><span class="math inline">\(H_0: \eta=\eta_0\)</span> where <span class="math inline">\(\eta\)</span> (Greek letter ‘eta’) is the population median</p>
+<p>Based on based on ranking <span class="math inline">\((|Y-\eta_0|)\)</span>, where the ranks for data with <span class="math inline">\(Y&lt;\eta_0\)</span> are compared to the ranks for data with <span class="math inline">\(Y&gt;\eta_0\)</span></p>
+<div class="columns">
+<div class="column">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="fu">wilcox.test</span>(tv<span class="sc">$</span>TELETIME, <span class="at">mu=</span><span class="dv">1680</span>, <span class="at">conf.int=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Wilcoxon signed rank exact test
+
+data:  tv$TELETIME
+V = 588, p-value = 0.6108
+alternative hypothesis: true location is not equal to 1680
+95 percent confidence interval:
+ 1557.5 1906.5
+sample estimates:
+(pseudo)median 
+          1728 </code></pre>
+</div>
+</div>
+</div><div class="column">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="fu">t.test</span>(tv<span class="sc">$</span>TELETIME, <span class="at">mu=</span><span class="dv">1680</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One Sample t-test
+
+data:  tv$TELETIME
+t = 0.58856, df = 45, p-value = 0.5591
+alternative hypothesis: true mean is not equal to 1680
+95 percent confidence interval:
+ 1560.633 1897.932
+sample estimates:
+mean of x 
+ 1729.283 </code></pre>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="non-parametric-anova" class="slide level2">
+<h2>Non-parametric ANOVA</h2>
+<p>Kruskal-Wallis test: allows to compare three or more groups</p>
+<p>Mann-Whitney test: allows to compare 2 groups under the non-normality assumption.</p>
+</section>
+<section id="kruskal-wallis-test" class="slide level2">
+<h2>Kruskal-Wallis test</h2>
+<p>The null and alternative hypotheses of the Kruskal-Wallis test are:</p>
+<p>H0: The 3 groups are equal in terms of the variable H1: At least one group is different from the other 2 groups in terms of variable</p>
+<p>Similar to an ANOVA the alternative hypothesis is not that all groups are different. The opposite of all groups being equal (H0) is that at least one group is different from the others (H1).</p>
+<p>In this sense, if the null hypothesis is rejected, it means that at least one group is different from the other 2, but not necessarily that all 3 groups are different from each other. Post-hoc tests must be performed to test whether all 3 groups differ.</p>
+</section>
+<section id="mann-whitney-test" class="slide level2">
+<h2>Mann-Whitney test</h2>
+<p>For two group comparison, pool the two group responses and then rank the pooled data</p>
+<p>Ranks for the first group are compared to the ranks for the second group</p>
+<p>The null hypothesis is that the two group medians are the same: <span class="math inline">\(H_0: \eta_1=\eta_2\)</span>.</p>
+<div class="columns">
+<div class="column">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="fu">load</span>(<span class="st">"../data/rangitikei.Rdata"</span>)</span>
+<span id="cb42-2"><a href="#cb42-2"></a><span class="fu">wilcox.test</span>(rangitikei<span class="sc">$</span>people<span class="sc">~</span>rangitikei<span class="sc">$</span>time, <span class="at">conf.int=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Wilcoxon rank sum test with continuity correction
+
+data:  rangitikei$people by rangitikei$time
+W = 30, p-value = 0.007711
+alternative hypothesis: true location shift is not equal to 0
+95 percent confidence interval:
+ -88.99996 -10.00005
+sample estimates:
+difference in location 
+             -36.46835 </code></pre>
+</div>
+</div>
+</div><div class="column">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="fu">t.test</span>(rangitikei<span class="sc">$</span>people<span class="sc">~</span>rangitikei<span class="sc">$</span>time)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  rangitikei$people by rangitikei$time
+t = -3.1677, df = 30.523, p-value = 0.003478
+alternative hypothesis: true difference in means between group 1 and group 2 is not equal to 0
+95 percent confidence interval:
+ -102.28710  -22.13049
+sample estimates:
+mean in group 1 mean in group 2 
+       22.71429        84.92308 </code></pre>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="another-form-of-test" class="slide level2">
+<h2>Another form of test</h2>
+<div class="columns">
+<div class="column">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="fu">kruskal.test</span>(rangitikei<span class="sc">$</span>people<span class="sc">~</span>rangitikei<span class="sc">$</span>time)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Kruskal-Wallis rank sum test
+
+data:  rangitikei$people by rangitikei$time
+Kruskal-Wallis chi-squared = 7.2171, df = 1, p-value = 0.007221</code></pre>
+</div>
+</div>
+</div><div class="column">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a><span class="fu">wilcox.test</span>(rangitikei<span class="sc">$</span>people<span class="sc">~</span>rangitikei<span class="sc">$</span>time)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Wilcoxon rank sum test with continuity correction
+
+data:  rangitikei$people by rangitikei$time
+W = 30, p-value = 0.007711
+alternative hypothesis: true location shift is not equal to 0</code></pre>
+</div>
+</div>
+</div>
+</div>
 
 
 <img src="img/L_Color.png" class="slide-logo r-stretch"><div class="footer footer-default">
