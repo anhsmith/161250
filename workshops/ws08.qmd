@@ -657,11 +657,6 @@ plot(allEffects(mod1))
 Old style Interaction effects plots:
 
 ```{r, results='hide', fig.show='hide'}
-mod2 <- aov(
-  yield ~ shade*irrigation*inoculum - shade:irrigation:inoculum, 
-  data = alfalfa
-  )
-
 
 library(effects)
 
@@ -810,34 +805,6 @@ Note that this regression allows the treatments to be compared with the control.
 
 ```
 
-
-## Exercise 8.6 {-}
-
-In a two-factor experiment, one of the factors was assigned to main plot (main-plot factor), the second factor, called the subplot factor, was assigned into subplots.  The dataset `https://www.massey.ac.nz/~kgovinda/data/plots.RData` gives the experimental set up. 
-
-**R:**
-
-```{r, results='hide', fig.show='hide'}
-url1 <- "https://www.massey.ac.nz/~anhsmith/data/plots.RData"
-download.file(url = url1, destfile = "plots.RData")
-load("plots.RData")
-
-plots
-```
-
-Perform the ANOVA for this basic split-plot experiment.
-```{r, results='hide', fig.show='hide'}
-sp.model <- aov(yield ~ block + A*B + Error(block/A),
-                data=plots)
-summary(sp.model)
-
-```
-
-```{r, results='hide', fig.show='hide'}
-#Incorrect model
-summary(aov(yield ~ block + A*B ,
-            data=plots))
-```
 
 ## Non-parametric ANOVA
 
