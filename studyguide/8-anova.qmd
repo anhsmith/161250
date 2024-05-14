@@ -750,8 +750,8 @@ restaurant <-
          I1 = as.numeric(Location=="Mall"),
          I2 = as.numeric(Location=="Street"),
          I3 = as.numeric(Location=="Highway"),
-         I1.X = I1 * Sales,
-         I2.X = I2 * Sales)
+         I1.X = I1 * Households,
+         I2.X = I2 * Households)
 
 restaurant
 ```
