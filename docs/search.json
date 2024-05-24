@@ -984,7 +984,7 @@
     "href": "slides/Chapter08.html#analysis-of-covariance-ancova",
     "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
     "section": "Analysis of Covariance (ANCOVA)",
-    "text": "Analysis of Covariance (ANCOVA)\nAnalysis of covariance (ANCOVA) is a statistical method that combines linear regression and analysis of variance (ANOVA) to evaluate the relationship between a response variable and various independent variables while controlling for covariates."
+    "text": "Analysis of Covariance (ANCOVA)\nAnalysis of covariance (ANCOVA) is a statistical method that combines linear regression and analysis of variance (ANOVA) to evaluate the relationship between a response variable and various independent variables while controlling for covariates.\n\nIndicator variables are used as additional regressors along with a quantitative predictor (covariate)."
   },
   {
     "objectID": "slides/Chapter08.html#analysis-of-covariance-ancova-1",
@@ -998,14 +998,14 @@
     "href": "slides/Chapter08.html#ancova-fit",
     "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
     "section": "ANCOVA fit",
-    "text": "ANCOVA fit\n\n\nIn order to allow for different slopes for each location, we define the product (or interaction) variables \\(I_1*X\\), and \\(I_2*X\\) (\\(X\\) being the covariate, Households)\nLocation is categorical with levels Mall, Street, and Highway"
+    "text": "ANCOVA fit\nEstimates are the slope in each treatment (group). Remember that R assigns the first (alphabetical) level of the treatment to Intercept\n\n\n\nCall:\nlm(formula = posttest ~ pretest + group, data = anxiety)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-1.00467 -0.29485 -0.02866  0.33846  0.68799 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) -0.94088    0.72574  -1.296 0.202074    \npretest      1.02775    0.04202  24.461  &lt; 2e-16 ***\ngroupgrp2   -0.64112    0.15137  -4.235 0.000126 ***\ngroupgrp3   -2.98463    0.15027 -19.862  &lt; 2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.4114 on 41 degrees of freedom\nMultiple R-squared:  0.9615,    Adjusted R-squared:  0.9587 \nF-statistic: 341.5 on 3 and 41 DF,  p-value: &lt; 2.2e-16"
   },
   {
     "objectID": "slides/Chapter08.html#ancova-fit-1",
     "href": "slides/Chapter08.html#ancova-fit-1",
     "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
     "section": "ANCOVA fit",
-    "text": "ANCOVA fit\n\n\nIn order to allow for different slopes for each location, we define the product (or interaction) variables \\(I_1*X\\), and \\(I_2*X\\) (\\(X\\) being the covariate, Households)\nLocation is categorical with levels Mall, Street, and Highway"
+    "text": "ANCOVA fit\nUse ANOVA table to display\n\n\nAnalysis of Variance Table\n\nResponse: posttest\n          Df Sum Sq Mean Sq F value    Pr(&gt;F)    \npretest    1 99.400  99.400  587.16 &lt; 2.2e-16 ***\ngroup      2 74.023  37.011  218.63 &lt; 2.2e-16 ***\nResiduals 41  6.941   0.169                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nPost-hoc tests to see which group is different\n\n\n  Tukey multiple comparisons of means\n    95% family-wise confidence level\n\nFit: aov(formula = posttest ~ group + pretest, data = anxiety)\n\n$group\n               diff       lwr        upr p adj\ngrp2-grp1 -1.093333 -1.458662 -0.7280048     0\ngrp3-grp1 -3.060000 -3.425329 -2.6946715     0\ngrp3-grp2 -1.966667 -2.331995 -1.6013381     0"
   },
   {
     "objectID": "slides/Chapter08.html#explanation-of-fit",
@@ -1096,7 +1096,7 @@
     "href": "slides/Chapter08.html#where-to-go-from-here",
     "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
     "section": "Where to go from here?",
-    "text": "Where to go from here?\nLinear models form the basis of a lot more statistics tests."
+    "text": "Where to go from here?\nLinear models form the basis of a lot more statistics tests.\n\n\n\n161250 Data Analysis"
   },
   {
     "objectID": "slides/Chapter06.html#what-is-a-statistical-model",
@@ -3959,7 +3959,7 @@
     "href": "slides/Chapter08.html#another-form-of-test",
     "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
     "section": "Another form of test",
-    "text": "Another form of test\n\n\n\nkruskal.test(rangitikei$people~rangitikei$time)\n\n\n    Kruskal-Wallis rank sum test\n\ndata:  rangitikei$people by rangitikei$time\nKruskal-Wallis chi-squared = 7.2171, df = 1, p-value = 0.007221\n\n\n\n\nwilcox.test(rangitikei$people~rangitikei$time)\n\n\n    Wilcoxon rank sum test with continuity correction\n\ndata:  rangitikei$people by rangitikei$time\nW = 30, p-value = 0.007711\nalternative hypothesis: true location shift is not equal to 0\n\n\n\n\n\n\n\n161250 Data Analysis"
+    "text": "Another form of test\n\n\n\nkruskal.test(rangitikei$people~rangitikei$time)\n\n\n    Kruskal-Wallis rank sum test\n\ndata:  rangitikei$people by rangitikei$time\nKruskal-Wallis chi-squared = 7.2171, df = 1, p-value = 0.007221\n\n\n\n\nwilcox.test(rangitikei$people~rangitikei$time)\n\n\n    Wilcoxon rank sum test with continuity correction\n\ndata:  rangitikei$people by rangitikei$time\nW = 30, p-value = 0.007711\nalternative hypothesis: true location shift is not equal to 0"
   },
   {
     "objectID": "slides/Chapter08.html#what-if-the-equal-variance-assumption-is-violated",
@@ -4016,5 +4016,96 @@
     "title": "Chapter 8 Workshop",
     "section": "Return to the Oyster Data",
     "text": "Return to the Oyster Data\n\n\nCode\naov(Growth~Salinity, data = oys)\n\n\nCall:\n   aov(formula = Growth ~ Salinity, data = oys)\n\nTerms:\n                Salinity Residuals\nSum of Squares   0.16378  81.11150\nDeg. of Freedom        1        58\n\nResidual standard error: 1.182571\nEstimated effects may be unbalanced\n\n\n\n\nCode\nkruskal.test(oys$Growth~oys$Salinity)\n\n\n\n    Kruskal-Wallis rank sum test\n\ndata:  oys$Growth by oys$Salinity\nKruskal-Wallis chi-squared = 0.013989, df = 1, p-value = 0.9058\n\n\n\n\nCode\nwilcox.test(oys$Growth~oys$Salinity)\n\n\n\n    Wilcoxon rank sum exact test\n\ndata:  oys$Growth by oys$Salinity\nW = 458, p-value = 0.9124\nalternative hypothesis: true location shift is not equal to 0\n\n\n\nMore R code examples are here"
+  },
+  {
+    "objectID": "slides/Chapter08.html#data-example-test-anxiety",
+    "href": "slides/Chapter08.html#data-example-test-anxiety",
+    "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
+    "section": "Data example: test anxiety",
+    "text": "Data example: test anxiety\nResearchers investigated the effect of exercises in reducing the level of anxiety, where they measured the anxiety score of three groups of individuals practicing physical exercises at different levels (grp1: low, grp2: moderate and grp3: high).\nThe anxiety score was measured pre- and 6-months post-exercise training programs. It is expected that any reduction in the anxiety by the exercises programs would also depend on the participant’s basal level of anxiety score.\nIn this analysis we use the pretest anxiety score (pretest) as the covariate and are interested in possible differences between group with respect to the post-test anxiety scores.\n\n\n# A tibble: 3 × 4\n  id    group pretest posttest\n  &lt;fct&gt; &lt;fct&gt;   &lt;dbl&gt;    &lt;dbl&gt;\n1 15    grp1     19.8     19.4\n2 30    grp2     19.3     17.7\n3 33    grp3     15.5     11"
+  },
+  {
+    "objectID": "slides/Chapter08.html#interaction",
+    "href": "slides/Chapter08.html#interaction",
+    "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
+    "section": "Interaction",
+    "text": "Interaction\nAre the regression slopes the same?\n\n\n              Df Sum Sq Mean Sq F value Pr(&gt;F)    \ngroup          2  72.13   36.07 203.973 &lt;2e-16 ***\npretest        1 101.29  101.29 572.828 &lt;2e-16 ***\ngroup:pretest  2   0.04    0.02   0.127  0.881    \nResiduals     39   6.90    0.18                   \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nInteraction term is not significant (at sig. level of 5%)."
+  },
+  {
+    "objectID": "slides/Chapter08.html#check-assumptions",
+    "href": "slides/Chapter08.html#check-assumptions",
+    "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
+    "section": "Check assumptions",
+    "text": "Check assumptions\nLinearity:\n\nAppears to be a linear relationship in each training group"
+  },
+  {
+    "objectID": "slides/Chapter08.html#assumptions",
+    "href": "slides/Chapter08.html#assumptions",
+    "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
+    "section": "Assumptions",
+    "text": "Assumptions\nResiduals:"
+  },
+  {
+    "objectID": "slides/Chapter08.html#assumptions-1",
+    "href": "slides/Chapter08.html#assumptions-1",
+    "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
+    "section": "Assumptions",
+    "text": "Assumptions\nNormality:\n\n\n# A tibble: 1 × 3\n  variable                 statistic p.value\n  &lt;chr&gt;                        &lt;dbl&gt;   &lt;dbl&gt;\n1 summary(model$residuals)     0.964   0.849\n\n\nThe Shapiro Wilk test was not significant (\\(\\alpha = 0.05\\)), so we can assume normality of residuals\nEqual variance:\n\n\nLevene's Test for Homogeneity of Variance (center = median)\n      Df F value Pr(&gt;F)\ngroup  2  0.2604  0.772\n      42               \n\n\nThe Levene’s test was not significant (\\(\\alpha = 0.05\\)), so we can assume homogeneity of the residual variances for all groups."
+  },
+  {
+    "objectID": "slides/Chapter08.html#data-example-fast-food-resturants",
+    "href": "slides/Chapter08.html#data-example-fast-food-resturants",
+    "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
+    "section": "Data example: fast-food resturants",
+    "text": "Data example: fast-food resturants\n\n\n Restaurant  Sales Households Location I1 I2\n          1 135.27        155  Highway  0  0\n          2  72.74         93  Highway  0  0\n          3 114.95        128  Highway  0  0\n          4 102.93        114  Highway  0  0\n          5 131.77        158  Highway  0  0\n          6 160.91        183  Highway  0  0\n          7 179.86        178     Mall  1  0\n          8 220.14        215     Mall  1  0\n          9 179.64        172     Mall  1  0\n         10 185.92        197     Mall  1  0\n         11 207.82        207     Mall  1  0\n         12 113.51         95     Mall  1  0\n         13 203.98        224   Street  0  1\n         14 174.48        199   Street  0  1\n         15 220.43        240   Street  0  1\n         16  93.19        100   Street  0  1\n\n\n\nDo we need three separate models?"
+  },
+  {
+    "objectID": "slides/Chapter08.html#ancova",
+    "href": "slides/Chapter08.html#ancova",
+    "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
+    "section": "ANCOVA",
+    "text": "ANCOVA\n\n\nIn order to allow for different slopes for each location, we define the product (or interaction) variables"
+  },
+  {
+    "objectID": "slides/Chapter08.html#data-set-up",
+    "href": "slides/Chapter08.html#data-set-up",
+    "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
+    "section": "Data set up",
+    "text": "Data set up\n\n\n  Restaurant  Sales Households Location I1 I2\n1          1 135.27        155  Highway  0  0\n2          2  72.74         93  Highway  0  0\n3          3 114.95        128  Highway  0  0\n4          4 102.93        114  Highway  0  0\n5          5 131.77        158  Highway  0  0\n6          6 160.91        183  Highway  0  0"
+  },
+  {
+    "objectID": "slides/Chapter08.html#ancova-model",
+    "href": "slides/Chapter08.html#ancova-model",
+    "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
+    "section": "ANCOVA model",
+    "text": "ANCOVA model\nWe examine the relationship between restaurant sales (response variable, in thousands of dollars) and the number of households (H) in the restaurant’s trading area and the location of the restaurant (Mall, Street, and Highway). We can use the indicator variables (\\(I_1\\) and \\(I_2\\)) to define our three locations uniquely.\n\\(Sales = \\beta_0 + \\beta_1 I_1 + \\beta_2 I_2 + (\\beta_3 + \\beta_4 I_1 + \\beta_5 I_2)Households\\)\nThis model provides a separate model for each location as well as allows for the interaction between location of the restaurant and the number of households through the slope coefficient"
+  },
+  {
+    "objectID": "slides/Chapter08.html#ancova-model-1",
+    "href": "slides/Chapter08.html#ancova-model-1",
+    "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
+    "section": "ANCOVA model",
+    "text": "ANCOVA model\n\\(Sales = \\beta_0 + \\beta_1 I_1 + \\beta_2 I_2 + (\\beta_3 + \\beta_4 I_1 + \\beta_5 I_2)Households\\)\n\nFor Highway Locations: \\(I_1=0\\) & \\(I_2=0\\) hence our model simplifies to\n\\(Sales = \\beta_{0} + (\\beta_3)Households\\)\nFor Mall Locations: \\(I_1=1\\) & \\(I_2=0\\) so the model becomes\n\\(Sales = \\beta_{0} + \\beta_{1} I_1 (\\beta_3 + \\beta_4)Households\\)\nFor Street Locations: \\(I_1=0\\) & \\(I_2=1\\) so the model becomes \\(Sales = \\beta_{0} + \\beta_2 + (\\beta_3 + \\beta_5) Households\\)\n\nnote R does not require us to code Location as an indicator variable"
+  },
+  {
+    "objectID": "slides/Chapter08.html#ancova-model-2",
+    "href": "slides/Chapter08.html#ancova-model-2",
+    "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
+    "section": "ANCOVA model",
+    "text": "ANCOVA model\n\\(Sales = -6.2 + 39.22 I_1 + 8.04 I_2 + ( 0.909 + -0.074I_1 -0.012 I_2) Households\\)\n\nFor Highway Locations: \\(I_1=0\\) & \\(I_2=0\\) hence our model simplifies to\n\\(Sales = -6.2 + (\\beta_3)Households\\)\nFor Mall Locations: \\(I_1=1\\) & \\(I_2=0\\) so the model becomes\n\\(Sales = \\beta_{0} + \\beta_{1} I_1 (\\beta_3 + \\beta_4)Households\\)\nFor Street Locations: \\(I_1=0\\) & \\(I_2=1\\) so the model becomes \\(Sales = \\beta_{0} + \\beta_2 + (\\beta_3 + \\beta_5) Households\\)"
+  },
+  {
+    "objectID": "slides/Chapter08.html#linear-models-review",
+    "href": "slides/Chapter08.html#linear-models-review",
+    "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
+    "section": "Linear models Review",
+    "text": "Linear models Review\nFamily tree\nT-tests, regressions, ANOVAs, and ANCOVAs are related\nSimilarities:\n-   1 continuous response variable\n-   Assumptions: normality, equal variance, and independence of residuals\nDifferences:\n- EDA\n- test statistics\n- number and type of predictors"
+  },
+  {
+    "objectID": "slides/Chapter08.html#ancova-fit-2",
+    "href": "slides/Chapter08.html#ancova-fit-2",
+    "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
+    "section": "ANCOVA fit",
+    "text": "ANCOVA fit\n\n\n                          Estimate Std. Error t value Pr(&gt;|t|)\n(Intercept)                 -6.203     11.818  -0.525    0.611\nHouseholds                   0.909      0.083  10.906    0.000\nLocationMall                39.223     16.451   2.384    0.038\nLocationStreet               8.036     16.273   0.494    0.632\nHouseholds:LocationMall     -0.074      0.104  -0.710    0.494\nHouseholds:LocationStreet   -0.012      0.101  -0.120    0.907\n\n\nWe can plug these numbers into our equations \\(Sales = \\beta_{0} + \\beta_{1} I_1 + \\beta_2 I_2 + (\\beta_3 + \\beta_4 I_1 + \\beta_5 I_2)Households\\)\n\\(Sales = -6.2 + 39.22 I_1 + 8.04 I_2 + ( 0.909 + -0.074I_1 -0.012 I_2) Households\\)"
   }
 ]

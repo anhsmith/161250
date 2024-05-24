@@ -1277,12 +1277,167 @@ Fabric 4-Fabric 3  1.74 -1.33676  4.81676 0.3968476</code></pre>
 <section id="analysis-of-covariance-ancova" class="slide level2">
 <h2>Analysis of Covariance (ANCOVA)</h2>
 <p>Analysis of covariance (ANCOVA) is a statistical method that combines linear regression and analysis of variance (ANOVA) to evaluate the relationship between a response variable and various independent variables while controlling for covariates.</p>
-</section>
-<section id="analysis-of-covariance-ancova-1" class="slide level2">
-<h2>Analysis of Covariance (ANCOVA)</h2>
 <ul>
 <li>Indicator variables are used as additional regressors along with a quantitative predictor (covariate).</li>
 </ul>
+</section>
+<section id="data-example-test-anxiety" class="slide level2">
+<h2>Data example: test anxiety</h2>
+<p>Researchers investigated the effect of exercises in reducing the level of anxiety, where they measured the anxiety score of three groups of individuals practicing physical exercises at different levels (grp1: low, grp2: moderate and grp3: high).</p>
+<p>The anxiety score was measured pre- and 6-months post-exercise training programs. It is expected that any reduction in the anxiety by the exercises programs would also depend on the participant’s basal level of anxiety score.</p>
+<p>In this analysis we use the pretest anxiety score (<code>pretest</code>) as the covariate and are interested in possible differences between group with respect to the post-test anxiety scores.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+  id    group pretest posttest
+  &lt;fct&gt; &lt;fct&gt;   &lt;dbl&gt;    &lt;dbl&gt;
+1 15    grp1     19.8     19.4
+2 30    grp2     19.3     17.7
+3 33    grp3     15.5     11  </code></pre>
+</div>
+</div>
+</section>
+<section id="interaction" class="slide level2">
+<h2>Interaction</h2>
+<p>Are the regression slopes the same?</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>              Df Sum Sq Mean Sq F value Pr(&gt;F)    
+group          2  72.13   36.07 203.973 &lt;2e-16 ***
+pretest        1 101.29  101.29 572.828 &lt;2e-16 ***
+group:pretest  2   0.04    0.02   0.127  0.881    
+Residuals     39   6.90    0.18                   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>Interaction term is not significant (at sig. level of 5%).</p>
+</section>
+<section id="check-assumptions" class="slide level2">
+<h2>Check assumptions</h2>
+<p>Linearity:</p>
+
+<img data-src="Chapter08_files/figure-revealjs/unnamed-chunk-30-1.png" width="960" class="r-stretch quarto-figure-center"><p>Appears to be a linear relationship in each training group</p>
+</section>
+<section id="assumptions" class="slide level2">
+<h2>Assumptions</h2>
+<p>Residuals:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Chapter08_files/figure-revealjs/unnamed-chunk-31-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Chapter08_files/figure-revealjs/unnamed-chunk-31-2.png" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Chapter08_files/figure-revealjs/unnamed-chunk-31-3.png" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Chapter08_files/figure-revealjs/unnamed-chunk-31-4.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="assumptions-1" class="slide level2">
+<h2>Assumptions</h2>
+<p>Normality:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+  variable                 statistic p.value
+  &lt;chr&gt;                        &lt;dbl&gt;   &lt;dbl&gt;
+1 summary(model$residuals)     0.964   0.849</code></pre>
+</div>
+</div>
+<p>The Shapiro Wilk test was not significant (<span class="math inline">\(\alpha = 0.05\)</span>), so we can assume normality of residuals</p>
+<p>Equal variance:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>Levene's Test for Homogeneity of Variance (center = median)
+      Df F value Pr(&gt;F)
+group  2  0.2604  0.772
+      42               </code></pre>
+</div>
+</div>
+<p>The Levene’s test was not significant (<span class="math inline">\(\alpha = 0.05\)</span>), so we can assume homogeneity of the residual variances for all groups.</p>
+</section>
+<section id="ancova-fit" class="slide level2">
+<h2>ANCOVA fit</h2>
+<p>Estimates are the slope in each treatment (<code>group</code>). Remember that R assigns the first (alphabetical) level of the treatment to <code>Intercept</code></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = posttest ~ pretest + group, data = anxiety)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.00467 -0.29485 -0.02866  0.33846  0.68799 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -0.94088    0.72574  -1.296 0.202074    
+pretest      1.02775    0.04202  24.461  &lt; 2e-16 ***
+groupgrp2   -0.64112    0.15137  -4.235 0.000126 ***
+groupgrp3   -2.98463    0.15027 -19.862  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.4114 on 41 degrees of freedom
+Multiple R-squared:  0.9615,    Adjusted R-squared:  0.9587 
+F-statistic: 341.5 on 3 and 41 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+</section>
+<section id="ancova-fit-1" class="slide level2">
+<h2>ANCOVA fit</h2>
+<p>Use ANOVA table to display</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Response: posttest
+          Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+pretest    1 99.400  99.400  587.16 &lt; 2.2e-16 ***
+group      2 74.023  37.011  218.63 &lt; 2.2e-16 ***
+Residuals 41  6.941   0.169                      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>Post-hoc tests to see which group is different</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = posttest ~ group + pretest, data = anxiety)
+
+$group
+               diff       lwr        upr p adj
+grp2-grp1 -1.093333 -1.458662 -0.7280048     0
+grp3-grp1 -3.060000 -3.425329 -2.6946715     0
+grp3-grp2 -1.966667 -2.331995 -1.6013381     0</code></pre>
+</div>
+</div>
+</section>
+<section id="data-example-fast-food-resturants" class="slide level2">
+<h2>Data example: fast-food resturants</h2>
 <div class="cell" data-layout-align="center">
 <div class="cell-output cell-output-stdout">
 <pre><code> Restaurant  Sales Households Location I1 I2
@@ -1305,44 +1460,80 @@ Fabric 4-Fabric 3  1.74 -1.33676  4.81676 0.3968476</code></pre>
 </div>
 </div>
 <ul>
-<li>Plot of data. Do we need three separate models?</li>
+<li>Do we need three separate models?</li>
 </ul>
 
-<img data-src="Chapter08_files/figure-revealjs/unnamed-chunk-29-1.png" width="960" class="r-stretch quarto-figure-center"></section>
-<section id="ancova-fit" class="slide level2">
-<h2>ANCOVA fit</h2>
+<img data-src="Chapter08_files/figure-revealjs/unnamed-chunk-38-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<section id="ancova" class="slide level2">
+<h2>ANCOVA</h2>
 
-<img data-src="Chapter08_files/figure-revealjs/unnamed-chunk-30-1.png" width="960" class="r-stretch quarto-figure-center"><ul>
-<li><p>In order to allow for different slopes for each location, we define the product (or interaction) variables <span class="math inline">\(I_1*X\)</span>, and <span class="math inline">\(I_2*X\)</span> (<span class="math inline">\(X\)</span> being the covariate, Households)</p></li>
-<li><p>Location is categorical with levels Mall, Street, and Highway</p></li>
+<img data-src="Chapter08_files/figure-revealjs/unnamed-chunk-39-1.png" width="960" class="r-stretch quarto-figure-center"><ul>
+<li>In order to allow for different slopes for each location, we define the product (or interaction) variables</li>
 </ul>
 </section>
-<section id="explanation-of-fit" class="slide level2">
-<h2>Explanation of fit</h2>
+<section id="data-set-up" class="slide level2">
+<h2>Data set up</h2>
 <div class="cell" data-layout-align="center">
 <div class="cell-output cell-output-stdout">
-<pre><code>            Estimate Std. Error t value Pr(&gt;|t|)
-(Intercept)   -6.203     11.818  -0.525    0.611
-X              0.909      0.083  10.906    0.000
-I1            39.223     16.451   2.384    0.038
-I2             8.036     16.273   0.494    0.632
-X:I1          -0.074      0.104  -0.710    0.494
-X:I2          -0.012      0.101  -0.120    0.907</code></pre>
+<pre><code>  Restaurant  Sales Households Location I1 I2
+1          1 135.27        155  Highway  0  0
+2          2  72.74         93  Highway  0  0
+3          3 114.95        128  Highway  0  0
+4          4 102.93        114  Highway  0  0
+5          5 131.77        158  Highway  0  0
+6          6 160.91        183  Highway  0  0</code></pre>
 </div>
 </div>
+</section>
+<section id="ancova-model" class="slide level2">
+<h2>ANCOVA model</h2>
+<p>We examine the relationship between restaurant sales (response variable, in thousands of dollars) and the number of households (H) in the restaurant’s trading area and the location of the restaurant (Mall, Street, and Highway). We can use the indicator variables (<span class="math inline">\(I_1\)</span> and <span class="math inline">\(I_2\)</span>) to define our three locations uniquely.</p>
+<p><span class="math inline">\(Sales = \beta_0 + \beta_1 I_1 + \beta_2 I_2 + (\beta_3 + \beta_4 I_1 + \beta_5 I_2)Households\)</span></p>
+<p>This model provides a separate model for each location as well as allows for the interaction between location of the restaurant and the number of households through the slope coefficient</p>
+</section>
+<section id="ancova-model-1" class="slide level2">
+<h2>ANCOVA model</h2>
+<p><span class="math inline">\(Sales = \beta_0 + \beta_1 I_1 + \beta_2 I_2 + (\beta_3 + \beta_4 I_1 + \beta_5 I_2)Households\)</span></p>
 <ul>
-<li><p>For <span class="math inline">\(I_1=0\)</span> &amp; <span class="math inline">\(I_2=0\)</span>, the model becomes the fit for <code>Highway</code></p>
+<li><p>For Highway Locations: <span class="math inline">\(I_1=0\)</span> &amp; <span class="math inline">\(I_2=0\)</span> hence our model simplifies to</p>
+<p><span class="math inline">\(Sales = \beta_{0} + (\beta_3)Households\)</span></p></li>
+<li><p>For Mall Locations: <span class="math inline">\(I_1=1\)</span> &amp; <span class="math inline">\(I_2=0\)</span> so the model becomes</p>
+<p><span class="math inline">\(Sales = \beta_{0} + \beta_{1} I_1 (\beta_3 + \beta_4)Households\)</span></p></li>
+<li><p>For Street Locations: <span class="math inline">\(I_1=0\)</span> &amp; <span class="math inline">\(I_2=1\)</span> so the model becomes <span class="math inline">\(Sales = \beta_{0} + \beta_2 + (\beta_3 + \beta_5) Households\)</span></p></li>
+</ul>
+<p><em>note</em> R does not <em>require</em> us to code Location as an indicator variable</p>
+</section>
+<section id="ancova-fit-2" class="slide level2">
+<h2>ANCOVA fit</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>                          Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept)                 -6.203     11.818  -0.525    0.611
+Households                   0.909      0.083  10.906    0.000
+LocationMall                39.223     16.451   2.384    0.038
+LocationStreet               8.036     16.273   0.494    0.632
+Households:LocationMall     -0.074      0.104  -0.710    0.494
+Households:LocationStreet   -0.012      0.101  -0.120    0.907</code></pre>
+</div>
+</div>
+<p>We can plug these numbers into our equations <span class="math inline">\(Sales = \beta_{0} + \beta_{1} I_1 + \beta_2 I_2 + (\beta_3 + \beta_4 I_1 + \beta_5 I_2)Households\)</span></p>
+<p><span class="math inline">\(Sales = -6.2 + 39.22 I_1 + 8.04 I_2 + ( 0.909 + -0.074I_1 -0.012 I_2) Households\)</span></p>
+</section>
+<section id="ancova-model-2" class="slide level2">
+<h2>ANCOVA model</h2>
+<p><span class="math inline">\(Sales = -6.2 + 39.22 I_1 + 8.04 I_2 + ( 0.909 + -0.074I_1 -0.012 I_2) Households\)</span></p>
 <ul>
-<li>So this set-up compares Mall/Street with Highway</li>
-</ul></li>
-<li><p>Significant <span class="math inline">\(I_1\)</span> coefficient means that Mall location has a constant level of higher sales</p></li>
-<li><p>Mall location model has a higher intercept but the slopes are the same for all three locations.</p></li>
+<li><p>For Highway Locations: <span class="math inline">\(I_1=0\)</span> &amp; <span class="math inline">\(I_2=0\)</span> hence our model simplifies to</p>
+<p><span class="math inline">\(Sales = -6.2 + (\beta_3)Households\)</span></p></li>
+<li><p>For Mall Locations: <span class="math inline">\(I_1=1\)</span> &amp; <span class="math inline">\(I_2=0\)</span> so the model becomes</p>
+<p><span class="math inline">\(Sales = \beta_{0} + \beta_{1} I_1 (\beta_3 + \beta_4)Households\)</span></p></li>
+<li><p>For Street Locations: <span class="math inline">\(I_1=0\)</span> &amp; <span class="math inline">\(I_2=1\)</span> so the model becomes <span class="math inline">\(Sales = \beta_{0} + \beta_2 + (\beta_3 + \beta_5) Households\)</span></p></li>
 </ul>
 </section>
 <section id="graphing-the-model" class="slide level2">
 <h2>Graphing the model</h2>
 
-<img data-src="Chapter08_files/figure-revealjs/unnamed-chunk-32-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="Chapter08_files/figure-revealjs/unnamed-chunk-42-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="summary" class="slide level2">
 <h2>Summary</h2>
 <p>ANOVA models study categorical predictors (factors).</p>
@@ -1351,8 +1542,170 @@ X:I2          -0.012      0.101  -0.120    0.907</code></pre>
 <p>ANCOVA models employs both numerical variables (covariates) and qualitative factors for modelling.</p>
 <pre><code>-   Interaction between factors and covariates is important.</code></pre>
 </section>
-<section id="linear-models" class="slide level2">
-<h2>Linear models</h2>
+<section id="review-of-non-parametric-tests" class="slide level2">
+<h2>Review of non-parametric tests</h2>
+<p>Non-parametric tests are light on assumptions, and can be used for highly asymmetric data (as an alternative to using transformations).</p>
+<p>Many non-parametric methods rely on replacing the observed data by their <em>ranks</em>.</p>
+</section>
+<section id="spearmans-rank-correlation" class="slide level2">
+<h2>Spearman’s Rank Correlation</h2>
+<div class="columns">
+<div class="column">
+<p>Rank the <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> variables, and then obtain usual Pearson correlation coefficient.</p>
+<p>The plot shows non-parametric Spearman in the the upper triangle and parametric Pearson in the bottom triangle.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a><span class="fu">library</span>(GGally)</span>
+<span id="cb43-2"><a href="#cb43-2"></a></span>
+<span id="cb43-3"><a href="#cb43-3"></a>p <span class="ot">&lt;-</span> <span class="fu">ggpairs</span>(</span>
+<span id="cb43-4"><a href="#cb43-4"></a>  trees, </span>
+<span id="cb43-5"><a href="#cb43-5"></a>  <span class="at">upper =</span> <span class="fu">list</span>(<span class="at">continuous =</span> <span class="fu">wrap</span>(<span class="st">'cor'</span>, <span class="at">method =</span> <span class="st">"spearman"</span>)),</span>
+<span id="cb43-6"><a href="#cb43-6"></a>  <span class="at">lower =</span> <span class="fu">list</span>(<span class="at">continuous =</span> <span class="st">'cor'</span>) </span>
+<span id="cb43-7"><a href="#cb43-7"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-spear" class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Chapter08_files/figure-revealjs/fig-spear-1.png" width="480"></p>
+<figcaption>Figure&nbsp;2: Comparison of Pearsonian and Spearman’s rank correlations</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="wilcoxon-signed-rank-test" class="slide level2">
+<h2>Wilcoxon signed rank test</h2>
+<p>A non-parametric alternative to the one-sample t-test</p>
+<p><span class="math inline">\(H_0: \eta=\eta_0\)</span> where <span class="math inline">\(\eta\)</span> (Greek letter ‘eta’) is the population median</p>
+<p>Based on based on ranking <span class="math inline">\((|Y-\eta_0|)\)</span>, where the ranks for data with <span class="math inline">\(Y&lt;\eta_0\)</span> are compared to the ranks for data with <span class="math inline">\(Y&gt;\eta_0\)</span></p>
+<div class="columns">
+<div class="column">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="fu">wilcox.test</span>(tv<span class="sc">$</span>TELETIME, <span class="at">mu=</span><span class="dv">1680</span>, <span class="at">conf.int=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Wilcoxon signed rank exact test
+
+data:  tv$TELETIME
+V = 588, p-value = 0.6108
+alternative hypothesis: true location is not equal to 1680
+95 percent confidence interval:
+ 1557.5 1906.5
+sample estimates:
+(pseudo)median 
+          1728 </code></pre>
+</div>
+</div>
+</div><div class="column">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="fu">t.test</span>(tv<span class="sc">$</span>TELETIME, <span class="at">mu=</span><span class="dv">1680</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One Sample t-test
+
+data:  tv$TELETIME
+t = 0.58856, df = 45, p-value = 0.5591
+alternative hypothesis: true mean is not equal to 1680
+95 percent confidence interval:
+ 1560.633 1897.932
+sample estimates:
+mean of x 
+ 1729.283 </code></pre>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="non-parametric-anova" class="slide level2">
+<h2>Non-parametric ANOVA</h2>
+<p>Kruskal-Wallis test: allows to compare three or more groups</p>
+<p>Mann-Whitney test: allows to compare 2 groups under the non-normality assumption.</p>
+</section>
+<section id="kruskal-wallis-test" class="slide level2">
+<h2>Kruskal-Wallis test</h2>
+<p>The null and alternative hypotheses of the Kruskal-Wallis test are:</p>
+<p>H0: The 3 groups are equal in terms of the variable H1: At least one group is different from the other 2 groups in terms of variable</p>
+<p>Similar to an ANOVA the alternative hypothesis is not that all groups are different. The opposite of all groups being equal (H0) is that at least one group is different from the others (H1).</p>
+<p>In this sense, if the null hypothesis is rejected, it means that at least one group is different from the other 2, but not necessarily that all 3 groups are different from each other. Post-hoc tests must be performed to test whether all 3 groups differ.</p>
+</section>
+<section id="mann-whitney-test" class="slide level2">
+<h2>Mann-Whitney test</h2>
+<p>For two group comparison, pool the two group responses and then rank the pooled data</p>
+<p>Ranks for the first group are compared to the ranks for the second group</p>
+<p>The null hypothesis is that the two group medians are the same: <span class="math inline">\(H_0: \eta_1=\eta_2\)</span>.</p>
+<div class="columns">
+<div class="column">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a><span class="fu">load</span>(<span class="st">"../data/rangitikei.Rdata"</span>)</span>
+<span id="cb48-2"><a href="#cb48-2"></a><span class="fu">wilcox.test</span>(rangitikei<span class="sc">$</span>people<span class="sc">~</span>rangitikei<span class="sc">$</span>time, <span class="at">conf.int=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Wilcoxon rank sum test with continuity correction
+
+data:  rangitikei$people by rangitikei$time
+W = 30, p-value = 0.007711
+alternative hypothesis: true location shift is not equal to 0
+95 percent confidence interval:
+ -88.99996 -10.00005
+sample estimates:
+difference in location 
+             -36.46835 </code></pre>
+</div>
+</div>
+</div><div class="column">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a><span class="fu">t.test</span>(rangitikei<span class="sc">$</span>people<span class="sc">~</span>rangitikei<span class="sc">$</span>time)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  rangitikei$people by rangitikei$time
+t = -3.1677, df = 30.523, p-value = 0.003478
+alternative hypothesis: true difference in means between group 1 and group 2 is not equal to 0
+95 percent confidence interval:
+ -102.28710  -22.13049
+sample estimates:
+mean in group 1 mean in group 2 
+       22.71429        84.92308 </code></pre>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="another-form-of-test" class="slide level2">
+<h2>Another form of test</h2>
+<div class="columns">
+<div class="column">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a><span class="fu">kruskal.test</span>(rangitikei<span class="sc">$</span>people<span class="sc">~</span>rangitikei<span class="sc">$</span>time)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Kruskal-Wallis rank sum test
+
+data:  rangitikei$people by rangitikei$time
+Kruskal-Wallis chi-squared = 7.2171, df = 1, p-value = 0.007221</code></pre>
+</div>
+</div>
+</div><div class="column">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a><span class="fu">wilcox.test</span>(rangitikei<span class="sc">$</span>people<span class="sc">~</span>rangitikei<span class="sc">$</span>time)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Wilcoxon rank sum test with continuity correction
+
+data:  rangitikei$people by rangitikei$time
+W = 30, p-value = 0.007711
+alternative hypothesis: true location shift is not equal to 0</code></pre>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="linear-models-review" class="slide level2">
+<h2>Linear models Review</h2>
 <p>Family tree</p>
 <p>T-tests, regressions, ANOVAs, and ANCOVAs are related</p>
 <p>Similarities:</p>
@@ -1488,168 +1841,6 @@ X:I2          -0.012      0.101  -0.120    0.907</code></pre>
 <section id="where-to-go-from-here" class="slide level2">
 <h2>Where to go from here?</h2>
 <p>Linear models form the basis of a lot more statistics tests.</p>
-</section>
-<section id="review-of-non-parametric-tests" class="slide level2">
-<h2>Review of non-parametric tests</h2>
-<p>Non-parametric tests are light on assumptions, and can be used for highly asymmetric data (as an alternative to using transformations).</p>
-<p>Many non-parametric methods rely on replacing the observed data by their <em>ranks</em>.</p>
-</section>
-<section id="spearmans-rank-correlation" class="slide level2">
-<h2>Spearman’s Rank Correlation</h2>
-<div class="columns">
-<div class="column">
-<p>Rank the <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> variables, and then obtain usual Pearson correlation coefficient.</p>
-<p>The plot shows non-parametric Spearman in the the upper triangle and parametric Pearson in the bottom triangle.</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="fu">library</span>(GGally)</span>
-<span id="cb37-2"><a href="#cb37-2"></a></span>
-<span id="cb37-3"><a href="#cb37-3"></a>p <span class="ot">&lt;-</span> <span class="fu">ggpairs</span>(</span>
-<span id="cb37-4"><a href="#cb37-4"></a>  trees, </span>
-<span id="cb37-5"><a href="#cb37-5"></a>  <span class="at">upper =</span> <span class="fu">list</span>(<span class="at">continuous =</span> <span class="fu">wrap</span>(<span class="st">'cor'</span>, <span class="at">method =</span> <span class="st">"spearman"</span>)),</span>
-<span id="cb37-6"><a href="#cb37-6"></a>  <span class="at">lower =</span> <span class="fu">list</span>(<span class="at">continuous =</span> <span class="st">'cor'</span>) </span>
-<span id="cb37-7"><a href="#cb37-7"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div><div class="column">
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div id="fig-spear" class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="Chapter08_files/figure-revealjs/fig-spear-1.png" width="480"></p>
-<figcaption>Figure&nbsp;2: Comparison of Pearsonian and Spearman’s rank correlations</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="wilcoxon-signed-rank-test" class="slide level2">
-<h2>Wilcoxon signed rank test</h2>
-<p>A non-parametric alternative to the one-sample t-test</p>
-<p><span class="math inline">\(H_0: \eta=\eta_0\)</span> where <span class="math inline">\(\eta\)</span> (Greek letter ‘eta’) is the population median</p>
-<p>Based on based on ranking <span class="math inline">\((|Y-\eta_0|)\)</span>, where the ranks for data with <span class="math inline">\(Y&lt;\eta_0\)</span> are compared to the ranks for data with <span class="math inline">\(Y&gt;\eta_0\)</span></p>
-<div class="columns">
-<div class="column">
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="fu">wilcox.test</span>(tv<span class="sc">$</span>TELETIME, <span class="at">mu=</span><span class="dv">1680</span>, <span class="at">conf.int=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Wilcoxon signed rank exact test
-
-data:  tv$TELETIME
-V = 588, p-value = 0.6108
-alternative hypothesis: true location is not equal to 1680
-95 percent confidence interval:
- 1557.5 1906.5
-sample estimates:
-(pseudo)median 
-          1728 </code></pre>
-</div>
-</div>
-</div><div class="column">
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="fu">t.test</span>(tv<span class="sc">$</span>TELETIME, <span class="at">mu=</span><span class="dv">1680</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    One Sample t-test
-
-data:  tv$TELETIME
-t = 0.58856, df = 45, p-value = 0.5591
-alternative hypothesis: true mean is not equal to 1680
-95 percent confidence interval:
- 1560.633 1897.932
-sample estimates:
-mean of x 
- 1729.283 </code></pre>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="non-parametric-anova" class="slide level2">
-<h2>Non-parametric ANOVA</h2>
-<p>Kruskal-Wallis test: allows to compare three or more groups</p>
-<p>Mann-Whitney test: allows to compare 2 groups under the non-normality assumption.</p>
-</section>
-<section id="kruskal-wallis-test" class="slide level2">
-<h2>Kruskal-Wallis test</h2>
-<p>The null and alternative hypotheses of the Kruskal-Wallis test are:</p>
-<p>H0: The 3 groups are equal in terms of the variable H1: At least one group is different from the other 2 groups in terms of variable</p>
-<p>Similar to an ANOVA the alternative hypothesis is not that all groups are different. The opposite of all groups being equal (H0) is that at least one group is different from the others (H1).</p>
-<p>In this sense, if the null hypothesis is rejected, it means that at least one group is different from the other 2, but not necessarily that all 3 groups are different from each other. Post-hoc tests must be performed to test whether all 3 groups differ.</p>
-</section>
-<section id="mann-whitney-test" class="slide level2">
-<h2>Mann-Whitney test</h2>
-<p>For two group comparison, pool the two group responses and then rank the pooled data</p>
-<p>Ranks for the first group are compared to the ranks for the second group</p>
-<p>The null hypothesis is that the two group medians are the same: <span class="math inline">\(H_0: \eta_1=\eta_2\)</span>.</p>
-<div class="columns">
-<div class="column">
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="fu">load</span>(<span class="st">"../data/rangitikei.Rdata"</span>)</span>
-<span id="cb42-2"><a href="#cb42-2"></a><span class="fu">wilcox.test</span>(rangitikei<span class="sc">$</span>people<span class="sc">~</span>rangitikei<span class="sc">$</span>time, <span class="at">conf.int=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Wilcoxon rank sum test with continuity correction
-
-data:  rangitikei$people by rangitikei$time
-W = 30, p-value = 0.007711
-alternative hypothesis: true location shift is not equal to 0
-95 percent confidence interval:
- -88.99996 -10.00005
-sample estimates:
-difference in location 
-             -36.46835 </code></pre>
-</div>
-</div>
-</div><div class="column">
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="fu">t.test</span>(rangitikei<span class="sc">$</span>people<span class="sc">~</span>rangitikei<span class="sc">$</span>time)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Welch Two Sample t-test
-
-data:  rangitikei$people by rangitikei$time
-t = -3.1677, df = 30.523, p-value = 0.003478
-alternative hypothesis: true difference in means between group 1 and group 2 is not equal to 0
-95 percent confidence interval:
- -102.28710  -22.13049
-sample estimates:
-mean in group 1 mean in group 2 
-       22.71429        84.92308 </code></pre>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="another-form-of-test" class="slide level2">
-<h2>Another form of test</h2>
-<div class="columns">
-<div class="column">
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="fu">kruskal.test</span>(rangitikei<span class="sc">$</span>people<span class="sc">~</span>rangitikei<span class="sc">$</span>time)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Kruskal-Wallis rank sum test
-
-data:  rangitikei$people by rangitikei$time
-Kruskal-Wallis chi-squared = 7.2171, df = 1, p-value = 0.007221</code></pre>
-</div>
-</div>
-</div><div class="column">
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a><span class="fu">wilcox.test</span>(rangitikei<span class="sc">$</span>people<span class="sc">~</span>rangitikei<span class="sc">$</span>time)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Wilcoxon rank sum test with continuity correction
-
-data:  rangitikei$people by rangitikei$time
-W = 30, p-value = 0.007711
-alternative hypothesis: true location shift is not equal to 0</code></pre>
-</div>
-</div>
-</div>
-</div>
 
 
 <img src="img/L_Color.png" class="slide-logo r-stretch"><div class="footer footer-default">
