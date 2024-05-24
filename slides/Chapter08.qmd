@@ -620,10 +620,104 @@ fabric |> aov(formula = burntime~fabric) |> TukeyHSD()
 
 Analysis of covariance (ANCOVA) is a statistical method that combines linear regression and analysis of variance (ANOVA) to evaluate the relationship between a response variable and various independent variables while controlling for covariates.
 
-## Analysis of Covariance (ANCOVA)
+
 -   Indicator variables are used as additional regressors along with a
     quantitative predictor (covariate).
 
+
+## Data example: test anxiety
+
+Researchers investigated the effect of exercises in reducing the level of anxiety, where they measured the anxiety score of three groups of individuals practicing physical exercises at different levels (grp1: low, grp2: moderate and grp3: high).
+
+The anxiety score was measured pre- and 6-months post-exercise training programs. It is expected that any reduction in the anxiety by the exercises programs would also depend on the participant’s basal level of anxiety score.
+
+In this analysis we use the pretest anxiety score (`pretest`) as the covariate and are interested in possible differences between group with respect to the post-test anxiety scores.
+
+```{r}
+library(ggpubr)
+library(rstatix)
+library(broom)
+# Load and prepare the data
+data("anxiety", package = "datarium")
+anxiety <- anxiety %>%
+  select(id, group, t1, t3) %>%
+  rename(pretest = t1, posttest = t3)
+anxiety[14, "posttest"] <- 19
+# Inspect the data by showing one random row by groups
+set.seed(123)
+anxiety %>% sample_n_by(group, size = 1)
+```
+
+## Interaction
+Are the regression slopes the same?
+
+```{r}
+aov(posttest ~ group*pretest, data = anxiety) %>% summary()
+```
+
+Interaction term is not significant (at sig. level of 5%). 
+
+
+## Check assumptions
+
+Linearity:
+
+```{r}
+ggscatter(
+  anxiety, x = "pretest", y = "posttest",
+  color = "group", add = "reg.line"
+  )
+```
+
+Appears to be a linear relationship in each training group
+
+
+## Assumptions
+
+Residuals:
+```{r}
+# Fit the model, the covariate goes first
+model <- lm(posttest ~ pretest + group, data = anxiety) 
+
+plot(model)
+
+```
+
+## Assumptions
+
+Normality:
+```{r}
+# Assess normality of residuals using shapiro wilk test
+shapiro_test(summary(model$residuals))
+```
+The Shapiro Wilk test was not significant ($\alpha = 0.05$), so we can assume normality of residuals
+
+Equal variance:
+```{r}
+car::leveneTest(posttest ~ group, data = anxiety) 
+```
+The Levene’s test was not significant ($\alpha = 0.05$), so we can assume homogeneity of the residual variances for all groups.
+
+## ANCOVA fit
+Estimates are the slope in each treatment (`group`). Remember that R assigns the first (alphabetical) level of the treatment to `Intercept` 
+
+```{r}
+summary(model)
+```
+## ANCOVA fit
+Use ANOVA table to display
+
+```{r}
+anova(model)
+```
+Post-hoc tests to see which group is different
+
+```{r}
+TukeyHSD(aov(posttest ~ group+pretest, data = anxiety))
+```
+
+
+## Data example: fast-food resturants 
 ```{r, comment=""}
 restaurant <- 
   read.table("../data/restaurant.txt", header=TRUE, sep = "\t") |> 
@@ -633,7 +727,7 @@ restaurant <-
 print(restaurant, row.names=FALSE)
 ```
 
--   Plot of data. Do we need three separate models?
+-   Do we need three separate models?
 
 ```{r}
 restaurant |> ggplot() + 
@@ -641,8 +735,7 @@ restaurant |> ggplot() +
   geom_point() + geom_smooth(method = lm, se = FALSE)
 ```
 
-
-##  ANCOVA fit
+##  ANCOVA 
 
 ```{r}
 restaurant |> ggplot() + 
@@ -651,33 +744,72 @@ restaurant |> ggplot() +
 ```
 
 -   In order to allow for different slopes for each location, we define
-    the product (or interaction) variables $I_1*X$, and $I_2*X$ ($X$
-    being the covariate, Households)
-    
--   Location is categorical with levels Mall, Street, and Highway
+    the product (or interaction) variables 
+ 
 
-## Explanation of fit
+## Data set up
 ```{r}
-Y = restaurant$Sales
-X = restaurant$Households
-X2 = restaurant$Location
-I1 = as.numeric(X2=="Mall")
-I2 = as.numeric(X2=="Street")
-I3 = as.numeric(X2=="Highway")
-modl = lm(Y~X*I1+X*I2)
+head(restaurant)
+```
+
+
+
+
+
+##  ANCOVA model
+
+We examine the relationship between restaurant sales (response variable, in thousands of dollars) and the number of households (H) in the restaurant's trading area and the location of the restaurant (Mall, Street, and Highway). We can use the indicator variables ($I_1$ and $I_2$) to define our three locations uniquely. 
+
+$Sales = \beta_0 + \beta_1 I_1 + \beta_2 I_2 + (\beta_3 + \beta_4 I_1 + \beta_5 I_2)Households$
+
+This model provides a separate model for each location as well as allows for the interaction between location of the restaurant and the number of households through the slope coefficient
+
+## ANCOVA model
+
+$Sales = \beta_0 + \beta_1 I_1 + \beta_2 I_2 + (\beta_3 + \beta_4 I_1 + \beta_5 I_2)Households$
+
+-   For Highway Locations: $I_1=0$ & $I_2=0$ hence our model simplifies to
+
+    $Sales = \beta_{0} + (\beta_3)Households$
+
+-   For Mall Locations: $I_1=1$ & $I_2=0$ so the model becomes
+
+    $Sales = \beta_{0} + \beta_{1} I_1 (\beta_3 + \beta_4)Households$
+
+-   For Street Locations: $I_1=0$ & $I_2=1$ so the model becomes
+    $Sales = \beta_{0} + \beta_2 + (\beta_3 + \beta_5) Households$
+    
+    
+
+ *note* R does not *require* us to code Location as an indicator variable
+
+## ANCOVA fit 
+
+
+```{r}
+modl = lm(Sales~Households*Location, data = restaurant)
 outs <- summary(modl)$coefficients
 round(outs[, 1:4], digits = 3)
 ```
+We can plug these numbers into our equations 
+$Sales = \beta_{0} + \beta_{1} I_1 + \beta_2 I_2 + (\beta_3 + \beta_4 I_1 + \beta_5 I_2)Households$
 
--   For $I_1=0$ & $I_2=0$, the model becomes the fit for `Highway`
+$Sales = -6.2 + 39.22 I_1 + 8.04 I_2 + ( 0.909 + -0.074I_1 -0.012 I_2) Households$
 
-    -   So this set-up compares Mall/Street with Highway
+## ANCOVA model
 
--   Significant $I_1$ coefficient means that Mall location has a
-    constant level of higher sales
+$Sales = -6.2 + 39.22 I_1 + 8.04 I_2 + ( 0.909 + -0.074I_1 -0.012 I_2) Households$
 
--   Mall location model has a higher intercept but the slopes are the
-    same for all three locations.
+-   For Highway Locations: $I_1=0$ & $I_2=0$ hence our model simplifies to
+
+    $Sales =  -6.2 + (\beta_3)Households$
+
+-   For Mall Locations: $I_1=1$ & $I_2=0$ so the model becomes
+
+    $Sales = \beta_{0} + \beta_{1} I_1 (\beta_3 + \beta_4)Households$
+
+-   For Street Locations: $I_1=0$ & $I_2=1$ so the model becomes
+    $Sales = \beta_{0} + \beta_2 + (\beta_3 + \beta_5) Households$
 
 ## Graphing the model
 
@@ -689,6 +821,7 @@ p <- restaurant |> ggplot() +
                      labels=c("Street/Highway", "Mall"))
 p
 ```
+
 
 ## Summary
 
@@ -703,8 +836,162 @@ qualitative factors for modelling.
        
     -   Interaction between factors and covariates is important.
 
+## Review of non-parametric tests
+Non-parametric tests are light on assumptions, and can be used for highly asymmetric data (as an alternative to using transformations). 
 
-## Linear models
+Many non-parametric methods rely on replacing the observed data by their *ranks*. 
+
+
+```{r}
+#| echo: false
+tv = read_csv("https://www.massey.ac.nz/~anhsmith/data/tv.csv")
+```
+
+## Spearman's Rank Correlation
+
+
+::::{.columns}
+
+:::{.column}
+
+Rank the $X$ and $Y$ variables, and then obtain usual Pearson correlation coefficient.
+
+The plot shows non-parametric Spearman in the the upper triangle and parametric Pearson in the bottom triangle.
+
+```{r}
+#| echo: true
+library(GGally)
+
+p <- ggpairs(
+  trees, 
+  upper = list(continuous = wrap('cor', method = "spearman")),
+  lower = list(continuous = 'cor') 
+  )
+```
+
+:::
+
+:::{.column}
+
+```{r}
+#| label: fig-spear
+#| echo: false
+#| fig.cap: "Comparison of Pearsonian and Spearman's rank correlations"
+#| fig-width: 5
+#| fig-height: 5
+p
+```
+
+:::
+::::
+
+## Wilcoxon signed rank test
+
+A non-parametric alternative to the one-sample t-test
+
+$H_0: \eta=\eta_0$ where $\eta$ (Greek letter 'eta') is the population median
+
+Based on based on ranking $(|Y-\eta_0|)$, where the ranks for data with $Y<\eta_0$ are compared to the ranks for data with $Y>\eta_0$
+
+
+::::{.columns}
+
+:::{.column}
+
+```{r}
+#| echo: true
+wilcox.test(tv$TELETIME, mu=1680, conf.int=T)
+```
+
+:::
+
+:::{.column}
+
+```{r}
+#| echo: true
+t.test(tv$TELETIME, mu=1680)
+```
+
+:::
+::::
+
+
+## Non-parametric ANOVA
+
+Kruskal-Wallis test: allows to compare three or more groups
+
+Mann-Whitney test: allows to compare 2 groups under the non-normality assumption.
+
+
+## Kruskal-Wallis test
+The null and alternative hypotheses of the Kruskal-Wallis test are:
+
+H0: The 3 groups are equal in terms of the variable
+H1: At least one group is different from the other 2 groups in terms of variable
+
+Similar to an ANOVA the alternative hypothesis is not that all groups are different. The opposite of all groups being equal (H0) is that at least one group is different from the others (H1).
+
+In this sense, if the null hypothesis is rejected, it means that at least one group is different from the other 2, but not necessarily that all 3 groups are different from each other. Post-hoc tests must be performed to test whether all 3 groups differ.
+
+## Mann-Whitney test
+
+For two group comparison, pool the two group responses and then rank the
+pooled data
+
+Ranks for the first group are compared to the ranks for the second group
+
+The null hypothesis is that the two group medians are the same:     $H_0: \eta_1=\eta_2$.
+
+
+::::{.columns}
+
+:::{.column}
+
+
+```{r}
+#| echo: true
+load("../data/rangitikei.Rdata")
+wilcox.test(rangitikei$people~rangitikei$time, conf.int=T)
+```
+
+:::
+
+:::{.column}
+
+```{r}
+#| echo: true
+t.test(rangitikei$people~rangitikei$time)
+```
+
+:::
+::::
+
+## Another form of test
+
+
+::::{.columns}
+
+:::{.column}
+
+```{r}
+#| echo: true
+kruskal.test(rangitikei$people~rangitikei$time)
+```
+
+:::
+
+:::{.column}
+
+```{r}
+#| echo: true
+wilcox.test(rangitikei$people~rangitikei$time)
+```
+
+
+:::
+::::
+
+## Linear models Review
 
 Family tree
 
@@ -868,157 +1155,3 @@ ANOVA: difference between the means of three or more groups
 
 Linear models form the basis of a lot more statistics tests. 
 
-## Review of non-parametric tests
-Non-parametric tests are light on assumptions, and can be used for highly asymmetric data (as an alternative to using transformations). 
-
-Many non-parametric methods rely on replacing the observed data by their *ranks*. 
-
-
-```{r}
-#| echo: false
-tv = read_csv("https://www.massey.ac.nz/~anhsmith/data/tv.csv")
-```
-
-## Spearman's Rank Correlation
-
-
-::::{.columns}
-
-:::{.column}
-
-Rank the $X$ and $Y$ variables, and then obtain usual Pearson correlation coefficient.
-
-The plot shows non-parametric Spearman in the the upper triangle and parametric Pearson in the bottom triangle.
-
-```{r}
-#| echo: true
-library(GGally)
-
-p <- ggpairs(
-  trees, 
-  upper = list(continuous = wrap('cor', method = "spearman")),
-  lower = list(continuous = 'cor') 
-  )
-```
-
-:::
-
-:::{.column}
-
-```{r}
-#| label: fig-spear
-#| echo: false
-#| fig.cap: "Comparison of Pearsonian and Spearman's rank correlations"
-#| fig-width: 5
-#| fig-height: 5
-p
-```
-
-:::
-::::
-
-## Wilcoxon signed rank test
-
-A non-parametric alternative to the one-sample t-test
-
-$H_0: \eta=\eta_0$ where $\eta$ (Greek letter 'eta') is the population median
-
-Based on based on ranking $(|Y-\eta_0|)$, where the ranks for data with $Y<\eta_0$ are compared to the ranks for data with $Y>\eta_0$
-
-
-::::{.columns}
-
-:::{.column}
-
-```{r}
-#| echo: true
-wilcox.test(tv$TELETIME, mu=1680, conf.int=T)
-```
-
-:::
-
-:::{.column}
-
-```{r}
-#| echo: true
-t.test(tv$TELETIME, mu=1680)
-```
-
-:::
-::::
-
-
-## Non-parametric ANOVA
-
-Kruskal-Wallis test: allows to compare three or more groups
-
-Mann-Whitney test: allows to compare 2 groups under the non-normality assumption.
-
-
-## Kruskal-Wallis test
-The null and alternative hypotheses of the Kruskal-Wallis test are:
-
-H0: The 3 groups are equal in terms of the variable
-H1: At least one group is different from the other 2 groups in terms of variable
-
-Similar to an ANOVA the alternative hypothesis is not that all groups are different. The opposite of all groups being equal (H0) is that at least one group is different from the others (H1).
-
-In this sense, if the null hypothesis is rejected, it means that at least one group is different from the other 2, but not necessarily that all 3 groups are different from each other. Post-hoc tests must be performed to test whether all 3 groups differ.
-
-## Mann-Whitney test
-
-For two group comparison, pool the two group responses and then rank the
-pooled data
-
-Ranks for the first group are compared to the ranks for the second group
-
-The null hypothesis is that the two group medians are the same:     $H_0: \eta_1=\eta_2$.
-
-
-::::{.columns}
-
-:::{.column}
-
-
-```{r}
-#| echo: true
-load("../data/rangitikei.Rdata")
-wilcox.test(rangitikei$people~rangitikei$time, conf.int=T)
-```
-
-:::
-
-:::{.column}
-
-```{r}
-#| echo: true
-t.test(rangitikei$people~rangitikei$time)
-```
-
-:::
-::::
-
-## Another form of test
-
-
-::::{.columns}
-
-:::{.column}
-
-```{r}
-#| echo: true
-kruskal.test(rangitikei$people~rangitikei$time)
-```
-
-:::
-
-:::{.column}
-
-```{r}
-#| echo: true
-wilcox.test(rangitikei$people~rangitikei$time)
-```
-
-
-:::
-::::
