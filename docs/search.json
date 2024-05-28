@@ -4085,14 +4085,14 @@
     "href": "slides/Chapter08.html#ancova-model-1",
     "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
     "section": "ANCOVA model",
-    "text": "ANCOVA model\n\\(Sales = \\beta_0 + \\beta_1 I_1 + \\beta_2 I_2 + (\\beta_3 + \\beta_4 I_1 + \\beta_5 I_2)Households\\)\n\nFor Highway Locations: \\(I_1=0\\) & \\(I_2=0\\) hence our model simplifies to\n\\(Sales = \\beta_{0} + (\\beta_3)Households\\)\nFor Mall Locations: \\(I_1=1\\) & \\(I_2=0\\) so the model becomes\n\\(Sales = \\beta_{0} + \\beta_{1} I_1 (\\beta_3 + \\beta_4)Households\\)\nFor Street Locations: \\(I_1=0\\) & \\(I_2=1\\) so the model becomes \\(Sales = \\beta_{0} + \\beta_2 + (\\beta_3 + \\beta_5) Households\\)\n\nnote R does not require us to code Location as an indicator variable"
+    "text": "ANCOVA model\n\\(Sales = \\beta_0 + \\beta_1 I_1 + \\beta_2 I_2 + (\\beta_3 + \\beta_4 I_1 + \\beta_5 I_2)Households\\)\n\nFor Highway Locations: \\(I_1=0\\) & \\(I_2=0\\) hence our model simplifies to\n\\(Sales = \\beta_{0} + (\\beta_3)Households\\)\nFor Mall Locations: \\(I_1=1\\) & \\(I_2=0\\) so the model becomes\n\\(Sales = \\beta_{0} + \\beta_{1} + (\\beta_3 + \\beta_4)Households\\)\nFor Street Locations: \\(I_1=0\\) & \\(I_2=1\\) so the model becomes \\(Sales = \\beta_{0} + \\beta_2 + (\\beta_3 + \\beta_5) Households\\)\n\nnote R does not require us to code Location as an indicator variable"
   },
   {
     "objectID": "slides/Chapter08.html#ancova-model-2",
     "href": "slides/Chapter08.html#ancova-model-2",
     "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
     "section": "ANCOVA model",
-    "text": "ANCOVA model\n\\(Sales = -6.2 + 39.22 I_1 + 8.04 I_2 + ( 0.909 + -0.074I_1 -0.012 I_2) Households\\)\n\nFor Highway Locations: \\(I_1=0\\) & \\(I_2=0\\) hence our model simplifies to\n\\(Sales = -6.2 + (\\beta_3)Households\\)\nFor Mall Locations: \\(I_1=1\\) & \\(I_2=0\\) so the model becomes\n\\(Sales = \\beta_{0} + \\beta_{1} I_1 (\\beta_3 + \\beta_4)Households\\)\nFor Street Locations: \\(I_1=0\\) & \\(I_2=1\\) so the model becomes \\(Sales = \\beta_{0} + \\beta_2 + (\\beta_3 + \\beta_5) Households\\)"
+    "text": "ANCOVA model\n\\(Sales = -6.2 + 39.22 + 8.04 + ( 0.909 -0.074 -0.012) Households\\)\n\nFor Highway Locations: \\(I_1=0\\) & \\(I_2=0\\) hence our model simplifies to\n\\(Sales = -6.2 + (0.909)Households\\)\nFor Mall Locations: \\(I_1=1\\) & \\(I_2=0\\) so the model becomes\n\\(Sales = -6.2 + 39.22 + (0.909 -0.074)Households\\)\nFor Street Locations: \\(I_1=0\\) & \\(I_2=1\\) so the model becomes \\(Sales = -6.2 + 8.04 + (0.909 -0.012) Households\\)"
   },
   {
     "objectID": "slides/Chapter08.html#linear-models-review",
@@ -4106,6 +4106,6 @@
     "href": "slides/Chapter08.html#ancova-fit-2",
     "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
     "section": "ANCOVA fit",
-    "text": "ANCOVA fit\n\n\n                          Estimate Std. Error t value Pr(&gt;|t|)\n(Intercept)                 -6.203     11.818  -0.525    0.611\nHouseholds                   0.909      0.083  10.906    0.000\nLocationMall                39.223     16.451   2.384    0.038\nLocationStreet               8.036     16.273   0.494    0.632\nHouseholds:LocationMall     -0.074      0.104  -0.710    0.494\nHouseholds:LocationStreet   -0.012      0.101  -0.120    0.907\n\n\nWe can plug these numbers into our equations \\(Sales = \\beta_{0} + \\beta_{1} I_1 + \\beta_2 I_2 + (\\beta_3 + \\beta_4 I_1 + \\beta_5 I_2)Households\\)\n\\(Sales = -6.2 + 39.22 I_1 + 8.04 I_2 + ( 0.909 + -0.074I_1 -0.012 I_2) Households\\)"
+    "text": "ANCOVA fit\n\nmodl = lm(Sales~Households*Location, data = restaurant)\nouts &lt;- summary(modl)$coefficients\nround(outs[, 1:4], digits = 3)\n\n                          Estimate Std. Error t value Pr(&gt;|t|)\n(Intercept)                 -6.203     11.818  -0.525    0.611\nHouseholds                   0.909      0.083  10.906    0.000\nLocationMall                39.223     16.451   2.384    0.038\nLocationStreet               8.036     16.273   0.494    0.632\nHouseholds:LocationMall     -0.074      0.104  -0.710    0.494\nHouseholds:LocationStreet   -0.012      0.101  -0.120    0.907\n\n\nWe can plug these numbers into our equations \\(Sales = \\beta_{0} + \\beta_{1} I_1 + \\beta_2 I_2 + (\\beta_3 + \\beta_4 I_1 + \\beta_5 I_2)Households\\)\n\\(Sales = -6.2 + 39.22 + 8.04 + ( 0.909 -0.074 -0.012) Households\\)"
   }
 ]
