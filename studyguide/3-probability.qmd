@@ -674,58 +674,6 @@ p1/p2
 The mean & variance of the lognormal random variables are:
 
 $$\mu_X=e^{\left(\mu +{\frac {\sigma ^{2}}{2}}\right)}~~~~\sigma_X^2=(e^{\sigma ^{2}}-1) e^{(2\mu +\sigma ^{2})}$$
-
- **Weibull**
-
-The probability function of the Weibull distribution is given below:
-
-$$f(t;\eta,\beta) =
-\begin{cases}
-\frac{\beta}{\eta}\left(\frac{x}{\eta}\right)^{\beta-1}e^{-(x/\eta)^{\beta}}  ~~x\geq0 ,\\
-0~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  x<0,
-\end{cases}$$
-
-
-$\beta~(> 0)$  is the called the **shape** parameter and $\eta~(> 0)$ is the called **scale** parameter, and different values of $\beta$ will result in different distributional shapes; see @fig-weib.
-
-
-```{r}
-#| label: fig-weib
-#| echo: false
-#| fig-cap: 'Weibull distributional shapes'
-#| fig-height: 4
-#| fig-width: 7
-
-p1 <- data.frame(x=c(0,5)) |> 
-  ggplot() + aes(x=x) +
-  stat_function(fun = dweibull, args = list(shape = 0.5, scale = 1),
-                geom='area') +
-  labs(title = "shape = 0.5, scale = 1")
-
-p2 <- ggplot(data.frame(x=c(0,5)), aes(x=x)) +
-  stat_function(fun = dweibull, args = list(shape = 1, scale = 1),
-                geom='area') +
-  labs(title = "shape = 1, scale = 1")
-
-p3 <- ggplot(data.frame(x=c(0,5)), aes(x=x)) +
-  stat_function(fun = dweibull, args = list(shape = 3, scale = 1),
-                geom='area') +
-  labs(title = "shape = 3, scale = 1")
-
-p4 <- ggplot(data.frame(x=c(0,7)), aes(x=x)) +
-  stat_function(fun = dweibull, args = list(shape = 6, scale = 4),
-                geom='area') +
-  labs(title = "shape = 6, scale = 4")
-
-library(patchwork)
-p1+p2+p3+p4
-```
-
-
-The Weibull distribution becomes the exponential distribution for $\beta=1$.
-
-The scale parameter $\eta$ is called the *characteristic life* because $\eta$ becomes the quantile with slightly less than two-thirds of the population (63.21%) below it irrespective of the shape $\beta$ when this distribution is used to model lifetimes. 
-
  **Gamma**
 
 The probability function of the gamma distribution with shape parameter $\alpha$ and scale parameter $\beta$ is given below:
@@ -1057,77 +1005,6 @@ p4 <- ggplot(data.frame(x), aes(sample = x)) +  stat_qq() +
 gridExtra::grid.arrange(p1,p2, p3, p4, ncol=2) 
 ```
 
-### Some non-normal distributions
-
-For a normal distribution, which is specified by its mean $\mu$ and variance $\sigma^2$, parameter estimation is fairly straight forward.  The sample mean and variance become the estimates.   The Poisson parameter  $\lambda$ is also the mean of the distribution and hence the sample mean becomes the estimate.  On the other hand, distributions such as beta, and gamma involve shape and/or scale parameters and hence their estimation becomes complicated.  The population mean and SD of these distributions are functions of the distributional parameters.  Data from skewed distributions are not well represented by the sample mean and SD.
-
-In order to estimate the distributional parameters, we follow a method called the **Maximum Likelihood** (ML) method. The *likelihood* function (or simply the likelihood) is based on the joint probability of the observed data as a function of the distributional parameters.  The ML method maximises the likelihood function to estimate the distributional (model) parameters.  There are also other methods of estimation such as the method of moments and we will not delve into the theory behind these methods in this course. We will simply use R packages such as `VGAM` or `fitdistrplus` to estimate the parameters.
-
-Example: Your are familiar with the **rangitikei** dataset which gives the number of people who made use of a recreational facility.  This variable is right skewed, and let us fit a lognormal distribution to this variable using the `fitdistrplus` package.
-
-
-```{r}
-#| echo: true
-#| message: false
-library(fitdistrplus, exclude = c("select", "area"))
-
-fitdist(rangitikei$people, "lnorm")
-```
-
-The adequacy of the lognormal distribution fitted, can be examined using graphical displays as in @fig-lnormfit.
-
-```{r} 
-#| label: fig-lnormfit
-#| echo: true
-#| fig-cap: 'Log-normal fit for people'
-#| fig-height: 7
-#| fig-width: 7
-
-lnormfit <- fitdist(rangitikei$people, "lnorm")
-plot(lnormfit)
-```
-
-The lognormal fit does not appear too bad to people data. How about fitting gamma distribution instead of lognormal?  This fit can again be accomplished using the `fitdistrplus` package.
-
-```{r, echo=TRUE}
-fitdist(rangitikei$people, "gamma")
-```
-
-The EDA plots to assess the gamma distribution fit are shown in @fig-gammafit.
-
-```{r}
-#| label: fig-gammafit
-#| echo: true
-#| fig-cap: 'Gamma fit for people'
-#| fig-height: 7
-#| fig-width: 7
-
-gammafit <- fitdist(rangitikei$people, "gamma")
-plot(gammafit)
-```
-
-
-Note that this package gives the estimated gamma parameters in a reparametrised form. For small and medium size datasets $(n<300)$, we may not be able discriminate between gamma & Weibull type of right skewed distributions.
-
-We can of course fit a gallery of probability distributions but we have to select the *best* fitting distribution, if it exists.
-
-The function `descdist()` in  the `fitdistrplus` package will obtain a plot of kurtosis, a measure of excessive peakedness, against the square of a measure of skew for a number of probability distributions.  This plot is known as the *Cullen and Frey plot*.  We can visibly judge the best fitting distribution using this plot.  For the number of people data, this plot is shown in @fig-cfplot.
-
-```{r}
-#| label: fig-cfplot
-#| echo: true
-#| fig-cap: 'Cullen and Frey plot for people'
-#| fig-height: 6
-#| fig-width: 7
-
-descdist(rangitikei$people)
-```
-
-The presence of a large outlier in peoples data particularly affect the measures of skewness and kurtosis.  So Cullen and Frey plot does not particularly strongly support the lognormal fit but suggests the lack of fit for symmetrical distributions such as normal (read corresponding to zero skew).
-
-When the observed data is a mixture from two or more distributions or contain a large number of unusual observations, no single distributional fit will be satisfactory.  For example, count data may not fit the Poisson distribution due to excessive zeros.
-
-We will cover the power transformation of data in the next Chapter, which is a remedy for dampening the effect of outliers and mixture of subgroups (distributions).
 
 # Summary
 

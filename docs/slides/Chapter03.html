@@ -565,8 +565,8 @@ about 81% are Rh+ and about 8% are K+.</p>
 <div class="left-code-wide">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div class="grViz html-widget html-fill-item" id="htmlwidget-49c65b485454a6a0d9b1" style="width:576px;height:384px;"></div>
-<script type="application/json" data-for="htmlwidget-49c65b485454a6a0d9b1">{"x":{"diagram":"digraph {\n  \n  # horizontal alignment\n  graph [rankdir = LR]\n  \n  # Nodes with labels\n  node [shape = oval]\n  Start [label = \"Start\", shape = box]\n  Healthy [label = \"Healthy\"]\n  Disease [label = \"Disease\"]\n  PosH [label = \"Positive\"]\n  NegH [label = \"Negative\"]\n  PosD [label = \"Positive\"]\n  NegD [label = \"Negative\"]\n  pPosH [label = \"P(H & T+) = 0.0485\", shape = none]\n  pNegH [label = \"P(H & T-) = 0.9215\", shape = none]\n  pPosD [label = \"P(D & T+) = 0.0294\", shape = none]\n  pNegD [label = \"P(D & T-) = 0.0006\", shape = none]\n  \n  # Edges with labels\n  Start -> Healthy [label = \"0.97\"]\n  Start -> Disease [label = \"0.03\"]\n  Healthy -> PosH [label = \"0.05\"]\n  Healthy -> NegH [label = \"0.95\"]\n  Disease -> PosD [label = \"0.98\"]\n  Disease -> NegD [label = \"0.02\"]\n  PosH -> pPosH \n  NegH -> pNegH \n  PosD -> pPosD \n  NegD -> pNegD \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="grViz html-widget html-fill-item" id="htmlwidget-29115d86ba592b326653" style="width:576px;height:384px;"></div>
+<script type="application/json" data-for="htmlwidget-29115d86ba592b326653">{"x":{"diagram":"digraph {\n  \n  # horizontal alignment\n  graph [rankdir = LR]\n  \n  # Nodes with labels\n  node [shape = oval]\n  Start [label = \"Start\", shape = box]\n  Healthy [label = \"Healthy\"]\n  Disease [label = \"Disease\"]\n  PosH [label = \"Positive\"]\n  NegH [label = \"Negative\"]\n  PosD [label = \"Positive\"]\n  NegD [label = \"Negative\"]\n  pPosH [label = \"P(H & T+) = 0.0485\", shape = none]\n  pNegH [label = \"P(H & T-) = 0.9215\", shape = none]\n  pPosD [label = \"P(D & T+) = 0.0294\", shape = none]\n  pNegD [label = \"P(D & T-) = 0.0006\", shape = none]\n  \n  # Edges with labels\n  Start -> Healthy [label = \"0.97\"]\n  Start -> Disease [label = \"0.03\"]\n  Healthy -> PosH [label = \"0.05\"]\n  Healthy -> NegH [label = \"0.95\"]\n  Disease -> PosD [label = \"0.98\"]\n  Disease -> NegD [label = \"0.02\"]\n  PosH -> pPosH \n  NegH -> pNegH \n  PosD -> pPosD \n  NegD -> pNegD \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p><strong>Rules of the Probability Tree</strong></p>
@@ -1139,137 +1139,43 @@ is normally distributed with a mean of <span class="math inline">\(40g\)</span> 
 <img data-src="Chapter03_files/figure-revealjs/unnamed-chunk-26-1.png" width="960" class="r-stretch quarto-figure-center"><div class="footer">
 <p>Continuous probability distributions</p>
 </div>
-</section></section>
-<section>
-<section id="skewed-continuous-probability-distributions" class="title-slide slide level1 background-black center">
-<h1>Skewed continuous probability distributions</h1>
-<div class="footer">
-<p>Skewed continuous probability distributions</p>
-</div>
-</section>
-<section id="log-normal-distribution" class="slide level2">
-<h2>Log-normal distribution</h2>
-<div class="pull-left">
-<p>A random variable <span class="math inline">\(X\)</span> is log-normally distributed, when <span class="math inline">\(log_e(X)\)</span> follows normal.</p>
-<p>Alternatively, if <span class="math inline">\(X\)</span> follows normal, then <span class="math inline">\(e^X\)</span> follows log-normal.</p>
-<p>R function <code>dlnorm()</code> gives the log-normal density.</p>
-<p>Mean &amp; variance:</p>
-<p><span class="math display">\[
-\begin{align}
-\mu_X&amp;=e^{\left(\mu +{\frac {\sigma ^{2}}{2}}\right)} \\
-\sigma_X^2&amp;=(e^{\sigma ^{2}}-1) e^{(2\mu +\sigma ^{2})}
-\end{align}
-\]</span></p>
-</div>
-<div class="pull-right">
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>dfln <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x=</span><span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">4</span>, <span class="at">length=</span><span class="dv">1000</span>), </span>
-<span id="cb30-2"><a href="#cb30-2"></a>              <span class="st">`</span><span class="at">f(x)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">dlnorm</span>(x), </span>
-<span id="cb30-3"><a href="#cb30-3"></a>              <span class="st">`</span><span class="at">F(x)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">plnorm</span>(x))</span>
-<span id="cb30-4"><a href="#cb30-4"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dfln) <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x=</span>x,<span class="at">y=</span><span class="st">`</span><span class="at">f(x)</span><span class="st">`</span>) <span class="sc">+</span> <span class="fu">geom_area</span>(<span class="at">alpha=</span>.<span class="dv">8</span>) <span class="sc">+</span> </span>
-<span id="cb30-5"><a href="#cb30-5"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Standard log-normal density"</span>, </span>
-<span id="cb30-6"><a href="#cb30-6"></a>       <span class="at">x =</span> <span class="st">"standard log-normal deviate, z"</span>)</span>
-<span id="cb30-7"><a href="#cb30-7"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dfln) <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x=</span>x,<span class="at">y=</span><span class="st">`</span><span class="at">F(x)</span><span class="st">`</span>) <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
-<span id="cb30-8"><a href="#cb30-8"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Cumulative standard log-normal density"</span>, </span>
-<span id="cb30-9"><a href="#cb30-9"></a>       <span class="at">x =</span> <span class="st">"standard log-normal deviate, z"</span>)</span>
-<span id="cb30-10"><a href="#cb30-10"></a>p1<span class="sc">/</span>p2 </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="Chapter03_files/figure-revealjs/unnamed-chunk-27-1.png" width="480"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div class="footer">
-<p>Skewed continuous probability distributions</p>
-</div>
-</section>
-<section id="weibull-distribution" class="slide level2">
-<h2>Weibull distribution</h2>
-<div class="pull-left">
-<p>The PDF of the Weibull distribution is:</p>
-<p><span class="math display">\[f(t;\eta,\beta) =
-\begin{cases}
-\frac{\beta}{\eta}\left(\frac{x}{\eta}\right)^{\beta-1}e^{-(x/\eta)^{\beta}}  ~~x\geq0 ,\\
-0~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  x&lt;0,
-\end{cases}\]</span></p>
-<p><span class="math inline">\(\beta~(&gt; 0)\)</span> is the called the <strong>shape</strong> parameter and <span class="math inline">\(\eta~(&gt; 0)\)</span> is the called <strong>scale</strong> parameter.</p>
-<p>The Weibull distribution becomes the exponential distribution for <span class="math inline">\(\beta=1\)</span>.</p>
-<p>The scale parameter <span class="math inline">\(\eta\)</span> is called the <em>characteristic life</em> because <span class="math inline">\(\eta\)</span> becomes the quantile with slightly less than two-thirds of the population (63%) below it irrespective of the shape <span class="math inline">\(\beta\)</span>.</p>
-</div>
-<div class="absolute" style="top: 0px; right: 0px; width: 400px; ">
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="Chapter03_files/figure-revealjs/unnamed-chunk-28-1.png" width="384"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div class="footer">
-<p>Skewed continuous probability distributions</p>
-</div>
-</section>
-<section id="gamma-distribution" class="slide level2 smaller">
-<h2>Gamma distribution</h2>
-<p>The probability function of the gamma distribution with shape parameter <span class="math inline">\(\alpha\)</span> and scale parameter <span class="math inline">\(\beta\)</span> is given below:</p>
-<p><span class="math display">\[\displaystyle {\begin{aligned}f(x)={\frac {\beta ^{\alpha }x^{\alpha -1}e^{-\beta x}}{\Gamma (\alpha )}}\quad {\text{ for }}x&gt;0\quad \alpha ,\beta &gt;0,\\[6pt]\end{aligned}}\]</span> where <span class="math inline">\(\displaystyle \Gamma (\alpha)=\int _{0}^{\infty }x^{\alpha-1}e^{-x}\,dx.\)</span></p>
-
-<img data-src="Chapter03_files/figure-revealjs/gam-1.png" width="960" class="r-stretch quarto-figure-center"><div class="footer">
-<p>Skewed continuous probability distributions</p>
-</div>
-</section>
-<section id="beta-distribution" class="slide level2 smaller">
-<h2>Beta distribution</h2>
-<p>The beta distribution is bounded on the interval <span class="math inline">\([0, 1]\)</span> and parameterised by two positive shape parameters, say <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>.</p>
-<p>Probability function of the beta distribution:</p>
-<p><span class="math display">\[\begin{aligned}f(x;\alpha ,\beta ) ={\frac {x^{\alpha -1}(1-x)^{\beta -1}}{\displaystyle \int _{0}^{1}u^{\alpha -1}(1-u)^{\beta -1}\,du}}={\frac {1}{\mathrm {B} (\alpha ,\beta )}}x^{\alpha -1}(1-x)^{\beta -1}\end{aligned} \]</span> where <span class="math inline">\(\mathrm {B} (\alpha ,\beta )=\frac {\Gamma (\alpha )\Gamma (\beta )}{\Gamma (\alpha +\beta )}\)</span>. Here’s a plot of beta density for various shape parameter combinations.</p>
-
-<img data-src="Chapter03_files/figure-revealjs/betas-1.png" width="960" class="r-stretch quarto-figure-center"><p>When <span class="math inline">\(\alpha=\beta=1\)</span>, the beta distribution becomes the continuous uniform distribution.</p>
-<div class="footer">
-<p>Skewed continuous probability distributions</p>
-</div>
 </section>
 <section id="small-sample-effect" class="slide level2">
 <h2>Small sample effect</h2>
 <p>For small samples, the shape might be difficult to judge.</p>
 <div class="cell custom4060 columns column-output-location" data-layout-align="center">
 <div class="column">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb31-2"><a href="#cb31-2"></a>dfm <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb31-3"><a href="#cb31-3"></a>  <span class="at">x=</span><span class="fu">rnorm</span>(<span class="dv">50</span>, </span>
-<span id="cb31-4"><a href="#cb31-4"></a>          <span class="at">mean=</span><span class="dv">80</span>, </span>
-<span id="cb31-5"><a href="#cb31-5"></a>          <span class="at">sd=</span><span class="dv">12</span>)</span>
-<span id="cb31-6"><a href="#cb31-6"></a>  )</span>
-<span id="cb31-7"><a href="#cb31-7"></a></span>
-<span id="cb31-8"><a href="#cb31-8"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dfm) <span class="sc">+</span> </span>
-<span id="cb31-9"><a href="#cb31-9"></a>  <span class="fu">geom_histogram</span>(</span>
-<span id="cb31-10"><a href="#cb31-10"></a>    <span class="fu">aes</span>(<span class="at">x=</span>x, <span class="at">y=</span><span class="fu">after_stat</span>(density)), </span>
-<span id="cb31-11"><a href="#cb31-11"></a>    <span class="at">colour=</span><span class="dv">1</span></span>
-<span id="cb31-12"><a href="#cb31-12"></a>    ) <span class="sc">+</span> </span>
-<span id="cb31-13"><a href="#cb31-13"></a>  <span class="fu">stat_function</span>(</span>
-<span id="cb31-14"><a href="#cb31-14"></a>    <span class="at">fun =</span> dnorm, </span>
-<span id="cb31-15"><a href="#cb31-15"></a>    <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="dv">80</span>, <span class="at">sd =</span> <span class="dv">12</span>), </span>
-<span id="cb31-16"><a href="#cb31-16"></a>    <span class="at">geom =</span> <span class="st">"line"</span></span>
-<span id="cb31-17"><a href="#cb31-17"></a>    ) <span class="sc">+</span></span>
-<span id="cb31-18"><a href="#cb31-18"></a>  <span class="fu">xlim</span>(<span class="fu">min</span>(dfm), <span class="fu">max</span>(dfm))</span>
-<span id="cb31-19"><a href="#cb31-19"></a></span>
-<span id="cb31-20"><a href="#cb31-20"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dfm) <span class="sc">+</span> <span class="fu">aes</span>(x) <span class="sc">+</span> </span>
-<span id="cb31-21"><a href="#cb31-21"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb31-22"><a href="#cb31-22"></a>  <span class="fu">xlim</span>(<span class="fu">min</span>(dfm), <span class="fu">max</span>(dfm)) <span class="sc">+</span></span>
-<span id="cb31-23"><a href="#cb31-23"></a>  <span class="fu">theme_void</span>()</span>
-<span id="cb31-24"><a href="#cb31-24"></a></span>
-<span id="cb31-25"><a href="#cb31-25"></a><span class="fu">library</span>(patchwork)</span>
-<span id="cb31-26"><a href="#cb31-26"></a>p1 <span class="sc">/</span> p2 <span class="sc">+</span> <span class="fu">plot_layout</span>(<span class="at">heights =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb30-2"><a href="#cb30-2"></a>dfm <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb30-3"><a href="#cb30-3"></a>  <span class="at">x=</span><span class="fu">rnorm</span>(<span class="dv">50</span>, </span>
+<span id="cb30-4"><a href="#cb30-4"></a>          <span class="at">mean=</span><span class="dv">80</span>, </span>
+<span id="cb30-5"><a href="#cb30-5"></a>          <span class="at">sd=</span><span class="dv">12</span>)</span>
+<span id="cb30-6"><a href="#cb30-6"></a>  )</span>
+<span id="cb30-7"><a href="#cb30-7"></a></span>
+<span id="cb30-8"><a href="#cb30-8"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dfm) <span class="sc">+</span> </span>
+<span id="cb30-9"><a href="#cb30-9"></a>  <span class="fu">geom_histogram</span>(</span>
+<span id="cb30-10"><a href="#cb30-10"></a>    <span class="fu">aes</span>(<span class="at">x=</span>x, <span class="at">y=</span><span class="fu">after_stat</span>(density)), </span>
+<span id="cb30-11"><a href="#cb30-11"></a>    <span class="at">colour=</span><span class="dv">1</span></span>
+<span id="cb30-12"><a href="#cb30-12"></a>    ) <span class="sc">+</span> </span>
+<span id="cb30-13"><a href="#cb30-13"></a>  <span class="fu">stat_function</span>(</span>
+<span id="cb30-14"><a href="#cb30-14"></a>    <span class="at">fun =</span> dnorm, </span>
+<span id="cb30-15"><a href="#cb30-15"></a>    <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="dv">80</span>, <span class="at">sd =</span> <span class="dv">12</span>), </span>
+<span id="cb30-16"><a href="#cb30-16"></a>    <span class="at">geom =</span> <span class="st">"line"</span></span>
+<span id="cb30-17"><a href="#cb30-17"></a>    ) <span class="sc">+</span></span>
+<span id="cb30-18"><a href="#cb30-18"></a>  <span class="fu">xlim</span>(<span class="fu">min</span>(dfm), <span class="fu">max</span>(dfm))</span>
+<span id="cb30-19"><a href="#cb30-19"></a></span>
+<span id="cb30-20"><a href="#cb30-20"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dfm) <span class="sc">+</span> <span class="fu">aes</span>(x) <span class="sc">+</span> </span>
+<span id="cb30-21"><a href="#cb30-21"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb30-22"><a href="#cb30-22"></a>  <span class="fu">xlim</span>(<span class="fu">min</span>(dfm), <span class="fu">max</span>(dfm)) <span class="sc">+</span></span>
+<span id="cb30-23"><a href="#cb30-23"></a>  <span class="fu">theme_void</span>()</span>
+<span id="cb30-24"><a href="#cb30-24"></a></span>
+<span id="cb30-25"><a href="#cb30-25"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb30-26"><a href="#cb30-26"></a>p1 <span class="sc">/</span> p2 <span class="sc">+</span> <span class="fu">plot_layout</span>(<span class="at">heights =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="Chapter03_files/figure-revealjs/unnamed-chunk-29-1.png" width="576"></p>
+<p><img data-src="Chapter03_files/figure-revealjs/unnamed-chunk-27-1.png" width="576"></p>
 </figure>
 </div>
 </div>
@@ -1288,7 +1194,7 @@ is normally distributed with a mean of <span class="math inline">\(40g\)</span> 
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="Chapter03_files/figure-revealjs/unnamed-chunk-30-1.png" width="960"></p>
+<p><img data-src="Chapter03_files/figure-revealjs/unnamed-chunk-28-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1298,146 +1204,12 @@ is normally distributed with a mean of <span class="math inline">\(40g\)</span> 
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="Chapter03_files/figure-revealjs/unnamed-chunk-31-1.png" width="960"></p>
+<p><img data-src="Chapter03_files/figure-revealjs/unnamed-chunk-29-1.png" width="960"></p>
 </figure>
 </div>
 </div>
 </div>
 <div class="footer">
-<p>Skewed continuous probability distributions</p>
-</div>
-</section>
-<section id="skewed-data" class="slide level2">
-<h2>Skewed data</h2>
-<p>The number of <em>people</em> who made use of a recreational facility is in the <strong>rangitikei</strong> dataset.</p>
-<p>The deviation of points from the line indicate that this variable does not conform to a normal distribution.</p>
-
-<img data-src="Chapter03_files/figure-revealjs/unnamed-chunk-32-1.png" width="960" class="r-stretch quarto-figure-center"><div class="footer">
-<p>Skewed continuous probability distributions</p>
-</div>
-</section>
-<section id="fitting-lognormal" class="slide level2">
-<h2>Fitting lognormal</h2>
-<p>R package <code>fitdistrplus</code> can be used to estimate the lognormal parameters for <em>people</em> data.</p>
-<p>The <em>likelihood</em> function is based on the joint probability of the observed data as a function of the distributional parameters.</p>
-<p>The ML method maximises the likelihood function to estimate the distributional (model) parameters.</p>
-<ul>
-<li><code>fitdistrplus</code> default is the ML method</li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">library</span>(fitdistrplus)</span>
-<span id="cb32-2"><a href="#cb32-2"></a><span class="fu">fitdist</span>(rangitikei<span class="sc">$</span>people, <span class="st">"lnorm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Fitting of the distribution ' lnorm ' by maximum likelihood 
-Parameters:
-        estimate Std. Error
-meanlog 3.775514  0.1789851
-sdlog   1.028191  0.1265611</code></pre>
-</div>
-</div>
-<div class="footer">
-<p>Skewed continuous probability distributions</p>
-</div>
-</section>
-<section id="fitting-lognormal-1" class="slide level2">
-<h2>Fitting lognormal</h2>
-<p>R package <code>fitdistrplus</code> can be used to estimate the lognormal parameters for <em>people</em> data.</p>
-<p>The <em>likelihood</em> function is based on the joint probability of the observed data as a function of the distributional parameters.</p>
-<p>The ML method maximises the likelihood function to estimate the distributional (model) parameters. Examine the fit using graphical displays.</p>
-<div class="cell columns column-output-location" data-layout-align="center">
-<div class="column">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>lnormfit <span class="ot">&lt;-</span> <span class="fu">fitdist</span>(rangitikei<span class="sc">$</span>people, <span class="st">"lnorm"</span>)</span>
-<span id="cb34-2"><a href="#cb34-2"></a><span class="fu">plot</span>(lnormfit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div><div class="column">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="Chapter03_files/figure-revealjs/unnamed-chunk-34-1.png" width="576"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div class="footer">
-<p>Skewed continuous probability distributions</p>
-</div>
-</section>
-<section id="gamma-fit" class="slide level2">
-<h2>Gamma fit</h2>
-<p>Gamma distribution also fits OK but the outlier remains.</p>
-<p>Outliers and subgroups will affect the Maximum Likelihood (ML) employed in the <code>fitdistrplus</code> package.</p>
-<div class="cell columns column-output-location" data-layout-align="center">
-<div class="column">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="fu">fitdist</span>(rangitikei<span class="sc">$</span>people, <span class="st">"gamma"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div><div class="column">
-<div class="cell-output cell-output-stdout">
-<pre><code>Fitting of the distribution ' gamma ' by maximum likelihood 
-Parameters:
-        estimate  Std. Error
-shape 1.13134351 0.246678484
-rate  0.01571622 0.004259844</code></pre>
-</div>
-</div>
-</div>
-<div class="cell columns column-output-location" data-layout-align="center">
-<div class="column">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a>gammafit <span class="ot">&lt;-</span> <span class="fu">fitdist</span>(rangitikei<span class="sc">$</span>people, <span class="st">"gamma"</span>)</span>
-<span id="cb37-2"><a href="#cb37-2"></a><span class="fu">plot</span>(gammafit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div><div class="column">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="Chapter03_files/figure-revealjs/unnamed-chunk-36-1.png" width="576"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div class="footer">
-<p>Skewed continuous probability distributions</p>
-</div>
-</section>
-<section id="cullen-and-frey-plot" class="slide level2">
-<h2>Cullen and Frey plot</h2>
-<p>This is a plot of <em>kurtosis</em>, a measure of excessive peakedness, against the square of a measure of <em>skew</em>.</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="fu">descdist</span>(rangitikei<span class="sc">$</span>people)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-<div class="cell-output cell-output-stdout">
-<pre><code>summary statistics
-------
-min:  4   max:  470 
-median:  46 
-mean:  71.72727 
-estimated sd:  86.28089 
-estimated skewness:  3.3264 
-estimated kurtosis:  17.11618 </code></pre>
-</div>
-</div>
-<img data-src="Chapter03_files/figure-revealjs/unnamed-chunk-37-1.png" width="960" class="r-stretch quarto-figure-center"><p>Symmetrical distributions such as normal (read corresponding to zero skew) are poor fits. Lognormal also does not fare well.</p>
-<p><strong>When the observed data is a mixture from two or more distributions or contain a large number of unusual observations, no single distributional fit will be satisfactory.</strong></p>
-<div class="footer">
-<p>Skewed continuous probability distributions</p>
-</div>
-</section>
-<section id="tv-watching-time-data" class="slide level2">
-<h2>TV watching time data</h2>
-<p>Normal fit is supported.</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="fu">descdist</span>(tv<span class="sc">$</span>TELETIME)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-<div class="cell-output cell-output-stdout">
-<pre><code>summary statistics
-------
-min:  490   max:  2799 
-median:  1760.5 
-mean:  1729.283 
-estimated sd:  567.913 
-estimated skewness:  -0.004088284 
-estimated kurtosis:  2.32614 </code></pre>
-</div>
-</div>
-<img data-src="Chapter03_files/figure-revealjs/unnamed-chunk-38-1.png" width="960" class="r-stretch quarto-figure-center"><div class="footer">
 <p>Skewed continuous probability distributions</p>
 </div>
 </section>

@@ -805,42 +805,6 @@ $ effect.on.health &lt;fct&gt; No.effect on health, No.effect on health, No.effe
 </ul>
 
 <img data-src="Chapter02_files/figure-revealjs/unnamed-chunk-17-1.png" width="960" class="r-stretch quarto-figure-center"></section>
-<section id="letter-value-table" class="slide level2">
-<h2>Letter-Value table</h2>
-<p>An extension of the boxplot, suitable for large data sets</p>
-<div class="columns">
-<div class="column">
-<p>Shows:</p>
-<ul>
-<li>M: Median</li>
-<li>F: Fourths</li>
-<li>E: Eighths</li>
-<li>D: Sixteenths</li>
-<li>C: Thirty-seconds</li>
-<li>…</li>
-</ul>
-</div><div class="column">
-<div class="cell" data-layout-align="center">
-<div class="cell-output cell-output-stdout">
-<pre><code>  Depth    Lower     Upper       Mid   Spread
-M  25.5 99.92736  99.92736  99.92736 0.000000
-F  13.0 99.43952 100.70136 100.07044 1.261832
-E   7.0 98.93218 101.20796 100.07007 2.275786
-D   4.0 98.73494 101.55871 100.14682 2.823770
-C   2.5 98.52396 101.75099 100.13747 3.227034
-B   1.5 98.17334 101.97793 100.07564 3.804590
-A   1.0 98.03338 102.16896 100.10117 4.135573</code></pre>
-</div>
-</div>
-</div>
-</div>
-<p>Hofmann, H; Wickham, H.; Kafadar, K. 2017. “Letter-Value Plots: Boxplots for Large Data.” <em>Journal of Computational and Graphical Statistics</em> 26 (3): 469–77. <a href="https://doi.org/10.1080/10618600.2017.1305277" class="uri">https://doi.org/10.1080/10618600.2017.1305277</a>.</p>
-</section>
-<section id="letter-value-plot" class="slide level2">
-<h2>Letter-Value Plot</h2>
-<p>An extension of the boxplot, suitable for large data sets</p>
-
-<img data-src="Chapter02_files/figure-revealjs/unnamed-chunk-19-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="cumulative-frequency-graphs" class="slide level2">
 <h2>Cumulative frequency graphs</h2>
 <ul>
@@ -849,20 +813,20 @@ A   1.0 98.03338 102.16896 100.10117 4.135573</code></pre>
 </ul>
 <div class="cell custom3070 columns column-output-location" data-layout-align="center">
 <div class="column">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb21-2"><a href="#cb21-2"></a></span>
-<span id="cb21-3"><a href="#cb21-3"></a>d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb21-4"><a href="#cb21-4"></a>  <span class="at">x =</span> <span class="fu">rnorm</span>(<span class="dv">50</span>, <span class="dv">100</span>)</span>
-<span id="cb21-5"><a href="#cb21-5"></a>  )</span>
-<span id="cb21-6"><a href="#cb21-6"></a></span>
-<span id="cb21-7"><a href="#cb21-7"></a><span class="fu">ggplot</span>(d) <span class="sc">+</span> </span>
-<span id="cb21-8"><a href="#cb21-8"></a>  <span class="fu">aes</span>(x) <span class="sc">+</span> </span>
-<span id="cb21-9"><a href="#cb21-9"></a>  <span class="fu">stat_ecdf</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb20-2"><a href="#cb20-2"></a></span>
+<span id="cb20-3"><a href="#cb20-3"></a>d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb20-4"><a href="#cb20-4"></a>  <span class="at">x =</span> <span class="fu">rnorm</span>(<span class="dv">50</span>, <span class="dv">100</span>)</span>
+<span id="cb20-5"><a href="#cb20-5"></a>  )</span>
+<span id="cb20-6"><a href="#cb20-6"></a></span>
+<span id="cb20-7"><a href="#cb20-7"></a><span class="fu">ggplot</span>(d) <span class="sc">+</span> </span>
+<span id="cb20-8"><a href="#cb20-8"></a>  <span class="fu">aes</span>(x) <span class="sc">+</span> </span>
+<span id="cb20-9"><a href="#cb20-9"></a>  <span class="fu">stat_ecdf</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="Chapter02_files/figure-revealjs/unnamed-chunk-20-1.png" width="480"></p>
+<p><img data-src="Chapter02_files/figure-revealjs/unnamed-chunk-18-1.png" width="480"></p>
 </figure>
 </div>
 </div>
@@ -884,31 +848,31 @@ A   1.0 98.03338 102.16896 100.10117 4.135573</code></pre>
 <p>Q-Q plots compare the distributions of two data sets by plotting their quantiles against each other.</p>
 <div class="cell custom4060 columns column-output-location" data-layout-align="center">
 <div class="column">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>vital <span class="ot">&lt;-</span> <span class="fu">read.table</span>(</span>
-<span id="cb22-2"><a href="#cb22-2"></a>  <span class="st">"https://www.massey.ac.nz/~anhsmith/data/vital.txt"</span>, </span>
-<span id="cb22-3"><a href="#cb22-3"></a>  <span class="at">header=</span><span class="cn">TRUE</span>, <span class="at">sep=</span><span class="st">","</span>)</span>
-<span id="cb22-4"><a href="#cb22-4"></a></span>
-<span id="cb22-5"><a href="#cb22-5"></a>quants <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.05</span>)</span>
-<span id="cb22-6"><a href="#cb22-6"></a></span>
-<span id="cb22-7"><a href="#cb22-7"></a>vital <span class="sc">|&gt;</span> </span>
-<span id="cb22-8"><a href="#cb22-8"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb22-9"><a href="#cb22-9"></a>    <span class="at">Female =</span> <span class="fu">quantile</span>(Life_female, quants),</span>
-<span id="cb22-10"><a href="#cb22-10"></a>    <span class="at">Male =</span> <span class="fu">quantile</span>(Life_male, quants)</span>
-<span id="cb22-11"><a href="#cb22-11"></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb22-12"><a href="#cb22-12"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb22-13"><a href="#cb22-13"></a>  <span class="fu">aes</span>(<span class="at">x =</span> Female, <span class="at">y =</span> Male) <span class="sc">+</span></span>
-<span id="cb22-14"><a href="#cb22-14"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb22-15"><a href="#cb22-15"></a>  <span class="fu">geom_abline</span>(<span class="at">slope=</span><span class="dv">1</span>, <span class="at">intercept=</span><span class="dv">0</span>) <span class="sc">+</span></span>
-<span id="cb22-16"><a href="#cb22-16"></a>  <span class="fu">coord_fixed</span>() <span class="sc">+</span></span>
-<span id="cb22-17"><a href="#cb22-17"></a>  <span class="fu">ggtitle</span>(</span>
-<span id="cb22-18"><a href="#cb22-18"></a>    <span class="st">"Quantiles of life expectancy"</span>,</span>
-<span id="cb22-19"><a href="#cb22-19"></a>    <span class="at">subtitle =</span> <span class="st">"are lower for males vs females"</span></span>
-<span id="cb22-20"><a href="#cb22-20"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>vital <span class="ot">&lt;-</span> <span class="fu">read.table</span>(</span>
+<span id="cb21-2"><a href="#cb21-2"></a>  <span class="st">"https://www.massey.ac.nz/~anhsmith/data/vital.txt"</span>, </span>
+<span id="cb21-3"><a href="#cb21-3"></a>  <span class="at">header=</span><span class="cn">TRUE</span>, <span class="at">sep=</span><span class="st">","</span>)</span>
+<span id="cb21-4"><a href="#cb21-4"></a></span>
+<span id="cb21-5"><a href="#cb21-5"></a>quants <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.05</span>)</span>
+<span id="cb21-6"><a href="#cb21-6"></a></span>
+<span id="cb21-7"><a href="#cb21-7"></a>vital <span class="sc">|&gt;</span> </span>
+<span id="cb21-8"><a href="#cb21-8"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb21-9"><a href="#cb21-9"></a>    <span class="at">Female =</span> <span class="fu">quantile</span>(Life_female, quants),</span>
+<span id="cb21-10"><a href="#cb21-10"></a>    <span class="at">Male =</span> <span class="fu">quantile</span>(Life_male, quants)</span>
+<span id="cb21-11"><a href="#cb21-11"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb21-12"><a href="#cb21-12"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb21-13"><a href="#cb21-13"></a>  <span class="fu">aes</span>(<span class="at">x =</span> Female, <span class="at">y =</span> Male) <span class="sc">+</span></span>
+<span id="cb21-14"><a href="#cb21-14"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb21-15"><a href="#cb21-15"></a>  <span class="fu">geom_abline</span>(<span class="at">slope=</span><span class="dv">1</span>, <span class="at">intercept=</span><span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb21-16"><a href="#cb21-16"></a>  <span class="fu">coord_fixed</span>() <span class="sc">+</span></span>
+<span id="cb21-17"><a href="#cb21-17"></a>  <span class="fu">ggtitle</span>(</span>
+<span id="cb21-18"><a href="#cb21-18"></a>    <span class="st">"Quantiles of life expectancy"</span>,</span>
+<span id="cb21-19"><a href="#cb21-19"></a>    <span class="at">subtitle =</span> <span class="st">"are lower for males vs females"</span></span>
+<span id="cb21-20"><a href="#cb21-20"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="Chapter02_files/figure-revealjs/unnamed-chunk-21-1.png" width="480"></p>
+<p><img data-src="Chapter02_files/figure-revealjs/unnamed-chunk-19-1.png" width="480"></p>
 </figure>
 </div>
 </div>
@@ -931,16 +895,16 @@ A   1.0 98.03338 102.16896 100.10117 4.135573</code></pre>
 <p>A scatter plot shows the relationship between two quantitative variables. It can highlight linear or non-linear relationships, gaps/subgroups, outliers, etc. A <code>lowess</code> smoother or 2D density can help show the relationship.</p>
 <div class="cell custom4060 columns column-output-location" data-layout-align="center">
 <div class="column">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(horsehearts) <span class="sc">+</span></span>
-<span id="cb23-2"><a href="#cb23-2"></a>  <span class="fu">aes</span>(<span class="at">x =</span> EXTSYS, <span class="at">y =</span> WEIGHT) <span class="sc">+</span></span>
-<span id="cb23-3"><a href="#cb23-3"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"Scatterplot"</span>)</span>
-<span id="cb23-4"><a href="#cb23-4"></a></span>
-<span id="cb23-5"><a href="#cb23-5"></a>p1 </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(horsehearts) <span class="sc">+</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a>  <span class="fu">aes</span>(<span class="at">x =</span> EXTSYS, <span class="at">y =</span> WEIGHT) <span class="sc">+</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"Scatterplot"</span>)</span>
+<span id="cb22-4"><a href="#cb22-4"></a></span>
+<span id="cb22-5"><a href="#cb22-5"></a>p1 </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="Chapter02_files/figure-revealjs/unnamed-chunk-23-1.png" width="480"></p>
+<p><img data-src="Chapter02_files/figure-revealjs/unnamed-chunk-21-1.png" width="480"></p>
 </figure>
 </div>
 </div>
@@ -952,18 +916,18 @@ A   1.0 98.03338 102.16896 100.10117 4.135573</code></pre>
 <p>A scatter plot shows the relationship between two quantitative variables. It can highlight linear or non-linear relationships, gaps/subgroups, outliers, etc. A <code>lowess</code> smoother or 2D density can help show the relationship.</p>
 <div class="cell custom4060 columns column-output-location" data-layout-align="center">
 <div class="column">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(horsehearts) <span class="sc">+</span></span>
-<span id="cb24-2"><a href="#cb24-2"></a>  <span class="fu">aes</span>(<span class="at">x =</span> EXTSYS, <span class="at">y =</span> WEIGHT) <span class="sc">+</span></span>
-<span id="cb24-3"><a href="#cb24-3"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"Scatterplot"</span>)</span>
-<span id="cb24-4"><a href="#cb24-4"></a></span>
-<span id="cb24-5"><a href="#cb24-5"></a>p1 <span class="sc">+</span> </span>
-<span id="cb24-6"><a href="#cb24-6"></a>  <span class="fu">geom_smooth</span>(<span class="at">span =</span> <span class="fl">0.8</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
-<span id="cb24-7"><a href="#cb24-7"></a>  <span class="fu">ggtitle</span>(<span class="st">"Scatterplot with lowess smoother"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(horsehearts) <span class="sc">+</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a>  <span class="fu">aes</span>(<span class="at">x =</span> EXTSYS, <span class="at">y =</span> WEIGHT) <span class="sc">+</span></span>
+<span id="cb23-3"><a href="#cb23-3"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"Scatterplot"</span>)</span>
+<span id="cb23-4"><a href="#cb23-4"></a></span>
+<span id="cb23-5"><a href="#cb23-5"></a>p1 <span class="sc">+</span> </span>
+<span id="cb23-6"><a href="#cb23-6"></a>  <span class="fu">geom_smooth</span>(<span class="at">span =</span> <span class="fl">0.8</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
+<span id="cb23-7"><a href="#cb23-7"></a>  <span class="fu">ggtitle</span>(<span class="st">"Scatterplot with lowess smoother"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="Chapter02_files/figure-revealjs/unnamed-chunk-24-1.png" width="480"></p>
+<p><img data-src="Chapter02_files/figure-revealjs/unnamed-chunk-22-1.png" width="480"></p>
 </figure>
 </div>
 </div>
@@ -975,18 +939,18 @@ A   1.0 98.03338 102.16896 100.10117 4.135573</code></pre>
 <p>A scatter plot shows the relationship between two quantitative variables. It can highlight linear or non-linear relationships, gaps/subgroups, outliers, etc. A <code>lowess</code> smoother or 2D density can help show the relationship.</p>
 <div class="cell custom4060 columns column-output-location" data-layout-align="center">
 <div class="column">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(horsehearts) <span class="sc">+</span></span>
-<span id="cb25-2"><a href="#cb25-2"></a>  <span class="fu">aes</span>(<span class="at">x =</span> EXTSYS, <span class="at">y =</span> WEIGHT) <span class="sc">+</span></span>
-<span id="cb25-3"><a href="#cb25-3"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"Scatterplot"</span>)</span>
-<span id="cb25-4"><a href="#cb25-4"></a></span>
-<span id="cb25-5"><a href="#cb25-5"></a>p1 <span class="sc">+</span> </span>
-<span id="cb25-6"><a href="#cb25-6"></a>  <span class="fu">geom_density_2d</span>() <span class="sc">+</span></span>
-<span id="cb25-7"><a href="#cb25-7"></a>  <span class="fu">ggtitle</span>(<span class="st">"Scatterplot with 2D density"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(horsehearts) <span class="sc">+</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a>  <span class="fu">aes</span>(<span class="at">x =</span> EXTSYS, <span class="at">y =</span> WEIGHT) <span class="sc">+</span></span>
+<span id="cb24-3"><a href="#cb24-3"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"Scatterplot"</span>)</span>
+<span id="cb24-4"><a href="#cb24-4"></a></span>
+<span id="cb24-5"><a href="#cb24-5"></a>p1 <span class="sc">+</span> </span>
+<span id="cb24-6"><a href="#cb24-6"></a>  <span class="fu">geom_density_2d</span>() <span class="sc">+</span></span>
+<span id="cb24-7"><a href="#cb24-7"></a>  <span class="fu">ggtitle</span>(<span class="st">"Scatterplot with 2D density"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="Chapter02_files/figure-revealjs/unnamed-chunk-25-1.png" width="480"></p>
+<p><img data-src="Chapter02_files/figure-revealjs/unnamed-chunk-23-1.png" width="480"></p>
 </figure>
 </div>
 </div>
@@ -998,12 +962,29 @@ A   1.0 98.03338 102.16896 100.10117 4.135573</code></pre>
 <p>Shows both bivariate relationships and univariate (marginal) distributions</p>
 <div class="cell custom4060 columns column-output-location" data-layout-align="center">
 <div class="column">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(rangitikei) <span class="sc">+</span></span>
-<span id="cb26-2"><a href="#cb26-2"></a>  <span class="fu">aes</span>(<span class="at">x =</span> people, <span class="at">y =</span> vehicle) <span class="sc">+</span> </span>
-<span id="cb26-3"><a href="#cb26-3"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">theme_bw</span>()</span>
-<span id="cb26-4"><a href="#cb26-4"></a></span>
-<span id="cb26-5"><a href="#cb26-5"></a><span class="fu">library</span>(ggExtra)</span>
-<span id="cb26-6"><a href="#cb26-6"></a><span class="fu">ggMarginal</span>(p1, <span class="at">type=</span><span class="st">"boxplot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(rangitikei) <span class="sc">+</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a>  <span class="fu">aes</span>(<span class="at">x =</span> people, <span class="at">y =</span> vehicle) <span class="sc">+</span> </span>
+<span id="cb25-3"><a href="#cb25-3"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">theme_bw</span>()</span>
+<span id="cb25-4"><a href="#cb25-4"></a></span>
+<span id="cb25-5"><a href="#cb25-5"></a><span class="fu">library</span>(ggExtra)</span>
+<span id="cb25-6"><a href="#cb25-6"></a><span class="fu">ggMarginal</span>(p1, <span class="at">type=</span><span class="st">"boxplot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Chapter02_files/figure-revealjs/unnamed-chunk-25-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="pairs-plot-scatterplot-matrix" class="slide level2">
+<h2>Pairs plot / scatterplot matrix</h2>
+<div class="cell custom4060 columns column-output-location" data-layout-align="center">
+<div class="column">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">library</span>(GGally)</span>
+<span id="cb26-2"><a href="#cb26-2"></a><span class="fu">ggpairs</span>(pinetree[,<span class="sc">-</span><span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -1015,44 +996,18 @@ A   1.0 98.03338 102.16896 100.10117 4.135573</code></pre>
 </div>
 </div>
 </section>
-<section id="shiny-apps-1" class="slide level2">
-<h2>Shiny apps</h2>
-<p>Explore (though many of these are currently not working)</p>
-<p><a href="https://shiny.massey.ac.nz/anhsmith/demos/explore.bivariate.plots/" class="uri">https://shiny.massey.ac.nz/anhsmith/demos/explore.bivariate.plots/</a></p>
-<p><a href="https://shiny.massey.ac.nz/anhsmith/demos/get.bivariate.plots/" class="uri">https://shiny.massey.ac.nz/anhsmith/demos/get.bivariate.plots/</a></p>
-<p><a href="https://shiny.massey.ac.nz/anhsmith/demos/explore.facet.wrapped.plots/" class="uri">https://shiny.massey.ac.nz/anhsmith/demos/explore.facet.wrapped.plots/</a></p>
-<p><a href="https://shiny.massey.ac.nz/anhsmith/demos/get.facet.wrapped.plots/" class="uri">https://shiny.massey.ac.nz/anhsmith/demos/get.facet.wrapped.plots/</a></p>
-<p><a href="https://shiny.massey.ac.nz/anhsmith/demos/explore.facet.grid.plots/" class="uri">https://shiny.massey.ac.nz/anhsmith/demos/explore.facet.grid.plots/</a></p>
-</section>
-<section id="pairs-plot-scatterplot-matrix" class="slide level2">
-<h2>Pairs plot / scatterplot matrix</h2>
-<div class="cell custom4060 columns column-output-location" data-layout-align="center">
-<div class="column">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">library</span>(GGally)</span>
-<span id="cb27-2"><a href="#cb27-2"></a><span class="fu">ggpairs</span>(pinetree[,<span class="sc">-</span><span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div><div class="column">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="Chapter02_files/figure-revealjs/unnamed-chunk-29-1.png" width="480"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</section>
 <section id="pairs-plot-with-a-grouping-variable" class="slide level2">
 <h2>Pairs plot with a grouping variable</h2>
 <div class="cell custom4060 columns column-output-location" data-layout-align="center">
 <div class="column">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">library</span>(GGally)</span>
-<span id="cb28-2"><a href="#cb28-2"></a><span class="fu">ggpairs</span>(pinetree[,<span class="sc">-</span><span class="dv">1</span>], </span>
-<span id="cb28-3"><a href="#cb28-3"></a>        <span class="fu">aes</span>(<span class="at">colour =</span> pinetree<span class="sc">$</span>Area))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">library</span>(GGally)</span>
+<span id="cb27-2"><a href="#cb27-2"></a><span class="fu">ggpairs</span>(pinetree[,<span class="sc">-</span><span class="dv">1</span>], </span>
+<span id="cb27-3"><a href="#cb27-3"></a>        <span class="fu">aes</span>(<span class="at">colour =</span> pinetree<span class="sc">$</span>Area))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="Chapter02_files/figure-revealjs/unnamed-chunk-30-1.png" width="480"></p>
+<p><img data-src="Chapter02_files/figure-revealjs/unnamed-chunk-28-1.png" width="480"></p>
 </figure>
 </div>
 </div>
@@ -1063,7 +1018,7 @@ A   1.0 98.03338 102.16896 100.10117 4.135573</code></pre>
 <h2>Correlation coefficients</h2>
 <p>The Pearson correlation coefficient measures the <strong>linear</strong> association between two variables.</p>
 
-<img data-src="Chapter02_files/figure-revealjs/unnamed-chunk-31-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="Chapter02_files/figure-revealjs/unnamed-chunk-29-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="correlation-matrix" class="slide level2 scrollable">
 <h2>Correlation Matrix</h2>
 <ul>
@@ -1072,8 +1027,8 @@ A   1.0 98.03338 102.16896 100.10117 4.135573</code></pre>
 </ul>
 <div class="cell custom4060 columns column-output-location" data-layout-align="center">
 <div class="column">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="fu">library</span>(psych)</span>
-<span id="cb29-2"><a href="#cb29-2"></a><span class="fu">corr.test</span>(pinetree[,<span class="sc">-</span><span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">library</span>(psych)</span>
+<span id="cb28-2"><a href="#cb28-2"></a><span class="fu">corr.test</span>(pinetree[,<span class="sc">-</span><span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output cell-output-stdout">
 <pre><code>Call:corr.test(x = pinetree[, -1])
@@ -1101,17 +1056,17 @@ First    0     0      0     0
 <h2>Correlation Plots</h2>
 <div class="cell custom4060 columns column-output-location" data-layout-align="center">
 <div class="column">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="fu">library</span>(corrplot)</span>
-<span id="cb31-2"><a href="#cb31-2"></a><span class="fu">corrplot</span>(</span>
-<span id="cb31-3"><a href="#cb31-3"></a>  <span class="fu">cor</span>(pinetree[,<span class="sc">-</span><span class="dv">1</span>]),  </span>
-<span id="cb31-4"><a href="#cb31-4"></a>  <span class="at">type =</span> <span class="st">"upper"</span>, </span>
-<span id="cb31-5"><a href="#cb31-5"></a>  <span class="at">method=</span><span class="st">"number"</span></span>
-<span id="cb31-6"><a href="#cb31-6"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">library</span>(corrplot)</span>
+<span id="cb30-2"><a href="#cb30-2"></a><span class="fu">corrplot</span>(</span>
+<span id="cb30-3"><a href="#cb30-3"></a>  <span class="fu">cor</span>(pinetree[,<span class="sc">-</span><span class="dv">1</span>]),  </span>
+<span id="cb30-4"><a href="#cb30-4"></a>  <span class="at">type =</span> <span class="st">"upper"</span>, </span>
+<span id="cb30-5"><a href="#cb30-5"></a>  <span class="at">method=</span><span class="st">"number"</span></span>
+<span id="cb30-6"><a href="#cb30-6"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="Chapter02_files/figure-revealjs/unnamed-chunk-33-1.png" width="480"></p>
+<p><img data-src="Chapter02_files/figure-revealjs/unnamed-chunk-31-1.png" width="480"></p>
 </figure>
 </div>
 </div>
@@ -1122,15 +1077,15 @@ First    0     0      0     0
 <h2>Network plots</h2>
 <div class="cell custom4060 columns column-output-location" data-layout-align="center">
 <div class="column">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">library</span>(corrr)</span>
-<span id="cb32-2"><a href="#cb32-2"></a>pinetree[,<span class="sc">-</span><span class="dv">1</span>] <span class="sc">|&gt;</span> </span>
-<span id="cb32-3"><a href="#cb32-3"></a>  <span class="fu">correlate</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb32-4"><a href="#cb32-4"></a>  <span class="fu">network_plot</span>(<span class="at">min_cor=</span><span class="fl">0.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="fu">library</span>(corrr)</span>
+<span id="cb31-2"><a href="#cb31-2"></a>pinetree[,<span class="sc">-</span><span class="dv">1</span>] <span class="sc">|&gt;</span> </span>
+<span id="cb31-3"><a href="#cb31-3"></a>  <span class="fu">correlate</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb31-4"><a href="#cb31-4"></a>  <span class="fu">network_plot</span>(<span class="at">min_cor=</span><span class="fl">0.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="Chapter02_files/figure-revealjs/unnamed-chunk-34-1.png" width="768"></p>
+<p><img data-src="Chapter02_files/figure-revealjs/unnamed-chunk-32-1.png" width="768"></p>
 </figure>
 </div>
 </div>
@@ -1142,19 +1097,19 @@ First    0     0      0     0
 <p>A bubble plot, shows the third (fourth) variable as point size (colour).</p>
 <div class="cell custom3070 columns column-output-location" data-layout-align="center">
 <div class="column">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(pinetree) <span class="sc">+</span></span>
-<span id="cb33-2"><a href="#cb33-2"></a>  <span class="fu">aes</span>(<span class="at">x =</span> First, </span>
-<span id="cb33-3"><a href="#cb33-3"></a>      <span class="at">y =</span> Second,</span>
-<span id="cb33-4"><a href="#cb33-4"></a>      <span class="at">size =</span> Third) <span class="sc">+</span> </span>
-<span id="cb33-5"><a href="#cb33-5"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb33-6"><a href="#cb33-6"></a>  <span class="fu">ggtitle</span>(<span class="st">"Bubble plot"</span>)</span>
-<span id="cb33-7"><a href="#cb33-7"></a></span>
-<span id="cb33-8"><a href="#cb33-8"></a>p1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(pinetree) <span class="sc">+</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a>  <span class="fu">aes</span>(<span class="at">x =</span> First, </span>
+<span id="cb32-3"><a href="#cb32-3"></a>      <span class="at">y =</span> Second,</span>
+<span id="cb32-4"><a href="#cb32-4"></a>      <span class="at">size =</span> Third) <span class="sc">+</span> </span>
+<span id="cb32-5"><a href="#cb32-5"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb32-6"><a href="#cb32-6"></a>  <span class="fu">ggtitle</span>(<span class="st">"Bubble plot"</span>)</span>
+<span id="cb32-7"><a href="#cb32-7"></a></span>
+<span id="cb32-8"><a href="#cb32-8"></a>p1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="Chapter02_files/figure-revealjs/unnamed-chunk-35-1.png" width="576"></p>
+<p><img data-src="Chapter02_files/figure-revealjs/unnamed-chunk-33-1.png" width="576"></p>
 </figure>
 </div>
 </div>
@@ -1166,19 +1121,19 @@ First    0     0      0     0
 <p>A bubble plot, shows the third (fourth) variable as point size (colour).</p>
 <div class="cell custom3070 columns column-output-location" data-layout-align="center">
 <div class="column">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(pinetree) <span class="sc">+</span></span>
-<span id="cb34-2"><a href="#cb34-2"></a>  <span class="fu">aes</span>(<span class="at">x =</span> First, </span>
-<span id="cb34-3"><a href="#cb34-3"></a>      <span class="at">y =</span> Second,</span>
-<span id="cb34-4"><a href="#cb34-4"></a>      <span class="at">size =</span> Third) <span class="sc">+</span> </span>
-<span id="cb34-5"><a href="#cb34-5"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb34-6"><a href="#cb34-6"></a>  <span class="fu">ggtitle</span>(<span class="st">"Bubble plot"</span>)</span>
-<span id="cb34-7"><a href="#cb34-7"></a></span>
-<span id="cb34-8"><a href="#cb34-8"></a>p1 <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">colour =</span> Area)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(pinetree) <span class="sc">+</span></span>
+<span id="cb33-2"><a href="#cb33-2"></a>  <span class="fu">aes</span>(<span class="at">x =</span> First, </span>
+<span id="cb33-3"><a href="#cb33-3"></a>      <span class="at">y =</span> Second,</span>
+<span id="cb33-4"><a href="#cb33-4"></a>      <span class="at">size =</span> Third) <span class="sc">+</span> </span>
+<span id="cb33-5"><a href="#cb33-5"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb33-6"><a href="#cb33-6"></a>  <span class="fu">ggtitle</span>(<span class="st">"Bubble plot"</span>)</span>
+<span id="cb33-7"><a href="#cb33-7"></a></span>
+<span id="cb33-8"><a href="#cb33-8"></a>p1 <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">colour =</span> Area)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="Chapter02_files/figure-revealjs/unnamed-chunk-36-1.png" width="576"></p>
+<p><img data-src="Chapter02_files/figure-revealjs/unnamed-chunk-34-1.png" width="576"></p>
 </figure>
 </div>
 </div>
@@ -1190,20 +1145,20 @@ First    0     0      0     0
 <p>Package <code>plot3D</code></p>
 <div class="cell custom3070 columns column-output-location" data-layout-align="center">
 <div class="column">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="fu">library</span>(<span class="st">"plot3D"</span>)</span>
-<span id="cb35-2"><a href="#cb35-2"></a></span>
-<span id="cb35-3"><a href="#cb35-3"></a><span class="fu">scatter3D</span>(</span>
-<span id="cb35-4"><a href="#cb35-4"></a>  <span class="at">x =</span> pinetree<span class="sc">$</span>First, </span>
-<span id="cb35-5"><a href="#cb35-5"></a>  <span class="at">y =</span> pinetree<span class="sc">$</span>Second, </span>
-<span id="cb35-6"><a href="#cb35-6"></a>  <span class="at">z =</span> pinetree<span class="sc">$</span>Top, </span>
-<span id="cb35-7"><a href="#cb35-7"></a>  <span class="at">phi =</span> <span class="dv">0</span>, <span class="at">bty =</span> <span class="st">"g"</span>, </span>
-<span id="cb35-8"><a href="#cb35-8"></a>  <span class="at">ticktype =</span><span class="st">"detailed"</span></span>
-<span id="cb35-9"><a href="#cb35-9"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="fu">library</span>(<span class="st">"plot3D"</span>)</span>
+<span id="cb34-2"><a href="#cb34-2"></a></span>
+<span id="cb34-3"><a href="#cb34-3"></a><span class="fu">scatter3D</span>(</span>
+<span id="cb34-4"><a href="#cb34-4"></a>  <span class="at">x =</span> pinetree<span class="sc">$</span>First, </span>
+<span id="cb34-5"><a href="#cb34-5"></a>  <span class="at">y =</span> pinetree<span class="sc">$</span>Second, </span>
+<span id="cb34-6"><a href="#cb34-6"></a>  <span class="at">z =</span> pinetree<span class="sc">$</span>Top, </span>
+<span id="cb34-7"><a href="#cb34-7"></a>  <span class="at">phi =</span> <span class="dv">0</span>, <span class="at">bty =</span> <span class="st">"g"</span>, </span>
+<span id="cb34-8"><a href="#cb34-8"></a>  <span class="at">ticktype =</span><span class="st">"detailed"</span></span>
+<span id="cb34-9"><a href="#cb34-9"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="Chapter02_files/figure-revealjs/unnamed-chunk-37-1.png" width="576"></p>
+<p><img data-src="Chapter02_files/figure-revealjs/unnamed-chunk-35-1.png" width="576"></p>
 </figure>
 </div>
 </div>
@@ -1215,19 +1170,19 @@ First    0     0      0     0
 <p>Package <code>plotly</code></p>
 <div class="cell custom3070 columns column-output-location" data-layout-align="center">
 <div class="column">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="fu">library</span>(plotly)</span>
-<span id="cb36-2"><a href="#cb36-2"></a></span>
-<span id="cb36-3"><a href="#cb36-3"></a><span class="fu">plot_ly</span>(</span>
-<span id="cb36-4"><a href="#cb36-4"></a>  pinetree, </span>
-<span id="cb36-5"><a href="#cb36-5"></a>  <span class="at">x =</span> <span class="sc">~</span>First, </span>
-<span id="cb36-6"><a href="#cb36-6"></a>  <span class="at">y =</span> <span class="sc">~</span>Second, </span>
-<span id="cb36-7"><a href="#cb36-7"></a>  <span class="at">z =</span> <span class="sc">~</span>Top</span>
-<span id="cb36-8"><a href="#cb36-8"></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb36-9"><a href="#cb36-9"></a>  <span class="fu">add_markers</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="fu">library</span>(plotly)</span>
+<span id="cb35-2"><a href="#cb35-2"></a></span>
+<span id="cb35-3"><a href="#cb35-3"></a><span class="fu">plot_ly</span>(</span>
+<span id="cb35-4"><a href="#cb35-4"></a>  pinetree, </span>
+<span id="cb35-5"><a href="#cb35-5"></a>  <span class="at">x =</span> <span class="sc">~</span>First, </span>
+<span id="cb35-6"><a href="#cb35-6"></a>  <span class="at">y =</span> <span class="sc">~</span>Second, </span>
+<span id="cb35-7"><a href="#cb35-7"></a>  <span class="at">z =</span> <span class="sc">~</span>Top</span>
+<span id="cb35-8"><a href="#cb35-8"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb35-9"><a href="#cb35-9"></a>  <span class="fu">add_markers</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output-display">
 <div class="plotly html-widget html-fill-item" id="htmlwidget-9fed18d622a76f1d8b9e" style="width:576px;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-9fed18d622a76f1d8b9e">{"x":{"visdat":{"e1fc7c22153":["function () ","plotlyVisDat"]},"cur_data":"e1fc7c22153","attrs":{"e1fc7c22153":{"x":{},"y":{},"z":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d","mode":"markers","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":"First"},"yaxis":{"title":"Second"},"zaxis":{"title":"Top"}},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[23.899999999999999,25.699999999999999,27.199999999999999,30,31.699999999999999,31.699999999999999,32.600000000000001,32.799999999999997,33.100000000000001,33.399999999999999,34.5,34.600000000000001,35.799999999999997,36.299999999999997,37.600000000000001,38,41.200000000000003,43.5,44.899999999999999,47.600000000000001,17.600000000000001,23.300000000000001,24.699999999999999,25.199999999999999,26.5,26.800000000000001,27.100000000000001,28,28.899999999999999,29.399999999999999,30.800000000000001,31.600000000000001,33.200000000000003,34.700000000000003,36.100000000000001,37.5,38.799999999999997,41.5,43.200000000000003,46.700000000000003,17.899999999999999,18.800000000000001,20.899999999999999,21.600000000000001,22.699999999999999,23.5,24.100000000000001,25.300000000000001,26.199999999999999,26.899999999999999,27.399999999999999,27.800000000000001,28.5,29.100000000000001,29.899999999999999,30.800000000000001,31.600000000000001,33.700000000000003,35.600000000000001,36.200000000000003],"y":[16.300000000000001,22.800000000000001,24.5,25.199999999999999,26.399999999999999,27.300000000000001,27.300000000000001,27.899999999999999,28.100000000000001,28.699999999999999,29,29.5,30.5,31.399999999999999,32.799999999999997,33.200000000000003,34.700000000000003,35.600000000000001,37.200000000000003,38,16.800000000000001,17.899999999999999,18.699999999999999,20.399999999999999,22.699999999999999,24.100000000000001,25.5,26.699999999999999,27.800000000000001,28.899999999999999,30.100000000000001,31.199999999999999,31.699999999999999,32.5,32.799999999999997,33.899999999999999,34.700000000000003,35.899999999999999,37.5,40.899999999999999,15.1,17.300000000000001,18.399999999999999,19.800000000000001,20.5,21.199999999999999,21.899999999999999,22.399999999999999,22.800000000000001,23.300000000000001,23.699999999999999,24.100000000000001,24.600000000000001,24.600000000000001,25.199999999999999,26.699999999999999,27.800000000000001,29.199999999999999,30.5,31.100000000000001],"z":[11.1,12.5,13.699999999999999,14.199999999999999,15,16.100000000000001,16.800000000000001,17.5,17.5,18.899999999999999,20.300000000000001,21.699999999999999,22.199999999999999,23.600000000000001,24.100000000000001,24.800000000000001,25.699999999999999,26.899999999999999,27.600000000000001,30.300000000000001,10.1,10.9,11.300000000000001,12.699999999999999,13.300000000000001,14.1,15,15.300000000000001,16.100000000000001,16.699999999999999,17.5,17.5,18.199999999999999,20.5,22.100000000000001,22.899999999999999,23.699999999999999,25.600000000000001,27.899999999999999,30,10.5,10.9,11.1,11.199999999999999,11.4,11.4,11.800000000000001,12.1,12.199999999999999,12.699999999999999,13.199999999999999,13.6,14.5,14.9,15.800000000000001,16.899999999999999,17.5,18.100000000000001,19.699999999999999,22.5],"type":"scatter3d","mode":"markers","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-9fed18d622a76f1d8b9e">{"x":{"visdat":{"8740749c108a":["function () ","plotlyVisDat"]},"cur_data":"8740749c108a","attrs":{"8740749c108a":{"x":{},"y":{},"z":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d","mode":"markers","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":"First"},"yaxis":{"title":"Second"},"zaxis":{"title":"Top"}},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[23.899999999999999,25.699999999999999,27.199999999999999,30,31.699999999999999,31.699999999999999,32.600000000000001,32.799999999999997,33.100000000000001,33.399999999999999,34.5,34.600000000000001,35.799999999999997,36.299999999999997,37.600000000000001,38,41.200000000000003,43.5,44.899999999999999,47.600000000000001,17.600000000000001,23.300000000000001,24.699999999999999,25.199999999999999,26.5,26.800000000000001,27.100000000000001,28,28.899999999999999,29.399999999999999,30.800000000000001,31.600000000000001,33.200000000000003,34.700000000000003,36.100000000000001,37.5,38.799999999999997,41.5,43.200000000000003,46.700000000000003,17.899999999999999,18.800000000000001,20.899999999999999,21.600000000000001,22.699999999999999,23.5,24.100000000000001,25.300000000000001,26.199999999999999,26.899999999999999,27.399999999999999,27.800000000000001,28.5,29.100000000000001,29.899999999999999,30.800000000000001,31.600000000000001,33.700000000000003,35.600000000000001,36.200000000000003],"y":[16.300000000000001,22.800000000000001,24.5,25.199999999999999,26.399999999999999,27.300000000000001,27.300000000000001,27.899999999999999,28.100000000000001,28.699999999999999,29,29.5,30.5,31.399999999999999,32.799999999999997,33.200000000000003,34.700000000000003,35.600000000000001,37.200000000000003,38,16.800000000000001,17.899999999999999,18.699999999999999,20.399999999999999,22.699999999999999,24.100000000000001,25.5,26.699999999999999,27.800000000000001,28.899999999999999,30.100000000000001,31.199999999999999,31.699999999999999,32.5,32.799999999999997,33.899999999999999,34.700000000000003,35.899999999999999,37.5,40.899999999999999,15.1,17.300000000000001,18.399999999999999,19.800000000000001,20.5,21.199999999999999,21.899999999999999,22.399999999999999,22.800000000000001,23.300000000000001,23.699999999999999,24.100000000000001,24.600000000000001,24.600000000000001,25.199999999999999,26.699999999999999,27.800000000000001,29.199999999999999,30.5,31.100000000000001],"z":[11.1,12.5,13.699999999999999,14.199999999999999,15,16.100000000000001,16.800000000000001,17.5,17.5,18.899999999999999,20.300000000000001,21.699999999999999,22.199999999999999,23.600000000000001,24.100000000000001,24.800000000000001,25.699999999999999,26.899999999999999,27.600000000000001,30.300000000000001,10.1,10.9,11.300000000000001,12.699999999999999,13.300000000000001,14.1,15,15.300000000000001,16.100000000000001,16.699999999999999,17.5,17.5,18.199999999999999,20.5,22.100000000000001,22.899999999999999,23.699999999999999,25.600000000000001,27.899999999999999,30,10.5,10.9,11.1,11.199999999999999,11.4,11.4,11.800000000000001,12.1,12.199999999999999,12.699999999999999,13.199999999999999,13.6,14.5,14.9,15.800000000000001,16.899999999999999,17.5,18.100000000000001,19.699999999999999,22.5],"type":"scatter3d","mode":"markers","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </div>
@@ -1240,15 +1195,15 @@ First    0     0      0     0
 </ul>
 <div class="cell custom3070 columns column-output-location" data-layout-align="center">
 <div class="column">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="fu">library</span>(plotly)</span>
-<span id="cb37-2"><a href="#cb37-2"></a><span class="fu">plot_ly</span>(<span class="at">type =</span> <span class="st">'contour'</span>, </span>
-<span id="cb37-3"><a href="#cb37-3"></a>        <span class="at">x=</span>pinetree<span class="sc">$</span>First, </span>
-<span id="cb37-4"><a href="#cb37-4"></a>        <span class="at">y=</span>pinetree<span class="sc">$</span>Second, </span>
-<span id="cb37-5"><a href="#cb37-5"></a>        <span class="at">z=</span>pinetree<span class="sc">$</span>Top)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="fu">library</span>(plotly)</span>
+<span id="cb36-2"><a href="#cb36-2"></a><span class="fu">plot_ly</span>(<span class="at">type =</span> <span class="st">'contour'</span>, </span>
+<span id="cb36-3"><a href="#cb36-3"></a>        <span class="at">x=</span>pinetree<span class="sc">$</span>First, </span>
+<span id="cb36-4"><a href="#cb36-4"></a>        <span class="at">y=</span>pinetree<span class="sc">$</span>Second, </span>
+<span id="cb36-5"><a href="#cb36-5"></a>        <span class="at">z=</span>pinetree<span class="sc">$</span>Top)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output-display">
 <div class="plotly html-widget html-fill-item" id="htmlwidget-786d9d3fe28ddcdfc642" style="width:576px;height:576px;"></div>
-<script type="application/json" data-for="htmlwidget-786d9d3fe28ddcdfc642">{"x":{"visdat":{"e1fc7aa6402a":["function () ","plotlyVisDat"]},"cur_data":"e1fc7aa6402a","attrs":{"e1fc7aa6402a":{"x":[23.899999999999999,25.699999999999999,27.199999999999999,30,31.699999999999999,31.699999999999999,32.600000000000001,32.799999999999997,33.100000000000001,33.399999999999999,34.5,34.600000000000001,35.799999999999997,36.299999999999997,37.600000000000001,38,41.200000000000003,43.5,44.899999999999999,47.600000000000001,17.600000000000001,23.300000000000001,24.699999999999999,25.199999999999999,26.5,26.800000000000001,27.100000000000001,28,28.899999999999999,29.399999999999999,30.800000000000001,31.600000000000001,33.200000000000003,34.700000000000003,36.100000000000001,37.5,38.799999999999997,41.5,43.200000000000003,46.700000000000003,17.899999999999999,18.800000000000001,20.899999999999999,21.600000000000001,22.699999999999999,23.5,24.100000000000001,25.300000000000001,26.199999999999999,26.899999999999999,27.399999999999999,27.800000000000001,28.5,29.100000000000001,29.899999999999999,30.800000000000001,31.600000000000001,33.700000000000003,35.600000000000001,36.200000000000003],"y":[16.300000000000001,22.800000000000001,24.5,25.199999999999999,26.399999999999999,27.300000000000001,27.300000000000001,27.899999999999999,28.100000000000001,28.699999999999999,29,29.5,30.5,31.399999999999999,32.799999999999997,33.200000000000003,34.700000000000003,35.600000000000001,37.200000000000003,38,16.800000000000001,17.899999999999999,18.699999999999999,20.399999999999999,22.699999999999999,24.100000000000001,25.5,26.699999999999999,27.800000000000001,28.899999999999999,30.100000000000001,31.199999999999999,31.699999999999999,32.5,32.799999999999997,33.899999999999999,34.700000000000003,35.899999999999999,37.5,40.899999999999999,15.1,17.300000000000001,18.399999999999999,19.800000000000001,20.5,21.199999999999999,21.899999999999999,22.399999999999999,22.800000000000001,23.300000000000001,23.699999999999999,24.100000000000001,24.600000000000001,24.600000000000001,25.199999999999999,26.699999999999999,27.800000000000001,29.199999999999999,30.5,31.100000000000001],"z":[11.1,12.5,13.699999999999999,14.199999999999999,15,16.100000000000001,16.800000000000001,17.5,17.5,18.899999999999999,20.300000000000001,21.699999999999999,22.199999999999999,23.600000000000001,24.100000000000001,24.800000000000001,25.699999999999999,26.899999999999999,27.600000000000001,30.300000000000001,10.1,10.9,11.300000000000001,12.699999999999999,13.300000000000001,14.1,15,15.300000000000001,16.100000000000001,16.699999999999999,17.5,17.5,18.199999999999999,20.5,22.100000000000001,22.899999999999999,23.699999999999999,25.600000000000001,27.899999999999999,30,10.5,10.9,11.1,11.199999999999999,11.4,11.4,11.800000000000001,12.1,12.199999999999999,12.699999999999999,13.199999999999999,13.6,14.5,14.9,15.800000000000001,16.899999999999999,17.5,18.100000000000001,19.699999999999999,22.5],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"contour"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":[]},"yaxis":{"domain":[0,1],"automargin":true,"title":[]},"scene":{"zaxis":{"title":[]}},"hovermode":"closest","showlegend":false,"legend":{"yanchor":"top","y":0.5}},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"colorbar":{"title":"","ticklen":2,"len":0.5,"lenmode":"fraction","y":1,"yanchor":"top"},"colorscale":[["0","rgba(68,1,84,1)"],["0.0416666666666667","rgba(70,19,97,1)"],["0.0833333333333333","rgba(72,32,111,1)"],["0.125","rgba(71,45,122,1)"],["0.166666666666667","rgba(68,58,128,1)"],["0.208333333333333","rgba(64,70,135,1)"],["0.25","rgba(60,82,138,1)"],["0.291666666666667","rgba(56,93,140,1)"],["0.333333333333333","rgba(49,104,142,1)"],["0.375","rgba(46,114,142,1)"],["0.416666666666667","rgba(42,123,142,1)"],["0.458333333333333","rgba(38,133,141,1)"],["0.5","rgba(37,144,140,1)"],["0.541666666666667","rgba(33,154,138,1)"],["0.583333333333333","rgba(39,164,133,1)"],["0.625","rgba(47,174,127,1)"],["0.666666666666667","rgba(53,183,121,1)"],["0.708333333333333","rgba(79,191,110,1)"],["0.75","rgba(98,199,98,1)"],["0.791666666666667","rgba(119,207,85,1)"],["0.833333333333333","rgba(147,214,70,1)"],["0.875","rgba(172,220,52,1)"],["0.916666666666667","rgba(199,225,42,1)"],["0.958333333333333","rgba(226,228,40,1)"],["1","rgba(253,231,37,1)"]],"showscale":true,"x":[23.899999999999999,25.699999999999999,27.199999999999999,30,31.699999999999999,31.699999999999999,32.600000000000001,32.799999999999997,33.100000000000001,33.399999999999999,34.5,34.600000000000001,35.799999999999997,36.299999999999997,37.600000000000001,38,41.200000000000003,43.5,44.899999999999999,47.600000000000001,17.600000000000001,23.300000000000001,24.699999999999999,25.199999999999999,26.5,26.800000000000001,27.100000000000001,28,28.899999999999999,29.399999999999999,30.800000000000001,31.600000000000001,33.200000000000003,34.700000000000003,36.100000000000001,37.5,38.799999999999997,41.5,43.200000000000003,46.700000000000003,17.899999999999999,18.800000000000001,20.899999999999999,21.600000000000001,22.699999999999999,23.5,24.100000000000001,25.300000000000001,26.199999999999999,26.899999999999999,27.399999999999999,27.800000000000001,28.5,29.100000000000001,29.899999999999999,30.800000000000001,31.600000000000001,33.700000000000003,35.600000000000001,36.200000000000003],"y":[16.300000000000001,22.800000000000001,24.5,25.199999999999999,26.399999999999999,27.300000000000001,27.300000000000001,27.899999999999999,28.100000000000001,28.699999999999999,29,29.5,30.5,31.399999999999999,32.799999999999997,33.200000000000003,34.700000000000003,35.600000000000001,37.200000000000003,38,16.800000000000001,17.899999999999999,18.699999999999999,20.399999999999999,22.699999999999999,24.100000000000001,25.5,26.699999999999999,27.800000000000001,28.899999999999999,30.100000000000001,31.199999999999999,31.699999999999999,32.5,32.799999999999997,33.899999999999999,34.700000000000003,35.899999999999999,37.5,40.899999999999999,15.1,17.300000000000001,18.399999999999999,19.800000000000001,20.5,21.199999999999999,21.899999999999999,22.399999999999999,22.800000000000001,23.300000000000001,23.699999999999999,24.100000000000001,24.600000000000001,24.600000000000001,25.199999999999999,26.699999999999999,27.800000000000001,29.199999999999999,30.5,31.100000000000001],"z":[11.1,12.5,13.699999999999999,14.199999999999999,15,16.100000000000001,16.800000000000001,17.5,17.5,18.899999999999999,20.300000000000001,21.699999999999999,22.199999999999999,23.600000000000001,24.100000000000001,24.800000000000001,25.699999999999999,26.899999999999999,27.600000000000001,30.300000000000001,10.1,10.9,11.300000000000001,12.699999999999999,13.300000000000001,14.1,15,15.300000000000001,16.100000000000001,16.699999999999999,17.5,17.5,18.199999999999999,20.5,22.100000000000001,22.899999999999999,23.699999999999999,25.600000000000001,27.899999999999999,30,10.5,10.9,11.1,11.199999999999999,11.4,11.4,11.800000000000001,12.1,12.199999999999999,12.699999999999999,13.199999999999999,13.6,14.5,14.9,15.800000000000001,16.899999999999999,17.5,18.100000000000001,19.699999999999999,22.5],"type":"contour","line":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-786d9d3fe28ddcdfc642">{"x":{"visdat":{"8740750878fd":["function () ","plotlyVisDat"]},"cur_data":"8740750878fd","attrs":{"8740750878fd":{"x":[23.899999999999999,25.699999999999999,27.199999999999999,30,31.699999999999999,31.699999999999999,32.600000000000001,32.799999999999997,33.100000000000001,33.399999999999999,34.5,34.600000000000001,35.799999999999997,36.299999999999997,37.600000000000001,38,41.200000000000003,43.5,44.899999999999999,47.600000000000001,17.600000000000001,23.300000000000001,24.699999999999999,25.199999999999999,26.5,26.800000000000001,27.100000000000001,28,28.899999999999999,29.399999999999999,30.800000000000001,31.600000000000001,33.200000000000003,34.700000000000003,36.100000000000001,37.5,38.799999999999997,41.5,43.200000000000003,46.700000000000003,17.899999999999999,18.800000000000001,20.899999999999999,21.600000000000001,22.699999999999999,23.5,24.100000000000001,25.300000000000001,26.199999999999999,26.899999999999999,27.399999999999999,27.800000000000001,28.5,29.100000000000001,29.899999999999999,30.800000000000001,31.600000000000001,33.700000000000003,35.600000000000001,36.200000000000003],"y":[16.300000000000001,22.800000000000001,24.5,25.199999999999999,26.399999999999999,27.300000000000001,27.300000000000001,27.899999999999999,28.100000000000001,28.699999999999999,29,29.5,30.5,31.399999999999999,32.799999999999997,33.200000000000003,34.700000000000003,35.600000000000001,37.200000000000003,38,16.800000000000001,17.899999999999999,18.699999999999999,20.399999999999999,22.699999999999999,24.100000000000001,25.5,26.699999999999999,27.800000000000001,28.899999999999999,30.100000000000001,31.199999999999999,31.699999999999999,32.5,32.799999999999997,33.899999999999999,34.700000000000003,35.899999999999999,37.5,40.899999999999999,15.1,17.300000000000001,18.399999999999999,19.800000000000001,20.5,21.199999999999999,21.899999999999999,22.399999999999999,22.800000000000001,23.300000000000001,23.699999999999999,24.100000000000001,24.600000000000001,24.600000000000001,25.199999999999999,26.699999999999999,27.800000000000001,29.199999999999999,30.5,31.100000000000001],"z":[11.1,12.5,13.699999999999999,14.199999999999999,15,16.100000000000001,16.800000000000001,17.5,17.5,18.899999999999999,20.300000000000001,21.699999999999999,22.199999999999999,23.600000000000001,24.100000000000001,24.800000000000001,25.699999999999999,26.899999999999999,27.600000000000001,30.300000000000001,10.1,10.9,11.300000000000001,12.699999999999999,13.300000000000001,14.1,15,15.300000000000001,16.100000000000001,16.699999999999999,17.5,17.5,18.199999999999999,20.5,22.100000000000001,22.899999999999999,23.699999999999999,25.600000000000001,27.899999999999999,30,10.5,10.9,11.1,11.199999999999999,11.4,11.4,11.800000000000001,12.1,12.199999999999999,12.699999999999999,13.199999999999999,13.6,14.5,14.9,15.800000000000001,16.899999999999999,17.5,18.100000000000001,19.699999999999999,22.5],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"contour"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":[]},"yaxis":{"domain":[0,1],"automargin":true,"title":[]},"scene":{"zaxis":{"title":[]}},"hovermode":"closest","showlegend":false,"legend":{"yanchor":"top","y":0.5}},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"colorbar":{"title":"","ticklen":2,"len":0.5,"lenmode":"fraction","y":1,"yanchor":"top"},"colorscale":[["0","rgba(68,1,84,1)"],["0.0416666666666667","rgba(70,19,97,1)"],["0.0833333333333333","rgba(72,32,111,1)"],["0.125","rgba(71,45,122,1)"],["0.166666666666667","rgba(68,58,128,1)"],["0.208333333333333","rgba(64,70,135,1)"],["0.25","rgba(60,82,138,1)"],["0.291666666666667","rgba(56,93,140,1)"],["0.333333333333333","rgba(49,104,142,1)"],["0.375","rgba(46,114,142,1)"],["0.416666666666667","rgba(42,123,142,1)"],["0.458333333333333","rgba(38,133,141,1)"],["0.5","rgba(37,144,140,1)"],["0.541666666666667","rgba(33,154,138,1)"],["0.583333333333333","rgba(39,164,133,1)"],["0.625","rgba(47,174,127,1)"],["0.666666666666667","rgba(53,183,121,1)"],["0.708333333333333","rgba(79,191,110,1)"],["0.75","rgba(98,199,98,1)"],["0.791666666666667","rgba(119,207,85,1)"],["0.833333333333333","rgba(147,214,70,1)"],["0.875","rgba(172,220,52,1)"],["0.916666666666667","rgba(199,225,42,1)"],["0.958333333333333","rgba(226,228,40,1)"],["1","rgba(253,231,37,1)"]],"showscale":true,"x":[23.899999999999999,25.699999999999999,27.199999999999999,30,31.699999999999999,31.699999999999999,32.600000000000001,32.799999999999997,33.100000000000001,33.399999999999999,34.5,34.600000000000001,35.799999999999997,36.299999999999997,37.600000000000001,38,41.200000000000003,43.5,44.899999999999999,47.600000000000001,17.600000000000001,23.300000000000001,24.699999999999999,25.199999999999999,26.5,26.800000000000001,27.100000000000001,28,28.899999999999999,29.399999999999999,30.800000000000001,31.600000000000001,33.200000000000003,34.700000000000003,36.100000000000001,37.5,38.799999999999997,41.5,43.200000000000003,46.700000000000003,17.899999999999999,18.800000000000001,20.899999999999999,21.600000000000001,22.699999999999999,23.5,24.100000000000001,25.300000000000001,26.199999999999999,26.899999999999999,27.399999999999999,27.800000000000001,28.5,29.100000000000001,29.899999999999999,30.800000000000001,31.600000000000001,33.700000000000003,35.600000000000001,36.200000000000003],"y":[16.300000000000001,22.800000000000001,24.5,25.199999999999999,26.399999999999999,27.300000000000001,27.300000000000001,27.899999999999999,28.100000000000001,28.699999999999999,29,29.5,30.5,31.399999999999999,32.799999999999997,33.200000000000003,34.700000000000003,35.600000000000001,37.200000000000003,38,16.800000000000001,17.899999999999999,18.699999999999999,20.399999999999999,22.699999999999999,24.100000000000001,25.5,26.699999999999999,27.800000000000001,28.899999999999999,30.100000000000001,31.199999999999999,31.699999999999999,32.5,32.799999999999997,33.899999999999999,34.700000000000003,35.899999999999999,37.5,40.899999999999999,15.1,17.300000000000001,18.399999999999999,19.800000000000001,20.5,21.199999999999999,21.899999999999999,22.399999999999999,22.800000000000001,23.300000000000001,23.699999999999999,24.100000000000001,24.600000000000001,24.600000000000001,25.199999999999999,26.699999999999999,27.800000000000001,29.199999999999999,30.5,31.100000000000001],"z":[11.1,12.5,13.699999999999999,14.199999999999999,15,16.100000000000001,16.800000000000001,17.5,17.5,18.899999999999999,20.300000000000001,21.699999999999999,22.199999999999999,23.600000000000001,24.100000000000001,24.800000000000001,25.699999999999999,26.899999999999999,27.600000000000001,30.300000000000001,10.1,10.9,11.300000000000001,12.699999999999999,13.300000000000001,14.1,15,15.300000000000001,16.100000000000001,16.699999999999999,17.5,17.5,18.199999999999999,20.5,22.100000000000001,22.899999999999999,23.699999999999999,25.600000000000001,27.899999999999999,30,10.5,10.9,11.1,11.199999999999999,11.4,11.4,11.800000000000001,12.1,12.199999999999999,12.699999999999999,13.199999999999999,13.6,14.5,14.9,15.800000000000001,16.899999999999999,17.5,18.100000000000001,19.699999999999999,22.5],"type":"contour","line":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </div>
@@ -1277,13 +1232,13 @@ First    0     0      0     0
 <p>Conditioning Plots (Coplots) show two variables at different ranges of third variable</p>
 <div class="cell custom3070 columns column-output-location" data-layout-align="center">
 <div class="column">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="fu">coplot</span>(Top <span class="sc">~</span> First <span class="sc">|</span> Second<span class="sc">*</span>Area, </span>
-<span id="cb38-2"><a href="#cb38-2"></a>       <span class="at">data =</span> pinetree)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="fu">coplot</span>(Top <span class="sc">~</span> First <span class="sc">|</span> Second<span class="sc">*</span>Area, </span>
+<span id="cb37-2"><a href="#cb37-2"></a>       <span class="at">data =</span> pinetree)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="Chapter02_files/figure-revealjs/unnamed-chunk-40-1.png" width="576"></p>
+<p><img data-src="Chapter02_files/figure-revealjs/unnamed-chunk-38-1.png" width="576"></p>
 </figure>
 </div>
 </div>
@@ -1295,22 +1250,22 @@ First    0     0      0     0
 <p>Conditioning Plots (Coplots) show two variables at different ranges of third variable</p>
 <div class="cell custom3070 columns column-output-location" data-layout-align="center">
 <div class="column">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="co"># install.packages("remotes")</span></span>
-<span id="cb39-2"><a href="#cb39-2"></a><span class="co"># remotes::install_github("mpru/ggcleveland")</span></span>
-<span id="cb39-3"><a href="#cb39-3"></a><span class="fu">library</span>(ggcleveland)</span>
-<span id="cb39-4"><a href="#cb39-4"></a><span class="fu">gg_coplot</span>(</span>
-<span id="cb39-5"><a href="#cb39-5"></a>  pinetree, </span>
-<span id="cb39-6"><a href="#cb39-6"></a>  <span class="at">x =</span> First, </span>
-<span id="cb39-7"><a href="#cb39-7"></a>  <span class="at">y =</span> Top, </span>
-<span id="cb39-8"><a href="#cb39-8"></a>  <span class="at">faceting =</span> Second, </span>
-<span id="cb39-9"><a href="#cb39-9"></a>  <span class="at">number_bins =</span> <span class="dv">6</span>, </span>
-<span id="cb39-10"><a href="#cb39-10"></a>  <span class="at">overlap =</span> <span class="dv">3</span><span class="sc">/</span><span class="dv">4</span></span>
-<span id="cb39-11"><a href="#cb39-11"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="co"># install.packages("remotes")</span></span>
+<span id="cb38-2"><a href="#cb38-2"></a><span class="co"># remotes::install_github("mpru/ggcleveland")</span></span>
+<span id="cb38-3"><a href="#cb38-3"></a><span class="fu">library</span>(ggcleveland)</span>
+<span id="cb38-4"><a href="#cb38-4"></a><span class="fu">gg_coplot</span>(</span>
+<span id="cb38-5"><a href="#cb38-5"></a>  pinetree, </span>
+<span id="cb38-6"><a href="#cb38-6"></a>  <span class="at">x =</span> First, </span>
+<span id="cb38-7"><a href="#cb38-7"></a>  <span class="at">y =</span> Top, </span>
+<span id="cb38-8"><a href="#cb38-8"></a>  <span class="at">faceting =</span> Second, </span>
+<span id="cb38-9"><a href="#cb38-9"></a>  <span class="at">number_bins =</span> <span class="dv">6</span>, </span>
+<span id="cb38-10"><a href="#cb38-10"></a>  <span class="at">overlap =</span> <span class="dv">3</span><span class="sc">/</span><span class="dv">4</span></span>
+<span id="cb38-11"><a href="#cb38-11"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="Chapter02_files/figure-revealjs/unnamed-chunk-41-1.png" width="576"></p>
+<p><img data-src="Chapter02_files/figure-revealjs/unnamed-chunk-39-1.png" width="576"></p>
 </figure>
 </div>
 </div>
@@ -1322,25 +1277,25 @@ First    0     0      0     0
 <p>Build plots in a single layout (R packages <code>patchwork</code> or <code>gridExtra</code>)</p>
 <div class="cell custom4060 columns column-output-location" data-layout-align="center">
 <div class="column">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(testmarks) <span class="sc">+</span></span>
-<span id="cb40-2"><a href="#cb40-2"></a>  <span class="fu">aes</span>(<span class="at">y =</span> English, <span class="at">x =</span> Maths) <span class="sc">+</span> </span>
-<span id="cb40-3"><a href="#cb40-3"></a>  <span class="fu">geom_point</span>()</span>
-<span id="cb40-4"><a href="#cb40-4"></a></span>
-<span id="cb40-5"><a href="#cb40-5"></a>p2 <span class="ot">&lt;-</span> p1 <span class="sc">+</span> </span>
-<span id="cb40-6"><a href="#cb40-6"></a>  <span class="fu">stat_density_2d</span>(</span>
-<span id="cb40-7"><a href="#cb40-7"></a>    <span class="at">geom =</span> <span class="st">"raster"</span>,</span>
-<span id="cb40-8"><a href="#cb40-8"></a>    <span class="fu">aes</span>(<span class="at">fill =</span> <span class="fu">after_stat</span>(density)),</span>
-<span id="cb40-9"><a href="#cb40-9"></a>    <span class="at">contour =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
-<span id="cb40-10"><a href="#cb40-10"></a>  <span class="fu">scale_fill_viridis_c</span>() <span class="sc">+</span> </span>
-<span id="cb40-11"><a href="#cb40-11"></a>  <span class="fu">guides</span>(<span class="at">fill=</span><span class="cn">FALSE</span>)</span>
-<span id="cb40-12"><a href="#cb40-12"></a></span>
-<span id="cb40-13"><a href="#cb40-13"></a><span class="fu">library</span>(patchwork)</span>
-<span id="cb40-14"><a href="#cb40-14"></a>p1 <span class="sc">/</span> p2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(testmarks) <span class="sc">+</span></span>
+<span id="cb39-2"><a href="#cb39-2"></a>  <span class="fu">aes</span>(<span class="at">y =</span> English, <span class="at">x =</span> Maths) <span class="sc">+</span> </span>
+<span id="cb39-3"><a href="#cb39-3"></a>  <span class="fu">geom_point</span>()</span>
+<span id="cb39-4"><a href="#cb39-4"></a></span>
+<span id="cb39-5"><a href="#cb39-5"></a>p2 <span class="ot">&lt;-</span> p1 <span class="sc">+</span> </span>
+<span id="cb39-6"><a href="#cb39-6"></a>  <span class="fu">stat_density_2d</span>(</span>
+<span id="cb39-7"><a href="#cb39-7"></a>    <span class="at">geom =</span> <span class="st">"raster"</span>,</span>
+<span id="cb39-8"><a href="#cb39-8"></a>    <span class="fu">aes</span>(<span class="at">fill =</span> <span class="fu">after_stat</span>(density)),</span>
+<span id="cb39-9"><a href="#cb39-9"></a>    <span class="at">contour =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
+<span id="cb39-10"><a href="#cb39-10"></a>  <span class="fu">scale_fill_viridis_c</span>() <span class="sc">+</span> </span>
+<span id="cb39-11"><a href="#cb39-11"></a>  <span class="fu">guides</span>(<span class="at">fill=</span><span class="cn">FALSE</span>)</span>
+<span id="cb39-12"><a href="#cb39-12"></a></span>
+<span id="cb39-13"><a href="#cb39-13"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb39-14"><a href="#cb39-14"></a>p1 <span class="sc">/</span> p2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="Chapter02_files/figure-revealjs/unnamed-chunk-43-1.png" width="576"></p>
+<p><img data-src="Chapter02_files/figure-revealjs/unnamed-chunk-41-1.png" width="576"></p>
 </figure>
 </div>
 </div>
@@ -1365,173 +1320,6 @@ First    0     0      0     0
 <!-- - The focus of this course is to perform EDA and not spend lots of time coding.  Adopt the codes of others.  -->
 <!-- - There are hundreds of R packages and examples for graphing. So, develop basic skills of recycling the R codes for a new dataset. -->
 <!--  - More graphing is covered in the exercises (such as `plotly` type) -->
-</section>
-<section id="time-series-data" class="slide level2">
-<h2>Time series data</h2>
-<ul>
-<li><p>A Time Series is an ordered sequence of observations of a variable(s) (often) made at equally spaced time points.</p></li>
-<li><p>Time series Components of variation</p>
-<ul>
-<li><em>Trend</em> - representing long term positive (upward) or negative (downward) movement</li>
-<li><em>Seasonal</em> - a periodic behaviour happening within a block (say Christmas time) of a given time period (say in a calendar year) but this periodic behaviour will repeat fairly regularly over time (say year after year)</li>
-<li><em>Error</em> (Residual)</li>
-</ul></li>
-</ul>
-</section>
-<section id="time-series-example" class="slide level2">
-<h2>Time series example</h2>
-
-<!-- http://www.rbnz.govt.nz/-/media/ReserveBank/Files/Statistics/tables/f3/hf3.xls -->
-<div class="cell custom4060 columns column-output-location" data-layout-align="center">
-<div class="column">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a>notes <span class="ot">=</span> <span class="fu">read.table</span>(<span class="st">"../data/20dollar.txt"</span>, <span class="at">header=</span><span class="cn">TRUE</span>, <span class="at">sep=</span><span class="st">""</span>)</span>
-<span id="cb41-2"><a href="#cb41-2"></a></span>
-<span id="cb41-3"><a href="#cb41-3"></a><span class="fu">library</span>(forecast)</span>
-<span id="cb41-4"><a href="#cb41-4"></a></span>
-<span id="cb41-5"><a href="#cb41-5"></a><span class="co"># value in millions; turn into time series (ts) object</span></span>
-<span id="cb41-6"><a href="#cb41-6"></a>NZnotes20 <span class="ot">&lt;-</span> <span class="fu">ts</span>(notes<span class="sc">$</span>value <span class="sc">/</span> <span class="dv">1000</span>, <span class="at">start=</span><span class="dv">1968</span>, <span class="at">frequency=</span><span class="dv">1</span>)</span>
-<span id="cb41-7"><a href="#cb41-7"></a></span>
-<span id="cb41-8"><a href="#cb41-8"></a><span class="fu">autoplot</span>(</span>
-<span id="cb41-9"><a href="#cb41-9"></a>  NZnotes20, </span>
-<span id="cb41-10"><a href="#cb41-10"></a>  <span class="at">xlab=</span><span class="st">"Year"</span>, </span>
-<span id="cb41-11"><a href="#cb41-11"></a>  <span class="at">ylab=</span><span class="st">"Value of $20 notes (millions)"</span></span>
-<span id="cb41-12"><a href="#cb41-12"></a>  ) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div><div class="column">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="Chapter02_files/figure-revealjs/unnamed-chunk-44-1.png" width="576"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<!-- ```{r} -->
-<!-- # Dynamic graphing -->
-<!-- # https://rstudio.github.io/dygraphs/index.html -->
-<!-- library(dygraphs) -->
-<!-- dygraph(NZnotes20) %>% -->
-<!--   dyOptions(drawPoints = TRUE) -->
-<!-- dygraph(NZnotes20) %>% -->
-<!--   dyOptions(fillGraph=TRUE) -->
-<!-- ``` -->
-</section>
-<section id="autocorrelation-function-acf" class="slide level2">
-<h2>Autocorrelation function (ACF)</h2>
-<p>Autocorrelation captures the extent to which neighbouring data values are similar to each other.</p>
-<p>The <span class="math inline">\(k ^ \text{th}\)</span> order ACF or the autocorrelation between <span class="math inline">\(x_t\)</span> and <span class="math inline">\(x_{t-k}\)</span> is</p>
-<p><span class="math display">\[\frac{\text{Covariance}(x_t, x_{t-k})}{\text{SD}(x_t)\text{SD}(x_{t-k})} = \frac{\text{Covariance}(x_t, x_{t-k})}{\text{Variance}(x_t)}\]</span></p>
-</section>
-<section id="autocorrelation-function-acf-plot" class="slide level2">
-<h2>Autocorrelation function (ACF) Plot</h2>
-<p>The significance of autocorrelations may be judged from the 95% confidence interval band</p>
-<div class="cell custom4060 columns column-output-location" data-layout-align="center">
-<div class="column">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="fu">ggAcf</span>(NZnotes20)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div><div class="column">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="Chapter02_files/figure-revealjs/unnamed-chunk-45-1.png" width="576"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<p>Autocorrelations decay to zero ($20 notes positively depend on the values of $20 notes held in the immediate past rather than too distant past)</p>
-</section>
-<section id="pacf-partial-autocorrelation-function" class="slide level2">
-<h2>PACF (Partial Autocorrelation Function)</h2>
-<p>A type of correlation after removing the effect of earlier lags</p>
-<div class="cell custom4060 columns column-output-location" data-layout-align="center">
-<div class="column">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a><span class="fu">ggPacf</span>(NZnotes20)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div><div class="column">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="Chapter02_files/figure-revealjs/unnamed-chunk-46-1.png" width="576"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="time-series-trend-types" class="slide level2">
-<h2>Time series trend types</h2>
-<p>Requires a (parametric) model to fit the trend (covered later)</p>
-<div class="centered">
-<p><img data-src="img/trendtypes.png"></p>
-</div>
-<p>Non-parametric fits can also be made</p>
-</section>
-<section id="seasonality" class="slide level2">
-<h2>Seasonality</h2>
-<p>Simple scatter plot of the response variable against time may reveal seasonality directly</p>
-<div class="cell custom4060 columns column-output-location" data-layout-align="center">
-<div class="column">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="co"># Data from:</span></span>
-<span id="cb44-2"><a href="#cb44-2"></a><span class="co"># https://www.stats.govt.nz/indicators/uv-intensity/</span></span>
-<span id="cb44-3"><a href="#cb44-3"></a></span>
-<span id="cb44-4"><a href="#cb44-4"></a>uv <span class="ot">=</span> <span class="fu">read.table</span>(<span class="st">"../data/uv.txt"</span>,</span>
-<span id="cb44-5"><a href="#cb44-5"></a>                <span class="at">header=</span><span class="cn">TRUE</span>, <span class="at">sep=</span><span class="st">""</span>)</span>
-<span id="cb44-6"><a href="#cb44-6"></a></span>
-<span id="cb44-7"><a href="#cb44-7"></a>uv <span class="ot">&lt;-</span> <span class="fu">ts</span>(uv<span class="sc">$</span>erythemal.uv, </span>
-<span id="cb44-8"><a href="#cb44-8"></a>         <span class="at">start=</span><span class="fu">c</span>(<span class="dv">1990</span>,<span class="dv">1</span>), </span>
-<span id="cb44-9"><a href="#cb44-9"></a>         <span class="at">frequency=</span><span class="dv">12</span>)</span>
-<span id="cb44-10"><a href="#cb44-10"></a></span>
-<span id="cb44-11"><a href="#cb44-11"></a><span class="fu">autoplot</span>(uv, </span>
-<span id="cb44-12"><a href="#cb44-12"></a>         <span class="at">xlab=</span><span class="st">"time"</span>, </span>
-<span id="cb44-13"><a href="#cb44-13"></a>         <span class="at">ylab=</span><span class="st">"Erythemal UV"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div><div class="column">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="Chapter02_files/figure-revealjs/unnamed-chunk-47-1.png" width="576"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="sub-series-plots" class="slide level2">
-<h2>Sub-series plots</h2>
-<p>Seasonality is easily seen graphically when grouping variables are used</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggseasonplot</span>(uv)</span>
-<span id="cb45-2"><a href="#cb45-2"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggsubseriesplot</span>(uv)</span>
-<span id="cb45-3"><a href="#cb45-3"></a><span class="fu">library</span>(patchwork); p1 <span class="sc">+</span> p2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="Chapter02_files/figure-revealjs/unnamed-chunk-48-1.png" width="1152" class="r-stretch quarto-figure-center"></section>
-<section id="time-series-decomposition" class="slide level2">
-<h2>Time series decomposition</h2>
-<div class="left-code">
-<div style="font-size: 90%;">
-<ul>
-<li><p>Additive model<br>
-<span class="math inline">\(X_t\)</span> = Trend + Seasonal + Error<br>
-(where <span class="math inline">\(X_t\)</span> is an observation at time <span class="math inline">\(t\)</span>)</p></li>
-<li><p>Multiplicative model<br>
-<span class="math inline">\(X_t\)</span> = Trend <span class="math inline">\(\times\)</span> Seasonal + Error<br>
-(trend and seasonal components are not independent)</p></li>
-<li><p><em>Detrending</em> means removing the trend from the series, making it easier to see the seasonality.</p></li>
-<li><p><em>Deseasoning</em> means removing the seasonality from the series, making it easier to see the trend.</p></li>
-</ul>
-</div>
-</div>
-<div class="right-plot">
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a>uv <span class="sc">|&gt;</span> <span class="fu">decompose</span>(<span class="at">type=</span><span class="st">"additive"</span>) <span class="sc">|&gt;</span> <span class="fu">autoplot</span>() <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="Chapter02_files/figure-revealjs/unnamed-chunk-49-1.png" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
 </section>
 <section id="learning-eda" class="slide level2">
 <h2>Learning EDA</h2>
