@@ -3913,10 +3913,207 @@
     "text": "Exercise 7.6\nMake an indicator variable for the Waimakariri River catchment in Canterbury (0 = not in that catchment, 1 = in that catchment). Add this to your regression from exercise 7.5. Produce new tables and discuss your results.\n\n\nCode\n# your code goes here\n\n\n\nMore R code examples are here"
   },
   {
+<<<<<<< HEAD
     "objectID": "workshops/ws07.html#footnotes",
     "href": "workshops/ws07.html#footnotes",
     "title": "Chapter 7 Workshop",
     "section": "Footnotes",
     "text": "Footnotes\n\n\nThe car::vif() notation calls the function vif() from within the package car. Alternatively, you can load the package into R with the command library(car). After doing this, all functions in the car package become available, so you can call the function directly as vif(), omitting the car::. Either way, you must have the package installed, of course!↩︎\nNegative values of AIC, as seen here, are uncommon but are nothing to worry about. This occurs when the values of the response variable are small.↩︎"
+=======
+    "objectID": "slides/Chapter08.html#review-of-non-parametric-tests",
+    "href": "slides/Chapter08.html#review-of-non-parametric-tests",
+    "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
+    "section": "Review of non-parametric tests",
+    "text": "Review of non-parametric tests\nNon-parametric tests are light on assumptions, and can be used for highly asymmetric data (as an alternative to using transformations).\nMany non-parametric methods rely on replacing the observed data by their ranks."
+  },
+  {
+    "objectID": "slides/Chapter08.html#spearmans-rank-correlation",
+    "href": "slides/Chapter08.html#spearmans-rank-correlation",
+    "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
+    "section": "Spearman’s Rank Correlation",
+    "text": "Spearman’s Rank Correlation\n\n\nRank the \\(X\\) and \\(Y\\) variables, and then obtain usual Pearson correlation coefficient.\nThe plot shows non-parametric Spearman in the the upper triangle and parametric Pearson in the bottom triangle.\n\nlibrary(GGally)\n\np &lt;- ggpairs(\n  trees, \n  upper = list(continuous = wrap('cor', method = \"spearman\")),\n  lower = list(continuous = 'cor') \n  )\n\n\n\n\n\n\n\nFigure 2: Comparison of Pearsonian and Spearman’s rank correlations"
+  },
+  {
+    "objectID": "slides/Chapter08.html#wilcoxon-signed-rank-test",
+    "href": "slides/Chapter08.html#wilcoxon-signed-rank-test",
+    "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
+    "section": "Wilcoxon signed rank test",
+    "text": "Wilcoxon signed rank test\nA non-parametric alternative to the one-sample t-test\n\\(H_0: \\eta=\\eta_0\\) where \\(\\eta\\) (Greek letter ‘eta’) is the population median\nBased on based on ranking \\((|Y-\\eta_0|)\\), where the ranks for data with \\(Y&lt;\\eta_0\\) are compared to the ranks for data with \\(Y&gt;\\eta_0\\)\n\n\n\nwilcox.test(tv$TELETIME, mu=1680, conf.int=T)\n\n\n    Wilcoxon signed rank exact test\n\ndata:  tv$TELETIME\nV = 588, p-value = 0.6108\nalternative hypothesis: true location is not equal to 1680\n95 percent confidence interval:\n 1557.5 1906.5\nsample estimates:\n(pseudo)median \n          1728 \n\n\n\n\nt.test(tv$TELETIME, mu=1680)\n\n\n    One Sample t-test\n\ndata:  tv$TELETIME\nt = 0.58856, df = 45, p-value = 0.5591\nalternative hypothesis: true mean is not equal to 1680\n95 percent confidence interval:\n 1560.633 1897.932\nsample estimates:\nmean of x \n 1729.283"
+  },
+  {
+    "objectID": "slides/Chapter08.html#non-parametric-anova",
+    "href": "slides/Chapter08.html#non-parametric-anova",
+    "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
+    "section": "Non-parametric ANOVA",
+    "text": "Non-parametric ANOVA\nKruskal-Wallis test: allows to compare three or more groups\nMann-Whitney test: allows to compare 2 groups under the non-normality assumption."
+  },
+  {
+    "objectID": "slides/Chapter08.html#kruskal-wallis-test",
+    "href": "slides/Chapter08.html#kruskal-wallis-test",
+    "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
+    "section": "Kruskal-Wallis test",
+    "text": "Kruskal-Wallis test\nThe null and alternative hypotheses of the Kruskal-Wallis test are:\nH0: The 3 groups are equal in terms of the variable H1: At least one group is different from the other 2 groups in terms of variable\nSimilar to an ANOVA the alternative hypothesis is not that all groups are different. The opposite of all groups being equal (H0) is that at least one group is different from the others (H1).\nIn this sense, if the null hypothesis is rejected, it means that at least one group is different from the other 2, but not necessarily that all 3 groups are different from each other. Post-hoc tests must be performed to test whether all 3 groups differ."
+  },
+  {
+    "objectID": "slides/Chapter08.html#mann-whitney-test",
+    "href": "slides/Chapter08.html#mann-whitney-test",
+    "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
+    "section": "Mann-Whitney test",
+    "text": "Mann-Whitney test\nFor two group comparison, pool the two group responses and then rank the pooled data\nRanks for the first group are compared to the ranks for the second group\nThe null hypothesis is that the two group medians are the same: \\(H_0: \\eta_1=\\eta_2\\).\n\n\n\nload(\"../data/rangitikei.Rdata\")\nwilcox.test(rangitikei$people~rangitikei$time, conf.int=T)\n\n\n    Wilcoxon rank sum test with continuity correction\n\ndata:  rangitikei$people by rangitikei$time\nW = 30, p-value = 0.007711\nalternative hypothesis: true location shift is not equal to 0\n95 percent confidence interval:\n -88.99996 -10.00005\nsample estimates:\ndifference in location \n             -36.46835 \n\n\n\n\nt.test(rangitikei$people~rangitikei$time)\n\n\n    Welch Two Sample t-test\n\ndata:  rangitikei$people by rangitikei$time\nt = -3.1677, df = 30.523, p-value = 0.003478\nalternative hypothesis: true difference in means between group 1 and group 2 is not equal to 0\n95 percent confidence interval:\n -102.28710  -22.13049\nsample estimates:\nmean in group 1 mean in group 2 \n       22.71429        84.92308"
+  },
+  {
+    "objectID": "slides/Chapter08.html#another-form-of-test",
+    "href": "slides/Chapter08.html#another-form-of-test",
+    "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
+    "section": "Another form of test",
+    "text": "Another form of test\n\n\n\nkruskal.test(rangitikei$people~rangitikei$time)\n\n\n    Kruskal-Wallis rank sum test\n\ndata:  rangitikei$people by rangitikei$time\nKruskal-Wallis chi-squared = 7.2171, df = 1, p-value = 0.007221\n\n\n\n\nwilcox.test(rangitikei$people~rangitikei$time)\n\n\n    Wilcoxon rank sum test with continuity correction\n\ndata:  rangitikei$people by rangitikei$time\nW = 30, p-value = 0.007711\nalternative hypothesis: true location shift is not equal to 0"
+  },
+  {
+    "objectID": "slides/Chapter08.html#what-if-the-equal-variance-assumption-is-violated",
+    "href": "slides/Chapter08.html#what-if-the-equal-variance-assumption-is-violated",
+    "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
+    "section": "What if the equal variance assumption is violated?",
+    "text": "What if the equal variance assumption is violated?\nANOVA’s are considered to be fairly robust against violations of the equal variances assumption as long as each group has the same sample size.\nIf this assumption is violated, the most common way to deal with it is to transform the response variable using one of the three transformations:\n\nLog Transformation: Transform the response variable from y to log(y).\nSquare Root Transformation: Transform the response variable from y to √y.\nCube Root Transformation: Transform the response variable from y to y1/3.\n\nBy performing these transformations, the problem of heteroscedasticity typically goes away."
+  },
+  {
+    "objectID": "slides/Chapter08.html#when-transformations-do-not-work",
+    "href": "slides/Chapter08.html#when-transformations-do-not-work",
+    "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
+    "section": "When transformations do not work:",
+    "text": "When transformations do not work:\n\nweighted least squares regression: This type of regression assigns a weight to each data point based on the variance of its fitted value.\n\nEssentially, this gives small weights to data points that have higher variances, which shrinks their squared residuals. When the proper weights are used, this can eliminate the problem of heteroscedasticity.\n\nNon-parametric test:\n\nKruskal-Wallis Test is the non-parametric version of a one-way ANOVA"
+  },
+  {
+    "objectID": "slides/Chapter08.html#interpreting-interactions-1",
+    "href": "slides/Chapter08.html#interpreting-interactions-1",
+    "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
+    "section": "Interpreting interactions",
+    "text": "Interpreting interactions"
+  },
+  {
+    "objectID": "slides/Chapter08.html#one-way-anova-hypotheses",
+    "href": "slides/Chapter08.html#one-way-anova-hypotheses",
+    "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
+    "section": "One-way ANOVA Hypotheses",
+    "text": "One-way ANOVA Hypotheses\n\n\\(H_0\\): The mean burn times are equal for the four fabrics\n\\(H_a\\): The mean burn time of at least one fabric is different."
+  },
+  {
+    "objectID": "slides/Chapter08.html#when-transformations-do-not-help",
+    "href": "slides/Chapter08.html#when-transformations-do-not-help",
+    "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
+    "section": "When transformations do not help:",
+    "text": "When transformations do not help:\n\nWeighted least squares regression: This type of regression assigns a weight to each data point based on the variance of its fitted value.\n\nEssentially, this gives small weights to data points that have higher variances, which shrinks their squared residuals. When the proper weights are used, this can eliminate the problem of heteroscedasticity.\n\nNon-parametric test:\n\nKruskal-Wallis Test is the non-parametric version of a one-way ANOVA"
+  },
+  {
+    "objectID": "workshops/ws08.html#non-parametric-anova",
+    "href": "workshops/ws08.html#non-parametric-anova",
+    "title": "Chapter 8 Workshop",
+    "section": "Non-parametric ANOVA",
+    "text": "Non-parametric ANOVA\nMann-Whitney test: allows to compare 2 groups under the non-normality assumption.\nKruskal-Wallis test: allows to compare three or more groups"
+  },
+  {
+    "objectID": "workshops/ws08.html#return-to-the-insect-data",
+    "href": "workshops/ws08.html#return-to-the-insect-data",
+    "title": "Chapter 8 Workshop",
+    "section": "Return to the Insect Data",
+    "text": "Return to the Insect Data\n\n\nCode\naov(count ~ spray, data=IS)\n\n\nCall:\n   aov(formula = count ~ spray, data = IS)\n\nTerms:\n                   spray Residuals\nSum of Squares  2668.833  1015.167\nDeg. of Freedom        5        66\n\nResidual standard error: 3.921902\nEstimated effects may be unbalanced\n\n\nCode\naov(count ~ spray, data=IS) |&gt; TukeyHSD()\n\n\n  Tukey multiple comparisons of means\n    95% family-wise confidence level\n\nFit: aov(formula = count ~ spray, data = IS)\n\n$spray\n           diff        lwr       upr     p adj\nB-A   0.8333333  -3.866075  5.532742 0.9951810\nC-A -12.4166667 -17.116075 -7.717258 0.0000000\nD-A  -9.5833333 -14.282742 -4.883925 0.0000014\nE-A -11.0000000 -15.699409 -6.300591 0.0000000\nF-A   2.1666667  -2.532742  6.866075 0.7542147\nC-B -13.2500000 -17.949409 -8.550591 0.0000000\nD-B -10.4166667 -15.116075 -5.717258 0.0000002\nE-B -11.8333333 -16.532742 -7.133925 0.0000000\nF-B   1.3333333  -3.366075  6.032742 0.9603075\nD-C   2.8333333  -1.866075  7.532742 0.4920707\nE-C   1.4166667  -3.282742  6.116075 0.9488669\nF-C  14.5833333   9.883925 19.282742 0.0000000\nE-D  -1.4166667  -6.116075  3.282742 0.9488669\nF-D  11.7500000   7.050591 16.449409 0.0000000\nF-E  13.1666667   8.467258 17.866075 0.0000000\n\n\n\n\nCode\nkruskal.test(IS$count~IS$spray)\n\n\n\n    Kruskal-Wallis rank sum test\n\ndata:  IS$count by IS$spray\nKruskal-Wallis chi-squared = 54.691, df = 5, p-value = 1.511e-10"
+  },
+  {
+    "objectID": "workshops/ws08.html#return-to-the-oyster-data",
+    "href": "workshops/ws08.html#return-to-the-oyster-data",
+    "title": "Chapter 8 Workshop",
+    "section": "Return to the Oyster Data",
+    "text": "Return to the Oyster Data\n\n\nCode\naov(Growth~Salinity, data = oys)\n\n\nCall:\n   aov(formula = Growth ~ Salinity, data = oys)\n\nTerms:\n                Salinity Residuals\nSum of Squares   0.16378  81.11150\nDeg. of Freedom        1        58\n\nResidual standard error: 1.182571\nEstimated effects may be unbalanced\n\n\n\n\nCode\nkruskal.test(oys$Growth~oys$Salinity)\n\n\n\n    Kruskal-Wallis rank sum test\n\ndata:  oys$Growth by oys$Salinity\nKruskal-Wallis chi-squared = 0.013989, df = 1, p-value = 0.9058\n\n\n\n\nCode\nwilcox.test(oys$Growth~oys$Salinity)\n\n\n\n    Wilcoxon rank sum exact test\n\ndata:  oys$Growth by oys$Salinity\nW = 458, p-value = 0.9124\nalternative hypothesis: true location shift is not equal to 0\n\n\n\nMore R code examples are here"
+  },
+  {
+    "objectID": "slides/Chapter08.html#data-example-test-anxiety",
+    "href": "slides/Chapter08.html#data-example-test-anxiety",
+    "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
+    "section": "Data example: test anxiety",
+    "text": "Data example: test anxiety\nResearchers investigated the effect of exercises in reducing the level of anxiety, where they measured the anxiety score of three groups of individuals practicing physical exercises at different levels (grp1: low, grp2: moderate and grp3: high).\nThe anxiety score was measured pre- and 6-months post-exercise training programs. It is expected that any reduction in the anxiety by the exercises programs would also depend on the participant’s basal level of anxiety score.\nIn this analysis we use the pretest anxiety score (pretest) as the covariate and are interested in possible differences between group with respect to the post-test anxiety scores.\n\n\n# A tibble: 3 × 4\n  id    group pretest posttest\n  &lt;fct&gt; &lt;fct&gt;   &lt;dbl&gt;    &lt;dbl&gt;\n1 15    grp1     19.8     19.4\n2 30    grp2     19.3     17.7\n3 33    grp3     15.5     11"
+  },
+  {
+    "objectID": "slides/Chapter08.html#interaction",
+    "href": "slides/Chapter08.html#interaction",
+    "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
+    "section": "Interaction",
+    "text": "Interaction\nAre the regression slopes the same?\n\n\n              Df Sum Sq Mean Sq F value Pr(&gt;F)    \ngroup          2  72.13   36.07 203.973 &lt;2e-16 ***\npretest        1 101.29  101.29 572.828 &lt;2e-16 ***\ngroup:pretest  2   0.04    0.02   0.127  0.881    \nResiduals     39   6.90    0.18                   \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nInteraction term is not significant (at sig. level of 5%)."
+  },
+  {
+    "objectID": "slides/Chapter08.html#check-assumptions",
+    "href": "slides/Chapter08.html#check-assumptions",
+    "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
+    "section": "Check assumptions",
+    "text": "Check assumptions\nLinearity:\n\nAppears to be a linear relationship in each training group"
+  },
+  {
+    "objectID": "slides/Chapter08.html#assumptions",
+    "href": "slides/Chapter08.html#assumptions",
+    "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
+    "section": "Assumptions",
+    "text": "Assumptions\nResiduals:"
+  },
+  {
+    "objectID": "slides/Chapter08.html#assumptions-1",
+    "href": "slides/Chapter08.html#assumptions-1",
+    "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
+    "section": "Assumptions",
+    "text": "Assumptions\nNormality:\n\n\n# A tibble: 1 × 3\n  variable                 statistic p.value\n  &lt;chr&gt;                        &lt;dbl&gt;   &lt;dbl&gt;\n1 summary(model$residuals)     0.964   0.849\n\n\nThe Shapiro Wilk test was not significant (\\(\\alpha = 0.05\\)), so we can assume normality of residuals\nEqual variance:\n\n\nLevene's Test for Homogeneity of Variance (center = median)\n      Df F value Pr(&gt;F)\ngroup  2  0.2604  0.772\n      42               \n\n\nThe Levene’s test was not significant (\\(\\alpha = 0.05\\)), so we can assume homogeneity of the residual variances for all groups."
+  },
+  {
+    "objectID": "slides/Chapter08.html#data-example-fast-food-resturants",
+    "href": "slides/Chapter08.html#data-example-fast-food-resturants",
+    "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
+    "section": "Data example: fast-food resturants",
+    "text": "Data example: fast-food resturants\n\n\n Restaurant  Sales Households Location I1 I2\n          1 135.27        155  Highway  0  0\n          2  72.74         93  Highway  0  0\n          3 114.95        128  Highway  0  0\n          4 102.93        114  Highway  0  0\n          5 131.77        158  Highway  0  0\n          6 160.91        183  Highway  0  0\n          7 179.86        178     Mall  1  0\n          8 220.14        215     Mall  1  0\n          9 179.64        172     Mall  1  0\n         10 185.92        197     Mall  1  0\n         11 207.82        207     Mall  1  0\n         12 113.51         95     Mall  1  0\n         13 203.98        224   Street  0  1\n         14 174.48        199   Street  0  1\n         15 220.43        240   Street  0  1\n         16  93.19        100   Street  0  1\n\n\n\nDo we need three separate models?"
+  },
+  {
+    "objectID": "slides/Chapter08.html#ancova",
+    "href": "slides/Chapter08.html#ancova",
+    "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
+    "section": "ANCOVA",
+    "text": "ANCOVA\n\n\nIn order to allow for different slopes for each location, we define the product (or interaction) variables"
+  },
+  {
+    "objectID": "slides/Chapter08.html#data-set-up",
+    "href": "slides/Chapter08.html#data-set-up",
+    "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
+    "section": "Data set up",
+    "text": "Data set up\n\n\n  Restaurant  Sales Households Location I1 I2\n1          1 135.27        155  Highway  0  0\n2          2  72.74         93  Highway  0  0\n3          3 114.95        128  Highway  0  0\n4          4 102.93        114  Highway  0  0\n5          5 131.77        158  Highway  0  0\n6          6 160.91        183  Highway  0  0"
+  },
+  {
+    "objectID": "slides/Chapter08.html#ancova-model",
+    "href": "slides/Chapter08.html#ancova-model",
+    "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
+    "section": "ANCOVA model",
+    "text": "ANCOVA model\nWe examine the relationship between restaurant sales (response variable, in thousands of dollars) and the number of households (H) in the restaurant’s trading area and the location of the restaurant (Mall, Street, and Highway). We can use the indicator variables (\\(I_1\\) and \\(I_2\\)) to define our three locations uniquely.\n\\(Sales = \\beta_0 + \\beta_1 I_1 + \\beta_2 I_2 + (\\beta_3 + \\beta_4 I_1 + \\beta_5 I_2)Households\\)\nThis model provides a separate model for each location as well as allows for the interaction between location of the restaurant and the number of households through the slope coefficient"
+  },
+  {
+    "objectID": "slides/Chapter08.html#ancova-model-1",
+    "href": "slides/Chapter08.html#ancova-model-1",
+    "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
+    "section": "ANCOVA model",
+    "text": "ANCOVA model\n\\(Sales = \\beta_0 + \\beta_1 I_1 + \\beta_2 I_2 + (\\beta_3 + \\beta_4 I_1 + \\beta_5 I_2)Households\\)\n\nFor Highway Locations: \\(I_1=0\\) & \\(I_2=0\\) hence our model simplifies to\n\\(Sales = \\beta_{0} + (\\beta_3)Households\\)\nFor Mall Locations: \\(I_1=1\\) & \\(I_2=0\\) so the model becomes\n\\(Sales = \\beta_{0} + \\beta_{1} + (\\beta_3 + \\beta_4)Households\\)\nFor Street Locations: \\(I_1=0\\) & \\(I_2=1\\) so the model becomes \\(Sales = \\beta_{0} + \\beta_2 + (\\beta_3 + \\beta_5) Households\\)\n\nnote R does not require us to code Location as an indicator variable"
+  },
+  {
+    "objectID": "slides/Chapter08.html#ancova-model-2",
+    "href": "slides/Chapter08.html#ancova-model-2",
+    "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
+    "section": "ANCOVA model",
+    "text": "ANCOVA model\n\\(Sales = -6.2 + 39.22 + 8.04 + ( 0.909 -0.074 -0.012) Households\\)\n\nFor Highway Locations: \\(I_1=0\\) & \\(I_2=0\\) hence our model simplifies to\n\\(Sales = -6.2 + (0.909)Households\\)\nFor Mall Locations: \\(I_1=1\\) & \\(I_2=0\\) so the model becomes\n\\(Sales = -6.2 + 39.22 + (0.909 -0.074)Households\\)\nFor Street Locations: \\(I_1=0\\) & \\(I_2=1\\) so the model becomes \\(Sales = -6.2 + 8.04 + (0.909 -0.012) Households\\)"
+  },
+  {
+    "objectID": "slides/Chapter08.html#linear-models-review",
+    "href": "slides/Chapter08.html#linear-models-review",
+    "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
+    "section": "Linear models Review",
+    "text": "Linear models Review\nFamily tree\nT-tests, regressions, ANOVAs, and ANCOVAs are related\nSimilarities:\n-   1 continuous response variable\n-   Assumptions: normality, equal variance, and independence of residuals\nDifferences:\n- EDA\n- test statistics\n- number and type of predictors"
+  },
+  {
+    "objectID": "slides/Chapter08.html#ancova-fit-2",
+    "href": "slides/Chapter08.html#ancova-fit-2",
+    "title": "Chapter 8:Analysis of Variance (ANOVA) and Analysis of Covariance (ANCOVA)",
+    "section": "ANCOVA fit",
+    "text": "ANCOVA fit\n\nmodl = lm(Sales~Households*Location, data = restaurant)\nouts &lt;- summary(modl)$coefficients\nround(outs[, 1:4], digits = 3)\n\n                          Estimate Std. Error t value Pr(&gt;|t|)\n(Intercept)                 -6.203     11.818  -0.525    0.611\nHouseholds                   0.909      0.083  10.906    0.000\nLocationMall                39.223     16.451   2.384    0.038\nLocationStreet               8.036     16.273   0.494    0.632\nHouseholds:LocationMall     -0.074      0.104  -0.710    0.494\nHouseholds:LocationStreet   -0.012      0.101  -0.120    0.907\n\n\nWe can plug these numbers into our equations \\(Sales = \\beta_{0} + \\beta_{1} I_1 + \\beta_2 I_2 + (\\beta_3 + \\beta_4 I_1 + \\beta_5 I_2)Households\\)\n\\(Sales = -6.2 + 39.22 + 8.04 + ( 0.909 -0.074 -0.012) Households\\)"
+>>>>>>> 235c39521584803e371131586aa26d577453b72f
   }
 ]

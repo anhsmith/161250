@@ -774,7 +774,7 @@ $Sales = \beta_0 + \beta_1 I_1 + \beta_2 I_2 + (\beta_3 + \beta_4 I_1 + \beta_5 
 
 -   For Mall Locations: $I_1=1$ & $I_2=0$ so the model becomes
 
-    $Sales = \beta_{0} + \beta_{1} I_1 (\beta_3 + \beta_4)Households$
+    $Sales = \beta_{0} + \beta_{1} + (\beta_3 + \beta_4)Households$
 
 -   For Street Locations: $I_1=0$ & $I_2=1$ so the model becomes
     $Sales = \beta_{0} + \beta_2 + (\beta_3 + \beta_5) Households$
@@ -786,7 +786,7 @@ $Sales = \beta_0 + \beta_1 I_1 + \beta_2 I_2 + (\beta_3 + \beta_4 I_1 + \beta_5 
 ## ANCOVA fit 
 
 
-```{r}
+```{r, echo=TRUE}
 modl = lm(Sales~Households*Location, data = restaurant)
 outs <- summary(modl)$coefficients
 round(outs[, 1:4], digits = 3)
@@ -794,31 +794,29 @@ round(outs[, 1:4], digits = 3)
 We can plug these numbers into our equations 
 $Sales = \beta_{0} + \beta_{1} I_1 + \beta_2 I_2 + (\beta_3 + \beta_4 I_1 + \beta_5 I_2)Households$
 
-$Sales = -6.2 + 39.22 I_1 + 8.04 I_2 + ( 0.909 + -0.074I_1 -0.012 I_2) Households$
+$Sales = -6.2 + 39.22 + 8.04 + ( 0.909  -0.074 -0.012) Households$
 
 ## ANCOVA model
 
-$Sales = -6.2 + 39.22 I_1 + 8.04 I_2 + ( 0.909 + -0.074I_1 -0.012 I_2) Households$
+$Sales = -6.2 + 39.22 + 8.04 + ( 0.909  -0.074 -0.012) Households$
 
 -   For Highway Locations: $I_1=0$ & $I_2=0$ hence our model simplifies to
 
-    $Sales =  -6.2 + (\beta_3)Households$
+    $Sales =  -6.2 + (0.909)Households$
 
 -   For Mall Locations: $I_1=1$ & $I_2=0$ so the model becomes
 
-    $Sales = \beta_{0} + \beta_{1} I_1 (\beta_3 + \beta_4)Households$
+    $Sales = -6.2 + 39.22 + (0.909  -0.074)Households$
 
 -   For Street Locations: $I_1=0$ & $I_2=1$ so the model becomes
-    $Sales = \beta_{0} + \beta_2 + (\beta_3 + \beta_5) Households$
+    $Sales = -6.2 + 8.04 + (0.909 -0.012) Households$
 
 ## Graphing the model
 
 ```{r}
 p <- restaurant |> ggplot() + 
-  aes(x=Households, y=Sales, colour = Location=="Mall") +
-  geom_point() + geom_smooth(method = lm, se = FALSE) +
-  scale_color_manual("Location", values = 2:3, 
-                     labels=c("Street/Highway", "Mall"))
+  aes(x=Households, y=Sales, colour = Location) +
+  geom_point() + geom_smooth(method = lm, se = FALSE) 
 p
 ```
 
