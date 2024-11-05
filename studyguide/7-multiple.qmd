@@ -78,21 +78,8 @@ tidy(full.reg) # or summary(full.reg)
 #| label: tbl-fullregtidy
 #| tbl-cap: 'Full Regression tidy() output'
 
-if(knitr::is_html_output()) {
+tidy(full.reg) |> kable(digits = 3)
   
-  tidy(full.reg) |> 
-    kable(digits = 3,
-          table.attr = 'data-quarto-disable-processing="true"'
-          ) |>  
-    kable_classic(full_width = F) 
-  
-} else {
-  
-    tidy(full.reg) |> 
-    kable(digits = 3) |>  
-    kable_classic(full_width = F) 
-  
-  }
 ```
 
 This regression model is known as the **full regression** because we have included all the predictors in our model. The `R` syntax `~.` means that we are placing all variables in the dataframe except the one selected as the response variable. We note that the slope coefficients of the predictors `INNERDIA`, `INNERSYS`, and `OUTERDIA` are not significant at 5% level. This confirms that we do not need to place all six predictors in the model but only a subset of them.
@@ -108,24 +95,26 @@ car::vif(full.reg)
 #| label: tbl-fullregvif
 #| tbl-cap: 'Variance Inflation Factors'
 
-if(knitr::is_html_output()) {
+# if(knitr::is_html_output()) {
+# 
+#     car::vif(full.reg) |> 
+#     kable(digits = 2,
+#           table.attr = 'data-quarto-disable-processing="true"'
+#           ) |> 
+#     kable_classic(full_width=F)
+#     
+# } else {
+#   
+#     car::vif(full.reg) |> 
+#     kable(digits = 2) |> 
+#     kable_classic(full_width=F)
+#   
+# }
 
-    car::vif(full.reg) |> 
+car::vif(full.reg) |> 
     kable(digits = 2,
           table.attr = 'data-quarto-disable-processing="true"'
-          ) |> 
-    kable_classic(full_width=F)
-    
-} else {
-  
-    car::vif(full.reg) |> 
-    kable(digits = 2) |> 
-    kable_classic(full_width=F)
-  
-}
-
-
-  
+          )
 
 ```
 
@@ -198,20 +187,21 @@ SS <- anova(full.reg) |>
   select(term:sumsq) |> 
   janitor::adorn_totals()
 
-if(knitr::is_html_output()) {
+SS |> kable(digits = 2 ) 
 
-  SS |> kable(digits = 2,
-        table.attr = 'data-quarto-disable-processing="true"'
-        ) |>  
-  kable_classic(full_width = F) 
-    
-} else {
-  
-  SS |> kable(digits = 2 ) |>  
-  kable_classic(full_width = F) 
-  
-}
-
+# if(knitr::is_html_output()) {
+# 
+#   SS |> kable(digits = 2,
+#         table.attr = 'data-quarto-disable-processing="true"'
+#         ) |>  
+#   kable_classic(full_width = F) 
+#     
+# } else {
+#   
+#   SS |> kable(digits = 2 ) |>  
+#   kable_classic(full_width = F) 
+#   
+# }
 
 ```
 Now let's calculate the Sums of Squares Total (SST), Error (SSE), and Regression (SSR). 
@@ -355,23 +345,24 @@ type1and2
 ```{r}
 #| echo: false
 
-if(knitr::is_html_output()) {
+# if(knitr::is_html_output()) {
+# 
+#   type1and2 |> 
+#   kable(digits = 2,
+#         table.attr = 'data-quarto-disable-processing="true"'
+#         ) |> 
+#   kable_classic(full_width=F)
+#     
+# } else {
+#   
+#   type1and2 |> 
+#   kable(digits = 2) |> 
+#   kable_classic(full_width=F)
+#   
+# }
 
-  type1and2 |> 
-  kable(digits = 2,
-        table.attr = 'data-quarto-disable-processing="true"'
-        ) |> 
-  kable_classic(full_width=F)
-    
-} else {
-  
-  type1and2 |> 
-  kable(digits = 2) |> 
-  kable_classic(full_width=F)
-  
-}
-
-
+type1and2 |> 
+  kable(digits = 2)
 ```
 
 When predictor variables are correlated, it is difficult to assess their absolute importance and the importance of a variable can be assessed only relatively. This is not an issue with the most highly correlated predictor in general.
@@ -396,25 +387,27 @@ threevar.model |> tidy()
 ```{r}
 #| echo: false
 
-if(knitr::is_html_output()) {
+# if(knitr::is_html_output()) {
+# 
+#   threevar.model |> 
+#   tidy() |> 
+#   kable(digits=3,
+#         table.attr = 'data-quarto-disable-processing="true"'
+#         ) |> 
+#   kable_classic(full_width=F)
+#     
+# } else {
+#   
+#   threevar.model |> 
+#   tidy() |> 
+#   kable(digits=3) |> 
+#   kable_classic(full_width=F)
+#   
+# }
 
-  threevar.model |> 
+threevar.model |> 
   tidy() |> 
-  kable(digits=3,
-        table.attr = 'data-quarto-disable-processing="true"'
-        ) |> 
-  kable_classic(full_width=F)
-    
-} else {
-  
-  threevar.model |> 
-  tidy() |> 
-  kable(digits=3) |> 
-  kable_classic(full_width=F)
-  
-}
-
-
+  kable(digits=3)
 
 ```
 
@@ -549,23 +542,28 @@ stmdl |> tidy()
 ```{r}
 #| echo: false
 
-if(knitr::is_html_output()) {
+# if(knitr::is_html_output()) {
+# 
+#   stmdl |> 
+#     tidy() |> 
+#     kable(digits=3,
+#           table.attr = 'data-quarto-disable-processing="true"'
+#           ) |> 
+#     kable_classic(full_width=F)
+#     
+# } else {
+#   
+#   stmdl |> 
+#     tidy() |> 
+#     kable(digits=3) |> 
+#     kable_classic(full_width=F)
+#   
+# }
 
-  stmdl |> 
-    tidy() |> 
+stmdl |> tidy() |> 
     kable(digits=3,
           table.attr = 'data-quarto-disable-processing="true"'
-          ) |> 
-    kable_classic(full_width=F)
-    
-} else {
-  
-  stmdl |> 
-    tidy() |> 
-    kable(digits=3) |> 
-    kable_classic(full_width=F)
-  
-}
+          )
 
 ```
 
@@ -692,25 +690,27 @@ pine1 |> tidy()
 #| warning: false
 #| label: tbl-poly1tidy
 #| tbl-cap: "tidy() output of lm(Top~First, data=pinetree)"
-if(knitr::is_html_output()) {
+# if(knitr::is_html_output()) {
+# 
+#   pine1 |> 
+#   tidy() |> 
+#   kable(digits=3,
+#         table.attr = 'data-quarto-disable-processing="true"'
+#         ) |> 
+#   kable_classic(full_width=F)
+#     
+# } else {
+#   
+#   pine1 |> 
+#   tidy() |> 
+#   kable(digits=3 ) |> 
+#   kable_classic(full_width=F)
+#   
+# }
 
-  pine1 |> 
+pine1 |> 
   tidy() |> 
-  kable(digits=3,
-        table.attr = 'data-quarto-disable-processing="true"'
-        ) |> 
-  kable_classic(full_width=F)
-    
-} else {
-  
-  pine1 |> 
-  tidy() |> 
-  kable(digits=3 ) |> 
-  kable_classic(full_width=F)
-  
-}
-
- 
+  kable(digits=3 )
 ```
 
 
@@ -727,28 +727,31 @@ pine1 |>
 #| echo: false
 #| label: tbl-poly1glance
 #| tbl-cap: "glance() output of lm(Top~First, data=pinetree)"
-if(knitr::is_html_output()) {
+# if(knitr::is_html_output()) {
+# 
+#   pine1 |> 
+#   glance() |> 
+#   select(adj.r.squared, sigma, statistic, p.value, AIC, BIC) |> 
+#   kable(digits=3,
+#         table.attr = 'data-quarto-disable-processing="true"'
+#         ) |> 
+#   kable_classic(full_width=F) 
+#     
+# } else {
+#   
+#   pine1 |> 
+#   glance() |> 
+#   select(adj.r.squared, sigma, statistic, p.value, AIC, BIC) |> 
+#   kable(digits=3) |> 
+#   kable_classic(full_width=F) 
+#   
+# }
 
-  pine1 |> 
+
+ pine1 |> 
   glance() |> 
   select(adj.r.squared, sigma, statistic, p.value, AIC, BIC) |> 
-  kable(digits=3,
-        table.attr = 'data-quarto-disable-processing="true"'
-        ) |> 
-  kable_classic(full_width=F) 
-    
-} else {
-  
-  pine1 |> 
-  glance() |> 
-  select(adj.r.squared, sigma, statistic, p.value, AIC, BIC) |> 
-  kable(digits=3) |> 
-  kable_classic(full_width=F) 
-  
-}
-
-
-
+  kable(digits=3)
 
 ```
 
@@ -783,24 +786,26 @@ pine3 |> tidy()
 #| warning: false
 #| label: tbl-poly3tidy
 #| tbl-cap: "tidy() output of lm(Top~poly(First, 3, raw=TRUE), data=pinetree)"
-if(knitr::is_html_output()) {
-
-  pine3 |> 
+# if(knitr::is_html_output()) {
+# 
+#   pine3 |> 
+#   tidy() |> 
+#   kable(digits = 4,
+#         table.attr = 'data-quarto-disable-processing="true"'
+#         ) |> 
+#   kable_classic(full_width=F)
+#     
+# } else {
+#   
+#   pine3 |> 
+#   tidy() |> 
+#   kable(digits = 4) |> 
+#   kable_classic(full_width=F)
+#   
+# }
+pine3 |> 
   tidy() |> 
-  kable(digits = 4,
-        table.attr = 'data-quarto-disable-processing="true"'
-        ) |> 
-  kable_classic(full_width=F)
-    
-} else {
-  
-  pine3 |> 
-  tidy() |> 
-  kable(digits = 4) |> 
-  kable_classic(full_width=F)
-  
-}
-
+  kable(digits = 4)
  
 ```
 
@@ -818,27 +823,30 @@ pine3 |>
 #| echo: false
 #| label: tbl-poly3glance
 #| tbl-cap: "glance() output of lm(Top~poly(First,3, raw=TRUE), data=pinetree)"
-if(knitr::is_html_output()) {
+# if(knitr::is_html_output()) {
+# 
+#   pine3 |> 
+#   glance() |> 
+#   select(adj.r.squared, sigma, statistic, p.value, AIC, BIC) |> 
+#   kable(digits = 2,
+#         table.attr = 'data-quarto-disable-processing="true"'
+#         ) |> 
+#   kable_classic(full_width=F)
+#     
+# } else {
+#   
+#   pine3 |> 
+#   glance() |> 
+#   select(adj.r.squared, sigma, statistic, p.value, AIC, BIC) |> 
+#   kable(digits = 2) |> 
+#   kable_classic(full_width=F)
+#   
+# }
 
-  pine3 |> 
+pine3 |> 
   glance() |> 
   select(adj.r.squared, sigma, statistic, p.value, AIC, BIC) |> 
-  kable(digits = 2,
-        table.attr = 'data-quarto-disable-processing="true"'
-        ) |> 
-  kable_classic(full_width=F)
-    
-} else {
-  
-  pine3 |> 
-  glance() |> 
-  select(adj.r.squared, sigma, statistic, p.value, AIC, BIC) |> 
-  kable(digits = 2) |> 
-  kable_classic(full_width=F)
-  
-}
-
-
+  kable(digits = 2)
 ```
 
 ```{r}
@@ -892,23 +900,25 @@ modstats
 #| label: tbl-polysummary
 #| tbl-cap: "Glancing Polynomial models"
 
-if(knitr::is_html_output()) {
+# if(knitr::is_html_output()) {
+# 
+#   modstats |> 
+#   kable(digits=2,
+#         table.attr = 'data-quarto-disable-processing="true"'
+#         ) |> 
+#   kable_classic(full_width=F)
+#     
+# } else {
+#   
+#   modstats |> 
+#   kable(digits=2) |> 
+#   kable_classic(full_width=F)
+#   
+# }
 
-  modstats |> 
-  kable(digits=2,
-        table.attr = 'data-quarto-disable-processing="true"'
-        ) |> 
-  kable_classic(full_width=F)
-    
-} else {
-  
-  modstats |> 
-  kable(digits=2) |> 
-  kable_classic(full_width=F)
-  
-}
-
-
+ 
+modstats |> 
+  kable(digits=2)
 ```
 
 It is desirable to keep the coefficients the same when higher order polynomial terms are added. This can be done using orthogonal polynomial coefficients (we will skip the theory) for which we will avoid the argument `raw` within the function `poly()`. Try-

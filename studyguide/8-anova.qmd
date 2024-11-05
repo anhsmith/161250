@@ -68,8 +68,7 @@ dtf
 #| tbl-cap: "Fabric Burntime data"
 
 library(kableExtra)
-kable(dtf) |> 
-  kable_styling(full_width = F)
+kable(dtf) 
 ```
 
 Note that the response variable $Y$ is quantitative in that they are measurements of burn times in seconds. The five measurements for each fabric are assumed to be a random sample for all possible burn times for that fabric so that the five readings are true replications.
@@ -271,8 +270,7 @@ concrete <- read_csv("http://www.massey.ac.nz/~anhsmith/data/concrete.txt",
 #| tbl-cap: "Concrete strength data"
 #| echo: false
 
-concrete |> kable() |> 
-  kable_styling(full_width = F)
+concrete |> kable() 
 ```
 
 In @fig-6-8, the computation of row (cement) and column (Aggregate) effects is explained. Clearly the rows correspond to the four cements and the columns correspond to the three aggregates.
@@ -586,8 +584,7 @@ fabric
 #| label: tbl-invartab
 #| tbl-cap: "Indicators of Fabrics"
 fabric |> 
-  kable()|> 
-  kable_styling(full_width = F)
+  kable()
 ```
 
 ```{r, echo=TRUE}
@@ -701,8 +698,7 @@ tidy(mdl)
 #| tbl-cap: 'Regression of Top Circumference on Area Indicator Variables'
 
 tidy(mdl) |> 
-  kable() |> 
-  kable_styling(full_width = F)
+  kable()
 ```
 
 The following points are to be noted on the regression model shown in @tbl-indicat:
@@ -730,8 +726,7 @@ lm(Top ~ Area, data=pinetree) |> anova()
 
 lm(Top ~ Area, data=pinetree) |> 
   anova() |> 
-  kable() |>    
-  kable_styling(full_width = F)
+  kable()
 ```
 
 # Analysis of Covariance (ANCOVA)
@@ -761,8 +756,7 @@ restaurant
 #| label: tbl-Restaurant
 #| tbl-cap: 'Restaurant Sales Data'
 restaurant |> 
-  kable() |> 
-  kable_styling(full_width = F)
+  kable() 
 ```
 
 @tbl-Restaurant also shows the indicator variables for the Location factor. Just two indicator variables (say $I_1$ and $I_2$) are needed in order to define the three different locations uniquely. In order to permit a separate line for each location we need a model of the following form
@@ -791,8 +785,7 @@ tidy(ancova.model)
 
 ancova.model |> 
   tidy() |> 
-  kable(digits=3) |> 
-  kable_styling(full_width = F)
+  kable(digits=3) 
 ```
 
 This `R` output suggests that the coefficients for $I_2$, $I_1\times X$ and $I_2\times X$ are not significantly different from zero. This suggests that a simpler model can be fitted to these data omitting the category indicated by $I_2$. The significance of the $I_1$ coefficient means that the $y$-intercept of the model for Mall location is different. The significance of the coefficients of the product variables will imply significant differences in slopes for the locations but this is not the case here. In general, a stepwise regression is needed to obtain a simpler model having the best subset of predictors (rather than judging from the multiple regression model given here).

@@ -111,13 +111,16 @@ theme_set(theme_bw())
 #| message: false
 #| label: fig-barchart
 #| fig-cap: 'Bar Chart of Ceramics counts'
+
 data(Snodgrass, package = "archdata")
 
 Snodgrass |> 
   ggplot() + 
   aes(x = Ceramics) + 
   geom_bar()
+
 ```
+
 
 The bar graph illustrates clearly that no ceramics were found in many houses but a lot were found in a few houses. This may be due to status and wealth of the occupants.
 
@@ -624,6 +627,7 @@ Letter values are displayed as a graph called letter value plot; see @fig-LVplt1
 
 library(lvplot)
 LVboxplot(Snodgrass$Length, xlab = "Length")
+
 ```
 
 A letter value plot showing the eighths is shown in @fig-boxplt2. Note that this LV plot does not have a whisker, but the points falling outside the eighths are tagged.
@@ -632,7 +636,12 @@ A letter value plot showing the eighths is shown in @fig-boxplt2. Note that this
 #| echo: true
 #| label: fig-boxplt2
 #| fig-cap: 'Letter-value plots of `Length` by `Inside`'
-LVboxplot(Snodgrass$Length ~ Snodgrass$Inside, xlab = "Length")
+
+LVboxplot(
+  Snodgrass$Length ~ Snodgrass$Inside, 
+  xlab = "Length"
+  )
+
 ```
 
 If we compare @fig-boxplt1 with @fig-boxplt2, we can see that the whiskers have been replaced with more 'outliers' and two extra boxes. The middle boxes are the same; they show the first and third quartiles. The smaller, darker boxes in @fig-boxplt2 show the first and seventh eighths.
@@ -663,7 +672,10 @@ data.frame(
   xlab("")
 ```
 
-# Cumulative Frequency Graph and Quantiles
+
+# Cumulative Frequencies and Quantiles
+
+## Cumulative frequencies
 
 When the data consists of individual points rather than grouped data, we first order the data from smallest to largest and we can plot the row numbers against these.
 
@@ -677,15 +689,19 @@ With the Length data, there is a slight hitch in that there is duplication of th
 #| echo: true
 #| label: fig-cumfrq
 #| fig-cap: 'Cumulative Relative Frequency Curve'
+
 ggplot(Snodgrass) + 
   aes(Length) + 
   stat_ecdf()
-```
 
+```
 
 @fig-cumfrq shows the Cumulative Relative Frequency Curve. The procedure we described is a very basic one, and `R` software will get a better one where we make more assumptions on how to relate the observed data to the cumulative relative frequencies.
 
+## Quantiles
+
 An important use of cumulative relative frequency graph is to find the **quantiles** of the distribution which is a general term for percentiles, deciles etc. For example, the $50^{\text th}$ percentile or the 5$^{\text th}$ decile (tenth) is the median which has 50% of the distribution up to, and including it. Any desired percentile can be found from the graph by drawing a horizontal line at the desired cumulative relative frequency and noting the value at which it cuts the curve.  @fig-cumfrq1 illustrates how the 30$^{\text th}$ percentile can be interpolated for the Length variable. It is desirable to use software to draw the cumulative relative frequency curves or estimate the quantiles.
+
 
 ```{r}
 #| echo: true
@@ -720,7 +736,9 @@ ggplot(Snodgrass) +
 
 ```
 
+
 The 25$^{\text th}$ percentile is known as the **lower quartile** and the 75$^{\text th}$ percentile is known as the **upper quartile**. The inter-quartile range (IQR) is defined as the difference between the upper and lower quartiles. The lower and upper quartiles will slightly differ from the lower and upper hinges for small data sets due to the differences in estimating the cumulative relative frequency function known as the empirical cumulative distribution function (**ECDF**).
+
 
 The `R` function `quantile()` will get the quantiles easily. The following output shows the percentiles for Length data.
 
@@ -728,7 +746,7 @@ The `R` function `quantile()` will get the quantiles easily. The following outpu
 quantile(Snodgrass$Length, seq(0,1,0.1))
 ```
 
-## Quantile-Quantile (Q-Q) Plot
+## Quantile-Quantile Plots
 
 At times, two groups may have different numbers of observations but they may be similar in some ways and it may be appropriate to compare them. This comparison can be done in several ways but Q-Q plot is once such graph useful for such a comparison. The quantiles of the first batch is plotted against the quantiles of the second batch. A 45 degree $(Y=X)$ line is also drawn. If the points on a quantile-quantile plot fall along, or close to, the 45 degree line, then the two variables follow the same distribution; if they fall on a line parallel to the 45 degree line, the two variables follow similar distributions but one has a larger location parameter (say mean, or median) than the other; if the slope differs from the 45 degree line the variables have a similar distribution but have different scale parameters (say, standard deviations or F-spreads); if the plot is linear then the distributions of $Y$ and $X$ are different.
 
@@ -789,6 +807,7 @@ p4 <- ggplot() +
   xlab("X quantiles") + ylab("Y quantiles")
 
 gridExtra::grid.arrange(p1, p2, p3, p4, ncol=2)
+
 ```
 
 In @fig-qq1, different kinds of quantile-quantile plots are shown; note the following three cases in particular.
@@ -825,58 +844,29 @@ ggplot() +
   geom_abline(slope=1, intercept=0) + 
   xlab("Length quantiles for Inside Group") + 
   ylab("Length quantiles for Outside Group")
+
 ```
+
 
 Note that the distribution of two variables $X$ and $Y$ can be compared in a number of ways using boxplots, overlaid ECDF plots etc.
 
-# Comparing Several Groups of Data
+# Exploring Relationships
 
-In earlier sections we have seen briefly how to compare two batches of data using boxplots, Q-Q plot etc. Several boxplots can be presented in a single display so that the distributions of the variables can be compared. An example is shown in @fig-boxpl3. Note that we can instead make dotplots instead of boxplots shown in @fig-facetgrid.
-
-```{r}
-#| message: false
-#| echo: true
-#| label: fig-boxpl3
-#| fig-cap: 'Comparing many batches'
-
-download.file(
-  url = "http://www.massey.ac.nz/~anhsmith/data/rangitikei.RData",
-  destfile = "rangitikei.RData")
-load("rangitikei.RData")
-
-ggplot(rangitikei) + 
-  aes(y=people, x=temp) + 
-  geom_boxplot() + 
-  coord_flip()
-```
-
-By the term faceting, we mean in a trellis or matrix like layout for graphing. A facet grid of plots is a matrix of panels of graphs defined by row and/or column faceting variables. A simple row grid of jittered dotplots is shown in @fig-facetgrid. This display shows that more people visited Rangitikei river when the temperature is moderate than when it is too low or high.
-
-```{r}
-#| echo: true
-#| label: fig-facetgrid
-#| fig-cap: 'Comparing many batches'
-
-ggplot(rangitikei) +
-  aes(y=people, x="") +
-  geom_jitter() + 
-  facet_grid(temp ~ .)
-
-# Try  + geom_jitter() + facet_grid(temp ~ wind)
-# Try  + geom_jitter() + facet_grid( ~ temp+wind)
-```
-
-Plots can also be wrapped for better comparison and discovery of patterns and peculiarities. More `R` instructions appear in the software handout and in course `Shiny` apps.
-
-## Exploring relationships
+## Scatterplots
 
 Consider data which can be written as pairs ($X$, $Y$). The two groups of data ($X$ and $Y$) need not be in the same units but they are assumed to be related in some way. Scatterplots are useful in exploring the type of relationship between $X$ and $Y$.
 
 ```{r}
-download.file(
-  url = "http://www.massey.ac.nz/~anhsmith/data/testmarks.RData", 
-  destfile = "testmarks.RData")
+if( !file.exists("testmarks.RData") ) {
 
+  download.file(
+    url = "http://www.massey.ac.nz/~anhsmith/data/testmarks.RData", 
+    destfile = "testmarks.RData")
+
+}
+```
+
+```{r}
 load("testmarks.RData")
 ```
 
@@ -918,6 +908,25 @@ In @fig-marginbp, it can be seen (with some effort) that each set of scores seem
 
 Finally, does the variability in English marks change as the Maths mark changes, or is it fairly constant, i.e. does the vertical height of the scatter change from left to right? In this case the variability appears to be fairly constant (we will see why this is important later).
 
+The **Rangitikei** data gives the number of people making recreational use of the Rangitikei River and the number of vehicles seen at a particular location and time. The data were collected at two locations (location being a categorical variable).
+
+```{r}
+if( !file.exists("rangitikei.RData") ) {
+
+  download.file(
+    url = "http://www.massey.ac.nz/~anhsmith/data/rangitikei.RData",
+    destfile = "rangitikei.RData")
+
+}
+```
+
+```{r}
+load("rangitikei.RData")
+```
+
+
+If the data are grouped, this information can be added to a scatterplot by using different symbols and/or colours for each group. For example, we can show a scatterplot of people vs vehicles with different points for locations (@fig-sca2). 
+
 
 ```{r}
 #| echo: true
@@ -929,7 +938,9 @@ ggplot(rangitikei) +
   geom_point()
 ```
 
-If the data is known to be grouped, then this can be shown on the scatterplot by using different symbols for each group. The data file **Rangitikei.txt** gives the number of people making recreational use of the Rangitikei River and the number of vehicles seen at a particular location and time. The data were collected at two locations (location being a categorical variable). The effect of location, if any, on the number of people and vehicles can be seen on a scatterplot if we identify each plotted point with a different symbol (or colour) depending on the location (see @fig-sca2). There appears to be little effect of location on the number of people and vehicles seen.
+There appears to be little difference in the number of people and vehicles seen among the locations.
+
+@fig-marginbp1 shows the number of people against the number of vehicles seen as well as the distribution of each variable along the axes using boxplots (these are often referred to as *marginal distributions*). The first plot in @fig-marginbp1 (A) shows the scatter of all points, whereas the second one (B) shows the scatter with the very large value (Observation \#26) removed. In the first plot, the outlier shows up quite clearly in both boxplots. In the second plot, the boxplot associated with the variable 'people' still shows one point as an outlier, though this doesn't appear to be as extreme as the outlier in the first plot. 
 
 ```{r}
 #| echo: true
@@ -958,17 +969,28 @@ gridExtra::grid.arrange(
   ggMarginal(p1, type="boxplot"), 
   ggMarginal(p2, type="boxplot"), 
   ncol=1)
+
 ```
 
-@fig-marginbp2 shows the number of people against the number of vehicles seen as well as the distribution of each variable along the axes using boxplots (these are often referred to as *marginal distributions*). The first plot in @fig-marginbp2 (A) shows the scatter of all points, whereas the second one (B) shows the scatter with the very large value (Observation \#26) removed. In the first plot the outlier shows up quite clearly in both boxplots. In the second plot the boxplot associated with the variable 'people' still shows one point as an outlier, though this doesn't appear to be as extreme as the one in the first plot, and in the scatterplot the points fall close to a line which has a positive slope as is the case of @fig-marginbp2 (A). However, the distribution of each variable is skewed to the right.
 
-Note that the case which produced the outlier in both the marginal distributions did not produce a scatterplot value that was in any way unusual. While this might not surprise us (the relationship between people and vehicles might be expected to stay the same even for a location with large numbers of each), it follows that an outlier with respect to the underlying relationship between two variables will be different from an outlier in the marginal distribution sense. And such a value may not be an outlier in either marginal distribution. Look again at @fig-marginbp - there is one student with a high Maths mark but a low English mark. While neither mark is unusual in itself, the point stands out from the rest of the scatterplot because it is unusually high or low (i.e. up or down) on the plot. In general an outlier with respect to the relationship between $X$ and $Y$ is one whose $Y$ value is unusually large or small compared to other cases with similar $X$ values.
+Note that the outlier point in @fig-marginbp1 (A) showed clearly in the marginal distributions of both variables. However, it was consistent with the *relationship* between vehicle and people. While this might not surprise us (the relationship between people and vehicles might be expected to stay the same even for a location with large numbers of each), it follows that an outlier with respect to the underlying relationship between two variables will be different from an outlier in the marginal distribution sense. And such a value may not be an outlier in either marginal distribution. 
+
+Look again at @fig-marginbp - there is one student with a high Maths mark but a low English mark. While neither mark is unusual in itself, the point stands out from the rest of the scatterplot because it is unusually high or low (i.e. up or down) on the plot. In general an outlier with respect to the relationship between $X$ and $Y$ is one whose $Y$ value is unusually large or small compared to other cases with similar $X$ values.
+
+Now let's load the `horsehearts` dataset, which contains the weights of horses' hearts along with some other heart measurements. 
 
 ```{r}
-download.file(
-  url = "http://www.massey.ac.nz/~anhsmith/data/horsehearts.RData",
-  destfile = "horsehearts.RData")
+if( !file.exists("horsehearts.RData") ) {
 
+  download.file(
+    url = "http://www.massey.ac.nz/~anhsmith/data/horsehearts.RData",
+    destfile = "horsehearts.RData")
+
+}
+```
+
+
+```{r}
 load("horsehearts.RData")
 ```
 
@@ -994,13 +1016,13 @@ gridExtra::grid.arrange(
   ncol=1)
 ```
 
-Another example of a scatterplot is shown in @fig-marginbp2 which displays the weight of horses' hearts against their exterior widths in the systole phase (that is the contracted phase)(data set **horsehearts.txt**). The scatterplot indicates that a straight line would not fit the data well. On the other hand, there is some evidence the weights fall into one of two subgroups (with a value around 2.5kg being the cut off point). Scatterplots are particularly useful in pinpointing possible groupings of points so that the structure of the data is revealed which might otherwise go undetected in descriptive statistics calculated for the full data set.
+@fig-marginbp2 shows scatterplots of weights of horses' hearts against their exterior widths in the systolic phase (that is the contracted phase). The scatterplot indicates that a straight line would not fit the data well. On the other hand, there is some evidence the weights fall into one of two subgroups (with a value around 2.5kg being the cut off point). Scatterplots are particularly useful in pinpointing possible groupings of points so that the structure of the data is revealed which might otherwise go undetected in descriptive statistics calculated for the full data set.
 
 One way of quickly assessing whether a straight line fit is reasonable is to smooth the points in the plot using a LOWESS (LOcally WEighted Scatterplot Smoother) smoothed line. The lowess (also called loess) procedure is based on local sets of points (instead of the whole data set) at a given $x$ range, and fits a smoothed line to the data. The second scatterplot in @fig-marginbp2 shows the lowess smoother which confirms that there is curvature in the underlying relationship- possibly a cubic curve would fit this.
 
-### Scatterplots and Correlation Coefficients
+## Correlation coefficients
 
-We will use the data set **horsehearts.txt** of the weights of horses' hearts in relation to other heart measurements to illustrate the measurement of correlation. As we have seen before, scatterplots provide a good starting point for exploring the type of relationship between two variables. In @fig-scaqud, the weight, $Y$, is plotted against the exterior width $X$ (diastole phase in column 7 of **horsehearts.txt**). It is helpful to divide the scatterplot into four quarters, called quadrants, by drawing a line horizontally at the average $Y$ value or weight (2.235kg) and vertically at the average $X$ value (or diastole exterior width 14.13mm). The first quadrant is the top right hand side quarter. We move anti-clockwise for numbering the quadrants, and the bottom left hand side quadrant is called the third quadrant.
+As we have seen before, scatterplots provide a good starting point for exploring the relationship between two variables. In @fig-scaqud, the weight, $Y$, is plotted against the exterior width $X$ (diastolic phase in column 7 of **horsehearts.txt**). It is helpful to divide the scatterplot into four quarters, called quadrants, by drawing a line horizontally at the average $Y$ value or weight (2.235 kg) and vertically at the average $X$ value (or diastolic exterior width 14.13 mm). The first quadrant is the top right hand side quarter. We move anti-clockwise for numbering the quadrants, and the bottom left hand side quadrant is called the third quadrant.
 
 
 ```{r}
@@ -1035,7 +1057,7 @@ $$
 Here $S_{xx}=S_x^2$ is the variance of $X$, $S_{yy}=S_y^2$ is the variance of $Y$, and $S_{xy}$ is the covariance between $X$ and $Y$.
 
 
-The (Pearsonian) correlation (coefficient) between WEIGHT and EXTDIA equals 0.759. Perfect correlation (+l) would occur if all points fell on a straight line in the first and third quadrants. Assuming a bivariate normal distribution, the null hypothesis that the true correlation coefficient $\rho _{xy} =0$ can be tested using the test statistic $$t = \frac{{r_{xy} }}{{\sqrt {\frac{{1 - r_{xy}^2 }}{{n - 2}}} }}$$ Statistical software programs directly give the $p$-value for this test. The estimated correlation coefficient of 0.759 for $(n-2)=44$ df is significant ($p$-value is close to zero). Testing of hypothesis related topics are covered in the next Chapter.
+The Pearson correlation (coefficient) between WEIGHT and EXTDIA equals 0.759. Perfect correlation (+1) would occur if all points fell on a straight line in the first and third quadrants. Assuming a bivariate normal distribution, the null hypothesis that the true correlation coefficient $\rho _{xy} =0$ can be tested using the test statistic $$t = \frac{{r_{xy} }}{{\sqrt {\frac{{1 - r_{xy}^2 }}{{n - 2}}} }}$$ Statistical software programs directly give the $p$-value for this test. The estimated correlation coefficient of 0.759 for $(n-2)=44$ df is significant ($p$-value is close to zero). Testing of hypothesis related topics are covered in the next Chapter.
 
 The scatterplot indicates that there may be two groups of horses; whose hearts weigh about 2.3 kg or more and whose heart weights are less than 2.3 kg. If possible, one should try to establish whether there are two groups for some reason (perhaps age, sex or breed). If the points tended to concentrate in quadrants 2 and 4, this would indicate that the correlation between $Y$ and $X$ is negative (as $X$ increases, $Y$ tends to decrease). If the points were evenly scattered among the four quadrants, the correlation coefficient would be close to zero.
 
@@ -1110,16 +1132,23 @@ To see why the sign of $r$ indicates the direction of the relationship, consider
 
 3.  Points in the second and fourth quadrant contribute negative amounts, $(-)\times (+)$ or $(+)\times (-)$, to the cross product $S_{xy}$. If there are a considerable number of points in quadrants 2 and 4, the correlation coefficient will tend to be negative.
 
-### Scatterplot and correlation Matrices
-  
-  When there are more than two variables of interest, it is possible to draw scatterplots of each pair of variables but this becomes a bewildering exercise as the number of variables increases. One way to keep track of these plots is to set them out in a scatterplot matrix as in @fig-matplt2 which is based on the data set **pinetree.txt** containing the circumference measurements of pine trees at four positions (Top, Third, Second and First) and in three areas of a forest. This plot also shows the simple correlation coefficients on the upper diagonal and smoothed density plots on the main diagonal of the matrix. This plot clearly shows that the variables are strongly related to each other. In particular, the Top circumference can be predicted reasonably well based on the bottom circumference. Even though the correlations are high, a quadratic model may fit better. @fig-matplt2 seems to show a non-random pattern in the way points appear on the plot. This may be due to the Area effect because the circumference data were collected from three different areas. @fig-matplt2 confirms that this is indeed the case.
+## Correlation matrices
+
+When there are more than two variables of interest, it is possible to draw scatterplots of each pair of variables but this becomes a bewildering exercise as the number of variables increases. One way to keep track of these plots is to set them out in a scatterplot matrix as in @fig-matplt2 which is based on the `pinetree` data set, which  contains the circumference measurements of pine trees at four positions (`Top`, `Third`, `Second` and `First`) and in three areas of a forest. This plot also shows the simple correlation coefficients on the upper diagonal and smoothed density plots on the main diagonal of the matrix. This plot clearly shows that the variables are strongly related to each other. In particular, the Top circumference can be predicted reasonably well based on the bottom circumference. Even though the correlations are high, a quadratic model may fit better. @fig-matplt2 seems to show a non-random pattern in the way points appear on the plot. This may be due to the Area effect because the circumference data were collected from three different areas. @fig-matplt2 confirms that this is indeed the case.
 
 ```{r}
-download.file(
-  url = "http://www.massey.ac.nz/~anhsmith/data/pinetree.RData", 
-  destfile = "pinetree.RData")
-load("pinetree.RData")
+if( !file.exists("pinetree.RData") ) {
 
+  download.file(
+    url = "http://www.massey.ac.nz/~anhsmith/data/pinetree.RData", 
+    destfile = "pinetree.RData")
+
+}
+```
+
+
+```{r}
+load("pinetree.RData")
 ```
 
 
@@ -1146,9 +1175,9 @@ ggpairs(
   )
 ```
 
-### Exploring bivariate distributions
-  
-  The two-dimensional or the **bivariate probability distribution** of $X$ and $Y$ can be displayed as a 2-d smoothed density plot or as a probability contour plot. @fig-matplt3 shows such plots. This figure rather suggests that there may be two separate joint probability distributions of Maths and English scores. This clue is not obtained in the scatter plot of English score against Maths score but only from the other three plots.
+## Bivariate distributions
+
+The two-dimensional or the **bivariate probability distribution** of $X$ and $Y$ can be displayed as a 2-d smoothed density plot or as a probability contour plot. @fig-matplt3 shows such plots. This figure rather suggests that there may be two separate joint probability distributions of Maths and English scores. This clue is not obtained in the scatter plot of English score against Maths score but only from the other three plots.
   
 
 ```{r}
@@ -1192,18 +1221,6 @@ par(op)
 par(def.par)
 ```
 
-<!-- ```{r} -->
-<!-- p0 <- testmarks |>  -->
-<!--   ggplot() +  -->
-<!--   aes(x = Maths, y = English) -->
-
-<!-- p1 <- p0 + geom_point() -->
-
-<!-- p2 <- p0 + geom_bin2d() -->
-
-<!-- ``` -->
-
-
 In summary, scatterplots may reveal many properties and peculiarities about the relationship of $Y$ to $X$, namely
 
 1.  **Trends**: the overall trend may be positive or negative. It may be appropriate to fit a straight line or a curve.
@@ -1229,12 +1246,8 @@ plot_ly(type = 'contour',
         z=pinetree$Top)
 ```
 
-For the Snodgrass data, the contour plot of East (X) vs, South (Y) vs. Area (Z) is shown in @fig-cntrplt. This plot shows that bigger house pits are inside the X and Y axis show the geolocations.
 
-![A contour plot for the Snodgrass data](images/ContourPlot.png){#fig-cntrplt}
-
-
-A bubble plot is another option where a scatter plot shows the third variable as the size of the bubble on a scatter plot. This type of plot can be restrictive for some datasets depending on the variability involved in the third variable. @fig-bubble shows the location of the house pits and total Area. This plot not only gives the spatial view of the tribal area but indirectly reveals the clustering of house sizes.
+A bubble plot is a way to plot three variables on a two-dimensional scatter plot, where a third variable gives the size of the points (or 'bubbles'). This type of plot can be restrictive for some datasets depending on the variability involved in the third variable. @fig-bubble shows the location of the house pits and total Area. This plot not only gives the spatial view of the tribal area but indirectly reveals the clustering of house sizes.
 
 ```{r}
 #| label: fig-bubble
@@ -1251,13 +1264,6 @@ Using the appropriate software, it is possible to explore three variables using 
 #| fig-cap: 'A 3-D plot'
 library(lattice)
 cloud(Top ~ First+Second, group=Area, data=pinetree)
-```
-
-R packages such as `rgl` and `plotly` allow rotations of axes for graphical exploration of the relationships among variables, detection of peculiar points etc. It is easy to miss the form of relationships if proper rotational exploration is not done. Try:
-  
-```{r}
-library(rgl)
-plot3d(Snodgrass$East, Snodgrass$South, Snodgrass$Area)
 ```
 
 `plotly` is great for interactive 3d plots (though they only work with HTML, not PDF).
@@ -1279,53 +1285,8 @@ coplot(Top~ First | Second*Area, data = pinetree)
 
 The coplot in @fig-coplt shows that pine trees are not maturing well in Area 3, given that fewer points are on the right hand side of the graph when compared to Areas 1 and 2.
 
-Obviously we cannot to visualise several dimensions easily but there are few shortcuts for multivariate data visualisation such as the Chernoff or cartoon faces plot. This type of plot is based on our ability to recognise features in human faces. This type of plot is suitable for small datasets and identify unusual observations, for example observation \#46 in *horsehearts* data shown in @fig-faceplot.
 
-```{r}
-#| echo: false
-#| label: fig-faceplot
-#| fig-cap: 'A Cartoon Faces plot'
-#| fig-height: 8
-#| fig-width: 8
-
-library(aplpack)
-faces(horsehearts)
-```
-
-Exploration of higher dimensional data requires further theory. Reduction of dimensions and display of crucial information using newly generated variables based on the theory of multivariate statistics are the natural way to explore higher dimensional data. Many such approaches are taught mainly in 300 level papers. A couple of such methods are explained below:
-  
-  One of the tricks to handle multidimensional data is to reduce the number of dimensions using *principal components*. These are simply linear combinations of the original variables and may not have physical meaning. In some cases, we may be able to identify a latent variable that represents such a linear combination of variables. For example, `physical endurance` is latent but can be measured indirectly using many variables such as time taken to run 100m, maximum weight lifted etc. The first principal component (PC) is found in such a way that it accounts for the most variation in the data. The second principal component is found independent of the first in such a way that it accounts for the most variation that is not explained by the first principal component. The following output shows that the first two components are sufficient to explain most (\>98%) of the variation in the four numerical variables in the pinetree dataset.
-
-```{r}
-#| label: fig-pc
-#| fig-cap: ''
-
-fit <- prcomp(pinetree[, -1], scale. = TRUE)
-summary(fit)
-# Try autoplot(fit)
-```
-
-A biplot aims to show both the observations and variables in the same plot formed by the first two principal components. @fig-biplot shows the biplot for the pinetree variables and data.
-
-```{r}
-#| label: fig-biplot
-#| fig-cap: 'A biplot'
-#| message: false
-library(ggfortify)
-autoplot(fit, loadings = TRUE, loadings.label = TRUE)
-```
-
-For interpreting the biplot, consider the following patterns:
-  
-  1.  If points that are close to each other, it means observations with similar values. So you can spot the odd ones.
-
-2.  The correlation between variables is indicated by the cosine of the angle between vectors displayed for the variables. Highly correlated variables will point in the same direction. If variables are uncorrelated, they will be at right angles to each other. For the pine tree data, we notice high correlation. This has implications in model building. We may not need all of the three predictor variables of Top. More will follow in later Chapters.
-
-3.  The cosine of the angle between a vector and an axis indicates the contribution of the corresponding variable to the axis dimension. Look particularly the X-axis that represents the first principal component. The variables contribute somewhat the same.
-
-Note that the biplot is not useful if the first two principal components account for only a small part of the overall variation. We can also examine relationship between the categorical factors and the principal components but this topic is skipped in this course.
-
-# Time series EDA
+# Time Series EDA
 
 A **Time Series** is an ordered sequence of observations of a variable(s) (often) made at equally spaced time points. Time series data may have internal structures such as trends, seasonality, cycles etc. Such internal structural variation is largely absent in randomly collected data which are observed one-at-a-time (called cross-section data). Time series data analysis is useful in business and economic forecasting, stock market analysis, quality control etc. The objective of time series analysis is to understand the structure that generated the time-oriented data, fit a model, monitor and forecast if necessary.
 

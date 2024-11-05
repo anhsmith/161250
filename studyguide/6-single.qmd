@@ -159,15 +159,24 @@ tidy(simplereg)
 simplereg |> 
   tidy() |>
   mutate_if(is.numeric, round, 5) |> 
-  kable() |> 
-  kable_classic(full_width = F) 
+  kable() 
 ```
 
-For the horses hearts data, under the null hypothesis that the true (or population) slope $b$ equals zero (i.e., $H_{0}:\beta =0$), the test statistic becomes $$t=\frac{b}{s_{b} } =\frac{0.29963}{0.03877} = 7.728.$$
+For the horses hearts data, under the null hypothesis that the true (or population) slope $b$ equals zero (i.e., $H_{0}:\beta =0$), the test statistic becomes 
+
+$$
+t=\frac{b}{s_{b} } =\frac{0.29963}{0.03877} = 7.728
+$$
 
 The $t$-statistic is clearly large enough to be considered significant for $(n-2)$ $df$ and the $p$-value is close to zero. Thus, we would reject the null hypothesis $H_{0} :\beta =0$. In other words, the slope coefficient is significantly different from zero and hence the predictor variable *extdia* explains a significant amount of variation in the response variable *weight*.
 
-We can also carry out a similar $t$-test for the $y$-intercept $\alpha$ based on the $t$-statistic $$t = \frac {a}{s_a}= \frac{-2.00034}{0.55881}=-3.58.$$ but the main interest is in the slope parameter $\beta$. See @tbl-fittedmodel.
+We can also carry out a similar $t$-test for the $y$-intercept $\alpha$ based on the $t$-statistic:
+
+$$
+t = \frac{a}{s_a} = \frac{-2.00034}{0.55881} = -3.58
+$$ 
+
+but the main interest is in the slope parameter $\beta$. See @tbl-fittedmodel.
 
 ## Model Summaries
 

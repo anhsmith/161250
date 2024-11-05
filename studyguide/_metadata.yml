@@ -11,5 +11,6 @@ format:
     cite-method: biblatex
     toc: true  
     number-sections: true
+    prefer-html: false
 
 bibliography: references.bib

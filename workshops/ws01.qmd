@@ -865,33 +865,36 @@ out1 <- st.line.model |>
                 ~round(., 2))
          )
 
-out1 |> t() |> kable() |> 
-  kable_classic(full_width = F) 
+out1 |> t() |> kable() 
 ```
 
 For processing using Rmarkdown, we may use the codes which will give a tidy tabular output in the word-processed output.
 
 
 ```{r}
-library(tidyverse)
-library(broom)
-library(kableExtra)
-
 out1 <- st.line.model |> 
   tidy() |> 
   mutate(across(where(is.numeric), ~round(., 2)))
 
-kable(out1) |>  
-  kable_classic(full_width = F) 
+kable(out1)
 ```
 
 The fitted model is shown below:
 
 ```{r}
 ggplot(stackloss) + 
-  aes(y=stack.loss, x=Air.Flow) +
+  
+  aes(
+    y = stack.loss, 
+    x = Air.Flow
+    ) +
+  
   geom_point() + 
-  geom_smooth(method = lm, se = FALSE)
+  
+  geom_smooth(
+    method = lm, 
+    se = FALSE
+    )
 ```
 
 The fitted model can also be displayed on the scatter plot using the old style `plot` and `abline` commands.
