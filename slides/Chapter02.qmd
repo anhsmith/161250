@@ -296,7 +296,7 @@ vital <- read.table( "https://www.massey.ac.nz/~anhsmith/data/vital.txt", header
 
 ::::{.columns}
 :::{.column}
-**Histogram**<br>a coarse approximation of the density
+**Histogram**<br>a coarse visualisation of the distribution
 
 ```{r}
 #| echo: true

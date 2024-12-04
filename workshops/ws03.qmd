@@ -145,7 +145,7 @@ pnorm(2.1) - pnorm(-1.8)
 ```
 
 
-## Exercise 3.2 {-}
+## Exercise 3.3 {-}
 
 Plot the `prestige` scores data as a histogram and show the theoretical normal curve fitted to the data. 
 
@@ -156,7 +156,7 @@ library(car)
 Prestige |> 
   ggplot() + 
   aes(prestige) +
-  geom_histogram(aes(y=after_stat(density)), bins=10) +
+  geom_histogram(aes(y = after_stat(density)), bins=10) +
   stat_function(
     fun = dnorm,
     args = list(mean = mean(Prestige$prestige),
@@ -185,7 +185,7 @@ Prestige |>
 ```
 
 
-## Exercise 3.3 {-}
+## Exercise 3.4 {-}
 
 Let's look at the `prestige` scores variable to see how well it conforms with a normal distribution. 
 
@@ -233,23 +233,21 @@ shapiro.test(Prestige$prestige)
 ```
 Here, the null hypothesis is rejected, so the data are unlikely to have come from a normal. 
 
-The Kolmogorov-Smirnov test can also be used. It differs from the Shapiro-Wilk in that you specify the mean and SD of the distribution (here using the sample mean and SD). 
+The Kolmogorov-Smirnov test can also be used to test for departure from a theoretical distribution. K-S differs from Shapiro-Wilk in that you specify the mean and SD of the distribution. Let's say someone made the claim that prestige was normally distributed with a mean of 50 and a standard deviation of 17. We can test this like so:
 
 ```{r, results='hide'}
-ks.test(Prestige$prestige, 
-        "pnorm", 
-        mean(Prestige$prestige), 
-        sd(Prestige$prestige) )
+ks.test(Prestige$prestige, "pnorm", 50, 17)
 ```
-Here we have a discrepancy. S-W rejected the null hypothesis, and K-S did not. It is well-known that S-W is generally more powerful (i.e., more likely to reject a false null hypothesis). 
+We reject the null hypothesis and conclude that there is evidence against this claim. 
 
-At any rate, I don't believe in "true" distributions. Would I feel comfortable using a normal here? Possibly. It all depends on the context. Remember, there are no true models, only useful ones. 
+At any rate, I don't believe in "true" distributions. Would I feel comfortable assuming that these data came from a normal distribution? Possibly. It all depends on the context. Remember, there are no true models, only useful ones.
 
-We can try the square-root transformed `prestige` with . 
+Let's see if the square root-transformed `prestige` looks normal. 
 
 ```{r, results='hide'}
 shapiro.test(sqrt(Prestige$prestige))
 ```
+
 No significant departure from normality for the sqrt-transformed data.
 
 

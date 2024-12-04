@@ -160,7 +160,7 @@ $P(A | B) = P(A)$ **and** $P(B | A) = P(B)$.
 Observing event $A$ doesn't make event $B$ any more or less likely, and
 vice versa.
 
-For any two independent events $A$ and $B$,
+For any two events $A$ and $B$,
 $P(A \text{ and } B ) = P(A|B) \times P(B)$ and
 $P(A \textbf{ and } B ) = P(B|A) \times P(A)$.
 :::

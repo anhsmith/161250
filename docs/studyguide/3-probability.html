@@ -997,15 +997,7 @@ div.csl-indent {
 95% of the values fall within 2 standard deviation of the mean<br>
 99% of the values fall within 3 standard deviation of the mean.<br>
 </p>
-<p>As a special case, 50% of the values will fall within 0.6745 standard deviations of the mean. For symmetric distributions, mean equals the median. Hence the fourths (quartiles) of random data obtained drawn from theoretical normal population will be</p>
-<p><strong>Lower hinge</strong> = median - <span class="math inline">\(0.6745\times S~(\simeq\)</span>lower quartile),</p>
-<p>and</p>
-<p><strong>Upper hinge</strong> = median + <span class="math inline">\(0.6745 \times S~(\simeq\)</span> upper quartile),</p>
-<p>where <span class="math inline">\(S\)</span> is the standard deviation. Thus F-spread (or <span class="math inline">\(\simeq\)</span> the IQR) <span class="math inline">\(\simeq\)</span> 1.35<span class="math inline">\(\times S\)</span>. Hence</p>
-<p><strong>inner fences</strong>= median <span class="math inline">\(\pm\)</span> 2 F-spread = median <span class="math inline">\(\pm\)</span> 2.7<span class="math inline">\(\times S\)</span></p>
-<p>The probability that an observation falls between these fences is 0.993, or the probability of falling outside these fences is 0.007. Thus in our simulated batch of size 1000, we expect about 7 possible outliers but none for the simulated batch size 100. <strong>Outer fences</strong> are defined as being 2 steps (3<span class="math inline">\(\times\)</span>F-spread) away from the fourths so that</p>
-<p><strong>outer fences</strong>= median <span class="math inline">\(\pm\)</span> 3.5<span class="math inline">\(\times\)</span>F-spread = median <span class="math inline">\(\pm\)</span> 4.72<span class="math inline">\(\times S\)</span></p>
-<p>The probability of a point falling outside of this range is the extremely small amount of 0.000002. It is not surprising, then, that none of the values in our simulated batches fell outside of the outer fences. If they did, we would class them as probable outliers. Of course, with distributions other than the Gaussian one, and particularly for asymmetric distributions, the probability of a value falling outside these fences is higher.</p>
+<p>As a special case, 50% of the values will fall within 0.6745 standard deviations of the mean. For symmetric distributions, mean equals the median.</p>
 </section>
 <section id="assessment-of-normality" class="level3">
 <h3 class="anchored" data-anchor-id="assessment-of-normality">Assessment of Normality</h3>
@@ -2276,139 +2268,123 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb24-916"><a href="#cb24-916" aria-hidden="true" tabindex="-1"></a>95% of the values fall within 2 standard deviation of the mean\</span>
 <span id="cb24-917"><a href="#cb24-917" aria-hidden="true" tabindex="-1"></a>99% of the values fall within 3 standard deviation of the mean.\</span>
 <span id="cb24-918"><a href="#cb24-918" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-919"><a href="#cb24-919" aria-hidden="true" tabindex="-1"></a>As a special case, 50% of the values will fall within 0.6745 standard deviations of the mean. For symmetric distributions, mean equals the median. Hence the fourths (quartiles) of random data obtained drawn from theoretical normal population will be</span>
+<span id="cb24-919"><a href="#cb24-919" aria-hidden="true" tabindex="-1"></a>As a special case, 50% of the values will fall within 0.6745 standard deviations of the mean. For symmetric distributions, mean equals the median. </span>
 <span id="cb24-920"><a href="#cb24-920" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-921"><a href="#cb24-921" aria-hidden="true" tabindex="-1"></a>**Lower hinge** = median - $0.6745\times S~(\simeq$lower quartile),</span>
+<span id="cb24-921"><a href="#cb24-921" aria-hidden="true" tabindex="-1"></a><span class="fu">### Assessment of Normality</span></span>
 <span id="cb24-922"><a href="#cb24-922" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-923"><a href="#cb24-923" aria-hidden="true" tabindex="-1"></a>and</span>
+<span id="cb24-923"><a href="#cb24-923" aria-hidden="true" tabindex="-1"></a>The shapes of the ECDF curves shown in @fig-simnorecdf are typical of the empirical cumulative distributions for data from Normal populations. This curve was drawn using 1000 and 100 simulated random normal data. It could perhaps be described as an S-shape on its side (or lazy or stretched out S). The curve is flatter at either end which reflects the small amounts of relative frequency in the tails of the Normal distribution. The theoretical Cumulative Distribution Function (CDF) curve for the normal distribution is also shown in @fig-simnorecdf as a smooth curve. For smaller samples from a Normal population, the ECDF curve will vary about the theoretical curve, and, of course, the variation is likely to be larger the smaller the sample; see @fig-simnorecdf(B).</span>
 <span id="cb24-924"><a href="#cb24-924" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-925"><a href="#cb24-925" aria-hidden="true" tabindex="-1"></a>**Upper hinge** = median + $0.6745 \times S~(\simeq$ upper quartile),</span>
-<span id="cb24-926"><a href="#cb24-926" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-927"><a href="#cb24-927" aria-hidden="true" tabindex="-1"></a>where $S$ is the standard deviation. Thus F-spread (or $\simeq$ the IQR) $\simeq$ 1.35$\times S$. Hence</span>
-<span id="cb24-928"><a href="#cb24-928" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-929"><a href="#cb24-929" aria-hidden="true" tabindex="-1"></a>**inner fences**= median $\pm$ 2 F-spread = median $\pm$ 2.7$\times S$</span>
-<span id="cb24-930"><a href="#cb24-930" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-931"><a href="#cb24-931" aria-hidden="true" tabindex="-1"></a>The probability that an observation falls between these fences is 0.993, or the probability of falling outside these fences is 0.007. Thus in our simulated batch of size 1000, we expect about 7 possible outliers but none for the simulated batch size 100. **Outer fences** are defined as being 2 steps (3$\times$F-spread) away from the fourths so that</span>
+<span id="cb24-927"><a href="#cb24-927" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-928"><a href="#cb24-928" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-simnorecdf</span></span>
+<span id="cb24-929"><a href="#cb24-929" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb24-930"><a href="#cb24-930" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb24-931"><a href="#cb24-931" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: 'Simulated normal data, n=100 and n=1000'</span></span>
 <span id="cb24-932"><a href="#cb24-932" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-933"><a href="#cb24-933" aria-hidden="true" tabindex="-1"></a>**outer fences**= median $\pm$ 3.5$\times$F-spread = median $\pm$ 4.72$\times S$</span>
-<span id="cb24-934"><a href="#cb24-934" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-935"><a href="#cb24-935" aria-hidden="true" tabindex="-1"></a>The probability of a point falling outside of this range is the extremely small amount of 0.000002. It is not surprising, then, that none of the values in our simulated batches fell outside of the outer fences. If they did, we would class them as probable outliers. Of course, with distributions other than the Gaussian one, and particularly for asymmetric distributions, the probability of a value falling outside these fences is higher.</span>
-<span id="cb24-936"><a href="#cb24-936" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-937"><a href="#cb24-937" aria-hidden="true" tabindex="-1"></a><span class="fu">### Assessment of Normality</span></span>
-<span id="cb24-938"><a href="#cb24-938" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-939"><a href="#cb24-939" aria-hidden="true" tabindex="-1"></a>The shapes of the ECDF curves shown in @fig-simnorecdf are typical of the empirical cumulative distributions for data from Normal populations. This curve was drawn using 1000 and 100 simulated random normal data. It could perhaps be described as an S-shape on its side (or lazy or stretched out S). The curve is flatter at either end which reflects the small amounts of relative frequency in the tails of the Normal distribution. The theoretical Cumulative Distribution Function (CDF) curve for the normal distribution is also shown in @fig-simnorecdf as a smooth curve. For smaller samples from a Normal population, the ECDF curve will vary about the theoretical curve, and, of course, the variation is likely to be larger the smaller the sample; see @fig-simnorecdf(B).</span>
-<span id="cb24-940"><a href="#cb24-940" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-943"><a href="#cb24-943" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb24-944"><a href="#cb24-944" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-simnorecdf</span></span>
-<span id="cb24-945"><a href="#cb24-945" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb24-946"><a href="#cb24-946" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb24-947"><a href="#cb24-947" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: 'Simulated normal data, n=100 and n=1000'</span></span>
-<span id="cb24-948"><a href="#cb24-948" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-949"><a href="#cb24-949" aria-hidden="true" tabindex="-1"></a>Mean  <span class="ot">&lt;-</span>  <span class="dv">80</span></span>
-<span id="cb24-950"><a href="#cb24-950" aria-hidden="true" tabindex="-1"></a>Sd  <span class="ot">&lt;-</span>  <span class="dv">12</span></span>
-<span id="cb24-951"><a href="#cb24-951" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb24-952"><a href="#cb24-952" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb24-953"><a href="#cb24-953" aria-hidden="true" tabindex="-1"></a>dfm<span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">RNDnorm =</span> <span class="fu">rnorm</span>(n, Mean, Sd))</span>
-<span id="cb24-954"><a href="#cb24-954" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dfm, <span class="fu">aes</span>(<span class="at">x =</span> RNDnorm)) <span class="sc">+</span> <span class="fu">stat_ecdf</span>(<span class="fu">aes</span>(<span class="at">color=</span><span class="st">"red"</span>)) </span>
-<span id="cb24-955"><a href="#cb24-955" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> p1<span class="sc">+</span><span class="fu">stat_function</span>(<span class="at">fun =</span> pnorm, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="fu">mean</span>(dfm<span class="sc">$</span>RNDnorm), <span class="at">sd =</span> <span class="fu">sd</span>(dfm<span class="sc">$</span>RNDnorm)))</span>
-<span id="cb24-956"><a href="#cb24-956" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> p1<span class="sc">+</span><span class="fu">guides</span>(<span class="at">colour=</span><span class="cn">FALSE</span>)<span class="sc">+</span><span class="fu">ggtitle</span>(<span class="st">"(A)"</span>)</span>
-<span id="cb24-957"><a href="#cb24-957" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> p1<span class="sc">+</span><span class="fu">xlab</span>(<span class="st">"N(80,12) random data n=100"</span>)<span class="sc">+</span><span class="fu">ylab</span>(<span class="st">"Cumulative proportion/probability"</span>)</span>
-<span id="cb24-958"><a href="#cb24-958" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-959"><a href="#cb24-959" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
-<span id="cb24-960"><a href="#cb24-960" aria-hidden="true" tabindex="-1"></a>dfm<span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">RNDnorm =</span> <span class="fu">rnorm</span>(n, Mean, Sd))</span>
-<span id="cb24-961"><a href="#cb24-961" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dfm, <span class="fu">aes</span>(<span class="at">x =</span> RNDnorm)) <span class="sc">+</span> <span class="fu">stat_ecdf</span>(<span class="fu">aes</span>(<span class="at">color=</span><span class="st">"red"</span>)) </span>
-<span id="cb24-962"><a href="#cb24-962" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> p2<span class="sc">+</span><span class="fu">stat_function</span>(<span class="at">fun =</span> pnorm, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="fu">mean</span>(dfm<span class="sc">$</span>RNDnorm), <span class="at">sd =</span> <span class="fu">sd</span>(dfm<span class="sc">$</span>RNDnorm)))</span>
-<span id="cb24-963"><a href="#cb24-963" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> p2<span class="sc">+</span><span class="fu">guides</span>(<span class="at">colour=</span><span class="cn">FALSE</span>)<span class="sc">+</span><span class="fu">ggtitle</span>(<span class="st">"(B)"</span>)</span>
-<span id="cb24-964"><a href="#cb24-964" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> p2<span class="sc">+</span><span class="fu">xlab</span>(<span class="st">"N(80,12) random data n=1000"</span>)<span class="sc">+</span><span class="fu">ylab</span>(<span class="st">"Cumulative proportion/probability"</span>)</span>
-<span id="cb24-965"><a href="#cb24-965" aria-hidden="true" tabindex="-1"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(p2,p1, <span class="at">ncol=</span><span class="dv">2</span>)</span>
-<span id="cb24-966"><a href="#cb24-966" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb24-967"><a href="#cb24-967" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-968"><a href="#cb24-968" aria-hidden="true" tabindex="-1"></a><span class="fu">### Normal quantile-quantile plots</span></span>
-<span id="cb24-969"><a href="#cb24-969" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-970"><a href="#cb24-970" aria-hidden="true" tabindex="-1"></a>To visually check whether a given set of data are normally distributed, one can create a normal quantile-quantile (Q-Q) plot. In this plot the quantiles of the sample are plotted against the theoretical quantiles of a standard normal distribution N(0,1). If the data, $Y_{i}$, are normally distributed N($\mu, \sigma$) then $Z_{i} = \left(Y_{i} -\mu \right)/\sigma$ has a standard normal distribution. If we plot the quantiles of the data against corresponding quantiles of the standard normal distribution, the points should roughly lie on the straight line: $$Y_{i} =\mu +\sigma Z_{i}$$ that is, a line with intercept $\mu$, and slope $\sigma$.</span>
-<span id="cb24-971"><a href="#cb24-971" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-972"><a href="#cb24-972" aria-hidden="true" tabindex="-1"></a>We should note that the mean and standard deviation do not appear in the formula $Y_{i} =\mu +\sigma Z_{i}$ by coincidence. Rather, the mean and standard deviation are intimately connected to the normal distribution: if the data had not been normal then the line with these parameters would not pass through the data.</span>
-<span id="cb24-973"><a href="#cb24-973" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-976"><a href="#cb24-976" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb24-977"><a href="#cb24-977" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-normqq</span></span>
-<span id="cb24-978"><a href="#cb24-978" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb24-979"><a href="#cb24-979" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: 'Normal Quantile-Quantile Plot for Checking Normality'</span></span>
-<span id="cb24-980"><a href="#cb24-980" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-981"><a href="#cb24-981" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb24-982"><a href="#cb24-982" aria-hidden="true" tabindex="-1"></a>x  <span class="ot">&lt;-</span>  <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">50</span>, <span class="at">mean =</span> <span class="dv">80</span>, <span class="at">sd =</span> <span class="dv">12</span>) <span class="co">#qqnorm(x); qqline(x) # base function</span></span>
-<span id="cb24-983"><a href="#cb24-983" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(x), <span class="fu">aes</span>(<span class="at">sample =</span> x)) <span class="sc">+</span>  <span class="fu">stat_qq</span>() <span class="sc">+</span> <span class="fu">stat_qq_line</span>() <span class="sc">+</span></span>
-<span id="cb24-984"><a href="#cb24-984" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme_minimal</span>()</span>
-<span id="cb24-985"><a href="#cb24-985" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb24-986"><a href="#cb24-986" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-987"><a href="#cb24-987" aria-hidden="true" tabindex="-1"></a>@fig-normqq shows the normal Q-Q plot for 50 random values from N(80,12). Note that the points in the middle largely plot on a line. It is natural that the tail part of the distribution shows more variation, and hence we will ignore such departures.</span>
-<span id="cb24-988"><a href="#cb24-988" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-989"><a href="#cb24-989" aria-hidden="true" tabindex="-1"></a>The normal Q-Q plot is presented as a **normal probability plot** in some software where the theoretical quantiles are replaced by the associated normal probabilities. Such normal probability plots show the sample data in the $X$-axis and the normal probabilities in the $Y$-axis. In both plots, we mainly look whether or not the points plot roughly on a straight line.</span>
-<span id="cb24-990"><a href="#cb24-990" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-993"><a href="#cb24-993" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb24-994"><a href="#cb24-994" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-normqqP</span></span>
-<span id="cb24-995"><a href="#cb24-995" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
-<span id="cb24-996"><a href="#cb24-996" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: 'Normal Quantile-Quantile Plot for Checking Normality'</span></span>
-<span id="cb24-997"><a href="#cb24-997" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-998"><a href="#cb24-998" aria-hidden="true" tabindex="-1"></a><span class="fu">download.file</span>(</span>
-<span id="cb24-999"><a href="#cb24-999" aria-hidden="true" tabindex="-1"></a>  <span class="at">url =</span> <span class="st">"http://www.massey.ac.nz/~anhsmith/data/rangitikei.RData"</span>,</span>
-<span id="cb24-1000"><a href="#cb24-1000" aria-hidden="true" tabindex="-1"></a>  <span class="at">destfile =</span> <span class="st">"rangitikei.RData"</span>)</span>
+<span id="cb24-933"><a href="#cb24-933" aria-hidden="true" tabindex="-1"></a>Mean  <span class="ot">&lt;-</span>  <span class="dv">80</span></span>
+<span id="cb24-934"><a href="#cb24-934" aria-hidden="true" tabindex="-1"></a>Sd  <span class="ot">&lt;-</span>  <span class="dv">12</span></span>
+<span id="cb24-935"><a href="#cb24-935" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb24-936"><a href="#cb24-936" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb24-937"><a href="#cb24-937" aria-hidden="true" tabindex="-1"></a>dfm<span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">RNDnorm =</span> <span class="fu">rnorm</span>(n, Mean, Sd))</span>
+<span id="cb24-938"><a href="#cb24-938" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dfm, <span class="fu">aes</span>(<span class="at">x =</span> RNDnorm)) <span class="sc">+</span> <span class="fu">stat_ecdf</span>(<span class="fu">aes</span>(<span class="at">color=</span><span class="st">"red"</span>)) </span>
+<span id="cb24-939"><a href="#cb24-939" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> p1<span class="sc">+</span><span class="fu">stat_function</span>(<span class="at">fun =</span> pnorm, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="fu">mean</span>(dfm<span class="sc">$</span>RNDnorm), <span class="at">sd =</span> <span class="fu">sd</span>(dfm<span class="sc">$</span>RNDnorm)))</span>
+<span id="cb24-940"><a href="#cb24-940" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> p1<span class="sc">+</span><span class="fu">guides</span>(<span class="at">colour=</span><span class="cn">FALSE</span>)<span class="sc">+</span><span class="fu">ggtitle</span>(<span class="st">"(A)"</span>)</span>
+<span id="cb24-941"><a href="#cb24-941" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> p1<span class="sc">+</span><span class="fu">xlab</span>(<span class="st">"N(80,12) random data n=100"</span>)<span class="sc">+</span><span class="fu">ylab</span>(<span class="st">"Cumulative proportion/probability"</span>)</span>
+<span id="cb24-942"><a href="#cb24-942" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-943"><a href="#cb24-943" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb24-944"><a href="#cb24-944" aria-hidden="true" tabindex="-1"></a>dfm<span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">RNDnorm =</span> <span class="fu">rnorm</span>(n, Mean, Sd))</span>
+<span id="cb24-945"><a href="#cb24-945" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dfm, <span class="fu">aes</span>(<span class="at">x =</span> RNDnorm)) <span class="sc">+</span> <span class="fu">stat_ecdf</span>(<span class="fu">aes</span>(<span class="at">color=</span><span class="st">"red"</span>)) </span>
+<span id="cb24-946"><a href="#cb24-946" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> p2<span class="sc">+</span><span class="fu">stat_function</span>(<span class="at">fun =</span> pnorm, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="fu">mean</span>(dfm<span class="sc">$</span>RNDnorm), <span class="at">sd =</span> <span class="fu">sd</span>(dfm<span class="sc">$</span>RNDnorm)))</span>
+<span id="cb24-947"><a href="#cb24-947" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> p2<span class="sc">+</span><span class="fu">guides</span>(<span class="at">colour=</span><span class="cn">FALSE</span>)<span class="sc">+</span><span class="fu">ggtitle</span>(<span class="st">"(B)"</span>)</span>
+<span id="cb24-948"><a href="#cb24-948" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> p2<span class="sc">+</span><span class="fu">xlab</span>(<span class="st">"N(80,12) random data n=1000"</span>)<span class="sc">+</span><span class="fu">ylab</span>(<span class="st">"Cumulative proportion/probability"</span>)</span>
+<span id="cb24-949"><a href="#cb24-949" aria-hidden="true" tabindex="-1"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(p2,p1, <span class="at">ncol=</span><span class="dv">2</span>)</span>
+<span id="cb24-950"><a href="#cb24-950" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-951"><a href="#cb24-951" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-952"><a href="#cb24-952" aria-hidden="true" tabindex="-1"></a><span class="fu">### Normal quantile-quantile plots</span></span>
+<span id="cb24-953"><a href="#cb24-953" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-954"><a href="#cb24-954" aria-hidden="true" tabindex="-1"></a>To visually check whether a given set of data are normally distributed, one can create a normal quantile-quantile (Q-Q) plot. In this plot the quantiles of the sample are plotted against the theoretical quantiles of a standard normal distribution N(0,1). If the data, $Y_{i}$, are normally distributed N($\mu, \sigma$) then $Z_{i} = \left(Y_{i} -\mu \right)/\sigma$ has a standard normal distribution. If we plot the quantiles of the data against corresponding quantiles of the standard normal distribution, the points should roughly lie on the straight line: $$Y_{i} =\mu +\sigma Z_{i}$$ that is, a line with intercept $\mu$, and slope $\sigma$.</span>
+<span id="cb24-955"><a href="#cb24-955" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-956"><a href="#cb24-956" aria-hidden="true" tabindex="-1"></a>We should note that the mean and standard deviation do not appear in the formula $Y_{i} =\mu +\sigma Z_{i}$ by coincidence. Rather, the mean and standard deviation are intimately connected to the normal distribution: if the data had not been normal then the line with these parameters would not pass through the data.</span>
+<span id="cb24-957"><a href="#cb24-957" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-960"><a href="#cb24-960" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-961"><a href="#cb24-961" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-normqq</span></span>
+<span id="cb24-962"><a href="#cb24-962" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb24-963"><a href="#cb24-963" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: 'Normal Quantile-Quantile Plot for Checking Normality'</span></span>
+<span id="cb24-964"><a href="#cb24-964" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-965"><a href="#cb24-965" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb24-966"><a href="#cb24-966" aria-hidden="true" tabindex="-1"></a>x  <span class="ot">&lt;-</span>  <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">50</span>, <span class="at">mean =</span> <span class="dv">80</span>, <span class="at">sd =</span> <span class="dv">12</span>) <span class="co">#qqnorm(x); qqline(x) # base function</span></span>
+<span id="cb24-967"><a href="#cb24-967" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(x), <span class="fu">aes</span>(<span class="at">sample =</span> x)) <span class="sc">+</span>  <span class="fu">stat_qq</span>() <span class="sc">+</span> <span class="fu">stat_qq_line</span>() <span class="sc">+</span></span>
+<span id="cb24-968"><a href="#cb24-968" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme_minimal</span>()</span>
+<span id="cb24-969"><a href="#cb24-969" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-970"><a href="#cb24-970" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-971"><a href="#cb24-971" aria-hidden="true" tabindex="-1"></a>@fig-normqq shows the normal Q-Q plot for 50 random values from N(80,12). Note that the points in the middle largely plot on a line. It is natural that the tail part of the distribution shows more variation, and hence we will ignore such departures.</span>
+<span id="cb24-972"><a href="#cb24-972" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-973"><a href="#cb24-973" aria-hidden="true" tabindex="-1"></a>The normal Q-Q plot is presented as a **normal probability plot** in some software where the theoretical quantiles are replaced by the associated normal probabilities. Such normal probability plots show the sample data in the $X$-axis and the normal probabilities in the $Y$-axis. In both plots, we mainly look whether or not the points plot roughly on a straight line.</span>
+<span id="cb24-974"><a href="#cb24-974" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-977"><a href="#cb24-977" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-978"><a href="#cb24-978" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-normqqP</span></span>
+<span id="cb24-979"><a href="#cb24-979" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb24-980"><a href="#cb24-980" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: 'Normal Quantile-Quantile Plot for Checking Normality'</span></span>
+<span id="cb24-981"><a href="#cb24-981" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-982"><a href="#cb24-982" aria-hidden="true" tabindex="-1"></a><span class="fu">download.file</span>(</span>
+<span id="cb24-983"><a href="#cb24-983" aria-hidden="true" tabindex="-1"></a>  <span class="at">url =</span> <span class="st">"http://www.massey.ac.nz/~anhsmith/data/rangitikei.RData"</span>,</span>
+<span id="cb24-984"><a href="#cb24-984" aria-hidden="true" tabindex="-1"></a>  <span class="at">destfile =</span> <span class="st">"rangitikei.RData"</span>)</span>
+<span id="cb24-985"><a href="#cb24-985" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-986"><a href="#cb24-986" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"rangitikei.RData"</span>)</span>
+<span id="cb24-987"><a href="#cb24-987" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-988"><a href="#cb24-988" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(rangitikei) <span class="sc">+</span></span>
+<span id="cb24-989"><a href="#cb24-989" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">sample =</span> people) <span class="sc">+</span> </span>
+<span id="cb24-990"><a href="#cb24-990" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_qq</span>() <span class="sc">+</span> <span class="fu">stat_qq_line</span>()</span>
+<span id="cb24-991"><a href="#cb24-991" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-992"><a href="#cb24-992" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(rangitikei) <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">y=</span>people, <span class="at">x=</span><span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb24-993"><a href="#cb24-993" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb24-994"><a href="#cb24-994" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span> </span>
+<span id="cb24-995"><a href="#cb24-995" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span>
+<span id="cb24-996"><a href="#cb24-996" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-997"><a href="#cb24-997" aria-hidden="true" tabindex="-1"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(p1, p2, <span class="at">ncol=</span><span class="dv">1</span>) </span>
+<span id="cb24-998"><a href="#cb24-998" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-999"><a href="#cb24-999" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-1000"><a href="#cb24-1000" aria-hidden="true" tabindex="-1"></a>@fig-normqqP shows the normal Q-Q plot for the number of people who made use of a recreational facility (**rangitikei**). This plot clearly reveals that the data are not normal. The plotted points show a curved but asymmetric pattern. This pattern matches with the right skewness seen in the data (see the boxplot given in @fig-normqqP.</span>
 <span id="cb24-1001"><a href="#cb24-1001" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-1002"><a href="#cb24-1002" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"rangitikei.RData"</span>)</span>
+<span id="cb24-1002"><a href="#cb24-1002" aria-hidden="true" tabindex="-1"></a>Note that **normality and symmetry are not the same**. If the true distribution of the data is symmetric such as uniform, rectangular or triangular distributions, then the normal Q-Q plot will show a symmetric pattern for the plotted points but they will not plot on a straight line. As an example, the normal Q-Q plots for batches of random data from Student's $t$ (to be covered later in the next Chapter) and few other symmetric distributions is shown in @fig-normqqsym. Clearly normality is rejected for other symmetric non-normal distributions.</span>
 <span id="cb24-1003"><a href="#cb24-1003" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-1004"><a href="#cb24-1004" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(rangitikei) <span class="sc">+</span></span>
-<span id="cb24-1005"><a href="#cb24-1005" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">sample =</span> people) <span class="sc">+</span> </span>
-<span id="cb24-1006"><a href="#cb24-1006" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_qq</span>() <span class="sc">+</span> <span class="fu">stat_qq_line</span>()</span>
-<span id="cb24-1007"><a href="#cb24-1007" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-1008"><a href="#cb24-1008" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(rangitikei) <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">y=</span>people, <span class="at">x=</span><span class="st">""</span>) <span class="sc">+</span></span>
-<span id="cb24-1009"><a href="#cb24-1009" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb24-1010"><a href="#cb24-1010" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span> </span>
-<span id="cb24-1011"><a href="#cb24-1011" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span>
+<span id="cb24-1006"><a href="#cb24-1006" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-1007"><a href="#cb24-1007" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-normqqsym</span></span>
+<span id="cb24-1008"><a href="#cb24-1008" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb24-1009"><a href="#cb24-1009" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: 'Normal Quantile-Quantile Plot for Checking Normality'</span></span>
+<span id="cb24-1010"><a href="#cb24-1010" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 6</span></span>
+<span id="cb24-1011"><a href="#cb24-1011" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 6</span></span>
 <span id="cb24-1012"><a href="#cb24-1012" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-1013"><a href="#cb24-1013" aria-hidden="true" tabindex="-1"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(p1, p2, <span class="at">ncol=</span><span class="dv">1</span>) </span>
-<span id="cb24-1014"><a href="#cb24-1014" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb24-1015"><a href="#cb24-1015" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-1016"><a href="#cb24-1016" aria-hidden="true" tabindex="-1"></a>@fig-normqqP shows the normal Q-Q plot for the number of people who made use of a recreational facility (**rangitikei**). This plot clearly reveals that the data are not normal. The plotted points show a curved but asymmetric pattern. This pattern matches with the right skewness seen in the data (see the boxplot given in @fig-normqqP.</span>
-<span id="cb24-1017"><a href="#cb24-1017" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-1018"><a href="#cb24-1018" aria-hidden="true" tabindex="-1"></a>Note that **normality and symmetry are not the same**. If the true distribution of the data is symmetric such as uniform, rectangular or triangular distributions, then the normal Q-Q plot will show a symmetric pattern for the plotted points but they will not plot on a straight line. As an example, the normal Q-Q plots for batches of random data from Student's $t$ (to be covered later in the next Chapter) and few other symmetric distributions is shown in @fig-normqqsym. Clearly normality is rejected for other symmetric non-normal distributions.</span>
-<span id="cb24-1019"><a href="#cb24-1019" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-1022"><a href="#cb24-1022" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb24-1023"><a href="#cb24-1023" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-normqqsym</span></span>
-<span id="cb24-1024"><a href="#cb24-1024" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb24-1025"><a href="#cb24-1025" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: 'Normal Quantile-Quantile Plot for Checking Normality'</span></span>
-<span id="cb24-1026"><a href="#cb24-1026" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 6</span></span>
-<span id="cb24-1027"><a href="#cb24-1027" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 6</span></span>
+<span id="cb24-1013"><a href="#cb24-1013" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb24-1014"><a href="#cb24-1014" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-1015"><a href="#cb24-1015" aria-hidden="true" tabindex="-1"></a>x  <span class="ot">&lt;-</span>  <span class="fu">rt</span>(<span class="dv">500</span>, <span class="dv">2</span>) </span>
+<span id="cb24-1016"><a href="#cb24-1016" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="fu">data.frame</span>(x), <span class="fu">aes</span>(<span class="at">sample =</span> x)) <span class="sc">+</span>  <span class="fu">stat_qq</span>() <span class="sc">+</span> <span class="fu">stat_qq_line</span>() <span class="sc">+</span></span>
+<span id="cb24-1017"><a href="#cb24-1017" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme_minimal</span>()<span class="sc">+</span><span class="fu">ggtitle</span>(<span class="st">"Student t data with 2 df - n=500"</span>)</span>
+<span id="cb24-1018"><a href="#cb24-1018" aria-hidden="true" tabindex="-1"></a>x  <span class="ot">&lt;-</span>  <span class="fu">runif</span>(<span class="dv">500</span>) </span>
+<span id="cb24-1019"><a href="#cb24-1019" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="fu">data.frame</span>(x), <span class="fu">aes</span>(<span class="at">sample =</span> x)) <span class="sc">+</span>  <span class="fu">stat_qq</span>() <span class="sc">+</span> <span class="fu">stat_qq_line</span>() <span class="sc">+</span></span>
+<span id="cb24-1020"><a href="#cb24-1020" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme_minimal</span>()<span class="sc">+</span><span class="fu">ggtitle</span>(<span class="st">"Uniform data - n=500"</span>)</span>
+<span id="cb24-1021"><a href="#cb24-1021" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-1022"><a href="#cb24-1022" aria-hidden="true" tabindex="-1"></a>x  <span class="ot">&lt;-</span>  <span class="fu">rbeta</span>(<span class="dv">500</span>, <span class="dv">2</span>,<span class="dv">2</span>) </span>
+<span id="cb24-1023"><a href="#cb24-1023" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="fu">data.frame</span>(x), <span class="fu">aes</span>(<span class="at">sample =</span> x)) <span class="sc">+</span> </span>
+<span id="cb24-1024"><a href="#cb24-1024" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_qq</span>() <span class="sc">+</span> <span class="fu">stat_qq_line</span>() <span class="sc">+</span></span>
+<span id="cb24-1025"><a href="#cb24-1025" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span><span class="fu">ggtitle</span>(<span class="st">"Beta(2,2) data - n=500"</span>)</span>
+<span id="cb24-1026"><a href="#cb24-1026" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-1027"><a href="#cb24-1027" aria-hidden="true" tabindex="-1"></a>x  <span class="ot">&lt;-</span>  extraDistr<span class="sc">::</span><span class="fu">rlaplace</span>(<span class="dv">500</span>) </span>
 <span id="cb24-1028"><a href="#cb24-1028" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-1029"><a href="#cb24-1029" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb24-1030"><a href="#cb24-1030" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-1031"><a href="#cb24-1031" aria-hidden="true" tabindex="-1"></a>x  <span class="ot">&lt;-</span>  <span class="fu">rt</span>(<span class="dv">500</span>, <span class="dv">2</span>) </span>
-<span id="cb24-1032"><a href="#cb24-1032" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="fu">data.frame</span>(x), <span class="fu">aes</span>(<span class="at">sample =</span> x)) <span class="sc">+</span>  <span class="fu">stat_qq</span>() <span class="sc">+</span> <span class="fu">stat_qq_line</span>() <span class="sc">+</span></span>
-<span id="cb24-1033"><a href="#cb24-1033" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme_minimal</span>()<span class="sc">+</span><span class="fu">ggtitle</span>(<span class="st">"Student t data with 2 df - n=500"</span>)</span>
-<span id="cb24-1034"><a href="#cb24-1034" aria-hidden="true" tabindex="-1"></a>x  <span class="ot">&lt;-</span>  <span class="fu">runif</span>(<span class="dv">500</span>) </span>
-<span id="cb24-1035"><a href="#cb24-1035" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="fu">data.frame</span>(x), <span class="fu">aes</span>(<span class="at">sample =</span> x)) <span class="sc">+</span>  <span class="fu">stat_qq</span>() <span class="sc">+</span> <span class="fu">stat_qq_line</span>() <span class="sc">+</span></span>
-<span id="cb24-1036"><a href="#cb24-1036" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme_minimal</span>()<span class="sc">+</span><span class="fu">ggtitle</span>(<span class="st">"Uniform data - n=500"</span>)</span>
-<span id="cb24-1037"><a href="#cb24-1037" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-1038"><a href="#cb24-1038" aria-hidden="true" tabindex="-1"></a>x  <span class="ot">&lt;-</span>  <span class="fu">rbeta</span>(<span class="dv">500</span>, <span class="dv">2</span>,<span class="dv">2</span>) </span>
-<span id="cb24-1039"><a href="#cb24-1039" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="fu">data.frame</span>(x), <span class="fu">aes</span>(<span class="at">sample =</span> x)) <span class="sc">+</span> </span>
-<span id="cb24-1040"><a href="#cb24-1040" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_qq</span>() <span class="sc">+</span> <span class="fu">stat_qq_line</span>() <span class="sc">+</span></span>
-<span id="cb24-1041"><a href="#cb24-1041" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span><span class="fu">ggtitle</span>(<span class="st">"Beta(2,2) data - n=500"</span>)</span>
+<span id="cb24-1029"><a href="#cb24-1029" aria-hidden="true" tabindex="-1"></a>p4 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="fu">data.frame</span>(x), <span class="fu">aes</span>(<span class="at">sample =</span> x)) <span class="sc">+</span>  <span class="fu">stat_qq</span>() <span class="sc">+</span> </span>
+<span id="cb24-1030"><a href="#cb24-1030" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_qq_line</span>() <span class="sc">+</span></span>
+<span id="cb24-1031"><a href="#cb24-1031" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span><span class="fu">ggtitle</span>(<span class="st">"Laplace data - n=500"</span>)</span>
+<span id="cb24-1032"><a href="#cb24-1032" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-1033"><a href="#cb24-1033" aria-hidden="true" tabindex="-1"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(p1,p2, p3, p4, <span class="at">ncol=</span><span class="dv">2</span>) </span>
+<span id="cb24-1034"><a href="#cb24-1034" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-1035"><a href="#cb24-1035" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-1036"><a href="#cb24-1036" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-1037"><a href="#cb24-1037" aria-hidden="true" tabindex="-1"></a><span class="fu"># Summary</span></span>
+<span id="cb24-1038"><a href="#cb24-1038" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-1039"><a href="#cb24-1039" aria-hidden="true" tabindex="-1"></a>This Chapter provided a revision of probability concepts usually covered the first year level covered at the seventh form level or in a first year Statistics course.  A few popular probability distributions are also introduced.</span>
+<span id="cb24-1040"><a href="#cb24-1040" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-1041"><a href="#cb24-1041" aria-hidden="true" tabindex="-1"></a>Identification of a probability distribution is not an easy task for a set of observed data. This issue is not settled purely on statistical grounds.  EDA helps to short-list distributions fitting reasonably well to the data.  For regression type of models fitted to continuous responses, the normal distribution works generally well.</span>
 <span id="cb24-1042"><a href="#cb24-1042" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-1043"><a href="#cb24-1043" aria-hidden="true" tabindex="-1"></a>x  <span class="ot">&lt;-</span>  extraDistr<span class="sc">::</span><span class="fu">rlaplace</span>(<span class="dv">500</span>) </span>
-<span id="cb24-1044"><a href="#cb24-1044" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-1045"><a href="#cb24-1045" aria-hidden="true" tabindex="-1"></a>p4 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="fu">data.frame</span>(x), <span class="fu">aes</span>(<span class="at">sample =</span> x)) <span class="sc">+</span>  <span class="fu">stat_qq</span>() <span class="sc">+</span> </span>
-<span id="cb24-1046"><a href="#cb24-1046" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_qq_line</span>() <span class="sc">+</span></span>
-<span id="cb24-1047"><a href="#cb24-1047" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span><span class="fu">ggtitle</span>(<span class="st">"Laplace data - n=500"</span>)</span>
-<span id="cb24-1048"><a href="#cb24-1048" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-1049"><a href="#cb24-1049" aria-hidden="true" tabindex="-1"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(p1,p2, p3, p4, <span class="at">ncol=</span><span class="dv">2</span>) </span>
-<span id="cb24-1050"><a href="#cb24-1050" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb24-1051"><a href="#cb24-1051" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-1052"><a href="#cb24-1052" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-1053"><a href="#cb24-1053" aria-hidden="true" tabindex="-1"></a><span class="fu"># Summary</span></span>
-<span id="cb24-1054"><a href="#cb24-1054" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-1055"><a href="#cb24-1055" aria-hidden="true" tabindex="-1"></a>This Chapter provided a revision of probability concepts usually covered the first year level covered at the seventh form level or in a first year Statistics course.  A few popular probability distributions are also introduced.</span>
-<span id="cb24-1056"><a href="#cb24-1056" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-1057"><a href="#cb24-1057" aria-hidden="true" tabindex="-1"></a>Identification of a probability distribution is not an easy task for a set of observed data. This issue is not settled purely on statistical grounds.  EDA helps to short-list distributions fitting reasonably well to the data.  For regression type of models fitted to continuous responses, the normal distribution works generally well.</span>
-<span id="cb24-1058"><a href="#cb24-1058" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-1059"><a href="#cb24-1059" aria-hidden="true" tabindex="-1"></a>The material covered in this Chapter forms the foundation for many of the inferential methods.</span>
+<span id="cb24-1043"><a href="#cb24-1043" aria-hidden="true" tabindex="-1"></a>The material covered in this Chapter forms the foundation for many of the inferential methods.</span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

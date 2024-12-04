@@ -217,6 +217,7 @@ We can tidy it up by ordering the professions on the plot according to `prestige
 
 ```{r}
 #| fig-height: 12
+#| fig-width: 6
 #| output: true
 #| fig-show: asis
 

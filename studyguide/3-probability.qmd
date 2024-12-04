@@ -880,23 +880,7 @@ For a normal distribution,
 95% of the values fall within 2 standard deviation of the mean\
 99% of the values fall within 3 standard deviation of the mean.\
 
-As a special case, 50% of the values will fall within 0.6745 standard deviations of the mean. For symmetric distributions, mean equals the median. Hence the fourths (quartiles) of random data obtained drawn from theoretical normal population will be
-
-**Lower hinge** = median - $0.6745\times S~(\simeq$lower quartile),
-
-and
-
-**Upper hinge** = median + $0.6745 \times S~(\simeq$ upper quartile),
-
-where $S$ is the standard deviation. Thus F-spread (or $\simeq$ the IQR) $\simeq$ 1.35$\times S$. Hence
-
-**inner fences**= median $\pm$ 2 F-spread = median $\pm$ 2.7$\times S$
-
-The probability that an observation falls between these fences is 0.993, or the probability of falling outside these fences is 0.007. Thus in our simulated batch of size 1000, we expect about 7 possible outliers but none for the simulated batch size 100. **Outer fences** are defined as being 2 steps (3$\times$F-spread) away from the fourths so that
-
-**outer fences**= median $\pm$ 3.5$\times$F-spread = median $\pm$ 4.72$\times S$
-
-The probability of a point falling outside of this range is the extremely small amount of 0.000002. It is not surprising, then, that none of the values in our simulated batches fell outside of the outer fences. If they did, we would class them as probable outliers. Of course, with distributions other than the Gaussian one, and particularly for asymmetric distributions, the probability of a value falling outside these fences is higher.
+As a special case, 50% of the values will fall within 0.6745 standard deviations of the mean. For symmetric distributions, mean equals the median. 
 
 ### Assessment of Normality
 

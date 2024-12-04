@@ -233,13 +233,13 @@ ggplot(Snodgrass) +
   coord_flip()
 ```
 
-On reflection, the one dimensional dotplot gives rise to a second dimension wherever observations are identical or nearly the same. In a dotplot such points are usually stacked. As our eyes tend to pick up trends very easily, they tend to be distracted by the vertical changes. The main problem here is that some of the values which coincide by chance may be taken to represent real increases in density. To overcome this we try 'jiggling' or jittering the data, which is equivalent to plotting a random number on the vertical axis against the data values on the horizontal axis. It is suggested that the vertical jiggle be restricted to a small range so that the overall effect is that of a one-dimensional spread with greater, or lesser, density of points along the graph. @fig-dot2 shows a jiggled dotplot. You can decide for yourself which strategy is better.
+On reflection, the one dimensional dotplot gives rise to a second dimension wherever observations are identical or nearly the same. In a dotplot such points are usually stacked. As our eyes tend to pick up trends very easily, they tend to be distracted by the vertical changes. The main problem here is that some of the values which coincide by chance may be taken to represent real increases in density. To overcome this we try 'jittering' the data, which is equivalent to plotting a random number on the vertical axis against the data values on the horizontal axis. It is suggested that the vertical jitter be restricted to a small range so that the overall effect is that of a one-dimensional spread with greater, or lesser, density of points along the graph. @fig-dot2 shows a jittered dotplot. You can decide for yourself which strategy is better.
 
-Clearly, the use of jiggling is much more relevant for larger sets of data. Notice that with jiggling we are interested in the relative density of the graph in different places rather than in trends.
+Clearly, the use of jittering is much more relevant for larger sets of data. Notice that with jittering we are interested in the relative density of the graph in different places rather than in trends.
 
-As the vertical reading is determined at random our eyes may be distracted by a seeming trend which is mainly due to this randomness. For this reason, it is helpful to try more than one plot with different jiggles. This is in the spirit of EDA, in which data is viewed from as many angles as is feasible. The other side of this coin is that conclusions from one display of data should be treated with some scepticism. The availability of computers allows data to be plotted, tabulated and transformed quickly, so we should look at it several ways to better appreciate the peculiarities inherent in our data.
+As the vertical reading is determined at random our eyes may be distracted by a seeming trend which is mainly due to this randomness. For this reason, it is helpful to try more than one plot with different levels of jitter This is in the spirit of EDA, in which data is viewed from as many angles as is feasible. The other side of this coin is that conclusions from one display of data should be treated with some scepticism. The availability of computers allows data to be plotted, tabulated and transformed quickly, so we should look at it several ways to better appreciate the peculiarities inherent in our data.
 
-In practice, one tends to avoid jiggling except in (two-variable) scatter plots where there are many repeated $(x, y)$ points. Graphs with a jiggle are mainly needed when the data are discrete or grouped in some way, or there are a large number of points to be plotted.
+In practice, one tends to avoid jittering except in (two-variable) scatter plots where there are many repeated $(x, y)$ points. Graphs with jitter are mainly needed when the data are heavily rounded, discrete, or grouped in some way, or there are a large number of points to be plotted.
 
 ```{r}
 #| echo: false
@@ -248,7 +248,7 @@ In practice, one tends to avoid jiggling except in (two-variable) scatter plots 
 
 ggplot(Snodgrass) + 
   aes(x=Inside, y=Length) +
-  geom_jitter(width = 0.1) + 
+  geom_jitter(width=.2, height=0) + 
   coord_flip()
 ```
 
@@ -620,7 +620,7 @@ quantile(Snodgrass$Length, seq(0,1,0.1))
 
 ## Quantile-Quantile Plots
 
-At times, two groups may have different numbers of observations but they may be similar in some ways and it may be appropriate to compare them. This comparison can be done in several ways but Q-Q plot is once such graph useful for such a comparison. The quantiles of the first batch is plotted against the quantiles of the second batch. A 45 degree $(Y=X)$ line is also drawn. If the points on a quantile-quantile plot fall along, or close to, the 45 degree line, then the two variables follow the same distribution; if they fall on a line parallel to the 45 degree line, the two variables follow similar distributions but one has a larger location parameter (say mean, or median) than the other; if the slope differs from the 45 degree line the variables have a similar distribution but have different scale parameters (say, standard deviations or F-spreads); if the plot is linear then the distributions of $Y$ and $X$ are different.
+At times, two groups may have different numbers of observations but they may be similar in some ways and it may be appropriate to compare them. This comparison can be done in several ways but Q-Q plot is once such graph useful for such a comparison. The quantiles of the first batch is plotted against the quantiles of the second batch. A 45 degree $(Y=X)$ line is also drawn. If the points on a quantile-quantile plot fall along, or close to, the 45 degree line, then the two variables follow the same distribution; if they fall on a line parallel to the 45 degree line, the two variables follow similar distributions but one has a larger location parameter (say mean, or median) than the other; if the slope differs from the 45 degree line the variables have a similar distribution but may have a different standard deviation; if the plot is linear then the distributions of $Y$ and $X$ are different.
 
 
 ```{r}
@@ -979,8 +979,8 @@ p5 <- ggplot(dfm, aes(x = X, y = Y)) + geom_point()+geom_smooth(se=FALSE)
 p5 <- p5 + ggtitle("Correlation is \nnear zero within subgroups\nSpurious correlation")
 
 set.seed(123)
-Sigma=rbind(c(3, 0.6), c(0.6, 3))
-dfm<-mvrnorm(300, mu=c(0,0), Sigma=Sigma)
+Sigma = rbind(c(3, 0.6), c(0.6, 3))
+dfm <- mvrnorm(300, mu=c(0,0), Sigma=Sigma)
 dfm <- data.frame(dfm)
 colnames(dfm)<-c("X", "Y")
 dfm$Y[151:300] <- dfm$Y[151:300]+30

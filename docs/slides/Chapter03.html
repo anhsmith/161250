@@ -495,7 +495,7 @@ The sample space is <span class="math inline">\(\{0,1,2,3,4,5,6,7,8,9\}\)</span>
 <div class="fragment">
 <p>We say that two events (<span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>) are <strong>independent</strong> if <span class="math inline">\(P(A | B) = P(A)\)</span> <strong>and</strong> <span class="math inline">\(P(B | A) = P(B)\)</span>.</p>
 <p>Observing event <span class="math inline">\(A\)</span> doesn’t make event <span class="math inline">\(B\)</span> any more or less likely, and vice versa.</p>
-<p>For any two independent events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, <span class="math inline">\(P(A \text{ and } B ) = P(A|B) \times P(B)\)</span> and <span class="math inline">\(P(A \textbf{ and } B ) = P(B|A) \times P(A)\)</span>.</p>
+<p>For any two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, <span class="math inline">\(P(A \text{ and } B ) = P(A|B) \times P(B)\)</span> and <span class="math inline">\(P(A \textbf{ and } B ) = P(B|A) \times P(A)\)</span>.</p>
 </div>
 </section>
 <section id="blood-group-example" class="slide level2 smaller">
@@ -565,8 +565,8 @@ about 81% are Rh+ and about 8% are K+.</p>
 <div class="left-code-wide">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div class="grViz html-widget html-fill-item" id="htmlwidget-29115d86ba592b326653" style="width:576px;height:384px;"></div>
-<script type="application/json" data-for="htmlwidget-29115d86ba592b326653">{"x":{"diagram":"digraph {\n  \n  # horizontal alignment\n  graph [rankdir = LR]\n  \n  # Nodes with labels\n  node [shape = oval]\n  Start [label = \"Start\", shape = box]\n  Healthy [label = \"Healthy\"]\n  Disease [label = \"Disease\"]\n  PosH [label = \"Positive\"]\n  NegH [label = \"Negative\"]\n  PosD [label = \"Positive\"]\n  NegD [label = \"Negative\"]\n  pPosH [label = \"P(H & T+) = 0.0485\", shape = none]\n  pNegH [label = \"P(H & T-) = 0.9215\", shape = none]\n  pPosD [label = \"P(D & T+) = 0.0294\", shape = none]\n  pNegD [label = \"P(D & T-) = 0.0006\", shape = none]\n  \n  # Edges with labels\n  Start -> Healthy [label = \"0.97\"]\n  Start -> Disease [label = \"0.03\"]\n  Healthy -> PosH [label = \"0.05\"]\n  Healthy -> NegH [label = \"0.95\"]\n  Disease -> PosD [label = \"0.98\"]\n  Disease -> NegD [label = \"0.02\"]\n  PosH -> pPosH \n  NegH -> pNegH \n  PosD -> pPosD \n  NegD -> pNegD \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="grViz html-widget html-fill-item" id="htmlwidget-b7958041cc5a3abdda5a" style="width:576px;height:384px;"></div>
+<script type="application/json" data-for="htmlwidget-b7958041cc5a3abdda5a">{"x":{"diagram":"digraph {\n  \n  # horizontal alignment\n  graph [rankdir = LR]\n  \n  # Nodes with labels\n  node [shape = oval]\n  Start [label = \"Start\", shape = box]\n  Healthy [label = \"Healthy\"]\n  Disease [label = \"Disease\"]\n  PosH [label = \"Positive\"]\n  NegH [label = \"Negative\"]\n  PosD [label = \"Positive\"]\n  NegD [label = \"Negative\"]\n  pPosH [label = \"P(H & T+) = 0.0485\", shape = none]\n  pNegH [label = \"P(H & T-) = 0.9215\", shape = none]\n  pPosD [label = \"P(D & T+) = 0.0294\", shape = none]\n  pNegD [label = \"P(D & T-) = 0.0006\", shape = none]\n  \n  # Edges with labels\n  Start -> Healthy [label = \"0.97\"]\n  Start -> Disease [label = \"0.03\"]\n  Healthy -> PosH [label = \"0.05\"]\n  Healthy -> NegH [label = \"0.95\"]\n  Disease -> PosD [label = \"0.98\"]\n  Disease -> NegD [label = \"0.02\"]\n  PosH -> pPosH \n  NegH -> pNegH \n  PosD -> pPosD \n  NegD -> pNegD \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p><strong>Rules of the Probability Tree</strong></p>

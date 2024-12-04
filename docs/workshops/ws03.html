@@ -257,8 +257,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#dataset-prestige" id="toc-dataset-prestige" class="nav-link" data-scroll-target="#dataset-prestige">Dataset <strong><code>Prestige</code></strong></a>
   <ul class="collapse">
   <li><a href="#exercise-3.2" id="toc-exercise-3.2" class="nav-link" data-scroll-target="#exercise-3.2">Exercise 3.2</a></li>
-  <li><a href="#exercise-3.2-1" id="toc-exercise-3.2-1" class="nav-link" data-scroll-target="#exercise-3.2-1">Exercise 3.2</a></li>
   <li><a href="#exercise-3.3" id="toc-exercise-3.3" class="nav-link" data-scroll-target="#exercise-3.3">Exercise 3.3</a></li>
+  <li><a href="#exercise-3.4" id="toc-exercise-3.4" class="nav-link" data-scroll-target="#exercise-3.4">Exercise 3.4</a></li>
   </ul></li>
   <li><a href="#answers-to-exercise-3.1" id="toc-answers-to-exercise-3.1" class="nav-link" data-scroll-target="#answers-to-exercise-3.1">Answers to Exercise 3.1</a></li>
   </ul>
@@ -412,8 +412,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 </div>
 </section>
-<section id="exercise-3.2-1" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="exercise-3.2-1">Exercise 3.2</h2>
+<section id="exercise-3.3" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="exercise-3.3">Exercise 3.3</h2>
 <p>Plot the <code>prestige</code> scores data as a histogram and show the theoretical normal curve fitted to the data.</p>
 <div class="cell" data-layout-align="center">
 <details open="">
@@ -424,7 +424,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>Prestige <span class="sc">|&gt;</span> </span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(prestige) <span class="sc">+</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span><span class="fu">after_stat</span>(density)), <span class="at">bins=</span><span class="dv">10</span>) <span class="sc">+</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(density)), <span class="at">bins=</span><span class="dv">10</span>) <span class="sc">+</span></span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_function</span>(</span>
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">fun =</span> dnorm,</span>
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="fu">mean</span>(Prestige<span class="sc">$</span>prestige),</span>
@@ -452,8 +452,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 </div>
 </section>
-<section id="exercise-3.3" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="exercise-3.3">Exercise 3.3</h2>
+<section id="exercise-3.4" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="exercise-3.4">Exercise 3.4</h2>
 <p>Let’s look at the <code>prestige</code> scores variable to see how well it conforms with a normal distribution.</p>
 <p>First, make a normal quantile plot.</p>
 <div class="cell" data-layout-align="center">
@@ -504,19 +504,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 </div>
 <p>Here, the null hypothesis is rejected, so the data are unlikely to have come from a normal.</p>
-<p>The Kolmogorov-Smirnov test can also be used. It differs from the Shapiro-Wilk in that you specify the mean and SD of the distribution (here using the sample mean and SD).</p>
+<p>The Kolmogorov-Smirnov test can also be used to test for departure from a theoretical distribution. K-S differs from Shapiro-Wilk in that you specify the mean and SD of the distribution. Let’s say someone made the claim that prestige was normally distributed with a mean of 50 and a standard deviation of 17. We can test this like so:</p>
 <div class="cell" data-layout-align="center">
 <details open="">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(Prestige<span class="sc">$</span>prestige, </span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>        <span class="st">"pnorm"</span>, </span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mean</span>(Prestige<span class="sc">$</span>prestige), </span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">sd</span>(Prestige<span class="sc">$</span>prestige) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(Prestige<span class="sc">$</span>prestige, <span class="st">"pnorm"</span>, <span class="dv">50</span>, <span class="dv">17</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>Here we have a discrepancy. S-W rejected the null hypothesis, and K-S did not. It is well-known that S-W is generally more powerful (i.e., more likely to reject a false null hypothesis).</p>
-<p>At any rate, I don’t believe in “true” distributions. Would I feel comfortable using a normal here? Possibly. It all depends on the context. Remember, there are no true models, only useful ones.</p>
-<p>We can try the square-root transformed <code>prestige</code> with .</p>
+<p>We reject the null hypothesis and conclude that there is evidence against this claim.</p>
+<p>At any rate, I don’t believe in “true” distributions. Would I feel comfortable assuming that these data came from a normal distribution? Possibly. It all depends on the context. Remember, there are no true models, only useful ones.</p>
+<p>Let’s see if the square root-transformed <code>prestige</code> looks normal.</p>
 <div class="cell" data-layout-align="center">
 <details open="">
 <summary>Code</summary>
@@ -1139,7 +1136,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb22-152"><a href="#cb22-152" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb22-153"><a href="#cb22-153" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-154"><a href="#cb22-154" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-155"><a href="#cb22-155" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exercise 3.2 {-}</span></span>
+<span id="cb22-155"><a href="#cb22-155" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exercise 3.3 {-}</span></span>
 <span id="cb22-156"><a href="#cb22-156" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-157"><a href="#cb22-157" aria-hidden="true" tabindex="-1"></a>Plot the <span class="in">`prestige`</span> scores data as a histogram and show the theoretical normal curve fitted to the data. </span>
 <span id="cb22-158"><a href="#cb22-158" aria-hidden="true" tabindex="-1"></a></span>
@@ -1150,7 +1147,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb22-163"><a href="#cb22-163" aria-hidden="true" tabindex="-1"></a>Prestige <span class="sc">|&gt;</span> </span>
 <span id="cb22-164"><a href="#cb22-164" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
 <span id="cb22-165"><a href="#cb22-165" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(prestige) <span class="sc">+</span></span>
-<span id="cb22-166"><a href="#cb22-166" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span><span class="fu">after_stat</span>(density)), <span class="at">bins=</span><span class="dv">10</span>) <span class="sc">+</span></span>
+<span id="cb22-166"><a href="#cb22-166" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(density)), <span class="at">bins=</span><span class="dv">10</span>) <span class="sc">+</span></span>
 <span id="cb22-167"><a href="#cb22-167" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_function</span>(</span>
 <span id="cb22-168"><a href="#cb22-168" aria-hidden="true" tabindex="-1"></a>    <span class="at">fun =</span> dnorm,</span>
 <span id="cb22-169"><a href="#cb22-169" aria-hidden="true" tabindex="-1"></a>    <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="fu">mean</span>(Prestige<span class="sc">$</span>prestige),</span>
@@ -1179,7 +1176,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb22-192"><a href="#cb22-192" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb22-193"><a href="#cb22-193" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-194"><a href="#cb22-194" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-195"><a href="#cb22-195" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exercise 3.3 {-}</span></span>
+<span id="cb22-195"><a href="#cb22-195" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exercise 3.4 {-}</span></span>
 <span id="cb22-196"><a href="#cb22-196" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-197"><a href="#cb22-197" aria-hidden="true" tabindex="-1"></a>Let's look at the <span class="in">`prestige`</span> scores variable to see how well it conforms with a normal distribution. </span>
 <span id="cb22-198"><a href="#cb22-198" aria-hidden="true" tabindex="-1"></a></span>
@@ -1227,151 +1224,151 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb22-242"><a href="#cb22-242" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb22-243"><a href="#cb22-243" aria-hidden="true" tabindex="-1"></a>Here, the null hypothesis is rejected, so the data are unlikely to have come from a normal. </span>
 <span id="cb22-244"><a href="#cb22-244" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-245"><a href="#cb22-245" aria-hidden="true" tabindex="-1"></a>The Kolmogorov-Smirnov test can also be used. It differs from the Shapiro-Wilk in that you specify the mean and SD of the distribution (here using the sample mean and SD). </span>
+<span id="cb22-245"><a href="#cb22-245" aria-hidden="true" tabindex="-1"></a>The Kolmogorov-Smirnov test can also be used to test for departure from a theoretical distribution. K-S differs from Shapiro-Wilk in that you specify the mean and SD of the distribution. Let's say someone made the claim that prestige was normally distributed with a mean of 50 and a standard deviation of 17. We can test this like so:</span>
 <span id="cb22-246"><a href="#cb22-246" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-247"><a href="#cb22-247" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, results='hide'}</span></span>
-<span id="cb22-248"><a href="#cb22-248" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(Prestige<span class="sc">$</span>prestige, </span>
-<span id="cb22-249"><a href="#cb22-249" aria-hidden="true" tabindex="-1"></a>        <span class="st">"pnorm"</span>, </span>
-<span id="cb22-250"><a href="#cb22-250" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mean</span>(Prestige<span class="sc">$</span>prestige), </span>
-<span id="cb22-251"><a href="#cb22-251" aria-hidden="true" tabindex="-1"></a>        <span class="fu">sd</span>(Prestige<span class="sc">$</span>prestige) )</span>
-<span id="cb22-252"><a href="#cb22-252" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-253"><a href="#cb22-253" aria-hidden="true" tabindex="-1"></a>Here we have a discrepancy. S-W rejected the null hypothesis, and K-S did not. It is well-known that S-W is generally more powerful (i.e., more likely to reject a false null hypothesis). </span>
-<span id="cb22-254"><a href="#cb22-254" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-255"><a href="#cb22-255" aria-hidden="true" tabindex="-1"></a>At any rate, I don't believe in "true" distributions. Would I feel comfortable using a normal here? Possibly. It all depends on the context. Remember, there are no true models, only useful ones. </span>
-<span id="cb22-256"><a href="#cb22-256" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-257"><a href="#cb22-257" aria-hidden="true" tabindex="-1"></a>We can try the square-root transformed <span class="in">`prestige`</span> with . </span>
-<span id="cb22-258"><a href="#cb22-258" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-259"><a href="#cb22-259" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, results='hide'}</span></span>
-<span id="cb22-260"><a href="#cb22-260" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(<span class="fu">sqrt</span>(Prestige<span class="sc">$</span>prestige))</span>
-<span id="cb22-261"><a href="#cb22-261" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-262"><a href="#cb22-262" aria-hidden="true" tabindex="-1"></a>No significant departure from normality for the sqrt-transformed data.</span>
-<span id="cb22-263"><a href="#cb22-263" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-248"><a href="#cb22-248" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(Prestige<span class="sc">$</span>prestige, <span class="st">"pnorm"</span>, <span class="dv">50</span>, <span class="dv">17</span>)</span>
+<span id="cb22-249"><a href="#cb22-249" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-250"><a href="#cb22-250" aria-hidden="true" tabindex="-1"></a>We reject the null hypothesis and conclude that there is evidence against this claim. </span>
+<span id="cb22-251"><a href="#cb22-251" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-252"><a href="#cb22-252" aria-hidden="true" tabindex="-1"></a>At any rate, I don't believe in "true" distributions. Would I feel comfortable assuming that these data came from a normal distribution? Possibly. It all depends on the context. Remember, there are no true models, only useful ones.</span>
+<span id="cb22-253"><a href="#cb22-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-254"><a href="#cb22-254" aria-hidden="true" tabindex="-1"></a>Let's see if the square root-transformed <span class="in">`prestige`</span> looks normal. </span>
+<span id="cb22-255"><a href="#cb22-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-256"><a href="#cb22-256" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, results='hide'}</span></span>
+<span id="cb22-257"><a href="#cb22-257" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(<span class="fu">sqrt</span>(Prestige<span class="sc">$</span>prestige))</span>
+<span id="cb22-258"><a href="#cb22-258" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-259"><a href="#cb22-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-260"><a href="#cb22-260" aria-hidden="true" tabindex="-1"></a>No significant departure from normality for the sqrt-transformed data.</span>
+<span id="cb22-261"><a href="#cb22-261" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-262"><a href="#cb22-262" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-263"><a href="#cb22-263" aria-hidden="true" tabindex="-1"></a><span class="fu"># Answers to Exercise 3.1</span></span>
 <span id="cb22-264"><a href="#cb22-264" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-265"><a href="#cb22-265" aria-hidden="true" tabindex="-1"></a><span class="fu"># Answers to Exercise 3.1</span></span>
+<span id="cb22-265"><a href="#cb22-265" aria-hidden="true" tabindex="-1"></a>$X \sim \text{N}(10,4)$</span>
 <span id="cb22-266"><a href="#cb22-266" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-267"><a href="#cb22-267" aria-hidden="true" tabindex="-1"></a>$X \sim \text{N}(10,4)$</span>
+<span id="cb22-267"><a href="#cb22-267" aria-hidden="true" tabindex="-1"></a>a.  $\text{P}(X &lt; 7)$ </span>
 <span id="cb22-268"><a href="#cb22-268" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-269"><a href="#cb22-269" aria-hidden="true" tabindex="-1"></a>a.  $\text{P}(X &lt; 7)$ </span>
-<span id="cb22-270"><a href="#cb22-270" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-273"><a href="#cb22-273" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb22-274"><a href="#cb22-274" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="at">q=</span><span class="dv">7</span>, <span class="at">mean=</span><span class="dv">10</span>, <span class="at">sd=</span><span class="dv">4</span>)</span>
-<span id="cb22-275"><a href="#cb22-275" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-276"><a href="#cb22-276" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-279"><a href="#cb22-279" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb22-280"><a href="#cb22-280" aria-hidden="true" tabindex="-1"></a>dfs <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb22-281"><a href="#cb22-281" aria-hidden="true" tabindex="-1"></a>  <span class="at">x=</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">25</span>, <span class="at">length=</span><span class="dv">500</span>), </span>
-<span id="cb22-282"><a href="#cb22-282" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">f(x)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">dnorm</span>(x, <span class="at">mean=</span><span class="dv">10</span>, <span class="at">sd=</span><span class="dv">4</span>)</span>
-<span id="cb22-283"><a href="#cb22-283" aria-hidden="true" tabindex="-1"></a>  ) </span>
-<span id="cb22-284"><a href="#cb22-284" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-285"><a href="#cb22-285" aria-hidden="true" tabindex="-1"></a>gp <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dfs) <span class="sc">+</span> </span>
-<span id="cb22-286"><a href="#cb22-286" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> <span class="st">`</span><span class="at">f(x)</span><span class="st">`</span>) <span class="sc">+</span> </span>
-<span id="cb22-287"><a href="#cb22-287" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_area</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>) </span>
-<span id="cb22-288"><a href="#cb22-288" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-289"><a href="#cb22-289" aria-hidden="true" tabindex="-1"></a>gp <span class="sc">+</span> </span>
-<span id="cb22-290"><a href="#cb22-290" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_area</span>(</span>
-<span id="cb22-291"><a href="#cb22-291" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dfs <span class="sc">|&gt;</span> </span>
-<span id="cb22-292"><a href="#cb22-292" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>(x <span class="sc">&lt;</span> <span class="dv">7</span>),</span>
-<span id="cb22-293"><a href="#cb22-293" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill=</span><span class="st">"coral1"</span></span>
-<span id="cb22-294"><a href="#cb22-294" aria-hidden="true" tabindex="-1"></a>    ) </span>
-<span id="cb22-295"><a href="#cb22-295" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-296"><a href="#cb22-296" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-271"><a href="#cb22-271" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-272"><a href="#cb22-272" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="at">q=</span><span class="dv">7</span>, <span class="at">mean=</span><span class="dv">10</span>, <span class="at">sd=</span><span class="dv">4</span>)</span>
+<span id="cb22-273"><a href="#cb22-273" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-274"><a href="#cb22-274" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-277"><a href="#cb22-277" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-278"><a href="#cb22-278" aria-hidden="true" tabindex="-1"></a>dfs <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb22-279"><a href="#cb22-279" aria-hidden="true" tabindex="-1"></a>  <span class="at">x=</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">25</span>, <span class="at">length=</span><span class="dv">500</span>), </span>
+<span id="cb22-280"><a href="#cb22-280" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">f(x)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">dnorm</span>(x, <span class="at">mean=</span><span class="dv">10</span>, <span class="at">sd=</span><span class="dv">4</span>)</span>
+<span id="cb22-281"><a href="#cb22-281" aria-hidden="true" tabindex="-1"></a>  ) </span>
+<span id="cb22-282"><a href="#cb22-282" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-283"><a href="#cb22-283" aria-hidden="true" tabindex="-1"></a>gp <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dfs) <span class="sc">+</span> </span>
+<span id="cb22-284"><a href="#cb22-284" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> <span class="st">`</span><span class="at">f(x)</span><span class="st">`</span>) <span class="sc">+</span> </span>
+<span id="cb22-285"><a href="#cb22-285" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_area</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>) </span>
+<span id="cb22-286"><a href="#cb22-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-287"><a href="#cb22-287" aria-hidden="true" tabindex="-1"></a>gp <span class="sc">+</span> </span>
+<span id="cb22-288"><a href="#cb22-288" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_area</span>(</span>
+<span id="cb22-289"><a href="#cb22-289" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dfs <span class="sc">|&gt;</span> </span>
+<span id="cb22-290"><a href="#cb22-290" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>(x <span class="sc">&lt;</span> <span class="dv">7</span>),</span>
+<span id="cb22-291"><a href="#cb22-291" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill=</span><span class="st">"coral1"</span></span>
+<span id="cb22-292"><a href="#cb22-292" aria-hidden="true" tabindex="-1"></a>    ) </span>
+<span id="cb22-293"><a href="#cb22-293" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-294"><a href="#cb22-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-295"><a href="#cb22-295" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-296"><a href="#cb22-296" aria-hidden="true" tabindex="-1"></a>b.  $\text{P}(8.4 &lt; X &lt; 15.7)$                   </span>
 <span id="cb22-297"><a href="#cb22-297" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-298"><a href="#cb22-298" aria-hidden="true" tabindex="-1"></a>b.  $\text{P}(8.4 &lt; X &lt; 15.7)$                   </span>
-<span id="cb22-299"><a href="#cb22-299" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-302"><a href="#cb22-302" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb22-303"><a href="#cb22-303" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 3</span></span>
-<span id="cb22-304"><a href="#cb22-304" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 9</span></span>
-<span id="cb22-305"><a href="#cb22-305" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-306"><a href="#cb22-306" aria-hidden="true" tabindex="-1"></a>p_between_8<span class="fl">.4</span>_and_15<span class="fl">.7</span> <span class="ot">&lt;-</span> </span>
-<span id="cb22-307"><a href="#cb22-307" aria-hidden="true" tabindex="-1"></a>  gp <span class="sc">+</span> </span>
-<span id="cb22-308"><a href="#cb22-308" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_area</span>(</span>
-<span id="cb22-309"><a href="#cb22-309" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dfs <span class="sc">|&gt;</span> </span>
-<span id="cb22-310"><a href="#cb22-310" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>(x <span class="sc">&lt;</span> <span class="fl">15.7</span> <span class="sc">&amp;</span> x <span class="sc">&gt;</span> <span class="fl">8.4</span>),</span>
-<span id="cb22-311"><a href="#cb22-311" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill=</span><span class="st">"purple"</span>,</span>
-<span id="cb22-312"><a href="#cb22-312" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.5</span></span>
-<span id="cb22-313"><a href="#cb22-313" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
-<span id="cb22-314"><a href="#cb22-314" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"P(8.4 &lt; X &lt; 15.7)"</span>)</span>
-<span id="cb22-315"><a href="#cb22-315" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-316"><a href="#cb22-316" aria-hidden="true" tabindex="-1"></a>p_lessthan_15<span class="fl">.7</span> <span class="ot">&lt;-</span> </span>
-<span id="cb22-317"><a href="#cb22-317" aria-hidden="true" tabindex="-1"></a>  gp <span class="sc">+</span> </span>
-<span id="cb22-318"><a href="#cb22-318" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_area</span>(</span>
-<span id="cb22-319"><a href="#cb22-319" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dfs <span class="sc">|&gt;</span> </span>
-<span id="cb22-320"><a href="#cb22-320" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>(x <span class="sc">&lt;</span> <span class="fl">15.7</span>),</span>
-<span id="cb22-321"><a href="#cb22-321" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill=</span><span class="st">"dodgerblue3"</span>,</span>
-<span id="cb22-322"><a href="#cb22-322" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.5</span></span>
-<span id="cb22-323"><a href="#cb22-323" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
-<span id="cb22-324"><a href="#cb22-324" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"P(X &lt; 15.7)"</span>)</span>
-<span id="cb22-325"><a href="#cb22-325" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-326"><a href="#cb22-326" aria-hidden="true" tabindex="-1"></a>p_lessthan_8<span class="fl">.4</span> <span class="ot">&lt;-</span> </span>
-<span id="cb22-327"><a href="#cb22-327" aria-hidden="true" tabindex="-1"></a>  gp <span class="sc">+</span> </span>
-<span id="cb22-328"><a href="#cb22-328" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_area</span>(</span>
-<span id="cb22-329"><a href="#cb22-329" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dfs <span class="sc">|&gt;</span> </span>
-<span id="cb22-330"><a href="#cb22-330" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>(x <span class="sc">&lt;</span> <span class="fl">8.4</span>),</span>
-<span id="cb22-331"><a href="#cb22-331" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill=</span><span class="st">"coral1"</span></span>
-<span id="cb22-332"><a href="#cb22-332" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
-<span id="cb22-333"><a href="#cb22-333" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"P(X &lt; 8.4)"</span>)</span>
-<span id="cb22-334"><a href="#cb22-334" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-335"><a href="#cb22-335" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-336"><a href="#cb22-336" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
-<span id="cb22-337"><a href="#cb22-337" aria-hidden="true" tabindex="-1"></a>p_between_8<span class="fl">.4</span>_and_15<span class="fl">.7</span> <span class="sc">+</span> p_lessthan_15<span class="fl">.7</span> <span class="sc">+</span> p_lessthan_8<span class="fl">.4</span></span>
-<span id="cb22-338"><a href="#cb22-338" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-339"><a href="#cb22-339" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-342"><a href="#cb22-342" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb22-343"><a href="#cb22-343" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="fl">15.7</span>, <span class="dv">10</span>, <span class="dv">4</span>) <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="fl">8.4</span>, <span class="dv">10</span>, <span class="dv">4</span>)</span>
-<span id="cb22-344"><a href="#cb22-344" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-345"><a href="#cb22-345" aria-hidden="true" tabindex="-1"></a>What we want is the purple area in the left figure above. </span>
+<span id="cb22-300"><a href="#cb22-300" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-301"><a href="#cb22-301" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 3</span></span>
+<span id="cb22-302"><a href="#cb22-302" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 9</span></span>
+<span id="cb22-303"><a href="#cb22-303" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-304"><a href="#cb22-304" aria-hidden="true" tabindex="-1"></a>p_between_8<span class="fl">.4</span>_and_15<span class="fl">.7</span> <span class="ot">&lt;-</span> </span>
+<span id="cb22-305"><a href="#cb22-305" aria-hidden="true" tabindex="-1"></a>  gp <span class="sc">+</span> </span>
+<span id="cb22-306"><a href="#cb22-306" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_area</span>(</span>
+<span id="cb22-307"><a href="#cb22-307" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dfs <span class="sc">|&gt;</span> </span>
+<span id="cb22-308"><a href="#cb22-308" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>(x <span class="sc">&lt;</span> <span class="fl">15.7</span> <span class="sc">&amp;</span> x <span class="sc">&gt;</span> <span class="fl">8.4</span>),</span>
+<span id="cb22-309"><a href="#cb22-309" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill=</span><span class="st">"purple"</span>,</span>
+<span id="cb22-310"><a href="#cb22-310" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.5</span></span>
+<span id="cb22-311"><a href="#cb22-311" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb22-312"><a href="#cb22-312" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"P(8.4 &lt; X &lt; 15.7)"</span>)</span>
+<span id="cb22-313"><a href="#cb22-313" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-314"><a href="#cb22-314" aria-hidden="true" tabindex="-1"></a>p_lessthan_15<span class="fl">.7</span> <span class="ot">&lt;-</span> </span>
+<span id="cb22-315"><a href="#cb22-315" aria-hidden="true" tabindex="-1"></a>  gp <span class="sc">+</span> </span>
+<span id="cb22-316"><a href="#cb22-316" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_area</span>(</span>
+<span id="cb22-317"><a href="#cb22-317" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dfs <span class="sc">|&gt;</span> </span>
+<span id="cb22-318"><a href="#cb22-318" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>(x <span class="sc">&lt;</span> <span class="fl">15.7</span>),</span>
+<span id="cb22-319"><a href="#cb22-319" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill=</span><span class="st">"dodgerblue3"</span>,</span>
+<span id="cb22-320"><a href="#cb22-320" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.5</span></span>
+<span id="cb22-321"><a href="#cb22-321" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb22-322"><a href="#cb22-322" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"P(X &lt; 15.7)"</span>)</span>
+<span id="cb22-323"><a href="#cb22-323" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-324"><a href="#cb22-324" aria-hidden="true" tabindex="-1"></a>p_lessthan_8<span class="fl">.4</span> <span class="ot">&lt;-</span> </span>
+<span id="cb22-325"><a href="#cb22-325" aria-hidden="true" tabindex="-1"></a>  gp <span class="sc">+</span> </span>
+<span id="cb22-326"><a href="#cb22-326" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_area</span>(</span>
+<span id="cb22-327"><a href="#cb22-327" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dfs <span class="sc">|&gt;</span> </span>
+<span id="cb22-328"><a href="#cb22-328" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>(x <span class="sc">&lt;</span> <span class="fl">8.4</span>),</span>
+<span id="cb22-329"><a href="#cb22-329" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill=</span><span class="st">"coral1"</span></span>
+<span id="cb22-330"><a href="#cb22-330" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb22-331"><a href="#cb22-331" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"P(X &lt; 8.4)"</span>)</span>
+<span id="cb22-332"><a href="#cb22-332" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-333"><a href="#cb22-333" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-334"><a href="#cb22-334" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb22-335"><a href="#cb22-335" aria-hidden="true" tabindex="-1"></a>p_between_8<span class="fl">.4</span>_and_15<span class="fl">.7</span> <span class="sc">+</span> p_lessthan_15<span class="fl">.7</span> <span class="sc">+</span> p_lessthan_8<span class="fl">.4</span></span>
+<span id="cb22-336"><a href="#cb22-336" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-337"><a href="#cb22-337" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-340"><a href="#cb22-340" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-341"><a href="#cb22-341" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="fl">15.7</span>, <span class="dv">10</span>, <span class="dv">4</span>) <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="fl">8.4</span>, <span class="dv">10</span>, <span class="dv">4</span>)</span>
+<span id="cb22-342"><a href="#cb22-342" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-343"><a href="#cb22-343" aria-hidden="true" tabindex="-1"></a>What we want is the purple area in the left figure above. </span>
+<span id="cb22-344"><a href="#cb22-344" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-345"><a href="#cb22-345" aria-hidden="true" tabindex="-1"></a>We get this by subtracting the coral area, <span class="in">`pnorm(8.4, 10, 4)`</span> (right figure), from the blue area, <span class="in">`pnorm(15.7, 10, 4)`</span> (middle figure).</span>
 <span id="cb22-346"><a href="#cb22-346" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-347"><a href="#cb22-347" aria-hidden="true" tabindex="-1"></a>We get this by subtracting the coral area, <span class="in">`pnorm(8.4, 10, 4)`</span> (right figure), from the blue area, <span class="in">`pnorm(15.7, 10, 4)`</span> (middle figure).</span>
+<span id="cb22-347"><a href="#cb22-347" aria-hidden="true" tabindex="-1"></a>c.  $\text{P}(X &gt; 17)$                          </span>
 <span id="cb22-348"><a href="#cb22-348" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-349"><a href="#cb22-349" aria-hidden="true" tabindex="-1"></a>c.  $\text{P}(X &gt; 17)$                          </span>
-<span id="cb22-350"><a href="#cb22-350" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-353"><a href="#cb22-353" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb22-354"><a href="#cb22-354" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="dv">17</span>, <span class="dv">10</span>, <span class="dv">4</span>)</span>
-<span id="cb22-355"><a href="#cb22-355" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-356"><a href="#cb22-356" aria-hidden="true" tabindex="-1"></a><span class="co"># or pnorm(17, 10, 4, lower.tail = F)</span></span>
-<span id="cb22-357"><a href="#cb22-357" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-358"><a href="#cb22-358" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-361"><a href="#cb22-361" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb22-362"><a href="#cb22-362" aria-hidden="true" tabindex="-1"></a>gp <span class="sc">+</span> </span>
-<span id="cb22-363"><a href="#cb22-363" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_area</span>(</span>
-<span id="cb22-364"><a href="#cb22-364" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dfs <span class="sc">|&gt;</span> </span>
-<span id="cb22-365"><a href="#cb22-365" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>(x <span class="sc">&gt;</span> <span class="dv">17</span>),</span>
-<span id="cb22-366"><a href="#cb22-366" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill=</span><span class="st">"coral1"</span></span>
-<span id="cb22-367"><a href="#cb22-367" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb22-368"><a href="#cb22-368" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-369"><a href="#cb22-369" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-351"><a href="#cb22-351" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-352"><a href="#cb22-352" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="dv">17</span>, <span class="dv">10</span>, <span class="dv">4</span>)</span>
+<span id="cb22-353"><a href="#cb22-353" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-354"><a href="#cb22-354" aria-hidden="true" tabindex="-1"></a><span class="co"># or pnorm(17, 10, 4, lower.tail = F)</span></span>
+<span id="cb22-355"><a href="#cb22-355" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-356"><a href="#cb22-356" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-359"><a href="#cb22-359" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-360"><a href="#cb22-360" aria-hidden="true" tabindex="-1"></a>gp <span class="sc">+</span> </span>
+<span id="cb22-361"><a href="#cb22-361" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_area</span>(</span>
+<span id="cb22-362"><a href="#cb22-362" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dfs <span class="sc">|&gt;</span> </span>
+<span id="cb22-363"><a href="#cb22-363" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>(x <span class="sc">&gt;</span> <span class="dv">17</span>),</span>
+<span id="cb22-364"><a href="#cb22-364" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill=</span><span class="st">"coral1"</span></span>
+<span id="cb22-365"><a href="#cb22-365" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb22-366"><a href="#cb22-366" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-367"><a href="#cb22-367" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-368"><a href="#cb22-368" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-369"><a href="#cb22-369" aria-hidden="true" tabindex="-1"></a>d.  Find $x$ such that $\text{P}(X &lt; x) = 0.2$ (i.e. the 0.2 quantile). Hint: use the <span class="in">`qnorm()`</span> function.   </span>
 <span id="cb22-370"><a href="#cb22-370" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-371"><a href="#cb22-371" aria-hidden="true" tabindex="-1"></a>d.  Find $x$ such that $\text{P}(X &lt; x) = 0.2$ (i.e. the 0.2 quantile). Hint: use the <span class="in">`qnorm()`</span> function.   </span>
-<span id="cb22-372"><a href="#cb22-372" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-375"><a href="#cb22-375" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb22-376"><a href="#cb22-376" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="at">p =</span> <span class="fl">0.2</span>, <span class="dv">10</span>, <span class="dv">4</span>)</span>
-<span id="cb22-377"><a href="#cb22-377" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-378"><a href="#cb22-378" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-381"><a href="#cb22-381" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb22-382"><a href="#cb22-382" aria-hidden="true" tabindex="-1"></a>gp <span class="sc">+</span> </span>
-<span id="cb22-383"><a href="#cb22-383" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_area</span>(</span>
-<span id="cb22-384"><a href="#cb22-384" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dfs <span class="sc">|&gt;</span> </span>
-<span id="cb22-385"><a href="#cb22-385" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>(x <span class="sc">&lt;</span> <span class="fu">qnorm</span>(<span class="at">p =</span> <span class="fl">0.2</span>, <span class="dv">10</span>, <span class="dv">4</span>)),</span>
-<span id="cb22-386"><a href="#cb22-386" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill=</span><span class="st">"coral1"</span></span>
-<span id="cb22-387"><a href="#cb22-387" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
-<span id="cb22-388"><a href="#cb22-388" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(</span>
-<span id="cb22-389"><a href="#cb22-389" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">qnorm</span>(<span class="at">p =</span> <span class="fl">0.2</span>, <span class="dv">10</span>, <span class="dv">4</span>), </span>
-<span id="cb22-390"><a href="#cb22-390" aria-hidden="true" tabindex="-1"></a>        <span class="at">xend =</span> <span class="fu">qnorm</span>(<span class="at">p =</span> <span class="fl">0.2</span>, <span class="dv">10</span>, <span class="dv">4</span>),</span>
-<span id="cb22-391"><a href="#cb22-391" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="dv">0</span>,</span>
-<span id="cb22-392"><a href="#cb22-392" aria-hidden="true" tabindex="-1"></a>        <span class="at">yend =</span> <span class="fu">qnorm</span>(<span class="at">p =</span> <span class="fl">0.2</span>, <span class="dv">10</span>, <span class="dv">4</span>) <span class="sc">|&gt;</span> <span class="fu">dnorm</span>(<span class="dv">10</span>, <span class="dv">4</span>)</span>
-<span id="cb22-393"><a href="#cb22-393" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb22-394"><a href="#cb22-394" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span> </span>
-<span id="cb22-395"><a href="#cb22-395" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(</span>
-<span id="cb22-396"><a href="#cb22-396" aria-hidden="true" tabindex="-1"></a>    <span class="st">"text"</span>,</span>
-<span id="cb22-397"><a href="#cb22-397" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">qnorm</span>(<span class="at">p =</span> <span class="fl">0.2</span>, <span class="dv">10</span>, <span class="dv">4</span>),</span>
-<span id="cb22-398"><a href="#cb22-398" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">qnorm</span>(<span class="at">p =</span> <span class="fl">0.2</span>, <span class="dv">10</span>, <span class="dv">4</span>) <span class="sc">|&gt;</span> <span class="fu">dnorm</span>(<span class="dv">10</span>, <span class="dv">4</span>) <span class="sc">+</span> .<span class="dv">008</span>,</span>
-<span id="cb22-399"><a href="#cb22-399" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="fu">qnorm</span>(<span class="at">p =</span> <span class="fl">0.2</span>, <span class="dv">10</span>, <span class="dv">4</span>) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span>
-<span id="cb22-400"><a href="#cb22-400" aria-hidden="true" tabindex="-1"></a>    ) </span>
-<span id="cb22-401"><a href="#cb22-401" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-373"><a href="#cb22-373" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-374"><a href="#cb22-374" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="at">p =</span> <span class="fl">0.2</span>, <span class="dv">10</span>, <span class="dv">4</span>)</span>
+<span id="cb22-375"><a href="#cb22-375" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-376"><a href="#cb22-376" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-379"><a href="#cb22-379" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-380"><a href="#cb22-380" aria-hidden="true" tabindex="-1"></a>gp <span class="sc">+</span> </span>
+<span id="cb22-381"><a href="#cb22-381" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_area</span>(</span>
+<span id="cb22-382"><a href="#cb22-382" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dfs <span class="sc">|&gt;</span> </span>
+<span id="cb22-383"><a href="#cb22-383" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>(x <span class="sc">&lt;</span> <span class="fu">qnorm</span>(<span class="at">p =</span> <span class="fl">0.2</span>, <span class="dv">10</span>, <span class="dv">4</span>)),</span>
+<span id="cb22-384"><a href="#cb22-384" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill=</span><span class="st">"coral1"</span></span>
+<span id="cb22-385"><a href="#cb22-385" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb22-386"><a href="#cb22-386" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(</span>
+<span id="cb22-387"><a href="#cb22-387" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">qnorm</span>(<span class="at">p =</span> <span class="fl">0.2</span>, <span class="dv">10</span>, <span class="dv">4</span>), </span>
+<span id="cb22-388"><a href="#cb22-388" aria-hidden="true" tabindex="-1"></a>        <span class="at">xend =</span> <span class="fu">qnorm</span>(<span class="at">p =</span> <span class="fl">0.2</span>, <span class="dv">10</span>, <span class="dv">4</span>),</span>
+<span id="cb22-389"><a href="#cb22-389" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="dv">0</span>,</span>
+<span id="cb22-390"><a href="#cb22-390" aria-hidden="true" tabindex="-1"></a>        <span class="at">yend =</span> <span class="fu">qnorm</span>(<span class="at">p =</span> <span class="fl">0.2</span>, <span class="dv">10</span>, <span class="dv">4</span>) <span class="sc">|&gt;</span> <span class="fu">dnorm</span>(<span class="dv">10</span>, <span class="dv">4</span>)</span>
+<span id="cb22-391"><a href="#cb22-391" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb22-392"><a href="#cb22-392" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span> </span>
+<span id="cb22-393"><a href="#cb22-393" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(</span>
+<span id="cb22-394"><a href="#cb22-394" aria-hidden="true" tabindex="-1"></a>    <span class="st">"text"</span>,</span>
+<span id="cb22-395"><a href="#cb22-395" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">qnorm</span>(<span class="at">p =</span> <span class="fl">0.2</span>, <span class="dv">10</span>, <span class="dv">4</span>),</span>
+<span id="cb22-396"><a href="#cb22-396" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">qnorm</span>(<span class="at">p =</span> <span class="fl">0.2</span>, <span class="dv">10</span>, <span class="dv">4</span>) <span class="sc">|&gt;</span> <span class="fu">dnorm</span>(<span class="dv">10</span>, <span class="dv">4</span>) <span class="sc">+</span> .<span class="dv">008</span>,</span>
+<span id="cb22-397"><a href="#cb22-397" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="fu">qnorm</span>(<span class="at">p =</span> <span class="fl">0.2</span>, <span class="dv">10</span>, <span class="dv">4</span>) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span>
+<span id="cb22-398"><a href="#cb22-398" aria-hidden="true" tabindex="-1"></a>    ) </span>
+<span id="cb22-399"><a href="#cb22-399" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-400"><a href="#cb22-400" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-401"><a href="#cb22-401" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-402"><a href="#cb22-402" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-403"><a href="#cb22-403" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-403"><a href="#cb22-403" aria-hidden="true" tabindex="-1"></a>More graphing examples are  <span class="co">[</span><span class="ot">here</span><span class="co">](../exercises/Chap3more.R)</span> (R code file).</span>
 <span id="cb22-404"><a href="#cb22-404" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-405"><a href="#cb22-405" aria-hidden="true" tabindex="-1"></a>More graphing examples are  <span class="co">[</span><span class="ot">here</span><span class="co">](../exercises/Chap3more.R)</span> (R code file).</span>
+<span id="cb22-405"><a href="#cb22-405" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-406"><a href="#cb22-406" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-407"><a href="#cb22-407" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-408"><a href="#cb22-408" aria-hidden="true" tabindex="-1"></a></span>
@@ -1384,8 +1381,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb22-415"><a href="#cb22-415" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-416"><a href="#cb22-416" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-417"><a href="#cb22-417" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-418"><a href="#cb22-418" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-419"><a href="#cb22-419" aria-hidden="true" tabindex="-1"></a></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
