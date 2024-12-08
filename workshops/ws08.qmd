@@ -81,7 +81,8 @@ Analysis of variance compares the variation among groups (group means from the o
 
 
 ```{r}
-meanIS <- IS |> group_by(spray) |> summarise(count = mean(count))
+# make a summary dataset
+meanIS <- IS |> group_by(spray) |> summarise(count = mean(count)) 
 
 dvp + 
   geom_point( # adds a line for the mean value
