@@ -173,10 +173,65 @@ CA(tabledata)
 ```
 
 
-```{r, echo=FALSE}
-options(warn=0) 
+
+# Exercise 5.3 {-}
+
+The `diamonds` dataset contains the prices and other attributes of almost 54,000 diamonds. Use `?diamonds` to see information for each variable.
+
+We are interested in whether there is an association between cut and color. Perform a test of association and then obtain the symmetric plot.
+
+```{r}
+data("diamonds")
+names(diamonds)
+
+## Some EDA plots
+ggplot(diamonds, aes(color))+geom_bar() + facet_wrap(~cut)
+ggplot(diamonds, aes(color))+geom_bar(aes(fill=cut))
+ggplot(diamonds, aes(color))+geom_bar(aes(fill=cut))+ facet_wrap(~clarity)
+
 ```
 
 
+```{r contingency table}
+# alternative coding for making a table of data to count observations of each category
+cont.table <- table(diamonds$cut, diamonds$color)
 
+# EDA 
+tab.data <- xtabs( ~ cut+color, data = diamonds)
+
+
+plot(tab.data)
+```
+
+```{r chi sq}
+# A test of association
+# 
+chisq.test(tab.data)
+
+chisq.test(tab.data)$expected
+chisq.test(tab.data)$stdres
+
+chisq.test(tab.data, simulate.p.value = TRUE)
+
+```
+
+
+```{r}
+# plots below are expecting an xtabs object, additional arguments would have to be added for other data formats
+mosaic(tab.data, shade=TRUE, legend=TRUE)
+
+assoc(tab.data, shade=TRUE) 
+strucplot(tab.data, core = struc_assoc, )
+
+sieve(tab.data)
+
+library(gplots)
+gplots::balloonplot(tab.data, main ="Balloon Plot", xlab ="", ylab="",
+                    label = FALSE, show.margins = FALSE)
+```
+
+
+```{r, echo=FALSE}
+options(warn=0) 
+```
 -   More R code examples are  [here](../exercises/Chap5more.R)
