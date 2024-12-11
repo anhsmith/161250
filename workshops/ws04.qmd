@@ -173,7 +173,7 @@ car::leveneTest(Height ~ Sex, data = ele2)
 
 A p-value of 0.1 is not huge, but it's not enough evidence to reject the null hypothesis that the variance of male heights is equal to the variance of female heights (at the 5% level).
 
-The default option for a t-test using the `t.test()` function is not *not* assume equal variances. 
+The default option for a t-test using the `t.test()` function is to *not* assume equal variances. 
 
 ```{r}
 t.test(formula = Height ~ Sex, data = ele2) 

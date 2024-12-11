@@ -319,17 +319,10 @@ If we want to be **more confident** that we have included the true value of the 
 The confidence interval estimate of the unknown population parameter (mean in the above discussion) is affected by the following:
 
 1. The amount of variation in the population.
-2. The nature of variation in the population.
 3. Sample size.
 4. The degree of confidence (probability) needed.
 
-Sample size is simply a trade off to obtain a confidence interval of a desired width. If a population is more variable, then it has to be sampled heavily. The width of the confidence interval and the degree of confidence are inversely related. The corollary is that a 100% confidence interval is of infinite width.
-
-Confidence intervals are NOT unique. For example, we can leave 1% probability for the left tail and 4% probability for the right tail. But such an interval will be wider for symmetric distributions but may be appropriate for skewed sampling distributions. Confidence intervals may not always possess good statistical properties such as accuracy (probability of covering any wrong value of the parameter than the other) and unbiasedness (An unbiased 95% confidence interval has probability no more than 5% of covering any value of the parameter). Stronger assumptions must be made to obtain sharper confidence intervals.
-
-One sided (lower or upper only) confidence bounds can be obtained and the confidence need not be expressed as an interval.
-
-Also note that there many types of statistical intervals available in the literature, and the confidence interval is one such interval which is expected to capture an unknown `parameter` of the population. In our example, we used the mean of the population (parameter). Naturally, we can construct a CI for the median, 90th percentile etc. A prediction interval (which will discuss later on) deals with covering a desired fraction of the population and is different from a confidence interval.
+A wider confidence interval means that we have less certainty in our estimate. More data equals more information so generally yields a narrower confidence interval, all else being equal. Likewise, if a population of values has more variation, then this leads to greater uncertainty, and a larger sample size might be required to obtain a confidence interval of acceptable width.
 
 # Hypothesis Testing
 
