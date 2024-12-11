@@ -31,7 +31,7 @@ Let's load the data and create a new variable, which is the temperature in Celsi
 
 ```{r}
 ch <- read_csv("https://www.massey.ac.nz/~anhsmith/data/chirps.csv") |> 
-  mutate(degC = (degF-32)*5/9)
+  mutate(degC = (degF-32)*5/9) # mutate makes a new column
 ```
 
 We will examine how well the temperature predicts the frequency of chirping by this insect. 
