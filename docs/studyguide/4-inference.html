@@ -1582,8 +1582,8 @@ bootstrap(data = tv$TELETIME, statistic = mean)
 Replications: 10000
 
 Summary Statistics:
-     Observed       SE     Mean   Bias
-mean 1729.283 82.67234 1729.723 0.4401</code></pre>
+     Observed       SE     Mean       Bias
+mean 1729.283 83.24928 1729.259 -0.0237913</code></pre>
 </div>
 </div>
 <p>This output shows the observed sample mean 1729.283 and the mean of all bootstrap means which is 1729.114. The bias is the difference, which is -0.168. The main advantage of the bootstrap method is that it can quantify the bias that can occur due to sampling. <a href="#fig-bootc">Figure&nbsp;17</a> and <a href="#fig-bootqq">Figure&nbsp;18</a>, respectively, show the histogram and the normal quantile plots for the bootstrap means. Obviously the bootstrap means follow normal (due to CLT).</p>
@@ -1622,8 +1622,8 @@ mean 1729.283 82.67234 1729.723 0.4401</code></pre>
 <div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">CI.t</span>(bootC)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>         2.5%   97.5%
-mean 1560.785 1897.78</code></pre>
+<pre><code>         2.5%    97.5%
+mean 1559.609 1898.956</code></pre>
 </div>
 </div>
 <p>This interval compares well with the confidence interval using t-distribution found earlier namely (1560.633, 1897.932). The same approach can be taken to construct a confidence interval for the mean of the paired differences and thereby perform a test analogous to paired t-test. See the <em>testsmarks</em> data example given below:</p>
@@ -1636,7 +1636,7 @@ mean 1560.785 1897.78</code></pre>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>          2.5%    97.5%
-mean -4.188955 4.938955</code></pre>
+mean -4.146211 4.896211</code></pre>
 </div>
 </div>
 <p>The parametric (i.e.&nbsp;t-test based) and bootstrap results are very similar. The bootstrap method can obtain better confidence intervals for the mean when the population is skewed because resampling tends to adjust for the skew in the population when captured by the sample well. The bootstrap approach will work well only when reasonably large sample sizes are available because of the inherent uncertainty in the tails of the underlying distribution. Small samples are not sufficient to identify capture the tails of the distribution and hence certain types of inferences involving tail part of distribution will not work well. Parametric assumptions can be made to improve the bootstrap method and this approach is known as parametric bootstrapping. We will not study such methods in this course.</p>
@@ -1649,7 +1649,7 @@ mean -4.188955 4.938955</code></pre>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>               2.5%    97.5%
-mean: 1-2 -475.6394 231.5525</code></pre>
+mean: 1-2 -469.7486 225.6616</code></pre>
 </div>
 </div>
 <p>The bootstrap test conclusion again agrees with the Welch two-sample t-test conclusion.</p>

@@ -26,14 +26,21 @@ The dataset is a 5 x 3 x 2 x 2 contingency table, with 60 observations on the fo
 
 Obtain relevant graphical displays for this dataset.
 
-Bar charts-
+## Bar charts
 
 ```{r}
+#| message: false
 library(tidyverse)
-
 library(vcdExtra)
-data(Toxaemia)
+```
 
+
+```{r}
+data(Toxaemia)
+```
+
+
+```{r}
 Toxaemia |> 
   ggplot() + 
   aes(x=smoke, y=Freq, fill=hyper) + 
@@ -47,9 +54,8 @@ Toxaemia |>
   geom_bar(stat='identity', 
            position = "dodge"
            )
-
-
 ```
+
 ```{r}
 Toxaemia |> 
   ggplot() + 
@@ -59,7 +65,7 @@ Toxaemia |>
   facet_grid(urea ~ ., scales = "free")
 ```
 
-Mosaic type charts
+## Mosaic type charts
 
 ```{r, fig.show='hide', results='hide'}
 tab.data <- xtabs(Freq ~ smoke + hyper + urea, data=Toxaemia)

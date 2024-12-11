@@ -316,7 +316,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <details open="">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>ch <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://www.massey.ac.nz/~anhsmith/data/chirps.csv"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">degC =</span> (degF<span class="dv">-32</span>)<span class="sc">*</span><span class="dv">5</span><span class="sc">/</span><span class="dv">9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">degC =</span> (degF<span class="dv">-32</span>)<span class="sc">*</span><span class="dv">5</span><span class="sc">/</span><span class="dv">9</span>) <span class="co"># mutate makes a new column</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>We will examine how well the temperature predicts the frequency of chirping by this insect.</p>
@@ -1351,7 +1351,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb48-33"><a href="#cb48-33" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb48-36"><a href="#cb48-36" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb48-37"><a href="#cb48-37" aria-hidden="true" tabindex="-1"></a>ch <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://www.massey.ac.nz/~anhsmith/data/chirps.csv"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb48-38"><a href="#cb48-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">degC =</span> (degF<span class="dv">-32</span>)<span class="sc">*</span><span class="dv">5</span><span class="sc">/</span><span class="dv">9</span>)</span>
+<span id="cb48-38"><a href="#cb48-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">degC =</span> (degF<span class="dv">-32</span>)<span class="sc">*</span><span class="dv">5</span><span class="sc">/</span><span class="dv">9</span>) <span class="co"># mutate makes a new column</span></span>
 <span id="cb48-39"><a href="#cb48-39" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb48-40"><a href="#cb48-40" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb48-41"><a href="#cb48-41" aria-hidden="true" tabindex="-1"></a>We will examine how well the temperature predicts the frequency of chirping by this insect. </span>

@@ -4,6 +4,7 @@ title: "Midterm Review"
 
 ```{r, echo=FALSE, message=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE, comment=NA, fig.show="hide")
+library(tidyverse)
 ```
 
 ## Chapter 3: Probability
@@ -238,7 +239,7 @@ new n=11, mu=124, var=14
 
 pooled variance
 ```{r}
-w1= (n1-1)/
+# w1= (n1-1)/
 ```
 
 
