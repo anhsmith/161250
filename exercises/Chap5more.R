@@ -9,11 +9,7 @@ ggplot(diamonds, aes(color))+geom_bar() + facet_wrap(~cut)
 ggplot(diamonds, aes(color))+geom_bar(aes(fill=cut))
 ggplot(diamonds, aes(color))+geom_bar(aes(fill=cut))+ facet_wrap(~clarity)
 
-# EDA
 
-tab.data <- xtabs( ~ cut+color, data = diamonds)
-
-plot(tab.data)
 
 library(vcdExtra)
 vcd::mosaic(tab.data, shade=TRUE, legend=TRUE)
