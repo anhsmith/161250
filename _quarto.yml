@@ -71,7 +71,5 @@ format:
     css: styles.css
     toc: true
 execute: 
-  freeze: true
-
-
-
+  freeze: auto
+  
